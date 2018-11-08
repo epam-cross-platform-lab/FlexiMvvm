@@ -1,0 +1,9 @@
+﻿<Project Sdk="MSBuild.Sdk.Extras/1.6.52">
+    <PropertyGroup>
+        <TargetFrameworks>netstandard2.0</TargetFrameworks>
+        <AssemblyName>FlexiMvvm.Common</AssemblyName>
+        <PackageId>FlexiMvvm.Common</PackageId>
+        <Title>FlexiMvvm.Common</Title>
+        <Description>MVVM framework for Xamarin.Native.</Description>
+    </PropertyGroup>
+</Project>

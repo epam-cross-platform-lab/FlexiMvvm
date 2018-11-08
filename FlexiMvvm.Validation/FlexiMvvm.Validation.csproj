@@ -1,0 +1,13 @@
+﻿<Project Sdk="MSBuild.Sdk.Extras/1.6.52">
+    <PropertyGroup>
+        <TargetFrameworks>netstandard2.0</TargetFrameworks>
+        <AssemblyName>FlexiMvvm.Validation</AssemblyName>
+        <PackageId>FlexiMvvm.Validation</PackageId>
+        <Title>FlexiMvvm.Validation</Title>
+        <Description>MVVM framework for Xamarin.Native.</Description>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\FlexiMvvm.Common\FlexiMvvm.Common.csproj" />
+        <PackageReference Include="FluentValidation" Version="8.0.100" />
+    </ItemGroup>
+</Project>

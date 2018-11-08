@@ -1,0 +1,19 @@
+﻿<Project Sdk="MSBuild.Sdk.Extras/1.6.52">
+    <PropertyGroup>
+        <TargetFrameworks>MonoAndroid80;MonoAndroid81;Xamarin.iOS10</TargetFrameworks>
+        <AssemblyName>FlexiMvvm.Collections</AssemblyName>
+        <PackageId>FlexiMvvm.Collections</PackageId>
+        <Title>FlexiMvvm.Collections</Title>
+        <Description>MVVM framework for Xamarin.Native.</Description>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\FlexiMvvm.Common\FlexiMvvm.Common.csproj" />
+        <ProjectReference Include="..\FlexiMvvm.Essentials\FlexiMvvm.Essentials.csproj" />
+    </ItemGroup>
+    <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid80')) ">
+        <PackageReference Include="Xamarin.Android.Support.v7.RecyclerView" Version="26.1.0.1" />
+    </ItemGroup>
+    <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid81')) ">
+        <PackageReference Include="Xamarin.Android.Support.v7.RecyclerView" Version="27.0.2.1" />
+    </ItemGroup>
+</Project>

@@ -1,0 +1,15 @@
+﻿<Project Sdk="MSBuild.Sdk.Extras/1.6.52">
+    <PropertyGroup>
+        <TargetFrameworks>MonoAndroid80;MonoAndroid81;Xamarin.iOS10</TargetFrameworks>
+        <AssemblyName>FlexiMvvm.Full</AssemblyName>
+        <PackageId>FlexiMvvm.Full</PackageId>
+        <Title>FlexiMvvm.Full</Title>
+        <Description>MVVM framework for Xamarin.Native.</Description>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\FlexiMvvm.Bindings\FlexiMvvm.Bindings.csproj" />
+        <ProjectReference Include="..\FlexiMvvm.Collections\FlexiMvvm.Collections.csproj" />
+        <ProjectReference Include="..\FlexiMvvm.Common\FlexiMvvm.Common.csproj" />
+        <ProjectReference Include="..\FlexiMvvm.Lifecycle\FlexiMvvm.Lifecycle.csproj" />
+    </ItemGroup>
+</Project>

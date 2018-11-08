@@ -1,0 +1,36 @@
+<Project>
+    <PropertyGroup>
+        <RootNamespace>FlexiMvvm</RootNamespace>
+        <PackageTags>epam, xamarin, android, xamarin.android, monodroid, ios, xamarin.ios, monotouch, flexi, mvvm, fleximvvm, framework, kit</PackageTags>
+        <Product>$(AssemblyName) ($(TargetFramework))</Product>
+        <AssemblyVersion>0.9.0.0</AssemblyVersion>
+        <AssemblyFileVersion>0.9.0.0</AssemblyFileVersion>
+        <Version>0.9.0</Version>
+        <Authors>EPAM Systems</Authors>
+        <Owners>EPAM Systems</Owners>
+        <NeutralLanguage>en</NeutralLanguage>
+        <Copyright>EPAM Systems, Inc.</Copyright>
+        <LangVersion>latest</LangVersion>
+        <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+        <Configurations>Debug;Release</Configurations>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)'=='Debug' ">
+        <DebugType>full</DebugType>
+        <DebugSymbols>true</DebugSymbols>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)'=='Release' ">
+        <DebugType>pdbonly</DebugType>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="Shared\**\*.cs" />
+    </ItemGroup>
+    <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
+        <Compile Include="Platform\**\*.cs" />
+        <Compile Include="Platform.Android\**\*.cs" />
+    </ItemGroup>
+        <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
+        <Compile Include="Platform\**\*.cs" />
+        <Compile Include="Platform.iOS\**\*.cs" />
+    </ItemGroup>
+    <Import Project="$(MSBuildThisFileDirectory)\CodeStyles.targets" />
+</Project>
