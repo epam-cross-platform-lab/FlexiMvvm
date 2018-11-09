@@ -25,7 +25,7 @@ namespace FlexiMvvm.ViewModels
         private IBundle _bundle;
 
         [NotNull]
-        protected IBundle Bundle => _bundle ?? (_bundle = BundleFactory.CreateBundle());
+        protected IBundle Bundle => _bundle ?? (_bundle = BundleFactory.Create());
 
         internal void ImportResultBundle([NotNull] IBundle resultBundle)
         {

@@ -48,7 +48,7 @@ namespace FlexiMvvm.ViewModels
         public Task Initialization { get; private set; }
 
         [NotNull]
-        private IBundle StateBundle => _stateBundle ?? (_stateBundle = BundleFactory.CreateBundle());
+        private IBundle StateBundle => _stateBundle ?? (_stateBundle = BundleFactory.Create());
 
         [NotNull]
         protected ViewModelState State => _state ?? (_state = new ViewModelState(this, StateBundle));
@@ -109,7 +109,7 @@ namespace FlexiMvvm.ViewModels
         public Task Initialization { get; private set; }
 
         [NotNull]
-        private IBundle StateBundle => _stateBundle ?? (_stateBundle = BundleFactory.CreateBundle());
+        private IBundle StateBundle => _stateBundle ?? (_stateBundle = BundleFactory.Create());
 
         [NotNull]
         protected ViewModelState State => _state ?? (_state = new ViewModelState(this, StateBundle));

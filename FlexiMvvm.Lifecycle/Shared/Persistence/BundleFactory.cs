@@ -19,10 +19,10 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.Persistence
 {
-    internal class BundleFactory
+    public static class BundleFactory
     {
         [NotNull]
-        internal static IBundle CreateBundle()
+        public static IBundle Create()
         {
 #if NETSTANDARD2_0
             return new InMemoryBundle();
