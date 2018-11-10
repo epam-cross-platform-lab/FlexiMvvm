@@ -19,31 +19,37 @@ using System.Collections.Generic;
 using FlexiMvvm.Diagnostics;
 using JetBrains.Annotations;
 
-namespace FlexiMvvm.ViewModels.Locator
+namespace FlexiMvvm.ViewModels
 {
-    public class ViewModelFactory
+    public abstract class ViewModelFactoryBase : IViewModelFactory
     {
-        [NotNull]
-        private readonly Dictionary<Type, Func<IViewModel>> _viewModelsFactories = new Dictionary<Type, Func<IViewModel>>();
+        [CanBeNull]
+        private Dictionary<Type, Func<IViewModel>> _factories;
 
-        public void Register<TViewModel>([NotNull] Func<TViewModel> factory)
+        [NotNull]
+        private Dictionary<Type, Func<IViewModel>> Factories => _factories ?? (_factories = new Dictionary<Type, Func<IViewModel>>());
+
+        public abstract TViewModel Create<TViewModel>()
+            where TViewModel : class, IViewModel;
+
+        protected void Register<TViewModel>([NotNull] Func<TViewModel> factory)
             where TViewModel : class, IViewModel
         {
-            _viewModelsFactories[typeof(TViewModel)] = factory ?? throw new ArgumentNullException(nameof(factory));
+            Factories[typeof(TViewModel)] = factory ?? throw new ArgumentNullException(nameof(factory));
         }
 
         [NotNull]
-        internal TViewModel Get<TViewModel>()
+        protected TViewModel Resolve<TViewModel>()
             where TViewModel : class, IViewModel
         {
-            if (!_viewModelsFactories.TryGetValue(typeof(TViewModel), out var viewModelFactory))
+            if (!Factories.TryGetValue(typeof(TViewModel), out var factory))
             {
                 throw new InvalidOperationException(
                     $"View model factory is not registered for \"{LogFormatter.FormatTypeName<TViewModel>()}\" view model. " +
-                    $"Use \"{LogFormatter.FormatTypeName<ViewModelFactory>()}.{nameof(Register)}\" method for that.");
+                    $"Use \"{LogFormatter.FormatTypeName(this)}.{nameof(Register)}\" method for that.");
             }
 
-            return (TViewModel)viewModelFactory().NotNull();
+            return (TViewModel)factory();
         }
     }
 }

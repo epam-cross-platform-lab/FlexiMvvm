@@ -14,29 +14,65 @@
 // limitations under the License.
 // =========================================================================
 
+using System;
+using FlexiMvvm.Diagnostics;
 using FlexiMvvm.Persistence;
-using FlexiMvvm.ViewModels.Locator;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.ViewModels
 {
     public static partial class ViewModelProvider
     {
+        [CanBeNull]
+        private static IViewModelFactory _factory;
+
         [NotNull]
-        public static TViewModel Get<TViewModel>([CanBeNull] IBundle stateBundle)
+        public static TViewModel Get<TViewModel>([NotNull] IViewModelFactory factory, [CanBeNull] IBundle stateBundle)
             where TViewModel : class, IViewModel, IViewModelWithState
         {
-            var viewModel = Get<TViewModel>();
+            if (factory == null)
+                throw new ArgumentNullException(nameof(factory));
+
+            var viewModel = Get<TViewModel>(factory);
             viewModel.ImportStateBundle(stateBundle);
 
             return viewModel;
         }
 
         [NotNull]
-        public static TViewModel Get<TViewModel>()
+        public static TViewModel Get<TViewModel>([NotNull] IViewModelFactory factory)
             where TViewModel : class, IViewModel
         {
-            return ViewModelLocator.CreateInstance<TViewModel>();
+            if (factory == null)
+                throw new ArgumentNullException(nameof(factory));
+
+            var viewModel = factory.Create<TViewModel>();
+
+            if (viewModel == null)
+            {
+                throw new InvalidOperationException(
+                    $"\"{LogFormatter.FormatTypeName(factory)}\" returned \"null\" for \"{LogFormatter.FormatTypeName<TViewModel>()}>\" " +
+                    $"view model instance that is not allowed.");
+            }
+
+            return viewModel;
+        }
+
+        [NotNull]
+        internal static IViewModelFactory GetFactory()
+        {
+            if (_factory == null)
+            {
+                throw new InvalidOperationException(
+                    $"View model factory is not set. Use \"{nameof(ViewModelProvider)}.{nameof(SetFactory)}\" method to set factory instance.");
+            }
+
+            return _factory;
+        }
+
+        public static void SetFactory([NotNull] IViewModelFactory factory)
+        {
+            _factory = factory ?? throw new ArgumentNullException(nameof(factory));
         }
     }
 }

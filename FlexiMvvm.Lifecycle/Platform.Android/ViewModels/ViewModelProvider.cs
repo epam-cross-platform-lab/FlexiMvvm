@@ -41,7 +41,7 @@ namespace FlexiMvvm.ViewModels
 
             if (viewModel == null)
             {
-                viewModel = Get<TViewModel>(stateBundle);
+                viewModel = Get<TViewModel>(GetFactory(), stateBundle);
                 store.Set<TViewModel>(key, viewModel);
             }
 

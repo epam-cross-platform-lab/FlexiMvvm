@@ -14,26 +14,17 @@
 // limitations under the License.
 // =========================================================================
 
-using System;
 using JetBrains.Annotations;
 
-namespace FlexiMvvm.ViewModels.Locator
+namespace FlexiMvvm.ViewModels
 {
-    public abstract class ViewModelLocatorBase
+    public static partial class ViewModelProvider
     {
-        [CanBeNull]
-        internal ViewModelFactory Factory { get; set; }
-
-        protected internal abstract void SetupFactory([NotNull] ViewModelFactory factory);
-
         [NotNull]
-        protected internal virtual TViewModel CreateInstance<TViewModel>([NotNull] ViewModelFactory factory)
+        public static TViewModel Get<TViewModel>()
             where TViewModel : class, IViewModel
         {
-            if (factory == null)
-                throw new ArgumentNullException(nameof(factory));
-
-            return factory.Get<TViewModel>();
+            return Get<TViewModel>(GetFactory());
         }
     }
 }
