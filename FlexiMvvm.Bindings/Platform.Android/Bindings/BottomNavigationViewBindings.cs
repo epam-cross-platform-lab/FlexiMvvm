@@ -20,7 +20,7 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class BottomNavigationViewExtensions
+    public static class BottomNavigationViewBindings
     {
         [NotNull]
         public static TargetItemBinding<BottomNavigationView, int> SelectedItemIdAndNavigationItemSelectedBinding(

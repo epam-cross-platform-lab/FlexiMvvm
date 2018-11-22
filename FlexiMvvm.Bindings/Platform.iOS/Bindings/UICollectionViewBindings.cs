@@ -14,22 +14,29 @@
 // limitations under the License.
 // =========================================================================
 
-using Android.Widget;
+using System;
 using FlexiMvvm.Bindings.Custom;
+using Foundation;
 using JetBrains.Annotations;
+using UIKit;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class TextViewExtensions
+    public static class UICollectionViewBindings
     {
         [NotNull]
-        public static TargetItemBinding<TextView, string> TextBinding(
-            [NotNull] this IItemReference<TextView> textViewReference)
+        public static TargetItemBinding<UICollectionView, NSIndexPath> ScrollToItemBinding(
+            [NotNull] this IItemReference<UICollectionView> collectionViewReference,
+            UICollectionViewScrollPosition scrollPosition,
+            bool animated = true)
         {
-            return new TargetItemOneWayCustomBinding<TextView, string>(
-                textViewReference,
-                (textView, text) => textView.NotNull().Text = text,
-                () => "Text");
+            if (collectionViewReference == null)
+                throw new ArgumentNullException(nameof(collectionViewReference));
+
+            return new TargetItemOneWayCustomBinding<UICollectionView, NSIndexPath>(
+                collectionViewReference,
+                (collectionView, indexPath) => collectionView.NotNull().ScrollToItem(indexPath, scrollPosition, animated),
+                () => "ScrollToItem");
         }
     }
 }
