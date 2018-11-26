@@ -89,6 +89,18 @@ namespace FlexiMvvm.Bindings
                 () => "SetBaseline");
         }
 
+        /// <summary>
+        /// Binding that sets an image drawable for <see cref="ImageView"/>.
+        /// </summary>
+        /// <param name="imageViewReference">The image view reference.</param>
+        /// <returns>Binding</returns>
+        /// <exception cref="ArgumentNullException">imageViewReference</exception>
+        /// <example>
+        /// This sample shows how to call the <see cref="SetImageDrawableBinding"/> method.
+        /// <code>
+        /// .For(v => v.SetImageDrawableBinding())
+        /// </code>
+        /// </example>
         [NotNull]
         public static TargetItemBinding<ImageView, Drawable> SetImageDrawableBinding(
             [NotNull] this IItemReference<ImageView> imageViewReference)

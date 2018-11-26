@@ -15,6 +15,7 @@
 // =========================================================================
 
 using System;
+using Android.Content.Res;
 using Android.Graphics;
 using Android.Text;
 using Android.Widget;
@@ -277,16 +278,43 @@ namespace FlexiMvvm.Bindings
                 () => "SetHint");
         }
 
+        /// <summary>
+        /// Binding that sets a hint text color for <see cref="TextView"/>.
+        /// <para>
+        /// Supported types for <see cref="TValue"/>: <see cref="Color"/>, <see cref="ColorStateList"/>
+        /// </para>
+        /// <para>
+        /// Usage: <c>.For(v => v.SetHintTextColorBinding&lt;ColorStateList&gt;())</c>
+        /// </para>
+        /// </summary>
+        /// <typeparam name="TValue">The type of the value.</typeparam>
+        /// <param name="textViewReference">The text view reference.</param>
+        /// <returns>Binding</returns>
+        /// <exception cref="ArgumentNullException">textViewReference</exception>
+        /// <exception cref="NotSupportedException">textViewReference</exception>
         [NotNull]
-        public static TargetItemBinding<TextView, Color> SetHintTextColorBinding(
+        public static TargetItemBinding<TextView, TValue> SetHintTextColorBinding<TValue>(
             [NotNull] this IItemReference<TextView> textViewReference)
         {
             if (textViewReference == null)
                 throw new ArgumentNullException(nameof(textViewReference));
 
-            return new TargetItemOneWayCustomBinding<TextView, Color>(
+            return new TargetItemOneWayCustomBinding<TextView, TValue>(
                 textViewReference,
-                (textView, color) => textView.NotNull().SetHintTextColor(color),
+                (textView, value) =>
+                {
+                    switch (value)
+                    {
+                        case Color color:
+                            textView.NotNull().SetHintTextColor(color);
+                            break;
+                        case ColorStateList colorStateList:
+                            textView.NotNull().SetHintTextColor(colorStateList);
+                            break;
+                        default:
+                            throw new NotSupportedException($"{nameof(SetTextColorBinding)} doesn't support type {typeof(TValue)}");
+                    }
+                },
                 () => "SetHintTextColor");
         }
 
@@ -472,16 +500,43 @@ namespace FlexiMvvm.Bindings
                 () => "SetSingleLine");
         }
 
+        /// <summary>
+        /// Binding that sets a text color for <see cref="TextView"/>.
+        /// <para>
+        /// Supported types for <see cref="TValue"/>: <see cref="Color"/>, <see cref="ColorStateList"/>
+        /// </para>
+        /// <para>
+        /// Usage: <c>.For(v => v.SetTextColorBinding&lt;Color&gt;())</c>
+        /// </para>
+        /// </summary>
+        /// <typeparam name="TValue">The type of the value.</typeparam>
+        /// <param name="textViewReference">The text view reference.</param>
+        /// <returns>Binding</returns>
+        /// <exception cref="ArgumentNullException">textViewReference</exception>
+        /// <exception cref="NotSupportedException"><see cref="TValue"/></exception>
         [NotNull]
-        public static TargetItemBinding<TextView, Color> SetTextColorBinding(
+        public static TargetItemBinding<TextView, TValue> SetTextColorBinding<TValue>(
             [NotNull] this IItemReference<TextView> textViewReference)
         {
             if (textViewReference == null)
                 throw new ArgumentNullException(nameof(textViewReference));
 
-            return new TargetItemOneWayCustomBinding<TextView, Color>(
+            return new TargetItemOneWayCustomBinding<TextView, TValue>(
                 textViewReference,
-                (textView, color) => textView.NotNull().SetTextColor(color),
+                (textView, value) =>
+                {
+                    switch (value)
+                    {
+                        case Color color:
+                            textView.NotNull().SetTextColor(color);
+                            break;
+                        case ColorStateList colorStateList:
+                            textView.NotNull().SetTextColor(colorStateList);
+                            break;
+                        default:
+                            throw new NotSupportedException($"{nameof(SetTextColorBinding)} doesn't support type {typeof(TValue)}");
+                    }
+                },
                 () => "SetTextColor");
         }
 
