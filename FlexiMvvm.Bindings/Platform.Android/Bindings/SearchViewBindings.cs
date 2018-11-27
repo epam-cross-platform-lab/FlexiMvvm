@@ -18,6 +18,7 @@ using System;
 using Android.Views;
 using Android.Widget;
 using FlexiMvvm.Bindings.Custom;
+using Java.Lang;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.Bindings
@@ -202,17 +203,45 @@ namespace FlexiMvvm.Bindings
                 () => "SetMaxWidth");
         }
 
+        /// <summary>
+        /// Binding that sets the query for <see cref="SearchView"/>.
+        /// <para>
+        /// Supported types for <see cref="TValue"/>: <see cref="string"/>, <see cref="ICharSequence"/>
+        /// </para>
+        /// <para>
+        /// Usage: <c>.For(v => v.SetQueryBinding&lt;ICharSequence&gt;())</c>
+        /// </para>
+        /// </summary>
+        /// <typeparam name="TValue">The type of the value.</typeparam>
+        /// <param name="searchViewReference">The search view reference.</param>
+        /// <param name="submit">if set to <c>true</c> [submit].</param>
+        /// <returns>Binding</returns>
+        /// <exception cref="ArgumentNullException">searchViewReference</exception>
+        /// <exception cref="NotSupportedException">searchViewReference</exception>
         [NotNull]
-        public static TargetItemBinding<SearchView, string> SetQueryBinding(
+        public static TargetItemBinding<SearchView, TValue> SetQueryBinding<TValue>(
             [NotNull] this IItemReference<SearchView> searchViewReference,
             bool submit = true)
         {
             if (searchViewReference == null)
                 throw new ArgumentNullException(nameof(searchViewReference));
 
-            return new TargetItemOneWayCustomBinding<SearchView, string>(
+            return new TargetItemOneWayCustomBinding<SearchView, TValue>(
                 searchViewReference,
-                (searchView, query) => searchView.NotNull().SetQuery(query, submit),
+                (searchView, query) =>
+                {
+                    switch (query)
+                    {
+                        case ICharSequence charSequence:
+                            searchView.NotNull().SetQuery(charSequence, submit);
+                            break;
+                        case string @string:
+                            searchView.NotNull().SetQuery(@string, submit);
+                            break;
+                        default:
+                            throw new NotSupportedException($"{nameof(SetQueryBinding)} doesn't support type {typeof(TValue)}");
+                    }
+                },
                 () => "SetQuery");
         }
 
