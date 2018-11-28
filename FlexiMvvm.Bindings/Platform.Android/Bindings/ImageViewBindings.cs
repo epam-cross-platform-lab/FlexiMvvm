@@ -15,6 +15,7 @@
 // =========================================================================
 
 using System;
+using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Widget;
 using FlexiMvvm.Bindings.Custom;
@@ -87,6 +88,45 @@ namespace FlexiMvvm.Bindings
                 imageViewReference,
                 (imageView, baseline) => imageView.NotNull().SetBaseline(baseline),
                 () => "SetBaseline");
+        }
+
+        [NotNull]
+        public static TargetItemBinding<ImageView, TValue> SetColorFilterBinding<TValue>(
+            [NotNull] this IItemReference<ImageView> imageViewReference)
+        {
+            if (imageViewReference == null)
+                throw new ArgumentNullException(nameof(imageViewReference));
+
+            return new TargetItemOneWayCustomBinding<ImageView, TValue>(
+                imageViewReference,
+                (imageView, value) =>
+                {
+                    switch (value)
+                    {
+                        case Color color:
+                            imageView.NotNull().SetColorFilter(color);
+                            break;
+                        case ColorFilter colorFilter:
+                            imageView.NotNull().SetColorFilter(colorFilter);
+                            break;
+                        default:
+                            throw new NotSupportedException($"{nameof(SetColorFilterBinding)} doesn't support type {typeof(TValue)}");
+                    }
+                },
+                () => "SetColorFilter");
+        }
+
+        [NotNull]
+        public static TargetItemBinding<ImageView, Bitmap> SetImageBitmapBinding(
+            [NotNull] this IItemReference<ImageView> imageViewReference)
+        {
+            if (imageViewReference == null)
+                throw new ArgumentNullException(nameof(imageViewReference));
+
+            return new TargetItemOneWayCustomBinding<ImageView, Bitmap>(
+                imageViewReference,
+                (imageView, bitmap) => imageView.NotNull().SetImageBitmap(bitmap),
+                () => "SetImageBitmap");
         }
 
         /// <summary>

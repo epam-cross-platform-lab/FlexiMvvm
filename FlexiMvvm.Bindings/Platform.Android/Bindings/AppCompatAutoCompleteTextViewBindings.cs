@@ -18,6 +18,7 @@ using System;
 using Android.Support.V7.Widget;
 using Android.Widget;
 using FlexiMvvm.Bindings.Custom;
+using Java.Lang;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.Bindings
@@ -192,15 +193,28 @@ namespace FlexiMvvm.Bindings
         }
 
         [NotNull]
-        public static TargetItemBinding<AppCompatAutoCompleteTextView, string> SetCompletionHintBinding(
+        public static TargetItemBinding<AppCompatAutoCompleteTextView, TValue> SetCompletionHintBinding<TValue>(
             [NotNull] this IItemReference<AppCompatAutoCompleteTextView> appCompatAutoCompleteTextViewReference)
         {
             if (appCompatAutoCompleteTextViewReference == null)
                 throw new ArgumentNullException(nameof(appCompatAutoCompleteTextViewReference));
 
-            return new TargetItemOneWayCustomBinding<AppCompatAutoCompleteTextView, string>(
+            return new TargetItemOneWayCustomBinding<AppCompatAutoCompleteTextView, TValue>(
                 appCompatAutoCompleteTextViewReference,
-                (appCompatAutoCompleteTextView, hint) => appCompatAutoCompleteTextView.NotNull().SetCompletionHint(hint),
+                (appCompatAutoCompleteTextView, value) =>
+                {
+                    switch (value)
+                    {
+                        case ICharSequence charSequence:
+                            appCompatAutoCompleteTextView.NotNull().SetCompletionHint(charSequence);
+                            break;
+                        case string @string:
+                            appCompatAutoCompleteTextView.NotNull().SetCompletionHint(@string);
+                            break;
+                        default:
+                            throw new NotSupportedException($"{nameof(SetCompletionHintBinding)} doesn't support type {typeof(TValue)}");
+                    }
+                },
                 () => "SetCompletionHint");
         }
 
@@ -218,16 +232,32 @@ namespace FlexiMvvm.Bindings
         }
 
         [NotNull]
-        public static TargetItemBinding<AppCompatAutoCompleteTextView, string> SetTextBinding(
+        public static TargetItemBinding<AppCompatAutoCompleteTextView, TValue> SetTextBinding<TValue>(
             [NotNull] this IItemReference<AppCompatAutoCompleteTextView> appCompatAutoCompleteTextViewReference,
             bool filter = true)
         {
             if (appCompatAutoCompleteTextViewReference == null)
                 throw new ArgumentNullException(nameof(appCompatAutoCompleteTextViewReference));
 
-            return new TargetItemOneWayCustomBinding<AppCompatAutoCompleteTextView, string>(
+            return new TargetItemOneWayCustomBinding<AppCompatAutoCompleteTextView, TValue>(
                 appCompatAutoCompleteTextViewReference,
-                (appCompatAutoCompleteTextView, text) => appCompatAutoCompleteTextView.NotNull().SetText(text, true),
+                (appCompatAutoCompleteTextView, value) =>
+                {
+                    switch (value)
+                    {
+                        case ICharSequence charSequence:
+                            appCompatAutoCompleteTextView.NotNull().SetText(charSequence, filter);
+                            break;
+                        case string @string:
+                            appCompatAutoCompleteTextView.NotNull().SetText(@string, filter);
+                            break;
+                        case int resId:
+                            appCompatAutoCompleteTextView.NotNull().SetText(resId);
+                            break;
+                        default:
+                            throw new NotSupportedException($"{nameof(SetTextBinding)} doesn't support type {typeof(TValue)}");
+                    }
+                },
                 () => "SetText");
         }
 

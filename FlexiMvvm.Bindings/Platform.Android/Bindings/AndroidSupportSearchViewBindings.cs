@@ -17,6 +17,7 @@
 using System;
 using Android.Support.V7.Widget;
 using FlexiMvvm.Bindings.Custom;
+using Java.Lang;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.Bindings
@@ -25,8 +26,8 @@ namespace FlexiMvvm.Bindings
     {
         [NotNull]
         public static TargetItemBinding<SearchView, bool> CheckedChangeBinding(
-    [NotNull] this IItemReference<SearchView> searchViewReference,
-    bool trackCanExecuteCommandChanged = false)
+            [NotNull] this IItemReference<SearchView> searchViewReference,
+            bool trackCanExecuteCommandChanged = false)
         {
             if (searchViewReference == null)
                 throw new ArgumentNullException(nameof(searchViewReference));
@@ -156,16 +157,29 @@ namespace FlexiMvvm.Bindings
         }
 
         [NotNull]
-        public static TargetItemBinding<SearchView, string> SetQueryBinding(
+        public static TargetItemBinding<SearchView, TValue> SetQueryBinding<TValue>(
             [NotNull] this IItemReference<SearchView> searchViewReference,
             bool submit = true)
         {
             if (searchViewReference == null)
                 throw new ArgumentNullException(nameof(searchViewReference));
 
-            return new TargetItemOneWayCustomBinding<SearchView, string>(
+            return new TargetItemOneWayCustomBinding<SearchView, TValue>(
                 searchViewReference,
-                (searchView, query) => searchView.NotNull().SetQuery(query, submit),
+                (searchView, value) =>
+                {
+                    switch (value)
+                    {
+                        case ICharSequence charSequence:
+                            searchView.NotNull().SetQuery(charSequence, submit);
+                            break;
+                        case string @string:
+                            searchView.NotNull().SetQuery(@string, submit);
+                            break;
+                        default:
+                            throw new NotSupportedException($"{nameof(SetQueryBinding)} doesn't support type {typeof(TValue)}");
+                    }
+                },
                 () => "SetQuery");
         }
 
