@@ -228,9 +228,9 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemOneWayCustomBinding<SearchView, TValue>(
                 searchViewReference,
-                (searchView, query) =>
+                (searchView, value) =>
                 {
-                    switch (query)
+                    switch (value)
                     {
                         case ICharSequence charSequence:
                             searchView.NotNull().SetQuery(charSequence, submit);
@@ -246,15 +246,28 @@ namespace FlexiMvvm.Bindings
         }
 
         [NotNull]
-        public static TargetItemBinding<SearchView, string> SetQueryHintBinding(
+        public static TargetItemBinding<SearchView, TValue> SetQueryHintBinding<TValue>(
             [NotNull] this IItemReference<SearchView> searchViewReference)
         {
             if (searchViewReference == null)
                 throw new ArgumentNullException(nameof(searchViewReference));
 
-            return new TargetItemOneWayCustomBinding<SearchView, string>(
+            return new TargetItemOneWayCustomBinding<SearchView, TValue>(
                 searchViewReference,
-                (searchView, hint) => searchView.NotNull().SetQueryHint(hint),
+                (searchView, value) =>
+                {
+                    switch (value)
+                    {
+                        case ICharSequence charSequence:
+                            searchView.NotNull().SetQueryHint(charSequence);
+                            break;
+                        case string @string:
+                            searchView.NotNull().SetQueryHint(@string);
+                            break;
+                        default:
+                            throw new NotSupportedException($"{nameof(SetQueryHintBinding)} doesn't support type {typeof(TValue)}");
+                    }
+                },
                 () => "SetQueryHint");
         }
 

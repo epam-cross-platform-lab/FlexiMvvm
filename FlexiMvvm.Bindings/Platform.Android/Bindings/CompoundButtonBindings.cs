@@ -15,6 +15,8 @@
 // =========================================================================
 
 using System;
+using Android;
+using Android.Graphics.Drawables;
 using Android.Widget;
 using FlexiMvvm.Bindings.Custom;
 using JetBrains.Annotations;
@@ -84,15 +86,28 @@ namespace FlexiMvvm.Bindings
         }
 
         [NotNull]
-        public static TargetItemBinding<CompoundButton, int> SetButtonDrawableBinding(
+        public static TargetItemBinding<CompoundButton, TValue> SetButtonDrawableBinding<TValue>(
             [NotNull] this IItemReference<CompoundButton> compoundButtonReference)
         {
             if (compoundButtonReference == null)
                 throw new ArgumentNullException(nameof(compoundButtonReference));
 
-            return new TargetItemOneWayCustomBinding<CompoundButton, int>(
+            return new TargetItemOneWayCustomBinding<CompoundButton, TValue>(
                 compoundButtonReference,
-                (compoundButton, resId) => compoundButton.NotNull().SetButtonDrawable(resId),
+                (compoundButton, value) =>
+                {
+                    switch (value)
+                    {
+                        case int resId:
+                            compoundButton.NotNull().SetButtonDrawable(resId);
+                            break;
+                        case Drawable drawable:
+                            compoundButton.NotNull().SetButtonDrawable(drawable);
+                            break;
+                        default:
+                            throw new NotSupportedException($"{nameof(SetButtonDrawableBinding)} doesn't support type {typeof(TValue)}");
+                    }
+                },
                 () => "SetButtonDrawable");
         }
     }
