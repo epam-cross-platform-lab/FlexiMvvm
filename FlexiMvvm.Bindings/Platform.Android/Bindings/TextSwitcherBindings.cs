@@ -15,7 +15,6 @@
 // =========================================================================
 
 using System;
-using Android.Content;
 using Android.Widget;
 using FlexiMvvm.Bindings.Custom;
 using Java.Lang;
@@ -27,8 +26,7 @@ namespace FlexiMvvm.Bindings
     {
         [NotNull]
         public static TargetItemBinding<TextSwitcher, TValue> SetCurrentText<TValue>(
-            [NotNull] this IItemReference<TextSwitcher> textSwitcherReference,
-            [NotNull] Context context)
+            [NotNull] this IItemReference<TextSwitcher> textSwitcherReference)
         {
             if (textSwitcherReference == null)
                 throw new ArgumentNullException(nameof(textSwitcherReference));
@@ -54,8 +52,7 @@ namespace FlexiMvvm.Bindings
 
         [NotNull]
         public static TargetItemBinding<TextSwitcher, TValue> SetText<TValue>(
-            [NotNull] this IItemReference<TextSwitcher> textSwitcherReference,
-            [NotNull] Context context)
+            [NotNull] this IItemReference<TextSwitcher> textSwitcherReference)
         {
             if (textSwitcherReference == null)
                 throw new ArgumentNullException(nameof(textSwitcherReference));
