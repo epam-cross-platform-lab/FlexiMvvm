@@ -17,6 +17,7 @@
 using System;
 using Android.Content.Res;
 using Android.Graphics;
+using Android.Graphics.Drawables;
 using Android.Text;
 using Android.Widget;
 using FlexiMvvm.Bindings.Custom;
@@ -240,6 +241,33 @@ namespace FlexiMvvm.Bindings
         }
 
         [NotNull]
+        public static TargetItemBinding<TextView, TValue> SetErrorBinding<TValue>(
+            [NotNull] this IItemReference<TextView> textViewReference,
+            [NotNull] Drawable drawable)
+        {
+            if (textViewReference == null)
+                throw new ArgumentNullException(nameof(textViewReference));
+
+            return new TargetItemOneWayCustomBinding<TextView, TValue>(
+                textViewReference,
+                (textView, value) =>
+                {
+                    switch (value)
+                    {
+                        case ICharSequence charSequence:
+                            textView.NotNull().SetError(charSequence, drawable);
+                            break;
+                        case string @string:
+                            textView.NotNull().SetError(@string, drawable);
+                            break;
+                        default:
+                            throw new NotSupportedException($"{nameof(SetErrorBinding)} doesn't support type {typeof(TValue)}");
+                    }
+                },
+                () => "SetErrorBinding");
+        }
+
+        [NotNull]
         public static TargetItemBinding<TextView, int> SetHeightBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
         {
@@ -368,6 +396,32 @@ namespace FlexiMvvm.Bindings
                 textViewReference,
                 (textView, lines) => textView.NotNull().SetLines(lines),
                 () => "SetLines");
+        }
+
+        [NotNull]
+        public static TargetItemBinding<TextView, TValue> SetLinkTextColorBinding<TValue>(
+            [NotNull] this IItemReference<TextView> textViewReference)
+        {
+            if (textViewReference == null)
+                throw new ArgumentNullException(nameof(textViewReference));
+
+            return new TargetItemOneWayCustomBinding<TextView, TValue>(
+                textViewReference,
+                (textView, value) =>
+                {
+                    switch (value)
+                    {
+                        case Color color:
+                            textView.NotNull().SetLinkTextColor(color);
+                            break;
+                        case ColorStateList colorStateList:
+                            textView.NotNull().SetLinkTextColor(colorStateList);
+                            break;
+                        default:
+                            throw new NotSupportedException($"{nameof(SetLinkTextColorBinding)} doesn't support type {typeof(TValue)}");
+                    }
+                },
+                () => "SetLinkTextColor");
         }
 
         [NotNull]
@@ -500,6 +554,36 @@ namespace FlexiMvvm.Bindings
                 () => "SetSingleLine");
         }
 
+        [NotNull]
+        public static TargetItemBinding<TextView, TValue> SetTextBinding<TValue>(
+            [NotNull] this IItemReference<TextView> textViewReference,
+            [CanBeNull] TextView.BufferType bufferType = null)
+        {
+            if (textViewReference == null)
+                throw new ArgumentNullException(nameof(textViewReference));
+
+            return new TargetItemOneWayCustomBinding<TextView, TValue>(
+                textViewReference,
+                (textView, value) =>
+                {
+                    switch (value)
+                    {
+                        case int resId:
+                            textView.NotNull().SetText(resId, bufferType ?? TextView.BufferType.Normal);
+                            break;
+                        case ICharSequence charSequence:
+                            textView.NotNull().SetText(charSequence, bufferType ?? TextView.BufferType.Normal);
+                            break;
+                        case string @string:
+                            textView.NotNull().SetText(@string, bufferType ?? TextView.BufferType.Normal);
+                            break;
+                        default:
+                            throw new NotSupportedException($"{nameof(SetTextBinding)} doesn't support type {typeof(TValue)}");
+                    }
+                },
+                () => "SetText");
+        }
+
         /// <summary>
         /// Binding that sets a text color for <see cref="TextView"/>.
         /// <para>
@@ -554,15 +638,29 @@ namespace FlexiMvvm.Bindings
         }
 
         [NotNull]
-        public static TargetItemBinding<TextView, string> SetTextKeepStateBinding(
-            [NotNull] this IItemReference<TextView> textViewReference)
+        public static TargetItemBinding<TextView, TValue> SetTextKeepStateBinding<TValue>(
+            [NotNull] this IItemReference<TextView> textViewReference,
+            [CanBeNull] TextView.BufferType bufferType = null)
         {
             if (textViewReference == null)
                 throw new ArgumentNullException(nameof(textViewReference));
 
-            return new TargetItemOneWayCustomBinding<TextView, string>(
+            return new TargetItemOneWayCustomBinding<TextView, TValue>(
                 textViewReference,
-                (textView, text) => textView.NotNull().SetTextKeepState(text),
+                (textView, value) =>
+                {
+                    switch (value)
+                    {
+                        case ICharSequence charSequence:
+                            textView.NotNull().SetTextKeepState(charSequence, bufferType ?? TextView.BufferType.Normal);
+                            break;
+                        case string @string:
+                            textView.NotNull().SetTextKeepState(@string, bufferType ?? TextView.BufferType.Normal);
+                            break;
+                        default:
+                            throw new NotSupportedException($"{nameof(SetTextKeepStateBinding)} doesn't support type {typeof(TValue)}");
+                    }
+                },
                 () => "SetTextKeepState");
         }
 

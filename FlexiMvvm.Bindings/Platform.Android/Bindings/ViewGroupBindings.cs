@@ -15,8 +15,6 @@
 // =========================================================================
 
 using System;
-using Android.Animation;
-using Android.Graphics.Drawables;
 using Android.Views;
 using Android.Views.Animations;
 using FlexiMvvm.Bindings.Custom;
