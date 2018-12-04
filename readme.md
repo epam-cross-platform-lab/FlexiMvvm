@@ -28,7 +28,7 @@ According to current plans, first release is considered in 2019 Q1.
 ## Authors
 
 * Yauhen Papou (EPAM Systems), https://github.com/ypapou
-* Aliaksei Safonau (EPAM Systems)
+* Aliaksei Safonau (EPAM Systems), https://github.com/Aleksey7151
 
 ## Dependencies
 
