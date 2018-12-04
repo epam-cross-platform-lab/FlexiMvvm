@@ -1,6 +1,6 @@
 # Project Name
 
-FlexiMvvm
+### FlexiMvvm
 
 ## Description
 
@@ -21,14 +21,14 @@ git clone https://github.com/epam-xamarin-lab/FlexiMvvm.git
 
 ## Current Status
 
-Current state should be considered as a Developer Preview version.
+Current state should be considered as a **Developer Preview** version.
 Some of compatibility breaking changes are still possible due to continuous enhancements based on the early usage.
 According to current plans, first release is considered in 2019 Q1.
 
 ## Authors
 
-Yauhen Papou (EPAM Systems), https://github.com/ypapou
-Aliaksei Safonau (EPAM Systems)
+* Yauhen Papou (EPAM Systems), https://github.com/ypapou
+* Aliaksei Safonau (EPAM Systems)
 
 ## Dependencies
 
