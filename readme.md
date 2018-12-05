@@ -38,4 +38,4 @@ According to current plans, first release is considered in 2019 Q1.
 
 ## License Information
 
-Licensed under Apache 2.0, http://www.apache.org/licenses/LICENSE-2.0
+Licensed under Apache 2.0, https://github.com/epam-xamarin-lab/FlexiMvvm/blob/master/LICENSE
