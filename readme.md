@@ -1,8 +1,4 @@
-# Project Name
-
-### FlexiMvvm
-
-## Description
+# FlexiMvvm
 
 Based on the experience gained building mobile cross-platform applications with **Xamarin** and leveraging this framework's major advantages, implementing **FlexiMvvm** became crucial to address the minimal time to market demand and maintain overall product quality constrained to high standards for our clients.
 
