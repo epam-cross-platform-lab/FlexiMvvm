@@ -29,7 +29,7 @@ namespace FlexiMvvm.Bindings
         /// Binding on <see cref="ActionBar.HideOffset"/> property.
         /// </summary>
         /// <param name="actionBarReference">The action bar reference.</param>
-        /// <returns>Binding</returns>
+        /// <returns>Binding on <see cref="ActionBar.HideOffset"/> property.</returns>
         /// <exception cref="ArgumentNullException">actionBarReference</exception>
         [NotNull]
         public static TargetItemBinding<ActionBar, int> HideOffsetBinding(
@@ -48,7 +48,7 @@ namespace FlexiMvvm.Bindings
         /// Binding on <see cref="ActionBar.HideOnContentScrollEnabled"/> property.
         /// </summary>
         /// <param name="actionBarReference">The action bar reference.</param>
-        /// <returns>Binding</returns>
+        /// <returns>Binding on <see cref="ActionBar.HideOnContentScrollEnabled"/> property.</returns>
         /// <exception cref="ArgumentNullException">actionBarReference</exception>
         [NotNull]
         public static TargetItemBinding<ActionBar, bool> HideOnContentScrollEnabledBinding(
@@ -67,7 +67,7 @@ namespace FlexiMvvm.Bindings
         /// Binding on <see cref="ActionBar.MenuVisibility"/> event.
         /// </summary>
         /// <param name="actionBarReference">The action bar reference.</param>
-        /// <returns>Binding</returns>
+        /// <returns>Binding on <see cref="ActionBar.MenuVisibility"/> event.</returns>
         /// <exception cref="ArgumentNullException">actionBarReference</exception>
         [NotNull]
         public static TargetItemBinding<ActionBar, object> MenuVisibilityBinding(
@@ -89,7 +89,7 @@ namespace FlexiMvvm.Bindings
         /// Binding on <see cref="ActionBar.Subtitle"/> property.
         /// </summary>
         /// <param name="actionBarReference">The action bar reference.</param>
-        /// <returns>Binding</returns>
+        /// <returns>Binding on <see cref="ActionBar.Subtitle"/> property.</returns>
         /// <exception cref="ArgumentNullException">actionBarReference</exception>
         [NotNull]
         public static TargetItemBinding<ActionBar, string> SubtitleBinding(
@@ -108,7 +108,7 @@ namespace FlexiMvvm.Bindings
         /// Binding on <see cref="ActionBar.Title"/> property.
         /// </summary>
         /// <param name="actionBarReference">The action bar reference.</param>
-        /// <returns>Binding</returns>
+        /// <returns>Binding on <see cref="ActionBar.Title"/> property.</returns>
         /// <exception cref="ArgumentNullException">actionBarReference</exception>
         [NotNull]
         public static TargetItemBinding<ActionBar, string> TitleBinding(
@@ -126,15 +126,12 @@ namespace FlexiMvvm.Bindings
         /// <summary>
         /// Binding on <see cref="ActionBar.SetHomeActionContentDescription()"/> method.
         /// <para>
-        /// Supported types for <see cref="TValue"/>: <see cref="ICharSequence"/>, <see cref="string"/>, <see cref="int"/>
-        /// </para>
-        /// <para>
-        /// Usage: <c>.For(v => v.SetHomeActionContentDescriptionBinding&lt;ICharSequence&gt;())</c>
+        /// Supported parameters: <see cref="ICharSequence"/> description, <see cref="string"/> description, <see cref="int"/> resId.
         /// </para>
         /// </summary>
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="actionBarReference">The action bar reference.</param>
-        /// <returns>Binding</returns>
+        /// <returns>Binding on <see cref="ActionBar.SetHomeActionContentDescription()"/> method.</returns>
         /// <exception cref="ArgumentNullException">actionBarReference</exception>
         /// <exception cref="NotSupportedException">actionBarReference</exception>
         [NotNull]
@@ -153,11 +150,11 @@ namespace FlexiMvvm.Bindings
                         case int resId:
                             actionBar.NotNull().SetHomeActionContentDescription(resId);
                             break;
-                        case ICharSequence charSequence:
-                            actionBar.NotNull().SetHomeActionContentDescription(charSequence);
+                        case ICharSequence description:
+                            actionBar.NotNull().SetHomeActionContentDescription(description);
                             break;
-                        case string @string:
-                            actionBar.NotNull().SetHomeActionContentDescription(@string);
+                        case string description:
+                            actionBar.NotNull().SetHomeActionContentDescription(description);
                             break;
                         default:
                             throw new NotSupportedException($"{nameof(SetHomeActionContentDescriptionBinding)} doesn't support type {typeof(TValue)}");
@@ -169,15 +166,12 @@ namespace FlexiMvvm.Bindings
         /// <summary>
         /// Binding on <see cref="ActionBar.SetHomeAsUpIndicator()"/> method.
         /// <para>
-        /// Supported types for <see cref="TValue"/>: <see cref="Drawable"/>, <see cref="int"/>
-        /// </para>
-        /// <para>
-        /// Usage: <c>.For(v => v.SetHomeActionContentDescriptionBinding&lt;Drawable&gt;())</c>
+        /// Supported parameters: <see cref="Drawable"/> indicator, <see cref="int"/> resId.
         /// </para>
         /// </summary>
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="actionBarReference">The action bar reference.</param>
-        /// <returns>Binding</returns>
+        /// <returns>Binding on <see cref="ActionBar.SetHomeAsUpIndicator()"/> method.</returns>
         /// <exception cref="ArgumentNullException">actionBarReference</exception>
         /// <exception cref="NotSupportedException">actionBarReference</exception>
         [NotNull]
@@ -196,8 +190,8 @@ namespace FlexiMvvm.Bindings
                         case int resId:
                             actionBar.NotNull().SetHomeAsUpIndicator(resId);
                             break;
-                        case Drawable drawable:
-                            actionBar.NotNull().SetHomeAsUpIndicator(drawable);
+                        case Drawable indicator:
+                            actionBar.NotNull().SetHomeAsUpIndicator(indicator);
                             break;
                         default:
                             throw new NotSupportedException($"{nameof(SetHomeAsUpIndicatorBinding)} doesn't support type {typeof(TValue)}");
@@ -210,7 +204,7 @@ namespace FlexiMvvm.Bindings
         /// Binding on <see cref="ActionBar.SetHomeButtonEnabled()"/> method.
         /// </summary>
         /// <param name="actionBarReference">The action bar reference.</param>
-        /// <returns>Binding</returns>
+        /// <returns>Binding on <see cref="ActionBar.SetHomeButtonEnabled()"/> method.</returns>
         /// <exception cref="ArgumentNullException">actionBarReference</exception>
         [NotNull]
         public static TargetItemBinding<ActionBar, bool> SetHomeButtonEnabledBinding(
