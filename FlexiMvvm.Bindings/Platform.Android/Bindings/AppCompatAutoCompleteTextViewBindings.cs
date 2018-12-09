@@ -134,7 +134,7 @@ namespace FlexiMvvm.Bindings
         /// <summary>
         /// Binding on <see cref="AppCompatAutoCompleteTextView.DropDownWidth"/> property.
         /// </summary>
-        /// <param name="appCompatAutoCompleteTextViewReference">The application compat automatic complete text view reference.</param>
+        /// <param name="appCompatAutoCompleteTextViewReference">The item reference.</param>
         /// <returns>Binding on <see cref="AppCompatAutoCompleteTextView.DropDownWidth"/> property.</returns>
         /// <exception cref="ArgumentNullException">appCompatAutoCompleteTextViewReference is null.</exception>
         [NotNull]
@@ -150,6 +150,13 @@ namespace FlexiMvvm.Bindings
                 () => "DropDownWidth");
         }
 
+        /// <summary>
+        /// Binding on <see cref="AppCompatAutoCompleteTextView.ItemClick"/> event.
+        /// </summary>
+        /// <param name="appCompatAutoCompleteTextViewReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="AppCompatAutoCompleteTextView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>Binding on <see cref="AppCompatAutoCompleteTextView.ItemClick"/> event.</returns>
+        /// <exception cref="ArgumentNullException">appCompatAutoCompleteTextViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<AppCompatAutoCompleteTextView, int> ItemClickBinding(
             [NotNull] this IItemReference<AppCompatAutoCompleteTextView> appCompatAutoCompleteTextViewReference,
@@ -173,6 +180,13 @@ namespace FlexiMvvm.Bindings
                 () => "ItemClick");
         }
 
+        /// <summary>
+        /// Binding on <see cref="AppCompatAutoCompleteTextView.ItemSelected"/> event.
+        /// </summary>
+        /// <param name="appCompatAutoCompleteTextViewReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="AppCompatAutoCompleteTextView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>Binding on <see cref="AppCompatAutoCompleteTextView.ItemSelected"/> event.</returns>
+        /// <exception cref="ArgumentNullException">appCompatAutoCompleteTextViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<AppCompatAutoCompleteTextView, int> ItemSelectedBinding(
             [NotNull] this IItemReference<AppCompatAutoCompleteTextView> appCompatAutoCompleteTextViewReference,
@@ -196,6 +210,13 @@ namespace FlexiMvvm.Bindings
                 () => "ItemSelected");
         }
 
+        /// <summary>
+        /// Binding on <see cref="AppCompatAutoCompleteTextView.NothingSelected"/> event.
+        /// </summary>
+        /// <param name="appCompatAutoCompleteTextViewReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="AppCompatAutoCompleteTextView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>Binding on <see cref="AppCompatAutoCompleteTextView.NothingSelected"/> event.</returns>
+        /// <exception cref="ArgumentNullException">appCompatAutoCompleteTextViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<AppCompatAutoCompleteTextView, object> NothingSelectedBinding(
             [NotNull] this IItemReference<AppCompatAutoCompleteTextView> appCompatAutoCompleteTextViewReference,
@@ -219,6 +240,12 @@ namespace FlexiMvvm.Bindings
                 () => "NothingSelected");
         }
 
+        /// <summary>
+        /// Binding on <see cref="AppCompatAutoCompleteTextView.ListSelection"/> property.
+        /// </summary>
+        /// <param name="appCompatAutoCompleteTextViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="AppCompatAutoCompleteTextView.ListSelection"/> property.</returns>
+        /// <exception cref="ArgumentNullException">appCompatAutoCompleteTextViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<AppCompatAutoCompleteTextView, int> ListSelectionBinding(
             [NotNull] this IItemReference<AppCompatAutoCompleteTextView> appCompatAutoCompleteTextViewReference)
@@ -232,6 +259,16 @@ namespace FlexiMvvm.Bindings
                 () => "ListSelection");
         }
 
+        /// <summary>
+        /// Binding on <see cref="AppCompatAutoCompleteTextView.SetCompletionHint"/> method.
+        /// <para>
+        /// Supported parameters: <see cref="ICharSequence"/> hint; <see cref="string"/> hint.
+        /// </para>
+        /// </summary>
+        /// <typeparam name="TValue">The type of the value.</typeparam>
+        /// <param name="appCompatAutoCompleteTextViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="AppCompatAutoCompleteTextView.SetCompletionHint"/> method.</returns>
+        /// <exception cref="ArgumentNullException">appCompatAutoCompleteTextViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<AppCompatAutoCompleteTextView, TValue> SetCompletionHintBinding<TValue>(
             [NotNull] this IItemReference<AppCompatAutoCompleteTextView> appCompatAutoCompleteTextViewReference)
@@ -245,11 +282,11 @@ namespace FlexiMvvm.Bindings
                 {
                     switch (value)
                     {
-                        case ICharSequence charSequence:
-                            appCompatAutoCompleteTextView.NotNull().SetCompletionHint(charSequence);
+                        case ICharSequence hint:
+                            appCompatAutoCompleteTextView.NotNull().SetCompletionHint(hint);
                             break;
-                        case string @string:
-                            appCompatAutoCompleteTextView.NotNull().SetCompletionHint(@string);
+                        case string hint:
+                            appCompatAutoCompleteTextView.NotNull().SetCompletionHint(hint);
                             break;
                         default:
                             throw new NotSupportedException($"{nameof(SetCompletionHintBinding)} doesn't support type {typeof(TValue)}");
@@ -258,6 +295,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetCompletionHint");
         }
 
+        /// <summary>
+        /// Binding on <see cref="AppCompatAutoCompleteTextView.SetDropDownBackgroundResource(int)"/> method.
+        /// </summary>
+        /// <param name="appCompatAutoCompleteTextViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="AppCompatAutoCompleteTextView.SetDropDownBackgroundResource(int)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">appCompatAutoCompleteTextViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<AppCompatAutoCompleteTextView, int> SetDropDownBackgroundResourceBinding(
             [NotNull] this IItemReference<AppCompatAutoCompleteTextView> appCompatAutoCompleteTextViewReference)
@@ -271,6 +314,17 @@ namespace FlexiMvvm.Bindings
                 () => "SetDropDownBackgroundResource");
         }
 
+        /// <summary>
+        /// Binding on <see cref="AppCompatAutoCompleteTextView.SetText"/> method.
+        /// <para>
+        /// Supported parameters: <see cref="ICharSequence"/> text; <see cref="string"/> text; <see cref="int"/> resId.
+        /// </para>
+        /// </summary>
+        /// <typeparam name="TValue">The type of the value.</typeparam>
+        /// <param name="appCompatAutoCompleteTextViewReference">The item reference.</param>
+        /// <param name="filter">The second parameter of <see cref="AppCompatAutoCompleteTextView.SetText"/> method.</param>
+        /// <returns>Binding on <see cref="AppCompatAutoCompleteTextView.SetText"/> method.</returns>
+        /// <exception cref="ArgumentNullException">appCompatAutoCompleteTextViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<AppCompatAutoCompleteTextView, TValue> SetTextBinding<TValue>(
             [NotNull] this IItemReference<AppCompatAutoCompleteTextView> appCompatAutoCompleteTextViewReference,
@@ -285,11 +339,11 @@ namespace FlexiMvvm.Bindings
                 {
                     switch (value)
                     {
-                        case ICharSequence charSequence:
-                            appCompatAutoCompleteTextView.NotNull().SetText(charSequence, filter);
+                        case ICharSequence text:
+                            appCompatAutoCompleteTextView.NotNull().SetText(text, filter);
                             break;
-                        case string @string:
-                            appCompatAutoCompleteTextView.NotNull().SetText(@string, filter);
+                        case string text:
+                            appCompatAutoCompleteTextView.NotNull().SetText(text, filter);
                             break;
                         case int resId:
                             appCompatAutoCompleteTextView.NotNull().SetText(resId);
@@ -301,6 +355,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetText");
         }
 
+        /// <summary>
+        /// Binding on <see cref="AppCompatAutoCompleteTextView.Threshold"/> property.
+        /// </summary>
+        /// <param name="appCompatAutoCompleteTextViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="AppCompatAutoCompleteTextView.Threshold"/> property.</returns>
+        /// <exception cref="ArgumentNullException">appCompatAutoCompleteTextViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<AppCompatAutoCompleteTextView, int> ThresholdBinding(
             [NotNull] this IItemReference<AppCompatAutoCompleteTextView> appCompatAutoCompleteTextViewReference)
