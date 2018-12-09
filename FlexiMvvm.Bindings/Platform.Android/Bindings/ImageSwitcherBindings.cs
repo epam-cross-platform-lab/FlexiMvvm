@@ -24,6 +24,12 @@ namespace FlexiMvvm.Bindings
 {
     public static class ImageSwitcherBindings
     {
+        /// <summary>
+        /// Binding on <see cref="ImageSwitcher.SetImageDrawable(Drawable)"/> method.
+        /// </summary>
+        /// <param name="imageSwitcherReference">The item reference.</param>
+        /// <returns>Binding on <see cref="ImageSwitcher.SetImageDrawable(Drawable)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">imageSwitcherReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ImageSwitcher, Drawable> SetImageDrawableBinding(
             [NotNull] this IItemReference<ImageSwitcher> imageSwitcherReference)
@@ -37,6 +43,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetImageDrawable");
         }
 
+        /// <summary>
+        /// Binding on <see cref="ImageSwitcher.SetImageResource(int)"/> method.
+        /// </summary>
+        /// <param name="imageSwitcherReference">The item reference.</param>
+        /// <returns>Binding on <see cref="ImageSwitcher.SetImageResource(int)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">imageSwitcherReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ImageSwitcher, int> SetImageResourceBinding(
             [NotNull] this IItemReference<ImageSwitcher> imageSwitcherReference)
@@ -50,6 +62,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetImageResource");
         }
 
+        /// <summary>
+        /// Binding on <see cref="ImageSwitcher.SetImageURI(Android.Net.Uri)"/> method.
+        /// </summary>
+        /// <param name="imageSwitcherReference">The item reference.</param>
+        /// <returns>Binding on <see cref="ImageSwitcher.SetImageURI(Android.Net.Uri)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">imageSwitcherReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ImageSwitcher, Android.Net.Uri> SetImageURIBinding(
             [NotNull] this IItemReference<ImageSwitcher> imageSwitcherReference)

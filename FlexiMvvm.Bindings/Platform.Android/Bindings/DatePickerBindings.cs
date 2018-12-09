@@ -22,6 +22,12 @@ namespace FlexiMvvm.Bindings
 {
     public static class DatePickerBindings
     {
+        /// <summary>
+        /// Binding on <see cref="DatePicker.DateTime"/> property.
+        /// </summary>
+        /// <param name="datePickerReference">The item reference.</param>
+        /// <returns>Binding on <see cref="DatePicker.DateTime"/> property.</returns>
+        /// <exception cref="ArgumentNullException">datePickerReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<DatePicker, DateTime> DateTimeBinding(
             [NotNull] this IItemReference<DatePicker> datePickerReference)
@@ -35,6 +41,12 @@ namespace FlexiMvvm.Bindings
                 () => "DateTime");
         }
 
+        /// <summary>
+        /// Binding on <see cref="DatePicker.FirstDayOfWeek"/> property.
+        /// </summary>
+        /// <param name="datePickerReference">The item reference.</param>
+        /// <returns>Binding on <see cref="DatePicker.FirstDayOfWeek"/> property.</returns>
+        /// <exception cref="ArgumentNullException">datePickerReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<DatePicker, int> FirstDayOfWeekBinding(
             [NotNull] this IItemReference<DatePicker> datePickerReference)
@@ -48,6 +60,12 @@ namespace FlexiMvvm.Bindings
                 () => "FirstDayOfWeek");
         }
 
+        /// <summary>
+        /// Binding on <see cref="DatePicker.MaxDate"/> property.
+        /// </summary>
+        /// <param name="datePickerReference">The item reference.</param>
+        /// <returns>Binding on <see cref="DatePicker.MaxDate"/> property.</returns>
+        /// <exception cref="ArgumentNullException">datePickerReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<DatePicker, long> MaxDateBinding(
             [NotNull] this IItemReference<DatePicker> datePickerReference)
@@ -61,6 +79,12 @@ namespace FlexiMvvm.Bindings
                 () => "MaxDate");
         }
 
+        /// <summary>
+        /// Binding on <see cref="DatePicker.MinDate"/> property.
+        /// </summary>
+        /// <param name="datePickerReference">The item reference.</param>
+        /// <returns>Binding on <see cref="DatePicker.MinDate"/> property.</returns>
+        /// <exception cref="ArgumentNullException">datePickerReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<DatePicker, long> MinDateBinding(
             [NotNull] this IItemReference<DatePicker> datePickerReference)

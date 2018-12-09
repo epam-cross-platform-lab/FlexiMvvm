@@ -23,6 +23,12 @@ namespace FlexiMvvm.Bindings
 {
     public static class EditTextBindings
     {
+        /// <summary>
+        /// Binding on <see cref="EditText.SetSelection(int)"/> method.
+        /// </summary>
+        /// <param name="editTextReference">The item reference.</param>
+        /// <returns>Binding on <see cref="EditText.SetSelection(int)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">editTextReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<EditText, int> SetSelectionBinding(
             [NotNull] this IItemReference<EditText> editTextReference)

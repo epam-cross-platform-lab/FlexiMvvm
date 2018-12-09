@@ -24,6 +24,17 @@ namespace FlexiMvvm.Bindings
 {
     public static class TextSwitcherBindings
     {
+        /// <summary>
+        /// Binding on <see cref="TextSwitcher.SetCurrentText"/> method.
+        /// <para>
+        /// Supported parameters: <see cref="ICharSequence"/> text; <see cref="string"/> text.
+        /// </para>
+        /// </summary>
+        /// <typeparam name="TValue">The type of the value.</typeparam>
+        /// <param name="textSwitcherReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextSwitcher.SetCurrentText"/> method.</returns>
+        /// <exception cref="ArgumentNullException">textSwitcherReference is null.</exception>
+        /// <exception cref="NotSupportedException">Type <see cref="TValue"/> is not supported.</exception>
         [NotNull]
         public static TargetItemBinding<TextSwitcher, TValue> SetCurrentText<TValue>(
             [NotNull] this IItemReference<TextSwitcher> textSwitcherReference)
@@ -37,11 +48,11 @@ namespace FlexiMvvm.Bindings
                 {
                     switch (value)
                     {
-                        case ICharSequence charSequence:
-                            textSwitcher.NotNull().SetCurrentText(charSequence);
+                        case ICharSequence text:
+                            textSwitcher.NotNull().SetCurrentText(text);
                             break;
-                        case string @string:
-                            textSwitcher.NotNull().SetCurrentText(@string);
+                        case string text:
+                            textSwitcher.NotNull().SetCurrentText(text);
                             break;
                         default:
                             throw new NotSupportedException($"{nameof(SetCurrentText)} doesn't support type {typeof(TValue)}");
@@ -50,6 +61,17 @@ namespace FlexiMvvm.Bindings
                 () => "SetCurrentText");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextSwitcher.SetText"/> method.
+        /// <para>
+        /// Supported parameters: <see cref="ICharSequence"/> text; <see cref="string"/> text.
+        /// </para>
+        /// </summary>
+        /// <typeparam name="TValue">The type of the value.</typeparam>
+        /// <param name="textSwitcherReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextSwitcher.SetText"/> method.</returns>
+        /// <exception cref="ArgumentNullException">textSwitcherReference is null.</exception>
+        /// <exception cref="NotSupportedException">Type <see cref="TValue"/> is not supported.</exception>
         [NotNull]
         public static TargetItemBinding<TextSwitcher, TValue> SetText<TValue>(
             [NotNull] this IItemReference<TextSwitcher> textSwitcherReference)
@@ -63,11 +85,11 @@ namespace FlexiMvvm.Bindings
                 {
                     switch (value)
                     {
-                        case ICharSequence charSequence:
-                            textSwitcher.NotNull().SetText(charSequence);
+                        case ICharSequence text:
+                            textSwitcher.NotNull().SetText(text);
                             break;
-                        case string @string:
-                            textSwitcher.NotNull().SetText(@string);
+                        case string text:
+                            textSwitcher.NotNull().SetText(text);
                             break;
                         default:
                             throw new NotSupportedException($"{nameof(SetCurrentText)} doesn't support type {typeof(TValue)}");

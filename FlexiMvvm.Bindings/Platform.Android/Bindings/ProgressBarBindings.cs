@@ -24,6 +24,12 @@ namespace FlexiMvvm.Bindings
 {
     public static class ProgressBarBindings
     {
+        /// <summary>
+        /// Binding on <see cref="ProgressBar.IncrementProgressBy(int)"/> method.
+        /// </summary>
+        /// <param name="progressBarReference">The item reference.</param>
+        /// <returns>Binding on <see cref="ProgressBar.IncrementProgressBy(int)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">progressBarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ProgressBar, int> IncrementProgressByBinding(
             [NotNull] this IItemReference<ProgressBar> progressBarReference)
@@ -37,6 +43,12 @@ namespace FlexiMvvm.Bindings
                 () => "IncrementProgressBy");
         }
 
+        /// <summary>
+        /// Binding on <see cref="ProgressBar.IncrementSecondaryProgressBy(int)"/> method.
+        /// </summary>
+        /// <param name="progressBarReference">The item reference.</param>
+        /// <returns>Binding on <see cref="ProgressBar.IncrementSecondaryProgressBy(int)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">progressBarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ProgressBar, int> IncrementSecondaryProgressByBinding(
             [NotNull] this IItemReference<ProgressBar> progressBarReference)
@@ -50,6 +62,12 @@ namespace FlexiMvvm.Bindings
                 () => "IncrementSecondaryProgressBy");
         }
 
+        /// <summary>
+        /// Binding on <see cref="ProgressBar.Indeterminate"/> property.
+        /// </summary>
+        /// <param name="progressBarReference">The item reference.</param>
+        /// <returns>Binding on <see cref="ProgressBar.Indeterminate"/> property.</returns>
+        /// <exception cref="ArgumentNullException">progressBarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ProgressBar, bool> IndeterminateBinding(
             [NotNull] this IItemReference<ProgressBar> progressBarReference)
@@ -63,6 +81,12 @@ namespace FlexiMvvm.Bindings
                 () => "Indeterminate");
         }
 
+        /// <summary>
+        /// Binding on <see cref="ProgressBar.IndeterminateDrawable"/> property.
+        /// </summary>
+        /// <param name="progressBarReference">The item reference.</param>
+        /// <returns>Binding on <see cref="ProgressBar.IndeterminateDrawable"/> property.</returns>
+        /// <exception cref="ArgumentNullException">progressBarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ProgressBar, Drawable> IndeterminateDrawableBinding(
             [NotNull] this IItemReference<ProgressBar> progressBarReference)
@@ -76,6 +100,12 @@ namespace FlexiMvvm.Bindings
                 () => "IndeterminateDrawable");
         }
 
+        /// <summary>
+        /// Binding on <see cref="ProgressBar.Max"/> property.
+        /// </summary>
+        /// <param name="progressBarReference">The item reference.</param>
+        /// <returns>Binding on <see cref="ProgressBar.Max"/> property.</returns>
+        /// <exception cref="ArgumentNullException">progressBarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ProgressBar, int> MaxBinding(
             [NotNull] this IItemReference<ProgressBar> progressBarReference)
@@ -89,6 +119,12 @@ namespace FlexiMvvm.Bindings
                 () => "Max");
         }
 
+        /// <summary>
+        /// Binding on <see cref="ProgressBar.Progress"/> property.
+        /// </summary>
+        /// <param name="progressBarReference">The item reference.</param>
+        /// <returns>Binding on <see cref="ProgressBar.Progress"/> property.</returns>
+        /// <exception cref="ArgumentNullException">progressBarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ProgressBar, int> ProgressBinding(
             [NotNull] this IItemReference<ProgressBar> progressBarReference)
@@ -102,6 +138,12 @@ namespace FlexiMvvm.Bindings
                 () => "Progress");
         }
 
+        /// <summary>
+        /// Binding on <see cref="ProgressBar.ProgressDrawable"/> property.
+        /// </summary>
+        /// <param name="progressBarReference">The item reference.</param>
+        /// <returns>Binding on <see cref="ProgressBar.ProgressDrawable"/> property.</returns>
+        /// <exception cref="ArgumentNullException">progressBarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ProgressBar, Drawable> ProgressDrawableBinding(
             [NotNull] this IItemReference<ProgressBar> progressBarReference)
@@ -115,6 +157,12 @@ namespace FlexiMvvm.Bindings
                 () => "ProgressDrawable");
         }
 
+        /// <summary>
+        /// Binding on <see cref="ProgressBar.SecondaryProgress"/> property.
+        /// </summary>
+        /// <param name="progressBarReference">The item reference.</param>
+        /// <returns>Binding on <see cref="ProgressBar.SecondaryProgress"/> property.</returns>
+        /// <exception cref="ArgumentNullException">progressBarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ProgressBar, int> SecondaryProgressBinding(
             [NotNull] this IItemReference<ProgressBar> progressBarReference)

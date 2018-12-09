@@ -23,6 +23,13 @@ namespace FlexiMvvm.Bindings
 {
     public static class RadioGroupBindings
     {
+        /// <summary>
+        /// Two way binding on <see cref="RadioGroup.CheckedChange"/> event and <see cref="RadioGroup.Check"/> method.
+        /// </summary>
+        /// <param name="radioGroupReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="RadioGroup.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>Two way binding on <see cref="RadioGroup.CheckedChange"/> event and <see cref="RadioGroup.Check"/> method.</returns>
+        /// <exception cref="ArgumentNullException">radioGroupReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<RadioGroup, int> CheckAndCheckedChangeBinding(
             [NotNull] this IItemReference<RadioGroup> radioGroupReference,
@@ -47,6 +54,12 @@ namespace FlexiMvvm.Bindings
                 () => "CheckAndCheckedChange");
         }
 
+        /// <summary>
+        /// Binding on <see cref="RadioGroup.Check(int)"/> method.
+        /// </summary>
+        /// <param name="radioGroupReference">The item reference.</param>
+        /// <returns>Binding on <see cref="RadioGroup.Check(int)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">radioGroupReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<RadioGroup, int> CheckBinding(
             [NotNull] this IItemReference<RadioGroup> radioGroupReference)
@@ -60,6 +73,13 @@ namespace FlexiMvvm.Bindings
                 () => "Check");
         }
 
+        /// <summary>
+        /// Binding on <see cref="RadioGroup.CheckedChange"/> event.
+        /// </summary>
+        /// <param name="radioGroupReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="RadioGroup.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>Binding on <see cref="RadioGroup.CheckedChange"/> event.</returns>
+        /// <exception cref="ArgumentNullException">radioGroupReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<RadioGroup, int> CheckedChangeBinding(
             [NotNull] this IItemReference<RadioGroup> radioGroupReference,

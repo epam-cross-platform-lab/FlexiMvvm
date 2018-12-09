@@ -28,6 +28,13 @@ namespace FlexiMvvm.Bindings
 {
     public static class TextViewBindings
     {
+        /// <summary>
+        /// Binding on <see cref="TextView.AfterTextChanged"/> event.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="SearchView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>Binding on <see cref="TextView.AfterTextChanged"/> event.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, string> AfterTextChangedBinding(
             [NotNull] this IItemReference<TextView> textViewReference,
@@ -51,6 +58,13 @@ namespace FlexiMvvm.Bindings
                 () => "AfterTextChanged");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.BeforeTextChanged"/> event.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="SearchView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>Binding on <see cref="TextView.BeforeTextChanged"/> event.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, string> BeforeTextChangedBinding(
             [NotNull] this IItemReference<TextView> textViewReference,
@@ -74,6 +88,13 @@ namespace FlexiMvvm.Bindings
                 () => "BeforeTextChanged");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.EditorAction"/> event.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="SearchView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>Binding on <see cref="TextView.EditorAction"/> event.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, string> EditorActionBinding(
             [NotNull] this IItemReference<TextView> textViewReference,
@@ -97,6 +118,12 @@ namespace FlexiMvvm.Bindings
                 () => "EditorAction");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.Error"/> property.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.Error"/> property.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, string> ErrorBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -110,6 +137,12 @@ namespace FlexiMvvm.Bindings
                 () => "Error");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.FreezesText"/> property.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.FreezesText"/> property.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, bool> FreezesTextBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -123,6 +156,12 @@ namespace FlexiMvvm.Bindings
                 () => "FreezesText");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.Hint"/> property.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.Hint"/> property.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, string> HintBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -136,6 +175,12 @@ namespace FlexiMvvm.Bindings
                 () => "Hint");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.LetterSpacing"/> property.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.LetterSpacing"/> property.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, float> LetterSpacingBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -149,6 +194,12 @@ namespace FlexiMvvm.Bindings
                 () => "LetterSpacing");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.LinksClickable"/> property.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.LinksClickable"/> property.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, bool> LinksClickableBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -162,6 +213,12 @@ namespace FlexiMvvm.Bindings
                 () => "LinksClickable");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.PrivateImeOptions"/> property.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.PrivateImeOptions"/> property.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, string> PrivateImeOptionsBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -175,6 +232,12 @@ namespace FlexiMvvm.Bindings
                 () => "PrivateImeOptions");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.ShowSoftInputOnFocus"/> property.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.ShowSoftInputOnFocus"/> property.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, bool> ShowSoftInputOnFocusBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -188,6 +251,12 @@ namespace FlexiMvvm.Bindings
                 () => "ShowSoftInputOnFocus");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.SetAllCaps(bool)"/> method.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.SetAllCaps(bool)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, bool> SetAllCapsBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -201,6 +270,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetAllCaps");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.SetCursorVisible(bool)"/> method.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.SetCursorVisible(bool)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, bool> SetCursorVisibleBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -214,6 +289,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetCursorVisible");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.SetElegantTextHeight(bool)"/> method.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.SetElegantTextHeight(bool)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, bool> SetElegantTextHeightBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -227,6 +308,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetElegantTextHeight");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.SetEms(int)"/> method.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.SetEms(int)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, int> SetEmsBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -240,6 +327,18 @@ namespace FlexiMvvm.Bindings
                 () => "SetEms");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.SetError"/> method.
+        /// <para>
+        /// Supported parameters: <see cref="ICharSequence"/> error; <see cref="string"/> error.
+        /// </para>
+        /// </summary>
+        /// <typeparam name="TValue">The type of the value.</typeparam>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <param name="drawable">The drawable.</param>
+        /// <returns>Binding on <see cref="TextView.SetError"/> method.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
+        /// <exception cref="NotSupportedException">Type <see cref="TValue"/> is not supported.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, TValue> SetErrorBinding<TValue>(
             [NotNull] this IItemReference<TextView> textViewReference,
@@ -254,11 +353,11 @@ namespace FlexiMvvm.Bindings
                 {
                     switch (value)
                     {
-                        case ICharSequence charSequence:
-                            textView.NotNull().SetError(charSequence, drawable);
+                        case ICharSequence error:
+                            textView.NotNull().SetError(error, drawable);
                             break;
-                        case string @string:
-                            textView.NotNull().SetError(@string, drawable);
+                        case string error:
+                            textView.NotNull().SetError(error, drawable);
                             break;
                         default:
                             throw new NotSupportedException($"{nameof(SetErrorBinding)} doesn't support type {typeof(TValue)}");
@@ -267,6 +366,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetErrorBinding");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.SetHeight(int)"/> method.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.SetHeight(int)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, int> SetHeightBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -280,6 +385,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetHeight");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.SetHighlightColor(Color)"/> method.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.SetHighlightColor(Color)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, Color> SetHighlightColorBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -293,6 +404,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetHighlightColor");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.SetHint(int)"/> method.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.SetHint(int)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, int> SetHintBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -307,19 +424,16 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding that sets a hint text color for <see cref="TextView"/>.
+        /// Binding on <see cref="TextView.SetHintTextColor"/> method.
         /// <para>
-        /// Supported types for <see cref="TValue"/>: <see cref="Color"/>, <see cref="ColorStateList"/>
-        /// </para>
-        /// <para>
-        /// Usage: <c>.For(v => v.SetHintTextColorBinding&lt;ColorStateList&gt;())</c>
+        /// Supported parameters: <see cref="Color"/> color; <see cref="ColorStateList"/> colors.
         /// </para>
         /// </summary>
         /// <typeparam name="TValue">The type of the value.</typeparam>
-        /// <param name="textViewReference">The text view reference.</param>
-        /// <returns>Binding</returns>
-        /// <exception cref="ArgumentNullException">textViewReference</exception>
-        /// <exception cref="NotSupportedException">textViewReference</exception>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.SetHintTextColor"/> method.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
+        /// <exception cref="NotSupportedException">Type <see cref="TValue"/> is not supported.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, TValue> SetHintTextColorBinding<TValue>(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -336,8 +450,8 @@ namespace FlexiMvvm.Bindings
                         case Color color:
                             textView.NotNull().SetHintTextColor(color);
                             break;
-                        case ColorStateList colorStateList:
-                            textView.NotNull().SetHintTextColor(colorStateList);
+                        case ColorStateList colors:
+                            textView.NotNull().SetHintTextColor(colors);
                             break;
                         default:
                             throw new NotSupportedException($"{nameof(SetTextColorBinding)} doesn't support type {typeof(TValue)}");
@@ -346,6 +460,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetHintTextColor");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.SetHorizontallyScrolling(bool)"/> method.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.SetHorizontallyScrolling(bool)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, bool> SetHorizontallyScrollingBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -359,6 +479,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetHorizontallyScrolling");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.SetIncludeFontPadding(bool)"/> method.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.SetIncludeFontPadding(bool)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, bool> SetIncludeFontPaddingBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -372,6 +498,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetIncludeFontPadding");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.SetInputExtras(int)"/> method.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.SetInputExtras(int)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, int> SetInputExtrasBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -385,6 +517,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetInputExtras");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.SetLines(int)"/> method.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.SetLines(int)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, int> SetLinesBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -398,6 +536,17 @@ namespace FlexiMvvm.Bindings
                 () => "SetLines");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.SetLinkTextColor"/> method.
+        /// <para>
+        /// Supported parameters: <see cref="Color"/> color; <see cref="ColorStateList"/> colors.
+        /// </para>
+        /// </summary>
+        /// <typeparam name="TValue">The type of the value.</typeparam>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.SetLinkTextColor"/> method.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
+        /// <exception cref="NotSupportedException">Type <see cref="TValue"/> is not supported.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, TValue> SetLinkTextColorBinding<TValue>(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -414,8 +563,8 @@ namespace FlexiMvvm.Bindings
                         case Color color:
                             textView.NotNull().SetLinkTextColor(color);
                             break;
-                        case ColorStateList colorStateList:
-                            textView.NotNull().SetLinkTextColor(colorStateList);
+                        case ColorStateList colors:
+                            textView.NotNull().SetLinkTextColor(colors);
                             break;
                         default:
                             throw new NotSupportedException($"{nameof(SetLinkTextColorBinding)} doesn't support type {typeof(TValue)}");
@@ -424,6 +573,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetLinkTextColor");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.SetMaxEms(int)"/> method.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.SetMaxEms(int)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, int> SetMaxEmsBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -437,6 +592,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetMaxEms");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.SetMaxHeight(int)"/> method.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.SetMaxHeight(int)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, int> SetMaxHeightBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -450,6 +611,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetMaxHeight");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.SetMaxLines(int)"/> method.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.SetMaxLines(int)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, int> SetMaxLinesBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -463,6 +630,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetMaxLines");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.SetMaxWidth(int)"/> method.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.SetMaxWidth(int)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, int> SetMaxWidthBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -476,6 +649,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetMaxWidth");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.SetMinEms(int)"/> method.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.SetMinEms(int)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, int> SetMinEmsBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -489,6 +668,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetMinEms");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.SetMinHeight(int)"/> method.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.SetMinHeight(int)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, int> SetMinHeightBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -502,6 +687,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetMinHeight");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.SetMinLines(int)"/> method.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.SetMinLines(int)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, int> SetMinLinesBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -515,6 +706,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetMinLines");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.SetMinWidth(int)"/> method.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.SetMinWidth(int)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, int> SetMinWidthBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -528,6 +725,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetMinWidth");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.SetSelectAllOnFocus(bool)"/> method.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.SetSelectAllOnFocus(bool)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, bool> SetSelectAllOnFocusBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -541,6 +744,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetSelectAllOnFocus");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.SetSingleLine(bool)"/> method.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.SetSingleLine(bool)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, bool> SetSingleLineBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -554,6 +763,18 @@ namespace FlexiMvvm.Bindings
                 () => "SetSingleLine");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.SetText"/> method.
+        /// <para>
+        /// Supported parameters: <see cref="int"/> resId; <see cref="ICharSequence"/> text; <see cref="string"/> text.
+        /// </para>
+        /// </summary>
+        /// <typeparam name="TValue">The type of the value.</typeparam>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <param name="bufferType">The buffer type.</param>
+        /// <returns>Binding on <see cref="TextView.SetText"/> method.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
+        /// <exception cref="NotSupportedException">Type <see cref="TValue"/> is not supported.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, TValue> SetTextBinding<TValue>(
             [NotNull] this IItemReference<TextView> textViewReference,
@@ -571,11 +792,11 @@ namespace FlexiMvvm.Bindings
                         case int resId:
                             textView.NotNull().SetText(resId, bufferType ?? TextView.BufferType.Normal);
                             break;
-                        case ICharSequence charSequence:
-                            textView.NotNull().SetText(charSequence, bufferType ?? TextView.BufferType.Normal);
+                        case ICharSequence text:
+                            textView.NotNull().SetText(text, bufferType ?? TextView.BufferType.Normal);
                             break;
-                        case string @string:
-                            textView.NotNull().SetText(@string, bufferType ?? TextView.BufferType.Normal);
+                        case string text:
+                            textView.NotNull().SetText(text, bufferType ?? TextView.BufferType.Normal);
                             break;
                         default:
                             throw new NotSupportedException($"{nameof(SetTextBinding)} doesn't support type {typeof(TValue)}");
@@ -585,19 +806,16 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding that sets a text color for <see cref="TextView"/>.
+        /// Binding on <see cref="TextView.SetTextColor"/> method.
         /// <para>
-        /// Supported types for <see cref="TValue"/>: <see cref="Color"/>, <see cref="ColorStateList"/>
-        /// </para>
-        /// <para>
-        /// Usage: <c>.For(v => v.SetTextColorBinding&lt;Color&gt;())</c>
+        /// Supported parameters: <see cref="Color"/> color; <see cref="ColorStateList"/> colors.
         /// </para>
         /// </summary>
         /// <typeparam name="TValue">The type of the value.</typeparam>
-        /// <param name="textViewReference">The text view reference.</param>
-        /// <returns>Binding</returns>
-        /// <exception cref="ArgumentNullException">textViewReference</exception>
-        /// <exception cref="NotSupportedException"><see cref="TValue"/></exception>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.SetTextColor"/> method.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
+        /// <exception cref="NotSupportedException">Type <see cref="TValue"/> is not supported.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, TValue> SetTextColorBinding<TValue>(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -614,8 +832,8 @@ namespace FlexiMvvm.Bindings
                         case Color color:
                             textView.NotNull().SetTextColor(color);
                             break;
-                        case ColorStateList colorStateList:
-                            textView.NotNull().SetTextColor(colorStateList);
+                        case ColorStateList colors:
+                            textView.NotNull().SetTextColor(colors);
                             break;
                         default:
                             throw new NotSupportedException($"{nameof(SetTextColorBinding)} doesn't support type {typeof(TValue)}");
@@ -624,6 +842,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetTextColor");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.SetTextIsSelectable(bool)"/> method.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.SetTextIsSelectable(bool)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, bool> SetTextIsSelectableBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -637,6 +861,18 @@ namespace FlexiMvvm.Bindings
                 () => "SetTextIsSelectable");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.SetTextKeepState"/> method.
+        /// <para>
+        /// Supported parameters: <see cref="ICharSequence"/> text; <see cref="string"/> text.
+        /// </para>
+        /// </summary>
+        /// <typeparam name="TValue">The type of the value.</typeparam>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <param name="bufferType">The buffer type.</param>
+        /// <returns>Binding on <see cref="TextView.SetTextKeepState"/> method.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
+        /// <exception cref="NotSupportedException">Type <see cref="TValue"/> is not supported.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, TValue> SetTextKeepStateBinding<TValue>(
             [NotNull] this IItemReference<TextView> textViewReference,
@@ -651,11 +887,11 @@ namespace FlexiMvvm.Bindings
                 {
                     switch (value)
                     {
-                        case ICharSequence charSequence:
-                            textView.NotNull().SetTextKeepState(charSequence, bufferType ?? TextView.BufferType.Normal);
+                        case ICharSequence text:
+                            textView.NotNull().SetTextKeepState(text, bufferType ?? TextView.BufferType.Normal);
                             break;
-                        case string @string:
-                            textView.NotNull().SetTextKeepState(@string, bufferType ?? TextView.BufferType.Normal);
+                        case string text:
+                            textView.NotNull().SetTextKeepState(text, bufferType ?? TextView.BufferType.Normal);
                             break;
                         default:
                             throw new NotSupportedException($"{nameof(SetTextKeepStateBinding)} doesn't support type {typeof(TValue)}");
@@ -664,6 +900,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetTextKeepState");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.SetWidth(int)"/> method.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.SetWidth(int)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, int> SetWidthBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -677,6 +919,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetWidth");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.Text"/> property.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.Text"/> property.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, string> TextBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -690,6 +938,13 @@ namespace FlexiMvvm.Bindings
                 () => "Text");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.TextChanged"/> event.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="TextView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>Binding on <see cref="TextView.TextChanged"/> event.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, string> TextChangedBinding(
             [NotNull] this IItemReference<TextView> textViewReference,
@@ -713,6 +968,13 @@ namespace FlexiMvvm.Bindings
                 () => "TextChanged");
         }
 
+        /// <summary>
+        /// Two way binding on <see cref="TextView.TextChanged"/> event and <see cref="TextView.Text"/> property.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="TextView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>Two way binding on <see cref="TextView.TextChanged"/> event and <see cref="TextView.Text"/> property.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, string> TextAndTextChangedBinding(
             [NotNull] this IItemReference<TextView> textViewReference,
@@ -737,6 +999,12 @@ namespace FlexiMvvm.Bindings
                 () => "TextAndTextChanged");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.TextFormatted"/> property.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.TextFormatted"/> property.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, ICharSequence> TextFormattedBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -750,6 +1018,12 @@ namespace FlexiMvvm.Bindings
                 () => "TextFormatted");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.TextScaleX"/> property.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.TextScaleX"/> property.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, float> TextScaleXBinding(
             [NotNull] this IItemReference<TextView> textViewReference)
@@ -763,6 +1037,12 @@ namespace FlexiMvvm.Bindings
                 () => "TextScaleX");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TextView.TextSize"/> property.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TextView.TextSize"/> property.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TextView, float> TextSizeBinding(
             [NotNull] this IItemReference<TextView> textViewReference)

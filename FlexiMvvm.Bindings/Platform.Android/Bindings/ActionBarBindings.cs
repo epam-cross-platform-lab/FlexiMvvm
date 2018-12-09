@@ -124,7 +124,7 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="ActionBar.SetHomeActionContentDescription()"/> method.
+        /// Binding on <see cref="ActionBar.SetHomeActionContentDescription"/> method.
         /// <para>
         /// Supported parameters: <see cref="int"/> resId; <see cref="ICharSequence"/> description; <see cref="string"/> description.
         /// </para>

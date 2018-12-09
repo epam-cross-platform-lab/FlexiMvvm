@@ -25,6 +25,12 @@ namespace FlexiMvvm.Bindings
 {
     public static class ImageViewBindings
     {
+        /// <summary>
+        /// Binding on <see cref="ImageView.BaselineAlignBottom"/> property.
+        /// </summary>
+        /// <param name="imageViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="ImageView.BaselineAlignBottom"/> property.</returns>
+        /// <exception cref="ArgumentNullException">imageViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ImageView, bool> BaselineAlignBottomBinding(
             [NotNull] this IItemReference<ImageView> imageViewReference)
@@ -38,6 +44,12 @@ namespace FlexiMvvm.Bindings
                 () => "BaselineAlignBottom");
         }
 
+        /// <summary>
+        /// Binding on <see cref="ImageView.CropToPadding"/> property.
+        /// </summary>
+        /// <param name="imageViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="ImageView.CropToPadding"/> property.</returns>
+        /// <exception cref="ArgumentNullException">imageViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ImageView, bool> CropToPaddingBinding(
             [NotNull] this IItemReference<ImageView> imageViewReference)
@@ -51,6 +63,12 @@ namespace FlexiMvvm.Bindings
                 () => "CropToPadding");
         }
 
+        /// <summary>
+        /// Binding on <see cref="ImageView.ImageAlpha"/> property.
+        /// </summary>
+        /// <param name="imageViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="ImageView.ImageAlpha"/> property.</returns>
+        /// <exception cref="ArgumentNullException">imageViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ImageView, int> ImageAlphaBinding(
             [NotNull] this IItemReference<ImageView> imageViewReference)
@@ -64,6 +82,12 @@ namespace FlexiMvvm.Bindings
                 () => "ImageAlpha");
         }
 
+        /// <summary>
+        /// Binding on <see cref="ImageView.SetAdjustViewBounds(bool)"/> method.
+        /// </summary>
+        /// <param name="imageViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="ImageView.SetAdjustViewBounds(bool)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">imageViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ImageView, bool> SetAdjustViewBoundsBinding(
             [NotNull] this IItemReference<ImageView> imageViewReference)
@@ -77,6 +101,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetAdjustViewBounds");
         }
 
+        /// <summary>
+        /// Binding on <see cref="ImageView.SetBaseline(int)"/> method.
+        /// </summary>
+        /// <param name="imageViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="ImageView.SetBaseline(int)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">imageViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ImageView, int> SetBaselineBinding(
             [NotNull] this IItemReference<ImageView> imageViewReference)
@@ -90,6 +120,17 @@ namespace FlexiMvvm.Bindings
                 () => "SetBaseline");
         }
 
+        /// <summary>
+        /// Binding on <see cref="ImageView.SetColorFilter"/> method.
+        /// <para>
+        /// Supported parameters: <see cref="Color"/> color; <see cref="ColorFilter"/> cf.
+        /// </para>
+        /// </summary>
+        /// <typeparam name="TValue">The type of the value.</typeparam>
+        /// <param name="imageViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="ImageView.SetColorFilter"/> method.</returns>
+        /// <exception cref="ArgumentNullException">imageViewReference is null.</exception>
+        /// <exception cref="NotSupportedException">Type <see cref="TValue"/> is not supported.</exception>
         [NotNull]
         public static TargetItemBinding<ImageView, TValue> SetColorFilterBinding<TValue>(
             [NotNull] this IItemReference<ImageView> imageViewReference)
@@ -106,8 +147,8 @@ namespace FlexiMvvm.Bindings
                         case Color color:
                             imageView.NotNull().SetColorFilter(color);
                             break;
-                        case ColorFilter colorFilter:
-                            imageView.NotNull().SetColorFilter(colorFilter);
+                        case ColorFilter cf:
+                            imageView.NotNull().SetColorFilter(cf);
                             break;
                         default:
                             throw new NotSupportedException($"{nameof(SetColorFilterBinding)} doesn't support type {typeof(TValue)}");
@@ -116,6 +157,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetColorFilter");
         }
 
+        /// <summary>
+        /// Binding on <see cref="ImageView.SetImageBitmap(Bitmap)"/> method.
+        /// </summary>
+        /// <param name="imageViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="ImageView.SetImageBitmap(Bitmap)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">imageViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ImageView, Bitmap> SetImageBitmapBinding(
             [NotNull] this IItemReference<ImageView> imageViewReference)
@@ -130,17 +177,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding that sets an image drawable for <see cref="ImageView"/>.
+        /// Binding on <see cref="ImageView.SetImageDrawable(Drawable)"/> method.
         /// </summary>
-        /// <param name="imageViewReference">The image view reference.</param>
-        /// <returns>Binding</returns>
-        /// <exception cref="ArgumentNullException">imageViewReference</exception>
-        /// <example>
-        /// This sample shows how to call the <see cref="SetImageDrawableBinding"/> method.
-        /// <code>
-        /// .For(v => v.SetImageDrawableBinding())
-        /// </code>
-        /// </example>
+        /// <param name="imageViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="ImageView.SetImageDrawable(Drawable)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">imageViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ImageView, Drawable> SetImageDrawableBinding(
             [NotNull] this IItemReference<ImageView> imageViewReference)
@@ -154,6 +195,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetImageDrawable");
         }
 
+        /// <summary>
+        /// Binding on <see cref="ImageView.SetImageLevel(int)"/> method.
+        /// </summary>
+        /// <param name="imageViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="ImageView.SetImageLevel(int)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">imageViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ImageView, int> SetImageLevelBinding(
             [NotNull] this IItemReference<ImageView> imageViewReference)
@@ -167,6 +214,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetImageLevel");
         }
 
+        /// <summary>
+        /// Binding on <see cref="ImageView.SetImageResource(int)"/> method.
+        /// </summary>
+        /// <param name="imageViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="ImageView.SetImageResource(int)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">imageViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ImageView, int> SetImageResourceBinding(
             [NotNull] this IItemReference<ImageView> imageViewReference)
@@ -180,6 +233,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetImageResource");
         }
 
+        /// <summary>
+        /// Binding on <see cref="ImageView.SetMaxHeight(int)"/> method.
+        /// </summary>
+        /// <param name="imageViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="ImageView.SetMaxHeight(int)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">imageViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ImageView, int> SetMaxHeightBinding(
             [NotNull] this IItemReference<ImageView> imageViewReference)
@@ -193,6 +252,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetMaxHeight");
         }
 
+        /// <summary>
+        /// Binding on <see cref="ImageView.SetMaxWidth(int)"/> method.
+        /// </summary>
+        /// <param name="imageViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="ImageView.SetMaxWidth(int)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">imageViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ImageView, int> SetMaxWidthBinding(
             [NotNull] this IItemReference<ImageView> imageViewReference)

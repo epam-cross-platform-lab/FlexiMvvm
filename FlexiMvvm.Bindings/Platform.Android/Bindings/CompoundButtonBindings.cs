@@ -115,6 +115,7 @@ namespace FlexiMvvm.Bindings
         /// <param name="compoundButtonReference">The item reference.</param>
         /// <returns>Binding on <see cref="CompoundButton.SetButtonDrawable"/> method.</returns>
         /// <exception cref="ArgumentNullException">compoundButtonReference is null.</exception>
+        /// <exception cref="NotSupportedException">Type <see cref="TValue"/> is not supported.</exception>
         [NotNull]
         public static TargetItemBinding<CompoundButton, TValue> SetButtonDrawableBinding<TValue>(
             [NotNull] this IItemReference<CompoundButton> compoundButtonReference)
