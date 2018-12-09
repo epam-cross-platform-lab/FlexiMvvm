@@ -25,11 +25,21 @@ namespace FlexiMvvm.Bindings
 {
     public static class AppCompatAutoCompleteTextViewBindings
     {
+        /// <summary>
+        /// Binding on <see cref="AppCompatAutoCompleteTextView.Dismiss"/> event.
+        /// </summary>
+        /// <param name="appCompatAutoCompleteTextViewReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="AppCompatAutoCompleteTextView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>Binding on <see cref="AppCompatAutoCompleteTextView.Dismiss"/> event.</returns>
+        /// <exception cref="ArgumentNullException">appCompatAutoCompleteTextViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<AppCompatAutoCompleteTextView, object> DismissBinding(
             [NotNull] this IItemReference<AppCompatAutoCompleteTextView> appCompatAutoCompleteTextViewReference,
             bool trackCanExecuteCommandChanged = false)
         {
+            if (appCompatAutoCompleteTextViewReference == null)
+                throw new ArgumentNullException(nameof(appCompatAutoCompleteTextViewReference));
+
             return new TargetItemOneWayToSourceCustomBinding<AppCompatAutoCompleteTextView, object>(
                 appCompatAutoCompleteTextViewReference,
                 (appCompatAutoCompleteTextView, eventHandler) => appCompatAutoCompleteTextView.NotNull().Dismiss += eventHandler,
@@ -45,6 +55,12 @@ namespace FlexiMvvm.Bindings
                 () => "Dismiss");
         }
 
+        /// <summary>
+        /// Binding on <see cref="AppCompatAutoCompleteTextView.DropDownAnchor"/> property.
+        /// </summary>
+        /// <param name="appCompatAutoCompleteTextViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="AppCompatAutoCompleteTextView.DropDownAnchor"/> property.</returns>
+        /// <exception cref="ArgumentNullException">appCompatAutoCompleteTextViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<AppCompatAutoCompleteTextView, int> DropDownAnchorBinding(
             [NotNull] this IItemReference<AppCompatAutoCompleteTextView> appCompatAutoCompleteTextViewReference)
@@ -58,6 +74,12 @@ namespace FlexiMvvm.Bindings
                 () => "DropDownAnchor");
         }
 
+        /// <summary>
+        /// Binding on <see cref="AppCompatAutoCompleteTextView.DropDownHeight"/> property.
+        /// </summary>
+        /// <param name="appCompatAutoCompleteTextViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="AppCompatAutoCompleteTextView.DropDownHeight"/> property.</returns>
+        /// <exception cref="ArgumentNullException">appCompatAutoCompleteTextViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<AppCompatAutoCompleteTextView, int> DropDownHeightBinding(
             [NotNull] this IItemReference<AppCompatAutoCompleteTextView> appCompatAutoCompleteTextViewReference)
@@ -71,6 +93,12 @@ namespace FlexiMvvm.Bindings
                 () => "DropDownHeight");
         }
 
+        /// <summary>
+        /// Binding on <see cref="AppCompatAutoCompleteTextView.DropDownHorizontalOffset"/> property.
+        /// </summary>
+        /// <param name="appCompatAutoCompleteTextViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="AppCompatAutoCompleteTextView.DropDownHorizontalOffset"/> property.</returns>
+        /// <exception cref="ArgumentNullException">appCompatAutoCompleteTextViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<AppCompatAutoCompleteTextView, int> DropDownHorizontalOffsetBinding(
             [NotNull] this IItemReference<AppCompatAutoCompleteTextView> appCompatAutoCompleteTextViewReference)
@@ -84,6 +112,12 @@ namespace FlexiMvvm.Bindings
                 () => "DropDownHorizontalOffset");
         }
 
+        /// <summary>
+        /// Binding on <see cref="AppCompatAutoCompleteTextView.DropDownVerticalOffset"/> property.
+        /// </summary>
+        /// <param name="appCompatAutoCompleteTextViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="AppCompatAutoCompleteTextView.DropDownVerticalOffset"/> property.</returns>
+        /// <exception cref="ArgumentNullException">appCompatAutoCompleteTextViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<AppCompatAutoCompleteTextView, int> DropDownVerticalOffsetBinding(
             [NotNull] this IItemReference<AppCompatAutoCompleteTextView> appCompatAutoCompleteTextViewReference)
@@ -97,6 +131,12 @@ namespace FlexiMvvm.Bindings
                 () => "DropDownVerticalOffset");
         }
 
+        /// <summary>
+        /// Binding on <see cref="AppCompatAutoCompleteTextView.DropDownWidth"/> property.
+        /// </summary>
+        /// <param name="appCompatAutoCompleteTextViewReference">The application compat automatic complete text view reference.</param>
+        /// <returns>Binding on <see cref="AppCompatAutoCompleteTextView.DropDownWidth"/> property.</returns>
+        /// <exception cref="ArgumentNullException">appCompatAutoCompleteTextViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<AppCompatAutoCompleteTextView, int> DropDownWidthBinding(
             [NotNull] this IItemReference<AppCompatAutoCompleteTextView> appCompatAutoCompleteTextViewReference)
