@@ -213,7 +213,7 @@ namespace FlexiMvvm.Bindings
         /// </para>
         /// </summary>
         /// <typeparam name="TValue">The type of the value.</typeparam>
-        /// <param name="searchViewReference">The search view reference.</param>
+        /// <param name="searchViewReference">The item reference.</param>
         /// <param name="submit">if set to <c>true</c> [submit].</param>
         /// <returns>Binding</returns>
         /// <exception cref="ArgumentNullException">searchViewReference</exception>

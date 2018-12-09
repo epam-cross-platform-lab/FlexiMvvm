@@ -28,7 +28,7 @@ namespace FlexiMvvm.Bindings
         /// <summary>
         /// Binding on <see cref="ActionBar.HideOffset"/> property.
         /// </summary>
-        /// <param name="actionBarReference">The action bar reference.</param>
+        /// <param name="actionBarReference">The item reference.</param>
         /// <returns>Binding on <see cref="ActionBar.HideOffset"/> property.</returns>
         /// <exception cref="ArgumentNullException">actionBarReference is null.</exception>
         [NotNull]
@@ -47,7 +47,7 @@ namespace FlexiMvvm.Bindings
         /// <summary>
         /// Binding on <see cref="ActionBar.HideOnContentScrollEnabled"/> property.
         /// </summary>
-        /// <param name="actionBarReference">The action bar reference.</param>
+        /// <param name="actionBarReference">The item reference.</param>
         /// <returns>Binding on <see cref="ActionBar.HideOnContentScrollEnabled"/> property.</returns>
         /// <exception cref="ArgumentNullException">actionBarReference is null.</exception>
         [NotNull]
@@ -66,7 +66,7 @@ namespace FlexiMvvm.Bindings
         /// <summary>
         /// Binding on <see cref="ActionBar.MenuVisibility"/> event.
         /// </summary>
-        /// <param name="actionBarReference">The action bar reference.</param>
+        /// <param name="actionBarReference">The item reference.</param>
         /// <returns>Binding on <see cref="ActionBar.MenuVisibility"/> event.</returns>
         /// <exception cref="ArgumentNullException">actionBarReference is null.</exception>
         [NotNull]
@@ -88,7 +88,7 @@ namespace FlexiMvvm.Bindings
         /// <summary>
         /// Binding on <see cref="ActionBar.Subtitle"/> property.
         /// </summary>
-        /// <param name="actionBarReference">The action bar reference.</param>
+        /// <param name="actionBarReference">The item reference.</param>
         /// <returns>Binding on <see cref="ActionBar.Subtitle"/> property.</returns>
         /// <exception cref="ArgumentNullException">actionBarReference is null.</exception>
         [NotNull]
@@ -107,7 +107,7 @@ namespace FlexiMvvm.Bindings
         /// <summary>
         /// Binding on <see cref="ActionBar.Title"/> property.
         /// </summary>
-        /// <param name="actionBarReference">The action bar reference.</param>
+        /// <param name="actionBarReference">The item reference.</param>
         /// <returns>Binding on <see cref="ActionBar.Title"/> property.</returns>
         /// <exception cref="ArgumentNullException">actionBarReference is null.</exception>
         [NotNull]
@@ -130,7 +130,7 @@ namespace FlexiMvvm.Bindings
         /// </para>
         /// </summary>
         /// <typeparam name="TValue">The type of the value.</typeparam>
-        /// <param name="actionBarReference">The action bar reference.</param>
+        /// <param name="actionBarReference">The item reference.</param>
         /// <returns>
         /// Binding on <see cref="ActionBar.SetHomeActionContentDescription()"/> method.
         /// </returns>
@@ -172,7 +172,7 @@ namespace FlexiMvvm.Bindings
         /// </para>
         /// </summary>
         /// <typeparam name="TValue">The type of the value.</typeparam>
-        /// <param name="actionBarReference">The action bar reference.</param>
+        /// <param name="actionBarReference">The item reference.</param>
         /// <returns>
         /// Binding on <see cref="ActionBar.SetHomeAsUpIndicator()"/> method.
         /// </returns>
@@ -207,7 +207,7 @@ namespace FlexiMvvm.Bindings
         /// <summary>
         /// Binding on <see cref="ActionBar.SetHomeButtonEnabled(bool)"/> method.
         /// </summary>
-        /// <param name="actionBarReference">The action bar reference.</param>
+        /// <param name="actionBarReference">The item reference.</param>
         /// <returns>Binding on <see cref="ActionBar.SetHomeButtonEnabled(bool)"/> method.</returns>
         /// <exception cref="ArgumentNullException">actionBarReference is null.</exception>
         [NotNull]

@@ -26,7 +26,7 @@ namespace FlexiMvvm.Bindings
         /// <summary>
         /// Two way binding on <see cref="BottomNavigationView.NavigationItemSelected"/> event and <see cref="BottomNavigationView.SelectedItemId"/> property.
         /// </summary>
-        /// <param name="bottomNavigationViewReference">The bottom navigation view reference.</param>
+        /// <param name="bottomNavigationViewReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="BottomNavigationView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
         /// <returns>Two way binding on <see cref="BottomNavigationView.NavigationItemSelected"/> event and <see cref="BottomNavigationView.SelectedItemId"/> property.</returns>
         /// <exception cref="ArgumentNullException">bottomNavigationViewReference is null.</exception>

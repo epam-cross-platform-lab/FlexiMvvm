@@ -27,7 +27,7 @@ namespace FlexiMvvm.Bindings
         /// <summary>
         /// Binding on <see cref="SearchView.Close"/> event.
         /// </summary>
-        /// <param name="searchViewReference">The search view reference.</param>
+        /// <param name="searchViewReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="SearchView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
         /// <returns>Binding on <see cref="SearchView.Close"/> event.</returns>
         /// <exception cref="ArgumentNullException">searchViewReference is null.</exception>
@@ -57,7 +57,7 @@ namespace FlexiMvvm.Bindings
         /// <summary>
         /// Binding on <see cref="SearchView.Iconified"/> property.
         /// </summary>
-        /// <param name="searchViewReference">The search view reference.</param>
+        /// <param name="searchViewReference">The item reference.</param>
         /// <returns>Binding on <see cref="SearchView.Iconified"/> property.</returns>
         /// <exception cref="ArgumentNullException">searchViewReference is null.</exception>
         [NotNull]
@@ -76,7 +76,7 @@ namespace FlexiMvvm.Bindings
         /// <summary>
         /// Two way binding on <see cref="SearchView.QueryTextChange"/> event and <see cref="SearchView.Query"/> property.
         /// </summary>
-        /// <param name="searchViewReference">The search view reference.</param>
+        /// <param name="searchViewReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="SearchView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
         /// <returns>Two way binding on <see cref="SearchView.QueryTextChange"/> event and <see cref="SearchView.Query"/> property.</returns>
         /// <exception cref="ArgumentNullException">searchViewReference is null.</exception>
@@ -107,7 +107,7 @@ namespace FlexiMvvm.Bindings
         /// <summary>
         /// Binding on <see cref="SearchView.QueryHint"/> property.
         /// </summary>
-        /// <param name="searchViewReference">The search view reference.</param>
+        /// <param name="searchViewReference">The item reference.</param>
         /// <returns>Binding on <see cref="SearchView.QueryHint"/> property.</returns>
         /// <exception cref="ArgumentNullException">searchViewReference is null.</exception>
         [NotNull]
@@ -126,7 +126,7 @@ namespace FlexiMvvm.Bindings
         /// <summary>
         /// Binding on <see cref="SearchView.QueryRefinementEnabled"/> property.
         /// </summary>
-        /// <param name="searchViewReference">The search view reference.</param>
+        /// <param name="searchViewReference">The item reference.</param>
         /// <returns>Binding on <see cref="SearchView.QueryRefinementEnabled"/> property.</returns>
         /// <exception cref="ArgumentNullException">searchViewReference is null.</exception>
         [NotNull]
@@ -145,7 +145,7 @@ namespace FlexiMvvm.Bindings
         /// <summary>
         /// Binding on <see cref="SearchView.QueryTextChange"/> event.
         /// </summary>
-        /// <param name="searchViewReference">The search view reference.</param>
+        /// <param name="searchViewReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="SearchView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
         /// <returns>Binding on <see cref="SearchView.QueryTextChange"/> event.</returns>
         /// <exception cref="ArgumentNullException">searchViewReference is null.</exception>
@@ -175,7 +175,7 @@ namespace FlexiMvvm.Bindings
         /// <summary>
         /// Binding on <see cref="SearchView.QueryTextSubmit"/> event.
         /// </summary>
-        /// <param name="searchViewReference">The search view reference.</param>
+        /// <param name="searchViewReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="SearchView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
         /// <returns>Binding on <see cref="SearchView.QueryTextSubmit"/> event.</returns>
         /// <exception cref="ArgumentNullException">searchViewReference is null.</exception>
@@ -209,7 +209,7 @@ namespace FlexiMvvm.Bindings
         /// </para>
         /// </summary>
         /// <typeparam name="TValue">The type of the value.</typeparam>
-        /// <param name="searchViewReference">The search view reference.</param>
+        /// <param name="searchViewReference">The item reference.</param>
         /// <param name="submit">This second parameter of <see cref="SearchView.SetQuery"/> method.</param>
         /// <returns>Binding on <see cref="SearchView.SetQuery"/> method.</returns>
         /// <exception cref="ArgumentNullException">searchViewReference is null.</exception>
@@ -243,7 +243,7 @@ namespace FlexiMvvm.Bindings
         /// <summary>
         /// Binding on <see cref="SearchView.SubmitButtonEnabled"/> property.
         /// </summary>
-        /// <param name="searchViewReference">The search view reference.</param>
+        /// <param name="searchViewReference">The item reference.</param>
         /// <returns>Binding on <see cref="SearchView.SubmitButtonEnabled"/> property.</returns>
         /// <exception cref="ArgumentNullException">searchViewReference is null.</exception>
         [NotNull]
@@ -262,7 +262,7 @@ namespace FlexiMvvm.Bindings
         /// <summary>
         /// Binding on <see cref="SearchView.SuggestionClick"/> event.
         /// </summary>
-        /// <param name="searchViewReference">The search view reference.</param>
+        /// <param name="searchViewReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="SearchView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
         /// <returns>Binding on <see cref="SearchView.SuggestionClick"/> event.</returns>
         /// <exception cref="ArgumentNullException">searchViewReference is null.</exception>
@@ -292,7 +292,7 @@ namespace FlexiMvvm.Bindings
         /// <summary>
         /// Binding on <see cref="SearchView.SuggestionSelect"/> event.
         /// </summary>
-        /// <param name="searchViewReference">The search view reference.</param>
+        /// <param name="searchViewReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="SearchView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
         /// <returns>Binding on <see cref="SearchView.SuggestionSelect"/> event.</returns>
         /// <exception cref="ArgumentNullException">searchViewReference is null.</exception>

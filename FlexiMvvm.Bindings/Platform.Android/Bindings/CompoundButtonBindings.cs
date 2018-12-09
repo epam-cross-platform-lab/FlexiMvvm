@@ -25,6 +25,13 @@ namespace FlexiMvvm.Bindings
 {
     public static class CompoundButtonBindings
     {
+        /// <summary>
+        /// Two way binding on <see cref="CompoundButton.CheckedChange"/> event and <see cref="CompoundButton.Checked"/> property.
+        /// </summary>
+        /// <param name="compoundButtonReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="CompoundButton.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>Two way binding on <see cref="CompoundButton.CheckedChange"/> event and <see cref="CompoundButton.Checked"/> property.</returns>
+        /// <exception cref="ArgumentNullException">compoundButtonReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<CompoundButton, bool> CheckedAndCheckedChangeBinding(
             [NotNull] this IItemReference<CompoundButton> compoundButtonReference,
@@ -49,6 +56,12 @@ namespace FlexiMvvm.Bindings
                 () => "CheckedAndCheckedChange");
         }
 
+        /// <summary>
+        /// Binding on <see cref="CompoundButton.Checked"/> property.
+        /// </summary>
+        /// <param name="compoundButtonReference">The item reference.</param>
+        /// <returns>Binding on <see cref="CompoundButton.Checked"/> property.</returns>
+        /// <exception cref="ArgumentNullException">compoundButtonReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<CompoundButton, bool> CheckedBinding(
             [NotNull] this IItemReference<CompoundButton> compoundButtonReference)
@@ -62,6 +75,13 @@ namespace FlexiMvvm.Bindings
                 () => "Checked");
         }
 
+        /// <summary>
+        /// Binding on <see cref="CompoundButton.CheckedChange"/> event.
+        /// </summary>
+        /// <param name="compoundButtonReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="CompoundButton.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>Binding on <see cref="CompoundButton.CheckedChange"/> event.</returns>
+        /// <exception cref="ArgumentNullException">compoundButtonReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<CompoundButton, bool> CheckedChangeBinding(
             [NotNull] this IItemReference<CompoundButton> compoundButtonReference,
@@ -85,6 +105,16 @@ namespace FlexiMvvm.Bindings
                 () => "CheckedChange");
         }
 
+        /// <summary>
+        /// Binding on <see cref="CompoundButton.SetButtonDrawable"/> method.
+        /// <para>
+        /// Supported parameters: <see cref="int"/> resId; <see cref="Drawable"/> drawable.
+        /// </para>
+        /// </summary>
+        /// <typeparam name="TValue">The type of the value.</typeparam>
+        /// <param name="compoundButtonReference">The item reference.</param>
+        /// <returns>Binding on <see cref="CompoundButton.SetButtonDrawable"/> method.</returns>
+        /// <exception cref="ArgumentNullException">compoundButtonReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<CompoundButton, TValue> SetButtonDrawableBinding<TValue>(
             [NotNull] this IItemReference<CompoundButton> compoundButtonReference)
