@@ -23,6 +23,12 @@ namespace FlexiMvvm.Bindings
 {
     public static class ViewPagerBindings
     {
+        /// <summary>
+        /// Binding on <see cref="ViewPager.OffscreenPageLimit"/> property.
+        /// </summary>
+        /// <param name="viewPagerReference">The item reference.</param>
+        /// <returns>Binding on <see cref="ViewPager.OffscreenPageLimit"/> property.</returns>
+        /// <exception cref="ArgumentNullException">viewPagerReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ViewPager, int> OffscreenPageLimitBinding(
             [NotNull] this IItemReference<ViewPager> viewPagerReference)
@@ -36,6 +42,12 @@ namespace FlexiMvvm.Bindings
                 () => "OffscreenPageLimit");
         }
 
+        /// <summary>
+        /// Binding on <see cref="ViewPager.PageMargin"/> property.
+        /// </summary>
+        /// <param name="viewPagerReference">The item reference.</param>
+        /// <returns>Binding on <see cref="ViewPager.PageMargin"/> property.</returns>
+        /// <exception cref="ArgumentNullException">viewPagerReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ViewPager, int> PageMarginBinding(
             [NotNull] this IItemReference<ViewPager> viewPagerReference)
@@ -49,6 +61,14 @@ namespace FlexiMvvm.Bindings
                 () => "PageMargin");
         }
 
+        /// <summary>
+        /// Binding on <see cref="ViewPager.PageSelected"/> event.
+        /// </summary>
+        /// <param name="viewPagerReference">The item reference.</param>
+        /// <param name="smoothScroll">Second parameter of <see cref="ViewPager.SetCurrentItem"/> method.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="ViewPager.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>Binding on <see cref="ViewPager.PageSelected"/> event.</returns>
+        /// <exception cref="ArgumentNullException">viewPagerReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ViewPager, int> PageSelectedBinding(
             [NotNull] this IItemReference<ViewPager> viewPagerReference,
@@ -73,6 +93,13 @@ namespace FlexiMvvm.Bindings
                 () => "PageSelected");
         }
 
+        /// <summary>
+        /// Binding on <see cref="ViewPager.SetCurrentItem"/> method.
+        /// </summary>
+        /// <param name="viewPagerReference">The item reference.</param>
+        /// <param name="smoothScroll">Second parameter of <see cref="ViewPager.SetCurrentItem"/> method.</param>
+        /// <returns>Binding on <see cref="ViewPager.SetCurrentItem"/> method.</returns>
+        /// <exception cref="ArgumentNullException">viewPagerReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ViewPager, int> SetCurrentItemBinding(
             [NotNull] this IItemReference<ViewPager> viewPagerReference,
@@ -87,6 +114,14 @@ namespace FlexiMvvm.Bindings
                 () => "SetCurrentItem");
         }
 
+        /// <summary>
+        /// Two way binding on <see cref="ViewPager.PageSelected"/> event and <see cref="ViewPager.SetCurrentItem"/> method.
+        /// </summary>
+        /// <param name="viewPagerReference">The item reference.</param>
+        /// <param name="smoothScroll">Second parameter of <see cref="ViewPager.SetCurrentItem"/> method.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="ViewPager.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>Two way binding on <see cref="ViewPager.PageSelected"/> event and <see cref="ViewPager.SetCurrentItem"/> method.</returns>
+        /// <exception cref="ArgumentNullException">viewPagerReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ViewPager, int> SetCurrentItemAndPageSelectedBinding(
             [NotNull] this IItemReference<ViewPager> viewPagerReference,
@@ -110,29 +145,6 @@ namespace FlexiMvvm.Bindings
                 (viewPager, eventArgs) => eventArgs?.Position ?? viewPager.NotNull().CurrentItem,
                 (viewPager, currentItem) => viewPager.NotNull().SetCurrentItem(currentItem, smoothScroll),
                 () => "SetCurrentItemAndPageSelected");
-        }
-
-        [NotNull]
-        public static TargetItemBinding<ViewPager, int> ViewDetachedFromWindowBinding(
-            [NotNull] this IItemReference<ViewPager> viewPagerReference,
-            bool trackCanExecuteCommandChanged = false)
-        {
-            if (viewPagerReference == null)
-                throw new ArgumentNullException(nameof(viewPagerReference));
-
-            return new TargetItemOneWayToSourceCustomBinding<ViewPager, int, ViewPager.PageSelectedEventArgs>(
-                viewPagerReference,
-                (viewPager, eventHandler) => viewPager.NotNull().PageSelected += eventHandler,
-                (viewPager, eventHandler) => viewPager.NotNull().PageSelected -= eventHandler,
-                (viewPager, canExecuteCommand) =>
-                {
-                    if (trackCanExecuteCommandChanged)
-                    {
-                        viewPager.NotNull().Enabled = canExecuteCommand;
-                    }
-                },
-                (viewPager, eventArgs) => eventArgs?.Position ?? viewPager.NotNull().CurrentItem,
-                () => "ViewDetachedFromWindow");
         }
     }
 }
