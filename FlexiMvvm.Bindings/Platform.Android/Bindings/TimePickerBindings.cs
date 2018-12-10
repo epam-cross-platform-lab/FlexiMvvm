@@ -23,6 +23,12 @@ namespace FlexiMvvm.Bindings
 {
     public static class TimePickerBindings
     {
+        /// <summary>
+        /// Binding on <see cref="TimePicker.SetIs24HourView(Java.Lang.Boolean)"/> method.
+        /// </summary>
+        /// <param name="timePickerReference">The item reference.</param>
+        /// <returns>Binding on <see cref="TimePicker.SetIs24HourView(Java.Lang.Boolean)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">timePickerReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TimePicker, Java.Lang.Boolean> SetIs24HourViewBinding(
             [NotNull] this IItemReference<TimePicker> timePickerReference)
@@ -36,6 +42,13 @@ namespace FlexiMvvm.Bindings
                 () => "SetIs24HourView");
         }
 
+        /// <summary>
+        /// Binding on <see cref="TimePicker.TimeChanged"/> event.
+        /// </summary>
+        /// <param name="timePickerReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="TimePicker.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>Binding on <see cref="TimePicker.TimeChanged"/> event.</returns>
+        /// <exception cref="ArgumentNullException">timePickerReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<TimePicker, object> EditorActionBinding(
             [NotNull] this IItemReference<TimePicker> timePickerReference,

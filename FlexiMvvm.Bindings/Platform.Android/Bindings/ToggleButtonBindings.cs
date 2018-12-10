@@ -24,6 +24,12 @@ namespace FlexiMvvm.Bindings
 {
     public static class ToggleButtonBindings
     {
+        /// <summary>
+        /// Binding on <see cref="ToggleButton.TextOff"/> property.
+        /// </summary>
+        /// <param name="toggleButtonReference">The item reference.</param>
+        /// <returns>Binding on <see cref="ToggleButton.TextOff"/> property.</returns>
+        /// <exception cref="ArgumentNullException">toggleButtonReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ToggleButton, string> TextOffBinding(
             [NotNull] this IItemReference<ToggleButton> toggleButtonReference)
@@ -37,6 +43,12 @@ namespace FlexiMvvm.Bindings
                 () => "TextOff");
         }
 
+        /// <summary>
+        /// Binding on <see cref="ToggleButton.TextOffFormatted"/> property.
+        /// </summary>
+        /// <param name="toggleButtonReference">The item reference.</param>
+        /// <returns>Binding on <see cref="ToggleButton.TextOffFormatted"/> property.</returns>
+        /// <exception cref="ArgumentNullException">toggleButtonReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ToggleButton, ICharSequence> TextOffFormattedBinding(
             [NotNull] this IItemReference<ToggleButton> toggleButtonReference)
@@ -50,6 +62,12 @@ namespace FlexiMvvm.Bindings
                 () => "TextOffFormatted");
         }
 
+        /// <summary>
+        /// Binding on <see cref="ToggleButton.TextOn"/> property.
+        /// </summary>
+        /// <param name="toggleButtonReference">The item reference.</param>
+        /// <returns>Binding on <see cref="ToggleButton.TextOn"/> property.</returns>
+        /// <exception cref="ArgumentNullException">toggleButtonReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ToggleButton, string> TextOnBinding(
             [NotNull] this IItemReference<ToggleButton> toggleButtonReference)
@@ -63,6 +81,12 @@ namespace FlexiMvvm.Bindings
                 () => "TextOn");
         }
 
+        /// <summary>
+        /// Binding on <see cref="ToggleButton.TextOnFormatted"/> property.
+        /// </summary>
+        /// <param name="toggleButtonReference">The item reference.</param>
+        /// <returns>Binding on <see cref="ToggleButton.TextOnFormatted"/> property.</returns>
+        /// <exception cref="ArgumentNullException">toggleButtonReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ToggleButton, ICharSequence> TextOnFormattedBinding(
             [NotNull] this IItemReference<ToggleButton> toggleButtonReference)

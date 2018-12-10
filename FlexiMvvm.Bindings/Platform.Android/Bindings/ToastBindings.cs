@@ -24,6 +24,12 @@ namespace FlexiMvvm.Bindings
 {
     public static class ToastBindings
     {
+        /// <summary>
+        /// Binding on <see cref="Toast.Duration"/> property.
+        /// </summary>
+        /// <param name="toastReference">The item reference.</param>
+        /// <returns>Binding on <see cref="Toast.Duration"/> property.</returns>
+        /// <exception cref="ArgumentNullException">toastReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Toast, ToastLength> DurationBinding(
             [NotNull] this IItemReference<Toast> toastReference)
@@ -37,6 +43,17 @@ namespace FlexiMvvm.Bindings
                 () => "Duration");
         }
 
+        /// <summary>
+        /// Binding on <see cref="Toast.SetText"/> method.
+        /// <para>
+        /// Supported parameters: <see cref="int"/> resId; <see cref="ICharSequence"/> s; <see cref="string"/> s.
+        /// </para>
+        /// </summary>
+        /// <typeparam name="TValue">The type of the value.</typeparam>
+        /// <param name="toastReference">The item reference.</param>
+        /// <returns>Binding on <see cref="Toast.SetText"/> method.</returns>
+        /// <exception cref="ArgumentNullException">toastReference is null.</exception>
+        /// <exception cref="NotSupportedException">Type <see cref="TValue"/> is not supported.</exception>
         [NotNull]
         public static TargetItemBinding<Toast, TValue> SetTextBinding<TValue>(
             [NotNull] this IItemReference<Toast> toastReference)
@@ -53,11 +70,11 @@ namespace FlexiMvvm.Bindings
                         case int resId:
                             toast.NotNull().SetText(resId);
                             break;
-                        case ICharSequence charSequence:
-                            toast.NotNull().SetText(charSequence);
+                        case ICharSequence s:
+                            toast.NotNull().SetText(s);
                             break;
-                        case string @string:
-                            toast.NotNull().SetText(@string);
+                        case string s:
+                            toast.NotNull().SetText(s);
                             break;
                         default:
                             throw new NotSupportedException($"{nameof(SetTextBinding)} doesn't support type {typeof(TValue)}");

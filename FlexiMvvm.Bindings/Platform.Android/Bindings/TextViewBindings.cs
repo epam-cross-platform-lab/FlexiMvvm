@@ -32,7 +32,7 @@ namespace FlexiMvvm.Bindings
         /// Binding on <see cref="TextView.AfterTextChanged"/> event.
         /// </summary>
         /// <param name="textViewReference">The item reference.</param>
-        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="SearchView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="TextView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
         /// <returns>Binding on <see cref="TextView.AfterTextChanged"/> event.</returns>
         /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
@@ -62,7 +62,7 @@ namespace FlexiMvvm.Bindings
         /// Binding on <see cref="TextView.BeforeTextChanged"/> event.
         /// </summary>
         /// <param name="textViewReference">The item reference.</param>
-        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="SearchView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="TextView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
         /// <returns>Binding on <see cref="TextView.BeforeTextChanged"/> event.</returns>
         /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
@@ -92,7 +92,7 @@ namespace FlexiMvvm.Bindings
         /// Binding on <see cref="TextView.EditorAction"/> event.
         /// </summary>
         /// <param name="textViewReference">The item reference.</param>
-        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="SearchView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="TextView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
         /// <returns>Binding on <see cref="TextView.EditorAction"/> event.</returns>
         /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
