@@ -24,6 +24,14 @@ namespace FlexiMvvm.Bindings
 {
     public static class UITableViewBindings
     {
+        /// <summary>
+        /// Binding on <see cref="UITableView.ScrollToRow"/> method.
+        /// </summary>
+        /// <param name="tableViewReference">The item reference.</param>
+        /// <param name="scrollPosition">Second parameter for <see cref="UITableView.ScrollToRow"/> method.</param>
+        /// <param name="animated">Third parameter for <see cref="UITableView.ScrollToRow"/> method.</param>
+        /// <returns>Binding on <see cref="UITableView.ScrollToRow"/> method.</returns>
+        /// <exception cref="ArgumentNullException">tableViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITableView, NSIndexPath> ScrollToItemBinding(
             [NotNull] this IItemReference<UITableView> tableViewReference,

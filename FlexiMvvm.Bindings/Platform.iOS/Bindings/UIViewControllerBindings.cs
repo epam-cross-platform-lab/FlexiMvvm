@@ -23,6 +23,12 @@ namespace FlexiMvvm.Bindings
 {
     public static class UIViewControllerBindings
     {
+        /// <summary>
+        /// Binding on <see cref="UIViewController.Title"/> property.
+        /// </summary>
+        /// <param name="viewControllerReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UIViewController.Title"/> property.</returns>
+        /// <exception cref="ArgumentNullException">viewControllerReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIViewController, string> TitleBinding(
             [NotNull] this IItemReference<UIViewController> viewControllerReference)

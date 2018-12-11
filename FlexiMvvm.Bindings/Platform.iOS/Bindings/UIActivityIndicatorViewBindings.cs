@@ -23,6 +23,12 @@ namespace FlexiMvvm.Bindings
 {
     public static class UIActivityIndicatorViewBindings
     {
+        /// <summary>
+        /// Binding on <see cref="UIActivityIndicatorView.HidesWhenStopped"/> property.
+        /// </summary>
+        /// <param name="activityIndicatorViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UIActivityIndicatorView.HidesWhenStopped"/> property.</returns>
+        /// <exception cref="ArgumentNullException">activityIndicatorViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIActivityIndicatorView, bool> HidesWhenStoppedBinding(
             [NotNull] this IItemReference<UIActivityIndicatorView> activityIndicatorViewReference)
@@ -36,6 +42,12 @@ namespace FlexiMvvm.Bindings
                 () => "HidesWhenStopped");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UIActivityIndicatorView.StartAnimating"/> method.
+        /// </summary>
+        /// <param name="activityIndicatorViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UIActivityIndicatorView.StartAnimating"/> method.</returns>
+        /// <exception cref="ArgumentNullException">activityIndicatorViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIActivityIndicatorView, bool> StartAnimatingBinding(
             [NotNull] this IItemReference<UIActivityIndicatorView> activityIndicatorViewReference)
@@ -55,6 +67,12 @@ namespace FlexiMvvm.Bindings
                 () => "StartAnimating");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UIActivityIndicatorView.StopAnimating"/> method.
+        /// </summary>
+        /// <param name="activityIndicatorViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UIActivityIndicatorView.StopAnimating"/> method.</returns>
+        /// <exception cref="ArgumentNullException">activityIndicatorViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIActivityIndicatorView, bool> StopAnimatingBinding(
             [NotNull] this IItemReference<UIActivityIndicatorView> activityIndicatorViewReference)

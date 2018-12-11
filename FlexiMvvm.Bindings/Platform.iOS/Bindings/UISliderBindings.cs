@@ -23,6 +23,12 @@ namespace FlexiMvvm.Bindings
 {
     public static class UISliderBindings
     {
+        /// <summary>
+        /// Binding on <see cref="UISlider.Continuous"/> property.
+        /// </summary>
+        /// <param name="sliderReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UISlider.Continuous"/> property.</returns>
+        /// <exception cref="ArgumentNullException">sliderReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISlider, bool> ContinuousBinding(
             [NotNull] this IItemReference<UISlider> sliderReference)
@@ -36,6 +42,12 @@ namespace FlexiMvvm.Bindings
                 () => "Continuous");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UISlider.MaxValue"/> property.
+        /// </summary>
+        /// <param name="sliderReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UISlider.MaxValue"/> property.</returns>
+        /// <exception cref="ArgumentNullException">sliderReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISlider, float> MaxValueBinding(
             [NotNull] this IItemReference<UISlider> sliderReference)
@@ -49,6 +61,12 @@ namespace FlexiMvvm.Bindings
                 () => "MaxValue");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UISlider.MinValue"/> property.
+        /// </summary>
+        /// <param name="sliderReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UISlider.MinValue"/> property.</returns>
+        /// <exception cref="ArgumentNullException">sliderReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISlider, float> MinValueBinding(
             [NotNull] this IItemReference<UISlider> sliderReference)
@@ -62,6 +80,14 @@ namespace FlexiMvvm.Bindings
                 () => "MinValue");
         }
 
+        /// <summary>
+        /// Two way binding on <see cref="UIControl.ValueChanged"/> event and <see cref="UISlider.SetValue"/> method.
+        /// </summary>
+        /// <param name="sliderReference">The item reference.</param>
+        /// <param name="animated">Second parameter for <see cref="UISlider.SetValue"/> method.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="UISlider.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>Two way binding on <see cref="UIControl.ValueChanged"/> event and <see cref="UISlider.SetValue"/> method.</returns>
+        /// <exception cref="ArgumentNullException">sliderReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISlider, float> ValueAndValueChangedBinding(
             [NotNull] this IItemReference<UISlider> sliderReference,
@@ -87,6 +113,12 @@ namespace FlexiMvvm.Bindings
                 () => "ValueAndValueChanged");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UISlider.Value"/> property.
+        /// </summary>
+        /// <param name="sliderReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UISlider.Value"/> property.</returns>
+        /// <exception cref="ArgumentNullException">sliderReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISlider, float> ValueBinding(
             [NotNull] this IItemReference<UISlider> sliderReference)
@@ -100,29 +132,13 @@ namespace FlexiMvvm.Bindings
                 () => "Value");
         }
 
-        [NotNull]
-        public static TargetItemBinding<UISlider, float> ValueChangedBinding(
-            [NotNull] this IItemReference<UISlider> sliderReference,
-            bool trackCanExecuteCommandChanged = false)
-        {
-            if (sliderReference == null)
-                throw new ArgumentNullException(nameof(sliderReference));
-
-            return new TargetItemOneWayToSourceCustomBinding<UISlider, float>(
-                sliderReference,
-                (slider, eventHandler) => slider.ValueChanged += eventHandler,
-                (slider, eventHandler) => slider.ValueChanged -= eventHandler,
-                (slider, canExecuteCommand) =>
-                {
-                    if (trackCanExecuteCommandChanged)
-                    {
-                        slider.NotNull().Enabled = canExecuteCommand;
-                    }
-                },
-                slider => slider.Value,
-                () => "ValueChanged");
-        }
-
+        /// <summary>
+        /// Binding on <see cref="UISlider.SetValue"/> method.
+        /// </summary>
+        /// <param name="sliderReference">The item reference.</param>
+        /// <param name="animated">Second parameter for <see cref="UISlider.SetValue"/> method.</param>
+        /// <returns>Binding on <see cref="UISlider.SetValue"/> method.</returns>
+        /// <exception cref="ArgumentNullException">sliderReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISlider, float> SetValueBinding(
             [NotNull] this IItemReference<UISlider> sliderReference,

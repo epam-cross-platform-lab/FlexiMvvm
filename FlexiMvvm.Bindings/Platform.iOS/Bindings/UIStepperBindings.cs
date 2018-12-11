@@ -23,6 +23,12 @@ namespace FlexiMvvm.Bindings
 {
     public static class UIStepperBindings
     {
+        /// <summary>
+        /// Binding on <see cref="UIStepper.AutoRepeat"/> property.
+        /// </summary>
+        /// <param name="stepperReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UIStepper.AutoRepeat"/> property.</returns>
+        /// <exception cref="ArgumentNullException">stepperReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIStepper, bool> AutoRepeatBinding(
             [NotNull] this IItemReference<UIStepper> stepperReference)
@@ -36,6 +42,12 @@ namespace FlexiMvvm.Bindings
                 () => "AutoRepeat");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UIStepper.Continuous"/> property.
+        /// </summary>
+        /// <param name="stepperReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UIStepper.Continuous"/> property.</returns>
+        /// <exception cref="ArgumentNullException">stepperReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIStepper, bool> ContinuousBinding(
             [NotNull] this IItemReference<UIStepper> stepperReference)
@@ -49,6 +61,12 @@ namespace FlexiMvvm.Bindings
                 () => "Continuous");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UIStepper.MaximumValue"/> property.
+        /// </summary>
+        /// <param name="stepperReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UIStepper.MaximumValue"/> property.</returns>
+        /// <exception cref="ArgumentNullException">stepperReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIStepper, double> MaximumValueBinding(
             [NotNull] this IItemReference<UIStepper> stepperReference)
@@ -62,6 +80,12 @@ namespace FlexiMvvm.Bindings
                 () => "MaximumValue");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UIStepper.MinimumValue"/> property.
+        /// </summary>
+        /// <param name="stepperReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UIStepper.MinimumValue"/> property.</returns>
+        /// <exception cref="ArgumentNullException">stepperReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIStepper, double> MinimumValueBinding(
             [NotNull] this IItemReference<UIStepper> stepperReference)
@@ -75,6 +99,13 @@ namespace FlexiMvvm.Bindings
                 () => "MinimumValue");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UIStepper.SetBackgroundImage"/> method.
+        /// </summary>
+        /// <param name="stepperReference">The item reference.</param>
+        /// <param name="controlState">Second parameter for <see cref="UIStepper.SetBackgroundImage"/> method.</param>
+        /// <returns>Binding on <see cref="UIStepper.SetBackgroundImage"/> method.</returns>
+        /// <exception cref="ArgumentNullException">stepperReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIStepper, UIImage> SetBackgroundImageBinding(
             [NotNull] this IItemReference<UIStepper> stepperReference,
@@ -89,6 +120,13 @@ namespace FlexiMvvm.Bindings
                 () => "SetBackgroundImage");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UIStepper.SetDecrementImage"/> method.
+        /// </summary>
+        /// <param name="stepperReference">The item reference.</param>
+        /// <param name="controlState">Second parameter for <see cref="UIStepper.SetDecrementImage"/> method.</param>
+        /// <returns>Binding on <see cref="UIStepper.SetDecrementImage"/> method.</returns>
+        /// <exception cref="ArgumentNullException">stepperReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIStepper, UIImage> SetDecrementImageBinding(
             [NotNull] this IItemReference<UIStepper> stepperReference,
@@ -103,6 +141,14 @@ namespace FlexiMvvm.Bindings
                 () => "SetDecrementImage");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UIStepper.SetDividerImage"/> method.
+        /// </summary>
+        /// <param name="stepperReference">The item reference.</param>
+        /// <param name="leftState">Second parameter for <see cref="UIStepper.SetDividerImage"/> method.</param>
+        /// <param name="rightState">Third parameter for <see cref="UIStepper.SetDividerImage"/> method.</param>
+        /// <returns>Binding on <see cref="UIStepper.SetDividerImage"/> method.</returns>
+        /// <exception cref="ArgumentNullException">stepperReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIStepper, UIImage> SetDividerImageBinding(
             [NotNull] this IItemReference<UIStepper> stepperReference,
@@ -118,6 +164,13 @@ namespace FlexiMvvm.Bindings
                 () => "SetDividerImage");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UIStepper.SetIncrementImage"/> method.
+        /// </summary>
+        /// <param name="stepperReference">The item reference.</param>
+        /// <param name="controlState">Second parameter for <see cref="UIStepper.SetIncrementImage"/> method.</param>
+        /// <returns>Binding on <see cref="UIStepper.SetIncrementImage"/> method.</returns>
+        /// <exception cref="ArgumentNullException">stepperReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIStepper, UIImage> SetIncrementImageBinding(
             [NotNull] this IItemReference<UIStepper> stepperReference,
@@ -132,6 +185,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetIncrementImage");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UIStepper.StepValue"/> property.
+        /// </summary>
+        /// <param name="stepperReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UIStepper.StepValue"/> property.</returns>
+        /// <exception cref="ArgumentNullException">stepperReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIStepper, double> StepValueBinding(
             [NotNull] this IItemReference<UIStepper> stepperReference)
@@ -145,6 +204,12 @@ namespace FlexiMvvm.Bindings
                 () => "StepValue");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UIStepper.Value"/> property.
+        /// </summary>
+        /// <param name="stepperReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UIStepper.Value"/> property.</returns>
+        /// <exception cref="ArgumentNullException">stepperReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIStepper, double> ValueBinding(
             [NotNull] this IItemReference<UIStepper> stepperReference)
@@ -158,6 +223,12 @@ namespace FlexiMvvm.Bindings
                 () => "Value");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UIStepper.Wraps"/> property.
+        /// </summary>
+        /// <param name="stepperReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UIStepper.Wraps"/> property.</returns>
+        /// <exception cref="ArgumentNullException">stepperReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIStepper, bool> WrapsBinding(
             [NotNull] this IItemReference<UIStepper> stepperReference)

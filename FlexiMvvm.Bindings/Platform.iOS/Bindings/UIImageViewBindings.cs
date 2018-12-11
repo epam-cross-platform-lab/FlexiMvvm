@@ -23,6 +23,12 @@ namespace FlexiMvvm.Bindings
 {
     public static class UIImageViewBindings
     {
+        /// <summary>
+        /// Binding on <see cref="UIImageView.AdjustsImageSizeForAccessibilityContentSizeCategory"/> property.
+        /// </summary>
+        /// <param name="imageViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UIImageView.AdjustsImageSizeForAccessibilityContentSizeCategory"/> property.</returns>
+        /// <exception cref="ArgumentNullException">imageViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIImageView, bool> AdjustsImageSizeForAccessibilityContentSizeCategoryBinding(
             [NotNull] this IItemReference<UIImageView> imageViewReference)
@@ -36,6 +42,12 @@ namespace FlexiMvvm.Bindings
                 () => "AdjustsImageSizeForAccessibilityContentSizeCategory");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UIImageView.AnimationDuration"/> property.
+        /// </summary>
+        /// <param name="imageViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UIImageView.AnimationDuration"/> property.</returns>
+        /// <exception cref="ArgumentNullException">imageViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIImageView, double> AnimationDurationBinding(
             [NotNull] this IItemReference<UIImageView> imageViewReference)
@@ -49,6 +61,12 @@ namespace FlexiMvvm.Bindings
                 () => "AnimationDuration");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UIImageView.AnimationRepeatCount"/> property.
+        /// </summary>
+        /// <param name="imageViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UIImageView.AnimationRepeatCount"/> property.</returns>
+        /// <exception cref="ArgumentNullException">imageViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIImageView, nint> AnimationRepeatCountBinding(
             [NotNull] this IItemReference<UIImageView> imageViewReference)
@@ -62,6 +80,12 @@ namespace FlexiMvvm.Bindings
                 () => "AnimationRepeatCount");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UIImageView.Highlighted"/> property.
+        /// </summary>
+        /// <param name="imageViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UIImageView.Highlighted"/> property.</returns>
+        /// <exception cref="ArgumentNullException">imageViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIImageView, bool> HighlightedBinding(
             [NotNull] this IItemReference<UIImageView> imageViewReference)
@@ -75,6 +99,12 @@ namespace FlexiMvvm.Bindings
                 () => "Highlighted");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UIImageView.StartAnimating"/> method.
+        /// </summary>
+        /// <param name="imageViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UIImageView.StartAnimating"/> method.</returns>
+        /// <exception cref="ArgumentNullException">imageViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIImageView, bool> StartAnimatingBinding(
             [NotNull] this IItemReference<UIImageView> imageViewReference)
@@ -94,6 +124,12 @@ namespace FlexiMvvm.Bindings
                 () => "StartAnimating");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UIImageView.StopAnimating"/> method.
+        /// </summary>
+        /// <param name="imageViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UIImageView.StopAnimating"/> method.</returns>
+        /// <exception cref="ArgumentNullException">imageViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIImageView, bool> StopAnimatingBinding(
             [NotNull] this IItemReference<UIImageView> imageViewReference)

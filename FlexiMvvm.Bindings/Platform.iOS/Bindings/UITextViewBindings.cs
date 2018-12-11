@@ -24,6 +24,12 @@ namespace FlexiMvvm.Bindings
 {
     public static class UITextViewBindings
     {
+        /// <summary>
+        /// Binding on <see cref="UITextView.AdjustsFontForContentSizeCategory"/> property.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UITextView.AdjustsFontForContentSizeCategory"/> property.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextView, bool> AdjustsFontForContentSizeCategoryBinding(
             [NotNull] this IItemReference<UITextView> textViewReference)
@@ -37,6 +43,12 @@ namespace FlexiMvvm.Bindings
                 () => "AdjustsFontForContentSizeCategory");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UITextView.AllowsEditingTextAttributes"/> property.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UITextView.AllowsEditingTextAttributes"/> property.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextView, bool> AllowsEditingTextAttributesBinding(
             [NotNull] this IItemReference<UITextView> textViewReference)
@@ -50,6 +62,12 @@ namespace FlexiMvvm.Bindings
                 () => "AllowsEditingTextAttributes");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UITextView.AttributedText"/> property.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UITextView.AttributedText"/> property.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextView, NSAttributedString> AttributedTextBinding(
             [NotNull] this IItemReference<UITextView> textViewReference)
@@ -63,6 +81,12 @@ namespace FlexiMvvm.Bindings
                 () => "AttributedText");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UITextView.Changed"/> event.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UITextView.Changed"/> event.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextView, object> ChangedBinding(
             [NotNull] this IItemReference<UITextView> textViewReference)
@@ -79,6 +103,12 @@ namespace FlexiMvvm.Bindings
                 () => "Changed");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UITextView.ClearsOnInsertion"/> property.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UITextView.ClearsOnInsertion"/> property.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextView, bool> ClearsOnInsertionBinding(
             [NotNull] this IItemReference<UITextView> textViewReference)
@@ -92,6 +122,12 @@ namespace FlexiMvvm.Bindings
                 () => "ClearsOnInsertion");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UITextView.DecelerationEnded"/> property.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UITextView.DecelerationEnded"/> property.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextView, object> DecelerationEndedBinding(
             [NotNull] this IItemReference<UITextView> textViewReference)
@@ -108,6 +144,12 @@ namespace FlexiMvvm.Bindings
                 () => "DecelerationEnded");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UITextView.DecelerationStarted"/> event.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UITextView.DecelerationStarted"/> event.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextView, object> DecelerationStartedBinding(
             [NotNull] this IItemReference<UITextView> textViewReference)
@@ -124,6 +166,12 @@ namespace FlexiMvvm.Bindings
                 () => "DecelerationStarted");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UITextView.DidZoom"/> event.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UITextView.DidZoom"/> event.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextView, object> DidZoomBinding(
             [NotNull] this IItemReference<UITextView> textViewReference)
@@ -140,6 +188,12 @@ namespace FlexiMvvm.Bindings
                 () => "DidZoom");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UITextView.DraggingEnded"/> event.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UITextView.DraggingEnded"/> event.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextView, bool> DraggingEndedBinding(
             [NotNull] this IItemReference<UITextView> textViewReference)
@@ -156,6 +210,12 @@ namespace FlexiMvvm.Bindings
                 () => "DraggingEnded");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UITextView.DraggingStarted"/> event.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UITextView.DraggingStarted"/> event.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextView, object> DraggingStartedBinding(
             [NotNull] this IItemReference<UITextView> textViewReference)
@@ -172,6 +232,12 @@ namespace FlexiMvvm.Bindings
                 () => "DraggingStarted");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UITextView.Ended"/> event.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UITextView.Ended"/> event.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextView, object> EndedBinding(
             [NotNull] this IItemReference<UITextView> textViewReference)
@@ -188,6 +254,12 @@ namespace FlexiMvvm.Bindings
                 () => "Ended");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UITextView.Editable"/> property.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UITextView.Editable"/> property.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextView, bool> EditableBinding(
             [NotNull] this IItemReference<UITextView> textViewReference)
@@ -201,6 +273,12 @@ namespace FlexiMvvm.Bindings
                 () => "Editable");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UITextView.EnablesReturnKeyAutomatically"/> property.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UITextView.EnablesReturnKeyAutomatically"/> property.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextView, bool> EnablesReturnKeyAutomaticallyBinding(
             [NotNull] this IItemReference<UITextView> textViewReference)
@@ -214,6 +292,12 @@ namespace FlexiMvvm.Bindings
                 () => "EnablesReturnKeyAutomatically");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UITextView.InsertText"/> method.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UITextView.InsertText"/> method.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextView, string> InsertTextBinding(
             [NotNull] this IItemReference<UITextView> textViewReference)
@@ -227,6 +311,12 @@ namespace FlexiMvvm.Bindings
                 () => "InsertText");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UITextView.ScrollAnimationEnded"/> event.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UITextView.ScrollAnimationEnded"/> event.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextView, object> ScrollAnimationEndedBinding(
             [NotNull] this IItemReference<UITextView> textViewReference)
@@ -243,6 +333,12 @@ namespace FlexiMvvm.Bindings
                 () => "ScrollAnimationEnded");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UITextView.Scrolled"/> event.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UITextView.Scrolled"/> event.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextView, object> ScrolledBinding(
             [NotNull] this IItemReference<UITextView> textViewReference)
@@ -259,6 +355,12 @@ namespace FlexiMvvm.Bindings
                 () => "Scrolled");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UITextView.ScrolledToTop"/> event.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UITextView.ScrolledToTop"/> event.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextView, object> ScrolledToTopBinding(
             [NotNull] this IItemReference<UITextView> textViewReference)
@@ -275,6 +377,12 @@ namespace FlexiMvvm.Bindings
                 () => "ScrolledToTop");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UITextView.SecureTextEntry"/> property.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UITextView.SecureTextEntry"/> property.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextView, bool> SecureTextEntryBinding(
             [NotNull] this IItemReference<UITextView> textViewReference)
@@ -288,6 +396,12 @@ namespace FlexiMvvm.Bindings
                 () => "SecureTextEntry");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UITextView.Selectable"/> property.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UITextView.Selectable"/> property.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextView, bool> SelectableBinding(
             [NotNull] this IItemReference<UITextView> textViewReference)
@@ -301,6 +415,12 @@ namespace FlexiMvvm.Bindings
                 () => "Selectable");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UITextView.SelectionChanged"/> event.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UITextView.SelectionChanged"/> event.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextView, UITextRange> SelectionChangedBinding(
             [NotNull] this IItemReference<UITextView> textViewReference)
@@ -317,6 +437,12 @@ namespace FlexiMvvm.Bindings
                 () => "SelectionChanged");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UITextView.Started"/> event.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UITextView.Started"/> event.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextView, object> StartedBinding(
             [NotNull] this IItemReference<UITextView> textViewReference)
@@ -333,6 +459,12 @@ namespace FlexiMvvm.Bindings
                 () => "Started");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UITextView.Text"/> property.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UITextView.Text"/> property.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextView, string> TextBinding(
             [NotNull] this IItemReference<UITextView> textViewReference)
@@ -346,6 +478,12 @@ namespace FlexiMvvm.Bindings
                 () => "Text");
         }
 
+        /// <summary>
+        /// Two way binding on <see cref="UITextView.Changed"/> event and <see cref="UITextView.Text"/> property.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Two way binding on <see cref="UITextView.Changed"/> event and <see cref="UITextView.Text"/> property.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextView, string> TextAndChangedBinding(
             [NotNull] this IItemReference<UITextView> textViewReference)
@@ -363,6 +501,12 @@ namespace FlexiMvvm.Bindings
                 () => "TextAndChanged");
         }
 
+        /// <summary>
+        /// Two way binding on <see cref="UITextView.Ended"/> event and <see cref="UITextView.Text"/> property.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Two way binding on <see cref="UITextView.Ended"/> event and <see cref="UITextView.Text"/> property.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextView, string> TextAndEndedBinding(
             [NotNull] this IItemReference<UITextView> textViewReference)
@@ -380,6 +524,12 @@ namespace FlexiMvvm.Bindings
                 () => "TextAndEnded");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UITextView.WillEndDragging"/> event.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UITextView.WillEndDragging"/> event.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextView, object> WillEndDraggingBinding(
             [NotNull] this IItemReference<UITextView> textViewReference)
@@ -396,6 +546,12 @@ namespace FlexiMvvm.Bindings
                 () => "WillEndDragging");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UITextView.ZoomingEnded"/> event.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UITextView.ZoomingEnded"/> event.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextView, nfloat> ZoomingEndedBinding(
             [NotNull] this IItemReference<UITextView> textViewReference)
@@ -412,6 +568,12 @@ namespace FlexiMvvm.Bindings
                 () => "ZoomingEnded");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UITextView.ZoomingStarted"/> event.
+        /// </summary>
+        /// <param name="textViewReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UITextView.ZoomingStarted"/> event.</returns>
+        /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextView, object> ZoomingStartedBinding(
             [NotNull] this IItemReference<UITextView> textViewReference)
