@@ -23,6 +23,12 @@ namespace FlexiMvvm.Bindings
 {
     public static class UIRefreshControlBindings
     {
+        /// <summary>
+        /// Binding on <see cref="UIRefreshControl.BeginRefreshing"/> method.
+        /// </summary>
+        /// <param name="refreshControlReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UIRefreshControl.BeginRefreshing"/> method.</returns>
+        /// <exception cref="ArgumentNullException">refreshControlReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIRefreshControl, bool> BeginRefreshingBinding(
             [NotNull] this IItemReference<UIRefreshControl> refreshControlReference)
@@ -42,6 +48,12 @@ namespace FlexiMvvm.Bindings
                 () => "BeginRefreshing");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UIRefreshControl.EndRefreshing"/> method.
+        /// </summary>
+        /// <param name="refreshControlReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UIRefreshControl.EndRefreshing"/> method.</returns>
+        /// <exception cref="ArgumentNullException">refreshControlReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIRefreshControl, bool> EndRefreshingBinding(
             [NotNull] this IItemReference<UIRefreshControl> refreshControlReference)

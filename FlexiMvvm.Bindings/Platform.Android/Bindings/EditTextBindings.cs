@@ -14,22 +14,32 @@
 // limitations under the License.
 // =========================================================================
 
+using System;
 using Android.Widget;
 using FlexiMvvm.Bindings.Custom;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class TextViewExtensions
+    public static class EditTextBindings
     {
+        /// <summary>
+        /// Binding on <see cref="EditText.SetSelection(int)"/> method.
+        /// </summary>
+        /// <param name="editTextReference">The item reference.</param>
+        /// <returns>Binding on <see cref="EditText.SetSelection(int)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">editTextReference is null.</exception>
         [NotNull]
-        public static TargetItemBinding<TextView, string> TextBinding(
-            [NotNull] this IItemReference<TextView> textViewReference)
+        public static TargetItemBinding<EditText, int> SetSelectionBinding(
+            [NotNull] this IItemReference<EditText> editTextReference)
         {
-            return new TargetItemOneWayCustomBinding<TextView, string>(
-                textViewReference,
-                (textView, text) => textView.NotNull().Text = text,
-                () => "Text");
+            if (editTextReference == null)
+                throw new ArgumentNullException(nameof(editTextReference));
+
+            return new TargetItemOneWayCustomBinding<EditText, int>(
+                editTextReference,
+                (editText, index) => editText.NotNull().SetSelection(index),
+                () => "SetSelection");
         }
     }
 }

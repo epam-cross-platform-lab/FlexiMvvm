@@ -24,6 +24,12 @@ namespace FlexiMvvm.Bindings
 {
     public static class UITextFieldBindings
     {
+        /// <summary>
+        /// Binding on <see cref="UITextField.AttributedText"/> property.
+        /// </summary>
+        /// <param name="textFieldReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UITextField.AttributedText"/> property.</returns>
+        /// <exception cref="ArgumentNullException">textFieldReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextField, NSAttributedString> AttributedTextBinding(
             [NotNull] this IItemReference<UITextField> textFieldReference)
@@ -37,6 +43,13 @@ namespace FlexiMvvm.Bindings
                 () => "AttributedText");
         }
 
+        /// <summary>
+        /// Two way binding on <see cref="UIControl.EditingChanged"/> event and <see cref="UITextField.AttributedText"/> property.
+        /// </summary>
+        /// <param name="textFieldReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="UITextField.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>Two way binding on <see cref="UIControl.EditingChanged"/> event and <see cref="UITextField.AttributedText"/> property.</returns>
+        /// <exception cref="ArgumentNullException">textFieldReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextField, NSAttributedString> AttributedTextAndEditingChangedBinding(
             [NotNull] this IItemReference<UITextField> textFieldReference,
@@ -61,6 +74,13 @@ namespace FlexiMvvm.Bindings
                 () => "AttributedTextAndEditingChanged");
         }
 
+        /// <summary>
+        /// Two way binding on <see cref="UIControl.EditingDidEnd"/> event and <see cref="UITextField.AttributedText"/> property.
+        /// </summary>
+        /// <param name="textFieldReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="UITextField.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>Two way binding on <see cref="UIControl.EditingDidEnd"/> event and <see cref="UITextField.AttributedText"/> property.</returns>
+        /// <exception cref="ArgumentNullException">textFieldReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextField, NSAttributedString> AttributedTextAndEditingDidEndBinding(
             [NotNull] this IItemReference<UITextField> textFieldReference,
@@ -85,6 +105,12 @@ namespace FlexiMvvm.Bindings
                 () => "AttributedTextAndEditingDidEnd");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UITextField.EnablesReturnKeyAutomatically"/> property.
+        /// </summary>
+        /// <param name="textFieldReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UITextField.EnablesReturnKeyAutomatically"/> property.</returns>
+        /// <exception cref="ArgumentNullException">textFieldReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextField, bool> EnablesReturnKeyAutomaticallyBinding(
             [NotNull] this IItemReference<UITextField> textFieldReference)
@@ -98,6 +124,12 @@ namespace FlexiMvvm.Bindings
                 () => "EnablesReturnKeyAutomatically");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UITextField.InsertText"/> method.
+        /// </summary>
+        /// <param name="textFieldReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UITextField.InsertText"/> method.</returns>
+        /// <exception cref="ArgumentNullException">textFieldReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextField, string> InsertTextBinding(
             [NotNull] this IItemReference<UITextField> textFieldReference)
@@ -111,6 +143,12 @@ namespace FlexiMvvm.Bindings
                 () => "InsertText");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UITextField.Placeholder"/> property.
+        /// </summary>
+        /// <param name="textFieldReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UITextField.Placeholder"/> property.</returns>
+        /// <exception cref="ArgumentNullException">textFieldReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextField, string> PlaceholderBinding(
             [NotNull] this IItemReference<UITextField> textFieldReference)
@@ -124,6 +162,12 @@ namespace FlexiMvvm.Bindings
                 () => "Placeholder");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UITextField.SecureTextEntry"/> property.
+        /// </summary>
+        /// <param name="textFieldReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UITextField.SecureTextEntry"/> property.</returns>
+        /// <exception cref="ArgumentNullException">textFieldReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextField, bool> SecureTextEntryBinding(
             [NotNull] this IItemReference<UITextField> textFieldReference)
@@ -137,6 +181,12 @@ namespace FlexiMvvm.Bindings
                 () => "SecureTextEntry");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UITextField.Text"/> property.
+        /// </summary>
+        /// <param name="textFieldReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UITextField.Text"/> property.</returns>
+        /// <exception cref="ArgumentNullException">textFieldReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextField, string> TextBinding(
             [NotNull] this IItemReference<UITextField> textFieldReference)
@@ -150,6 +200,13 @@ namespace FlexiMvvm.Bindings
                 () => "Text");
         }
 
+        /// <summary>
+        /// Two way binding on <see cref="UIControl.EditingChanged"/> event and <see cref="UITextField.Text"/> property.
+        /// </summary>
+        /// <param name="textFieldReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="UITextField.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>Two way binding on <see cref="UIControl.EditingChanged"/> event and <see cref="UITextField.Text"/> property.</returns>
+        /// <exception cref="ArgumentNullException">textFieldReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextField, string> TextAndEditingChangedBinding(
             [NotNull] this IItemReference<UITextField> textFieldReference,
@@ -174,6 +231,12 @@ namespace FlexiMvvm.Bindings
                 () => "TextAndEditingChanged");
         }
 
+        /// <summary>
+        /// Two way binding on <see cref="UIControl.EditingDidEnd"/> event and <see cref="UITextField.Text"/> property.
+        /// </summary>
+        /// <param name="textFieldReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="UITextField.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>Two way binding on <see cref="UIControl.EditingDidEnd"/> event and <see cref="UITextField.Text"/> property.</returns>
         [NotNull]
         public static TargetItemBinding<UITextField, string> TextAndEditingDidEndBinding(
             [NotNull] this IItemReference<UITextField> textFieldReference,

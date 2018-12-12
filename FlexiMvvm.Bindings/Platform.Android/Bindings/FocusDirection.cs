@@ -16,12 +16,24 @@
 
 namespace FlexiMvvm.Bindings
 {
+    /// <summary>
+    /// Focus directions
+    /// </summary>
     public enum FocusDirection
     {
+        /// <summary>
+        /// The focus in or out
+        /// </summary>
         InOut,
 
+        /// <summary>
+        /// The focus in
+        /// </summary>
         In,
 
+        /// <summary>
+        /// The focus out
+        /// </summary>
         Out
     }
 }

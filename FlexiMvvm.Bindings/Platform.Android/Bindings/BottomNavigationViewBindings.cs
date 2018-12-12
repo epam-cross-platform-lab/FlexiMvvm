@@ -14,19 +14,30 @@
 // limitations under the License.
 // =========================================================================
 
+using System;
 using Android.Support.Design.Widget;
 using FlexiMvvm.Bindings.Custom;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class BottomNavigationViewExtensions
+    public static class BottomNavigationViewBindings
     {
+        /// <summary>
+        /// Two way binding on <see cref="BottomNavigationView.NavigationItemSelected"/> event and <see cref="BottomNavigationView.SelectedItemId"/> property.
+        /// </summary>
+        /// <param name="bottomNavigationViewReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="BottomNavigationView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>Two way binding on <see cref="BottomNavigationView.NavigationItemSelected"/> event and <see cref="BottomNavigationView.SelectedItemId"/> property.</returns>
+        /// <exception cref="ArgumentNullException">bottomNavigationViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<BottomNavigationView, int> SelectedItemIdAndNavigationItemSelectedBinding(
             [NotNull] this IItemReference<BottomNavigationView> bottomNavigationViewReference,
             bool trackCanExecuteCommandChanged = false)
         {
+            if (bottomNavigationViewReference == null)
+                throw new ArgumentNullException(nameof(bottomNavigationViewReference));
+
             return new TargetItemTwoWayCustomBinding<BottomNavigationView, int, BottomNavigationView.NavigationItemSelectedEventArgs>(
                 bottomNavigationViewReference,
                 (bottomNavigationView, eventHandler) => bottomNavigationView.NotNull().NavigationItemSelected += eventHandler,

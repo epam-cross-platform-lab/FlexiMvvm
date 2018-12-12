@@ -23,6 +23,12 @@ namespace FlexiMvvm.Bindings
 {
     public static class UINavigationItemBindings
     {
+        /// <summary>
+        /// Binding on <see cref="UINavigationItem.HidesBackButton"/> property.
+        /// </summary>
+        /// <param name="navigationItemReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UINavigationItem.HidesBackButton"/> property.</returns>
+        /// <exception cref="ArgumentNullException">navigationItemReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UINavigationItem, bool> HidesBackButtonBinding(
             [NotNull] this IItemReference<UINavigationItem> navigationItemReference)
@@ -36,6 +42,12 @@ namespace FlexiMvvm.Bindings
                 () => "HidesBackButton");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UINavigationItem.HidesSearchBarWhenScrolling"/> property.
+        /// </summary>
+        /// <param name="navigationItemReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UINavigationItem.HidesSearchBarWhenScrolling"/> property.</returns>
+        /// <exception cref="ArgumentNullException">navigationItemReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UINavigationItem, bool> HidesSearchBarWhenScrollingBinding(
             [NotNull] this IItemReference<UINavigationItem> navigationItemReference)
@@ -49,6 +61,12 @@ namespace FlexiMvvm.Bindings
                 () => "HidesSearchBarWhenScrolling");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UINavigationItem.LeftItemsSupplementBackButton"/> property.
+        /// </summary>
+        /// <param name="navigationItemReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UINavigationItem.LeftItemsSupplementBackButton"/> property.</returns>
+        /// <exception cref="ArgumentNullException">navigationItemReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UINavigationItem, bool> LeftItemsSupplementBackButtonBinding(
             [NotNull] this IItemReference<UINavigationItem> navigationItemReference)
@@ -62,6 +80,12 @@ namespace FlexiMvvm.Bindings
                 () => "LeftItemsSupplementBackButton");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UINavigationItem.Prompt"/> property.
+        /// </summary>
+        /// <param name="navigationItemReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UINavigationItem.Prompt"/> property.</returns>
+        /// <exception cref="ArgumentNullException">navigationItemReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UINavigationItem, string> PromptBinding(
             [NotNull] this IItemReference<UINavigationItem> navigationItemReference)
@@ -75,6 +99,13 @@ namespace FlexiMvvm.Bindings
                 () => "Prompt");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UINavigationItem.SetHidesBackButton"/> method.
+        /// </summary>
+        /// <param name="navigationItemReference">The item reference.</param>
+        /// <param name="animated">Second parameter for <see cref="UINavigationItem.SetHidesBackButton"/> method.</param>
+        /// <returns>Binding on <see cref="UINavigationItem.SetHidesBackButton"/> method.</returns>
+        /// <exception cref="ArgumentNullException">navigationItemReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UINavigationItem, bool> SetHidesBackButtonBinding(
             [NotNull] this IItemReference<UINavigationItem> navigationItemReference,
@@ -89,6 +120,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetHidesBackButton");
         }
 
+        /// <summary>
+        /// Binding on <see cref="UINavigationItem.Title"/> property.
+        /// </summary>
+        /// <param name="navigationItemReference">The item reference.</param>
+        /// <returns>Binding on <see cref="UINavigationItem.Title"/> property.</returns>
+        /// <exception cref="ArgumentNullException">navigationItemReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UINavigationItem, string> TitleBinding(
             [NotNull] this IItemReference<UINavigationItem> navigationItemReference)
