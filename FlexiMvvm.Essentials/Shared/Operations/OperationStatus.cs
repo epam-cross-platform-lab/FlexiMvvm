@@ -14,17 +14,14 @@
 // limitations under the License.
 // =========================================================================
 
-using System;
-
 namespace FlexiMvvm.Operations
 {
-    internal class HideNotificationEventArgs : EventArgs
+    public enum OperationStatus
     {
-        internal HideNotificationEventArgs(OperationCallback callback)
-        {
-            Callback = callback;
-        }
+        Succeeded,
 
-        internal OperationCallback Callback { get; }
+        Failed,
+
+        Canceled
     }
 }

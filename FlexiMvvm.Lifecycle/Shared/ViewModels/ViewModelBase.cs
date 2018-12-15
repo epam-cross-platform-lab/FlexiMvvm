@@ -26,15 +26,15 @@ namespace FlexiMvvm.ViewModels
     public abstract class ViewModelBase : ObservableObjectBase, IViewModelWithoutParameters, IViewModelWithState
     {
         [CanBeNull]
+        private readonly IOperationFactory _operationFactory;
+        [CanBeNull]
+        private OperationContext _operationContext;
+        [CanBeNull]
         private IBundle _stateBundle;
         [CanBeNull]
         private ViewModelState _state;
         [CanBeNull]
         private CommandProvider _commandProvider;
-        [CanBeNull]
-        private IOperationFactory _operationFactory;
-        [CanBeNull]
-        private OperationContext _operationContext;
 
         protected ViewModelBase()
         {
@@ -48,6 +48,13 @@ namespace FlexiMvvm.ViewModels
         public Task Initialization { get; private set; }
 
         [NotNull]
+        protected IOperationFactory OperationFactory => _operationFactory ?? throw new InvalidOperationException(
+            $"\"{nameof(OperationFactory)}\" property is \"null\". Make sure that operation factory is passed to \"{nameof(ViewModelBase)}\" constructor.");
+
+        [NotNull]
+        protected OperationContext OperationContext => _operationContext ?? (_operationContext = OperationFactory.CreateContext(this));
+
+        [NotNull]
         private IBundle StateBundle => _stateBundle ?? (_stateBundle = BundleFactory.Create());
 
         [NotNull]
@@ -55,12 +62,6 @@ namespace FlexiMvvm.ViewModels
 
         [NotNull]
         protected CommandProvider CommandProvider => _commandProvider ?? (_commandProvider = new CommandProvider());
-
-        [NotNull]
-        protected IOperationFactory OperationFactory => _operationFactory ?? (_operationFactory = new OperationFactory());
-
-        [NotNull]
-        protected OperationContext OperationContext => _operationContext ?? (_operationContext = OperationFactory.CreateContext(this));
 
         public virtual void Initialize()
         {
@@ -87,15 +88,15 @@ namespace FlexiMvvm.ViewModels
         where TParameters : ViewModelParametersBase
     {
         [CanBeNull]
+        private readonly IOperationFactory _operationFactory;
+        [CanBeNull]
+        private OperationContext _operationContext;
+        [CanBeNull]
         private IBundle _stateBundle;
         [CanBeNull]
         private ViewModelState _state;
         [CanBeNull]
         private CommandProvider _commandProvider;
-        [CanBeNull]
-        private IOperationFactory _operationFactory;
-        [CanBeNull]
-        private OperationContext _operationContext;
 
         protected ViewModelBase()
         {
@@ -109,6 +110,13 @@ namespace FlexiMvvm.ViewModels
         public Task Initialization { get; private set; }
 
         [NotNull]
+        protected IOperationFactory OperationFactory => _operationFactory ?? throw new InvalidOperationException(
+            $"\"{nameof(OperationFactory)}\" property is \"null\". Make sure that operation factory is passed to \"{nameof(ViewModelBase)}\" constructor.");
+
+        [NotNull]
+        protected OperationContext OperationContext => _operationContext ?? (_operationContext = OperationFactory.CreateContext(this));
+
+        [NotNull]
         private IBundle StateBundle => _stateBundle ?? (_stateBundle = BundleFactory.Create());
 
         [NotNull]
@@ -116,12 +124,6 @@ namespace FlexiMvvm.ViewModels
 
         [NotNull]
         protected CommandProvider CommandProvider => _commandProvider ?? (_commandProvider = new CommandProvider());
-
-        [NotNull]
-        protected IOperationFactory OperationFactory => _operationFactory ?? (_operationFactory = new OperationFactory());
-
-        [NotNull]
-        protected OperationContext OperationContext => _operationContext ?? (_operationContext = OperationFactory.CreateContext(this));
 
         public virtual void Initialize(TParameters parameters)
         {

@@ -24,12 +24,18 @@ namespace FlexiMvvm.Operations
     internal class OperationErrorHandler<TException> : IOperationErrorHandler
         where TException : Exception
     {
-        internal OperationErrorHandler([NotNull] Func<OperationError, CancellationToken, Task> handler)
+        [NotNull]
+        private readonly Func<OperationContext, OperationError<TException>, CancellationToken, Task> _handler;
+
+        internal OperationErrorHandler([NotNull] Func<OperationError<TException>, CancellationToken, Task> handler)
+            : this((context, error, cancellationToken) => handler(error, cancellationToken))
         {
-            Handler = handler;
         }
 
-        public Func<OperationError, CancellationToken, Task> Handler { get; }
+        internal OperationErrorHandler([NotNull] Func<OperationContext, OperationError<TException>, CancellationToken, Task> handler)
+        {
+            _handler = handler;
+        }
 
         public bool CanHandle(Exception ex)
         {
@@ -37,6 +43,19 @@ namespace FlexiMvvm.Operations
                 throw new ArgumentNullException(nameof(ex));
 
             return ex is TException;
+        }
+
+        public async Task<IOperationErrorResult> HandleAsync(OperationContext context, Exception ex, CancellationToken cancellationToken)
+        {
+            if (context == null)
+                throw new ArgumentNullException(nameof(context));
+            if (ex == null)
+                throw new ArgumentNullException(nameof(ex));
+
+            var error = new OperationError<TException>((TException)ex);
+            await _handler(context, error, cancellationToken).NotNull();
+
+            return error;
         }
     }
 }

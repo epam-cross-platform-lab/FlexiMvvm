@@ -21,17 +21,9 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.Operations
 {
-    internal interface IOperation
+    public interface IErrorHandler
     {
-        event EventHandler<HideNotificationEventArgs> HideNotificationRequested;
-
-        [CanBeNull]
-        OperationNotificationBase Notification { get; }
-
-        [CanBeNull]
-        OperationConditionBase Condition { get; }
-
         [NotNull]
-        Task ExecuteAsync([NotNull] OperationContext context, CancellationToken cancellationToken);
+        Task HandleAsync([NotNull] OperationContext context, [NotNull] OperationError<Exception> error, CancellationToken cancellationToken);
     }
 }

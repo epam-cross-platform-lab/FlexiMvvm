@@ -30,9 +30,9 @@ namespace FlexiMvvm.Operations
         IOperationBuilder WithCondition([CanBeNull] OperationConditionBase condition);
 
         [NotNull]
-        IOperationResultBuilder<TResult> WithExpression<TResult>([NotNull] Func<TResult> expression);
+        IOperationHandlerBuilder<TResult> WithExpression<TResult>([NotNull] Func<TResult> expression);
 
         [NotNull]
-        IOperationResultBuilder<TResult> WithExpressionAsync<TResult>([NotNull] Func<CancellationToken, Task<TResult>> expression);
+        IOperationHandlerBuilder<TResult> WithExpressionAsync<TResult>([NotNull] Func<CancellationToken, Task<TResult>> expression);
     }
 }

@@ -21,14 +21,14 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.Operations
 {
-    internal class OperationResultBuilder<TResult> : IOperationResultBuilder<TResult>
+    internal class OperationHandlerBuilder<TResult> : IOperationHandlerBuilder<TResult>
     {
         [NotNull]
         private readonly Operation<TResult> _operation;
         [NotNull]
         private readonly OperationContext _context;
 
-        internal OperationResultBuilder(
+        internal OperationHandlerBuilder(
             [NotNull] OperationContext context,
             [NotNull] Operation<TResult> operation)
         {
@@ -36,7 +36,27 @@ namespace FlexiMvvm.Operations
             _operation = operation;
         }
 
-        public IOperationResultBuilder<TResult> OnSuccess(Action<TResult> handler)
+        public IOperationHandlerBuilder<TResult> OnStart(Action handler)
+        {
+            if (handler == null)
+                throw new ArgumentNullException(nameof(handler));
+
+            return OnStartAsync(cancellationToken =>
+            {
+                handler();
+
+                return Task.CompletedTask;
+            });
+        }
+
+        public IOperationHandlerBuilder<TResult> OnStartAsync(Func<CancellationToken, Task> handler)
+        {
+            _operation.StartHandler = handler ?? throw new ArgumentNullException(nameof(handler));
+
+            return this;
+        }
+
+        public IOperationHandlerBuilder<TResult> OnSuccess(Action<TResult> handler)
         {
             if (handler == null)
                 throw new ArgumentNullException(nameof(handler));
@@ -49,14 +69,34 @@ namespace FlexiMvvm.Operations
             });
         }
 
-        public IOperationResultBuilder<TResult> OnSuccessAsync(Func<TResult, CancellationToken, Task> handler)
+        public IOperationHandlerBuilder<TResult> OnSuccessAsync(Func<TResult, CancellationToken, Task> handler)
         {
             _operation.SuccessHandler = handler ?? throw new ArgumentNullException(nameof(handler));
 
             return this;
         }
 
-        public IOperationResultBuilder<TResult> OnError<TException>(Action<OperationError> handler)
+        public IOperationHandlerBuilder<TResult> OnCancel(Action handler)
+        {
+            if (handler == null)
+                throw new ArgumentNullException(nameof(handler));
+
+            return OnCancelAsync(cancellationToken =>
+            {
+                handler();
+
+                return Task.CompletedTask;
+            });
+        }
+
+        public IOperationHandlerBuilder<TResult> OnCancelAsync(Func<CancellationToken, Task> handler)
+        {
+            _operation.CancelHandler = handler ?? throw new ArgumentNullException(nameof(handler));
+
+            return this;
+        }
+
+        public IOperationHandlerBuilder<TResult> OnError<TException>(Action<OperationError<TException>> handler)
             where TException : Exception
         {
             if (handler == null)
@@ -70,7 +110,7 @@ namespace FlexiMvvm.Operations
             });
         }
 
-        public IOperationResultBuilder<TResult> OnErrorAsync<TException>(Func<OperationError, CancellationToken, Task> handler)
+        public IOperationHandlerBuilder<TResult> OnErrorAsync<TException>(Func<OperationError<TException>, CancellationToken, Task> handler)
             where TException : Exception
         {
             if (handler == null)
@@ -81,12 +121,12 @@ namespace FlexiMvvm.Operations
             return this;
         }
 
-        public IOperationResultBuilder<TResult> OnCancel(Action handler)
+        public IOperationHandlerBuilder<TResult> OnFinish(Action handler)
         {
             if (handler == null)
                 throw new ArgumentNullException(nameof(handler));
 
-            return OnCancelAsync(cancellationToken =>
+            return OnFinishAsync(cancellationToken =>
             {
                 handler();
 
@@ -94,16 +134,16 @@ namespace FlexiMvvm.Operations
             });
         }
 
-        public IOperationResultBuilder<TResult> OnCancelAsync(Func<CancellationToken, Task> handler)
+        public IOperationHandlerBuilder<TResult> OnFinishAsync(Func<CancellationToken, Task> handler)
         {
-            _operation.CancelHandler = handler ?? throw new ArgumentNullException(nameof(handler));
+            _operation.FinishHandler = handler ?? throw new ArgumentNullException(nameof(handler));
 
             return this;
         }
 
         public Task ExecuteAsync(CancellationToken cancellationToken = default)
         {
-            return _context.ExecuteAsync(_operation, cancellationToken);
+            return _operation.ExecuteAsync(_context, cancellationToken);
         }
     }
 }

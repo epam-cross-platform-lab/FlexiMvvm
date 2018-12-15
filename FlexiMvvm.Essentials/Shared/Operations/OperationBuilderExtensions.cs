@@ -24,7 +24,7 @@ namespace FlexiMvvm.Operations
     public static class OperationBuilderExtensions
     {
         [NotNull]
-        public static IOperationResultBuilder<Void> WithExpression(
+        public static IOperationHandlerBuilder<Void> WithExpression(
             [NotNull] this IOperationBuilder operationBuilder,
             [NotNull] Action expression)
         {
@@ -42,7 +42,7 @@ namespace FlexiMvvm.Operations
         }
 
         [NotNull]
-        public static IOperationResultBuilder<Void> WithExpressionAsync(
+        public static IOperationHandlerBuilder<Void> WithExpressionAsync(
             [NotNull] this IOperationBuilder operationBuilder,
             [NotNull] Func<CancellationToken, Task> expression)
         {

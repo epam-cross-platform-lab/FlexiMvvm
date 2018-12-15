@@ -40,19 +40,19 @@ namespace FlexiMvvm.Operations
         protected internal CancellationTokenSource CancellationTokenSource { get; }
 
         [NotNull]
-        internal Task GetDelayTask()
+        internal Task DelayAsync(CancellationToken cancellationToken)
         {
-            return _delay > 0 ? Task.Delay(_delay).NotNull() : Task.CompletedTask;
+            return _delay > 0 ? Task.Delay(_delay, cancellationToken).NotNull() : Task.CompletedTask;
         }
 
         [NotNull]
-        internal Task GetMinDurationTask()
+        internal Task MinDurationDelayAsync(CancellationToken cancellationToken)
         {
-            return _minDuration > 0 ? Task.Delay(_minDuration).NotNull() : Task.CompletedTask;
+            return _minDuration > 0 ? Task.Delay(_minDuration, cancellationToken).NotNull() : Task.CompletedTask;
         }
 
         protected internal abstract void Show([NotNull] OperationContext context);
 
-        protected internal abstract void Hide([NotNull] OperationContext context, OperationCallback callback);
+        protected internal abstract void Hide([NotNull] OperationContext context, OperationStatus status);
     }
 }

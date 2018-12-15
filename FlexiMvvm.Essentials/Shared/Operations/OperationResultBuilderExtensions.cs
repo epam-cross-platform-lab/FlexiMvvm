@@ -24,8 +24,8 @@ namespace FlexiMvvm.Operations
     public static class OperationResultBuilderExtensions
     {
         [NotNull]
-        public static IOperationResultBuilder<Void> OnSuccess(
-            [NotNull] this IOperationResultBuilder<Void> operationBuilder,
+        public static IOperationHandlerBuilder<Void> OnSuccess(
+            [NotNull] this IOperationHandlerBuilder<Void> operationBuilder,
             [NotNull] Action handler)
         {
             if (operationBuilder == null)
@@ -37,8 +37,8 @@ namespace FlexiMvvm.Operations
         }
 
         [NotNull]
-        public static IOperationResultBuilder<Void> OnSuccessAsync(
-            [NotNull] this IOperationResultBuilder<Void> operationBuilder,
+        public static IOperationHandlerBuilder<Void> OnSuccessAsync(
+            [NotNull] this IOperationHandlerBuilder<Void> operationBuilder,
             [NotNull] Func<CancellationToken, Task> handler)
         {
             if (operationBuilder == null)

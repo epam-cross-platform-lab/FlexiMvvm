@@ -16,12 +16,10 @@
 
 namespace FlexiMvvm.Operations
 {
-    public enum OperationCallback
+    internal interface IOperationErrorResult
     {
-        Success,
+        bool Handled { get; }
 
-        Error,
-
-        Cancel
+        bool RetryOperation { get; }
     }
 }

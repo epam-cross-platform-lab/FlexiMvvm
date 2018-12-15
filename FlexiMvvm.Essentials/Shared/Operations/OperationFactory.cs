@@ -15,11 +15,24 @@
 // =========================================================================
 
 using System;
+using FlexiMvvm.Ioc;
+using JetBrains.Annotations;
 
 namespace FlexiMvvm.Operations
 {
     public class OperationFactory : IOperationFactory
     {
+        [CanBeNull]
+        private readonly IDependencyProvider _dependencyProvider;
+        [NotNull]
+        private readonly IErrorHandler _errorHandler;
+
+        public OperationFactory([CanBeNull] IDependencyProvider dependencyProvider, [NotNull] IErrorHandler errorHandler)
+        {
+            _dependencyProvider = dependencyProvider;
+            _errorHandler = errorHandler ?? throw new ArgumentNullException(nameof(errorHandler));
+        }
+
         public IOperationBuilder CreateOperation(OperationContext context)
         {
             if (context == null)
@@ -28,12 +41,12 @@ namespace FlexiMvvm.Operations
             return new OperationBuilder(context);
         }
 
-        public virtual OperationContext CreateContext(object owner)
+        public OperationContext CreateContext(object owner)
         {
             if (owner == null)
                 throw new ArgumentNullException(nameof(owner));
 
-            return new OperationContext(owner);
+            return new OperationContext(_dependencyProvider, owner, _errorHandler);
         }
     }
 }

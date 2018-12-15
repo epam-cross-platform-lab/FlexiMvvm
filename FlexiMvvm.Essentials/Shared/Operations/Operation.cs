@@ -23,13 +23,15 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.Operations
 {
-    internal class Operation<TResult> : IOperation
+    internal class Operation<TResult>
     {
         [NotNull]
         private readonly Func<CancellationToken, Task<TResult>> _expression;
         [CanBeNull]
         [ItemNotNull]
         private List<IOperationErrorHandler> _errorsHandlers;
+        private bool _isNotificationShowed;
+        private bool _isNotificationHidden;
 
         internal Operation(
             [NotNull] Func<CancellationToken, Task<TResult>> expression,
@@ -41,98 +43,242 @@ namespace FlexiMvvm.Operations
             Condition = condition;
         }
 
-        public event EventHandler<HideNotificationEventArgs> HideNotificationRequested;
+        [CanBeNull]
+        private OperationNotificationBase Notification { get; }
 
-        public OperationNotificationBase Notification { get; }
+        [CanBeNull]
+        private OperationConditionBase Condition { get; }
 
-        public OperationConditionBase Condition { get; }
+        [CanBeNull]
+        internal Func<CancellationToken, Task> StartHandler { get; set; }
 
-        [NotNull]
-        internal Func<TResult, CancellationToken, Task> SuccessHandler { get; set; } = (result, cancellationToken) => Task.CompletedTask;
+        [CanBeNull]
+        internal Func<TResult, CancellationToken, Task> SuccessHandler { get; set; }
 
-        [NotNull]
-        internal Func<CancellationToken, Task> CancelHandler { get; set; } = cancellationToken => Task.CompletedTask;
-
-        [NotNull]
-        private Func<OperationError, CancellationToken, Task> ErrorHandler { get; } = (error, cancellationToken) =>
-        {
-            error.NotNull().Handled = false;
-
-            return Task.CompletedTask;
-        };
+        [CanBeNull]
+        internal Func<CancellationToken, Task> CancelHandler { get; set; }
 
         [NotNull]
         [ItemNotNull]
         internal List<IOperationErrorHandler> ErrorsHandlers => _errorsHandlers ?? (_errorsHandlers = new List<IOperationErrorHandler>());
 
-        public async Task ExecuteAsync(OperationContext context, CancellationToken cancellationToken)
+        [NotNull]
+        internal Func<CancellationToken, Task> FinishHandler { get; set; } = cancellationToken => Task.CompletedTask;
+
+        internal async Task ExecuteAsync([NotNull] OperationContext context, CancellationToken cancellationToken)
         {
-            var result = default(TResult);
-            var executedSuccessfully = false;
-            OperationError error;
+            var notificationCancellationTokenSource = Notification?.CancellationTokenSource;
+            var linkedCancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
+                notificationCancellationTokenSource?.Token ?? CancellationToken.None,
+                cancellationToken);
+            var linkedCancellationToken = linkedCancellationTokenSource.Token;
 
-            do
+            try
             {
-                error = null;
+                IOperationErrorResult errorResult;
 
-                try
+                do
                 {
-                    cancellationToken.ThrowIfCancellationRequested();
+                    var result = default(TResult);
+                    var status = OperationStatus.Succeeded;
+                    errorResult = null;
+                    _isNotificationShowed = false;
+                    _isNotificationHidden = false;
 
-                    if (Condition == null || await Condition.CheckAsync(context, cancellationToken))
+                    try
                     {
-                        cancellationToken.ThrowIfCancellationRequested();
-                        result = await _expression(cancellationToken).NotNull();
-                        cancellationToken.ThrowIfCancellationRequested();
-                        executedSuccessfully = true;
+                        var notificationDelayTask = Notification?.DelayAsync(linkedCancellationToken) ?? Task.CompletedTask;
+                        await ExecuteOperationStartHandlerAsync(linkedCancellationToken);
+                        var operationTask = ExecuteExpressionWithConditionCheckAsync(context, linkedCancellationToken);
+                        await ShowNotificationIfNeededAsync(context, notificationDelayTask, operationTask, linkedCancellationToken);
+
+                        try
+                        {
+                            result = await operationTask;
+                            status = OperationStatus.Succeeded;
+                        }
+                        catch (OperationCanceledException)
+                        {
+                            throw;
+                        }
+                        catch (Exception ex)
+                        {
+                            status = OperationStatus.Failed;
+                            errorResult = await ExecuteOperationErrorHandlerAsync(context, status, ex, linkedCancellationToken);
+                            await ExecuteOperationFinishHandlerAsync(context, status, linkedCancellationToken);
+
+                            if (!(errorResult?.Handled ?? false))
+                            {
+                                errorResult = await ExecuteErrorHandlerAsync(context, ex, linkedCancellationToken);
+
+                                if (!errorResult.Handled)
+                                {
+                                    throw;
+                                }
+                            }
+                        }
+                        finally
+                        {
+                            if (status == OperationStatus.Succeeded)
+                            {
+                                await ExecuteOperationSuccessHandlerAsync(context, status, result, linkedCancellationToken);
+                                await ExecuteOperationFinishHandlerAsync(context, status, linkedCancellationToken);
+                            }
+                        }
                     }
-                    else
+                    catch (OperationCanceledException ex)
                     {
-                        throw new OperationCanceledException(CancellationToken.None);
+                        status = OperationStatus.Canceled;
+                        await ExecuteOperationCancelHandlerAsync(context, status, ex.CancellationToken);
+                        await ExecuteOperationFinishHandlerAsync(context, status, ex.CancellationToken);
                     }
                 }
-                catch (OperationCanceledException ex)
-                {
-                    var cancelTask = CancelHandler(ex.CancellationToken).NotNull();
-                    OnRequestHideNotification(new HideNotificationEventArgs(OperationCallback.Cancel));
-
-                    await cancelTask;
-                }
-                catch (Exception ex)
-                {
-                    error = new OperationError(ex);
-                    var errorHandler = GetErrorHandler(ex);
-                    var errorTask = errorHandler(error, cancellationToken).NotNull();
-                    OnRequestHideNotification(new HideNotificationEventArgs(OperationCallback.Error));
-
-                    await errorTask;
-
-                    if (!error.Handled)
-                    {
-                        throw;
-                    }
-                }
+                while (errorResult?.RetryOperation ?? false);
             }
-            while (error?.RetryOperation ?? false);
+            catch (OperationCanceledException)
+            {
+                // Do nothing.
+            }
+            finally
+            {
+                notificationCancellationTokenSource?.Dispose();
+                linkedCancellationTokenSource.Dispose();
+            }
+        }
 
-            if (executedSuccessfully)
+        [NotNull]
+        private async Task ExecuteOperationStartHandlerAsync(CancellationToken cancellationToken)
+        {
+            if (StartHandler != null)
+            {
+                await StartHandler(cancellationToken).NotNull();
+            }
+        }
+
+        [NotNull]
+        [ItemCanBeNull]
+        private async Task<TResult> ExecuteExpressionWithConditionCheckAsync(
+            [NotNull] OperationContext context,
+            CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            if (Condition == null || await Condition.CheckAsync(context, cancellationToken))
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+
+                return await _expression(cancellationToken).NotNull();
+            }
+            else
+            {
+                throw new OperationCanceledException(CancellationToken.None);
+            }
+        }
+
+        [NotNull]
+        private async Task ExecuteOperationSuccessHandlerAsync(
+            [NotNull] OperationContext context,
+            OperationStatus status,
+            [CanBeNull] TResult result,
+            CancellationToken cancellationToken)
+        {
+            if (SuccessHandler != null)
             {
                 var successTask = SuccessHandler(result, cancellationToken).NotNull();
-                OnRequestHideNotification(new HideNotificationEventArgs(OperationCallback.Success));
-
+                HideNotificationIfNeeded(context, status);
                 await successTask;
             }
         }
 
-        protected virtual void OnRequestHideNotification([NotNull] HideNotificationEventArgs e)
+        private async Task ExecuteOperationCancelHandlerAsync(
+            [NotNull] OperationContext context,
+            OperationStatus status,
+            CancellationToken cancellationToken)
         {
-            HideNotificationRequested?.Invoke(this, e);
+            if (CancelHandler != null)
+            {
+                var cancelTask = CancelHandler(cancellationToken).NotNull();
+                HideNotificationIfNeeded(context, status);
+                await cancelTask;
+            }
         }
 
         [NotNull]
-        private Func<OperationError, CancellationToken, Task> GetErrorHandler([NotNull] Exception ex)
+        [ItemCanBeNull]
+        private async Task<IOperationErrorResult> ExecuteOperationErrorHandlerAsync(
+            [NotNull] OperationContext context,
+            OperationStatus status,
+            [NotNull] Exception ex,
+            CancellationToken cancellationToken)
         {
-            return _errorsHandlers?.FirstOrDefault(errorHandler => errorHandler.NotNull().CanHandle(ex))?.Handler ?? ErrorHandler;
+            IOperationErrorResult errorResult = null;
+            var errorHandler = _errorsHandlers?.FirstOrDefault(handler => handler.NotNull().CanHandle(ex));
+
+            if (errorHandler != null)
+            {
+                var errorTask = errorHandler.HandleAsync(context, ex, cancellationToken);
+                HideNotificationIfNeeded(context, status);
+                errorResult = await errorTask;
+            }
+
+            return errorResult;
+        }
+
+        [NotNull]
+        private async Task ExecuteOperationFinishHandlerAsync(
+            [NotNull] OperationContext context,
+            OperationStatus status,
+            CancellationToken cancellationToken)
+        {
+            var finishTask = FinishHandler(cancellationToken).NotNull();
+            HideNotificationIfNeeded(context, status);
+            await finishTask;
+        }
+
+        [NotNull]
+        [ItemNotNull]
+        private async Task<IOperationErrorResult> ExecuteErrorHandlerAsync(
+            [NotNull] OperationContext context,
+            [NotNull] Exception ex,
+            CancellationToken cancellationToken)
+        {
+            var errorHandler = new OperationErrorHandler<Exception>(context.ErrorHandler.HandleAsync);
+
+            return await errorHandler.HandleAsync(context, ex, cancellationToken);
+        }
+
+        [NotNull]
+        private async Task ShowNotificationIfNeededAsync(
+            [NotNull] OperationContext context,
+            [NotNull] Task notificationDelayTask,
+            [NotNull] Task operationTask,
+            CancellationToken cancellationToken)
+        {
+            if (Notification != null)
+            {
+                await Task.WhenAny(notificationDelayTask, operationTask).NotNull();
+
+                if (!operationTask.IsCompleted)
+                {
+                    Notification.Show(context);
+                    context.IncreaseNotificationsCount(Notification.GetType());
+                    _isNotificationShowed = true;
+
+                    await Notification.MinDurationDelayAsync(cancellationToken);
+                }
+            }
+        }
+
+        private void HideNotificationIfNeeded(
+            [NotNull] OperationContext context,
+            OperationStatus status)
+        {
+            if (Notification != null && _isNotificationShowed && !_isNotificationHidden)
+            {
+                context.DecreaseNotificationsCount(Notification.GetType());
+                Notification.Hide(context, status);
+                _isNotificationHidden = true;
+            }
         }
     }
 }

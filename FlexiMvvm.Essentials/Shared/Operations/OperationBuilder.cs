@@ -49,22 +49,27 @@ namespace FlexiMvvm.Operations
             return this;
         }
 
-        public IOperationResultBuilder<TResult> WithExpression<TResult>(Func<TResult> expression)
+        public IOperationHandlerBuilder<TResult> WithExpression<TResult>(Func<TResult> expression)
         {
             if (expression == null)
                 throw new ArgumentNullException(nameof(expression));
 
-            return WithExpressionAsync(cancellationToken => Task.FromResult(expression()));
+            return WithExpressionAsync(async cancellationToken =>
+            {
+                await Task.Yield();
+
+                return expression();
+            });
         }
 
-        public IOperationResultBuilder<TResult> WithExpressionAsync<TResult>(Func<CancellationToken, Task<TResult>> expression)
+        public IOperationHandlerBuilder<TResult> WithExpressionAsync<TResult>(Func<CancellationToken, Task<TResult>> expression)
         {
             if (expression == null)
                 throw new ArgumentNullException(nameof(expression));
 
             var operation = new Operation<TResult>(expression, _notification, _condition);
 
-            return new OperationResultBuilder<TResult>(_context, operation);
+            return new OperationHandlerBuilder<TResult>(_context, operation);
         }
     }
 }

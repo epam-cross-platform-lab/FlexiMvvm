@@ -19,15 +19,16 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.Operations
 {
-    public class OperationError
+    public class OperationError<TException> : IOperationErrorResult
+        where TException : Exception
     {
-        internal OperationError([NotNull] Exception exception)
+        public OperationError([NotNull] TException exception)
         {
-            Exception = exception;
+            Exception = exception ?? throw new ArgumentNullException(nameof(exception));
         }
 
         [NotNull]
-        public Exception Exception { get; }
+        public TException Exception { get; }
 
         public bool Handled { get; set; } = true;
 

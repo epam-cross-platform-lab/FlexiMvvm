@@ -21,27 +21,39 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.Operations
 {
-    public interface IOperationResultBuilder<out TResult>
+    public interface IOperationHandlerBuilder<out TResult>
     {
         [NotNull]
-        IOperationResultBuilder<TResult> OnSuccess([NotNull] Action<TResult> handler);
+        IOperationHandlerBuilder<TResult> OnStart([NotNull] Action handler);
 
         [NotNull]
-        IOperationResultBuilder<TResult> OnSuccessAsync([NotNull] Func<TResult, CancellationToken, Task> handler);
+        IOperationHandlerBuilder<TResult> OnStartAsync([NotNull] Func<CancellationToken, Task> handler);
 
         [NotNull]
-        IOperationResultBuilder<TResult> OnError<TException>([NotNull] Action<OperationError> handler)
+        IOperationHandlerBuilder<TResult> OnSuccess([NotNull] Action<TResult> handler);
+
+        [NotNull]
+        IOperationHandlerBuilder<TResult> OnSuccessAsync([NotNull] Func<TResult, CancellationToken, Task> handler);
+
+        [NotNull]
+        IOperationHandlerBuilder<TResult> OnCancel([NotNull] Action handler);
+
+        [NotNull]
+        IOperationHandlerBuilder<TResult> OnCancelAsync([NotNull] Func<CancellationToken, Task> handler);
+
+        [NotNull]
+        IOperationHandlerBuilder<TResult> OnError<TException>([NotNull] Action<OperationError<TException>> handler)
             where TException : Exception;
 
         [NotNull]
-        IOperationResultBuilder<TResult> OnErrorAsync<TException>([NotNull] Func<OperationError, CancellationToken, Task> handler)
+        IOperationHandlerBuilder<TResult> OnErrorAsync<TException>([NotNull] Func<OperationError<TException>, CancellationToken, Task> handler)
             where TException : Exception;
 
         [NotNull]
-        IOperationResultBuilder<TResult> OnCancel([NotNull] Action handler);
+        IOperationHandlerBuilder<TResult> OnFinish([NotNull] Action handler);
 
         [NotNull]
-        IOperationResultBuilder<TResult> OnCancelAsync([NotNull] Func<CancellationToken, Task> handler);
+        IOperationHandlerBuilder<TResult> OnFinishAsync([NotNull] Func<CancellationToken, Task> handler);
 
         [NotNull]
         Task ExecuteAsync(CancellationToken cancellationToken = default);

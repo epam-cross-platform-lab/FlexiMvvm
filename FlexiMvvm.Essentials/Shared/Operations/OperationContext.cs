@@ -16,117 +16,60 @@
 
 using System;
 using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+using FlexiMvvm.Ioc;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.Operations
 {
     public class OperationContext
     {
-        [NotNull]
-        private readonly Dictionary<Type, int> _notificationsCounter = new Dictionary<Type, int>();
+        [CanBeNull]
+        private Dictionary<Type, int> _notificationsCounter;
 
-        public OperationContext([NotNull] object owner)
+        public OperationContext([CanBeNull] IDependencyProvider dependencyProvider, [NotNull] object owner, [NotNull] IErrorHandler errorHandler)
         {
+            DependencyProvider = dependencyProvider;
             Owner = owner ?? throw new ArgumentNullException(nameof(owner));
+            ErrorHandler = errorHandler ?? throw new ArgumentNullException(nameof(errorHandler));
         }
+
+        [CanBeNull]
+        public IDependencyProvider DependencyProvider { get; }
 
         [NotNull]
         public object Owner { get; }
 
         [NotNull]
-        internal async Task ExecuteAsync([NotNull] IOperation operation, CancellationToken cancellationToken)
-        {
-            var notificationCancellationTokenSource = operation.Notification?.CancellationTokenSource;
-            var linkedCancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
-                notificationCancellationTokenSource?.Token ?? CancellationToken.None,
-                cancellationToken);
-            var linkedCancellationToken = linkedCancellationTokenSource.Token;
-
-            try
-            {
-                OperationError error;
-
-                do
-                {
-                    error = null;
-
-                    var operationTask = operation.ExecuteAsync(this, linkedCancellationToken);
-                    var notificationMinDurationTask = Task.CompletedTask;
-
-                    if (operation.Notification != null)
-                    {
-                        var notificationDelayTask = operation.Notification.GetDelayTask();
-                        var completedTask = await Task.WhenAny(operationTask, notificationDelayTask).NotNull();
-
-                        if (completedTask != operationTask)
-                        {
-                            operation.HideNotificationRequested += Operation_HideNotificationRequested;
-                            RequestShowNotification(operation.Notification);
-                            notificationMinDurationTask = operation.Notification.GetMinDurationTask();
-                        }
-                    }
-
-                    try
-                    {
-                        await Task.WhenAll(operationTask, notificationMinDurationTask).NotNull();
-                    }
-                    catch (Exception ex)
-                    {
-                        error = new OperationError(ex);
-                        await OnErrorAsync(error);
-
-                        if (!error.Handled)
-                        {
-                            throw;
-                        }
-                    }
-                }
-                while (error?.RetryOperation ?? false);
-            }
-            finally
-            {
-                notificationCancellationTokenSource?.Dispose();
-                linkedCancellationTokenSource.Dispose();
-            }
-        }
+        internal IErrorHandler ErrorHandler { get; }
 
         [NotNull]
-        protected virtual Task OnErrorAsync([NotNull] OperationError error)
+        private Dictionary<Type, int> NotificationsCounter => _notificationsCounter ?? (_notificationsCounter = new Dictionary<Type, int>());
+
+        public int GetNotificationsCount<TNotification>()
+            where TNotification : OperationNotificationBase
         {
-            return Task.CompletedTask;
+            return GetNotificationsCount(typeof(TNotification));
         }
 
-        private void RequestShowNotification([NotNull] OperationNotificationBase notification)
+        internal int GetNotificationsCount([NotNull] Type notificationType)
         {
-            var notificationType = notification.GetType();
-            _notificationsCounter.TryGetValue(notificationType, out var counter);
-            _notificationsCounter[notificationType] = ++counter;
+            var count = 0;
 
-            notification.Show(this);
+            _notificationsCounter?.TryGetValue(notificationType, out count);
+
+            return count;
         }
 
-        private void RequestHideNotification([NotNull] OperationNotificationBase notification, OperationCallback callback)
+        internal void IncreaseNotificationsCount([NotNull] Type notificationType)
         {
-            var notificationType = notification.GetType();
-            _notificationsCounter.TryGetValue(notificationType, out var counter);
-            _notificationsCounter[notificationType] = Math.Max(--counter, 0);
-
-            if (counter == 0)
-            {
-                notification.Hide(this, callback);
-            }
+            var count = GetNotificationsCount(notificationType);
+            NotificationsCounter[notificationType] = ++count;
         }
 
-        private void Operation_HideNotificationRequested([NotNull] object sender, [NotNull] HideNotificationEventArgs e)
+        internal void DecreaseNotificationsCount([NotNull] Type notificationType)
         {
-            var operation = (IOperation)sender;
-
-            if (operation.Notification != null)
-            {
-                RequestHideNotification(operation.Notification, e.Callback);
-            }
+            var count = GetNotificationsCount(notificationType);
+            NotificationsCounter[notificationType] = Math.Max(--count, 0);
         }
     }
 }
