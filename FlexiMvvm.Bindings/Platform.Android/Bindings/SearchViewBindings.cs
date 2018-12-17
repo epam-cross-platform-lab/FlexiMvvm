@@ -75,12 +75,12 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Two way binding on <see cref="SearchView.QueryTextChange"/> event and <see cref="SearchView.SetQuery"/> method.
+        /// Two way binding on <see cref="SearchView.QueryTextChange"/> event and <see cref="SearchView.SetQuery(string, bool)"/> method.
         /// </summary>
         /// <param name="searchViewReference">The item reference.</param>
-        /// <param name="submit">Second parameter of <see cref="SearchView.SetQuery"/> method.</param>
+        /// <param name="submit">Second parameter of <see cref="SearchView.SetQuery(string, bool)"/> method.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="SearchView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Two way binding on <see cref="SearchView.QueryTextChange"/> event and <see cref="SearchView.SetQuery"/> method.</returns>
+        /// <returns>Two way binding on <see cref="SearchView.QueryTextChange"/> event and <see cref="SearchView.SetQuery(string, bool)"/> method.</returns>
         /// <exception cref="ArgumentNullException">searchViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<SearchView, string> QueryAndQueryTextChangeBinding(
@@ -266,14 +266,14 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// One way binding on <see cref="SearchView.SetQuery"/> method.
+        /// One way binding on <see cref="SearchView.SetQuery()"/> method.
         /// <para>
         /// Supported parameters: <see cref="ICharSequence"/> query; <see cref="string"/> query.
         /// </para>
         /// </summary>
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="searchViewReference">The item reference.</param>
-        /// <returns>One way binding on <see cref="SearchView.SetQuery"/> method.</returns>
+        /// <returns>One way binding on <see cref="SearchView.SetQuery()"/> method.</returns>
         /// <exception cref="ArgumentNullException">searchViewReference is null.</exception>
         /// <exception cref="NotSupportedException">Type <see cref="TValue"/> is not supported.</exception>
         [NotNull]
@@ -304,14 +304,14 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// One way binding on <see cref="SearchView.SetQueryHint"/> method.
+        /// One way binding on <see cref="SearchView.SetQueryHint()"/> method.
         /// <para>
         /// Supported parameters: <see cref="ICharSequence"/> hint; <see cref="string"/> hint.
         /// </para>
         /// </summary>
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="searchViewReference">The item reference.</param>
-        /// <returns>One way binding on <see cref="SearchView.SetQueryHint"/> method.</returns>
+        /// <returns>One way binding on <see cref="SearchView.SetQueryHint()"/> method.</returns>
         /// <exception cref="ArgumentNullException">searchViewReference is null.</exception>
         /// <exception cref="NotSupportedException">Type <see cref="TValue"/> is not supported.</exception>
         [NotNull]

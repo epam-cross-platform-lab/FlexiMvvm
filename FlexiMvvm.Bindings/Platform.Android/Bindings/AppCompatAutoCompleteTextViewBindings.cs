@@ -260,14 +260,14 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// One way binding on <see cref="AppCompatAutoCompleteTextView.SetCompletionHint"/> method.
+        /// One way binding on <see cref="AppCompatAutoCompleteTextView.SetCompletionHint()"/> method.
         /// <para>
         /// Supported parameters: <see cref="ICharSequence"/> hint; <see cref="string"/> hint.
         /// </para>
         /// </summary>
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="appCompatAutoCompleteTextViewReference">The item reference.</param>
-        /// <returns>One way binding on <see cref="AppCompatAutoCompleteTextView.SetCompletionHint"/> method.</returns>
+        /// <returns>One way binding on <see cref="AppCompatAutoCompleteTextView.SetCompletionHint()"/> method.</returns>
         /// <exception cref="ArgumentNullException">appCompatAutoCompleteTextViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<AppCompatAutoCompleteTextView, TValue> SetCompletionHintBinding<TValue>(
@@ -315,15 +315,15 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// One way binding on <see cref="AppCompatAutoCompleteTextView.SetText"/> method.
+        /// One way binding on <see cref="AppCompatAutoCompleteTextView.SetText()"/> method.
         /// <para>
         /// Supported parameters: <see cref="ICharSequence"/> text; <see cref="string"/> text; <see cref="int"/> resId.
         /// </para>
         /// </summary>
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="appCompatAutoCompleteTextViewReference">The item reference.</param>
-        /// <param name="filter">The second parameter of <see cref="AppCompatAutoCompleteTextView.SetText"/> method.</param>
-        /// <returns>One way binding on <see cref="AppCompatAutoCompleteTextView.SetText"/> method.</returns>
+        /// <param name="filter">The second parameter of <see cref="AppCompatAutoCompleteTextView.SetText()"/> method.</param>
+        /// <returns>One way binding on <see cref="AppCompatAutoCompleteTextView.SetText()"/> method.</returns>
         /// <exception cref="ArgumentNullException">appCompatAutoCompleteTextViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<AppCompatAutoCompleteTextView, TValue> SetTextBinding<TValue>(

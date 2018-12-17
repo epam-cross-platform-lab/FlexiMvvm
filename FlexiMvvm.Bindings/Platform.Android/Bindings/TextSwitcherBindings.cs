@@ -25,14 +25,14 @@ namespace FlexiMvvm.Bindings
     public static class TextSwitcherBindings
     {
         /// <summary>
-        /// One way binding on <see cref="TextSwitcher.SetCurrentText"/> method.
+        /// One way binding on <see cref="TextSwitcher.SetCurrentText()"/> method.
         /// <para>
         /// Supported parameters: <see cref="ICharSequence"/> text; <see cref="string"/> text.
         /// </para>
         /// </summary>
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="textSwitcherReference">The item reference.</param>
-        /// <returns>One way binding on <see cref="TextSwitcher.SetCurrentText"/> method.</returns>
+        /// <returns>One way binding on <see cref="TextSwitcher.SetCurrentText()"/> method.</returns>
         /// <exception cref="ArgumentNullException">textSwitcherReference is null.</exception>
         /// <exception cref="NotSupportedException">Type <see cref="TValue"/> is not supported.</exception>
         [NotNull]
@@ -62,14 +62,14 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// One way binding on <see cref="TextSwitcher.SetText"/> method.
+        /// One way binding on <see cref="TextSwitcher.SetText()"/> method.
         /// <para>
         /// Supported parameters: <see cref="ICharSequence"/> text; <see cref="string"/> text.
         /// </para>
         /// </summary>
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="textSwitcherReference">The item reference.</param>
-        /// <returns>One way binding on <see cref="TextSwitcher.SetText"/> method.</returns>
+        /// <returns>One way binding on <see cref="TextSwitcher.SetText()"/> method.</returns>
         /// <exception cref="ArgumentNullException">textSwitcherReference is null.</exception>
         /// <exception cref="NotSupportedException">Type <see cref="TValue"/> is not supported.</exception>
         [NotNull]

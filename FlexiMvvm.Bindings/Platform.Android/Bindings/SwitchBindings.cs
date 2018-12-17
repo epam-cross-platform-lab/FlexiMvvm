@@ -49,11 +49,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// One way binding on <see cref="Switch.SetSwitchTypeface"/> method.
+        /// One way binding on <see cref="Switch.SetSwitchTypeface(Typeface, TypefaceStyle)"/> method.
         /// </summary>
         /// <param name="switchReference">The switch reference.</param>
         /// <param name="typefaceStyle">The typeface style.</param>
-        /// <returns>One way binding on <see cref="Switch.SetSwitchTypeface"/> method.</returns>
+        /// <returns>One way binding on <see cref="Switch.SetSwitchTypeface(Typeface, TypefaceStyle)"/> method.</returns>
         /// <exception cref="ArgumentNullException">switchReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Switch, Typeface> SetSwitchTextAppearanceBinding(

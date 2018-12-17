@@ -64,14 +64,14 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// One way binding on <see cref="CheckedTextView.SetCheckMarkDrawable"/> method.
+        /// One way binding on <see cref="CheckedTextView.SetCheckMarkDrawable()"/> method.
         /// <para>
         /// Supported parameters: <see cref="int"/> resId; <see cref="Drawable"/> d.
         /// </para>
         /// </summary>
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="checkedTextViewReference">The item reference.</param>
-        /// <returns>One way binding on <see cref="CheckedTextView.SetCheckMarkDrawable"/> method.</returns>
+        /// <returns>One way binding on <see cref="CheckedTextView.SetCheckMarkDrawable()"/> method.</returns>
         /// <exception cref="ArgumentNullException">checkedTextViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<CheckedTextView, TValue> SetCheckMarkDrawableBinding<TValue>(

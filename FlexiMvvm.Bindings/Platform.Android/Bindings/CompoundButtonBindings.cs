@@ -105,14 +105,14 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// One way binding on <see cref="CompoundButton.SetButtonDrawable"/> method.
+        /// One way binding on <see cref="CompoundButton.SetButtonDrawable()"/> method.
         /// <para>
         /// Supported parameters: <see cref="int"/> resId; <see cref="Drawable"/> drawable.
         /// </para>
         /// </summary>
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="compoundButtonReference">The item reference.</param>
-        /// <returns>One way binding on <see cref="CompoundButton.SetButtonDrawable"/> method.</returns>
+        /// <returns>One way binding on <see cref="CompoundButton.SetButtonDrawable()"/> method.</returns>
         /// <exception cref="ArgumentNullException">compoundButtonReference is null.</exception>
         /// <exception cref="NotSupportedException">Type <see cref="TValue"/> is not supported.</exception>
         [NotNull]

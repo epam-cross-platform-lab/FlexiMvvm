@@ -328,7 +328,7 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// One way binding on <see cref="TextView.SetError"/> method.
+        /// One way binding on <see cref="TextView.SetError()"/> method.
         /// <para>
         /// Supported parameters: <see cref="ICharSequence"/> error; <see cref="string"/> error.
         /// </para>
@@ -336,7 +336,7 @@ namespace FlexiMvvm.Bindings
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="textViewReference">The item reference.</param>
         /// <param name="drawable">The drawable.</param>
-        /// <returns>One way binding on <see cref="TextView.SetError"/> method.</returns>
+        /// <returns>One way binding on <see cref="TextView.SetError()"/> method.</returns>
         /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         /// <exception cref="NotSupportedException">Type <see cref="TValue"/> is not supported.</exception>
         [NotNull]
@@ -424,14 +424,14 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// One way binding on <see cref="TextView.SetHintTextColor"/> method.
+        /// One way binding on <see cref="TextView.SetHintTextColor()"/> method.
         /// <para>
         /// Supported parameters: <see cref="Color"/> color; <see cref="ColorStateList"/> colors.
         /// </para>
         /// </summary>
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="textViewReference">The item reference.</param>
-        /// <returns>One way binding on <see cref="TextView.SetHintTextColor"/> method.</returns>
+        /// <returns>One way binding on <see cref="TextView.SetHintTextColor()"/> method.</returns>
         /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         /// <exception cref="NotSupportedException">Type <see cref="TValue"/> is not supported.</exception>
         [NotNull]
@@ -537,14 +537,14 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// One way binding on <see cref="TextView.SetLinkTextColor"/> method.
+        /// One way binding on <see cref="TextView.SetLinkTextColor()"/> method.
         /// <para>
         /// Supported parameters: <see cref="Color"/> color; <see cref="ColorStateList"/> colors.
         /// </para>
         /// </summary>
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="textViewReference">The item reference.</param>
-        /// <returns>One way binding on <see cref="TextView.SetLinkTextColor"/> method.</returns>
+        /// <returns>One way binding on <see cref="TextView.SetLinkTextColor()"/> method.</returns>
         /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         /// <exception cref="NotSupportedException">Type <see cref="TValue"/> is not supported.</exception>
         [NotNull]
@@ -764,7 +764,7 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// One way binding on <see cref="TextView.SetText"/> method.
+        /// One way binding on <see cref="TextView.SetText()"/> method.
         /// <para>
         /// Supported parameters: <see cref="int"/> resId; <see cref="ICharSequence"/> text; <see cref="string"/> text.
         /// </para>
@@ -772,7 +772,7 @@ namespace FlexiMvvm.Bindings
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="textViewReference">The item reference.</param>
         /// <param name="bufferType">The buffer type.</param>
-        /// <returns>One way binding on <see cref="TextView.SetText"/> method.</returns>
+        /// <returns>One way binding on <see cref="TextView.SetText()"/> method.</returns>
         /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         /// <exception cref="NotSupportedException">Type <see cref="TValue"/> is not supported.</exception>
         [NotNull]
@@ -806,14 +806,14 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// One way binding on <see cref="TextView.SetTextColor"/> method.
+        /// One way binding on <see cref="TextView.SetTextColor()"/> method.
         /// <para>
         /// Supported parameters: <see cref="Color"/> color; <see cref="ColorStateList"/> colors.
         /// </para>
         /// </summary>
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="textViewReference">The item reference.</param>
-        /// <returns>One way binding on <see cref="TextView.SetTextColor"/> method.</returns>
+        /// <returns>One way binding on <see cref="TextView.SetTextColor()"/> method.</returns>
         /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         /// <exception cref="NotSupportedException">Type <see cref="TValue"/> is not supported.</exception>
         [NotNull]
@@ -862,7 +862,7 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// One way binding on <see cref="TextView.SetTextKeepState"/> method.
+        /// One way binding on <see cref="TextView.SetTextKeepState()"/> method.
         /// <para>
         /// Supported parameters: <see cref="ICharSequence"/> text; <see cref="string"/> text.
         /// </para>
@@ -870,7 +870,7 @@ namespace FlexiMvvm.Bindings
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="textViewReference">The item reference.</param>
         /// <param name="bufferType">The buffer type.</param>
-        /// <returns>One way binding on <see cref="TextView.SetTextKeepState"/> method.</returns>
+        /// <returns>One way binding on <see cref="TextView.SetTextKeepState()"/> method.</returns>
         /// <exception cref="ArgumentNullException">textViewReference is null.</exception>
         /// <exception cref="NotSupportedException">Type <see cref="TValue"/> is not supported.</exception>
         [NotNull]

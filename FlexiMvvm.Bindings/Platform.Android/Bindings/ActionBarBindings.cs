@@ -124,7 +124,7 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// One way binding on <see cref="ActionBar.SetHomeActionContentDescription"/> method.
+        /// One way binding on <see cref="ActionBar.SetHomeActionContentDescription()"/> method.
         /// <para>
         /// Supported parameters: <see cref="int"/> resId; <see cref="ICharSequence"/> description; <see cref="string"/> description.
         /// </para>

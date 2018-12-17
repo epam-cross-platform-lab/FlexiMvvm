@@ -65,14 +65,12 @@ namespace FlexiMvvm.Bindings
         /// One way to source binding on <see cref="ViewPager.PageSelected"/> event.
         /// </summary>
         /// <param name="viewPagerReference">The item reference.</param>
-        /// <param name="smoothScroll">Second parameter of <see cref="ViewPager.SetCurrentItem"/> method.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="ViewPager.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
         /// <returns>One way to source binding on <see cref="ViewPager.PageSelected"/> event.</returns>
         /// <exception cref="ArgumentNullException">viewPagerReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ViewPager, int> PageSelectedBinding(
             [NotNull] this IItemReference<ViewPager> viewPagerReference,
-            bool smoothScroll = true,
             bool trackCanExecuteCommandChanged = false)
         {
             if (viewPagerReference == null)

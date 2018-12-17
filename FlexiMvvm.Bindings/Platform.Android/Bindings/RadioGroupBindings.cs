@@ -24,11 +24,11 @@ namespace FlexiMvvm.Bindings
     public static class RadioGroupBindings
     {
         /// <summary>
-        /// Two way binding on <see cref="RadioGroup.CheckedChange"/> event and <see cref="RadioGroup.Check"/> method.
+        /// Two way binding on <see cref="RadioGroup.CheckedChange"/> event and <see cref="RadioGroup.Check(int)"/> method.
         /// </summary>
         /// <param name="radioGroupReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="RadioGroup.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Two way binding on <see cref="RadioGroup.CheckedChange"/> event and <see cref="RadioGroup.Check"/> method.</returns>
+        /// <returns>Two way binding on <see cref="RadioGroup.CheckedChange"/> event and <see cref="RadioGroup.Check(int)"/> method.</returns>
         /// <exception cref="ArgumentNullException">radioGroupReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<RadioGroup, int> CheckAndCheckedChangeBinding(
