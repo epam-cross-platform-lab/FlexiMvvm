@@ -26,10 +26,10 @@ namespace FlexiMvvm.Bindings
     public static class CheckedTextViewBindings
     {
         /// <summary>
-        /// Binding on <see cref="CheckedTextView.Checked"/> property.
+        /// One way binding on <see cref="CheckedTextView.Checked"/> property.
         /// </summary>
         /// <param name="checkedTextViewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="CheckedTextView.Checked"/> property.</returns>
+        /// <returns>One way binding on <see cref="CheckedTextView.Checked"/> property.</returns>
         /// <exception cref="ArgumentNullException">checkedTextViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<CheckedTextView, bool> CheckedBinding(
@@ -45,10 +45,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="CheckedTextView.CheckMarkTintList"/> property.
+        /// One way binding on <see cref="CheckedTextView.CheckMarkTintList"/> property.
         /// </summary>
         /// <param name="checkedTextViewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="CheckedTextView.CheckMarkTintList"/> property.</returns>
+        /// <returns>One way binding on <see cref="CheckedTextView.CheckMarkTintList"/> property.</returns>
         /// <exception cref="ArgumentNullException">checkedTextViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<CheckedTextView, ColorStateList> CheckMarkTintListBinding(
@@ -64,14 +64,14 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="CheckedTextView.SetCheckMarkDrawable"/> method.
+        /// One way binding on <see cref="CheckedTextView.SetCheckMarkDrawable"/> method.
         /// <para>
         /// Supported parameters: <see cref="int"/> resId; <see cref="Drawable"/> d.
         /// </para>
         /// </summary>
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="checkedTextViewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="CheckedTextView.SetCheckMarkDrawable"/> method.</returns>
+        /// <returns>One way binding on <see cref="CheckedTextView.SetCheckMarkDrawable"/> method.</returns>
         /// <exception cref="ArgumentNullException">checkedTextViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<CheckedTextView, TValue> SetCheckMarkDrawableBinding<TValue>(

@@ -24,10 +24,10 @@ namespace FlexiMvvm.Bindings
     public static class UIImageViewBindings
     {
         /// <summary>
-        /// Binding on <see cref="UIImageView.AdjustsImageSizeForAccessibilityContentSizeCategory"/> property.
+        /// One way binding on <see cref="UIImageView.AdjustsImageSizeForAccessibilityContentSizeCategory"/> property.
         /// </summary>
         /// <param name="imageViewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UIImageView.AdjustsImageSizeForAccessibilityContentSizeCategory"/> property.</returns>
+        /// <returns>One way binding on <see cref="UIImageView.AdjustsImageSizeForAccessibilityContentSizeCategory"/> property.</returns>
         /// <exception cref="ArgumentNullException">imageViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIImageView, bool> AdjustsImageSizeForAccessibilityContentSizeCategoryBinding(
@@ -43,10 +43,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UIImageView.AnimationDuration"/> property.
+        /// One way binding on <see cref="UIImageView.AnimationDuration"/> property.
         /// </summary>
         /// <param name="imageViewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UIImageView.AnimationDuration"/> property.</returns>
+        /// <returns>One way binding on <see cref="UIImageView.AnimationDuration"/> property.</returns>
         /// <exception cref="ArgumentNullException">imageViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIImageView, double> AnimationDurationBinding(
@@ -62,10 +62,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UIImageView.AnimationRepeatCount"/> property.
+        /// One way binding on <see cref="UIImageView.AnimationRepeatCount"/> property.
         /// </summary>
         /// <param name="imageViewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UIImageView.AnimationRepeatCount"/> property.</returns>
+        /// <returns>One way binding on <see cref="UIImageView.AnimationRepeatCount"/> property.</returns>
         /// <exception cref="ArgumentNullException">imageViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIImageView, nint> AnimationRepeatCountBinding(
@@ -81,10 +81,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UIImageView.Highlighted"/> property.
+        /// One way binding on <see cref="UIImageView.Highlighted"/> property.
         /// </summary>
         /// <param name="imageViewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UIImageView.Highlighted"/> property.</returns>
+        /// <returns>One way binding on <see cref="UIImageView.Highlighted"/> property.</returns>
         /// <exception cref="ArgumentNullException">imageViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIImageView, bool> HighlightedBinding(
@@ -100,10 +100,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UIImageView.StartAnimating"/> method.
+        /// One way binding on <see cref="UIImageView.StartAnimating"/> method.
         /// </summary>
         /// <param name="imageViewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UIImageView.StartAnimating"/> method.</returns>
+        /// <returns>One way binding on <see cref="UIImageView.StartAnimating"/> method.</returns>
         /// <exception cref="ArgumentNullException">imageViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIImageView, bool> StartAnimatingBinding(
@@ -125,10 +125,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UIImageView.StopAnimating"/> method.
+        /// One way binding on <see cref="UIImageView.StopAnimating"/> method.
         /// </summary>
         /// <param name="imageViewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UIImageView.StopAnimating"/> method.</returns>
+        /// <returns>One way binding on <see cref="UIImageView.StopAnimating"/> method.</returns>
         /// <exception cref="ArgumentNullException">imageViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIImageView, bool> StopAnimatingBinding(

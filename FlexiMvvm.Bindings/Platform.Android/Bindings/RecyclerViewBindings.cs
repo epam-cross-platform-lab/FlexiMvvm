@@ -24,11 +24,11 @@ namespace FlexiMvvm.Bindings
     public static class RecyclerViewBindings
     {
         /// <summary>
-        /// Binding on <see cref="RecyclerView.ChildViewAttachedToWindow"/> event.
+        /// One way to source binding on <see cref="RecyclerView.ChildViewAttachedToWindow"/> event.
         /// </summary>
         /// <param name="recyclerViewReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="RecyclerView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Binding on <see cref="RecyclerView.ChildViewAttachedToWindow"/> event.</returns>
+        /// <returns>One way to source binding on <see cref="RecyclerView.ChildViewAttachedToWindow"/> event.</returns>
         /// <exception cref="ArgumentNullException">recyclerViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<RecyclerView, object> ChildViewAttachedToWindowBinding(
@@ -54,11 +54,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="RecyclerView.ChildViewDetachedFromWindow"/> event.
+        /// One way to source binding on <see cref="RecyclerView.ChildViewDetachedFromWindow"/> event.
         /// </summary>
         /// <param name="recyclerViewReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="RecyclerView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Binding on <see cref="RecyclerView.ChildViewDetachedFromWindow"/> event.</returns>
+        /// <returns>One way to source binding on <see cref="RecyclerView.ChildViewDetachedFromWindow"/> event.</returns>
         /// <exception cref="ArgumentNullException">recyclerViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<RecyclerView, object> ChildViewDetachedFromWindowBinding(
@@ -84,10 +84,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="RecyclerView.ScrollToPosition(int)"/> method.
+        /// One way binding on <see cref="RecyclerView.ScrollToPosition(int)"/> method.
         /// </summary>
         /// <param name="recyclerViewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="RecyclerView.ScrollToPosition(int)"/> method.</returns>
+        /// <returns>One way binding on <see cref="RecyclerView.ScrollToPosition(int)"/> method.</returns>
         /// <exception cref="ArgumentNullException">recyclerViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<RecyclerView, int> ScrollToPositionBinding(
@@ -103,10 +103,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="RecyclerView.SmoothScrollToPosition(int)"/> method.
+        /// One way binding on <see cref="RecyclerView.SmoothScrollToPosition(int)"/> method.
         /// </summary>
         /// <param name="recyclerViewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="RecyclerView.SmoothScrollToPosition(int)"/> method.</returns>
+        /// <returns>One way binding on <see cref="RecyclerView.SmoothScrollToPosition(int)"/> method.</returns>
         /// <exception cref="ArgumentNullException">recyclerViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<RecyclerView, int> SmoothScrollToPositionBinding(

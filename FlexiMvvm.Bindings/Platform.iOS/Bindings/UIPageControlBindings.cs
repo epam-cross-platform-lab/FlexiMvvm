@@ -55,10 +55,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UIPageControl.CurrentPage"/> property.
+        /// One way binding on <see cref="UIPageControl.CurrentPage"/> property.
         /// </summary>
         /// <param name="pageControlReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UIPageControl.CurrentPage"/> property.</returns>
+        /// <returns>One way binding on <see cref="UIPageControl.CurrentPage"/> property.</returns>
         /// <exception cref="ArgumentNullException">pageControlReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIPageControl, nint> CurrentPageBinding(
@@ -74,10 +74,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UIPageControl.DefersCurrentPageDisplay"/> property.
+        /// One way binding on <see cref="UIPageControl.DefersCurrentPageDisplay"/> property.
         /// </summary>
         /// <param name="pageControlReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UIPageControl.DefersCurrentPageDisplay"/> property.</returns>
+        /// <returns>One way binding on <see cref="UIPageControl.DefersCurrentPageDisplay"/> property.</returns>
         /// <exception cref="ArgumentNullException">pageControlReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIPageControl, bool> DefersCurrentPageDisplayBinding(
@@ -93,10 +93,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UIPageControl.HidesForSinglePage"/> property.
+        /// One way binding on <see cref="UIPageControl.HidesForSinglePage"/> property.
         /// </summary>
         /// <param name="pageControlReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UIPageControl.HidesForSinglePage"/> property.</returns>
+        /// <returns>One way binding on <see cref="UIPageControl.HidesForSinglePage"/> property.</returns>
         /// <exception cref="ArgumentNullException">pageControlReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIPageControl, bool> HidesForSinglePageBinding(
@@ -112,10 +112,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UIPageControl.Pages"/> property.
+        /// One way binding on <see cref="UIPageControl.Pages"/> property.
         /// </summary>
         /// <param name="pageControlReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UIPageControl.Pages"/> property.</returns>
+        /// <returns>One way binding on <see cref="UIPageControl.Pages"/> property.</returns>
         /// <exception cref="ArgumentNullException">pageControlReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIPageControl, nint> PagesBinding(

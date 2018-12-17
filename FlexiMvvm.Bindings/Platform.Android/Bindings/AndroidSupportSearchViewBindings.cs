@@ -25,11 +25,11 @@ namespace FlexiMvvm.Bindings
     public static class AndroidSupportSearchViewBindings
     {
         /// <summary>
-        /// Binding on <see cref="SearchView.Close"/> event.
+        /// One way to source binding on <see cref="SearchView.Close"/> event.
         /// </summary>
         /// <param name="searchViewReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="SearchView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Binding on <see cref="SearchView.Close"/> event.</returns>
+        /// <returns>One way to source binding on <see cref="SearchView.Close"/> event.</returns>
         /// <exception cref="ArgumentNullException">searchViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<SearchView, bool> CloseBinding(
@@ -55,10 +55,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="SearchView.Iconified"/> property.
+        /// One way binding on <see cref="SearchView.Iconified"/> property.
         /// </summary>
         /// <param name="searchViewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="SearchView.Iconified"/> property.</returns>
+        /// <returns>One way binding on <see cref="SearchView.Iconified"/> property.</returns>
         /// <exception cref="ArgumentNullException">searchViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<SearchView, bool> IconifiedBinding(
@@ -105,10 +105,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="SearchView.QueryHint"/> property.
+        /// One way binding on <see cref="SearchView.QueryHint"/> property.
         /// </summary>
         /// <param name="searchViewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="SearchView.QueryHint"/> property.</returns>
+        /// <returns>One way binding on <see cref="SearchView.QueryHint"/> property.</returns>
         /// <exception cref="ArgumentNullException">searchViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<SearchView, string> QueryHintBinding(
@@ -124,10 +124,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="SearchView.QueryRefinementEnabled"/> property.
+        /// One way binding on <see cref="SearchView.QueryRefinementEnabled"/> property.
         /// </summary>
         /// <param name="searchViewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="SearchView.QueryRefinementEnabled"/> property.</returns>
+        /// <returns>One way binding on <see cref="SearchView.QueryRefinementEnabled"/> property.</returns>
         /// <exception cref="ArgumentNullException">searchViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<SearchView, bool> QueryRefinementEnabledBinding(
@@ -143,11 +143,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="SearchView.QueryTextChange"/> event.
+        /// One way to source binding on <see cref="SearchView.QueryTextChange"/> event.
         /// </summary>
         /// <param name="searchViewReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="SearchView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Binding on <see cref="SearchView.QueryTextChange"/> event.</returns>
+        /// <returns>One way to source binding on <see cref="SearchView.QueryTextChange"/> event.</returns>
         /// <exception cref="ArgumentNullException">searchViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<SearchView, string> QueryTextChangeBinding(
@@ -173,11 +173,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="SearchView.QueryTextSubmit"/> event.
+        /// One way to source binding on <see cref="SearchView.QueryTextSubmit"/> event.
         /// </summary>
         /// <param name="searchViewReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="SearchView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Binding on <see cref="SearchView.QueryTextSubmit"/> event.</returns>
+        /// <returns>One way to source binding on <see cref="SearchView.QueryTextSubmit"/> event.</returns>
         /// <exception cref="ArgumentNullException">searchViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<SearchView, string> QueryTextSubmitBinding(
@@ -203,7 +203,7 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="SearchView.SetQuery"/> method.
+        /// One way binding on <see cref="SearchView.SetQuery"/> method.
         /// <para>
         /// Supported parameters: <see cref="ICharSequence"/> query; <see cref="string"/> query.
         /// </para>
@@ -211,7 +211,7 @@ namespace FlexiMvvm.Bindings
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="searchViewReference">The item reference.</param>
         /// <param name="submit">This second parameter of <see cref="SearchView.SetQuery"/> method.</param>
-        /// <returns>Binding on <see cref="SearchView.SetQuery"/> method.</returns>
+        /// <returns>One way binding on <see cref="SearchView.SetQuery"/> method.</returns>
         /// <exception cref="ArgumentNullException">searchViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<SearchView, TValue> SetQueryBinding<TValue>(
@@ -241,10 +241,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="SearchView.SubmitButtonEnabled"/> property.
+        /// One way binding on <see cref="SearchView.SubmitButtonEnabled"/> property.
         /// </summary>
         /// <param name="searchViewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="SearchView.SubmitButtonEnabled"/> property.</returns>
+        /// <returns>One way binding on <see cref="SearchView.SubmitButtonEnabled"/> property.</returns>
         /// <exception cref="ArgumentNullException">searchViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<SearchView, bool> SubmitButtonEnabledBinding(
@@ -260,11 +260,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="SearchView.SuggestionClick"/> event.
+        /// One way to source binding on <see cref="SearchView.SuggestionClick"/> event.
         /// </summary>
         /// <param name="searchViewReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="SearchView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Binding on <see cref="SearchView.SuggestionClick"/> event.</returns>
+        /// <returns>One way to source binding on <see cref="SearchView.SuggestionClick"/> event.</returns>
         /// <exception cref="ArgumentNullException">searchViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<SearchView, int> SuggestionClickBinding(
@@ -290,11 +290,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="SearchView.SuggestionSelect"/> event.
+        /// One way to source binding on <see cref="SearchView.SuggestionSelect"/> event.
         /// </summary>
         /// <param name="searchViewReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="SearchView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Binding on <see cref="SearchView.SuggestionSelect"/> event.</returns>
+        /// <returns>One way to source binding on <see cref="SearchView.SuggestionSelect"/> event.</returns>
         /// <exception cref="ArgumentNullException">searchViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<SearchView, int> SuggestionSelectBinding(

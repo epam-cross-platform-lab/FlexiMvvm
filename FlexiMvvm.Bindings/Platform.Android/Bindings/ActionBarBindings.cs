@@ -26,10 +26,10 @@ namespace FlexiMvvm.Bindings
     public static class ActionBarBindings
     {
         /// <summary>
-        /// Binding on <see cref="ActionBar.HideOffset"/> property.
+        /// One way binding on <see cref="ActionBar.HideOffset"/> property.
         /// </summary>
         /// <param name="actionBarReference">The item reference.</param>
-        /// <returns>Binding on <see cref="ActionBar.HideOffset"/> property.</returns>
+        /// <returns>One way binding on <see cref="ActionBar.HideOffset"/> property.</returns>
         /// <exception cref="ArgumentNullException">actionBarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ActionBar, int> HideOffsetBinding(
@@ -45,10 +45,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="ActionBar.HideOnContentScrollEnabled"/> property.
+        /// One way binding on <see cref="ActionBar.HideOnContentScrollEnabled"/> property.
         /// </summary>
         /// <param name="actionBarReference">The item reference.</param>
-        /// <returns>Binding on <see cref="ActionBar.HideOnContentScrollEnabled"/> property.</returns>
+        /// <returns>One way binding on <see cref="ActionBar.HideOnContentScrollEnabled"/> property.</returns>
         /// <exception cref="ArgumentNullException">actionBarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ActionBar, bool> HideOnContentScrollEnabledBinding(
@@ -64,10 +64,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="ActionBar.MenuVisibility"/> event.
+        /// One way to source binding on <see cref="ActionBar.MenuVisibility"/> event.
         /// </summary>
         /// <param name="actionBarReference">The item reference.</param>
-        /// <returns>Binding on <see cref="ActionBar.MenuVisibility"/> event.</returns>
+        /// <returns>One way to source binding on <see cref="ActionBar.MenuVisibility"/> event.</returns>
         /// <exception cref="ArgumentNullException">actionBarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ActionBar, object> MenuVisibilityBinding(
@@ -86,10 +86,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="ActionBar.Subtitle"/> property.
+        /// One way binding on <see cref="ActionBar.Subtitle"/> property.
         /// </summary>
         /// <param name="actionBarReference">The item reference.</param>
-        /// <returns>Binding on <see cref="ActionBar.Subtitle"/> property.</returns>
+        /// <returns>One way binding on <see cref="ActionBar.Subtitle"/> property.</returns>
         /// <exception cref="ArgumentNullException">actionBarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ActionBar, string> SubtitleBinding(
@@ -105,10 +105,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="ActionBar.Title"/> property.
+        /// One way binding on <see cref="ActionBar.Title"/> property.
         /// </summary>
         /// <param name="actionBarReference">The item reference.</param>
-        /// <returns>Binding on <see cref="ActionBar.Title"/> property.</returns>
+        /// <returns>One way binding on <see cref="ActionBar.Title"/> property.</returns>
         /// <exception cref="ArgumentNullException">actionBarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ActionBar, string> TitleBinding(
@@ -124,7 +124,7 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="ActionBar.SetHomeActionContentDescription"/> method.
+        /// One way binding on <see cref="ActionBar.SetHomeActionContentDescription"/> method.
         /// <para>
         /// Supported parameters: <see cref="int"/> resId; <see cref="ICharSequence"/> description; <see cref="string"/> description.
         /// </para>
@@ -132,7 +132,7 @@ namespace FlexiMvvm.Bindings
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="actionBarReference">The item reference.</param>
         /// <returns>
-        /// Binding on <see cref="ActionBar.SetHomeActionContentDescription()"/> method.
+        /// One way binding on <see cref="ActionBar.SetHomeActionContentDescription()"/> method.
         /// </returns>
         /// <exception cref="ArgumentNullException">actionBarReference is null.</exception>
         /// <exception cref="NotSupportedException">Type <see cref="TValue"/> is not supported.</exception>
@@ -166,7 +166,7 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="ActionBar.SetHomeAsUpIndicator()"/> method.
+        /// One way binding on <see cref="ActionBar.SetHomeAsUpIndicator()"/> method.
         /// <para>
         /// Supported parameters: <see cref="int"/> resId; <see cref="Drawable"/> indicator.
         /// </para>
@@ -174,7 +174,7 @@ namespace FlexiMvvm.Bindings
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="actionBarReference">The item reference.</param>
         /// <returns>
-        /// Binding on <see cref="ActionBar.SetHomeAsUpIndicator()"/> method.
+        /// One way binding on <see cref="ActionBar.SetHomeAsUpIndicator()"/> method.
         /// </returns>
         /// <exception cref="ArgumentNullException">actionBarReference is null.</exception>
         /// <exception cref="NotSupportedException">Type <see cref="TValue"/> is not supported.</exception>
@@ -205,10 +205,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="ActionBar.SetHomeButtonEnabled(bool)"/> method.
+        /// One way binding on <see cref="ActionBar.SetHomeButtonEnabled(bool)"/> method.
         /// </summary>
         /// <param name="actionBarReference">The item reference.</param>
-        /// <returns>Binding on <see cref="ActionBar.SetHomeButtonEnabled(bool)"/> method.</returns>
+        /// <returns>One way binding on <see cref="ActionBar.SetHomeButtonEnabled(bool)"/> method.</returns>
         /// <exception cref="ArgumentNullException">actionBarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ActionBar, bool> SetHomeButtonEnabledBinding(

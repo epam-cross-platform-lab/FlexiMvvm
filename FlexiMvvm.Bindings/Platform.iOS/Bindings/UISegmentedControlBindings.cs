@@ -65,10 +65,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UISegmentedControl.SelectedSegment"/> property.
+        /// One way binding on <see cref="UISegmentedControl.SelectedSegment"/> property.
         /// </summary>
         /// <param name="segmentedControlReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UISegmentedControl.SelectedSegment"/> property.</returns>
+        /// <returns>One way binding on <see cref="UISegmentedControl.SelectedSegment"/> property.</returns>
         /// <exception cref="ArgumentNullException">segmentedControlReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISegmentedControl, nint> SelectedSegmentBinding(

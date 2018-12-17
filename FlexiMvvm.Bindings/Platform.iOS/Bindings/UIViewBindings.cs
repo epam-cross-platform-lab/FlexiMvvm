@@ -24,10 +24,10 @@ namespace FlexiMvvm.Bindings
     public static class UIViewBindings
     {
         /// <summary>
-        /// Binding on <see cref="UIView.Alpha"/> property.
+        /// One way binding on <see cref="UIView.Alpha"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UIView.Alpha"/> property.</returns>
+        /// <returns>One way binding on <see cref="UIView.Alpha"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIView, float> AlphaBinding(
@@ -43,10 +43,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UIView.EndEditing(bool)"/> method.
+        /// One way binding on <see cref="UIView.EndEditing(bool)"/> method.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UIView.EndEditing(bool)"/> method.</returns>
+        /// <returns>One way binding on <see cref="UIView.EndEditing(bool)"/> method.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIView, bool> EndEditingBinding(
@@ -62,10 +62,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UIView.Hidden"/> property.
+        /// One way binding on <see cref="UIView.Hidden"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UIView.Hidden"/> property.</returns>
+        /// <returns>One way binding on <see cref="UIView.Hidden"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIView, bool> HiddenBinding(
@@ -81,10 +81,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UIView.IsAccessibilityElement"/> property.
+        /// One way binding on <see cref="UIView.IsAccessibilityElement"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UIView.IsAccessibilityElement"/> property.</returns>
+        /// <returns>One way binding on <see cref="UIView.IsAccessibilityElement"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIView, bool> IsAccessibilityElementBinding(
@@ -100,10 +100,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UIView.MultipleTouchEnabled"/> property.
+        /// One way binding on <see cref="UIView.MultipleTouchEnabled"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UIView.MultipleTouchEnabled"/> property.</returns>
+        /// <returns>One way binding on <see cref="UIView.MultipleTouchEnabled"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIView, bool> MultipleTouchEnabledBinding(
@@ -119,10 +119,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UIView.Opaque"/> property.
+        /// One way binding on <see cref="UIView.Opaque"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UIView.Opaque"/> property.</returns>
+        /// <returns>One way binding on <see cref="UIView.Opaque"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIView, bool> OpaqueBinding(
@@ -138,10 +138,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on Tap gesture.
+        /// One way to source binding on Tap gesture.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on Tap gesture.</returns>
+        /// <returns>One way  to source binding on Tap gesture.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIView, object> TapBinding(
@@ -156,10 +156,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UIView.UserInteractionEnabled"/> property.
+        /// One way binding on <see cref="UIView.UserInteractionEnabled"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UIView.UserInteractionEnabled"/> property.</returns>
+        /// <returns>One way binding on <see cref="UIView.UserInteractionEnabled"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIView, bool> UserInteractionEnabledBinding(

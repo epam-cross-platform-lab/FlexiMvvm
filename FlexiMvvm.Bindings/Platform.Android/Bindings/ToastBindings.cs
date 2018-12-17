@@ -25,10 +25,10 @@ namespace FlexiMvvm.Bindings
     public static class ToastBindings
     {
         /// <summary>
-        /// Binding on <see cref="Toast.Duration"/> property.
+        /// One way binding on <see cref="Toast.Duration"/> property.
         /// </summary>
         /// <param name="toastReference">The item reference.</param>
-        /// <returns>Binding on <see cref="Toast.Duration"/> property.</returns>
+        /// <returns>One way binding on <see cref="Toast.Duration"/> property.</returns>
         /// <exception cref="ArgumentNullException">toastReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Toast, ToastLength> DurationBinding(
@@ -44,14 +44,14 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="Toast.SetText"/> method.
+        /// One way binding on <see cref="Toast.SetText"/> method.
         /// <para>
         /// Supported parameters: <see cref="int"/> resId; <see cref="ICharSequence"/> s; <see cref="string"/> s.
         /// </para>
         /// </summary>
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="toastReference">The item reference.</param>
-        /// <returns>Binding on <see cref="Toast.SetText"/> method.</returns>
+        /// <returns>One way binding on <see cref="Toast.SetText"/> method.</returns>
         /// <exception cref="ArgumentNullException">toastReference is null.</exception>
         /// <exception cref="NotSupportedException">Type <see cref="TValue"/> is not supported.</exception>
         [NotNull]

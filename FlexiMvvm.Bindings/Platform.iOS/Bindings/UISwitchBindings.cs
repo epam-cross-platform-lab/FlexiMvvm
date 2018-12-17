@@ -24,10 +24,10 @@ namespace FlexiMvvm.Bindings
     public static class UISwitchBindings
     {
         /// <summary>
-        /// Binding on <see cref="UISwitch.On"/> property.
+        /// One way binding on <see cref="UISwitch.On"/> property.
         /// </summary>
         /// <param name="switchReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UISwitch.On"/> property.</returns>
+        /// <returns>One way binding on <see cref="UISwitch.On"/> property.</returns>
         /// <exception cref="ArgumentNullException">switchReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISwitch, bool> OnBinding(
@@ -43,11 +43,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UISwitch.SetState"/> method.
+        /// One way binding on <see cref="UISwitch.SetState"/> method.
         /// </summary>
         /// <param name="switchReference">The item reference.</param>
         /// <param name="animated">Second parameter for <see cref="UISwitch.SetState"/> method.</param>
-        /// <returns>Binding on <see cref="UISwitch.SetState"/> method.</returns>
+        /// <returns>One way binding on <see cref="UISwitch.SetState"/> method.</returns>
         /// <exception cref="ArgumentNullException">switchReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISwitch, bool> SetStateBinding(

@@ -25,10 +25,10 @@ namespace FlexiMvvm.Bindings
     public static class ToggleButtonBindings
     {
         /// <summary>
-        /// Binding on <see cref="ToggleButton.TextOff"/> property.
+        /// One way binding on <see cref="ToggleButton.TextOff"/> property.
         /// </summary>
         /// <param name="toggleButtonReference">The item reference.</param>
-        /// <returns>Binding on <see cref="ToggleButton.TextOff"/> property.</returns>
+        /// <returns>One way binding on <see cref="ToggleButton.TextOff"/> property.</returns>
         /// <exception cref="ArgumentNullException">toggleButtonReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ToggleButton, string> TextOffBinding(
@@ -44,10 +44,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="ToggleButton.TextOffFormatted"/> property.
+        /// One way binding on <see cref="ToggleButton.TextOffFormatted"/> property.
         /// </summary>
         /// <param name="toggleButtonReference">The item reference.</param>
-        /// <returns>Binding on <see cref="ToggleButton.TextOffFormatted"/> property.</returns>
+        /// <returns>One way binding on <see cref="ToggleButton.TextOffFormatted"/> property.</returns>
         /// <exception cref="ArgumentNullException">toggleButtonReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ToggleButton, ICharSequence> TextOffFormattedBinding(
@@ -63,10 +63,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="ToggleButton.TextOn"/> property.
+        /// One way binding on <see cref="ToggleButton.TextOn"/> property.
         /// </summary>
         /// <param name="toggleButtonReference">The item reference.</param>
-        /// <returns>Binding on <see cref="ToggleButton.TextOn"/> property.</returns>
+        /// <returns>One way binding on <see cref="ToggleButton.TextOn"/> property.</returns>
         /// <exception cref="ArgumentNullException">toggleButtonReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ToggleButton, string> TextOnBinding(
@@ -82,10 +82,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="ToggleButton.TextOnFormatted"/> property.
+        /// One way binding on <see cref="ToggleButton.TextOnFormatted"/> property.
         /// </summary>
         /// <param name="toggleButtonReference">The item reference.</param>
-        /// <returns>Binding on <see cref="ToggleButton.TextOnFormatted"/> property.</returns>
+        /// <returns>One way binding on <see cref="ToggleButton.TextOnFormatted"/> property.</returns>
         /// <exception cref="ArgumentNullException">toggleButtonReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ToggleButton, ICharSequence> TextOnFormattedBinding(

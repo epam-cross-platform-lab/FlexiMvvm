@@ -25,10 +25,10 @@ namespace FlexiMvvm.Bindings
     public static class UILabelBindings
     {
         /// <summary>
-        /// Binding on <see cref="UILabel.AdjustsFontForContentSizeCategory"/> property.
+        /// One way binding on <see cref="UILabel.AdjustsFontForContentSizeCategory"/> property.
         /// </summary>
         /// <param name="labelReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UILabel.AdjustsFontForContentSizeCategory"/> property.</returns>
+        /// <returns>One way binding on <see cref="UILabel.AdjustsFontForContentSizeCategory"/> property.</returns>
         /// <exception cref="ArgumentNullException">labelReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UILabel, bool> AdjustsFontForContentSizeCategoryBinding(
@@ -44,10 +44,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UILabel.AdjustsFontSizeToFitWidth"/> property.
+        /// One way binding on <see cref="UILabel.AdjustsFontSizeToFitWidth"/> property.
         /// </summary>
         /// <param name="labelReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UILabel.AdjustsFontSizeToFitWidth"/> property.</returns>
+        /// <returns>One way binding on <see cref="UILabel.AdjustsFontSizeToFitWidth"/> property.</returns>
         /// <exception cref="ArgumentNullException">labelReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UILabel, bool> AdjustsFontSizeToFitWidthBinding(
@@ -63,10 +63,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UILabel.AdjustsLetterSpacingToFitWidth"/> property.
+        /// One way binding on <see cref="UILabel.AdjustsLetterSpacingToFitWidth"/> property.
         /// </summary>
         /// <param name="labelReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UILabel.AdjustsLetterSpacingToFitWidth"/> property.</returns>
+        /// <returns>One way binding on <see cref="UILabel.AdjustsLetterSpacingToFitWidth"/> property.</returns>
         /// <exception cref="ArgumentNullException">labelReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UILabel, bool> AdjustsLetterSpacingToFitWidthBinding(
@@ -82,10 +82,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UILabel.AllowsDefaultTighteningForTruncation"/> property.
+        /// One way binding on <see cref="UILabel.AllowsDefaultTighteningForTruncation"/> property.
         /// </summary>
         /// <param name="labelReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UILabel.AllowsDefaultTighteningForTruncation"/> property.</returns>
+        /// <returns>One way binding on <see cref="UILabel.AllowsDefaultTighteningForTruncation"/> property.</returns>
         /// <exception cref="ArgumentNullException">labelReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UILabel, bool> AllowsDefaultTighteningForTruncationBinding(
@@ -101,10 +101,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UILabel.AttributedText"/> property.
+        /// One way binding on <see cref="UILabel.AttributedText"/> property.
         /// </summary>
         /// <param name="labelReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UILabel.AttributedText"/> property.</returns>
+        /// <returns>One way binding on <see cref="UILabel.AttributedText"/> property.</returns>
         /// <exception cref="ArgumentNullException">labelReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UILabel, NSAttributedString> AttributedTextBinding(
@@ -120,10 +120,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UILabel.Enabled"/> property.
+        /// One way binding on <see cref="UILabel.Enabled"/> property.
         /// </summary>
         /// <param name="labelReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UILabel.Enabled"/> property.</returns>
+        /// <returns>One way binding on <see cref="UILabel.Enabled"/> property.</returns>
         /// <exception cref="ArgumentNullException">labelReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UILabel, bool> EnabledBinding(
@@ -139,10 +139,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UILabel.Highlighted"/> property.
+        /// One way binding on <see cref="UILabel.Highlighted"/> property.
         /// </summary>
         /// <param name="labelReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UILabel.Highlighted"/> property.</returns>
+        /// <returns>One way binding on <see cref="UILabel.Highlighted"/> property.</returns>
         /// <exception cref="ArgumentNullException">labelReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UILabel, bool> HighlightedBinding(
@@ -158,10 +158,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UILabel.Lines"/> property.
+        /// One way binding on <see cref="UILabel.Lines"/> property.
         /// </summary>
         /// <param name="labelReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UILabel.Lines"/> property.</returns>
+        /// <returns>One way binding on <see cref="UILabel.Lines"/> property.</returns>
         /// <exception cref="ArgumentNullException">labelReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UILabel, nint> LinesBinding(
@@ -177,10 +177,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UILabel.MinimumFontSize"/> property.
+        /// One way binding on <see cref="UILabel.MinimumFontSize"/> property.
         /// </summary>
         /// <param name="labelReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UILabel.MinimumFontSize"/> property.</returns>
+        /// <returns>One way binding on <see cref="UILabel.MinimumFontSize"/> property.</returns>
         /// <exception cref="ArgumentNullException">labelReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UILabel, nfloat> MinimumFontSizeBinding(
@@ -196,10 +196,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UILabel.MinimumScaleFactor"/> property.
+        /// One way binding on <see cref="UILabel.MinimumScaleFactor"/> property.
         /// </summary>
         /// <param name="labelReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UILabel.MinimumScaleFactor"/> property.</returns>
+        /// <returns>One way binding on <see cref="UILabel.MinimumScaleFactor"/> property.</returns>
         /// <exception cref="ArgumentNullException">labelReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UILabel, nfloat> MinimumScaleFactorBinding(
@@ -215,10 +215,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UILabel.PreferredMaxLayoutWidth"/> property.
+        /// One way binding on <see cref="UILabel.PreferredMaxLayoutWidth"/> property.
         /// </summary>
         /// <param name="labelReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UILabel.PreferredMaxLayoutWidth"/> property.</returns>
+        /// <returns>One way binding on <see cref="UILabel.PreferredMaxLayoutWidth"/> property.</returns>
         /// <exception cref="ArgumentNullException">labelReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UILabel, nfloat> PreferredMaxLayoutWidthBinding(
@@ -234,10 +234,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UILabel.Text"/> property.
+        /// One way binding on <see cref="UILabel.Text"/> property.
         /// </summary>
         /// <param name="labelReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UILabel.Text"/> property.</returns>
+        /// <returns>One way binding on <see cref="UILabel.Text"/> property.</returns>
         /// <exception cref="ArgumentNullException">labelReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UILabel, string> TextBinding(

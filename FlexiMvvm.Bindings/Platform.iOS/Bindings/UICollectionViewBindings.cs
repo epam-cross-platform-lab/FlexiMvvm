@@ -25,12 +25,12 @@ namespace FlexiMvvm.Bindings
     public static class UICollectionViewBindings
     {
         /// <summary>
-        /// Binding on <see cref="UICollectionView.ScrollToItem"/> method.
+        /// One way binding on <see cref="UICollectionView.ScrollToItem"/> method.
         /// </summary>
         /// <param name="collectionViewReference">The item reference.</param>
         /// <param name="scrollPosition">Second parameter for <see cref="UICollectionView.ScrollToItem"/> method.</param>
         /// <param name="animated">Third parameter for <see cref="UICollectionView.ScrollToItem"/> method.</param>
-        /// <returns>Binding on <see cref="UICollectionView.ScrollToItem"/> method.</returns>
+        /// <returns>One way binding on <see cref="UICollectionView.ScrollToItem"/> method.</returns>
         /// <exception cref="ArgumentNullException">collectionViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UICollectionView, NSIndexPath> ScrollToItemBinding(

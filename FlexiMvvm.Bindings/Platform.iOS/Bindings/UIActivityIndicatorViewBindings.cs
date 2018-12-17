@@ -24,10 +24,10 @@ namespace FlexiMvvm.Bindings
     public static class UIActivityIndicatorViewBindings
     {
         /// <summary>
-        /// Binding on <see cref="UIActivityIndicatorView.HidesWhenStopped"/> property.
+        /// One way binding on <see cref="UIActivityIndicatorView.HidesWhenStopped"/> property.
         /// </summary>
         /// <param name="activityIndicatorViewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UIActivityIndicatorView.HidesWhenStopped"/> property.</returns>
+        /// <returns>One way binding on <see cref="UIActivityIndicatorView.HidesWhenStopped"/> property.</returns>
         /// <exception cref="ArgumentNullException">activityIndicatorViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIActivityIndicatorView, bool> HidesWhenStoppedBinding(
@@ -43,10 +43,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UIActivityIndicatorView.StartAnimating"/> method.
+        /// One way binding on <see cref="UIActivityIndicatorView.StartAnimating"/> method.
         /// </summary>
         /// <param name="activityIndicatorViewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UIActivityIndicatorView.StartAnimating"/> method.</returns>
+        /// <returns>One way binding on <see cref="UIActivityIndicatorView.StartAnimating"/> method.</returns>
         /// <exception cref="ArgumentNullException">activityIndicatorViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIActivityIndicatorView, bool> StartAnimatingBinding(
@@ -68,10 +68,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UIActivityIndicatorView.StopAnimating"/> method.
+        /// One way binding on <see cref="UIActivityIndicatorView.StopAnimating"/> method.
         /// </summary>
         /// <param name="activityIndicatorViewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UIActivityIndicatorView.StopAnimating"/> method.</returns>
+        /// <returns>One way binding on <see cref="UIActivityIndicatorView.StopAnimating"/> method.</returns>
         /// <exception cref="ArgumentNullException">activityIndicatorViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIActivityIndicatorView, bool> StopAnimatingBinding(

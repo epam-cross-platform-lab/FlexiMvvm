@@ -25,11 +25,11 @@ namespace FlexiMvvm.Bindings
     public static class ViewGroupBindings
     {
         /// <summary>
-        /// Binding on <see cref="ViewGroup.AnimationEnd"/> event.
+        /// One way to source binding on <see cref="ViewGroup.AnimationEnd"/> event.
         /// </summary>
         /// <param name="viewGroupReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="ViewGroup.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Binding on <see cref="ViewGroup.AnimationEnd"/> event.</returns>
+        /// <returns>One way to source binding on <see cref="ViewGroup.AnimationEnd"/> event.</returns>
         /// <exception cref="ArgumentNullException">viewGroupReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ViewGroup, object> AnimationEndBinding(
@@ -55,11 +55,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="ViewGroup.AnimationRepeat"/> event.
+        /// One way to source binding on <see cref="ViewGroup.AnimationRepeat"/> event.
         /// </summary>
         /// <param name="viewGroupReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="ViewGroup.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Binding on <see cref="ViewGroup.AnimationRepeat"/> event.</returns>
+        /// <returns>One way to source binding on <see cref="ViewGroup.AnimationRepeat"/> event.</returns>
         /// <exception cref="ArgumentNullException">viewGroupReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ViewGroup, object> AnimationRepeatBinding(
@@ -85,11 +85,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="ViewGroup.AnimationStart"/> event.
+        /// One way to source binding on <see cref="ViewGroup.AnimationStart"/> event.
         /// </summary>
         /// <param name="viewGroupReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="ViewGroup.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Binding on <see cref="ViewGroup.AnimationStart"/> event.</returns>
+        /// <returns>One way to source binding on <see cref="ViewGroup.AnimationStart"/> event.</returns>
         /// <exception cref="ArgumentNullException">viewGroupReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ViewGroup, object> AnimationStartBinding(
@@ -115,11 +115,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="ViewGroup.ChildViewAdded"/> event.
+        /// One way to source binding on <see cref="ViewGroup.ChildViewAdded"/> event.
         /// </summary>
         /// <param name="viewGroupReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="ViewGroup.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Binding on <see cref="ViewGroup.ChildViewAdded"/> event.</returns>
+        /// <returns>One way to source binding on <see cref="ViewGroup.ChildViewAdded"/> event.</returns>
         /// <exception cref="ArgumentNullException">viewGroupReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ViewGroup, object> ChildViewAddedBinding(
@@ -145,11 +145,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="ViewGroup.ChildViewRemoved"/> event.
+        /// One way to source binding on <see cref="ViewGroup.ChildViewRemoved"/> event.
         /// </summary>
         /// <param name="viewGroupReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="ViewGroup.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Binding on <see cref="ViewGroup.ChildViewRemoved"/> event.</returns>
+        /// <returns>One way to source binding on <see cref="ViewGroup.ChildViewRemoved"/> event.</returns>
         /// <exception cref="ArgumentNullException">viewGroupReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ViewGroup, object> ChildViewRemovedBinding(
@@ -175,10 +175,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="ViewGroup.MotionEventSplittingEnabled"/> property.
+        /// One way binding on <see cref="ViewGroup.MotionEventSplittingEnabled"/> property.
         /// </summary>
         /// <param name="viewGroupReference">The item reference.</param>
-        /// <returns>Binding on <see cref="ViewGroup.MotionEventSplittingEnabled"/> property.</returns>
+        /// <returns>One way binding on <see cref="ViewGroup.MotionEventSplittingEnabled"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewGroupReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ViewGroup, bool> MotionEventSplittingEnabledBinding(
@@ -194,10 +194,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="ViewGroup.TouchscreenBlocksFocus"/> property.
+        /// One way binding on <see cref="ViewGroup.TouchscreenBlocksFocus"/> property.
         /// </summary>
         /// <param name="viewGroupReference">The item reference.</param>
-        /// <returns>Binding on <see cref="ViewGroup.TouchscreenBlocksFocus"/> property.</returns>
+        /// <returns>One way binding on <see cref="ViewGroup.TouchscreenBlocksFocus"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewGroupReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ViewGroup, bool> TouchscreenBlocksFocusBinding(
@@ -213,10 +213,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="ViewGroup.TransitionGroup"/> property.
+        /// One way binding on <see cref="ViewGroup.TransitionGroup"/> property.
         /// </summary>
         /// <param name="viewGroupReference">The item reference.</param>
-        /// <returns>Binding on <see cref="ViewGroup.TransitionGroup"/> property.</returns>
+        /// <returns>One way binding on <see cref="ViewGroup.TransitionGroup"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewGroupReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<ViewGroup, bool> TransitionGroupBinding(

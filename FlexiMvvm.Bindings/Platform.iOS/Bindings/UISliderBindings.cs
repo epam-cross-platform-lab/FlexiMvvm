@@ -24,10 +24,10 @@ namespace FlexiMvvm.Bindings
     public static class UISliderBindings
     {
         /// <summary>
-        /// Binding on <see cref="UISlider.Continuous"/> property.
+        /// One way binding on <see cref="UISlider.Continuous"/> property.
         /// </summary>
         /// <param name="sliderReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UISlider.Continuous"/> property.</returns>
+        /// <returns>One way binding on <see cref="UISlider.Continuous"/> property.</returns>
         /// <exception cref="ArgumentNullException">sliderReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISlider, bool> ContinuousBinding(
@@ -43,10 +43,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UISlider.MaxValue"/> property.
+        /// One way binding on <see cref="UISlider.MaxValue"/> property.
         /// </summary>
         /// <param name="sliderReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UISlider.MaxValue"/> property.</returns>
+        /// <returns>One way binding on <see cref="UISlider.MaxValue"/> property.</returns>
         /// <exception cref="ArgumentNullException">sliderReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISlider, float> MaxValueBinding(
@@ -62,10 +62,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UISlider.MinValue"/> property.
+        /// One way binding on <see cref="UISlider.MinValue"/> property.
         /// </summary>
         /// <param name="sliderReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UISlider.MinValue"/> property.</returns>
+        /// <returns>One way binding on <see cref="UISlider.MinValue"/> property.</returns>
         /// <exception cref="ArgumentNullException">sliderReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISlider, float> MinValueBinding(
@@ -114,10 +114,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UISlider.Value"/> property.
+        /// One way binding on <see cref="UISlider.Value"/> property.
         /// </summary>
         /// <param name="sliderReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UISlider.Value"/> property.</returns>
+        /// <returns>One way binding on <see cref="UISlider.Value"/> property.</returns>
         /// <exception cref="ArgumentNullException">sliderReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISlider, float> ValueBinding(
@@ -133,11 +133,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UISlider.SetValue"/> method.
+        /// One way binding on <see cref="UISlider.SetValue"/> method.
         /// </summary>
         /// <param name="sliderReference">The item reference.</param>
         /// <param name="animated">Second parameter for <see cref="UISlider.SetValue"/> method.</param>
-        /// <returns>Binding on <see cref="UISlider.SetValue"/> method.</returns>
+        /// <returns>One way binding on <see cref="UISlider.SetValue"/> method.</returns>
         /// <exception cref="ArgumentNullException">sliderReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISlider, float> SetValueBinding(

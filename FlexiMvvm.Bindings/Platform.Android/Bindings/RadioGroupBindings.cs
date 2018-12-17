@@ -55,10 +55,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="RadioGroup.Check(int)"/> method.
+        /// One way binding on <see cref="RadioGroup.Check(int)"/> method.
         /// </summary>
         /// <param name="radioGroupReference">The item reference.</param>
-        /// <returns>Binding on <see cref="RadioGroup.Check(int)"/> method.</returns>
+        /// <returns>One way binding on <see cref="RadioGroup.Check(int)"/> method.</returns>
         /// <exception cref="ArgumentNullException">radioGroupReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<RadioGroup, int> CheckBinding(
@@ -74,11 +74,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="RadioGroup.CheckedChange"/> event.
+        /// One way to source binding on <see cref="RadioGroup.CheckedChange"/> event.
         /// </summary>
         /// <param name="radioGroupReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="RadioGroup.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Binding on <see cref="RadioGroup.CheckedChange"/> event.</returns>
+        /// <returns>One way to source binding on <see cref="RadioGroup.CheckedChange"/> event.</returns>
         /// <exception cref="ArgumentNullException">radioGroupReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<RadioGroup, int> CheckedChangeBinding(

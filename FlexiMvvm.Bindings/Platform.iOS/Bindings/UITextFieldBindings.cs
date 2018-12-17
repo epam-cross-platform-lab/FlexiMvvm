@@ -25,10 +25,10 @@ namespace FlexiMvvm.Bindings
     public static class UITextFieldBindings
     {
         /// <summary>
-        /// Binding on <see cref="UITextField.AttributedText"/> property.
+        /// One way binding on <see cref="UITextField.AttributedText"/> property.
         /// </summary>
         /// <param name="textFieldReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UITextField.AttributedText"/> property.</returns>
+        /// <returns>One way binding on <see cref="UITextField.AttributedText"/> property.</returns>
         /// <exception cref="ArgumentNullException">textFieldReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextField, NSAttributedString> AttributedTextBinding(
@@ -106,10 +106,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UITextField.EnablesReturnKeyAutomatically"/> property.
+        /// One way binding on <see cref="UITextField.EnablesReturnKeyAutomatically"/> property.
         /// </summary>
         /// <param name="textFieldReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UITextField.EnablesReturnKeyAutomatically"/> property.</returns>
+        /// <returns>One way binding on <see cref="UITextField.EnablesReturnKeyAutomatically"/> property.</returns>
         /// <exception cref="ArgumentNullException">textFieldReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextField, bool> EnablesReturnKeyAutomaticallyBinding(
@@ -125,10 +125,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UITextField.InsertText"/> method.
+        /// One way binding on <see cref="UITextField.InsertText"/> method.
         /// </summary>
         /// <param name="textFieldReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UITextField.InsertText"/> method.</returns>
+        /// <returns>One way binding on <see cref="UITextField.InsertText"/> method.</returns>
         /// <exception cref="ArgumentNullException">textFieldReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextField, string> InsertTextBinding(
@@ -144,10 +144,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UITextField.Placeholder"/> property.
+        /// One way binding on <see cref="UITextField.Placeholder"/> property.
         /// </summary>
         /// <param name="textFieldReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UITextField.Placeholder"/> property.</returns>
+        /// <returns>One way binding on <see cref="UITextField.Placeholder"/> property.</returns>
         /// <exception cref="ArgumentNullException">textFieldReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextField, string> PlaceholderBinding(
@@ -163,10 +163,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UITextField.SecureTextEntry"/> property.
+        /// One way binding on <see cref="UITextField.SecureTextEntry"/> property.
         /// </summary>
         /// <param name="textFieldReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UITextField.SecureTextEntry"/> property.</returns>
+        /// <returns>One way binding on <see cref="UITextField.SecureTextEntry"/> property.</returns>
         /// <exception cref="ArgumentNullException">textFieldReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextField, bool> SecureTextEntryBinding(
@@ -182,10 +182,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UITextField.Text"/> property.
+        /// One way binding on <see cref="UITextField.Text"/> property.
         /// </summary>
         /// <param name="textFieldReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UITextField.Text"/> property.</returns>
+        /// <returns>One way binding on <see cref="UITextField.Text"/> property.</returns>
         /// <exception cref="ArgumentNullException">textFieldReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITextField, string> TextBinding(

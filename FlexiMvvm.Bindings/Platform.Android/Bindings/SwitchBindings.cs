@@ -28,11 +28,11 @@ namespace FlexiMvvm.Bindings
     public static class SwitchBindings
     {
         /// <summary>
-        /// Binding on <see cref="Switch.SetSwitchTextAppearance"/> method.
+        /// One way binding on <see cref="Switch.SetSwitchTextAppearance"/> method.
         /// </summary>
         /// <param name="switchReference">The item reference.</param>
         /// <param name="context">The context.</param>
-        /// <returns>Binding on <see cref="Switch.SetSwitchTextAppearance"/> method.</returns>
+        /// <returns>One way binding on <see cref="Switch.SetSwitchTextAppearance"/> method.</returns>
         /// <exception cref="ArgumentNullException">switchReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Switch, int> SetSwitchTextAppearanceBinding(
@@ -49,11 +49,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="Switch.SetSwitchTypeface"/> method.
+        /// One way binding on <see cref="Switch.SetSwitchTypeface"/> method.
         /// </summary>
         /// <param name="switchReference">The switch reference.</param>
         /// <param name="typefaceStyle">The typeface style.</param>
-        /// <returns>Binding on <see cref="Switch.SetSwitchTypeface"/> method.</returns>
+        /// <returns>One way binding on <see cref="Switch.SetSwitchTypeface"/> method.</returns>
         /// <exception cref="ArgumentNullException">switchReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Switch, Typeface> SetSwitchTextAppearanceBinding(
@@ -70,11 +70,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="Switch.SetThumbResource(int)"/> method.
+        /// One way binding on <see cref="Switch.SetThumbResource(int)"/> method.
         /// </summary>
         /// <param name="switchReference">The item reference.</param>
         /// <param name="typefaceStyle">The typeface style.</param>
-        /// <returns>Binding on <see cref="Switch.SetThumbResource(int)"/> method.</returns>
+        /// <returns>One way binding on <see cref="Switch.SetThumbResource(int)"/> method.</returns>
         /// <exception cref="ArgumentNullException">switchReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Switch, int> SetThumbResourceBinding(
@@ -91,11 +91,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="Switch.SetTrackResource(int)"/> method.
+        /// One way binding on <see cref="Switch.SetTrackResource(int)"/> method.
         /// </summary>
         /// <param name="switchReference">The item reference.</param>
         /// <param name="typefaceStyle">The typeface style.</param>
-        /// <returns>Binding on <see cref="Switch.SetTrackResource(int)"/> method.</returns>
+        /// <returns>One way binding on <see cref="Switch.SetTrackResource(int)"/> method.</returns>
         /// <exception cref="ArgumentNullException">switchReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Switch, int> SetTrackResourceBinding(
@@ -112,10 +112,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="Switch.ShowText"/> property.
+        /// One way binding on <see cref="Switch.ShowText"/> property.
         /// </summary>
         /// <param name="switchReference">The item reference.</param>
-        /// <returns>Binding on <see cref="Switch.ShowText"/> property.</returns>
+        /// <returns>One way binding on <see cref="Switch.ShowText"/> property.</returns>
         /// <exception cref="ArgumentNullException">switchReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Switch, bool> ShowTextBinding(
@@ -131,10 +131,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="Switch.SplitTrack"/> property.
+        /// One way binding on <see cref="Switch.SplitTrack"/> property.
         /// </summary>
         /// <param name="switchReference">The item reference.</param>
-        /// <returns>Binding on <see cref="Switch.SplitTrack"/> property.</returns>
+        /// <returns>One way binding on <see cref="Switch.SplitTrack"/> property.</returns>
         /// <exception cref="ArgumentNullException">switchReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Switch, bool> SplitTrackBinding(
@@ -150,10 +150,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="Switch.SwitchMinWidth"/> property.
+        /// One way binding on <see cref="Switch.SwitchMinWidth"/> property.
         /// </summary>
         /// <param name="switchReference">The item reference.</param>
-        /// <returns>Binding on <see cref="Switch.SwitchMinWidth"/> property.</returns>
+        /// <returns>One way binding on <see cref="Switch.SwitchMinWidth"/> property.</returns>
         /// <exception cref="ArgumentNullException">switchReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Switch, int> SwitchMinWidthBinding(
@@ -169,10 +169,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="Switch.SwitchPadding"/> property.
+        /// One way binding on <see cref="Switch.SwitchPadding"/> property.
         /// </summary>
         /// <param name="switchReference">The item reference.</param>
-        /// <returns>Binding on <see cref="Switch.SwitchPadding"/> property.</returns>
+        /// <returns>One way binding on <see cref="Switch.SwitchPadding"/> property.</returns>
         /// <exception cref="ArgumentNullException">switchReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Switch, int> SwitchPaddingBinding(
@@ -188,10 +188,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="Switch.TextOff"/> property.
+        /// One way binding on <see cref="Switch.TextOff"/> property.
         /// </summary>
         /// <param name="switchReference">The item reference.</param>
-        /// <returns>Binding on <see cref="Switch.TextOff"/> property.</returns>
+        /// <returns>One way binding on <see cref="Switch.TextOff"/> property.</returns>
         /// <exception cref="ArgumentNullException">switchReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Switch, string> TextOffBinding(
@@ -207,10 +207,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="Switch.TextOffFormatted"/> property.
+        /// One way binding on <see cref="Switch.TextOffFormatted"/> property.
         /// </summary>
         /// <param name="switchReference">The item reference.</param>
-        /// <returns>Binding on <see cref="Switch.TextOffFormatted"/> property.</returns>
+        /// <returns>One way binding on <see cref="Switch.TextOffFormatted"/> property.</returns>
         /// <exception cref="ArgumentNullException">switchReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Switch, ICharSequence> TextOffFormattedBinding(
@@ -226,10 +226,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="Switch.TextOn"/> property.
+        /// One way binding on <see cref="Switch.TextOn"/> property.
         /// </summary>
         /// <param name="switchReference">The item reference.</param>
-        /// <returns>Binding on <see cref="Switch.TextOn"/> property.</returns>
+        /// <returns>One way binding on <see cref="Switch.TextOn"/> property.</returns>
         /// <exception cref="ArgumentNullException">switchReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Switch, string> TextOnBinding(
@@ -245,10 +245,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="Switch.TextOnFormatted"/> property.
+        /// One way binding on <see cref="Switch.TextOnFormatted"/> property.
         /// </summary>
         /// <param name="switchReference">The item reference.</param>
-        /// <returns>Binding on <see cref="Switch.TextOnFormatted"/> property.</returns>
+        /// <returns>One way binding on <see cref="Switch.TextOnFormatted"/> property.</returns>
         /// <exception cref="ArgumentNullException">switchReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Switch, ICharSequence> TextOnFormattedBinding(
@@ -264,10 +264,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="Switch.ThumbDrawable"/> property.
+        /// One way binding on <see cref="Switch.ThumbDrawable"/> property.
         /// </summary>
         /// <param name="switchReference">The item reference.</param>
-        /// <returns>Binding on <see cref="Switch.ThumbDrawable"/> property.</returns>
+        /// <returns>One way binding on <see cref="Switch.ThumbDrawable"/> property.</returns>
         /// <exception cref="ArgumentNullException">switchReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Switch, Drawable> ThumbDrawableBinding(
@@ -283,10 +283,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="Switch.ThumbTextPadding"/> property.
+        /// One way binding on <see cref="Switch.ThumbTextPadding"/> property.
         /// </summary>
         /// <param name="switchReference">The item reference.</param>
-        /// <returns>Binding on <see cref="Switch.ThumbTextPadding"/> property.</returns>
+        /// <returns>One way binding on <see cref="Switch.ThumbTextPadding"/> property.</returns>
         /// <exception cref="ArgumentNullException">switchReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Switch, int> ThumbTextPaddingBinding(
@@ -302,10 +302,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="Switch.TrackDrawable"/> property.
+        /// One way binding on <see cref="Switch.TrackDrawable"/> property.
         /// </summary>
         /// <param name="switchReference">The item reference.</param>
-        /// <returns>Binding on <see cref="Switch.TrackDrawable"/> property.</returns>
+        /// <returns>One way binding on <see cref="Switch.TrackDrawable"/> property.</returns>
         /// <exception cref="ArgumentNullException">switchReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Switch, Drawable> TrackDrawableBinding(

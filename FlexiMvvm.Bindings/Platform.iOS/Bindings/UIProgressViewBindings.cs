@@ -24,10 +24,10 @@ namespace FlexiMvvm.Bindings
     public static class UIProgressViewBindings
     {
         /// <summary>
-        /// Binding on <see cref="UIProgressView.Progress"/> property.
+        /// One way binding on <see cref="UIProgressView.Progress"/> property.
         /// </summary>
         /// <param name="progressViewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="UIProgressView.Progress"/> property.</returns>
+        /// <returns>One way binding on <see cref="UIProgressView.Progress"/> property.</returns>
         /// <exception cref="ArgumentNullException">progressViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIProgressView, float> ProgressBinding(
@@ -43,11 +43,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="UIProgressView.SetProgress"/> method.
+        /// One way binding on <see cref="UIProgressView.SetProgress"/> method.
         /// </summary>
         /// <param name="progressViewReference">The item reference.</param>
         /// <param name="animated">Second parameter for <see cref="UIProgressView.SetProgress"/> method.</param>
-        /// <returns>Binding on <see cref="UIProgressView.SetProgress"/> method.</returns>
+        /// <returns>One way binding on <see cref="UIProgressView.SetProgress"/> method.</returns>
         /// <exception cref="ArgumentNullException">progressViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIProgressView, float> SetProgressBinding(

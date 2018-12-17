@@ -25,10 +25,10 @@ namespace FlexiMvvm.Bindings
     public static class ToolbarBindings
     {
         /// <summary>
-        /// Binding on <see cref="Toolbar.Logo"/> property.
+        /// One way binding on <see cref="Toolbar.Logo"/> property.
         /// </summary>
         /// <param name="toolbarReference">The item reference.</param>
-        /// <returns>Binding on <see cref="Toolbar.Logo"/> property.</returns>
+        /// <returns>One way binding on <see cref="Toolbar.Logo"/> property.</returns>
         /// <exception cref="ArgumentNullException">toolbarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Toolbar, Drawable> LogoBinding(
@@ -44,10 +44,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="Toolbar.LogoDescription"/> property.
+        /// One way binding on <see cref="Toolbar.LogoDescription"/> property.
         /// </summary>
         /// <param name="toolbarReference">The item reference.</param>
-        /// <returns>Binding on <see cref="Toolbar.LogoDescription"/> property.</returns>
+        /// <returns>One way binding on <see cref="Toolbar.LogoDescription"/> property.</returns>
         /// <exception cref="ArgumentNullException">toolbarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Toolbar, string> LogoDescriptionBinding(
@@ -63,10 +63,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="Toolbar.NavigationContentDescription"/> property.
+        /// One way binding on <see cref="Toolbar.NavigationContentDescription"/> property.
         /// </summary>
         /// <param name="toolbarReference">The item reference.</param>
-        /// <returns>Binding on <see cref="Toolbar.NavigationContentDescription"/> property.</returns>
+        /// <returns>One way binding on <see cref="Toolbar.NavigationContentDescription"/> property.</returns>
         /// <exception cref="ArgumentNullException">toolbarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Toolbar, string> NavigationContentDescriptionBinding(
@@ -82,10 +82,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="Toolbar.NavigationContentDescriptionFormatted"/> property.
+        /// One way binding on <see cref="Toolbar.NavigationContentDescriptionFormatted"/> property.
         /// </summary>
         /// <param name="toolbarReference">The item reference.</param>
-        /// <returns>Binding on <see cref="Toolbar.NavigationContentDescriptionFormatted"/> property.</returns>
+        /// <returns>One way binding on <see cref="Toolbar.NavigationContentDescriptionFormatted"/> property.</returns>
         /// <exception cref="ArgumentNullException">toolbarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Toolbar, ICharSequence> NavigationContentDescriptionFormattedBinding(
@@ -101,10 +101,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="Toolbar.NavigationIcon"/> property.
+        /// One way binding on <see cref="Toolbar.NavigationIcon"/> property.
         /// </summary>
         /// <param name="toolbarReference">The item reference.</param>
-        /// <returns>Binding on <see cref="Toolbar.NavigationIcon"/> property.</returns>
+        /// <returns>One way binding on <see cref="Toolbar.NavigationIcon"/> property.</returns>
         /// <exception cref="ArgumentNullException">toolbarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Toolbar, Drawable> NavigationIconBinding(
@@ -120,11 +120,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="Toolbar.MenuItemClick"/> event.
+        /// One way to source binding on <see cref="Toolbar.MenuItemClick"/> event.
         /// </summary>
         /// <param name="toolbarReference">The item reference..</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="Toolbar.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Binding on <see cref="Toolbar.MenuItemClick"/> event.</returns>
+        /// <returns>One way to source binding on <see cref="Toolbar.MenuItemClick"/> event.</returns>
         /// <exception cref="ArgumentNullException">toolbarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Toolbar, object> MenuItemClickBinding(
@@ -150,11 +150,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="Toolbar.NavigationClick"/> event.
+        /// One way to source binding on <see cref="Toolbar.NavigationClick"/> event.
         /// </summary>
         /// <param name="toolbarReference">The item reference..</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="Toolbar.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Binding on <see cref="Toolbar.NavigationClick"/> event.</returns>
+        /// <returns>One way to source binding on <see cref="Toolbar.NavigationClick"/> event.</returns>
         /// <exception cref="ArgumentNullException">toolbarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Toolbar, object> NavigationClickBinding(
@@ -180,10 +180,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="Toolbar.OverflowIcon"/> property.
+        /// One way binding on <see cref="Toolbar.OverflowIcon"/> property.
         /// </summary>
         /// <param name="toolbarReference">The item reference.</param>
-        /// <returns>Binding on <see cref="Toolbar.OverflowIcon"/> property.</returns>
+        /// <returns>One way binding on <see cref="Toolbar.OverflowIcon"/> property.</returns>
         /// <exception cref="ArgumentNullException">toolbarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Toolbar, Drawable> OverflowIconBinding(
@@ -199,10 +199,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="Toolbar.Subtitle"/> property.
+        /// One way binding on <see cref="Toolbar.Subtitle"/> property.
         /// </summary>
         /// <param name="toolbarReference">The item reference.</param>
-        /// <returns>Binding on <see cref="Toolbar.Subtitle"/> property.</returns>
+        /// <returns>One way binding on <see cref="Toolbar.Subtitle"/> property.</returns>
         /// <exception cref="ArgumentNullException">toolbarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Toolbar, string> SubtitleBinding(
@@ -218,10 +218,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="Toolbar.SubtitleFormatted"/> property.
+        /// One way binding on <see cref="Toolbar.SubtitleFormatted"/> property.
         /// </summary>
         /// <param name="toolbarReference">The item reference.</param>
-        /// <returns>Binding on <see cref="Toolbar.SubtitleFormatted"/> property.</returns>
+        /// <returns>One way binding on <see cref="Toolbar.SubtitleFormatted"/> property.</returns>
         /// <exception cref="ArgumentNullException">toolbarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Toolbar, ICharSequence> SubtitleFormattedBinding(
@@ -237,10 +237,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="Toolbar.Title"/> property.
+        /// One way binding on <see cref="Toolbar.Title"/> property.
         /// </summary>
         /// <param name="toolbarReference">The item reference.</param>
-        /// <returns>Binding on <see cref="Toolbar.Title"/> property.</returns>
+        /// <returns>One way binding on <see cref="Toolbar.Title"/> property.</returns>
         /// <exception cref="ArgumentNullException">toolbarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Toolbar, string> TitleBinding(
@@ -256,10 +256,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="Toolbar.TitleFormatted"/> property.
+        /// One way binding on <see cref="Toolbar.TitleFormatted"/> property.
         /// </summary>
         /// <param name="toolbarReference">The item reference.</param>
-        /// <returns>Binding on <see cref="Toolbar.TitleFormatted"/> property.</returns>
+        /// <returns>One way binding on <see cref="Toolbar.TitleFormatted"/> property.</returns>
         /// <exception cref="ArgumentNullException">toolbarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Toolbar, ICharSequence> TitleFormattedBinding(

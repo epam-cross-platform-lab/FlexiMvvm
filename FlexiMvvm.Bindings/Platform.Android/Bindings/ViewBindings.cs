@@ -25,10 +25,10 @@ namespace FlexiMvvm.Bindings
     public static class ViewBindings
     {
         /// <summary>
-        /// Binding on <see cref="View.Activated"/> property.
+        /// One way binding on <see cref="View.Activated"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.Activated"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.Activated"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, bool> ActivatedBinding(
@@ -44,10 +44,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.Alpha"/> property.
+        /// One way binding on <see cref="View.Alpha"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.Alpha"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.Alpha"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, float> AlphaBinding(
@@ -63,10 +63,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.Background"/> property.
+        /// One way binding on <see cref="View.Background"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.Background"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.Background"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, Drawable> BackgroundBinding(
@@ -82,10 +82,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.Bottom"/> property.
+        /// One way binding on <see cref="View.Bottom"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.Bottom"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.Bottom"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, int> BottomBinding(
@@ -101,11 +101,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.Click"/> event.
+        /// One way to source binding on <see cref="View.Click"/> event.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="View.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Binding on <see cref="View.Click"/> event.</returns>
+        /// <returns>One way to source binding on <see cref="View.Click"/> event.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, object> ClickBinding(
@@ -131,11 +131,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.ContextClick"/> event.
+        /// One way to source binding on <see cref="View.ContextClick"/> event.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="View.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Binding on <see cref="View.ContextClick"/> event.</returns>
+        /// <returns>One way to source binding on <see cref="View.ContextClick"/> event.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, bool> ContextClickBinding(
@@ -161,11 +161,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.ContextMenuCreated"/> event.
+        /// One way to source binding on <see cref="View.ContextMenuCreated"/> event.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="View.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Binding on <see cref="View.ContextMenuCreated"/> event.</returns>
+        /// <returns>One way to source binding on <see cref="View.ContextMenuCreated"/> event.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, object> ContextMenuCreatedBinding(
@@ -191,10 +191,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.Clickable"/> property.
+        /// One way binding on <see cref="View.Clickable"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.Clickable"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.Clickable"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, bool> ClickableBinding(
@@ -210,10 +210,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.ClipToOutline"/> property.
+        /// One way binding on <see cref="View.ClipToOutline"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.ClipToOutline"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.ClipToOutline"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, bool> ClipToOutlineBinding(
@@ -229,10 +229,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.ContentDescription"/> property.
+        /// One way binding on <see cref="View.ContentDescription"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.ContentDescription"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.ContentDescription"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, string> ContentDescriptionBinding(
@@ -248,11 +248,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.Drag"/> event.
+        /// One way to source binding on <see cref="View.Drag"/> event.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="View.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Binding on <see cref="View.Drag"/> event.</returns>
+        /// <returns>One way to source binding on <see cref="View.Drag"/> event.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, bool> DragBinding(
@@ -278,10 +278,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.DrawingCacheEnabled"/> property.
+        /// One way binding on <see cref="View.DrawingCacheEnabled"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.DrawingCacheEnabled"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.DrawingCacheEnabled"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, bool> DrawingCacheEnabledBinding(
@@ -297,10 +297,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.DuplicateParentStateEnabled"/> property.
+        /// One way binding on <see cref="View.DuplicateParentStateEnabled"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.DuplicateParentStateEnabled"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.DuplicateParentStateEnabled"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, bool> DuplicateParentStateEnabledBinding(
@@ -316,10 +316,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.Elevation"/> property.
+        /// One way binding on <see cref="View.Elevation"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.Elevation"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.Elevation"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, float> ElevationBinding(
@@ -335,10 +335,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.Enabled"/> property.
+        /// One way binding on <see cref="View.Enabled"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.Enabled"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.Enabled"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, bool> EnabledBinding(
@@ -354,10 +354,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.FilterTouchesWhenObscured"/> property.
+        /// One way binding on <see cref="View.FilterTouchesWhenObscured"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.FilterTouchesWhenObscured"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.FilterTouchesWhenObscured"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, bool> FilterTouchesWhenObscuredBinding(
@@ -373,10 +373,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.Focusable"/> property.
+        /// One way binding on <see cref="View.Focusable"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.Focusable"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.Focusable"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, bool> FocusableBinding(
@@ -392,10 +392,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.FocusableInTouchMode"/> property.
+        /// One way binding on <see cref="View.FocusableInTouchMode"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.FocusableInTouchMode"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.FocusableInTouchMode"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, bool> FocusableInTouchModeBinding(
@@ -411,12 +411,12 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.FocusChange"/> event.
+        /// One way to source binding on <see cref="View.FocusChange"/> event.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
         /// <param name="focusDirection">The focus direction.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="View.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Binding on <see cref="View.FocusChange"/> event.</returns>
+        /// <returns>One way to source binding on <see cref="View.FocusChange"/> event.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, object> FocusChangeBinding(
@@ -456,11 +456,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.GenericMotion"/> event.
+        /// One way to source binding on <see cref="View.GenericMotion"/> event.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="View.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Binding on <see cref="View.GenericMotion"/> event.</returns>
+        /// <returns>One way to source binding on <see cref="View.GenericMotion"/> event.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, bool> GenericMotionBinding(
@@ -486,10 +486,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.HapticFeedbackEnabled"/> property.
+        /// One way binding on <see cref="View.HapticFeedbackEnabled"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.HapticFeedbackEnabled"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.HapticFeedbackEnabled"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, bool> HapticFeedbackEnabledBinding(
@@ -505,10 +505,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.HasTransientState"/> property.
+        /// One way binding on <see cref="View.HasTransientState"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.HasTransientState"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.HasTransientState"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, bool> HasTransientStateBinding(
@@ -524,10 +524,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.HorizontalScrollBarEnabled"/> property.
+        /// One way binding on <see cref="View.HorizontalScrollBarEnabled"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.HorizontalScrollBarEnabled"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.HorizontalScrollBarEnabled"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, bool> HorizontalScrollBarEnabledBinding(
@@ -543,11 +543,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.Hover"/> event.
+        /// One way to source binding on <see cref="View.Hover"/> event.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="View.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Binding on <see cref="View.Hover"/> event.</returns>
+        /// <returns>One way to source binding on <see cref="View.Hover"/> event.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, bool> HoverBinding(
@@ -573,10 +573,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.Hovered"/> property.
+        /// One way binding on <see cref="View.Hovered"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.Hovered"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.Hovered"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, bool> HoveredBinding(
@@ -592,10 +592,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.KeepScreenOn"/> property.
+        /// One way binding on <see cref="View.KeepScreenOn"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.KeepScreenOn"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.KeepScreenOn"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, bool> KeepScreenOnBinding(
@@ -611,11 +611,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.KeyPress"/> event.
+        /// One way to source binding on <see cref="View.KeyPress"/> event.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="View.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Binding on <see cref="View.KeyPress"/> event.</returns>
+        /// <returns>One way to source binding on <see cref="View.KeyPress"/> event.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, bool> KeyPressBinding(
@@ -641,11 +641,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.LayoutChange"/> event.
+        /// One way to source binding on <see cref="View.LayoutChange"/> event.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="View.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Binding on <see cref="View.LayoutChange"/> event.</returns>
+        /// <returns>One way to source binding on <see cref="View.LayoutChange"/> event.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, object> LayoutChangeBinding(
@@ -671,10 +671,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.Left"/> property.
+        /// One way binding on <see cref="View.Left"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.Left"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.Left"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, int> LeftBinding(
@@ -690,10 +690,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.LongClickable"/> property.
+        /// One way binding on <see cref="View.LongClickable"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.LongClickable"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.LongClickable"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, bool> LongClickableBinding(
@@ -709,11 +709,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.LongClick"/> event.
+        /// One way to source binding on <see cref="View.LongClick"/> event.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="View.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Binding on <see cref="View.LongClick"/> event.</returns>
+        /// <returns>One way to source binding on <see cref="View.LongClick"/> event.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, object> LongClickBinding(
@@ -739,10 +739,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.NestedScrollingEnabled"/> property.
+        /// One way binding on <see cref="View.NestedScrollingEnabled"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.NestedScrollingEnabled"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.NestedScrollingEnabled"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, bool> NestedScrollingEnabledBinding(
@@ -758,10 +758,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.Pressed"/> property.
+        /// One way binding on <see cref="View.Pressed"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.Pressed"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.Pressed"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, bool> PressedBinding(
@@ -777,10 +777,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.Right"/> property.
+        /// One way binding on <see cref="View.Right"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.Right"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.Right"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, int> RightBinding(
@@ -796,10 +796,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.SaveEnabled"/> property.
+        /// One way binding on <see cref="View.SaveEnabled"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.SaveEnabled"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.SaveEnabled"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, bool> SaveEnabledBinding(
@@ -815,10 +815,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.SaveFromParentEnabled"/> property.
+        /// One way binding on <see cref="View.SaveFromParentEnabled"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.SaveFromParentEnabled"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.SaveFromParentEnabled"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, bool> SaveFromParentEnabledBinding(
@@ -834,10 +834,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.ScaleX"/> property.
+        /// One way binding on <see cref="View.ScaleX"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.ScaleX"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.ScaleX"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, float> ScaleXBinding(
@@ -853,10 +853,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.ScaleY"/> property.
+        /// One way binding on <see cref="View.ScaleY"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.ScaleY"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.ScaleY"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, float> ScaleYBinding(
@@ -872,10 +872,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.ScrollBarDefaultDelayBeforeFade"/> property.
+        /// One way binding on <see cref="View.ScrollBarDefaultDelayBeforeFade"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.ScrollBarDefaultDelayBeforeFade"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.ScrollBarDefaultDelayBeforeFade"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, int> ScrollBarDefaultDelayBeforeFadeBinding(
@@ -891,10 +891,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.ScrollBarFadeDuration"/> property.
+        /// One way binding on <see cref="View.ScrollBarFadeDuration"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.ScrollBarFadeDuration"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.ScrollBarFadeDuration"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, int> ScrollBarFadeDurationBinding(
@@ -910,10 +910,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.ScrollbarFadingEnabled"/> property.
+        /// One way binding on <see cref="View.ScrollbarFadingEnabled"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.ScrollbarFadingEnabled"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.ScrollbarFadingEnabled"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, bool> ScrollbarFadingEnabledBinding(
@@ -929,10 +929,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.ScrollBarSize"/> property.
+        /// One way binding on <see cref="View.ScrollBarSize"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.ScrollBarSize"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.ScrollBarSize"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, int> ScrollBarSizeBinding(
@@ -948,10 +948,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.Selected"/> property.
+        /// One way binding on <see cref="View.Selected"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.Selected"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.Selected"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, bool> SelectedBinding(
@@ -967,10 +967,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.SetMinimumHeight(int)"/> method.
+        /// One way binding on <see cref="View.SetMinimumHeight(int)"/> method.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.SetMinimumHeight(int)"/> method.</returns>
+        /// <returns>One way binding on <see cref="View.SetMinimumHeight(int)"/> method.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, int> SetMinimumHeightBinding(
@@ -986,10 +986,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.SetMinimumWidth(int)"/> method.
+        /// One way binding on <see cref="View.SetMinimumWidth(int)"/> method.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.SetMinimumWidth(int)"/> method.</returns>
+        /// <returns>One way binding on <see cref="View.SetMinimumWidth(int)"/> method.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, int> SetMinimumWidthBinding(
@@ -1005,10 +1005,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.SoundEffectsEnabled"/> property.
+        /// One way binding on <see cref="View.SoundEffectsEnabled"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.SoundEffectsEnabled"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.SoundEffectsEnabled"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, bool> SoundEffectsEnabledBinding(
@@ -1024,11 +1024,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.SystemUiVisibilityChange"/> event.
+        /// One way to source binding on <see cref="View.SystemUiVisibilityChange"/> event.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="View.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Binding on <see cref="View.SystemUiVisibilityChange"/> event.</returns>
+        /// <returns>One way to source binding on <see cref="View.SystemUiVisibilityChange"/> event.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, StatusBarVisibility> SystemUiVisibilityChangeBinding(
@@ -1054,10 +1054,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.Top"/> property.
+        /// One way binding on <see cref="View.Top"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.Top"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.Top"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, int> TopBinding(
@@ -1073,11 +1073,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.Touch"/> event.
+        /// One way to source binding on <see cref="View.Touch"/> event.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="View.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Binding on <see cref="View.Touch"/> event.</returns>
+        /// <returns>One way to source binding on <see cref="View.Touch"/> event.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, bool> TouchBinding(
@@ -1103,10 +1103,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.VerticalFadingEdgeEnabled"/> property.
+        /// One way binding on <see cref="View.VerticalFadingEdgeEnabled"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.VerticalFadingEdgeEnabled"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.VerticalFadingEdgeEnabled"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, bool> VerticalFadingEdgeEnabledBinding(
@@ -1122,10 +1122,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.VerticalScrollBarEnabled"/> property.
+        /// One way binding on <see cref="View.VerticalScrollBarEnabled"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.VerticalScrollBarEnabled"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.VerticalScrollBarEnabled"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, bool> VerticalScrollBarEnabledBinding(
@@ -1141,11 +1141,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.ViewAttachedToWindow"/> event.
+        /// One way to source binding on <see cref="View.ViewAttachedToWindow"/> event.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="View.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Binding on <see cref="View.ViewAttachedToWindow"/> event.</returns>
+        /// <returns>One way to source binding on <see cref="View.ViewAttachedToWindow"/> event.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, object> ViewAttachedToWindowBinding(
@@ -1171,11 +1171,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.ViewDetachedFromWindow"/> event.
+        /// One way to source binding on <see cref="View.ViewDetachedFromWindow"/> event.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="View.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Binding on <see cref="View.ViewDetachedFromWindow"/> event.</returns>
+        /// <returns>One way to source binding on <see cref="View.ViewDetachedFromWindow"/> event.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, object> ViewDetachedFromWindowBinding(
@@ -1201,10 +1201,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="View.Visibility"/> property.
+        /// One way binding on <see cref="View.Visibility"/> property.
         /// </summary>
         /// <param name="viewReference">The item reference.</param>
-        /// <returns>Binding on <see cref="View.Visibility"/> property.</returns>
+        /// <returns>One way binding on <see cref="View.Visibility"/> property.</returns>
         /// <exception cref="ArgumentNullException">viewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<View, ViewStates> VisibilityBinding(

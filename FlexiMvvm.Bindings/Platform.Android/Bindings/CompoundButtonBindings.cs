@@ -56,10 +56,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="CompoundButton.Checked"/> property.
+        /// One way binding on <see cref="CompoundButton.Checked"/> property.
         /// </summary>
         /// <param name="compoundButtonReference">The item reference.</param>
-        /// <returns>Binding on <see cref="CompoundButton.Checked"/> property.</returns>
+        /// <returns>One way binding on <see cref="CompoundButton.Checked"/> property.</returns>
         /// <exception cref="ArgumentNullException">compoundButtonReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<CompoundButton, bool> CheckedBinding(
@@ -75,11 +75,11 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="CompoundButton.CheckedChange"/> event.
+        /// One way to source binding on <see cref="CompoundButton.CheckedChange"/> event.
         /// </summary>
         /// <param name="compoundButtonReference">The item reference.</param>
         /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="CompoundButton.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Binding on <see cref="CompoundButton.CheckedChange"/> event.</returns>
+        /// <returns>One way to source binding on <see cref="CompoundButton.CheckedChange"/> event.</returns>
         /// <exception cref="ArgumentNullException">compoundButtonReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<CompoundButton, bool> CheckedChangeBinding(
@@ -105,14 +105,14 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="CompoundButton.SetButtonDrawable"/> method.
+        /// One way binding on <see cref="CompoundButton.SetButtonDrawable"/> method.
         /// <para>
         /// Supported parameters: <see cref="int"/> resId; <see cref="Drawable"/> drawable.
         /// </para>
         /// </summary>
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="compoundButtonReference">The item reference.</param>
-        /// <returns>Binding on <see cref="CompoundButton.SetButtonDrawable"/> method.</returns>
+        /// <returns>One way binding on <see cref="CompoundButton.SetButtonDrawable"/> method.</returns>
         /// <exception cref="ArgumentNullException">compoundButtonReference is null.</exception>
         /// <exception cref="NotSupportedException">Type <see cref="TValue"/> is not supported.</exception>
         [NotNull]

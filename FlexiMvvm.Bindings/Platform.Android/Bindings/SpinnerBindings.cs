@@ -26,10 +26,10 @@ namespace FlexiMvvm.Bindings
     public static class SpinnerBindings
     {
         /// <summary>
-        /// Binding on <see cref="Spinner.DropDownHorizontalOffset"/> property.
+        /// One way binding on <see cref="Spinner.DropDownHorizontalOffset"/> property.
         /// </summary>
         /// <param name="spinnerReference">The item reference.</param>
-        /// <returns>Binding on <see cref="Spinner.DropDownHorizontalOffset"/> property.</returns>
+        /// <returns>One way binding on <see cref="Spinner.DropDownHorizontalOffset"/> property.</returns>
         /// <exception cref="ArgumentNullException">spinnerReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Spinner, int> DropDownHorizontalOffsetBinding(
@@ -45,10 +45,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="Spinner.DropDownVerticalOffset"/> property.
+        /// One way binding on <see cref="Spinner.DropDownVerticalOffset"/> property.
         /// </summary>
         /// <param name="spinnerReference">The item reference.</param>
-        /// <returns>Binding on <see cref="Spinner.DropDownVerticalOffset"/> property.</returns>
+        /// <returns>One way binding on <see cref="Spinner.DropDownVerticalOffset"/> property.</returns>
         /// <exception cref="ArgumentNullException">spinnerReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Spinner, int> DropDownVerticalOffsetBinding(
@@ -64,10 +64,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="Spinner.DropDownWidth"/> property.
+        /// One way binding on <see cref="Spinner.DropDownWidth"/> property.
         /// </summary>
         /// <param name="spinnerReference">The item reference.</param>
-        /// <returns>Binding on <see cref="Spinner.DropDownWidth"/> property.</returns>
+        /// <returns>One way binding on <see cref="Spinner.DropDownWidth"/> property.</returns>
         /// <exception cref="ArgumentNullException">spinnerReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Spinner, int> DropDownWidthBinding(
@@ -83,10 +83,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="Spinner.Prompt"/> property.
+        /// One way binding on <see cref="Spinner.Prompt"/> property.
         /// </summary>
         /// <param name="spinnerReference">The item reference.</param>
-        /// <returns>Binding on <see cref="Spinner.Prompt"/> property.</returns>
+        /// <returns>One way binding on <see cref="Spinner.Prompt"/> property.</returns>
         /// <exception cref="ArgumentNullException">spinnerReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Spinner, string> PromptBinding(
@@ -102,10 +102,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="Spinner.PromptFormatted"/> property.
+        /// One way binding on <see cref="Spinner.PromptFormatted"/> property.
         /// </summary>
         /// <param name="spinnerReference">The item reference.</param>
-        /// <returns>Binding on <see cref="Spinner.PromptFormatted"/> property.</returns>
+        /// <returns>One way binding on <see cref="Spinner.PromptFormatted"/> property.</returns>
         /// <exception cref="ArgumentNullException">spinnerReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Spinner, ICharSequence> PromptFormattedBinding(
@@ -121,10 +121,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="Spinner.SetPopupBackgroundDrawable(Drawable)"/> method.
+        /// One way binding on <see cref="Spinner.SetPopupBackgroundDrawable(Drawable)"/> method.
         /// </summary>
         /// <param name="spinnerReference">The item reference.</param>
-        /// <returns>Binding on <see cref="Spinner.SetPopupBackgroundDrawable(Drawable)"/> method.</returns>
+        /// <returns>One way binding on <see cref="Spinner.SetPopupBackgroundDrawable(Drawable)"/> method.</returns>
         /// <exception cref="ArgumentNullException">spinnerReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Spinner, Drawable> SetPopupBackgroundDrawableBinding(
@@ -140,10 +140,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="Spinner.SetPopupBackgroundResource(int)"/> method.
+        /// One way binding on <see cref="Spinner.SetPopupBackgroundResource(int)"/> method.
         /// </summary>
         /// <param name="spinnerReference">The item reference.</param>
-        /// <returns>Binding on <see cref="Spinner.SetPopupBackgroundResource(int)"/> method.</returns>
+        /// <returns>One way binding on <see cref="Spinner.SetPopupBackgroundResource(int)"/> method.</returns>
         /// <exception cref="ArgumentNullException">spinnerReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Spinner, int> SetPopupBackgroundResourceBinding(
@@ -159,10 +159,10 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// Binding on <see cref="Spinner.SetPromptId(int)"/> method.
+        /// One way binding on <see cref="Spinner.SetPromptId(int)"/> method.
         /// </summary>
         /// <param name="spinnerReference">The item reference.</param>
-        /// <returns>Binding on <see cref="Spinner.SetPromptId(int)"/> method.</returns>
+        /// <returns>One way binding on <see cref="Spinner.SetPromptId(int)"/> method.</returns>
         /// <exception cref="ArgumentNullException">spinnerReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<Spinner, int> SetPromptIdBinding(
