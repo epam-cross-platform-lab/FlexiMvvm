@@ -121,43 +121,6 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// One way binding on <see cref="ImageView.SetColorFilter()"/> method.
-        /// <para>
-        /// Supported parameters: <see cref="Color"/> color; <see cref="ColorFilter"/> cf.
-        /// </para>
-        /// </summary>
-        /// <typeparam name="TValue">The type of the value.</typeparam>
-        /// <param name="imageViewReference">The item reference.</param>
-        /// <returns>One way binding on <see cref="ImageView.SetColorFilter()"/> method.</returns>
-        /// <exception cref="ArgumentNullException">imageViewReference is null.</exception>
-        /// <exception cref="NotSupportedException">Type <see cref="TValue"/> is not supported.</exception>
-        [NotNull]
-        public static TargetItemBinding<ImageView, TValue> SetColorFilterBinding<TValue>(
-            [NotNull] this IItemReference<ImageView> imageViewReference)
-        {
-            if (imageViewReference == null)
-                throw new ArgumentNullException(nameof(imageViewReference));
-
-            return new TargetItemOneWayCustomBinding<ImageView, TValue>(
-                imageViewReference,
-                (imageView, value) =>
-                {
-                    switch (value)
-                    {
-                        case Color color:
-                            imageView.NotNull().SetColorFilter(color);
-                            break;
-                        case ColorFilter cf:
-                            imageView.NotNull().SetColorFilter(cf);
-                            break;
-                        default:
-                            throw new NotSupportedException($"\"{nameof(SetColorFilterBinding)}\" doesn't support \"{typeof(TValue)}\" type.");
-                    }
-                },
-                () => "SetColorFilter");
-        }
-
-        /// <summary>
         /// One way binding on <see cref="ImageView.SetImageBitmap(Bitmap)"/> method.
         /// </summary>
         /// <param name="imageViewReference">The item reference.</param>

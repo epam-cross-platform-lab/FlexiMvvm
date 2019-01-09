@@ -15,6 +15,7 @@
 // =========================================================================
 
 using System;
+using System.Windows.Input;
 using Android.Widget;
 using FlexiMvvm.Bindings.Custom;
 using JetBrains.Annotations;
@@ -24,11 +25,11 @@ namespace FlexiMvvm.Bindings
     public static class RadioGroupBindings
     {
         /// <summary>
-        /// Two way binding on <see cref="RadioGroup.CheckedChange"/> event and <see cref="RadioGroup.Check(int)"/> method.
+        /// Two way binding on <see cref="RadioGroup.Check(int)"/> method and <see cref="RadioGroup.CheckedChange"/> event.
         /// </summary>
         /// <param name="radioGroupReference">The item reference.</param>
-        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="RadioGroup.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Two way binding on <see cref="RadioGroup.CheckedChange"/> event and <see cref="RadioGroup.Check(int)"/> method.</returns>
+        /// <param name="trackCanExecuteCommandChanged">If set to <c>true</c> then <see cref="RadioGroup.Enabled"/> value will be updated based on <see cref="ICommand.CanExecute(object)"/> result.</param>
+        /// <returns>Two way binding on <see cref="RadioGroup.Check(int)"/> method and <see cref="RadioGroup.CheckedChange"/> event.</returns>
         /// <exception cref="ArgumentNullException">radioGroupReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<RadioGroup, int> CheckAndCheckedChangeBinding(
@@ -69,7 +70,7 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemOneWayCustomBinding<RadioGroup, int>(
                 radioGroupReference,
-                (radioGroup, index) => radioGroup.NotNull().Check(index),
+                (radioGroup, id) => radioGroup.NotNull().Check(id),
                 () => "Check");
         }
 
@@ -77,7 +78,7 @@ namespace FlexiMvvm.Bindings
         /// One way to source binding on <see cref="RadioGroup.CheckedChange"/> event.
         /// </summary>
         /// <param name="radioGroupReference">The item reference.</param>
-        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="RadioGroup.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <param name="trackCanExecuteCommandChanged">If set to <c>true</c> then <see cref="RadioGroup.Enabled"/> value will be updated based on <see cref="ICommand.CanExecute(object)"/> result.</param>
         /// <returns>One way to source binding on <see cref="RadioGroup.CheckedChange"/> event.</returns>
         /// <exception cref="ArgumentNullException">radioGroupReference is null.</exception>
         [NotNull]
@@ -99,7 +100,7 @@ namespace FlexiMvvm.Bindings
                         radioGroup.NotNull().Enabled = canExecuteCommand;
                     }
                 },
-                (radioGroup, eventArgs) => eventArgs?.CheckedId ?? radioGroup.NotNull().CheckedRadioButtonId,
+                (radioGroup, eventArgs) => eventArgs.NotNull().CheckedId,
                 () => "CheckedChange");
         }
     }

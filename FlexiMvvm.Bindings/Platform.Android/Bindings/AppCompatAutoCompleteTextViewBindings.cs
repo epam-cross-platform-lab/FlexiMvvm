@@ -15,10 +15,10 @@
 // =========================================================================
 
 using System;
+using System.Windows.Input;
 using Android.Support.V7.Widget;
 using Android.Widget;
 using FlexiMvvm.Bindings.Custom;
-using Java.Lang;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.Bindings
@@ -29,7 +29,7 @@ namespace FlexiMvvm.Bindings
         /// One way to source binding on <see cref="AppCompatAutoCompleteTextView.Dismiss"/> event.
         /// </summary>
         /// <param name="appCompatAutoCompleteTextViewReference">The item reference.</param>
-        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="AppCompatAutoCompleteTextView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <param name="trackCanExecuteCommandChanged">If set to <c>true</c> then <see cref="AppCompatAutoCompleteTextView.Enabled"/> value will be updated based on <see cref="ICommand.CanExecute(object)"/> result.</param>
         /// <returns>One way to source binding on <see cref="AppCompatAutoCompleteTextView.Dismiss"/> event.</returns>
         /// <exception cref="ArgumentNullException">appCompatAutoCompleteTextViewReference is null.</exception>
         [NotNull]
@@ -154,7 +154,7 @@ namespace FlexiMvvm.Bindings
         /// One way to source binding on <see cref="AppCompatAutoCompleteTextView.ItemClick"/> event.
         /// </summary>
         /// <param name="appCompatAutoCompleteTextViewReference">The item reference.</param>
-        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="AppCompatAutoCompleteTextView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <param name="trackCanExecuteCommandChanged">If set to <c>true</c> then <see cref="AppCompatAutoCompleteTextView.Enabled"/> value will be updated based on <see cref="ICommand.CanExecute(object)"/> result.</param>
         /// <returns>One way to source binding on <see cref="AppCompatAutoCompleteTextView.ItemClick"/> event.</returns>
         /// <exception cref="ArgumentNullException">appCompatAutoCompleteTextViewReference is null.</exception>
         [NotNull]
@@ -176,7 +176,7 @@ namespace FlexiMvvm.Bindings
                         appCompatAutoCompleteTextView.NotNull().Enabled = canExecuteCommand;
                     }
                 },
-                (appCompatAutoCompleteTextView, args) => args.Position,
+                (appCompatAutoCompleteTextView, eventArgs) => eventArgs.NotNull().Position,
                 () => "ItemClick");
         }
 
@@ -184,7 +184,7 @@ namespace FlexiMvvm.Bindings
         /// One way to source binding on <see cref="AppCompatAutoCompleteTextView.ItemSelected"/> event.
         /// </summary>
         /// <param name="appCompatAutoCompleteTextViewReference">The item reference.</param>
-        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="AppCompatAutoCompleteTextView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <param name="trackCanExecuteCommandChanged">If set to <c>true</c> then <see cref="AppCompatAutoCompleteTextView.Enabled"/> value will be updated based on <see cref="ICommand.CanExecute(object)"/> result.</param>
         /// <returns>One way to source binding on <see cref="AppCompatAutoCompleteTextView.ItemSelected"/> event.</returns>
         /// <exception cref="ArgumentNullException">appCompatAutoCompleteTextViewReference is null.</exception>
         [NotNull]
@@ -206,7 +206,7 @@ namespace FlexiMvvm.Bindings
                         appCompatAutoCompleteTextView.NotNull().Enabled = canExecuteCommand;
                     }
                 },
-                (appCompatAutoCompleteTextView, args) => args.Position,
+                (appCompatAutoCompleteTextView, eventArgs) => eventArgs.NotNull().Position,
                 () => "ItemSelected");
         }
 
@@ -214,7 +214,7 @@ namespace FlexiMvvm.Bindings
         /// One way to source binding on <see cref="AppCompatAutoCompleteTextView.NothingSelected"/> event.
         /// </summary>
         /// <param name="appCompatAutoCompleteTextViewReference">The item reference.</param>
-        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="AppCompatAutoCompleteTextView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <param name="trackCanExecuteCommandChanged">If set to <c>true</c> then <see cref="AppCompatAutoCompleteTextView.Enabled"/> value will be updated based on <see cref="ICommand.CanExecute(object)"/> result.</param>
         /// <returns>One way to source binding on <see cref="AppCompatAutoCompleteTextView.NothingSelected"/> event.</returns>
         /// <exception cref="ArgumentNullException">appCompatAutoCompleteTextViewReference is null.</exception>
         [NotNull]
@@ -236,7 +236,7 @@ namespace FlexiMvvm.Bindings
                         appCompatAutoCompleteTextView.NotNull().Enabled = canExecuteCommand;
                     }
                 },
-                (appCompatAutoCompleteTextView, args) => null,
+                (appCompatAutoCompleteTextView, eventArgs) => null,
                 () => "NothingSelected");
         }
 
@@ -260,38 +260,21 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// One way binding on <see cref="AppCompatAutoCompleteTextView.SetCompletionHint()"/> method.
-        /// <para>
-        /// Supported parameters: <see cref="ICharSequence"/> hint; <see cref="string"/> hint.
-        /// </para>
+        /// One way binding on <see cref="AppCompatAutoCompleteTextView.SetCompletionHint(string)"/> method.
         /// </summary>
-        /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="appCompatAutoCompleteTextViewReference">The item reference.</param>
-        /// <returns>One way binding on <see cref="AppCompatAutoCompleteTextView.SetCompletionHint()"/> method.</returns>
+        /// <returns>One way binding on <see cref="AppCompatAutoCompleteTextView.SetCompletionHint(string)"/> method.</returns>
         /// <exception cref="ArgumentNullException">appCompatAutoCompleteTextViewReference is null.</exception>
         [NotNull]
-        public static TargetItemBinding<AppCompatAutoCompleteTextView, TValue> SetCompletionHintBinding<TValue>(
+        public static TargetItemBinding<AppCompatAutoCompleteTextView, string> SetCompletionHintBinding(
             [NotNull] this IItemReference<AppCompatAutoCompleteTextView> appCompatAutoCompleteTextViewReference)
         {
             if (appCompatAutoCompleteTextViewReference == null)
                 throw new ArgumentNullException(nameof(appCompatAutoCompleteTextViewReference));
 
-            return new TargetItemOneWayCustomBinding<AppCompatAutoCompleteTextView, TValue>(
+            return new TargetItemOneWayCustomBinding<AppCompatAutoCompleteTextView, string>(
                 appCompatAutoCompleteTextViewReference,
-                (appCompatAutoCompleteTextView, value) =>
-                {
-                    switch (value)
-                    {
-                        case ICharSequence hint:
-                            appCompatAutoCompleteTextView.NotNull().SetCompletionHint(hint);
-                            break;
-                        case string hint:
-                            appCompatAutoCompleteTextView.NotNull().SetCompletionHint(hint);
-                            break;
-                        default:
-                            throw new NotSupportedException($"{nameof(SetCompletionHintBinding)} doesn't support type {typeof(TValue)}");
-                    }
-                },
+                (appCompatAutoCompleteTextView, hint) => appCompatAutoCompleteTextView.NotNull().SetCompletionHint(hint),
                 () => "SetCompletionHint");
         }
 
@@ -315,43 +298,23 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// One way binding on <see cref="AppCompatAutoCompleteTextView.SetText()"/> method.
-        /// <para>
-        /// Supported parameters: <see cref="ICharSequence"/> text; <see cref="string"/> text; <see cref="int"/> resId.
-        /// </para>
+        /// One way binding on <see cref="AppCompatAutoCompleteTextView.SetText(string, bool)"/> method.
         /// </summary>
-        /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="appCompatAutoCompleteTextViewReference">The item reference.</param>
-        /// <param name="filter">The second parameter of <see cref="AppCompatAutoCompleteTextView.SetText()"/> method.</param>
-        /// <returns>One way binding on <see cref="AppCompatAutoCompleteTextView.SetText()"/> method.</returns>
+        /// <param name="filter">The second parameter of <see cref="AppCompatAutoCompleteTextView.SetText(string, bool)"/> method.</param>
+        /// <returns>One way binding on <see cref="AppCompatAutoCompleteTextView.SetText(string, bool)"/> method.</returns>
         /// <exception cref="ArgumentNullException">appCompatAutoCompleteTextViewReference is null.</exception>
         [NotNull]
-        public static TargetItemBinding<AppCompatAutoCompleteTextView, TValue> SetTextBinding<TValue>(
+        public static TargetItemBinding<AppCompatAutoCompleteTextView, string> SetTextBinding(
             [NotNull] this IItemReference<AppCompatAutoCompleteTextView> appCompatAutoCompleteTextViewReference,
             bool filter = true)
         {
             if (appCompatAutoCompleteTextViewReference == null)
                 throw new ArgumentNullException(nameof(appCompatAutoCompleteTextViewReference));
 
-            return new TargetItemOneWayCustomBinding<AppCompatAutoCompleteTextView, TValue>(
+            return new TargetItemOneWayCustomBinding<AppCompatAutoCompleteTextView, string>(
                 appCompatAutoCompleteTextViewReference,
-                (appCompatAutoCompleteTextView, value) =>
-                {
-                    switch (value)
-                    {
-                        case ICharSequence text:
-                            appCompatAutoCompleteTextView.NotNull().SetText(text, filter);
-                            break;
-                        case string text:
-                            appCompatAutoCompleteTextView.NotNull().SetText(text, filter);
-                            break;
-                        case int resId:
-                            appCompatAutoCompleteTextView.NotNull().SetText(resId);
-                            break;
-                        default:
-                            throw new NotSupportedException($"\"{nameof(SetTextBinding)}\" doesn't support \"{typeof(TValue)}\" type.");
-                    }
-                },
+                (appCompatAutoCompleteTextView, text) => appCompatAutoCompleteTextView.NotNull().SetText(text, filter),
                 () => "SetText");
         }
 

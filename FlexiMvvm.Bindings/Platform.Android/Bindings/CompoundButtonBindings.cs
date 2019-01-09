@@ -15,7 +15,7 @@
 // =========================================================================
 
 using System;
-using Android.Graphics.Drawables;
+using System.Windows.Input;
 using Android.Widget;
 using FlexiMvvm.Bindings.Custom;
 using JetBrains.Annotations;
@@ -25,11 +25,11 @@ namespace FlexiMvvm.Bindings
     public static class CompoundButtonBindings
     {
         /// <summary>
-        /// Two way binding on <see cref="CompoundButton.CheckedChange"/> event and <see cref="CompoundButton.Checked"/> property.
+        /// Two way binding on <see cref="CompoundButton.Checked"/> property and <see cref="CompoundButton.CheckedChange"/> event.
         /// </summary>
         /// <param name="compoundButtonReference">The item reference.</param>
-        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="CompoundButton.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Two way binding on <see cref="CompoundButton.CheckedChange"/> event and <see cref="CompoundButton.Checked"/> property.</returns>
+        /// <param name="trackCanExecuteCommandChanged">If set to <c>true</c> then <see cref="CompoundButton.Enabled"/> value will be updated based on <see cref="ICommand.CanExecute(object)"/> result.</param>
+        /// <returns>Two way binding on <see cref="CompoundButton.Checked"/> property and <see cref="CompoundButton.CheckedChange"/> event.</returns>
         /// <exception cref="ArgumentNullException">compoundButtonReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<CompoundButton, bool> CheckedAndCheckedChangeBinding(
@@ -50,7 +50,7 @@ namespace FlexiMvvm.Bindings
                         compoundButton.NotNull().Enabled = canExecuteCommand;
                     }
                 },
-                (compoundButton, eventArgs) => compoundButton.NotNull().Checked,
+                (compoundButton, eventArgs) => eventArgs?.IsChecked ?? compoundButton.NotNull().Checked,
                 (compoundButton, @checked) => compoundButton.NotNull().Checked = @checked,
                 () => "CheckedAndCheckedChange");
         }
@@ -78,7 +78,7 @@ namespace FlexiMvvm.Bindings
         /// One way to source binding on <see cref="CompoundButton.CheckedChange"/> event.
         /// </summary>
         /// <param name="compoundButtonReference">The item reference.</param>
-        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="CompoundButton.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <param name="trackCanExecuteCommandChanged">If set to <c>true</c> then <see cref="CompoundButton.Enabled"/> value will be updated based on <see cref="ICommand.CanExecute(object)"/> result.</param>
         /// <returns>One way to source binding on <see cref="CompoundButton.CheckedChange"/> event.</returns>
         /// <exception cref="ArgumentNullException">compoundButtonReference is null.</exception>
         [NotNull]
@@ -100,44 +100,26 @@ namespace FlexiMvvm.Bindings
                         compoundButton.NotNull().Enabled = canExecuteCommand;
                     }
                 },
-                (compoundButton, eventArgs) => compoundButton.NotNull().Checked,
+                (compoundButton, eventArgs) => eventArgs.NotNull().IsChecked,
                 () => "CheckedChange");
         }
 
         /// <summary>
-        /// One way binding on <see cref="CompoundButton.SetButtonDrawable()"/> method.
-        /// <para>
-        /// Supported parameters: <see cref="int"/> resId; <see cref="Drawable"/> drawable.
-        /// </para>
+        /// One way binding on <see cref="CompoundButton.SetButtonDrawable(int)"/> method.
         /// </summary>
-        /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="compoundButtonReference">The item reference.</param>
-        /// <returns>One way binding on <see cref="CompoundButton.SetButtonDrawable()"/> method.</returns>
+        /// <returns>One way binding on <see cref="CompoundButton.SetButtonDrawable(int)"/> method.</returns>
         /// <exception cref="ArgumentNullException">compoundButtonReference is null.</exception>
-        /// <exception cref="NotSupportedException">Type <see cref="TValue"/> is not supported.</exception>
         [NotNull]
-        public static TargetItemBinding<CompoundButton, TValue> SetButtonDrawableBinding<TValue>(
+        public static TargetItemBinding<CompoundButton, int> SetButtonDrawableBinding(
             [NotNull] this IItemReference<CompoundButton> compoundButtonReference)
         {
             if (compoundButtonReference == null)
                 throw new ArgumentNullException(nameof(compoundButtonReference));
 
-            return new TargetItemOneWayCustomBinding<CompoundButton, TValue>(
+            return new TargetItemOneWayCustomBinding<CompoundButton, int>(
                 compoundButtonReference,
-                (compoundButton, value) =>
-                {
-                    switch (value)
-                    {
-                        case int resId:
-                            compoundButton.NotNull().SetButtonDrawable(resId);
-                            break;
-                        case Drawable drawable:
-                            compoundButton.NotNull().SetButtonDrawable(drawable);
-                            break;
-                        default:
-                            throw new NotSupportedException($"\"{nameof(SetButtonDrawableBinding)}\" doesn't support \"{typeof(TValue)}\" type.");
-                    }
-                },
+                (compoundButton, resId) => compoundButton.NotNull().SetButtonDrawable(resId),
                 () => "SetButtonDrawable");
         }
     }

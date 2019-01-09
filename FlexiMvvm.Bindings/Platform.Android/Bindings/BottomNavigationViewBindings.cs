@@ -15,6 +15,7 @@
 // =========================================================================
 
 using System;
+using System.Windows.Input;
 using Android.Support.Design.Widget;
 using FlexiMvvm.Bindings.Custom;
 using JetBrains.Annotations;
@@ -24,11 +25,11 @@ namespace FlexiMvvm.Bindings
     public static class BottomNavigationViewBindings
     {
         /// <summary>
-        /// Two way binding on <see cref="BottomNavigationView.NavigationItemSelected"/> event and <see cref="BottomNavigationView.SelectedItemId"/> property.
+        /// Two way binding on <see cref="BottomNavigationView.SelectedItemId"/> property and <see cref="BottomNavigationView.NavigationItemSelected"/> event.
         /// </summary>
         /// <param name="bottomNavigationViewReference">The item reference.</param>
-        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="BottomNavigationView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>Two way binding on <see cref="BottomNavigationView.NavigationItemSelected"/> event and <see cref="BottomNavigationView.SelectedItemId"/> property.</returns>
+        /// <param name="trackCanExecuteCommandChanged">If set to <c>true</c> then <see cref="BottomNavigationView.Enabled"/> value will be updated based on <see cref="ICommand.CanExecute(object)"/> result.</param>
+        /// <returns>Two way binding on <see cref="BottomNavigationView.SelectedItemId"/> property and <see cref="BottomNavigationView.NavigationItemSelected"/> event.</returns>
         /// <exception cref="ArgumentNullException">bottomNavigationViewReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<BottomNavigationView, int> SelectedItemIdAndNavigationItemSelectedBinding(

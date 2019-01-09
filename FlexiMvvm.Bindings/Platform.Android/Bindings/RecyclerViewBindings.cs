@@ -24,66 +24,6 @@ namespace FlexiMvvm.Bindings
     public static class RecyclerViewBindings
     {
         /// <summary>
-        /// One way to source binding on <see cref="RecyclerView.ChildViewAttachedToWindow"/> event.
-        /// </summary>
-        /// <param name="recyclerViewReference">The item reference.</param>
-        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="RecyclerView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>One way to source binding on <see cref="RecyclerView.ChildViewAttachedToWindow"/> event.</returns>
-        /// <exception cref="ArgumentNullException">recyclerViewReference is null.</exception>
-        [NotNull]
-        public static TargetItemBinding<RecyclerView, object> ChildViewAttachedToWindowBinding(
-            [NotNull] this IItemReference<RecyclerView> recyclerViewReference,
-            bool trackCanExecuteCommandChanged = false)
-        {
-            if (recyclerViewReference == null)
-                throw new ArgumentNullException(nameof(recyclerViewReference));
-
-            return new TargetItemOneWayToSourceCustomBinding<RecyclerView, object, RecyclerView.ChildViewAttachedToWindowEventArgs>(
-                recyclerViewReference,
-                (recyclerView, eventHandler) => recyclerView.NotNull().ChildViewAttachedToWindow += eventHandler,
-                (recyclerView, eventHandler) => recyclerView.NotNull().ChildViewAttachedToWindow -= eventHandler,
-                (recyclerView, canExecuteCommand) =>
-                {
-                    if (trackCanExecuteCommandChanged)
-                    {
-                        recyclerView.NotNull().Enabled = canExecuteCommand;
-                    }
-                },
-                (recyclerView, eventArgs) => null,
-                () => "ChildViewAttachedToWindow");
-        }
-
-        /// <summary>
-        /// One way to source binding on <see cref="RecyclerView.ChildViewDetachedFromWindow"/> event.
-        /// </summary>
-        /// <param name="recyclerViewReference">The item reference.</param>
-        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="RecyclerView.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
-        /// <returns>One way to source binding on <see cref="RecyclerView.ChildViewDetachedFromWindow"/> event.</returns>
-        /// <exception cref="ArgumentNullException">recyclerViewReference is null.</exception>
-        [NotNull]
-        public static TargetItemBinding<RecyclerView, object> ChildViewDetachedFromWindowBinding(
-            [NotNull] this IItemReference<RecyclerView> recyclerViewReference,
-            bool trackCanExecuteCommandChanged = false)
-        {
-            if (recyclerViewReference == null)
-                throw new ArgumentNullException(nameof(recyclerViewReference));
-
-            return new TargetItemOneWayToSourceCustomBinding<RecyclerView, object, RecyclerView.ChildViewDetachedFromWindowEventArgs>(
-                recyclerViewReference,
-                (recyclerView, eventHandler) => recyclerView.NotNull().ChildViewDetachedFromWindow += eventHandler,
-                (recyclerView, eventHandler) => recyclerView.NotNull().ChildViewDetachedFromWindow -= eventHandler,
-                (recyclerView, canExecuteCommand) =>
-                {
-                    if (trackCanExecuteCommandChanged)
-                    {
-                        recyclerView.NotNull().Enabled = canExecuteCommand;
-                    }
-                },
-                (recyclerView, eventArgs) => null,
-                () => "ChildViewDetachedFromWindow");
-        }
-
-        /// <summary>
         /// One way binding on <see cref="RecyclerView.ScrollToPosition(int)"/> method.
         /// </summary>
         /// <param name="recyclerViewReference">The item reference.</param>

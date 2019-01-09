@@ -16,7 +16,6 @@
 
 using System;
 using Android.Content.Res;
-using Android.Graphics.Drawables;
 using Android.Widget;
 using FlexiMvvm.Bindings.Custom;
 using JetBrains.Annotations;
@@ -64,38 +63,21 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// One way binding on <see cref="CheckedTextView.SetCheckMarkDrawable()"/> method.
-        /// <para>
-        /// Supported parameters: <see cref="int"/> resId; <see cref="Drawable"/> d.
-        /// </para>
+        /// One way binding on <see cref="CheckedTextView.SetCheckMarkDrawable(int)"/> method.
         /// </summary>
-        /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="checkedTextViewReference">The item reference.</param>
-        /// <returns>One way binding on <see cref="CheckedTextView.SetCheckMarkDrawable()"/> method.</returns>
+        /// <returns>One way binding on <see cref="CheckedTextView.SetCheckMarkDrawable(int)"/> method.</returns>
         /// <exception cref="ArgumentNullException">checkedTextViewReference is null.</exception>
         [NotNull]
-        public static TargetItemBinding<CheckedTextView, TValue> SetCheckMarkDrawableBinding<TValue>(
+        public static TargetItemBinding<CheckedTextView, int> SetCheckMarkDrawableBinding(
             [NotNull] this IItemReference<CheckedTextView> checkedTextViewReference)
         {
             if (checkedTextViewReference == null)
                 throw new ArgumentNullException(nameof(checkedTextViewReference));
 
-            return new TargetItemOneWayCustomBinding<CheckedTextView, TValue>(
+            return new TargetItemOneWayCustomBinding<CheckedTextView, int>(
                 checkedTextViewReference,
-                (checkedTextView, value) =>
-                {
-                    switch (value)
-                    {
-                        case Drawable drawable:
-                            checkedTextView.NotNull().SetCheckMarkDrawable(drawable);
-                            break;
-                        case int resId:
-                            checkedTextView.NotNull().SetCheckMarkDrawable(resId);
-                            break;
-                        default:
-                            throw new NotSupportedException($"\"{nameof(SetCheckMarkDrawableBinding)}\" doesn't support \"{typeof(TValue)}\" type.");
-                    }
-                },
+                (checkedTextView, resId) => checkedTextView.NotNull().SetCheckMarkDrawable(resId),
                 () => "SetCheckMarkDrawable");
         }
     }

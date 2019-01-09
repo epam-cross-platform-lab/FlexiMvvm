@@ -19,6 +19,7 @@ using Android.Graphics.Drawables;
 using Android.Widget;
 using FlexiMvvm.Bindings.Custom;
 using JetBrains.Annotations;
+using Uri = Android.Net.Uri;
 
 namespace FlexiMvvm.Bindings
 {
@@ -63,19 +64,19 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// One way binding on <see cref="ImageSwitcher.SetImageURI(Android.Net.Uri)"/> method.
+        /// One way binding on <see cref="ImageSwitcher.SetImageURI(Uri)"/> method.
         /// </summary>
         /// <param name="imageSwitcherReference">The item reference.</param>
-        /// <returns>One way binding on <see cref="ImageSwitcher.SetImageURI(Android.Net.Uri)"/> method.</returns>
+        /// <returns>One way binding on <see cref="ImageSwitcher.SetImageURI(Uri)"/> method.</returns>
         /// <exception cref="ArgumentNullException">imageSwitcherReference is null.</exception>
         [NotNull]
-        public static TargetItemBinding<ImageSwitcher, Android.Net.Uri> SetImageURIBinding(
+        public static TargetItemBinding<ImageSwitcher, Uri> SetImageURIBinding(
             [NotNull] this IItemReference<ImageSwitcher> imageSwitcherReference)
         {
             if (imageSwitcherReference == null)
                 throw new ArgumentNullException(nameof(imageSwitcherReference));
 
-            return new TargetItemOneWayCustomBinding<ImageSwitcher, Android.Net.Uri>(
+            return new TargetItemOneWayCustomBinding<ImageSwitcher, Uri>(
                 imageSwitcherReference,
                 (@switch, uri) => @switch.NotNull().SetImageURI(uri),
                 () => "SetImageURI");

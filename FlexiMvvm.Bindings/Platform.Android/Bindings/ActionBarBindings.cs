@@ -15,10 +15,8 @@
 // =========================================================================
 
 using System;
-using Android.Graphics.Drawables;
 using Android.Support.V7.App;
 using FlexiMvvm.Bindings.Custom;
-using Java.Lang;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.Bindings
@@ -70,18 +68,18 @@ namespace FlexiMvvm.Bindings
         /// <returns>One way to source binding on <see cref="ActionBar.MenuVisibility"/> event.</returns>
         /// <exception cref="ArgumentNullException">actionBarReference is null.</exception>
         [NotNull]
-        public static TargetItemBinding<ActionBar, object> MenuVisibilityBinding(
+        public static TargetItemBinding<ActionBar, bool> MenuVisibilityBinding(
             [NotNull] this IItemReference<ActionBar> actionBarReference)
         {
             if (actionBarReference == null)
                 throw new ArgumentNullException(nameof(actionBarReference));
 
-            return new TargetItemOneWayToSourceCustomBinding<ActionBar, object, ActionBar.MenuVisibilityEventArgs>(
+            return new TargetItemOneWayToSourceCustomBinding<ActionBar, bool, ActionBar.MenuVisibilityEventArgs>(
                 actionBarReference,
                 (actionBar, eventHandler) => actionBar.NotNull().MenuVisibility += eventHandler,
                 (actionBar, eventHandler) => actionBar.NotNull().MenuVisibility -= eventHandler,
                 (actionBar, canExecuteCommand) => { },
-                (view, eventArgs) => eventArgs.IsVisible,
+                (actionBar, eventArgs) => eventArgs.NotNull().IsVisible,
                 () => "MenuVisibility");
         }
 
@@ -124,83 +122,40 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
-        /// One way binding on <see cref="ActionBar.SetHomeActionContentDescription()"/> method.
-        /// <para>
-        /// Supported parameters: <see cref="int"/> resId; <see cref="ICharSequence"/> description; <see cref="string"/> description.
-        /// </para>
+        /// One way binding on <see cref="ActionBar.SetHomeActionContentDescription(string)"/> method.
         /// </summary>
-        /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="actionBarReference">The item reference.</param>
-        /// <returns>
-        /// One way binding on <see cref="ActionBar.SetHomeActionContentDescription()"/> method.
-        /// </returns>
+        /// <returns>One way binding on <see cref="ActionBar.SetHomeActionContentDescription(string)"/> method.</returns>
         /// <exception cref="ArgumentNullException">actionBarReference is null.</exception>
-        /// <exception cref="NotSupportedException">Type <see cref="TValue"/> is not supported.</exception>
         [NotNull]
-        public static TargetItemBinding<ActionBar, TValue> SetHomeActionContentDescriptionBinding<TValue>(
+        public static TargetItemBinding<ActionBar, string> SetHomeActionContentDescriptionBinding(
             [NotNull] this IItemReference<ActionBar> actionBarReference)
         {
             if (actionBarReference == null)
                 throw new ArgumentNullException(nameof(actionBarReference));
 
-            return new TargetItemOneWayCustomBinding<ActionBar, TValue>(
+            return new TargetItemOneWayCustomBinding<ActionBar, string>(
                 actionBarReference,
-                (actionBar, value) =>
-                {
-                    switch (value)
-                    {
-                        case int resId:
-                            actionBar.NotNull().SetHomeActionContentDescription(resId);
-                            break;
-                        case ICharSequence description:
-                            actionBar.NotNull().SetHomeActionContentDescription(description);
-                            break;
-                        case string description:
-                            actionBar.NotNull().SetHomeActionContentDescription(description);
-                            break;
-                        default:
-                            throw new NotSupportedException($"\"{nameof(SetHomeActionContentDescriptionBinding)}\" doesn't support \"{typeof(TValue)}\" type.");
-                    }
-                },
+                (actionBar, description) => actionBar.NotNull().SetHomeActionContentDescription(description),
                 () => "SetHomeActionContentDescription");
         }
 
         /// <summary>
-        /// One way binding on <see cref="ActionBar.SetHomeAsUpIndicator()"/> method.
-        /// <para>
-        /// Supported parameters: <see cref="int"/> resId; <see cref="Drawable"/> indicator.
-        /// </para>
+        /// One way binding on <see cref="ActionBar.SetHomeAsUpIndicator(int)"/> method.
         /// </summary>
-        /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="actionBarReference">The item reference.</param>
-        /// <returns>
-        /// One way binding on <see cref="ActionBar.SetHomeAsUpIndicator()"/> method.
-        /// </returns>
+        /// <returns>One way binding on <see cref="ActionBar.SetHomeAsUpIndicator(int)"/> method.</returns>
         /// <exception cref="ArgumentNullException">actionBarReference is null.</exception>
-        /// <exception cref="NotSupportedException">Type <see cref="TValue"/> is not supported.</exception>
         [NotNull]
-        public static TargetItemBinding<ActionBar, TValue> SetHomeAsUpIndicatorBinding<TValue>(
+        public static TargetItemBinding<ActionBar, int> SetHomeAsUpIndicatorBinding(
             [NotNull] this IItemReference<ActionBar> actionBarReference)
         {
             if (actionBarReference == null)
                 throw new ArgumentNullException(nameof(actionBarReference));
 
-            return new TargetItemOneWayCustomBinding<ActionBar, TValue>(
+            return new TargetItemOneWayCustomBinding<ActionBar, int>(
                 actionBarReference,
-                (actionBar, value) =>
-                {
-                    switch (value)
-                    {
-                        case int resId:
-                            actionBar.NotNull().SetHomeAsUpIndicator(resId);
-                            break;
-                        case Drawable indicator:
-                            actionBar.NotNull().SetHomeAsUpIndicator(indicator);
-                            break;
-                        default:
-                            throw new NotSupportedException($"\"{nameof(SetHomeAsUpIndicatorBinding)}\" doesn't support \"{typeof(TValue)}\" type.");
-                    }
-                },
+                (actionBar, resId) => actionBar.NotNull().SetHomeAsUpIndicator(resId),
                 () => "SetHomeAsUpIndicator");
         }
 
