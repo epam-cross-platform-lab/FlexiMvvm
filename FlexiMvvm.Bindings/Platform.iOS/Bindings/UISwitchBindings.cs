@@ -23,6 +23,12 @@ namespace FlexiMvvm.Bindings
 {
     public static class UISwitchBindings
     {
+        /// <summary>
+        /// One way binding on <see cref="UISwitch.On"/> property.
+        /// </summary>
+        /// <param name="switchReference">The item reference.</param>
+        /// <returns>One way binding on <see cref="UISwitch.On"/> property.</returns>
+        /// <exception cref="ArgumentNullException">switchReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISwitch, bool> OnBinding(
             [NotNull] this IItemReference<UISwitch> switchReference)
@@ -36,6 +42,13 @@ namespace FlexiMvvm.Bindings
                 () => "On");
         }
 
+        /// <summary>
+        /// One way binding on <see cref="UISwitch.SetState"/> method.
+        /// </summary>
+        /// <param name="switchReference">The item reference.</param>
+        /// <param name="animated">Second parameter for <see cref="UISwitch.SetState"/> method.</param>
+        /// <returns>One way binding on <see cref="UISwitch.SetState"/> method.</returns>
+        /// <exception cref="ArgumentNullException">switchReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISwitch, bool> SetStateBinding(
             [NotNull] this IItemReference<UISwitch> switchReference,
@@ -50,6 +63,14 @@ namespace FlexiMvvm.Bindings
                 () => "SetState");
         }
 
+        /// <summary>
+        /// Two way binding on <see cref="UIControl.ValueChanged"/> event and <see cref="UISwitch.SetState"/> method.
+        /// </summary>
+        /// <param name="switchReference">The item reference.</param>
+        /// <param name="animated">Second parameter for <see cref="UISwitch.SetState"/> method.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="UISwitch.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>Two way binding on <see cref="UIControl.ValueChanged"/> event and <see cref="UISwitch.SetState"/> method.</returns>
+        /// <exception cref="ArgumentNullException">switchReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISwitch, bool> SetStateAndValueChangedBinding(
             [NotNull] this IItemReference<UISwitch> switchReference,
@@ -73,29 +94,6 @@ namespace FlexiMvvm.Bindings
                 @switch => @switch.NotNull().On,
                 (@switch, newState) => @switch.NotNull().SetState(newState, animated),
                 () => "SetStateAndValueChanged");
-        }
-
-        [NotNull]
-        public static TargetItemBinding<UISwitch, bool> ValueChangedBinding(
-            [NotNull] this IItemReference<UISwitch> switchReference,
-            bool trackCanExecuteCommandChanged = false)
-        {
-            if (switchReference == null)
-                throw new ArgumentNullException(nameof(switchReference));
-
-            return new TargetItemOneWayToSourceCustomBinding<UISwitch, bool>(
-                switchReference,
-                (@switch, eventHandler) => @switch.NotNull().ValueChanged += eventHandler,
-                (@switch, eventHandler) => @switch.NotNull().ValueChanged -= eventHandler,
-                (@switch, canExecuteCommand) =>
-                {
-                    if (trackCanExecuteCommandChanged)
-                    {
-                        @switch.NotNull().Enabled = canExecuteCommand;
-                    }
-                },
-                @switch => @switch.NotNull().On,
-                () => "ValueChanged");
         }
     }
 }

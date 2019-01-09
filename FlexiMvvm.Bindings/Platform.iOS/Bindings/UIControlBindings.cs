@@ -23,6 +23,13 @@ namespace FlexiMvvm.Bindings
 {
     public static class UIControlBindings
     {
+        /// <summary>
+        /// One way to source binding on <see cref="UIControl.AllEditingEvents"/> event.
+        /// </summary>
+        /// <param name="controlReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="UIControl.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>One way to source binding on <see cref="UIControl.AllEditingEvents"/> event.</returns>
+        /// <exception cref="ArgumentNullException">controlReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIControl, object> AllEditingEventsBinding(
             [NotNull] this IItemReference<UIControl> controlReference,
@@ -46,6 +53,13 @@ namespace FlexiMvvm.Bindings
                 () => "AllEditingEvents");
         }
 
+        /// <summary>
+        /// One way to source binding on <see cref="UIControl.AllEvents"/> event.
+        /// </summary>
+        /// <param name="controlReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="UIControl.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>One way to source binding on <see cref="UIControl.AllEvents"/> event.</returns>
+        /// <exception cref="ArgumentNullException">controlReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIControl, object> AllEventsBinding(
             [NotNull] this IItemReference<UIControl> controlReference,
@@ -69,6 +83,13 @@ namespace FlexiMvvm.Bindings
                 () => "AllEvents");
         }
 
+        /// <summary>
+        /// One way to source binding on <see cref="UIControl.AllTouchEvents"/> event.
+        /// </summary>
+        /// <param name="controlReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="UIControl.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>One way to source binding on <see cref="UIControl.AllTouchEvents"/> event.</returns>
+        /// <exception cref="ArgumentNullException">controlReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIControl, object> AllTouchEventsBinding(
             [NotNull] this IItemReference<UIControl> controlReference,
@@ -92,6 +113,13 @@ namespace FlexiMvvm.Bindings
                 () => "AllTouchEvents");
         }
 
+        /// <summary>
+        /// One way to source binding on <see cref="UIControl.EditingChanged"/> event.
+        /// </summary>
+        /// <param name="controlReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="UIControl.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>One way to source binding on <see cref="UIControl.EditingChanged"/> event.</returns>
+        /// <exception cref="ArgumentNullException">controlReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIControl, object> EditingChangedBinding(
             [NotNull] this IItemReference<UIControl> controlReference,
@@ -115,6 +143,13 @@ namespace FlexiMvvm.Bindings
                 () => "EditingChanged");
         }
 
+        /// <summary>
+        /// One way to source binding on <see cref="UIControl.EditingDidBegin"/> event.
+        /// </summary>
+        /// <param name="controlReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="UIControl.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>One way to source binding on <see cref="UIControl.EditingDidBegin"/> event.</returns>
+        /// <exception cref="ArgumentNullException">controlReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIControl, object> EditingDidBeginBinding(
             [NotNull] this IItemReference<UIControl> controlReference,
@@ -138,6 +173,13 @@ namespace FlexiMvvm.Bindings
                 () => "EditingDidBegin");
         }
 
+        /// <summary>
+        /// One way to source binding on <see cref="UIControl.EditingDidEnd"/> event.
+        /// </summary>
+        /// <param name="controlReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="UIControl.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>One way to source binding on <see cref="UIControl.EditingDidEnd"/> event.</returns>
+        /// <exception cref="ArgumentNullException">controlReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIControl, object> EditingDidEndBinding(
             [NotNull] this IItemReference<UIControl> controlReference,
@@ -161,6 +203,13 @@ namespace FlexiMvvm.Bindings
                 () => "EditingDidEnd");
         }
 
+        /// <summary>
+        /// One way to source binding on <see cref="UIControl.EditingDidEndOnExit"/> event.
+        /// </summary>
+        /// <param name="controlReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="UIControl.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>One way to source binding on <see cref="UIControl.EditingDidEndOnExit"/> event.</returns>
+        /// <exception cref="ArgumentNullException">controlReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIControl, object> EditingDidEndOnExitBinding(
             [NotNull] this IItemReference<UIControl> controlReference,
@@ -184,6 +233,12 @@ namespace FlexiMvvm.Bindings
                 () => "EditingDidEndOnExit");
         }
 
+        /// <summary>
+        /// One way binding on <see cref="UIControl.Enabled"/> property.
+        /// </summary>
+        /// <param name="controlReference">The item reference.</param>
+        /// <returns>One way binding on <see cref="UIControl.Enabled"/> property.</returns>
+        /// <exception cref="ArgumentNullException">controlReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIControl, bool> EnabledBinding(
             [NotNull] this IItemReference<UIControl> controlReference)
@@ -197,6 +252,13 @@ namespace FlexiMvvm.Bindings
                 () => "Enabled");
         }
 
+        /// <summary>
+        /// One way to source binding on <see cref="UIControl.PrimaryActionTriggered"/> event.
+        /// </summary>
+        /// <param name="controlReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="UIControl.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>One way to source binding on <see cref="UIControl.PrimaryActionTriggered"/> event.</returns>
+        /// <exception cref="ArgumentNullException">controlReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIControl, object> PrimaryActionTriggeredBinding(
             [NotNull] this IItemReference<UIControl> controlReference,
@@ -220,6 +282,13 @@ namespace FlexiMvvm.Bindings
                 () => "PrimaryActionTriggered");
         }
 
+        /// <summary>
+        /// One way to source binding on <see cref="UIControl.TouchCancel"/> event.
+        /// </summary>
+        /// <param name="controlReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="UIControl.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>One way to source binding on <see cref="UIControl.TouchCancel"/> event.</returns>
+        /// <exception cref="ArgumentNullException">controlReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIControl, object> TouchCancelBinding(
             [NotNull] this IItemReference<UIControl> controlReference,
@@ -243,6 +312,13 @@ namespace FlexiMvvm.Bindings
                 () => "TouchCancel");
         }
 
+        /// <summary>
+        /// One way to source binding on <see cref="UIControl.TouchDown"/> event.
+        /// </summary>
+        /// <param name="controlReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="UIControl.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>One way to source binding on <see cref="UIControl.TouchDown"/> event.</returns>
+        /// <exception cref="ArgumentNullException">controlReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIControl, object> TouchDownBinding(
             [NotNull] this IItemReference<UIControl> controlReference,
@@ -266,6 +342,13 @@ namespace FlexiMvvm.Bindings
                 () => "TouchDown");
         }
 
+        /// <summary>
+        /// One way to source binding on <see cref="UIControl.TouchDownRepeat"/> event.
+        /// </summary>
+        /// <param name="controlReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="UIControl.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>One way to source binding on <see cref="UIControl.TouchDownRepeat"/> event.</returns>
+        /// <exception cref="ArgumentNullException">controlReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIControl, object> TouchDownRepeatBinding(
             [NotNull] this IItemReference<UIControl> controlReference,
@@ -289,6 +372,13 @@ namespace FlexiMvvm.Bindings
                 () => "TouchDownRepeat");
         }
 
+        /// <summary>
+        /// One way to source binding on <see cref="UIControl.TouchDragEnter"/> event.
+        /// </summary>
+        /// <param name="controlReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="UIControl.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>One way to source binding on <see cref="UIControl.TouchDragEnter"/> event.</returns>
+        /// <exception cref="ArgumentNullException">controlReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIControl, object> TouchDragEnterBinding(
             [NotNull] this IItemReference<UIControl> controlReference,
@@ -312,6 +402,13 @@ namespace FlexiMvvm.Bindings
                 () => "TouchDragEnter");
         }
 
+        /// <summary>
+        /// One way to source binding on <see cref="UIControl.TouchDragExit"/> event.
+        /// </summary>
+        /// <param name="controlReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="UIControl.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>One way to source binding on <see cref="UIControl.TouchDragExit"/> event.</returns>
+        /// <exception cref="ArgumentNullException">controlReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIControl, object> TouchDragExitBinding(
             [NotNull] this IItemReference<UIControl> controlReference,
@@ -335,6 +432,13 @@ namespace FlexiMvvm.Bindings
                 () => "TouchDragExit");
         }
 
+        /// <summary>
+        /// One way to source binding on <see cref="UIControl.TouchDragInside"/> event.
+        /// </summary>
+        /// <param name="controlReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="UIControl.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>One way to source binding on <see cref="UIControl.TouchDragInside"/> event.</returns>
+        /// <exception cref="ArgumentNullException">controlReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIControl, object> TouchDragInsideBinding(
             [NotNull] this IItemReference<UIControl> controlReference,
@@ -358,6 +462,13 @@ namespace FlexiMvvm.Bindings
                 () => "TouchDragInside");
         }
 
+        /// <summary>
+        /// One way to source binding on <see cref="UIControl.TouchDragOutside"/> event.
+        /// </summary>
+        /// <param name="controlReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="UIControl.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>One way to source binding on <see cref="UIControl.TouchDragOutside"/> event.</returns>
+        /// <exception cref="ArgumentNullException">controlReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIControl, object> TouchDragOutsideBinding(
             [NotNull] this IItemReference<UIControl> controlReference,
@@ -381,6 +492,13 @@ namespace FlexiMvvm.Bindings
                 () => "TouchDragOutside");
         }
 
+        /// <summary>
+        /// One way to source binding on <see cref="UIControl.TouchUpInside"/> event.
+        /// </summary>
+        /// <param name="controlReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="UIControl.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>One way to source binding on <see cref="UIControl.TouchUpInside"/> event.</returns>
+        /// <exception cref="ArgumentNullException">controlReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIControl, object> TouchUpInsideBinding(
             [NotNull] this IItemReference<UIControl> controlReference,
@@ -404,6 +522,13 @@ namespace FlexiMvvm.Bindings
                 () => "TouchUpInside");
         }
 
+        /// <summary>
+        /// One way to source binding on <see cref="UIControl.TouchUpOutside"/> event.
+        /// </summary>
+        /// <param name="controlReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="UIControl.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>One way to source binding on <see cref="UIControl.TouchUpOutside"/> event.</returns>
+        /// <exception cref="ArgumentNullException">controlReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIControl, object> TouchUpOutsideBinding(
             [NotNull] this IItemReference<UIControl> controlReference,
@@ -427,6 +552,13 @@ namespace FlexiMvvm.Bindings
                 () => "TouchUpOutside");
         }
 
+        /// <summary>
+        /// One way to source binding on <see cref="UIControl.ValueChanged"/> event.
+        /// </summary>
+        /// <param name="controlReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="UIControl.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>One way to source binding on <see cref="UIControl.ValueChanged"/> event.</returns>
+        /// <exception cref="ArgumentNullException">controlReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIControl, object> ValueChangedBinding(
             [NotNull] this IItemReference<UIControl> controlReference,

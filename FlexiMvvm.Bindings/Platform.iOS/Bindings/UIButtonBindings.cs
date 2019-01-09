@@ -23,6 +23,13 @@ namespace FlexiMvvm.Bindings
 {
     public static class UIButtonBindings
     {
+        /// <summary>
+        /// One way binding on <see cref="UIButton.SetTitle"/> method.
+        /// </summary>
+        /// <param name="buttonReference">The item reference.</param>
+        /// <param name="forState">Second parameter for <see cref="UIButton.SetTitle"/> method.</param>
+        /// <returns>One way binding on <see cref="UIButton.SetTitle"/> method.</returns>
+        /// <exception cref="ArgumentNullException">buttonReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIButton, string> SetTitleBinding(
             [NotNull] this IItemReference<UIButton> buttonReference,
@@ -37,6 +44,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetTitle");
         }
 
+        /// <summary>
+        /// One way binding on <see cref="UIButton.ReverseTitleShadowWhenHighlighted"/> property.
+        /// </summary>
+        /// <param name="buttonReference">The item reference.</param>
+        /// <returns>One way binding on <see cref="UIButton.ReverseTitleShadowWhenHighlighted"/> property.</returns>
+        /// <exception cref="ArgumentNullException">buttonReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIButton, bool> ReverseTitleShadowWhenHighlightedBinding(
             [NotNull] this IItemReference<UIButton> buttonReference)
@@ -50,6 +63,12 @@ namespace FlexiMvvm.Bindings
                 () => "ReverseTitleShadowWhenHighlighted");
         }
 
+        /// <summary>
+        /// One way binding on <see cref="UIButton.ShowsTouchWhenHighlighted"/> property.
+        /// </summary>
+        /// <param name="buttonReference">The item reference.</param>
+        /// <returns>One way binding on <see cref="UIButton.ShowsTouchWhenHighlighted"/> property.</returns>
+        /// <exception cref="ArgumentNullException">buttonReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIButton, bool> ShowsTouchWhenHighlightedBinding(
             [NotNull] this IItemReference<UIButton> buttonReference)

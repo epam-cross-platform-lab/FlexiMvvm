@@ -23,6 +23,13 @@ namespace FlexiMvvm.Bindings
 {
     public static class UISegmentedControlBindings
     {
+        /// <summary>
+        /// Two way binding on <see cref="UIControl.ValueChanged"/> event and <see cref="UISegmentedControl.SelectedSegment"/> property.
+        /// </summary>
+        /// <param name="segmentedControlReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="UISegmentedControl.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>Two way binding on <see cref="UIControl.ValueChanged"/> event and <see cref="UISegmentedControl.SelectedSegment"/> property.</returns>
+        /// <exception cref="ArgumentNullException">segmentedControlReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISegmentedControl, nint> SelectedSegmentAndValueChangedBinding(
             [NotNull] this IItemReference<UISegmentedControl> segmentedControlReference,
@@ -57,6 +64,12 @@ namespace FlexiMvvm.Bindings
                 () => "SelectedSegmentAndValueChanged");
         }
 
+        /// <summary>
+        /// One way binding on <see cref="UISegmentedControl.SelectedSegment"/> property.
+        /// </summary>
+        /// <param name="segmentedControlReference">The item reference.</param>
+        /// <returns>One way binding on <see cref="UISegmentedControl.SelectedSegment"/> property.</returns>
+        /// <exception cref="ArgumentNullException">segmentedControlReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISegmentedControl, nint> SelectedSegmentBinding(
             [NotNull] this IItemReference<UISegmentedControl> segmentedControlReference)
@@ -78,29 +91,6 @@ namespace FlexiMvvm.Bindings
                     }
                 },
                 () => "SelectedSegment");
-        }
-
-        [NotNull]
-        public static TargetItemBinding<UISegmentedControl, nint> ValueChangedBinding(
-            [NotNull] this IItemReference<UISegmentedControl> segmentedControlReference,
-            bool trackCanExecuteCommandChanged = false)
-        {
-            if (segmentedControlReference == null)
-                throw new ArgumentNullException(nameof(segmentedControlReference));
-
-            return new TargetItemOneWayToSourceCustomBinding<UISegmentedControl, nint>(
-                segmentedControlReference,
-                (segmentedControl, eventHandler) => segmentedControl.NotNull().ValueChanged += eventHandler,
-                (segmentedControl, eventHandler) => segmentedControl.NotNull().ValueChanged -= eventHandler,
-                (segmentedControl, canExecuteCommand) =>
-                {
-                    if (trackCanExecuteCommandChanged)
-                    {
-                        segmentedControl.NotNull().Enabled = canExecuteCommand;
-                    }
-                },
-                segmentedControl => segmentedControl.NotNull().SelectedSegment,
-                () => "ValueChanged");
         }
     }
 }

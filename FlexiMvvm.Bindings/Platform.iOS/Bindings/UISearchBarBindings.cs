@@ -23,6 +23,12 @@ namespace FlexiMvvm.Bindings
 {
     public static class UISearchBarBindings
     {
+        /// <summary>
+        /// One way to source binding on <see cref="UISearchBar.BookmarkButtonClicked"/> event.
+        /// </summary>
+        /// <param name="searchBarReference">The item reference.</param>
+        /// <returns>One way to source binding on <see cref="UISearchBar.BookmarkButtonClicked"/> event.</returns>
+        /// <exception cref="ArgumentNullException">searchBarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISearchBar, object> BookmarkButtonClickedBinding(
             [NotNull] this IItemReference<UISearchBar> searchBarReference)
@@ -39,6 +45,12 @@ namespace FlexiMvvm.Bindings
                 () => "BookmarkButtonClicked");
         }
 
+        /// <summary>
+        /// One way to source binding on <see cref="UISearchBar.CancelButtonClicked"/> event.
+        /// </summary>
+        /// <param name="searchBarReference">The item reference.</param>
+        /// <returns>One way to source binding on <see cref="UISearchBar.CancelButtonClicked"/> event.</returns>
+        /// <exception cref="ArgumentNullException">searchBarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISearchBar, object> CancelButtonClickedBinding(
             [NotNull] this IItemReference<UISearchBar> searchBarReference)
@@ -55,6 +67,12 @@ namespace FlexiMvvm.Bindings
                 () => "CancelButtonClicked");
         }
 
+        /// <summary>
+        /// One way to source binding on <see cref="UISearchBar.ListButtonClicked"/> event.
+        /// </summary>
+        /// <param name="searchBarReference">The item reference.</param>
+        /// <returns>One way to source binding on <see cref="UISearchBar.ListButtonClicked"/> event.</returns>
+        /// <exception cref="ArgumentNullException">searchBarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISearchBar, object> ListButtonClickedBinding(
             [NotNull] this IItemReference<UISearchBar> searchBarReference)
@@ -71,6 +89,12 @@ namespace FlexiMvvm.Bindings
                 () => "ListButtonClicked");
         }
 
+        /// <summary>
+        /// One way to source binding on <see cref="UISearchBar.OnEditingStarted"/> event.
+        /// </summary>
+        /// <param name="searchBarReference">The item reference.</param>
+        /// <returns>One way to source binding on <see cref="UISearchBar.OnEditingStarted"/> event.</returns>
+        /// <exception cref="ArgumentNullException">searchBarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISearchBar, object> OnEditingStartedBinding(
             [NotNull] this IItemReference<UISearchBar> searchBarReference)
@@ -87,6 +111,12 @@ namespace FlexiMvvm.Bindings
                 () => "OnEditingStarted");
         }
 
+        /// <summary>
+        /// One way to source binding on <see cref="UISearchBar.OnEditingStopped"/> event.
+        /// </summary>
+        /// <param name="searchBarReference">The item reference.</param>
+        /// <returns>One way to source binding on <see cref="UISearchBar.OnEditingStopped"/> event.</returns>
+        /// <exception cref="ArgumentNullException">searchBarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISearchBar, object> OnEditingStoppedBinding(
             [NotNull] this IItemReference<UISearchBar> searchBarReference)
@@ -103,6 +133,12 @@ namespace FlexiMvvm.Bindings
                 () => "OnEditingStopped");
         }
 
+        /// <summary>
+        /// One way binding on <see cref="UISearchBar.Placeholder"/> property.
+        /// </summary>
+        /// <param name="searchBarReference">The item reference.</param>
+        /// <returns>One way binding on <see cref="UISearchBar.Placeholder"/> property.</returns>
+        /// <exception cref="ArgumentNullException">searchBarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISearchBar, string> PlaceholderBinding(
             [NotNull] this IItemReference<UISearchBar> searchBarReference)
@@ -116,6 +152,12 @@ namespace FlexiMvvm.Bindings
                 () => "Placeholder");
         }
 
+        /// <summary>
+        /// One way binding on <see cref="UISearchBar.Prompt"/> property.
+        /// </summary>
+        /// <param name="searchBarReference">The item reference.</param>
+        /// <returns>One way binding on <see cref="UISearchBar.Prompt"/> property.</returns>
+        /// <exception cref="ArgumentNullException">searchBarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISearchBar, string> PromptBinding(
             [NotNull] this IItemReference<UISearchBar> searchBarReference)
@@ -129,6 +171,12 @@ namespace FlexiMvvm.Bindings
                 () => "Prompt");
         }
 
+        /// <summary>
+        /// One way to source binding on <see cref="UISearchBar.SearchButtonClicked"/> event.
+        /// </summary>
+        /// <param name="searchBarReference">The item reference.</param>
+        /// <returns>One way to source binding on <see cref="UISearchBar.SearchButtonClicked"/> event.</returns>
+        /// <exception cref="ArgumentNullException">searchBarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISearchBar, object> SearchButtonClickedBinding(
             [NotNull] this IItemReference<UISearchBar> searchBarReference)
@@ -145,6 +193,12 @@ namespace FlexiMvvm.Bindings
                 () => "SearchButtonClicked");
         }
 
+        /// <summary>
+        /// One way binding on <see cref="UISearchBar.SearchResultsButtonSelected"/> property.
+        /// </summary>
+        /// <param name="searchBarReference">The item reference.</param>
+        /// <returns>One way binding on <see cref="UISearchBar.SearchResultsButtonSelected"/> property.</returns>
+        /// <exception cref="ArgumentNullException">searchBarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISearchBar, bool> SearchResultsButtonSelectedBinding(
             [NotNull] this IItemReference<UISearchBar> searchBarReference)
@@ -158,6 +212,12 @@ namespace FlexiMvvm.Bindings
                 () => "SearchResultsButtonSelected");
         }
 
+        /// <summary>
+        /// One way binding on <see cref="UISearchBar.SecureTextEntry"/> property.
+        /// </summary>
+        /// <param name="searchBarReference">The item reference.</param>
+        /// <returns>One way binding on <see cref="UISearchBar.SecureTextEntry"/> property.</returns>
+        /// <exception cref="ArgumentNullException">searchBarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISearchBar, bool> SecureTextEntryBinding(
             [NotNull] this IItemReference<UISearchBar> searchBarReference)
@@ -171,6 +231,13 @@ namespace FlexiMvvm.Bindings
                 () => "SecureTextEntry");
         }
 
+        /// <summary>
+        /// One way binding on <see cref="UISearchBar.SetShowsCancelButton"/> method.
+        /// </summary>
+        /// <param name="searchBarReference">The item reference.</param>
+        /// <param name="animated">Second parameter for <see cref="UISearchBar.SetShowsCancelButton"/> method.</param>
+        /// <returns>One way binding on <see cref="UISearchBar.SetShowsCancelButton"/> method.</returns>
+        /// <exception cref="ArgumentNullException">searchBarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISearchBar, bool> SetShowsCancelButtonBinding(
             [NotNull] this IItemReference<UISearchBar> searchBarReference,
@@ -185,6 +252,12 @@ namespace FlexiMvvm.Bindings
                 () => "SetShowsCancelButton");
         }
 
+        /// <summary>
+        /// One way binding on <see cref="UISearchBar.ShowsBookmarkButton"/> property.
+        /// </summary>
+        /// <param name="searchBarReference">The item reference.</param>
+        /// <returns>One way binding on <see cref="UISearchBar.ShowsBookmarkButton"/> property.</returns>
+        /// <exception cref="ArgumentNullException">searchBarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISearchBar, bool> ShowsBookmarkButtonBinding(
             [NotNull] this IItemReference<UISearchBar> searchBarReference)
@@ -198,6 +271,12 @@ namespace FlexiMvvm.Bindings
                 () => "ShowsBookmarkButton");
         }
 
+        /// <summary>
+        /// One way binding on <see cref="UISearchBar.ShowsCancelButton"/> property.
+        /// </summary>
+        /// <param name="searchBarReference">The item reference.</param>
+        /// <returns>One way binding on <see cref="UISearchBar.ShowsCancelButton"/> property.</returns>
+        /// <exception cref="ArgumentNullException">searchBarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISearchBar, bool> ShowsCancelButtonBinding(
             [NotNull] this IItemReference<UISearchBar> searchBarReference)
@@ -211,6 +290,12 @@ namespace FlexiMvvm.Bindings
                 () => "ShowsCancelButton");
         }
 
+        /// <summary>
+        /// One way binding on <see cref="UISearchBar.ShowsScopeBar"/> property.
+        /// </summary>
+        /// <param name="searchBarReference">The item reference.</param>
+        /// <returns>One way binding on <see cref="UISearchBar.ShowsScopeBar"/> property.</returns>
+        /// <exception cref="ArgumentNullException">searchBarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISearchBar, bool> ShowsScopeBarBinding(
             [NotNull] this IItemReference<UISearchBar> searchBarReference)
@@ -224,6 +309,12 @@ namespace FlexiMvvm.Bindings
                 () => "ShowsScopeBar");
         }
 
+        /// <summary>
+        /// One way binding on <see cref="UISearchBar.ShowsSearchResultsButton"/> property.
+        /// </summary>
+        /// <param name="searchBarReference">The item reference.</param>
+        /// <returns>One way binding on <see cref="UISearchBar.ShowsSearchResultsButton"/> property.</returns>
+        /// <exception cref="ArgumentNullException">searchBarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISearchBar, bool> ShowsSearchResultsButtonBinding(
             [NotNull] this IItemReference<UISearchBar> searchBarReference)
@@ -237,6 +328,12 @@ namespace FlexiMvvm.Bindings
                 () => "ShowsSearchResultsButton");
         }
 
+        /// <summary>
+        /// One way binding on <see cref="UISearchBar.Text"/> property.
+        /// </summary>
+        /// <param name="searchBarReference">The item reference.</param>
+        /// <returns>One way binding on <see cref="UISearchBar.Text"/> property.</returns>
+        /// <exception cref="ArgumentNullException">searchBarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISearchBar, string> TextBinding(
             [NotNull] this IItemReference<UISearchBar> searchBarReference)
@@ -250,6 +347,12 @@ namespace FlexiMvvm.Bindings
                 () => "Text");
         }
 
+        /// <summary>
+        /// Two way binding on <see cref="UISearchBar.TextChanged"/> event and <see cref="UISearchBar.Text"/> property.
+        /// </summary>
+        /// <param name="searchBarReference">The item reference.</param>
+        /// <returns>Two way binding on <see cref="UISearchBar.TextChanged"/> event and <see cref="UISearchBar.Text"/> property.</returns>
+        /// <exception cref="ArgumentNullException">searchBarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISearchBar, string> TextAndTextChangedBinding(
             [NotNull] this IItemReference<UISearchBar> searchBarReference)
@@ -267,6 +370,12 @@ namespace FlexiMvvm.Bindings
                 () => "TextAndTextChanged");
         }
 
+        /// <summary>
+        /// One way binding on <see cref="UISearchBar.Translucent"/> property.
+        /// </summary>
+        /// <param name="searchBarReference">The item reference.</param>
+        /// <returns>One way binding on <see cref="UISearchBar.Translucent"/> property.</returns>
+        /// <exception cref="ArgumentNullException">searchBarReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UISearchBar, bool> TranslucentBinding(
             [NotNull] this IItemReference<UISearchBar> searchBarReference)

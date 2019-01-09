@@ -15,31 +15,31 @@
 // =========================================================================
 
 using System;
+using Android.Widget;
 using FlexiMvvm.Bindings.Custom;
 using JetBrains.Annotations;
-using UIKit;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class UIViewControllerBindings
+    public static class EditTextBindings
     {
         /// <summary>
-        /// One way binding on <see cref="UIViewController.Title"/> property.
+        /// One way binding on <see cref="EditText.SetSelection(int)"/> method.
         /// </summary>
-        /// <param name="viewControllerReference">The item reference.</param>
-        /// <returns>One way binding on <see cref="UIViewController.Title"/> property.</returns>
-        /// <exception cref="ArgumentNullException">viewControllerReference is null.</exception>
+        /// <param name="editTextReference">The item reference.</param>
+        /// <returns>One way binding on <see cref="EditText.SetSelection(int)"/> method.</returns>
+        /// <exception cref="ArgumentNullException">editTextReference is null.</exception>
         [NotNull]
-        public static TargetItemBinding<UIViewController, string> TitleBinding(
-            [NotNull] this IItemReference<UIViewController> viewControllerReference)
+        public static TargetItemBinding<EditText, int> SetSelectionBinding(
+            [NotNull] this IItemReference<EditText> editTextReference)
         {
-            if (viewControllerReference == null)
-                throw new ArgumentNullException(nameof(viewControllerReference));
+            if (editTextReference == null)
+                throw new ArgumentNullException(nameof(editTextReference));
 
-            return new TargetItemOneWayCustomBinding<UIViewController, string>(
-                viewControllerReference,
-                (viewController, title) => viewController.NotNull().Title = title,
-                () => "Title");
+            return new TargetItemOneWayCustomBinding<EditText, int>(
+                editTextReference,
+                (editText, index) => editText.NotNull().SetSelection(index),
+                () => "SetSelection");
         }
     }
 }

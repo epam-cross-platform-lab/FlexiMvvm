@@ -23,6 +23,13 @@ namespace FlexiMvvm.Bindings
 {
     public static class UIBarButtonItemBindings
     {
+        /// <summary>
+        /// One way to source binding on <see cref="UIBarButtonItem.Clicked"/> event.
+        /// </summary>
+        /// <param name="barButtonItemReference">The item reference.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="UIBarButtonItem.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>One way to source binding on <see cref="UIBarButtonItem.Clicked"/> event.</returns>
+        /// <exception cref="ArgumentNullException">barButtonItemReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIBarButtonItem, object> ClickedBinding(
             [NotNull] this IItemReference<UIBarButtonItem> barButtonItemReference,
@@ -46,6 +53,12 @@ namespace FlexiMvvm.Bindings
                 () => "Clicked");
         }
 
+        /// <summary>
+        /// One way binding on <see cref="UIBarButtonItem.Enabled"/> property.
+        /// </summary>
+        /// <param name="barButtonItemReference">The item reference.</param>
+        /// <returns>One way binding on <see cref="UIBarButtonItem.Enabled"/> property.</returns>
+        /// <exception cref="ArgumentNullException">barButtonItemReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIBarButtonItem, bool> EnabledBinding(
             [NotNull] this IItemReference<UIBarButtonItem> barButtonItemReference)
@@ -59,6 +72,12 @@ namespace FlexiMvvm.Bindings
                 () => "Enabled");
         }
 
+        /// <summary>
+        /// One way binding on <see cref="UIBarButtonItem.Title"/> property.
+        /// </summary>
+        /// <param name="barButtonItemReference">The item reference.</param>
+        /// <returns>One way binding on <see cref="UIBarButtonItem.Title"/> property.</returns>
+        /// <exception cref="ArgumentNullException">barButtonItemReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIBarButtonItem, string> TitleBinding(
             [NotNull] this IItemReference<UIBarButtonItem> barButtonItemReference)
@@ -72,6 +91,12 @@ namespace FlexiMvvm.Bindings
                 () => "Title");
         }
 
+        /// <summary>
+        /// One way binding on <see cref="UIBarButtonItem.Width"/> property.
+        /// </summary>
+        /// <param name="barButtonItemReference">The item reference.</param>
+        /// <returns>One way binding on <see cref="UIBarButtonItem.Width"/> property.</returns>
+        /// <exception cref="ArgumentNullException">barButtonItemReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIBarButtonItem, nfloat> WidthBinding(
             [NotNull] this IItemReference<UIBarButtonItem> barButtonItemReference)

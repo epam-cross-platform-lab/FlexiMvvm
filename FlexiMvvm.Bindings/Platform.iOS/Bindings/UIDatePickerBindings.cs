@@ -24,6 +24,12 @@ namespace FlexiMvvm.Bindings
 {
     public static class UIDatePickerBindings
     {
+        /// <summary>
+        /// One way binding on <see cref="UIDatePicker.CountDownDuration"/> property.
+        /// </summary>
+        /// <param name="datePickerReference">The item reference.</param>
+        /// <returns>One way binding on <see cref="UIDatePicker.CountDownDuration"/> property.</returns>
+        /// <exception cref="ArgumentNullException">datePickerReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIDatePicker, double> CountDownDurationBinding(
             [NotNull] this IItemReference<UIDatePicker> datePickerReference)
@@ -37,6 +43,14 @@ namespace FlexiMvvm.Bindings
                 () => "CountDownDuration");
         }
 
+        /// <summary>
+        /// Two way binding on <see cref="UIControl.ValueChanged"/> event and <see cref="UIDatePicker.SetDate"/> method.
+        /// </summary>
+        /// <param name="datePickerReference">The item reference.</param>
+        /// <param name="animated">Second parameter for <see cref="UIDatePicker.SetDate"/> method.</param>
+        /// <param name="trackCanExecuteCommandChanged">if set to <c>true</c> than <see cref="UIDatePicker.Enabled"/> will be <c>false</c> when corresponding command is executing.</param>
+        /// <returns>Two way binding on <see cref="UIControl.ValueChanged"/> event and <see cref="UIDatePicker.SetDate"/> method.</returns>
+        /// <exception cref="ArgumentNullException">datePickerReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIDatePicker, NSDate> DateAndValueChangedBinding(
             [NotNull] this IItemReference<UIDatePicker> datePickerReference,
@@ -68,6 +82,12 @@ namespace FlexiMvvm.Bindings
                 () => "DateAndValueChanged");
         }
 
+        /// <summary>
+        /// One way binding on <see cref="UIDatePicker.Date"/> property.
+        /// </summary>
+        /// <param name="datePickerReference">The item reference.</param>
+        /// <returns>One way binding on <see cref="UIDatePicker.Date"/> property.</returns>
+        /// <exception cref="ArgumentNullException">datePickerReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIDatePicker, NSDate> DateBinding(
             [NotNull] this IItemReference<UIDatePicker> datePickerReference)
@@ -81,6 +101,12 @@ namespace FlexiMvvm.Bindings
                 () => "Date");
         }
 
+        /// <summary>
+        /// One way binding on <see cref="UIDatePicker.MaximumDate"/> property.
+        /// </summary>
+        /// <param name="datePickerReference">The item reference.</param>
+        /// <returns>One way binding on <see cref="UIDatePicker.MaximumDate"/> property.</returns>
+        /// <exception cref="ArgumentNullException">datePickerReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIDatePicker, NSDate> MaximumDateBinding(
             [NotNull] this IItemReference<UIDatePicker> datePickerReference)
@@ -94,6 +120,12 @@ namespace FlexiMvvm.Bindings
                 () => "MaximumDate");
         }
 
+        /// <summary>
+        /// One way binding on <see cref="UIDatePicker.MinimumDate"/> property.
+        /// </summary>
+        /// <param name="datePickerReference">The item reference.</param>
+        /// <returns>One way binding on <see cref="UIDatePicker.MinimumDate"/> property.</returns>
+        /// <exception cref="ArgumentNullException">datePickerReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIDatePicker, NSDate> MinimumDateBinding(
             [NotNull] this IItemReference<UIDatePicker> datePickerReference)
@@ -107,6 +139,12 @@ namespace FlexiMvvm.Bindings
                 () => "MinimumDate");
         }
 
+        /// <summary>
+        /// One way binding on <see cref="UIDatePicker.MinuteInterval"/> property.
+        /// </summary>
+        /// <param name="datePickerReference">The item reference.</param>
+        /// <returns>One way binding on <see cref="UIDatePicker.MinuteInterval"/> property.</returns>
+        /// <exception cref="ArgumentNullException">datePickerReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UIDatePicker, nint> MinuteIntervalBinding(
             [NotNull] this IItemReference<UIDatePicker> datePickerReference)

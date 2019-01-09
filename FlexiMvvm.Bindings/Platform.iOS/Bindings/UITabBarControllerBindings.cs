@@ -23,6 +23,12 @@ namespace FlexiMvvm.Bindings
 {
     public static class UITabBarControllerBindings
     {
+        /// <summary>
+        /// One way binding on <see cref="UITabBarController.SelectedIndex"/> property.
+        /// </summary>
+        /// <param name="tabBarControllerReference">The item reference.</param>
+        /// <returns>One way binding on <see cref="UITabBarController.SelectedIndex"/> property.</returns>
+        /// <exception cref="ArgumentNullException">tabBarControllerReference is null.</exception>
         [NotNull]
         public static TargetItemBinding<UITabBarController, nint> SelectedIndexBinding(
             [NotNull] this IItemReference<UITabBarController> tabBarControllerReference)
