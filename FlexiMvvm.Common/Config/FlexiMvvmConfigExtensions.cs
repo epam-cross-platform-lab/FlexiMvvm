@@ -17,30 +17,26 @@
 using System;
 using JetBrains.Annotations;
 
-namespace FlexiMvvm.Bootstrappers
+namespace FlexiMvvm.Config
 {
-    public class CompositeBootstrapper : IBootstrapper
+    public static class FlexiMvvmConfigExtensions
     {
-        [CanBeNull]
-        private readonly IBootstrapper[] _bootstrappers;
+        private const string ShouldRaisePropertyChangedKey = "ShouldRaisePropertyChanged";
 
-        public CompositeBootstrapper([CanBeNull] params IBootstrapper[] bootstrappers)
-        {
-            _bootstrappers = bootstrappers;
-        }
-
-        public void Execute(BootstrapperConfig config)
+        public static bool ShouldRaisePropertyChanged([NotNull] this FlexiMvvmConfig config)
         {
             if (config == null)
                 throw new ArgumentNullException(nameof(config));
 
-            if (_bootstrappers != null)
-            {
-                foreach (var bootstrapper in _bootstrappers)
-                {
-                    bootstrapper.Execute(config);
-                }
-            }
+            return ((IConfig)config).GetValue(ShouldRaisePropertyChangedKey, true);
+        }
+
+        public static void ShouldRaisePropertyChanged([NotNull] this FlexiMvvmConfig config, bool value)
+        {
+            if (config == null)
+                throw new ArgumentNullException(nameof(config));
+
+            ((IConfig)config).SetValue(ShouldRaisePropertyChangedKey, value);
         }
     }
 }

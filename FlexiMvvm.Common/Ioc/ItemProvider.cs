@@ -17,18 +17,29 @@
 using System;
 using JetBrains.Annotations;
 
-namespace FlexiMvvm.Collections
+namespace FlexiMvvm.Ioc
 {
-    public static class DisposableExtensions
+    internal class ItemProvider
     {
-        public static void DisposeWith([NotNull] this IDisposable disposable, [NotNull] DisposableCollection collection)
-        {
-            if (disposable == null)
-                throw new ArgumentNullException(nameof(disposable));
-            if (collection == null)
-                throw new ArgumentNullException(nameof(collection));
+        [NotNull]
+        private readonly Func<object> _factory;
+        private readonly Reuse _reuse;
+        [CanBeNull]
+        private Lazy<object> _lazyItem;
 
-            collection.Add(disposable);
+        internal ItemProvider([NotNull] Func<object> factory, Reuse reuse)
+        {
+            _factory = factory;
+            _reuse = reuse;
+        }
+
+        [NotNull]
+        private Lazy<object> LazyItem => _lazyItem ?? (_lazyItem = new Lazy<object>(() => _factory()));
+
+        [CanBeNull]
+        internal object Get()
+        {
+            return _reuse == Reuse.Singleton ? LazyItem.Value : _factory();
         }
     }
 }

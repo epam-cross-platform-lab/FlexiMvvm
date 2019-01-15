@@ -17,11 +17,30 @@
 using System;
 using JetBrains.Annotations;
 
-namespace FlexiMvvm.Ioc
+namespace FlexiMvvm.Bootstrappers
 {
-    public interface ISimpleIoc : IDependencyProvider
+    public sealed class CompositeBootstrapper : IBootstrapper
     {
-        void Register<T>([NotNull] Func<T> factory, Reuse reuse = Reuse.Transient)
-            where T : class;
+        [CanBeNull]
+        private readonly IBootstrapper[] _bootstrappers;
+
+        public CompositeBootstrapper([CanBeNull] params IBootstrapper[] bootstrappers)
+        {
+            _bootstrappers = bootstrappers;
+        }
+
+        public void Execute(BootstrapperConfig config)
+        {
+            if (config == null)
+                throw new ArgumentNullException(nameof(config));
+
+            if (_bootstrappers != null)
+            {
+                foreach (var bootstrapper in _bootstrappers)
+                {
+                    bootstrapper.Execute(config);
+                }
+            }
+        }
     }
 }

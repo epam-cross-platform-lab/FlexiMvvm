@@ -20,65 +20,7 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.Weak.Subscriptions
 {
-    public class WeakEventSubscription<TEventSource, TEventArgs> : WeakEventSubscriptionBase<TEventSource, TEventArgs>
-        where TEventSource : class
-    {
-        [NotNull]
-        private readonly Action<TEventSource, EventHandler<TEventArgs>> _subscribeToEvent;
-        [NotNull]
-        private readonly Action<TEventSource, EventHandler<TEventArgs>> _unsubscribeFromEvent;
-        [NotNull]
-        private readonly WeakEventHandler<TEventArgs> _weakEventHandler;
-
-        public WeakEventSubscription(
-            [NotNull] TEventSource eventSource,
-            [NotNull] Action<TEventSource, EventHandler<TEventArgs>> subscribeToEvent,
-            [NotNull] Action<TEventSource, EventHandler<TEventArgs>> unsubscribeFromEvent,
-            [NotNull] EventHandler<TEventArgs> eventHandler)
-            : base(eventSource)
-        {
-            _subscribeToEvent = subscribeToEvent;
-            _unsubscribeFromEvent = unsubscribeFromEvent;
-            _weakEventHandler = new WeakEventHandler<TEventArgs>(eventHandler);
-
-            SubscribeToEvent();
-        }
-
-        protected override void SubscribeToEvent(TEventSource eventSource)
-        {
-            if (eventSource == null)
-                throw new ArgumentNullException(nameof(eventSource));
-
-            _subscribeToEvent(eventSource, OnSourceEvent);
-        }
-
-        protected override void UnsubscribeFromEvent(TEventSource eventSource)
-        {
-            if (eventSource == null)
-                throw new ArgumentNullException(nameof(eventSource));
-
-            _unsubscribeFromEvent(eventSource, OnSourceEvent);
-        }
-
-        protected override bool TryInvokeEventHandler(object sender, TEventArgs e)
-        {
-            if (sender == null)
-                throw new ArgumentNullException(nameof(sender));
-            if (e == null)
-                throw new ArgumentNullException(nameof(e));
-
-            if (_weakEventHandler.TryGetTarget(out var target))
-            {
-                _weakEventHandler.Invoke(target, sender, e);
-
-                return true;
-            }
-
-            return false;
-        }
-    }
-
-    public class WeakEventSubscription<TEventSource> : WeakEventSubscriptionBase<TEventSource, EventArgs>
+    public sealed class WeakEventSubscription<TEventSource> : WeakEventSubscriptionBase<TEventSource, EventArgs>
         where TEventSource : class
     {
         [NotNull]
@@ -126,6 +68,64 @@ namespace FlexiMvvm.Weak.Subscriptions
         }
 
         protected override bool TryInvokeEventHandler(object sender, EventArgs e)
+        {
+            if (sender == null)
+                throw new ArgumentNullException(nameof(sender));
+            if (e == null)
+                throw new ArgumentNullException(nameof(e));
+
+            if (_weakEventHandler.TryGetTarget(out var target))
+            {
+                _weakEventHandler.Invoke(target, sender, e);
+
+                return true;
+            }
+
+            return false;
+        }
+    }
+
+    public sealed class WeakEventSubscription<TEventSource, TEventArgs> : WeakEventSubscriptionBase<TEventSource, TEventArgs>
+        where TEventSource : class
+    {
+        [NotNull]
+        private readonly Action<TEventSource, EventHandler<TEventArgs>> _subscribeToEvent;
+        [NotNull]
+        private readonly Action<TEventSource, EventHandler<TEventArgs>> _unsubscribeFromEvent;
+        [NotNull]
+        private readonly WeakEventHandler<TEventArgs> _weakEventHandler;
+
+        public WeakEventSubscription(
+            [NotNull] TEventSource eventSource,
+            [NotNull] Action<TEventSource, EventHandler<TEventArgs>> subscribeToEvent,
+            [NotNull] Action<TEventSource, EventHandler<TEventArgs>> unsubscribeFromEvent,
+            [NotNull] EventHandler<TEventArgs> eventHandler)
+            : base(eventSource)
+        {
+            _subscribeToEvent = subscribeToEvent;
+            _unsubscribeFromEvent = unsubscribeFromEvent;
+            _weakEventHandler = new WeakEventHandler<TEventArgs>(eventHandler);
+
+            SubscribeToEvent();
+        }
+
+        protected override void SubscribeToEvent(TEventSource eventSource)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+
+            _subscribeToEvent(eventSource, OnSourceEvent);
+        }
+
+        protected override void UnsubscribeFromEvent(TEventSource eventSource)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+
+            _unsubscribeFromEvent(eventSource, OnSourceEvent);
+        }
+
+        protected override bool TryInvokeEventHandler(object sender, TEventArgs e)
         {
             if (sender == null)
                 throw new ArgumentNullException(nameof(sender));

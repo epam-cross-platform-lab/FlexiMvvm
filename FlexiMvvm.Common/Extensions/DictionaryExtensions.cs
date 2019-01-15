@@ -18,7 +18,7 @@ using System;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 
-namespace FlexiMvvm.Collections
+namespace FlexiMvvm
 {
     public static class DictionaryExtensions
     {
@@ -47,14 +47,13 @@ namespace FlexiMvvm.Collections
         [CanBeNull]
         public static TValue GetValueOrDefault<TKey, TValue>(
             [CanBeNull] this IDictionary<TKey, TValue> dictionary,
-            [NotNull] TKey key)
+            [NotNull] TKey key,
+            [CanBeNull] TValue defaultValue = default)
         {
             if (key == null)
                 throw new ArgumentNullException(nameof(key));
 
-            return dictionary != null && dictionary.ContainsKey(key)
-                ? dictionary[key]
-                : default;
+            return dictionary != null && dictionary.ContainsKey(key) ? dictionary[key] : defaultValue;
         }
     }
 }

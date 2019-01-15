@@ -14,33 +14,14 @@
 // limitations under the License.
 // =========================================================================
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using JetBrains.Annotations;
 
-namespace FlexiMvvm.Collections
+namespace FlexiMvvm.Config
 {
-    public class GroupedObservableCollection<TGroup, TItem> : RangeObservableCollection<TItem>, IGrouping<TGroup, TItem>
+    public interface IConfig
     {
-        public GroupedObservableCollection([NotNull] TGroup key)
-        {
-            if (key == null)
-                throw new ArgumentNullException(nameof(key));
+        T GetValue<T>([NotNull] string key, [CanBeNull] T defaultValue = default);
 
-            Key = key;
-        }
-
-        public GroupedObservableCollection([NotNull] TGroup key, [NotNull] IEnumerable<TItem> items)
-            : base(items)
-        {
-            if (key == null)
-                throw new ArgumentNullException(nameof(key));
-
-            Key = key;
-        }
-
-        [NotNull]
-        public TGroup Key { get; }
+        void SetValue<T>([NotNull] string key, [CanBeNull] T value);
     }
 }

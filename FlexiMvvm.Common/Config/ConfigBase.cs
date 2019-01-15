@@ -20,7 +20,7 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.Config
 {
-    public abstract class ConfigBase
+    public abstract class ConfigBase : IConfig
     {
         [CanBeNull]
         private Dictionary<string, object> _values;
@@ -28,25 +28,17 @@ namespace FlexiMvvm.Config
         [NotNull]
         private Dictionary<string, object> Values => _values ?? (_values = new Dictionary<string, object>());
 
-        [CanBeNull]
-        public object Get([NotNull] string key, [CanBeNull] object defaultValue = default)
+        T IConfig.GetValue<T>(string key, T defaultValue)
         {
             if (key == null)
                 throw new ArgumentNullException(nameof(key));
             if (string.IsNullOrWhiteSpace(key))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            var value = defaultValue;
-
-            if (_values != null && _values.ContainsKey(key))
-            {
-                value = _values[key];
-            }
-
-            return value;
+            return (T)_values.GetValueOrDefault(key, defaultValue);
         }
 
-        public void Set([NotNull] string key, [CanBeNull] object value)
+        void IConfig.SetValue<T>(string key, T value)
         {
             if (key == null)
                 throw new ArgumentNullException(nameof(key));

@@ -14,14 +14,10 @@
 // limitations under the License.
 // =========================================================================
 
-using JetBrains.Annotations;
-
-namespace FlexiMvvm.Ioc
+namespace FlexiMvvm.Exceptions
 {
-    public interface IDependencyProvider
+    public interface IUserFriendlyException
     {
-        [NotNull]
-        T Get<T>()
-            where T : class;
+        string Message { get; }
     }
 }

@@ -16,7 +16,7 @@
 
 using System;
 using System.Collections.Generic;
-using FlexiMvvm.Diagnostics;
+using FlexiMvvm.Formatters;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.Ioc
@@ -27,37 +27,34 @@ namespace FlexiMvvm.Ioc
         private Dictionary<Type, ItemProvider> _itemsProviders;
 
         [NotNull]
-        private Dictionary<Type, ItemProvider> ItemsProviders =>
-            _itemsProviders ?? (_itemsProviders = new Dictionary<Type, ItemProvider>());
+        private Dictionary<Type, ItemProvider> ItemsProviders => _itemsProviders ?? (_itemsProviders = new Dictionary<Type, ItemProvider>());
 
         public void Register<T>(Func<T> factory, Reuse reuse = Reuse.Transient)
-            where T : class
         {
             if (factory == null)
                 throw new ArgumentNullException(nameof(factory));
 
-            ItemsProviders[typeof(T)] = new ItemProvider(factory, reuse);
+            ItemsProviders[typeof(T)] = new ItemProvider(() => factory(), reuse);
         }
 
         public T Get<T>()
-            where T : class
         {
             if (_itemsProviders != null && _itemsProviders.TryGetValue(typeof(T), out var itemProvider))
             {
-                var instance = itemProvider.Get();
+                var instance = (T)itemProvider.Get();
 
                 if (instance == null)
                 {
                     throw new InvalidOperationException(
-                        $"\"{LogFormatter.FormatTypeName(this)}\" returned \"null\" for \"{LogFormatter.FormatTypeName<T>()}>\" instance.");
+                        $"\"{nameof(IDependencyProvider)}.{nameof(IDependencyProvider.Get)}\" returned \"null\" for the \"{TypeFormatter.FormatName<T>()}>\" type instance.");
                 }
 
-                return (T)instance;
+                return instance;
             }
 
             throw new InvalidOperationException(
-                $"Instance factory is not registered for \"{LogFormatter.FormatTypeName<T>()}\" type. " +
-                $"Use \"{LogFormatter.FormatTypeName(this)}.{nameof(Register)}\" method for factory registration.");
+                $"Instance factory is not registered for the \"{TypeFormatter.FormatName<T>()}\" type. " +
+                $"Use \"{nameof(ISimpleIoc)}.{nameof(ISimpleIoc.Register)}\" method for the factory registration.");
         }
     }
 }

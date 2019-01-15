@@ -16,7 +16,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
@@ -24,16 +23,16 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.Collections
 {
-    public class RangeObservableCollection<TItem> : ObservableCollection<TItem>
+    public class ObservableCollection<TItem> : System.Collections.ObjectModel.ObservableCollection<TItem>
     {
         private const string CountString = "Count";
         private const string IndexerName = "Item[]";
 
-        public RangeObservableCollection()
+        public ObservableCollection()
         {
         }
 
-        public RangeObservableCollection([NotNull] IEnumerable<TItem> items)
+        public ObservableCollection([NotNull] IEnumerable<TItem> items)
             : base(items)
         {
         }
@@ -127,5 +126,28 @@ namespace FlexiMvvm.Collections
                 OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, newItems, replacedItems, startIndex));
             }
         }
+    }
+
+    public class ObservableCollection<TGroup, TItem> : ObservableCollection<TItem>, IGrouping<TGroup, TItem>
+    {
+        public ObservableCollection([NotNull] TGroup key)
+        {
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
+
+            Key = key;
+        }
+
+        public ObservableCollection([NotNull] TGroup key, [NotNull] IEnumerable<TItem> items)
+            : base(items)
+        {
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
+
+            Key = key;
+        }
+
+        [NotNull]
+        public TGroup Key { get; }
     }
 }

@@ -15,40 +15,21 @@
 // =========================================================================
 
 using System;
+using FlexiMvvm.Collections;
 using JetBrains.Annotations;
 
-namespace FlexiMvvm.Ioc
+namespace FlexiMvvm
 {
-    internal class ItemProvider
+    public static class DisposableExtensions
     {
-        [NotNull]
-        private readonly Func<object> _factory;
-        private readonly Reuse _reuse;
-        [CanBeNull]
-        private object _instance;
-
-        internal ItemProvider([NotNull] Func<object> factory, Reuse reuse)
+        public static void DisposeWith([NotNull] this IDisposable disposable, [NotNull] DisposableCollection collection)
         {
-            _factory = factory;
-            _reuse = reuse;
-        }
+            if (disposable == null)
+                throw new ArgumentNullException(nameof(disposable));
+            if (collection == null)
+                throw new ArgumentNullException(nameof(collection));
 
-        [CanBeNull]
-        internal object Get()
-        {
-            object instance;
-
-            if (_reuse == Reuse.Singleton)
-            {
-                _instance = _instance ?? _factory();
-                instance = _instance;
-            }
-            else
-            {
-                instance = _factory();
-            }
-
-            return instance;
+            collection.Add(disposable);
         }
     }
 }
