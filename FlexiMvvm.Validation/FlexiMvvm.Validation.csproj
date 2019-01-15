@@ -8,6 +8,6 @@
     </PropertyGroup>
     <ItemGroup>
         <ProjectReference Include="..\FlexiMvvm.Common\FlexiMvvm.Common.csproj" />
-        <PackageReference Include="FluentValidation" Version="8.0.100" />
+        <PackageReference Include="FluentValidation" Version="8.1.2" />
     </ItemGroup>
 </Project>
