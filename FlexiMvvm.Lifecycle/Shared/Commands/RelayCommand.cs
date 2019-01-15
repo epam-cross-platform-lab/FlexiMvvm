@@ -15,191 +15,63 @@
 // =========================================================================
 
 using System;
-using System.Diagnostics;
-using FlexiMvvm.Diagnostics;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.Commands
 {
-    public class RelayCommand : ICommand
+    public sealed class RelayCommand : Command
     {
         [NotNull]
         private readonly Action _execute;
         [CanBeNull]
         private readonly Func<bool> _canExecute;
-        [CanBeNull]
-        private readonly string _name;
-        [CanBeNull]
-        private ILogger _logger;
 
-        public RelayCommand([NotNull] Action execute, [CanBeNull] Func<bool> canExecute = null)
+        public RelayCommand([NotNull] Action execute, [CanBeNull] Func<bool> canExecute = null, [CanBeNull] string name = null)
+            : base(name)
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute;
         }
 
-        internal RelayCommand([NotNull] Action execute, [CanBeNull] Func<bool> canExecute, [NotNull] string name)
-            : this(execute, canExecute)
+        public override bool CanExecute()
         {
-            _name = name;
-        }
-
-        public event EventHandler CanExecuteChanged;
-
-        [NotNull]
-        private ILogger Logger => _logger ?? (_logger = new ConsoleLogger("FlexiMvvm.Lifecycle", GetCommandName()));
-
-        public bool CanExecute([CanBeNull] object parameter)
-        {
-            if (parameter != null)
-            {
-                Log($"\"{GetCommandName()}.{nameof(CanExecute)}\" method doesn't handle any passed parameter. \"null\" value is only acceptable.");
-            }
-
             return _canExecute?.Invoke() ?? true;
         }
 
-        public bool CanExecute()
+        public override void Execute()
         {
-            return CanExecute(null);
-        }
-
-        public void Execute([CanBeNull] object parameter)
-        {
-            if (CanExecute(parameter))
+            if (CanExecute())
             {
-                if (parameter != null)
-                {
-                    Log($"\"{GetCommandName()}.{nameof(Execute)}\" method doesn't handle any passed parameter. \"null\" value is only acceptable.");
-                }
-
                 _execute();
             }
         }
-
-        public void Execute()
-        {
-            Execute(null);
-        }
-
-        public void RaiseCanExecuteChanged()
-        {
-            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
-        }
-
-        [NotNull]
-        private string GetCommandName()
-        {
-            return !string.IsNullOrWhiteSpace(_name) ? _name : LogFormatter.FormatTypeName(this);
-        }
-
-        [Conditional("DEBUG")]
-        private void Log([CanBeNull] string message)
-        {
-            Logger.Log(message);
-        }
     }
 
-    public class RelayCommand<T> : ICommand<T>
+    public sealed class RelayCommand<T> : Command<T>
     {
         [NotNull]
         private readonly Action<T> _execute;
         [CanBeNull]
         private readonly Func<T, bool> _canExecute;
-        [CanBeNull]
-        private readonly string _name;
-        [CanBeNull]
-        private ILogger _logger;
 
-        public RelayCommand([NotNull] Action<T> execute, [CanBeNull] Func<T, bool> canExecute = null)
+        public RelayCommand([NotNull] Action<T> execute, [CanBeNull] Func<T, bool> canExecute = null, [CanBeNull] string name = null)
+            : base(name)
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute;
         }
 
-        internal RelayCommand([NotNull] Action<T> execute, [CanBeNull] Func<T, bool> canExecute, [NotNull] string name)
-            : this(execute, canExecute)
-        {
-            _name = name;
-        }
-
-        public event EventHandler CanExecuteChanged;
-
-        [NotNull]
-        private ILogger Logger => _logger ?? (_logger = new ConsoleLogger("FlexiMvvm.Lifecycle", GetCommandName()));
-
-        public bool CanExecute([CanBeNull] object parameter)
-        {
-            if (parameter is T typedParameter)
-            {
-                return CanExecute(typedParameter);
-            }
-            else
-            {
-                if (Equals(parameter, default(T)))
-                {
-                    return CanExecute(default);
-                }
-                else
-                {
-                    Log($"\"{GetCommandName()}.{nameof(CanExecute)}\" method parameter is expected to be " +
-                        $"\"{LogFormatter.FormatTypeName<T>()}\" type but it has \"{LogFormatter.FormatTypeName(parameter)}\" one. " +
-                        $"This method won't be executed.");
-
-                    return false;
-                }
-            }
-        }
-
-        public bool CanExecute(T parameter)
+        public override bool CanExecute(T parameter)
         {
             return _canExecute?.Invoke(parameter) ?? true;
         }
 
-        public void Execute([CanBeNull] object parameter)
-        {
-            if (parameter is T typedParameter)
-            {
-                Execute(typedParameter);
-            }
-            else
-            {
-                if (Equals(parameter, default(T)))
-                {
-                    Execute(default);
-                }
-                else
-                {
-                    Log($"\"{GetCommandName()}.{nameof(Execute)}\" method parameter is expected to be " +
-                        $"\"{LogFormatter.FormatTypeName<T>()}\" type but it has \"{LogFormatter.FormatTypeName(parameter)}\" one. " +
-                        $"This method won't be executed.");
-                }
-            }
-        }
-
-        public void Execute(T parameter)
+        public override void Execute(T parameter)
         {
             if (CanExecute(parameter))
             {
                 _execute(parameter);
             }
-        }
-
-        public void RaiseCanExecuteChanged()
-        {
-            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
-        }
-
-        [NotNull]
-        private string GetCommandName()
-        {
-            return !string.IsNullOrWhiteSpace(_name) ? _name : LogFormatter.FormatTypeName(this);
-        }
-
-        [Conditional("DEBUG")]
-        private void Log([CanBeNull] string message)
-        {
-            Logger.Log(message);
         }
     }
 }

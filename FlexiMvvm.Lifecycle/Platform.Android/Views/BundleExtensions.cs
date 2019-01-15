@@ -18,6 +18,7 @@ using System;
 using System.Runtime.Serialization;
 using Android.OS;
 using FlexiMvvm.Persistence;
+using FlexiMvvm.Persistence.Core;
 using FlexiMvvm.ViewModels;
 using JetBrains.Annotations;
 
@@ -25,92 +26,100 @@ namespace FlexiMvvm.Views
 {
     public static class BundleExtensions
     {
-        private const string ViewModelStateKey = "FlexiMvvm_ViewModelState";
-        private const string ViewModelParametersKey = "FlexiMvvm_ViewModelParameters";
-        private const string ViewModelResultKey = "FlexiMvvm_ViewModelResult";
+        private const string StateKey = "FlexiMvvm_ViewModel_State";
+        private const string ParametersKey = "FlexiMvvm_ViewModel_Parameters";
+        private const string ResultKey = "FlexiMvvm_ViewModel_Result";
 
         [CanBeNull]
-        internal static IBundle GetViewModelStateBundle([CanBeNull] this Bundle bundle)
+        internal static IBundle GetState([NotNull] this Bundle bundle)
         {
-            var stateBundle = bundle?.GetBundle(ViewModelStateKey);
+            IBundle state = null;
+            var stateNativeBundle = bundle.GetBundle(StateKey);
 
-            if (stateBundle != null)
+            if (stateNativeBundle != null && !stateNativeBundle.IsEmpty)
             {
-                return new NativeBundle(stateBundle);
+                state = new AndroidBundle(stateNativeBundle);
             }
 
-            return default;
+            return state;
         }
 
-        internal static void PutViewModelStateBundle([NotNull] this Bundle bundle, [CanBeNull] IBundle state)
+        internal static void PutState([NotNull] this Bundle bundle, [CanBeNull] IBundle state)
         {
-            var stateBundle = (Bundle)state?.ToNative();
+            var stateNativeBundleOwner = (INativeBundleOwner)state;
+            var stateNativeBundle = stateNativeBundleOwner?.ExportNativeBundle();
 
-            if (stateBundle != null)
+            if (stateNativeBundle != null && !stateNativeBundle.IsEmpty)
             {
-                bundle.PutBundle(ViewModelStateKey, stateBundle);
+                bundle.PutBundle(StateKey, stateNativeBundle);
             }
         }
 
         [CanBeNull]
-        public static TParameters GetViewModelParameters<TParameters>([CanBeNull] this Bundle bundle)
-            where TParameters : ViewModelParametersBase
-        {
-            var parametersBundle = bundle?.GetBundle(ViewModelParametersKey);
-
-            if (parametersBundle != null)
-            {
-                var viewModelParameters = (TParameters)FormatterServices.GetUninitializedObject(typeof(TParameters)).NotNull();
-                viewModelParameters.ImportParametersBundle(new NativeBundle(parametersBundle));
-
-                return viewModelParameters;
-            }
-
-            return default;
-        }
-
-        public static void PutViewModelParameters<TParameters>([NotNull] this Bundle bundle, [CanBeNull] TParameters parameters)
-            where TParameters : ViewModelParametersBase
+        public static TParameters GetParameters<TParameters>([NotNull] this Bundle bundle)
+            where TParameters : Parameters
         {
             if (bundle == null)
                 throw new ArgumentNullException(nameof(bundle));
 
-            var parametersBundle = (Bundle)parameters?.ExportParametersBundle()?.ToNative();
+            TParameters parameters = null;
+            var parametersNativeBundle = bundle.GetBundle(ParametersKey);
 
-            if (parametersBundle != null)
+            if (parametersNativeBundle != null)
             {
-                bundle.PutBundle(ViewModelParametersKey, parametersBundle);
-            }
-        }
-
-        [CanBeNull]
-        public static TResult GetViewModelResult<TResult>([CanBeNull] this Bundle bundle)
-            where TResult : ViewModelResultBase
-        {
-            var resultBundle = bundle?.GetBundle(ViewModelResultKey);
-
-            if (resultBundle != null)
-            {
-                var viewModelResult = (TResult)FormatterServices.GetUninitializedObject(typeof(TResult)).NotNull();
-                viewModelResult.ImportResultBundle(new NativeBundle(resultBundle));
-
-                return viewModelResult;
+                parameters = (TParameters)FormatterServices.GetUninitializedObject(typeof(TParameters)).NotNull();
+                ((IBundleOwner)parameters).ImportBundle(new AndroidBundle(parametersNativeBundle));
             }
 
-            return default;
+            return parameters;
         }
 
-        public static void PutViewModelResult<TResult>([NotNull] this Bundle bundle, [CanBeNull] TResult result)
-            where TResult : ViewModelResultBase
+        public static void PutParameters<TParameters>([NotNull] this Bundle bundle, [CanBeNull] TParameters parameters)
+            where TParameters : Parameters
         {
             if (bundle == null)
                 throw new ArgumentNullException(nameof(bundle));
 
-            var resultBundle = (Bundle)result?.ExportResultBundle()?.ToNative();
+            var parametersNativeBundleOwner = (INativeBundleOwner)((IBundleOwner)parameters)?.ExportBundle();
+            var parametersNativeBundle = parametersNativeBundleOwner?.ExportNativeBundle();
 
-            if (resultBundle != null)
+            if (parametersNativeBundle != null)
             {
-                bundle.PutBundle(ViewModelResultKey, resultBundle);
+                bundle.PutBundle(ParametersKey, parametersNativeBundle);
+            }
+        }
+
+        [CanBeNull]
+        public static TResult GetResult<TResult>([NotNull] this Bundle bundle)
+            where TResult : Result
+        {
+            if (bundle == null)
+                throw new ArgumentNullException(nameof(bundle));
+
+            TResult result = null;
+            var resultNativeBundle = bundle.GetBundle(ResultKey);
+
+            if (resultNativeBundle != null)
+            {
+                result = (TResult)FormatterServices.GetUninitializedObject(typeof(TResult)).NotNull();
+                ((IBundleOwner)result).ImportBundle(new AndroidBundle(resultNativeBundle));
+            }
+
+            return result;
+        }
+
+        public static void PutResult<TResult>([NotNull] this Bundle bundle, [CanBeNull] TResult result)
+            where TResult : Result
+        {
+            if (bundle == null)
+                throw new ArgumentNullException(nameof(bundle));
+
+            var resultNativeBundleOwner = (INativeBundleOwner)((IBundleOwner)result)?.ExportBundle();
+            var resultNativeBundle = resultNativeBundleOwner?.ExportNativeBundle();
+
+            if (resultNativeBundle != null)
+            {
+                bundle.PutBundle(ResultKey, resultNativeBundle);
             }
         }
     }

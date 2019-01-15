@@ -19,4 +19,29 @@
     <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid90')) ">
         <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0" />
     </ItemGroup>
+    <ItemGroup>
+        <None Update="Platform.Android\Views\FlxViewsGenerator.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>FlxViewsGenerator.cs</LastGenOutput>
+        </None>
+        <None Update="Platform.iOS\Views\FlxViewsGenerator.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>FlxViewsGenerator.cs</LastGenOutput>
+        </None>
+    </ItemGroup>
+    <ItemGroup>
+        <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+    </ItemGroup>
+    <ItemGroup>
+        <None Update="Platform.Android\Views\FlxViewsGenerator.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>FlxViewsGenerator.tt</DependentUpon>
+        </None>
+        <None Update="Platform.iOS\Views\FlxViewsGenerator.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>FlxViewsGenerator.tt</DependentUpon>
+        </None>
+    </ItemGroup>
 </Project>

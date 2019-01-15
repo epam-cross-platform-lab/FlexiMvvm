@@ -14,56 +14,32 @@
 // limitations under the License.
 // =========================================================================
 
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using FlexiMvvm.Persistence;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.ViewModels
 {
-    public interface IViewModel : INotifyPropertyChanged
+    public interface IViewModel
     {
-        [CanBeNull]
-        Task Initialization { get; }
-
-        [NotifyPropertyChangedInvocator]
-        void RaisePropertyChanged([CallerMemberName] string propertyName = null);
-    }
-
-    public interface IViewModelWithState : IViewModel
-    {
-        void ImportStateBundle([CanBeNull] IBundle bundle);
-
-        [CanBeNull]
-        IBundle ExportStateBundle();
-    }
-
-    public interface IViewModelWithoutParameters : IViewModel
-    {
-        void Initialize();
-
         [NotNull]
         Task InitializeAsync();
     }
 
-    public interface IViewModelWithParameters<in TParameters> : IViewModel
-        where TParameters : ViewModelParametersBase
+    public interface IViewModelWithParameters<out TParameters> : IViewModel
+        where TParameters : Parameters
     {
-        void Initialize([CanBeNull] TParameters parameters);
-
-        [NotNull]
-        Task InitializeAsync([CanBeNull] TParameters parameters);
+        [CanBeNull]
+        TParameters Parameters { get; }
     }
 
     public interface IViewModelWithResult<in TResult> : IViewModel
-        where TResult : ViewModelResultBase
+        where TResult : Result
     {
-        void SetResult(ViewModelResultCode resultCode, [CanBeNull] TResult result);
+        void SetResult(ResultCode resultCode, [CanBeNull] TResult result);
     }
 
     public interface IViewModelWithResultHandler : IViewModel
     {
-        void HandleResult(ViewModelResultCode resultCode, [CanBeNull] ViewModelResultBase result);
+        void HandleResult(ResultCode resultCode, [CanBeNull] Result result);
     }
 }

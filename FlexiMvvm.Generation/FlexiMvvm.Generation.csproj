@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <AssemblyName>FlexiMvvm.Generation</AssemblyName>
+        <PackageId>FlexiMvvm.Generation</PackageId>
+        <Title>FlexiMvvm.Generation</Title>
+        <Description>MVVM framework for Xamarin.Native.</Description>
+        <EnableDefaultCompileItems>true</EnableDefaultCompileItems>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="System.CodeDom" Version="4.5.0" />
+    </ItemGroup>
+    <ItemGroup>
+        <None Update="Views\Generation\Android\BindableViewsGenerator.tt">
+            <Generator>TextTemplatingFilePreprocessor</Generator>
+            <LastGenOutput>BindableViewsGenerator.cs</LastGenOutput>
+        </None>
+        <None Update="Views\Generation\Android\ViewsGenerator.tt">
+            <Generator>TextTemplatingFilePreprocessor</Generator>
+            <LastGenOutput>ViewsGenerator.cs</LastGenOutput>
+        </None>
+        <None Update="Views\Generation\Ios\BindableViewsGenerator.tt">
+            <Generator>TextTemplatingFilePreprocessor</Generator>
+            <LastGenOutput>BindableViewsGenerator.cs</LastGenOutput>
+        </None>
+        <None Update="Views\Generation\Ios\ViewsGenerator.tt">
+            <Generator>TextTemplatingFilePreprocessor</Generator>
+            <LastGenOutput>ViewsGenerator.cs</LastGenOutput>
+        </None>
+    </ItemGroup>
+    <ItemGroup>
+        <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Update="Views\Generation\Android\BindableViewsGenerator.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>BindableViewsGenerator.tt</DependentUpon>
+        </Compile>
+        <Compile Update="Views\Generation\Android\ViewsGenerator.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>ViewsGenerator.tt</DependentUpon>
+        </Compile>
+        <Compile Update="Views\Generation\Ios\BindableViewsGenerator.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>BindableViewsGenerator.tt</DependentUpon>
+        </Compile>
+        <Compile Update="Views\Generation\Ios\ViewsGenerator.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>ViewsGenerator.tt</DependentUpon>
+        </Compile>
+    </ItemGroup>
+</Project>

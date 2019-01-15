@@ -14,7 +14,8 @@
 // limitations under the License.
 // =========================================================================
 
-using FlexiMvvm.ViewModels;
+using System;
+using System.Linq;
 using JetBrains.Annotations;
 using UIKit;
 
@@ -23,38 +24,88 @@ namespace FlexiMvvm.Views
     public static class ViewExtensions
     {
         [CanBeNull]
-        public static UINavigationController GetNavigationController([NotNull] this IIosView view)
+        public static UINavigationController GetNavigationController([NotNull] this IView view)
         {
             if (view == null)
-                throw new System.ArgumentNullException(nameof(view));
+                throw new ArgumentNullException(nameof(view));
 
-            UINavigationController parentNavigationControllerOrSelf = null;
+            return view.As(
+                navigationController => navigationController,
+                viewController => viewController.NotNull().NavigationController,
+                childViewController => FindParentViewController(childViewController.NotNull()).NavigationController);
+        }
+
+        internal static void As(
+            [NotNull] this IView view,
+            [NotNull] Action<UINavigationController> navigationControllerAction,
+            [NotNull] Action<UIViewController> viewControllerAction,
+            [NotNull] Action<UIViewController> childViewControllerAction)
+        {
+            if (view == null)
+                throw new ArgumentNullException(nameof(view));
+            if (navigationControllerAction == null)
+                throw new ArgumentNullException(nameof(navigationControllerAction));
+            if (viewControllerAction == null)
+                throw new ArgumentNullException(nameof(viewControllerAction));
+            if (childViewControllerAction == null)
+                throw new ArgumentNullException(nameof(childViewControllerAction));
 
             if (view is UINavigationController navigationController)
             {
-                parentNavigationControllerOrSelf = navigationController;
+                navigationControllerAction(navigationController);
             }
             else if (view is UIViewController viewController)
             {
-                parentNavigationControllerOrSelf = viewController.NavigationController;
+                if (IsChildViewController(viewController))
+                {
+                    childViewControllerAction(viewController);
+                }
+                else
+                {
+                    viewControllerAction(viewController);
+                }
             }
-
-            return parentNavigationControllerOrSelf;
         }
 
         [CanBeNull]
-        internal static IIosView<IViewModel> FindParentViewWithModel([NotNull] this UIViewController parent)
+        public static T As<T>(
+            [NotNull] this IView view,
+            [NotNull] Func<UINavigationController, T> navigationControllerFunc,
+            [NotNull] Func<UIViewController, T> viewControllerFunc,
+            [NotNull] Func<UIViewController, T> childViewControllerFunc)
         {
-            IIosView<IViewModel> parentView = null;
-            var parentViewController = parent;
+            if (view == null)
+                throw new ArgumentNullException(nameof(view));
+            if (navigationControllerFunc == null)
+                throw new ArgumentNullException(nameof(navigationControllerFunc));
+            if (viewControllerFunc == null)
+                throw new ArgumentNullException(nameof(viewControllerFunc));
+            if (childViewControllerFunc == null)
+                throw new ArgumentNullException(nameof(childViewControllerFunc));
 
-            while (parentView == null && parentViewController != null)
+            T result = default;
+
+            if (view is UINavigationController navigationController)
             {
-                parentView = parentViewController as IIosView<IViewModel>;
-                parentViewController = parentViewController.ParentViewController;
+                result = navigationControllerFunc(navigationController);
+            }
+            else if (view is UIViewController viewController)
+            {
+                result = IsChildViewController(viewController) ? childViewControllerFunc(viewController) : viewControllerFunc(viewController);
             }
 
-            return parentView;
+            return result;
+        }
+
+        private static bool IsChildViewController([NotNull] UIViewController viewController)
+        {
+            return viewController.ParentViewController?.ChildViewControllers?.Contains(viewController) ?? false;
+        }
+
+        [NotNull]
+        private static UIViewController FindParentViewController([NotNull] UIViewController viewController)
+        {
+            return IsChildViewController(viewController) ? FindParentViewController(viewController.ParentViewController.NotNull()) : viewController;
         }
     }
 }

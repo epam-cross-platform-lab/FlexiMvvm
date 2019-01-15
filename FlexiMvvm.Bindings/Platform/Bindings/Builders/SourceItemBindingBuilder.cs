@@ -16,8 +16,10 @@
 
 using System;
 using System.Linq.Expressions;
+using System.Windows.Input;
 using FlexiMvvm.Bindings.Custom.Core;
 using FlexiMvvm.Bindings.Custom.Core.Source;
+using FlexiMvvm.Commands;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.Bindings.Builders
@@ -71,7 +73,7 @@ namespace FlexiMvvm.Bindings.Builders
         }
 
         public ICompositeItemCommandBindingBuilder<TSourceItem> To(
-            Expression<Func<TSourceItem, System.Windows.Input.ICommand>> sourceItemValue)
+            Expression<Func<TSourceItem, ICommand>> sourceItemValue)
         {
             var sourceItemValueAccessor = new ItemValueAccessor<TSourceItem, System.Windows.Input.ICommand>(sourceItemValue);
             var sourceItemBinding = new SourceItemCommandBinding<TSourceItem, object>(
@@ -85,7 +87,7 @@ namespace FlexiMvvm.Bindings.Builders
         }
 
         public ICompositeItemCommandBindingBuilder<TSourceItem> To(
-            Expression<Func<TSourceItem, FlexiMvvm.Commands.ICommand>> sourceItemValue)
+            Expression<Func<TSourceItem, Command>> sourceItemValue)
         {
             var sourceItemValueAccessor = new ItemValueAccessor<TSourceItem, System.Windows.Input.ICommand>(sourceItemValue);
             var sourceItemBinding = new SourceItemCommandBinding<TSourceItem, object>(
@@ -99,7 +101,7 @@ namespace FlexiMvvm.Bindings.Builders
         }
 
         public ICompositeItemCommandBindingBuilder<TSourceItem> To<TSourceItemValue>(
-            Expression<Func<TSourceItem, FlexiMvvm.Commands.ICommand<TSourceItemValue>>> sourceItemValue)
+            Expression<Func<TSourceItem, Command<TSourceItemValue>>> sourceItemValue)
         {
             var sourceItemValueAccessor = new ItemValueAccessor<TSourceItem, System.Windows.Input.ICommand>(sourceItemValue);
             var sourceItemBinding = new SourceItemCommandBinding<TSourceItem, TSourceItemValue>(

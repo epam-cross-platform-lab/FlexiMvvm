@@ -25,41 +25,51 @@ namespace FlexiMvvm.Views
     public static class IntentExtensions
     {
         [CanBeNull]
-        public static TParameters GetViewModelParameters<TParameters>([CanBeNull] this Intent intent)
-            where TParameters : ViewModelParametersBase
-        {
-            return intent?.Extras.GetViewModelParameters<TParameters>();
-        }
-
-        public static void PutViewModelParameters<TParameters>([NotNull] this Intent intent, [CanBeNull] TParameters parameters)
-            where TParameters : ViewModelParametersBase
+        public static TParameters GetParameters<TParameters>([NotNull] this Intent intent)
+            where TParameters : Parameters
         {
             if (intent == null)
                 throw new ArgumentNullException(nameof(intent));
 
-            var bundle = intent.Extras ?? new Bundle();
-            bundle.PutViewModelParameters(parameters);
+            return intent.Extras?.GetParameters<TParameters>();
+        }
 
-            intent.ReplaceExtras(bundle);
+        public static void PutParameters<TParameters>([NotNull] this Intent intent, [CanBeNull] TParameters parameters)
+            where TParameters : Parameters
+        {
+            if (intent == null)
+                throw new ArgumentNullException(nameof(intent));
+
+            if (parameters != null)
+            {
+                var bundle = intent.Extras ?? new Bundle();
+                bundle.PutParameters(parameters);
+                intent.ReplaceExtras(bundle);
+            }
         }
 
         [CanBeNull]
-        public static TResult GetViewModelResult<TResult>([CanBeNull] this Intent intent)
-            where TResult : ViewModelResultBase
-        {
-            return intent?.Extras.GetViewModelResult<TResult>();
-        }
-
-        public static void PutViewModelResult<TResult>([NotNull] this Intent intent, [CanBeNull] TResult result)
-            where TResult : ViewModelResultBase
+        public static TResult GetResult<TResult>([NotNull] this Intent intent)
+            where TResult : Result
         {
             if (intent == null)
                 throw new ArgumentNullException(nameof(intent));
 
-            var bundle = intent.Extras ?? new Bundle();
-            bundle.PutViewModelResult(result);
+            return intent.Extras?.GetResult<TResult>();
+        }
 
-            intent.ReplaceExtras(bundle);
+        public static void PutResult<TResult>([NotNull] this Intent intent, [CanBeNull] TResult result)
+            where TResult : Result
+        {
+            if (intent == null)
+                throw new ArgumentNullException(nameof(intent));
+
+            if (result != null)
+            {
+                var bundle = intent.Extras ?? new Bundle();
+                bundle.PutResult(result);
+                intent.ReplaceExtras(bundle);
+            }
         }
     }
 }

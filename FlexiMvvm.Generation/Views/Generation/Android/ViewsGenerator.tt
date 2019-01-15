@@ -1,0 +1,226 @@
+﻿<#
+// =========================================================================
+// Copyright 2019 EPAM Systems, Inc.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// =========================================================================
+#>
+<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+using System;
+using System.Threading.Tasks;
+using Android.Content;
+using Android.OS;
+using Android.Runtime;
+using Android.Views;
+using FlexiMvvm.Persistence.Core;
+using FlexiMvvm.ViewModels;
+using FlexiMvvm.ViewModels.Core;
+using FlexiMvvm.Views;
+using FlexiMvvm.Views.Core;
+<# foreach (var viewGenerationOptions in ViewsGenerationOptions) { #>
+
+namespace <#= string.IsNullOrWhiteSpace(viewGenerationOptions.TargetNamespace) ? TargetNamespace : viewGenerationOptions.TargetNamespace #>
+{
+    [Register("<#= TargetNamespace.ToLower() #>.<#= viewGenerationOptions.ClassName #>")]
+    public partial class <#= viewGenerationOptions.ClassName #> : <#= viewGenerationOptions.BaseClassName #>, <#= viewGenerationOptions.BaseInterfaceName #>
+    {
+        private IViewLifecycleDelegate _lifecycleDelegate;
+
+        public event EventHandler OnCreateCalled;
+<# if (viewGenerationOptions.Kind == ViewKind.Fragment) { #>
+
+        public event EventHandler OnActivityCreatedCalled;
+<# } #>
+
+        public event EventHandler OnStartCalled;
+
+        public event EventHandler OnResumeCalled;
+
+        public event EventHandler OnPauseCalled;
+
+        public event EventHandler OnStopCalled;
+
+        public event EventHandler<OptionsItemSelectedEventArgs> OnOptionsItemSelectedCalled;
+<# if (viewGenerationOptions.Kind == ViewKind.Activity) { #>
+
+        public event EventHandler<BackPressedEventArgs> OnBackPressedCalled;
+<# } #>
+
+        protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ?? (_lifecycleDelegate = CreateLifecycleDelegate());
+
+        protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #>>(this);
+        }
+
+        <#= viewGenerationOptions.LifecycleMethodAccessModifier #> override void OnCreate(Bundle savedInstanceState)
+        {
+            base.OnCreate(savedInstanceState);
+
+            LifecycleDelegate.OnCreate(savedInstanceState);
+            OnCreateCalled?.Invoke(this, EventArgs.Empty);
+        }
+<# if (viewGenerationOptions.Kind == ViewKind.Fragment) { #>
+
+        public override void OnActivityCreated(Bundle savedInstanceState)
+        {
+            base.OnActivityCreated(savedInstanceState);
+
+            OnActivityCreatedCalled?.Invoke(this, EventArgs.Empty);
+        }
+<# } #>
+
+        <#= viewGenerationOptions.LifecycleMethodAccessModifier #> override void OnStart()
+        {
+            base.OnStart();
+
+            LifecycleDelegate.OnStart();
+            OnStartCalled?.Invoke(this, EventArgs.Empty);
+        }
+
+        <#= viewGenerationOptions.LifecycleMethodAccessModifier #> override void OnResume()
+        {
+            base.OnResume();
+
+            OnResumeCalled?.Invoke(this, EventArgs.Empty);
+        }
+
+        <#= viewGenerationOptions.LifecycleMethodAccessModifier #> override void OnPause()
+        {
+            base.OnPause();
+
+            OnPauseCalled?.Invoke(this, EventArgs.Empty);
+        }
+
+        <#= viewGenerationOptions.LifecycleMethodAccessModifier #> override void OnStop()
+        {
+            base.OnStop();
+
+            OnStopCalled?.Invoke(this, EventArgs.Empty);
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            var optionsItemSelectedEventArgs = new OptionsItemSelectedEventArgs(item);
+            OnOptionsItemSelectedCalled?.Invoke(this, optionsItemSelectedEventArgs);
+
+            if (optionsItemSelectedEventArgs.Handled)
+            {
+                return true;
+            }
+
+            return base.OnOptionsItemSelected(item);
+        }
+<# if (viewGenerationOptions.Kind == ViewKind.Activity) { #>
+
+        public override void OnBackPressed()
+        {
+            var backPressedEventArgs = new BackPressedEventArgs();
+            OnBackPressedCalled?.Invoke(this, backPressedEventArgs);
+
+            if (!backPressedEventArgs.Handled)
+            {
+                base.OnBackPressed();
+            }
+        }
+<# } #>
+
+        <#= viewGenerationOptions.LifecycleMethodAccessModifier #> override void OnActivityResult(int requestCode, <#= viewGenerationOptions.ResultCodeTypeName #> resultCode, Intent data)
+        {
+            LifecycleDelegate.OnActivityResult(requestCode, (Android.App.Result)resultCode, data);
+
+            base.OnActivityResult(requestCode, resultCode, data);
+        }
+
+        <#= viewGenerationOptions.LifecycleMethodAccessModifier #> override void OnSaveInstanceState(Bundle outState)
+        {
+            LifecycleDelegate.OnSaveInstanceState(outState);
+
+            base.OnSaveInstanceState(outState);
+        }
+<# if (viewGenerationOptions.Kind == ViewKind.Fragment) { #>
+
+        public override void OnDestroyView()
+        {
+            LifecycleDelegate.OnDestroyView();
+
+            base.OnDestroyView();
+        }
+<# } #>
+
+        <#= viewGenerationOptions.LifecycleMethodAccessModifier #> override void OnDestroy()
+        {
+            LifecycleDelegate.OnDestroy();
+
+            base.OnDestroy();
+        }
+    }
+
+    public partial class <#= viewGenerationOptions.ClassName #><TViewModel> : <#= viewGenerationOptions.ClassName #>, <#= viewGenerationOptions.BaseInterfaceName #><TViewModel>
+        where TViewModel : class, IViewModel, IStateOwner
+    {
+        private RequestCode _requestCode;
+
+        public TViewModel ViewModel { get; private set; }
+
+        public RequestCode RequestCode => _requestCode ?? (_requestCode = new RequestCode());
+
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel>, TViewModel>(this);
+        }
+
+        void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
+        {
+            ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
+        }
+
+        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        {
+            return ViewModel.InitializeAsync();
+        }
+    }
+
+    public partial class <#= viewGenerationOptions.ClassName #><TViewModel, TParameters> : <#= viewGenerationOptions.ClassName #>, <#= viewGenerationOptions.BaseInterfaceName #><TViewModel>
+        where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>, IStateOwner
+        where TParameters : Parameters
+    {
+        private RequestCode _requestCode;
+
+        public TViewModel ViewModel { get; private set; }
+
+        public RequestCode RequestCode => _requestCode ?? (_requestCode = new RequestCode());
+
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel, TParameters>, TViewModel>(this);
+        }
+
+        void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
+        {
+            ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
+        }
+
+        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        {
+            ViewModel.SetParameters(<#= viewGenerationOptions.ParametersSourceName #>?.GetParameters<TParameters>());
+
+            return ViewModel.InitializeAsync();
+        }
+    }
+}
+<# } #>

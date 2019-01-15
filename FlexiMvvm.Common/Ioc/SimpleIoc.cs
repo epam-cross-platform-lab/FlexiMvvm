@@ -21,7 +21,7 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.Ioc
 {
-    public class SimpleIoc : ISimpleIoc
+    public sealed class SimpleIoc : ISimpleIoc
     {
         [CanBeNull]
         private Dictionary<Type, ItemProvider> _itemsProviders;
@@ -46,7 +46,8 @@ namespace FlexiMvvm.Ioc
                 if (instance == null)
                 {
                     throw new InvalidOperationException(
-                        $"\"{nameof(IDependencyProvider)}.{nameof(IDependencyProvider.Get)}\" returned \"null\" for the \"{TypeFormatter.FormatName<T>()}>\" type instance.");
+                        $"\"{TypeFormatter.FormatName<IDependencyProvider>()}.{nameof(IDependencyProvider.Get)}\" " +
+                        $"returned \"null\" for the \"{TypeFormatter.FormatName<T>()}>\" type instance.");
                 }
 
                 return instance;
@@ -54,7 +55,7 @@ namespace FlexiMvvm.Ioc
 
             throw new InvalidOperationException(
                 $"Instance factory is not registered for the \"{TypeFormatter.FormatName<T>()}\" type. " +
-                $"Use \"{nameof(ISimpleIoc)}.{nameof(ISimpleIoc.Register)}\" method for the factory registration.");
+                $"Use \"{TypeFormatter.FormatName<ISimpleIoc>()}.{nameof(ISimpleIoc.Register)}\" method for the factory registration.");
         }
     }
 }

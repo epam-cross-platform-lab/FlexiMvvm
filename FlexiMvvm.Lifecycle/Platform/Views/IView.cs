@@ -19,12 +19,14 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.Views
 {
-    public interface IView<out TViewModel>
+    public partial interface IView
+    {
+    }
+
+    public interface IView<out TViewModel> : IView
         where TViewModel : class, IViewModel
     {
         [NotNull]
         TViewModel ViewModel { get; }
-
-        void InitializeViewModel();
     }
 }

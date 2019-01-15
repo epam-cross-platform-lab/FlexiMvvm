@@ -14,16 +14,18 @@
 // limitations under the License.
 // =========================================================================
 
+using FlexiMvvm.Persistence.Core;
 using FlexiMvvm.ViewModels;
+using FlexiMvvm.ViewModels.Core;
 
 namespace FlexiMvvm.Views
 {
-    public interface IFlxActivity : IEventSourceActivity, IActivityView
+    public interface IFlxActivity : IView, ILifecycleEventSourceActivity
     {
     }
 
-    public interface IFlxActivity<TViewModel> : IFlxActivity, IActivityView<TViewModel>
-        where TViewModel : class, IViewModel
+    public interface IFlxActivity<TViewModel> : IFlxActivity, IForwardNavigationView<TViewModel>, IBackwardNavigationView<TViewModel>, IViewModelOwner<TViewModel>
+        where TViewModel : class, IViewModel, IStateOwner
     {
     }
 }

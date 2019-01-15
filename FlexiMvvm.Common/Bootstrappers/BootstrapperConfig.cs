@@ -14,7 +14,7 @@
 // limitations under the License.
 // =========================================================================
 
-using FlexiMvvm.Config;
+using FlexiMvvm.Configuration;
 
 namespace FlexiMvvm.Bootstrappers
 {

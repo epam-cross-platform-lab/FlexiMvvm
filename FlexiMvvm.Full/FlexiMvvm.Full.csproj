@@ -12,4 +12,29 @@
         <ProjectReference Include="..\FlexiMvvm.Common\FlexiMvvm.Common.csproj" />
         <ProjectReference Include="..\FlexiMvvm.Lifecycle\FlexiMvvm.Lifecycle.csproj" />
     </ItemGroup>
+    <ItemGroup>
+        <None Update="Platform.Android\Views\FlxBindableViewsGenerator.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>FlxBindableViewsGenerator.cs</LastGenOutput>
+        </None>
+        <None Update="Platform.iOS\Views\FlxBindableViewsGenerator.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>FlxBindableViewsGenerator.cs</LastGenOutput>
+        </None>
+    </ItemGroup>
+    <ItemGroup>
+        <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+    </ItemGroup>
+    <ItemGroup>
+        <None Update="Platform.Android\Views\FlxBindableViewsGenerator.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>FlxBindableViewsGenerator.tt</DependentUpon>
+        </None>
+        <None Update="Platform.iOS\Views\FlxBindableViewsGenerator.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>FlxBindableViewsGenerator.tt</DependentUpon>
+        </None>
+    </ItemGroup>
 </Project>

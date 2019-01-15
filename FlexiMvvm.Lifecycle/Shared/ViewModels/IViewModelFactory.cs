@@ -14,6 +14,8 @@
 // limitations under the License.
 // =========================================================================
 
+using FlexiMvvm.Persistence;
+using FlexiMvvm.Persistence.Core;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.ViewModels
@@ -23,5 +25,9 @@ namespace FlexiMvvm.ViewModels
         [NotNull]
         TViewModel Create<TViewModel>()
             where TViewModel : class, IViewModel;
+
+        [NotNull]
+        TViewModel Create<TViewModel>([CanBeNull] IBundle state)
+            where TViewModel : class, IViewModel, IStateOwner;
     }
 }

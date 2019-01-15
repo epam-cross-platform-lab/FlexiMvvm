@@ -14,93 +14,73 @@
 // limitations under the License.
 // =========================================================================
 
-using Android.App;
-using FlexiMvvm.ViewModels;
+using System;
 using JetBrains.Annotations;
+using Fragment = Android.Support.V4.App.Fragment;
+using FragmentActivity = Android.Support.V4.App.FragmentActivity;
 
 namespace FlexiMvvm.Views
 {
     public static class ViewExtensions
     {
-        [CanBeNull]
-        public static Activity GetActivity([NotNull] this IAndroidView view)
+        [NotNull]
+        public static FragmentActivity GetActivity([NotNull] this IView view)
         {
             if (view == null)
-                throw new System.ArgumentNullException(nameof(view));
+                throw new ArgumentNullException(nameof(view));
 
-            Activity parentActivityOrSelf = null;
+            return view.As(
+                activity => activity,
+                fragment => fragment.NotNull().Activity).NotNull();
+        }
 
-            if (view is Activity activity)
+        public static void As(
+            [NotNull] this IView view,
+            [NotNull] Action<FragmentActivity> activityAction,
+            [NotNull] Action<Fragment> fragmentAction)
+        {
+            if (view == null)
+                throw new ArgumentNullException(nameof(view));
+            if (activityAction == null)
+                throw new ArgumentNullException(nameof(activityAction));
+            if (fragmentAction == null)
+                throw new ArgumentNullException(nameof(fragmentAction));
+
+            if (view is FragmentActivity activity)
             {
-                parentActivityOrSelf = activity;
-            }
-            else if (view is Android.Support.V4.App.Fragment appCompatFragment)
-            {
-                parentActivityOrSelf = appCompatFragment.Activity;
+                activityAction(activity);
             }
             else if (view is Fragment fragment)
             {
-                parentActivityOrSelf = fragment.Activity;
+                fragmentAction(fragment);
             }
-
-            return parentActivityOrSelf;
         }
 
         [CanBeNull]
-        internal static IAndroidView<IViewModel> FindParentViewWithModel([NotNull] this IAndroidView view)
+        public static T As<T>(
+            [NotNull] this IView view,
+            [NotNull] Func<FragmentActivity, T> activityFunc,
+            [NotNull] Func<Fragment, T> fragmentFunc)
         {
-            IAndroidView<IViewModel> parentView = null;
+            if (view == null)
+                throw new ArgumentNullException(nameof(view));
+            if (activityFunc == null)
+                throw new ArgumentNullException(nameof(activityFunc));
+            if (fragmentFunc == null)
+                throw new ArgumentNullException(nameof(fragmentFunc));
 
-            if (view is Android.Support.V4.App.Fragment appCompatFragment)
+            T result = default;
+
+            if (view is FragmentActivity activity)
             {
-                parentView = FindParentViewWithModel(appCompatFragment);
+                result = activityFunc(activity);
             }
             else if (view is Fragment fragment)
             {
-                parentView = FindParentViewWithModel(fragment);
+                result = fragmentFunc(fragment);
             }
 
-            return parentView;
-        }
-
-        [CanBeNull]
-        private static IAndroidView<IViewModel> FindParentViewWithModel([NotNull] Android.Support.V4.App.Fragment fragment)
-        {
-            IAndroidView<IViewModel> parentView = null;
-            var parentFragment = fragment.ParentFragment;
-
-            while (parentView == null && parentFragment != null)
-            {
-                parentView = parentFragment as IAndroidView<IViewModel>;
-                parentFragment = parentFragment.ParentFragment;
-            }
-
-            if (parentView == null)
-            {
-                parentView = fragment.Activity as IAndroidView<IViewModel>;
-            }
-
-            return parentView;
-        }
-
-        [CanBeNull]
-        private static IAndroidView<IViewModel> FindParentViewWithModel([NotNull] Fragment fragment)
-        {
-            IAndroidView<IViewModel> parentView = null;
-            var parentFragment = fragment.ParentFragment;
-
-            while (parentView == null && parentFragment != null)
-            {
-                parentView = parentFragment as IAndroidView<IViewModel>;
-                parentFragment = parentFragment.ParentFragment;
-            }
-
-            if (parentView == null)
-            {
-                parentView = fragment.Activity as IAndroidView<IViewModel>;
-            }
-
-            return parentView;
+            return result;
         }
     }
 }

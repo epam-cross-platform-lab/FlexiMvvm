@@ -15,14 +15,16 @@
 // =========================================================================
 
 using FlexiMvvm.ViewModels;
+using FlexiMvvm.ViewModels.Core;
+using FlexiMvvm.Views.Core;
 
 namespace FlexiMvvm.Views
 {
-    public interface IFlxViewController : IEventSourceViewController, IIosView
+    public interface IFlxViewController : IView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
     {
     }
 
-    public interface IFlxViewController<TViewModel> : IFlxViewController, IIosView<TViewModel>
+    public interface IFlxViewController<TViewModel> : IFlxViewController, IForwardNavigationView<TViewModel>, IBackwardNavigationView<TViewModel>, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModel
     {
     }

@@ -16,6 +16,8 @@
 
 using System;
 using System.Linq.Expressions;
+using System.Windows.Input;
+using FlexiMvvm.Commands;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.Bindings
@@ -29,14 +31,14 @@ namespace FlexiMvvm.Bindings
 
         [NotNull]
         ICompositeItemCommandBindingBuilder<TSourceItem> To(
-            [CanBeNull] Expression<Func<TSourceItem, System.Windows.Input.ICommand>> sourceItemValue);
+            [CanBeNull] Expression<Func<TSourceItem, ICommand>> sourceItemValue);
 
         [NotNull]
         ICompositeItemCommandBindingBuilder<TSourceItem> To(
-            [CanBeNull] Expression<Func<TSourceItem, FlexiMvvm.Commands.ICommand>> sourceItemValue);
+            [CanBeNull] Expression<Func<TSourceItem, Command>> sourceItemValue);
 
         [NotNull]
         ICompositeItemCommandBindingBuilder<TSourceItem> To<TSourceItemValue>(
-            [CanBeNull] Expression<Func<TSourceItem, FlexiMvvm.Commands.ICommand<TSourceItemValue>>> sourceItemValue);
+            [CanBeNull] Expression<Func<TSourceItem, Command<TSourceItemValue>>> sourceItemValue);
     }
 }

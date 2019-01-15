@@ -15,44 +15,41 @@
 // =========================================================================
 
 using System;
-using FlexiMvvm.Diagnostics;
 using FlexiMvvm.Persistence;
+using FlexiMvvm.Persistence.Core;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.ViewModels
 {
-    public static partial class ViewModelProvider
+    public static class ViewModelProvider
     {
         [CanBeNull]
         private static IViewModelFactory _factory;
 
         [NotNull]
-        public static TViewModel Get<TViewModel>([NotNull] IViewModelFactory factory, [CanBeNull] IBundle stateBundle)
-            where TViewModel : class, IViewModel, IViewModelWithState
+        public static TViewModel Get<TViewModel>(
+            [NotNull] IViewModelStore store,
+            [NotNull] string key,
+            [NotNull] IViewModelFactory factory,
+            [CanBeNull] IBundle state,
+            out bool created)
+            where TViewModel : class, IViewModel, IStateOwner
         {
+            if (store == null)
+                throw new ArgumentNullException(nameof(store));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
             if (factory == null)
                 throw new ArgumentNullException(nameof(factory));
 
-            var viewModel = Get<TViewModel>(factory);
-            viewModel.ImportStateBundle(stateBundle);
-
-            return viewModel;
-        }
-
-        [NotNull]
-        public static TViewModel Get<TViewModel>([NotNull] IViewModelFactory factory)
-            where TViewModel : class, IViewModel
-        {
-            if (factory == null)
-                throw new ArgumentNullException(nameof(factory));
-
-            var viewModel = factory.Create<TViewModel>();
+            var viewModel = store.Get<TViewModel>(key);
+            created = false;
 
             if (viewModel == null)
             {
-                throw new InvalidOperationException(
-                    $"\"{LogFormatter.FormatTypeName(factory)}\" returned \"null\" for \"{LogFormatter.FormatTypeName<TViewModel>()}>\" " +
-                    $"view model instance that is not allowed.");
+                viewModel = factory.Create<TViewModel>(state);
+                store.Add(key, viewModel);
+                created = true;
             }
 
             return viewModel;
@@ -61,13 +58,8 @@ namespace FlexiMvvm.ViewModels
         [NotNull]
         internal static IViewModelFactory GetFactory()
         {
-            if (_factory == null)
-            {
-                throw new InvalidOperationException(
-                    $"View model factory is not set. Use \"{nameof(ViewModelProvider)}.{nameof(SetFactory)}\" method to set factory instance.");
-            }
-
-            return _factory;
+            return _factory ?? throw new InvalidOperationException(
+                $"View model factory is not specified. Use \"{nameof(ViewModelProvider)}.{nameof(SetFactory)}\" method to set the factory instance.");
         }
 
         public static void SetFactory([NotNull] IViewModelFactory factory)

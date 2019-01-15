@@ -14,7 +14,7 @@
 // limitations under the License.
 // =========================================================================
 
-using System;
+using FlexiMvvm.Persistence.Core;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.Persistence
@@ -25,13 +25,13 @@ namespace FlexiMvvm.Persistence
         public static IBundle Create()
         {
 #if NETSTANDARD2_0
-            return new InMemoryBundle();
+            return new InMemoryBundle(new System.Collections.Generic.Dictionary<string, object>());
 #elif __ANDROID__
-            return new NativeBundle(null);
+            return new AndroidBundle(new Android.OS.Bundle());
 #elif __IOS__
-            return new InMemoryBundle();
+            return new InMemoryBundle(new System.Collections.Generic.Dictionary<string, object>());
 #else
-            throw new NotImplementedException($"\"{nameof(IBundle)}\" is not implemented in the portable version of this assembly. " +
+            throw new System.NotImplementedException($"\"{nameof(IBundle)}\" is not implemented in the portable version of this assembly. " +
                 "You should reference the NuGet package from your main application project in order " +
                 "to reference the platform-specific implementation.");
 #endif

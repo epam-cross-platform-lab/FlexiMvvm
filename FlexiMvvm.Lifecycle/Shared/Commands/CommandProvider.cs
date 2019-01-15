@@ -18,84 +18,76 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using FlexiMvvm.Collections;
+using System.Windows.Input;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.Commands
 {
-    public class CommandProvider
+    public sealed class CommandProvider
     {
         [NotNull]
-        private readonly Dictionary<string, System.Windows.Input.ICommand> _commands = new Dictionary<string, System.Windows.Input.ICommand>();
+        private readonly Dictionary<string, ICommand> _commands = new Dictionary<string, ICommand>();
 
         [NotNull]
-        public ICommand Get(
+        public Command Get(
             [NotNull] Action execute,
             [CanBeNull] Func<bool> canExecute = null,
             [CallerMemberName] string name = null)
         {
             if (execute == null)
                 throw new ArgumentNullException(nameof(execute));
-            if (name == null)
-                throw new ArgumentNullException(nameof(name));
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(name));
 
-            return (ICommand)_commands.GetOrAdd(
+            return (Command)_commands.GetOrAdd(
                 name,
                 _ => new RelayCommand(execute, canExecute, name)).NotNull();
         }
 
         [NotNull]
-        public ICommand GetForAsync(
-            [NotNull] Func<Task> execute,
-            [CanBeNull] Func<bool> canExecute = null,
-            [CallerMemberName] string name = null)
-        {
-            if (execute == null)
-                throw new ArgumentNullException(nameof(execute));
-            if (name == null)
-                throw new ArgumentNullException(nameof(name));
-            if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(name));
-
-            return (ICommand)_commands.GetOrAdd(
-                name,
-                _ => new RelayCommand(async () => await execute().NotNull(), canExecute, name)).NotNull();
-        }
-
-        [NotNull]
-        public ICommand<T> Get<T>(
+        public Command<T> Get<T>(
             [NotNull] Action<T> execute,
             [CanBeNull] Func<T, bool> canExecute = null,
             [CallerMemberName] string name = null)
         {
             if (execute == null)
                 throw new ArgumentNullException(nameof(execute));
-            if (name == null)
-                throw new ArgumentNullException(nameof(name));
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(name));
 
-            return (ICommand<T>)_commands.GetOrAdd(
+            return (Command<T>)_commands.GetOrAdd(
                 name,
                 _ => new RelayCommand<T>(execute, canExecute, name)).NotNull();
         }
 
         [NotNull]
-        public ICommand<T> GetForAsync<T>(
+        public Command GetForAsync(
+            [NotNull] Func<Task> execute,
+            [CanBeNull] Func<bool> canExecute = null,
+            [CallerMemberName] string name = null)
+        {
+            if (execute == null)
+                throw new ArgumentNullException(nameof(execute));
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(name));
+
+            return (Command)_commands.GetOrAdd(
+                name,
+                _ => new RelayCommand(async () => await execute().NotNull(), canExecute, name)).NotNull();
+        }
+
+        [NotNull]
+        public Command<T> GetForAsync<T>(
             [NotNull] Func<T, Task> execute,
             [CanBeNull] Func<T, bool> canExecute = null,
             [CallerMemberName] string name = null)
         {
             if (execute == null)
                 throw new ArgumentNullException(nameof(execute));
-            if (name == null)
-                throw new ArgumentNullException(nameof(name));
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(name));
 
-            return (ICommand<T>)_commands.GetOrAdd(
+            return (Command<T>)_commands.GetOrAdd(
                 name,
                 _ => new RelayCommand<T>(async parameter => await execute(parameter).NotNull(), canExecute, name)).NotNull();
         }
