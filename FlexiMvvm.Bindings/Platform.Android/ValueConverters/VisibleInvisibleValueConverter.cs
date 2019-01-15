@@ -20,7 +20,7 @@ using Android.Views;
 
 namespace FlexiMvvm.ValueConverters
 {
-    public class VisibleInvisibleVisibilityValueConverter : ValueConverter<bool, ViewStates>
+    public class VisibleInvisibleValueConverter : ValueConverter<bool, ViewStates>
     {
         protected override ConversionResult<ViewStates> Convert(bool value, Type targetType, object parameter, CultureInfo culture)
         {

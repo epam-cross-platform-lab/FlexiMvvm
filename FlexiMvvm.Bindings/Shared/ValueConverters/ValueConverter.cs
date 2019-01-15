@@ -24,6 +24,11 @@ namespace FlexiMvvm.ValueConverters
     {
         object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (targetType == null)
+                throw new ArgumentNullException(nameof(targetType));
+            if (culture == null)
+                throw new ArgumentNullException(nameof(culture));
+
             return Convert((TSourceValue)value, targetType, parameter, culture).Value;
         }
 
@@ -35,6 +40,11 @@ namespace FlexiMvvm.ValueConverters
 
         object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (targetType == null)
+                throw new ArgumentNullException(nameof(targetType));
+            if (culture == null)
+                throw new ArgumentNullException(nameof(culture));
+
             return ConvertBack((TTargetValue)value, targetType, parameter, culture).Value;
         }
 
