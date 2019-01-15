@@ -21,7 +21,7 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.Operations
 {
-    public static class OperationResultBuilderExtensions
+    public static class OperationHandlerBuilderExtensions
     {
         [NotNull]
         public static IOperationHandlerBuilder<Void> OnSuccess(
