@@ -18,13 +18,18 @@
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System;
-using FlexiMvvm.Weak.Delegates;
 using FlexiMvvm.Weak.Subscriptions;
 
 namespace FlexiMvvm
 {
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="INotifyPropertyChanged"/> class events.</summary>
     public static class NotifyPropertyChangedWeakEventsSubscriptionsExtensions
     {
+        /// <summary>Weak subscription on <see cref="INotifyPropertyChanged.PropertyChanged"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="INotifyPropertyChanged.PropertyChanged"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable PropertyChangedWeakSubscribe(
             this INotifyPropertyChanged eventSource,
             EventHandler<PropertyChangedEventArgs> eventHandler)
@@ -34,41 +39,33 @@ namespace FlexiMvvm
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new PropertyChangedWeakEventSubscription(
+            return new PropertyChangedEventHandlerWeakEventSubscription<INotifyPropertyChanged>(
                 eventSource,
                 (source, handler) => source.PropertyChanged += handler,
                 (source, handler) => source.PropertyChanged -= handler,
                 eventHandler);
         }
 
-        private sealed class PropertyChangedWeakEventSubscription : WeakEventSubscriptionBase<INotifyPropertyChanged, PropertyChangedEventArgs>
+        private sealed class PropertyChangedEventHandlerWeakEventSubscription<TEventSource> : WeakEventSubscription<TEventSource, PropertyChangedEventArgs>
+            where TEventSource : class
         {
-            private readonly Action<INotifyPropertyChanged, PropertyChangedEventHandler> _subscribeToEvent;
-            private readonly Action<INotifyPropertyChanged, PropertyChangedEventHandler> _unsubscribeFromEvent;
-            private readonly WeakEventHandler<PropertyChangedEventArgs> _weakEventHandler;
+            private readonly Action<TEventSource, PropertyChangedEventHandler> _subscribeToEvent;
+            private readonly Action<TEventSource, PropertyChangedEventHandler> _unsubscribeFromEvent;
         
-            public PropertyChangedWeakEventSubscription(
-                INotifyPropertyChanged eventSource,
-                Action<INotifyPropertyChanged, PropertyChangedEventHandler> subscribeToEvent,
-                Action<INotifyPropertyChanged, PropertyChangedEventHandler> unsubscribeFromEvent,
+            public PropertyChangedEventHandlerWeakEventSubscription(
+                TEventSource eventSource,
+                Action<TEventSource, PropertyChangedEventHandler> subscribeToEvent,
+                Action<TEventSource, PropertyChangedEventHandler> unsubscribeFromEvent,
                 EventHandler<PropertyChangedEventArgs> eventHandler)
-                : base(eventSource)
+                : base(eventSource, eventHandler)
             {
-                if (subscribeToEvent == null)
-                    throw new ArgumentNullException(nameof(subscribeToEvent));
-                if (unsubscribeFromEvent == null)
-                    throw new ArgumentNullException(nameof(unsubscribeFromEvent));
-                if (eventHandler == null)
-                    throw new ArgumentNullException(nameof(eventHandler));
-        
-                _subscribeToEvent = subscribeToEvent;
-                _unsubscribeFromEvent = unsubscribeFromEvent;
-                _weakEventHandler = new WeakEventHandler<PropertyChangedEventArgs>(eventHandler);
+                _subscribeToEvent = subscribeToEvent ?? throw new ArgumentNullException(nameof(subscribeToEvent));
+                _unsubscribeFromEvent = unsubscribeFromEvent ?? throw new ArgumentNullException(nameof(unsubscribeFromEvent));
         
                 SubscribeToEvent();
             }
         
-            protected override void SubscribeToEvent(INotifyPropertyChanged eventSource)
+            protected override void SubscribeToEvent(TEventSource eventSource)
             {
                 if (eventSource == null)
                     throw new ArgumentNullException(nameof(eventSource));
@@ -76,24 +73,12 @@ namespace FlexiMvvm
                 _subscribeToEvent(eventSource, OnSourceEvent);
             }
         
-            protected override void UnsubscribeFromEvent(INotifyPropertyChanged eventSource)
+            protected override void UnsubscribeFromEvent(TEventSource eventSource)
             {
                 if (eventSource == null)
                     throw new ArgumentNullException(nameof(eventSource));
         
                 _unsubscribeFromEvent(eventSource, OnSourceEvent);
-            }
-        
-            protected override bool TryInvokeEventHandler(object sender, PropertyChangedEventArgs e)
-            {
-                if (_weakEventHandler.TryGetTarget(out var target))
-                {
-                    _weakEventHandler.Invoke(target, sender, e);
-        
-                    return true;
-                }
-        
-                return false;
             }
         }
 
@@ -102,8 +87,14 @@ namespace FlexiMvvm
 
 namespace FlexiMvvm
 {
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="INotifyCollectionChanged"/> class events.</summary>
     public static class NotifyCollectionChangedWeakEventsSubscriptionsExtensions
     {
+        /// <summary>Weak subscription on <see cref="INotifyCollectionChanged.CollectionChanged"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="INotifyCollectionChanged.CollectionChanged"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable CollectionChangedWeakSubscribe(
             this INotifyCollectionChanged eventSource,
             EventHandler<NotifyCollectionChangedEventArgs> eventHandler)
@@ -113,41 +104,33 @@ namespace FlexiMvvm
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new CollectionChangedWeakEventSubscription(
+            return new NotifyCollectionChangedEventHandlerWeakEventSubscription<INotifyCollectionChanged>(
                 eventSource,
                 (source, handler) => source.CollectionChanged += handler,
                 (source, handler) => source.CollectionChanged -= handler,
                 eventHandler);
         }
 
-        private sealed class CollectionChangedWeakEventSubscription : WeakEventSubscriptionBase<INotifyCollectionChanged, NotifyCollectionChangedEventArgs>
+        private sealed class NotifyCollectionChangedEventHandlerWeakEventSubscription<TEventSource> : WeakEventSubscription<TEventSource, NotifyCollectionChangedEventArgs>
+            where TEventSource : class
         {
-            private readonly Action<INotifyCollectionChanged, NotifyCollectionChangedEventHandler> _subscribeToEvent;
-            private readonly Action<INotifyCollectionChanged, NotifyCollectionChangedEventHandler> _unsubscribeFromEvent;
-            private readonly WeakEventHandler<NotifyCollectionChangedEventArgs> _weakEventHandler;
+            private readonly Action<TEventSource, NotifyCollectionChangedEventHandler> _subscribeToEvent;
+            private readonly Action<TEventSource, NotifyCollectionChangedEventHandler> _unsubscribeFromEvent;
         
-            public CollectionChangedWeakEventSubscription(
-                INotifyCollectionChanged eventSource,
-                Action<INotifyCollectionChanged, NotifyCollectionChangedEventHandler> subscribeToEvent,
-                Action<INotifyCollectionChanged, NotifyCollectionChangedEventHandler> unsubscribeFromEvent,
+            public NotifyCollectionChangedEventHandlerWeakEventSubscription(
+                TEventSource eventSource,
+                Action<TEventSource, NotifyCollectionChangedEventHandler> subscribeToEvent,
+                Action<TEventSource, NotifyCollectionChangedEventHandler> unsubscribeFromEvent,
                 EventHandler<NotifyCollectionChangedEventArgs> eventHandler)
-                : base(eventSource)
+                : base(eventSource, eventHandler)
             {
-                if (subscribeToEvent == null)
-                    throw new ArgumentNullException(nameof(subscribeToEvent));
-                if (unsubscribeFromEvent == null)
-                    throw new ArgumentNullException(nameof(unsubscribeFromEvent));
-                if (eventHandler == null)
-                    throw new ArgumentNullException(nameof(eventHandler));
-        
-                _subscribeToEvent = subscribeToEvent;
-                _unsubscribeFromEvent = unsubscribeFromEvent;
-                _weakEventHandler = new WeakEventHandler<NotifyCollectionChangedEventArgs>(eventHandler);
+                _subscribeToEvent = subscribeToEvent ?? throw new ArgumentNullException(nameof(subscribeToEvent));
+                _unsubscribeFromEvent = unsubscribeFromEvent ?? throw new ArgumentNullException(nameof(unsubscribeFromEvent));
         
                 SubscribeToEvent();
             }
         
-            protected override void SubscribeToEvent(INotifyCollectionChanged eventSource)
+            protected override void SubscribeToEvent(TEventSource eventSource)
             {
                 if (eventSource == null)
                     throw new ArgumentNullException(nameof(eventSource));
@@ -155,24 +138,12 @@ namespace FlexiMvvm
                 _subscribeToEvent(eventSource, OnSourceEvent);
             }
         
-            protected override void UnsubscribeFromEvent(INotifyCollectionChanged eventSource)
+            protected override void UnsubscribeFromEvent(TEventSource eventSource)
             {
                 if (eventSource == null)
                     throw new ArgumentNullException(nameof(eventSource));
         
                 _unsubscribeFromEvent(eventSource, OnSourceEvent);
-            }
-        
-            protected override bool TryInvokeEventHandler(object sender, NotifyCollectionChangedEventArgs e)
-            {
-                if (_weakEventHandler.TryGetTarget(out var target))
-                {
-                    _weakEventHandler.Invoke(target, sender, e);
-        
-                    return true;
-                }
-        
-                return false;
             }
         }
 

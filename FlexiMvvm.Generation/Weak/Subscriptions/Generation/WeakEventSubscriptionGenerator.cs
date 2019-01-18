@@ -28,162 +28,85 @@ namespace FlexiMvvm.Weak.Subscriptions.Generation
             this.Write("private sealed class ");
             
             #line 2 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventSubscriptionGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(GetWeakEventSubscriptionClassName(TypeClassName, TypeEventGenerationOptions)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(GetClassName()));
             
             #line default
             #line hidden
-            this.Write(" : WeakEventSubscriptionBase<");
+            this.Write(" : ");
             
             #line 2 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventSubscriptionGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(TypeClassName));
+            this.Write(this.ToStringHelper.ToStringWithCulture(GetBaseClassName()));
             
             #line default
             #line hidden
-            this.Write(", ");
-            
-            #line 2 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventSubscriptionGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(TypeEventGenerationOptions.EventArgsClassName));
-            
-            #line default
-            #line hidden
-            this.Write(">\r\n{\r\n    private readonly Action<");
-            
-            #line 4 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventSubscriptionGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(TypeClassName));
-            
-            #line default
-            #line hidden
-            this.Write(", ");
-            
-            #line 4 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventSubscriptionGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(TypeEventGenerationOptions.EventHandlerClassName));
-            
-            #line default
-            #line hidden
-            this.Write("> _subscribeToEvent;\r\n    private readonly Action<");
+            this.Write("\r\n    where TEventSource : class\r\n{\r\n    private readonly Action<TEventSource, ");
             
             #line 5 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventSubscriptionGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(TypeClassName));
+            this.Write(this.ToStringHelper.ToStringWithCulture(GetOriginEventHandlerDeclarationName()));
             
             #line default
             #line hidden
-            this.Write(", ");
-            
-            #line 5 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventSubscriptionGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(TypeEventGenerationOptions.EventHandlerClassName));
-            
-            #line default
-            #line hidden
-            this.Write("> _unsubscribeFromEvent;\r\n    private readonly WeakEventHandler<");
+            this.Write("> _subscribeToEvent;\r\n    private readonly Action<TEventSource, ");
             
             #line 6 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventSubscriptionGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(TypeEventGenerationOptions.EventArgsClassName));
+            this.Write(this.ToStringHelper.ToStringWithCulture(GetOriginEventHandlerDeclarationName()));
             
             #line default
             #line hidden
-            this.Write("> _weakEventHandler;\r\n\r\n    public ");
+            this.Write("> _unsubscribeFromEvent;\r\n\r\n    public ");
             
             #line 8 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventSubscriptionGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(GetWeakEventSubscriptionClassName(TypeClassName, TypeEventGenerationOptions)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(GetClassName().WithoutGenericPart()));
             
             #line default
             #line hidden
-            this.Write("(\r\n        ");
-            
-            #line 9 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventSubscriptionGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(TypeClassName));
-            
-            #line default
-            #line hidden
-            this.Write(" eventSource,\r\n        Action<");
+            this.Write("(\r\n        TEventSource eventSource,\r\n        Action<TEventSource, ");
             
             #line 10 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventSubscriptionGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(TypeClassName));
+            this.Write(this.ToStringHelper.ToStringWithCulture(GetOriginEventHandlerDeclarationName()));
             
             #line default
             #line hidden
-            this.Write(", ");
-            
-            #line 10 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventSubscriptionGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(TypeEventGenerationOptions.EventHandlerClassName));
-            
-            #line default
-            #line hidden
-            this.Write("> subscribeToEvent,\r\n        Action<");
+            this.Write("> subscribeToEvent,\r\n        Action<TEventSource, ");
             
             #line 11 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventSubscriptionGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(TypeClassName));
+            this.Write(this.ToStringHelper.ToStringWithCulture(GetOriginEventHandlerDeclarationName()));
             
             #line default
             #line hidden
-            this.Write(", ");
-            
-            #line 11 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventSubscriptionGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(TypeEventGenerationOptions.EventHandlerClassName));
-            
-            #line default
-            #line hidden
-            this.Write("> unsubscribeFromEvent,\r\n        EventHandler<");
+            this.Write("> unsubscribeFromEvent,\r\n        ");
             
             #line 12 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventSubscriptionGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(TypeEventGenerationOptions.EventArgsClassName));
+            this.Write(this.ToStringHelper.ToStringWithCulture(GetPassedEventHandlerDeclarationName()));
             
             #line default
             #line hidden
-            this.Write(@"> eventHandler)
-        : base(eventSource)
+            this.Write(@" eventHandler)
+        : base(eventSource, eventHandler)
     {
-        if (subscribeToEvent == null)
-            throw new ArgumentNullException(nameof(subscribeToEvent));
-        if (unsubscribeFromEvent == null)
-            throw new ArgumentNullException(nameof(unsubscribeFromEvent));
-        if (eventHandler == null)
-            throw new ArgumentNullException(nameof(eventHandler));
+        _subscribeToEvent = subscribeToEvent ?? throw new ArgumentNullException(nameof(subscribeToEvent));
+        _unsubscribeFromEvent = unsubscribeFromEvent ?? throw new ArgumentNullException(nameof(unsubscribeFromEvent));
 
-        _subscribeToEvent = subscribeToEvent;
-        _unsubscribeFromEvent = unsubscribeFromEvent;
-        _weakEventHandler = new WeakEventHandler<");
-            
-            #line 24 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventSubscriptionGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(TypeEventGenerationOptions.EventArgsClassName));
-            
-            #line default
-            #line hidden
-            this.Write(">(eventHandler);\r\n\r\n        SubscribeToEvent();\r\n    }\r\n\r\n    protected override " +
-                    "void SubscribeToEvent(");
-            
-            #line 29 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventSubscriptionGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(TypeClassName));
-            
-            #line default
-            #line hidden
-            this.Write(" eventSource)\r\n    {\r\n        if (eventSource == null)\r\n            throw new Arg" +
-                    "umentNullException(nameof(eventSource));\r\n\r\n        _subscribeToEvent(eventSourc" +
-                    "e, OnSourceEvent);\r\n    }\r\n\r\n    protected override void UnsubscribeFromEvent(");
-            
-            #line 37 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventSubscriptionGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(TypeClassName));
-            
-            #line default
-            #line hidden
-            this.Write(@" eventSource)
+        SubscribeToEvent();
+    }
+
+    protected override void SubscribeToEvent(TEventSource eventSource)
+    {
+        if (eventSource == null)
+            throw new ArgumentNullException(nameof(eventSource));
+
+        _subscribeToEvent(eventSource, OnSourceEvent);
+    }
+
+    protected override void UnsubscribeFromEvent(TEventSource eventSource)
     {
         if (eventSource == null)
             throw new ArgumentNullException(nameof(eventSource));
 
         _unsubscribeFromEvent(eventSource, OnSourceEvent);
     }
-
-    protected override bool TryInvokeEventHandler(object sender, ");
-            
-            #line 45 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventSubscriptionGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(TypeEventGenerationOptions.EventArgsClassName));
-            
-            #line default
-            #line hidden
-            this.Write(" e)\r\n    {\r\n        if (_weakEventHandler.TryGetTarget(out var target))\r\n        " +
-                    "{\r\n            _weakEventHandler.Invoke(target, sender, e);\r\n\r\n            retur" +
-                    "n true;\r\n        }\r\n\r\n        return false;\r\n    }\r\n}\r\n");
+}
+");
             return this.GenerationEnvironment.ToString();
         }
     }

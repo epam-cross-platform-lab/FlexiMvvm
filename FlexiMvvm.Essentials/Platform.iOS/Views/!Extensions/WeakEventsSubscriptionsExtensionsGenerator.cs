@@ -15,16 +15,22 @@
 // limitations under the License.
 // =========================================================================
 
-using UIKit;
 using FlexiMvvm.Views.Keyboard;
+using Foundation;
+using UIKit;
 using System;
-using FlexiMvvm.Weak.Delegates;
 using FlexiMvvm.Weak.Subscriptions;
 
 namespace FlexiMvvm.Views
 {
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="KeyboardHandler"/> class events.</summary>
     public static class KeyboardHandlerWeakEventsSubscriptionsExtensions
     {
+        /// <summary>Weak subscription on <see cref="KeyboardHandler.KeyboardDidHide"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="KeyboardHandler.KeyboardDidHide"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable KeyboardDidHideWeakSubscribe(
             this KeyboardHandler eventSource,
             EventHandler<KeyboardSizeChangedEventArgs> eventHandler)
@@ -34,13 +40,18 @@ namespace FlexiMvvm.Views
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new WeakEventSubscription<KeyboardHandler, KeyboardSizeChangedEventArgs>(
+            return new EventHandlerWeakEventSubscription<KeyboardHandler, KeyboardSizeChangedEventArgs>(
                 eventSource,
                 (source, handler) => source.KeyboardDidHide += handler,
                 (source, handler) => source.KeyboardDidHide -= handler,
                 eventHandler);
         }
 
+        /// <summary>Weak subscription on <see cref="KeyboardHandler.KeyboardDidShow"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="KeyboardHandler.KeyboardDidShow"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable KeyboardDidShowWeakSubscribe(
             this KeyboardHandler eventSource,
             EventHandler<KeyboardSizeChangedEventArgs> eventHandler)
@@ -50,13 +61,18 @@ namespace FlexiMvvm.Views
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new WeakEventSubscription<KeyboardHandler, KeyboardSizeChangedEventArgs>(
+            return new EventHandlerWeakEventSubscription<KeyboardHandler, KeyboardSizeChangedEventArgs>(
                 eventSource,
                 (source, handler) => source.KeyboardDidShow += handler,
                 (source, handler) => source.KeyboardDidShow -= handler,
                 eventHandler);
         }
 
+        /// <summary>Weak subscription on <see cref="KeyboardHandler.KeyboardWillHide"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="KeyboardHandler.KeyboardWillHide"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable KeyboardWillHideWeakSubscribe(
             this KeyboardHandler eventSource,
             EventHandler<KeyboardSizeChangedEventArgs> eventHandler)
@@ -66,13 +82,18 @@ namespace FlexiMvvm.Views
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new WeakEventSubscription<KeyboardHandler, KeyboardSizeChangedEventArgs>(
+            return new EventHandlerWeakEventSubscription<KeyboardHandler, KeyboardSizeChangedEventArgs>(
                 eventSource,
                 (source, handler) => source.KeyboardWillHide += handler,
                 (source, handler) => source.KeyboardWillHide -= handler,
                 eventHandler);
         }
 
+        /// <summary>Weak subscription on <see cref="KeyboardHandler.KeyboardWillShow"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="KeyboardHandler.KeyboardWillShow"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable KeyboardWillShowWeakSubscribe(
             this KeyboardHandler eventSource,
             EventHandler<KeyboardSizeChangedEventArgs> eventHandler)
@@ -82,7 +103,7 @@ namespace FlexiMvvm.Views
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new WeakEventSubscription<KeyboardHandler, KeyboardSizeChangedEventArgs>(
+            return new EventHandlerWeakEventSubscription<KeyboardHandler, KeyboardSizeChangedEventArgs>(
                 eventSource,
                 (source, handler) => source.KeyboardWillShow += handler,
                 (source, handler) => source.KeyboardWillShow -= handler,
@@ -94,8 +115,311 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIAccelerometer"/> class events.</summary>
+    public static class UIAccelerometerWeakEventsSubscriptionsExtensions
+    {
+        /// <summary>Weak subscription on <see cref="UIAccelerometer.Acceleration"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIAccelerometer.Acceleration"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable AccelerationWeakSubscribe(
+            this UIAccelerometer eventSource,
+            EventHandler<UIAccelerometerEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIAccelerometer, UIAccelerometerEventArgs>(
+                eventSource,
+                (source, handler) => source.Acceleration += handler,
+                (source, handler) => source.Acceleration -= handler,
+                eventHandler);
+        }
+
+    }
+}
+
+namespace FlexiMvvm.Views
+{
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIActionSheet"/> class events.</summary>
+    public static class UIActionSheetWeakEventsSubscriptionsExtensions
+    {
+        /// <summary>Weak subscription on <see cref="UIActionSheet.Canceled"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIActionSheet.Canceled"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable CanceledWeakSubscribe(
+            this UIActionSheet eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIActionSheet>(
+                eventSource,
+                (source, handler) => source.Canceled += handler,
+                (source, handler) => source.Canceled -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIActionSheet.Clicked"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIActionSheet.Clicked"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable ClickedWeakSubscribe(
+            this UIActionSheet eventSource,
+            EventHandler<UIButtonEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIActionSheet, UIButtonEventArgs>(
+                eventSource,
+                (source, handler) => source.Clicked += handler,
+                (source, handler) => source.Clicked -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIActionSheet.Dismissed"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIActionSheet.Dismissed"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable DismissedWeakSubscribe(
+            this UIActionSheet eventSource,
+            EventHandler<UIButtonEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIActionSheet, UIButtonEventArgs>(
+                eventSource,
+                (source, handler) => source.Dismissed += handler,
+                (source, handler) => source.Dismissed -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIActionSheet.Presented"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIActionSheet.Presented"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable PresentedWeakSubscribe(
+            this UIActionSheet eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIActionSheet>(
+                eventSource,
+                (source, handler) => source.Presented += handler,
+                (source, handler) => source.Presented -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIActionSheet.WillDismiss"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIActionSheet.WillDismiss"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable WillDismissWeakSubscribe(
+            this UIActionSheet eventSource,
+            EventHandler<UIButtonEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIActionSheet, UIButtonEventArgs>(
+                eventSource,
+                (source, handler) => source.WillDismiss += handler,
+                (source, handler) => source.WillDismiss -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIActionSheet.WillPresent"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIActionSheet.WillPresent"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable WillPresentWeakSubscribe(
+            this UIActionSheet eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIActionSheet>(
+                eventSource,
+                (source, handler) => source.WillPresent += handler,
+                (source, handler) => source.WillPresent -= handler,
+                eventHandler);
+        }
+
+    }
+}
+
+namespace FlexiMvvm.Views
+{
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIAlertView"/> class events.</summary>
+    public static class UIAlertViewWeakEventsSubscriptionsExtensions
+    {
+        /// <summary>Weak subscription on <see cref="UIAlertView.Canceled"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIAlertView.Canceled"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable CanceledWeakSubscribe(
+            this UIAlertView eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIAlertView>(
+                eventSource,
+                (source, handler) => source.Canceled += handler,
+                (source, handler) => source.Canceled -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIAlertView.Clicked"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIAlertView.Clicked"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable ClickedWeakSubscribe(
+            this UIAlertView eventSource,
+            EventHandler<UIButtonEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIAlertView, UIButtonEventArgs>(
+                eventSource,
+                (source, handler) => source.Clicked += handler,
+                (source, handler) => source.Clicked -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIAlertView.Dismissed"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIAlertView.Dismissed"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable DismissedWeakSubscribe(
+            this UIAlertView eventSource,
+            EventHandler<UIButtonEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIAlertView, UIButtonEventArgs>(
+                eventSource,
+                (source, handler) => source.Dismissed += handler,
+                (source, handler) => source.Dismissed -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIAlertView.Presented"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIAlertView.Presented"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable PresentedWeakSubscribe(
+            this UIAlertView eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIAlertView>(
+                eventSource,
+                (source, handler) => source.Presented += handler,
+                (source, handler) => source.Presented -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIAlertView.WillDismiss"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIAlertView.WillDismiss"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable WillDismissWeakSubscribe(
+            this UIAlertView eventSource,
+            EventHandler<UIButtonEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIAlertView, UIButtonEventArgs>(
+                eventSource,
+                (source, handler) => source.WillDismiss += handler,
+                (source, handler) => source.WillDismiss -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIAlertView.WillPresent"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIAlertView.WillPresent"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable WillPresentWeakSubscribe(
+            this UIAlertView eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIAlertView>(
+                eventSource,
+                (source, handler) => source.WillPresent += handler,
+                (source, handler) => source.WillPresent -= handler,
+                eventHandler);
+        }
+
+    }
+}
+
+namespace FlexiMvvm.Views
+{
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIBarButtonItem"/> class events.</summary>
     public static class UIBarButtonItemWeakEventsSubscriptionsExtensions
     {
+        /// <summary>Weak subscription on <see cref="UIBarButtonItem.Clicked"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIBarButtonItem.Clicked"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable ClickedWeakSubscribe(
             this UIBarButtonItem eventSource,
             EventHandler eventHandler)
@@ -105,7 +429,7 @@ namespace FlexiMvvm.Views
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new WeakEventSubscription<UIBarButtonItem>(
+            return new EventHandlerWeakEventSubscription<UIBarButtonItem>(
                 eventSource,
                 (source, handler) => source.Clicked += handler,
                 (source, handler) => source.Clicked -= handler,
@@ -117,8 +441,421 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UICollisionBehavior"/> class events.</summary>
+    public static class UICollisionBehaviorWeakEventsSubscriptionsExtensions
+    {
+        /// <summary>Weak subscription on <see cref="UICollisionBehavior.BeganBoundaryContact"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UICollisionBehavior.BeganBoundaryContact"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable BeganBoundaryContactWeakSubscribe(
+            this UICollisionBehavior eventSource,
+            EventHandler<UICollisionBeganBoundaryContactEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UICollisionBehavior, UICollisionBeganBoundaryContactEventArgs>(
+                eventSource,
+                (source, handler) => source.BeganBoundaryContact += handler,
+                (source, handler) => source.BeganBoundaryContact -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UICollisionBehavior.BeganContact"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UICollisionBehavior.BeganContact"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable BeganContactWeakSubscribe(
+            this UICollisionBehavior eventSource,
+            EventHandler<UICollisionBeganContactEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UICollisionBehavior, UICollisionBeganContactEventArgs>(
+                eventSource,
+                (source, handler) => source.BeganContact += handler,
+                (source, handler) => source.BeganContact -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UICollisionBehavior.EndedBoundaryContact"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UICollisionBehavior.EndedBoundaryContact"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable EndedBoundaryContactWeakSubscribe(
+            this UICollisionBehavior eventSource,
+            EventHandler<UICollisionEndedBoundaryContactEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UICollisionBehavior, UICollisionEndedBoundaryContactEventArgs>(
+                eventSource,
+                (source, handler) => source.EndedBoundaryContact += handler,
+                (source, handler) => source.EndedBoundaryContact -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UICollisionBehavior.EndedContact"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UICollisionBehavior.EndedContact"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable EndedContactWeakSubscribe(
+            this UICollisionBehavior eventSource,
+            EventHandler<UICollisionEndedContactEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UICollisionBehavior, UICollisionEndedContactEventArgs>(
+                eventSource,
+                (source, handler) => source.EndedContact += handler,
+                (source, handler) => source.EndedContact -= handler,
+                eventHandler);
+        }
+
+    }
+}
+
+namespace FlexiMvvm.Views
+{
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIControl"/> class events.</summary>
     public static class UIControlWeakEventsSubscriptionsExtensions
     {
+        /// <summary>Weak subscription on <see cref="UIControl.AllEditingEvents"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIControl.AllEditingEvents"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable AllEditingEventsWeakSubscribe(
+            this UIControl eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIControl>(
+                eventSource,
+                (source, handler) => source.AllEditingEvents += handler,
+                (source, handler) => source.AllEditingEvents -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIControl.AllEvents"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIControl.AllEvents"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable AllEventsWeakSubscribe(
+            this UIControl eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIControl>(
+                eventSource,
+                (source, handler) => source.AllEvents += handler,
+                (source, handler) => source.AllEvents -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIControl.AllTouchEvents"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIControl.AllTouchEvents"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable AllTouchEventsWeakSubscribe(
+            this UIControl eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIControl>(
+                eventSource,
+                (source, handler) => source.AllTouchEvents += handler,
+                (source, handler) => source.AllTouchEvents -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIControl.EditingChanged"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIControl.EditingChanged"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable EditingChangedWeakSubscribe(
+            this UIControl eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIControl>(
+                eventSource,
+                (source, handler) => source.EditingChanged += handler,
+                (source, handler) => source.EditingChanged -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIControl.EditingDidBegin"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIControl.EditingDidBegin"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable EditingDidBeginWeakSubscribe(
+            this UIControl eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIControl>(
+                eventSource,
+                (source, handler) => source.EditingDidBegin += handler,
+                (source, handler) => source.EditingDidBegin -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIControl.EditingDidEnd"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIControl.EditingDidEnd"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable EditingDidEndWeakSubscribe(
+            this UIControl eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIControl>(
+                eventSource,
+                (source, handler) => source.EditingDidEnd += handler,
+                (source, handler) => source.EditingDidEnd -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIControl.EditingDidEndOnExit"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIControl.EditingDidEndOnExit"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable EditingDidEndOnExitWeakSubscribe(
+            this UIControl eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIControl>(
+                eventSource,
+                (source, handler) => source.EditingDidEndOnExit += handler,
+                (source, handler) => source.EditingDidEndOnExit -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIControl.PrimaryActionTriggered"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIControl.PrimaryActionTriggered"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable PrimaryActionTriggeredWeakSubscribe(
+            this UIControl eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIControl>(
+                eventSource,
+                (source, handler) => source.PrimaryActionTriggered += handler,
+                (source, handler) => source.PrimaryActionTriggered -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIControl.TouchCancel"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIControl.TouchCancel"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable TouchCancelWeakSubscribe(
+            this UIControl eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIControl>(
+                eventSource,
+                (source, handler) => source.TouchCancel += handler,
+                (source, handler) => source.TouchCancel -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIControl.TouchDown"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIControl.TouchDown"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable TouchDownWeakSubscribe(
+            this UIControl eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIControl>(
+                eventSource,
+                (source, handler) => source.TouchDown += handler,
+                (source, handler) => source.TouchDown -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIControl.TouchDownRepeat"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIControl.TouchDownRepeat"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable TouchDownRepeatWeakSubscribe(
+            this UIControl eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIControl>(
+                eventSource,
+                (source, handler) => source.TouchDownRepeat += handler,
+                (source, handler) => source.TouchDownRepeat -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIControl.TouchDragEnter"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIControl.TouchDragEnter"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable TouchDragEnterWeakSubscribe(
+            this UIControl eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIControl>(
+                eventSource,
+                (source, handler) => source.TouchDragEnter += handler,
+                (source, handler) => source.TouchDragEnter -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIControl.TouchDragExit"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIControl.TouchDragExit"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable TouchDragExitWeakSubscribe(
+            this UIControl eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIControl>(
+                eventSource,
+                (source, handler) => source.TouchDragExit += handler,
+                (source, handler) => source.TouchDragExit -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIControl.TouchDragInside"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIControl.TouchDragInside"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable TouchDragInsideWeakSubscribe(
+            this UIControl eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIControl>(
+                eventSource,
+                (source, handler) => source.TouchDragInside += handler,
+                (source, handler) => source.TouchDragInside -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIControl.TouchDragOutside"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIControl.TouchDragOutside"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable TouchDragOutsideWeakSubscribe(
+            this UIControl eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIControl>(
+                eventSource,
+                (source, handler) => source.TouchDragOutside += handler,
+                (source, handler) => source.TouchDragOutside -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIControl.TouchUpInside"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIControl.TouchUpInside"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable TouchUpInsideWeakSubscribe(
             this UIControl eventSource,
             EventHandler eventHandler)
@@ -128,13 +865,39 @@ namespace FlexiMvvm.Views
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new WeakEventSubscription<UIControl>(
+            return new EventHandlerWeakEventSubscription<UIControl>(
                 eventSource,
                 (source, handler) => source.TouchUpInside += handler,
                 (source, handler) => source.TouchUpInside -= handler,
                 eventHandler);
         }
 
+        /// <summary>Weak subscription on <see cref="UIControl.TouchUpOutside"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIControl.TouchUpOutside"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable TouchUpOutsideWeakSubscribe(
+            this UIControl eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIControl>(
+                eventSource,
+                (source, handler) => source.TouchUpOutside += handler,
+                (source, handler) => source.TouchUpOutside -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIControl.ValueChanged"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIControl.ValueChanged"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable ValueChangedWeakSubscribe(
             this UIControl eventSource,
             EventHandler eventHandler)
@@ -144,7 +907,7 @@ namespace FlexiMvvm.Views
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new WeakEventSubscription<UIControl>(
+            return new EventHandlerWeakEventSubscription<UIControl>(
                 eventSource,
                 (source, handler) => source.ValueChanged += handler,
                 (source, handler) => source.ValueChanged -= handler,
@@ -156,8 +919,361 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIDocumentInteractionController"/> class events.</summary>
+    public static class UIDocumentInteractionControllerWeakEventsSubscriptionsExtensions
+    {
+        /// <summary>Weak subscription on <see cref="UIDocumentInteractionController.DidDismissOpenInMenu"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIDocumentInteractionController.DidDismissOpenInMenu"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable DidDismissOpenInMenuWeakSubscribe(
+            this UIDocumentInteractionController eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIDocumentInteractionController>(
+                eventSource,
+                (source, handler) => source.DidDismissOpenInMenu += handler,
+                (source, handler) => source.DidDismissOpenInMenu -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIDocumentInteractionController.DidDismissOptionsMenu"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIDocumentInteractionController.DidDismissOptionsMenu"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable DidDismissOptionsMenuWeakSubscribe(
+            this UIDocumentInteractionController eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIDocumentInteractionController>(
+                eventSource,
+                (source, handler) => source.DidDismissOptionsMenu += handler,
+                (source, handler) => source.DidDismissOptionsMenu -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIDocumentInteractionController.DidEndPreview"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIDocumentInteractionController.DidEndPreview"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable DidEndPreviewWeakSubscribe(
+            this UIDocumentInteractionController eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIDocumentInteractionController>(
+                eventSource,
+                (source, handler) => source.DidEndPreview += handler,
+                (source, handler) => source.DidEndPreview -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIDocumentInteractionController.DidEndSendingToApplication"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIDocumentInteractionController.DidEndSendingToApplication"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable DidEndSendingToApplicationWeakSubscribe(
+            this UIDocumentInteractionController eventSource,
+            EventHandler<UIDocumentSendingToApplicationEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIDocumentInteractionController, UIDocumentSendingToApplicationEventArgs>(
+                eventSource,
+                (source, handler) => source.DidEndSendingToApplication += handler,
+                (source, handler) => source.DidEndSendingToApplication -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIDocumentInteractionController.WillBeginPreview"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIDocumentInteractionController.WillBeginPreview"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable WillBeginPreviewWeakSubscribe(
+            this UIDocumentInteractionController eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIDocumentInteractionController>(
+                eventSource,
+                (source, handler) => source.WillBeginPreview += handler,
+                (source, handler) => source.WillBeginPreview -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIDocumentInteractionController.WillBeginSendingToApplication"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIDocumentInteractionController.WillBeginSendingToApplication"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable WillBeginSendingToApplicationWeakSubscribe(
+            this UIDocumentInteractionController eventSource,
+            EventHandler<UIDocumentSendingToApplicationEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIDocumentInteractionController, UIDocumentSendingToApplicationEventArgs>(
+                eventSource,
+                (source, handler) => source.WillBeginSendingToApplication += handler,
+                (source, handler) => source.WillBeginSendingToApplication -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIDocumentInteractionController.WillPresentOpenInMenu"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIDocumentInteractionController.WillPresentOpenInMenu"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable WillPresentOpenInMenuWeakSubscribe(
+            this UIDocumentInteractionController eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIDocumentInteractionController>(
+                eventSource,
+                (source, handler) => source.WillPresentOpenInMenu += handler,
+                (source, handler) => source.WillPresentOpenInMenu -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIDocumentInteractionController.WillPresentOptionsMenu"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIDocumentInteractionController.WillPresentOptionsMenu"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable WillPresentOptionsMenuWeakSubscribe(
+            this UIDocumentInteractionController eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIDocumentInteractionController>(
+                eventSource,
+                (source, handler) => source.WillPresentOptionsMenu += handler,
+                (source, handler) => source.WillPresentOptionsMenu -= handler,
+                eventHandler);
+        }
+
+    }
+}
+
+namespace FlexiMvvm.Views
+{
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIDocumentMenuViewController"/> class events.</summary>
+    public static class UIDocumentMenuViewControllerWeakEventsSubscriptionsExtensions
+    {
+        /// <summary>Weak subscription on <see cref="UIDocumentMenuViewController.DidPickDocumentPicker"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIDocumentMenuViewController.DidPickDocumentPicker"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable DidPickDocumentPickerWeakSubscribe(
+            this UIDocumentMenuViewController eventSource,
+            EventHandler<UIDocumentMenuDocumentPickedEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIDocumentMenuViewController, UIDocumentMenuDocumentPickedEventArgs>(
+                eventSource,
+                (source, handler) => source.DidPickDocumentPicker += handler,
+                (source, handler) => source.DidPickDocumentPicker -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIDocumentMenuViewController.WasCancelled"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIDocumentMenuViewController.WasCancelled"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable WasCancelledWeakSubscribe(
+            this UIDocumentMenuViewController eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIDocumentMenuViewController>(
+                eventSource,
+                (source, handler) => source.WasCancelled += handler,
+                (source, handler) => source.WasCancelled -= handler,
+                eventHandler);
+        }
+
+    }
+}
+
+namespace FlexiMvvm.Views
+{
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIDocumentPickerViewController"/> class events.</summary>
+    public static class UIDocumentPickerViewControllerWeakEventsSubscriptionsExtensions
+    {
+        /// <summary>Weak subscription on <see cref="UIDocumentPickerViewController.DidPickDocument"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIDocumentPickerViewController.DidPickDocument"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable DidPickDocumentWeakSubscribe(
+            this UIDocumentPickerViewController eventSource,
+            EventHandler<UIDocumentPickedEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIDocumentPickerViewController, UIDocumentPickedEventArgs>(
+                eventSource,
+                (source, handler) => source.DidPickDocument += handler,
+                (source, handler) => source.DidPickDocument -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIDocumentPickerViewController.WasCancelled"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIDocumentPickerViewController.WasCancelled"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable WasCancelledWeakSubscribe(
+            this UIDocumentPickerViewController eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIDocumentPickerViewController>(
+                eventSource,
+                (source, handler) => source.WasCancelled += handler,
+                (source, handler) => source.WasCancelled -= handler,
+                eventHandler);
+        }
+
+    }
+}
+
+namespace FlexiMvvm.Views
+{
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIImagePickerController"/> class events.</summary>
+    public static class UIImagePickerControllerWeakEventsSubscriptionsExtensions
+    {
+        /// <summary>Weak subscription on <see cref="UIImagePickerController.Canceled"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIImagePickerController.Canceled"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable CanceledWeakSubscribe(
+            this UIImagePickerController eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIImagePickerController>(
+                eventSource,
+                (source, handler) => source.Canceled += handler,
+                (source, handler) => source.Canceled -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIImagePickerController.FinishedPickingImage"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIImagePickerController.FinishedPickingImage"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable FinishedPickingImageWeakSubscribe(
+            this UIImagePickerController eventSource,
+            EventHandler<UIImagePickerImagePickedEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIImagePickerController, UIImagePickerImagePickedEventArgs>(
+                eventSource,
+                (source, handler) => source.FinishedPickingImage += handler,
+                (source, handler) => source.FinishedPickingImage -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIImagePickerController.FinishedPickingMedia"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIImagePickerController.FinishedPickingMedia"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable FinishedPickingMediaWeakSubscribe(
+            this UIImagePickerController eventSource,
+            EventHandler<UIImagePickerMediaPickedEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIImagePickerController, UIImagePickerMediaPickedEventArgs>(
+                eventSource,
+                (source, handler) => source.FinishedPickingMedia += handler,
+                (source, handler) => source.FinishedPickingMedia -= handler,
+                eventHandler);
+        }
+
+    }
+}
+
+namespace FlexiMvvm.Views
+{
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIPageViewController"/> class events.</summary>
     public static class UIPageViewControllerWeakEventsSubscriptionsExtensions
     {
+        /// <summary>Weak subscription on <see cref="UIPageViewController.DidFinishAnimating"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIPageViewController.DidFinishAnimating"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable DidFinishAnimatingWeakSubscribe(
             this UIPageViewController eventSource,
             EventHandler<UIPageViewFinishedAnimationEventArgs> eventHandler)
@@ -167,10 +1283,31 @@ namespace FlexiMvvm.Views
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new WeakEventSubscription<UIPageViewController, UIPageViewFinishedAnimationEventArgs>(
+            return new EventHandlerWeakEventSubscription<UIPageViewController, UIPageViewFinishedAnimationEventArgs>(
                 eventSource,
                 (source, handler) => source.DidFinishAnimating += handler,
                 (source, handler) => source.DidFinishAnimating -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIPageViewController.WillTransition"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIPageViewController.WillTransition"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable WillTransitionWeakSubscribe(
+            this UIPageViewController eventSource,
+            EventHandler<UIPageViewControllerTransitionEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIPageViewController, UIPageViewControllerTransitionEventArgs>(
+                eventSource,
+                (source, handler) => source.WillTransition += handler,
+                (source, handler) => source.WillTransition -= handler,
                 eventHandler);
         }
 
@@ -179,10 +1316,16 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public static class UITextFieldWeakEventsSubscriptionsExtensions
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIPopoverController"/> class events.</summary>
+    public static class UIPopoverControllerWeakEventsSubscriptionsExtensions
     {
-        public static IDisposable EditingChangedWeakSubscribe(
-            this UITextField eventSource,
+        /// <summary>Weak subscription on <see cref="UIPopoverController.DidDismiss"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIPopoverController.DidDismiss"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable DidDismissWeakSubscribe(
+            this UIPopoverController eventSource,
             EventHandler eventHandler)
         {
             if (eventSource == null)
@@ -190,13 +1333,1035 @@ namespace FlexiMvvm.Views
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new WeakEventSubscription<UITextField>(
+            return new EventHandlerWeakEventSubscription<UIPopoverController>(
                 eventSource,
-                (source, handler) => source.EditingChanged += handler,
-                (source, handler) => source.EditingChanged -= handler,
+                (source, handler) => source.DidDismiss += handler,
+                (source, handler) => source.DidDismiss -= handler,
                 eventHandler);
         }
 
+        /// <summary>Weak subscription on <see cref="UIPopoverController.WillReposition"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIPopoverController.WillReposition"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable WillRepositionWeakSubscribe(
+            this UIPopoverController eventSource,
+            EventHandler<UIPopoverControllerRepositionEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIPopoverController, UIPopoverControllerRepositionEventArgs>(
+                eventSource,
+                (source, handler) => source.WillReposition += handler,
+                (source, handler) => source.WillReposition -= handler,
+                eventHandler);
+        }
+
+    }
+}
+
+namespace FlexiMvvm.Views
+{
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIPopoverPresentationController"/> class events.</summary>
+    public static class UIPopoverPresentationControllerWeakEventsSubscriptionsExtensions
+    {
+        /// <summary>Weak subscription on <see cref="UIPopoverPresentationController.DidDismiss"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIPopoverPresentationController.DidDismiss"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable DidDismissWeakSubscribe(
+            this UIPopoverPresentationController eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIPopoverPresentationController>(
+                eventSource,
+                (source, handler) => source.DidDismiss += handler,
+                (source, handler) => source.DidDismiss -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIPopoverPresentationController.PrepareForPresentation"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIPopoverPresentationController.PrepareForPresentation"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable PrepareForPresentationWeakSubscribe(
+            this UIPopoverPresentationController eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIPopoverPresentationController>(
+                eventSource,
+                (source, handler) => source.PrepareForPresentation += handler,
+                (source, handler) => source.PrepareForPresentation -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIPopoverPresentationController.WillReposition"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIPopoverPresentationController.WillReposition"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable WillRepositionWeakSubscribe(
+            this UIPopoverPresentationController eventSource,
+            EventHandler<UIPopoverPresentationControllerRepositionEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIPopoverPresentationController, UIPopoverPresentationControllerRepositionEventArgs>(
+                eventSource,
+                (source, handler) => source.WillReposition += handler,
+                (source, handler) => source.WillReposition -= handler,
+                eventHandler);
+        }
+
+    }
+}
+
+namespace FlexiMvvm.Views
+{
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIPreviewInteraction"/> class events.</summary>
+    public static class UIPreviewInteractionWeakEventsSubscriptionsExtensions
+    {
+        /// <summary>Weak subscription on <see cref="UIPreviewInteraction.DidCancel"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIPreviewInteraction.DidCancel"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable DidCancelWeakSubscribe(
+            this UIPreviewInteraction eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIPreviewInteraction>(
+                eventSource,
+                (source, handler) => source.DidCancel += handler,
+                (source, handler) => source.DidCancel -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIPreviewInteraction.DidUpdateCommit"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIPreviewInteraction.DidUpdateCommit"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable DidUpdateCommitWeakSubscribe(
+            this UIPreviewInteraction eventSource,
+            EventHandler<NSPreviewInteractionPreviewUpdateEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIPreviewInteraction, NSPreviewInteractionPreviewUpdateEventArgs>(
+                eventSource,
+                (source, handler) => source.DidUpdateCommit += handler,
+                (source, handler) => source.DidUpdateCommit -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIPreviewInteraction.DidUpdatePreviewTransition"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIPreviewInteraction.DidUpdatePreviewTransition"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable DidUpdatePreviewTransitionWeakSubscribe(
+            this UIPreviewInteraction eventSource,
+            EventHandler<NSPreviewInteractionPreviewUpdateEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIPreviewInteraction, NSPreviewInteractionPreviewUpdateEventArgs>(
+                eventSource,
+                (source, handler) => source.DidUpdatePreviewTransition += handler,
+                (source, handler) => source.DidUpdatePreviewTransition -= handler,
+                eventHandler);
+        }
+
+    }
+}
+
+namespace FlexiMvvm.Views
+{
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIPrintInteractionController"/> class events.</summary>
+    public static class UIPrintInteractionControllerWeakEventsSubscriptionsExtensions
+    {
+        /// <summary>Weak subscription on <see cref="UIPrintInteractionController.DidDismissPrinterOptions"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIPrintInteractionController.DidDismissPrinterOptions"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable DidDismissPrinterOptionsWeakSubscribe(
+            this UIPrintInteractionController eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIPrintInteractionController>(
+                eventSource,
+                (source, handler) => source.DidDismissPrinterOptions += handler,
+                (source, handler) => source.DidDismissPrinterOptions -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIPrintInteractionController.DidFinishJob"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIPrintInteractionController.DidFinishJob"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable DidFinishJobWeakSubscribe(
+            this UIPrintInteractionController eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIPrintInteractionController>(
+                eventSource,
+                (source, handler) => source.DidFinishJob += handler,
+                (source, handler) => source.DidFinishJob -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIPrintInteractionController.DidPresentPrinterOptions"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIPrintInteractionController.DidPresentPrinterOptions"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable DidPresentPrinterOptionsWeakSubscribe(
+            this UIPrintInteractionController eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIPrintInteractionController>(
+                eventSource,
+                (source, handler) => source.DidPresentPrinterOptions += handler,
+                (source, handler) => source.DidPresentPrinterOptions -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIPrintInteractionController.WillDismissPrinterOptions"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIPrintInteractionController.WillDismissPrinterOptions"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable WillDismissPrinterOptionsWeakSubscribe(
+            this UIPrintInteractionController eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIPrintInteractionController>(
+                eventSource,
+                (source, handler) => source.WillDismissPrinterOptions += handler,
+                (source, handler) => source.WillDismissPrinterOptions -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIPrintInteractionController.WillPresentPrinterOptions"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIPrintInteractionController.WillPresentPrinterOptions"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable WillPresentPrinterOptionsWeakSubscribe(
+            this UIPrintInteractionController eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIPrintInteractionController>(
+                eventSource,
+                (source, handler) => source.WillPresentPrinterOptions += handler,
+                (source, handler) => source.WillPresentPrinterOptions -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIPrintInteractionController.WillStartJob"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIPrintInteractionController.WillStartJob"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable WillStartJobWeakSubscribe(
+            this UIPrintInteractionController eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIPrintInteractionController>(
+                eventSource,
+                (source, handler) => source.WillStartJob += handler,
+                (source, handler) => source.WillStartJob -= handler,
+                eventHandler);
+        }
+
+    }
+}
+
+namespace FlexiMvvm.Views
+{
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIScrollView"/> class events.</summary>
+    public static class UIScrollViewWeakEventsSubscriptionsExtensions
+    {
+        /// <summary>Weak subscription on <see cref="UIScrollView.DecelerationEnded"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIScrollView.DecelerationEnded"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable DecelerationEndedWeakSubscribe(
+            this UIScrollView eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIScrollView>(
+                eventSource,
+                (source, handler) => source.DecelerationEnded += handler,
+                (source, handler) => source.DecelerationEnded -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIScrollView.DecelerationStarted"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIScrollView.DecelerationStarted"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable DecelerationStartedWeakSubscribe(
+            this UIScrollView eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIScrollView>(
+                eventSource,
+                (source, handler) => source.DecelerationStarted += handler,
+                (source, handler) => source.DecelerationStarted -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIScrollView.DidZoom"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIScrollView.DidZoom"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable DidZoomWeakSubscribe(
+            this UIScrollView eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIScrollView>(
+                eventSource,
+                (source, handler) => source.DidZoom += handler,
+                (source, handler) => source.DidZoom -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIScrollView.DraggingEnded"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIScrollView.DraggingEnded"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable DraggingEndedWeakSubscribe(
+            this UIScrollView eventSource,
+            EventHandler<DraggingEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIScrollView, DraggingEventArgs>(
+                eventSource,
+                (source, handler) => source.DraggingEnded += handler,
+                (source, handler) => source.DraggingEnded -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIScrollView.DraggingStarted"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIScrollView.DraggingStarted"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable DraggingStartedWeakSubscribe(
+            this UIScrollView eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIScrollView>(
+                eventSource,
+                (source, handler) => source.DraggingStarted += handler,
+                (source, handler) => source.DraggingStarted -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIScrollView.ScrollAnimationEnded"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIScrollView.ScrollAnimationEnded"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable ScrollAnimationEndedWeakSubscribe(
+            this UIScrollView eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIScrollView>(
+                eventSource,
+                (source, handler) => source.ScrollAnimationEnded += handler,
+                (source, handler) => source.ScrollAnimationEnded -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIScrollView.Scrolled"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIScrollView.Scrolled"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable ScrolledWeakSubscribe(
+            this UIScrollView eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIScrollView>(
+                eventSource,
+                (source, handler) => source.Scrolled += handler,
+                (source, handler) => source.Scrolled -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIScrollView.ScrolledToTop"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIScrollView.ScrolledToTop"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable ScrolledToTopWeakSubscribe(
+            this UIScrollView eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIScrollView>(
+                eventSource,
+                (source, handler) => source.ScrolledToTop += handler,
+                (source, handler) => source.ScrolledToTop -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIScrollView.WillEndDragging"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIScrollView.WillEndDragging"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable WillEndDraggingWeakSubscribe(
+            this UIScrollView eventSource,
+            EventHandler<WillEndDraggingEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIScrollView, WillEndDraggingEventArgs>(
+                eventSource,
+                (source, handler) => source.WillEndDragging += handler,
+                (source, handler) => source.WillEndDragging -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIScrollView.ZoomingEnded"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIScrollView.ZoomingEnded"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable ZoomingEndedWeakSubscribe(
+            this UIScrollView eventSource,
+            EventHandler<ZoomingEndedEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIScrollView, ZoomingEndedEventArgs>(
+                eventSource,
+                (source, handler) => source.ZoomingEnded += handler,
+                (source, handler) => source.ZoomingEnded -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIScrollView.ZoomingStarted"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIScrollView.ZoomingStarted"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable ZoomingStartedWeakSubscribe(
+            this UIScrollView eventSource,
+            EventHandler<UIScrollViewZoomingEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIScrollView, UIScrollViewZoomingEventArgs>(
+                eventSource,
+                (source, handler) => source.ZoomingStarted += handler,
+                (source, handler) => source.ZoomingStarted -= handler,
+                eventHandler);
+        }
+
+    }
+}
+
+namespace FlexiMvvm.Views
+{
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UISearchBar"/> class events.</summary>
+    public static class UISearchBarWeakEventsSubscriptionsExtensions
+    {
+        /// <summary>Weak subscription on <see cref="UISearchBar.BookmarkButtonClicked"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UISearchBar.BookmarkButtonClicked"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable BookmarkButtonClickedWeakSubscribe(
+            this UISearchBar eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UISearchBar>(
+                eventSource,
+                (source, handler) => source.BookmarkButtonClicked += handler,
+                (source, handler) => source.BookmarkButtonClicked -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UISearchBar.CancelButtonClicked"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UISearchBar.CancelButtonClicked"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable CancelButtonClickedWeakSubscribe(
+            this UISearchBar eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UISearchBar>(
+                eventSource,
+                (source, handler) => source.CancelButtonClicked += handler,
+                (source, handler) => source.CancelButtonClicked -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UISearchBar.ListButtonClicked"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UISearchBar.ListButtonClicked"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable ListButtonClickedWeakSubscribe(
+            this UISearchBar eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UISearchBar>(
+                eventSource,
+                (source, handler) => source.ListButtonClicked += handler,
+                (source, handler) => source.ListButtonClicked -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UISearchBar.OnEditingStarted"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UISearchBar.OnEditingStarted"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable OnEditingStartedWeakSubscribe(
+            this UISearchBar eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UISearchBar>(
+                eventSource,
+                (source, handler) => source.OnEditingStarted += handler,
+                (source, handler) => source.OnEditingStarted -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UISearchBar.OnEditingStopped"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UISearchBar.OnEditingStopped"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable OnEditingStoppedWeakSubscribe(
+            this UISearchBar eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UISearchBar>(
+                eventSource,
+                (source, handler) => source.OnEditingStopped += handler,
+                (source, handler) => source.OnEditingStopped -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UISearchBar.SearchButtonClicked"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UISearchBar.SearchButtonClicked"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable SearchButtonClickedWeakSubscribe(
+            this UISearchBar eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UISearchBar>(
+                eventSource,
+                (source, handler) => source.SearchButtonClicked += handler,
+                (source, handler) => source.SearchButtonClicked -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UISearchBar.SelectedScopeButtonIndexChanged"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UISearchBar.SelectedScopeButtonIndexChanged"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable SelectedScopeButtonIndexChangedWeakSubscribe(
+            this UISearchBar eventSource,
+            EventHandler<UISearchBarButtonIndexEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UISearchBar, UISearchBarButtonIndexEventArgs>(
+                eventSource,
+                (source, handler) => source.SelectedScopeButtonIndexChanged += handler,
+                (source, handler) => source.SelectedScopeButtonIndexChanged -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UISearchBar.TextChanged"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UISearchBar.TextChanged"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable TextChangedWeakSubscribe(
+            this UISearchBar eventSource,
+            EventHandler<UISearchBarTextChangedEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UISearchBar, UISearchBarTextChangedEventArgs>(
+                eventSource,
+                (source, handler) => source.TextChanged += handler,
+                (source, handler) => source.TextChanged -= handler,
+                eventHandler);
+        }
+
+    }
+}
+
+namespace FlexiMvvm.Views
+{
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UISplitViewController"/> class events.</summary>
+    public static class UISplitViewControllerWeakEventsSubscriptionsExtensions
+    {
+        /// <summary>Weak subscription on <see cref="UISplitViewController.WillChangeDisplayMode"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UISplitViewController.WillChangeDisplayMode"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable WillChangeDisplayModeWeakSubscribe(
+            this UISplitViewController eventSource,
+            EventHandler<UISplitViewControllerDisplayModeEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UISplitViewController, UISplitViewControllerDisplayModeEventArgs>(
+                eventSource,
+                (source, handler) => source.WillChangeDisplayMode += handler,
+                (source, handler) => source.WillChangeDisplayMode -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UISplitViewController.WillHideViewController"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UISplitViewController.WillHideViewController"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable WillHideViewControllerWeakSubscribe(
+            this UISplitViewController eventSource,
+            EventHandler<UISplitViewHideEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UISplitViewController, UISplitViewHideEventArgs>(
+                eventSource,
+                (source, handler) => source.WillHideViewController += handler,
+                (source, handler) => source.WillHideViewController -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UISplitViewController.WillPresentViewController"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UISplitViewController.WillPresentViewController"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable WillPresentViewControllerWeakSubscribe(
+            this UISplitViewController eventSource,
+            EventHandler<UISplitViewPresentEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UISplitViewController, UISplitViewPresentEventArgs>(
+                eventSource,
+                (source, handler) => source.WillPresentViewController += handler,
+                (source, handler) => source.WillPresentViewController -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UISplitViewController.WillShowViewController"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UISplitViewController.WillShowViewController"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable WillShowViewControllerWeakSubscribe(
+            this UISplitViewController eventSource,
+            EventHandler<UISplitViewShowEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UISplitViewController, UISplitViewShowEventArgs>(
+                eventSource,
+                (source, handler) => source.WillShowViewController += handler,
+                (source, handler) => source.WillShowViewController -= handler,
+                eventHandler);
+        }
+
+    }
+}
+
+namespace FlexiMvvm.Views
+{
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UITabBar"/> class events.</summary>
+    public static class UITabBarWeakEventsSubscriptionsExtensions
+    {
+        /// <summary>Weak subscription on <see cref="UITabBar.DidBeginCustomizingItems"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UITabBar.DidBeginCustomizingItems"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable DidBeginCustomizingItemsWeakSubscribe(
+            this UITabBar eventSource,
+            EventHandler<UITabBarItemsEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UITabBar, UITabBarItemsEventArgs>(
+                eventSource,
+                (source, handler) => source.DidBeginCustomizingItems += handler,
+                (source, handler) => source.DidBeginCustomizingItems -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UITabBar.DidEndCustomizingItems"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UITabBar.DidEndCustomizingItems"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable DidEndCustomizingItemsWeakSubscribe(
+            this UITabBar eventSource,
+            EventHandler<UITabBarFinalItemsEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UITabBar, UITabBarFinalItemsEventArgs>(
+                eventSource,
+                (source, handler) => source.DidEndCustomizingItems += handler,
+                (source, handler) => source.DidEndCustomizingItems -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UITabBar.ItemSelected"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UITabBar.ItemSelected"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable ItemSelectedWeakSubscribe(
+            this UITabBar eventSource,
+            EventHandler<UITabBarItemEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UITabBar, UITabBarItemEventArgs>(
+                eventSource,
+                (source, handler) => source.ItemSelected += handler,
+                (source, handler) => source.ItemSelected -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UITabBar.WillBeginCustomizingItems"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UITabBar.WillBeginCustomizingItems"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable WillBeginCustomizingItemsWeakSubscribe(
+            this UITabBar eventSource,
+            EventHandler<UITabBarItemsEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UITabBar, UITabBarItemsEventArgs>(
+                eventSource,
+                (source, handler) => source.WillBeginCustomizingItems += handler,
+                (source, handler) => source.WillBeginCustomizingItems -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UITabBar.WillEndCustomizingItems"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UITabBar.WillEndCustomizingItems"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable WillEndCustomizingItemsWeakSubscribe(
+            this UITabBar eventSource,
+            EventHandler<UITabBarFinalItemsEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UITabBar, UITabBarFinalItemsEventArgs>(
+                eventSource,
+                (source, handler) => source.WillEndCustomizingItems += handler,
+                (source, handler) => source.WillEndCustomizingItems -= handler,
+                eventHandler);
+        }
+
+    }
+}
+
+namespace FlexiMvvm.Views
+{
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UITabBarController"/> class events.</summary>
+    public static class UITabBarControllerWeakEventsSubscriptionsExtensions
+    {
+        /// <summary>Weak subscription on <see cref="UITabBarController.FinishedCustomizingViewControllers"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UITabBarController.FinishedCustomizingViewControllers"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable FinishedCustomizingViewControllersWeakSubscribe(
+            this UITabBarController eventSource,
+            EventHandler<UITabBarCustomizeChangeEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UITabBarController, UITabBarCustomizeChangeEventArgs>(
+                eventSource,
+                (source, handler) => source.FinishedCustomizingViewControllers += handler,
+                (source, handler) => source.FinishedCustomizingViewControllers -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UITabBarController.OnCustomizingViewControllers"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UITabBarController.OnCustomizingViewControllers"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable OnCustomizingViewControllersWeakSubscribe(
+            this UITabBarController eventSource,
+            EventHandler<UITabBarCustomizeEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UITabBarController, UITabBarCustomizeEventArgs>(
+                eventSource,
+                (source, handler) => source.OnCustomizingViewControllers += handler,
+                (source, handler) => source.OnCustomizingViewControllers -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UITabBarController.OnEndCustomizingViewControllers"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UITabBarController.OnEndCustomizingViewControllers"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable OnEndCustomizingViewControllersWeakSubscribe(
+            this UITabBarController eventSource,
+            EventHandler<UITabBarCustomizeChangeEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UITabBarController, UITabBarCustomizeChangeEventArgs>(
+                eventSource,
+                (source, handler) => source.OnEndCustomizingViewControllers += handler,
+                (source, handler) => source.OnEndCustomizingViewControllers -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UITabBarController.ViewControllerSelected"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UITabBarController.ViewControllerSelected"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable ViewControllerSelectedWeakSubscribe(
+            this UITabBarController eventSource,
+            EventHandler<UITabBarSelectionEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UITabBarController, UITabBarSelectionEventArgs>(
+                eventSource,
+                (source, handler) => source.ViewControllerSelected += handler,
+                (source, handler) => source.ViewControllerSelected -= handler,
+                eventHandler);
+        }
+
+    }
+}
+
+namespace FlexiMvvm.Views
+{
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UITextField"/> class events.</summary>
+    public static class UITextFieldWeakEventsSubscriptionsExtensions
+    {
+        /// <summary>Weak subscription on <see cref="UITextField.Ended"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UITextField.Ended"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable EndedWeakSubscribe(
             this UITextField eventSource,
             EventHandler eventHandler)
@@ -206,13 +2371,18 @@ namespace FlexiMvvm.Views
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new WeakEventSubscription<UITextField>(
+            return new EventHandlerWeakEventSubscription<UITextField>(
                 eventSource,
                 (source, handler) => source.Ended += handler,
                 (source, handler) => source.Ended -= handler,
                 eventHandler);
         }
 
+        /// <summary>Weak subscription on <see cref="UITextField.Started"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UITextField.Started"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable StartedWeakSubscribe(
             this UITextField eventSource,
             EventHandler eventHandler)
@@ -222,10 +2392,475 @@ namespace FlexiMvvm.Views
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new WeakEventSubscription<UITextField>(
+            return new EventHandlerWeakEventSubscription<UITextField>(
                 eventSource,
                 (source, handler) => source.Started += handler,
                 (source, handler) => source.Started -= handler,
+                eventHandler);
+        }
+
+    }
+}
+
+namespace FlexiMvvm.Views
+{
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UITextView"/> class events.</summary>
+    public static class UITextViewWeakEventsSubscriptionsExtensions
+    {
+        /// <summary>Weak subscription on <see cref="UITextView.Changed"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UITextView.Changed"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable ChangedWeakSubscribe(
+            this UITextView eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UITextView>(
+                eventSource,
+                (source, handler) => source.Changed += handler,
+                (source, handler) => source.Changed -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UITextView.DecelerationEnded"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UITextView.DecelerationEnded"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable DecelerationEndedWeakSubscribe(
+            this UITextView eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UITextView>(
+                eventSource,
+                (source, handler) => source.DecelerationEnded += handler,
+                (source, handler) => source.DecelerationEnded -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UITextView.DecelerationStarted"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UITextView.DecelerationStarted"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable DecelerationStartedWeakSubscribe(
+            this UITextView eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UITextView>(
+                eventSource,
+                (source, handler) => source.DecelerationStarted += handler,
+                (source, handler) => source.DecelerationStarted -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UITextView.DidZoom"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UITextView.DidZoom"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable DidZoomWeakSubscribe(
+            this UITextView eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UITextView>(
+                eventSource,
+                (source, handler) => source.DidZoom += handler,
+                (source, handler) => source.DidZoom -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UITextView.DraggingEnded"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UITextView.DraggingEnded"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable DraggingEndedWeakSubscribe(
+            this UITextView eventSource,
+            EventHandler<DraggingEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UITextView, DraggingEventArgs>(
+                eventSource,
+                (source, handler) => source.DraggingEnded += handler,
+                (source, handler) => source.DraggingEnded -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UITextView.DraggingStarted"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UITextView.DraggingStarted"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable DraggingStartedWeakSubscribe(
+            this UITextView eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UITextView>(
+                eventSource,
+                (source, handler) => source.DraggingStarted += handler,
+                (source, handler) => source.DraggingStarted -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UITextView.Ended"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UITextView.Ended"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable EndedWeakSubscribe(
+            this UITextView eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UITextView>(
+                eventSource,
+                (source, handler) => source.Ended += handler,
+                (source, handler) => source.Ended -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UITextView.ScrollAnimationEnded"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UITextView.ScrollAnimationEnded"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable ScrollAnimationEndedWeakSubscribe(
+            this UITextView eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UITextView>(
+                eventSource,
+                (source, handler) => source.ScrollAnimationEnded += handler,
+                (source, handler) => source.ScrollAnimationEnded -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UITextView.Scrolled"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UITextView.Scrolled"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable ScrolledWeakSubscribe(
+            this UITextView eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UITextView>(
+                eventSource,
+                (source, handler) => source.Scrolled += handler,
+                (source, handler) => source.Scrolled -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UITextView.ScrolledToTop"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UITextView.ScrolledToTop"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable ScrolledToTopWeakSubscribe(
+            this UITextView eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UITextView>(
+                eventSource,
+                (source, handler) => source.ScrolledToTop += handler,
+                (source, handler) => source.ScrolledToTop -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UITextView.SelectionChanged"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UITextView.SelectionChanged"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable SelectionChangedWeakSubscribe(
+            this UITextView eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UITextView>(
+                eventSource,
+                (source, handler) => source.SelectionChanged += handler,
+                (source, handler) => source.SelectionChanged -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UITextView.Started"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UITextView.Started"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable StartedWeakSubscribe(
+            this UITextView eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UITextView>(
+                eventSource,
+                (source, handler) => source.Started += handler,
+                (source, handler) => source.Started -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UITextView.WillEndDragging"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UITextView.WillEndDragging"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable WillEndDraggingWeakSubscribe(
+            this UITextView eventSource,
+            EventHandler<WillEndDraggingEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UITextView, WillEndDraggingEventArgs>(
+                eventSource,
+                (source, handler) => source.WillEndDragging += handler,
+                (source, handler) => source.WillEndDragging -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UITextView.ZoomingEnded"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UITextView.ZoomingEnded"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable ZoomingEndedWeakSubscribe(
+            this UITextView eventSource,
+            EventHandler<ZoomingEndedEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UITextView, ZoomingEndedEventArgs>(
+                eventSource,
+                (source, handler) => source.ZoomingEnded += handler,
+                (source, handler) => source.ZoomingEnded -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UITextView.ZoomingStarted"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UITextView.ZoomingStarted"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable ZoomingStartedWeakSubscribe(
+            this UITextView eventSource,
+            EventHandler<UIScrollViewZoomingEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UITextView, UIScrollViewZoomingEventArgs>(
+                eventSource,
+                (source, handler) => source.ZoomingStarted += handler,
+                (source, handler) => source.ZoomingStarted -= handler,
+                eventHandler);
+        }
+
+    }
+}
+
+namespace FlexiMvvm.Views
+{
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIVideoEditorController"/> class events.</summary>
+    public static class UIVideoEditorControllerWeakEventsSubscriptionsExtensions
+    {
+        /// <summary>Weak subscription on <see cref="UIVideoEditorController.Failed"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIVideoEditorController.Failed"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable FailedWeakSubscribe(
+            this UIVideoEditorController eventSource,
+            EventHandler<NSErrorEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIVideoEditorController, NSErrorEventArgs>(
+                eventSource,
+                (source, handler) => source.Failed += handler,
+                (source, handler) => source.Failed -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIVideoEditorController.Saved"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIVideoEditorController.Saved"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable SavedWeakSubscribe(
+            this UIVideoEditorController eventSource,
+            EventHandler<UIPathEventArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIVideoEditorController, UIPathEventArgs>(
+                eventSource,
+                (source, handler) => source.Saved += handler,
+                (source, handler) => source.Saved -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIVideoEditorController.UserCancelled"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIVideoEditorController.UserCancelled"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable UserCancelledWeakSubscribe(
+            this UIVideoEditorController eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIVideoEditorController>(
+                eventSource,
+                (source, handler) => source.UserCancelled += handler,
+                (source, handler) => source.UserCancelled -= handler,
+                eventHandler);
+        }
+
+    }
+}
+
+namespace FlexiMvvm.Views
+{
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIWebView"/> class events.</summary>
+    public static class UIWebViewWeakEventsSubscriptionsExtensions
+    {
+        /// <summary>Weak subscription on <see cref="UIWebView.LoadError"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIWebView.LoadError"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable LoadErrorWeakSubscribe(
+            this UIWebView eventSource,
+            EventHandler<UIWebErrorArgs> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIWebView, UIWebErrorArgs>(
+                eventSource,
+                (source, handler) => source.LoadError += handler,
+                (source, handler) => source.LoadError -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIWebView.LoadFinished"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIWebView.LoadFinished"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable LoadFinishedWeakSubscribe(
+            this UIWebView eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIWebView>(
+                eventSource,
+                (source, handler) => source.LoadFinished += handler,
+                (source, handler) => source.LoadFinished -= handler,
+                eventHandler);
+        }
+
+        /// <summary>Weak subscription on <see cref="UIWebView.LoadStarted"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="UIWebView.LoadStarted"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
+        public static IDisposable LoadStartedWeakSubscribe(
+            this UIWebView eventSource,
+            EventHandler eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new EventHandlerWeakEventSubscription<UIWebView>(
+                eventSource,
+                (source, handler) => source.LoadStarted += handler,
+                (source, handler) => source.LoadStarted -= handler,
                 eventHandler);
         }
 

@@ -18,13 +18,18 @@
 using Android.Support.Design.Widget;
 using Android.Views;
 using System;
-using FlexiMvvm.Weak.Delegates;
 using FlexiMvvm.Weak.Subscriptions;
 
 namespace FlexiMvvm.Views
 {
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="BottomNavigationView"/> class events.</summary>
     public static class BottomNavigationViewWeakEventsSubscriptionsExtensions
     {
+        /// <summary>Weak subscription on <see cref="BottomNavigationView.NavigationItemSelected"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="BottomNavigationView.NavigationItemSelected"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable NavigationItemSelectedWeakSubscribe(
             this BottomNavigationView eventSource,
             EventHandler<BottomNavigationView.NavigationItemSelectedEventArgs> eventHandler)
@@ -34,7 +39,7 @@ namespace FlexiMvvm.Views
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new WeakEventSubscription<BottomNavigationView, BottomNavigationView.NavigationItemSelectedEventArgs>(
+            return new EventHandlerWeakEventSubscription<BottomNavigationView, BottomNavigationView.NavigationItemSelectedEventArgs>(
                 eventSource,
                 (source, handler) => source.NavigationItemSelected += handler,
                 (source, handler) => source.NavigationItemSelected -= handler,
@@ -46,8 +51,14 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="View"/> class events.</summary>
     public static class ViewWeakEventsSubscriptionsExtensions
     {
+        /// <summary>Weak subscription on <see cref="View.Click"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="View.Click"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable ClickWeakSubscribe(
             this View eventSource,
             EventHandler eventHandler)
@@ -57,7 +68,7 @@ namespace FlexiMvvm.Views
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new WeakEventSubscription<View>(
+            return new EventHandlerWeakEventSubscription<View>(
                 eventSource,
                 (source, handler) => source.Click += handler,
                 (source, handler) => source.Click -= handler,

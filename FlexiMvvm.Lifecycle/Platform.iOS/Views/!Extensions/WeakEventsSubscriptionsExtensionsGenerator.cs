@@ -17,13 +17,18 @@
 
 using FlexiMvvm.ViewModels;
 using System;
-using FlexiMvvm.Weak.Delegates;
 using FlexiMvvm.Weak.Subscriptions;
 
 namespace FlexiMvvm.Views
 {
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="IBackwardNavigationView<IViewModel>"/> class events.</summary>
     public static class BackwardNavigationViewWeakEventsSubscriptionsExtensions
     {
+        /// <summary>Weak subscription on <see cref="IBackwardNavigationView<IViewModel>.ResultSet"/> event.</summary>
+        /// <returns>Weak event subscription instance.</returns>
+        /// <param name="eventSource">The source of the event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="IBackwardNavigationView<IViewModel>.ResultSet"/> event.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable ResultSetWeakSubscribe(
             this IBackwardNavigationView<IViewModel> eventSource,
             EventHandler<ResultSetEventArgs> eventHandler)
@@ -33,7 +38,7 @@ namespace FlexiMvvm.Views
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new WeakEventSubscription<IBackwardNavigationView<IViewModel>, ResultSetEventArgs>(
+            return new EventHandlerWeakEventSubscription<IBackwardNavigationView<IViewModel>, ResultSetEventArgs>(
                 eventSource,
                 (source, handler) => source.ResultSet += handler,
                 (source, handler) => source.ResultSet -= handler,

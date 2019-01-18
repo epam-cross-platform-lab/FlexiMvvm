@@ -30,6 +30,10 @@ namespace FlexiMvvm.Weak.Subscriptions.Generation
 
             ClassName = className;
             TypeEventsGenerationOptions = eventsGenerationOptions ?? Enumerable.Empty<EventGenerationOptions>();
+            TypeEventsWithCustomEventHandlerGenerationOptions = TypeEventsGenerationOptions
+                .Where(options => !options.NotNull().EventHandlerClassName.WithoutNamespace().WithoutGenericPart().Equals(nameof(EventHandler)))
+                .DistinctBy(options => options.NotNull().EventHandlerClassName)
+                .ToList();
         }
 
         [CanBeNull]
@@ -42,18 +46,6 @@ namespace FlexiMvvm.Weak.Subscriptions.Generation
         public IEnumerable<EventGenerationOptions> TypeEventsGenerationOptions { get; }
 
         [NotNull]
-        public string GetExtensionsClassName()
-        {
-            var sanitizedClassName = ClassName.Substring(ClassName.LastIndexOf('.') + 1);
-
-            if (sanitizedClassName.Contains('<'))
-            {
-                sanitizedClassName = sanitizedClassName.Substring(0, sanitizedClassName.IndexOf('<'));
-            }
-
-            sanitizedClassName = sanitizedClassName.TrimStart('I');
-
-            return $"{sanitizedClassName}WeakEventsSubscriptionsExtensions";
-        }
+        public IEnumerable<EventGenerationOptions> TypeEventsWithCustomEventHandlerGenerationOptions { get; }
     }
 }

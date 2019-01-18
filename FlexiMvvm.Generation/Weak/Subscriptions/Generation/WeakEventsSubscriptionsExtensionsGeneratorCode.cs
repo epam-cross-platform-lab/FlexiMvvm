@@ -37,5 +37,42 @@ namespace FlexiMvvm.Weak.Subscriptions.Generation
 
         [NotNull]
         private IEnumerable<ExtensionsGenerationOptions> TypesExtensionsGenerationOptions { get; }
+
+        [NotNull]
+        private string GetNamespace([NotNull] ExtensionsGenerationOptions typeExtensionsGenerationOptions)
+        {
+            return string.IsNullOrEmpty(typeExtensionsGenerationOptions.TargetNamespace)
+                ? TargetNamespace
+                : typeExtensionsGenerationOptions.TargetNamespace;
+        }
+
+        [NotNull]
+        private string GetClassName([NotNull] ExtensionsGenerationOptions typeExtensionsGenerationOptions)
+        {
+            var sanitizedClassName = typeExtensionsGenerationOptions.ClassName.WithoutNamespace().WithoutInterfacePrefix().WithoutGenericPart();
+
+            return $"{sanitizedClassName}WeakEventsSubscriptionsExtensions";
+        }
+
+        [NotNull]
+        private string GetPassedEventHandlerDeclarationName([NotNull] EventGenerationOptions typeEventGenerationOptions)
+        {
+            return string.IsNullOrWhiteSpace(typeEventGenerationOptions.EventArgsClassName)
+                ? nameof(EventHandler)
+                : $"{nameof(EventHandler)}<{typeEventGenerationOptions.EventArgsClassName}>";
+        }
+
+        [NotNull]
+        private string GetWeakEventSubscriptionClassName([NotNull] string typeClassName, [NotNull] EventGenerationOptions typeEventGenerationOptions)
+        {
+            if (string.IsNullOrWhiteSpace(typeClassName))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(typeClassName));
+            if (typeEventGenerationOptions == null)
+                throw new ArgumentNullException(nameof(typeEventGenerationOptions));
+
+            return typeEventGenerationOptions.IsGenericEventHandler
+                ? $"{typeEventGenerationOptions.EventHandlerClassName}WeakEventSubscription<{typeClassName}, {typeEventGenerationOptions.EventArgsClassName}>"
+                : $"{typeEventGenerationOptions.EventHandlerClassName}WeakEventSubscription<{typeClassName}>";
+        }
     }
 }

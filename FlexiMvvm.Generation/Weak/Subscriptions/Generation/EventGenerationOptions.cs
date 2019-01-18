@@ -27,6 +27,7 @@ namespace FlexiMvvm.Weak.Subscriptions.Generation
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(eventName));
 
             EventName = eventName;
+            EventHandlerClassName = nameof(EventHandler);
         }
 
         public EventGenerationOptions([NotNull] string eventName, [NotNull] string eventArgsClassName)
@@ -36,6 +37,7 @@ namespace FlexiMvvm.Weak.Subscriptions.Generation
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(eventArgsClassName));
 
             EventArgsClassName = eventArgsClassName;
+            IsGenericEventHandler = true;
         }
 
         public EventGenerationOptions([NotNull] string eventName, [NotNull] string eventArgsClassName, [NotNull] string eventHandlerClassName)
@@ -45,15 +47,23 @@ namespace FlexiMvvm.Weak.Subscriptions.Generation
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(eventHandlerClassName));
 
             EventHandlerClassName = eventHandlerClassName;
+            IsGenericEventHandler = false;
         }
 
         [NotNull]
         public string EventName { get; }
 
-        [CanBeNull]
+        [NotNull]
         public string EventHandlerClassName { get; }
 
         [CanBeNull]
         public string EventArgsClassName { get; }
+
+        public bool IsGenericEventHandler { get; set; }
+
+        public bool IsStaticEvent { get; set; }
+
+        [CanBeNull]
+        public string IfPreprocessorDirective { get; set; }
     }
 }

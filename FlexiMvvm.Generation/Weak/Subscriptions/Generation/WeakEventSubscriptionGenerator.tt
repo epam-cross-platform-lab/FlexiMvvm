@@ -1,32 +1,24 @@
 ﻿<#@ template visibility="internal" language="C#" #>
-private sealed class <#= GetWeakEventSubscriptionClassName(TypeClassName, TypeEventGenerationOptions) #> : WeakEventSubscriptionBase<<#= TypeClassName #>, <#= TypeEventGenerationOptions.EventArgsClassName #>>
+private sealed class <#= GetClassName() #> : <#= GetBaseClassName() #>
+    where TEventSource : class
 {
-    private readonly Action<<#= TypeClassName #>, <#= TypeEventGenerationOptions.EventHandlerClassName #>> _subscribeToEvent;
-    private readonly Action<<#= TypeClassName #>, <#= TypeEventGenerationOptions.EventHandlerClassName #>> _unsubscribeFromEvent;
-    private readonly WeakEventHandler<<#= TypeEventGenerationOptions.EventArgsClassName #>> _weakEventHandler;
+    private readonly Action<TEventSource, <#= GetOriginEventHandlerDeclarationName() #>> _subscribeToEvent;
+    private readonly Action<TEventSource, <#= GetOriginEventHandlerDeclarationName() #>> _unsubscribeFromEvent;
 
-    public <#= GetWeakEventSubscriptionClassName(TypeClassName, TypeEventGenerationOptions) #>(
-        <#= TypeClassName #> eventSource,
-        Action<<#= TypeClassName #>, <#= TypeEventGenerationOptions.EventHandlerClassName #>> subscribeToEvent,
-        Action<<#= TypeClassName #>, <#= TypeEventGenerationOptions.EventHandlerClassName #>> unsubscribeFromEvent,
-        EventHandler<<#= TypeEventGenerationOptions.EventArgsClassName #>> eventHandler)
-        : base(eventSource)
+    public <#= GetClassName().WithoutGenericPart() #>(
+        TEventSource eventSource,
+        Action<TEventSource, <#= GetOriginEventHandlerDeclarationName() #>> subscribeToEvent,
+        Action<TEventSource, <#= GetOriginEventHandlerDeclarationName() #>> unsubscribeFromEvent,
+        <#= GetPassedEventHandlerDeclarationName() #> eventHandler)
+        : base(eventSource, eventHandler)
     {
-        if (subscribeToEvent == null)
-            throw new ArgumentNullException(nameof(subscribeToEvent));
-        if (unsubscribeFromEvent == null)
-            throw new ArgumentNullException(nameof(unsubscribeFromEvent));
-        if (eventHandler == null)
-            throw new ArgumentNullException(nameof(eventHandler));
-
-        _subscribeToEvent = subscribeToEvent;
-        _unsubscribeFromEvent = unsubscribeFromEvent;
-        _weakEventHandler = new WeakEventHandler<<#= TypeEventGenerationOptions.EventArgsClassName #>>(eventHandler);
+        _subscribeToEvent = subscribeToEvent ?? throw new ArgumentNullException(nameof(subscribeToEvent));
+        _unsubscribeFromEvent = unsubscribeFromEvent ?? throw new ArgumentNullException(nameof(unsubscribeFromEvent));
 
         SubscribeToEvent();
     }
 
-    protected override void SubscribeToEvent(<#= TypeClassName #> eventSource)
+    protected override void SubscribeToEvent(TEventSource eventSource)
     {
         if (eventSource == null)
             throw new ArgumentNullException(nameof(eventSource));
@@ -34,23 +26,11 @@ private sealed class <#= GetWeakEventSubscriptionClassName(TypeClassName, TypeEv
         _subscribeToEvent(eventSource, OnSourceEvent);
     }
 
-    protected override void UnsubscribeFromEvent(<#= TypeClassName #> eventSource)
+    protected override void UnsubscribeFromEvent(TEventSource eventSource)
     {
         if (eventSource == null)
             throw new ArgumentNullException(nameof(eventSource));
 
         _unsubscribeFromEvent(eventSource, OnSourceEvent);
-    }
-
-    protected override bool TryInvokeEventHandler(object sender, <#= TypeEventGenerationOptions.EventArgsClassName #> e)
-    {
-        if (_weakEventHandler.TryGetTarget(out var target))
-        {
-            _weakEventHandler.Invoke(target, sender, e);
-
-            return true;
-        }
-
-        return false;
     }
 }
