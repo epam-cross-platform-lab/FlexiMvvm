@@ -28,6 +28,10 @@
             <Generator>TextTemplatingFileGenerator</Generator>
             <LastGenOutput>FlxViewsGenerator.cs</LastGenOutput>
         </None>
+        <None Update="Platform.iOS\Views\!Extensions\WeakEventsSubscriptionsExtensionsGenerator.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>WeakEventsSubscriptionsExtensionsGenerator.cs</LastGenOutput>
+        </None>
     </ItemGroup>
     <ItemGroup>
         <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
@@ -42,6 +46,11 @@
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
             <DependentUpon>FlxViewsGenerator.tt</DependentUpon>
+        </None>
+        <None Update="Platform.iOS\Views\!Extensions\WeakEventsSubscriptionsExtensionsGenerator.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>WeakEventsSubscriptionsExtensionsGenerator.tt</DependentUpon>
         </None>
     </ItemGroup>
 </Project>

@@ -15,13 +15,14 @@
 // limitations under the License.
 // =========================================================================
 
+using UIKit;
 using System;
 using System.Threading.Tasks;
 using FlexiMvvm.ViewModels;
 using FlexiMvvm.ViewModels.Core;
 using FlexiMvvm.Views;
 using FlexiMvvm.Views.Core;
-using UIKit;
+using FlexiMvvm.Views.Keyboard;
 
 namespace FlexiMvvm.Views
 {

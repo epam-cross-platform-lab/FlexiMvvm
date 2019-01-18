@@ -22,7 +22,7 @@ using FlexiMvvm.ViewModels;
 using FlexiMvvm.ViewModels.Core;
 using FlexiMvvm.Views;
 using FlexiMvvm.Views.Core;
-using UIKit;
+using FlexiMvvm.Views.Keyboard;
 <# foreach (var viewGenerationOptions in ViewsGenerationOptions) { #>
 
 namespace <#= string.IsNullOrWhiteSpace(viewGenerationOptions.TargetNamespace) ? TargetNamespace : viewGenerationOptions.TargetNamespace #>

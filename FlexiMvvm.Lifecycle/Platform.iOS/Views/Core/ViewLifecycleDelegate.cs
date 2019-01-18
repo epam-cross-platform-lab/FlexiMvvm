@@ -20,6 +20,7 @@ using System.Threading.Tasks;
 using FlexiMvvm.Formatters;
 using FlexiMvvm.ViewModels;
 using FlexiMvvm.ViewModels.Core;
+using FlexiMvvm.Views.Keyboard;
 using JetBrains.Annotations;
 using UIKit;
 

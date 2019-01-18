@@ -14,6 +14,7 @@
 // limitations under the License.
 // =========================================================================
 
+using FlexiMvvm.Views.Keyboard;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.Views

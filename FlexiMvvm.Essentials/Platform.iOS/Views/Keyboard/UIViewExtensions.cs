@@ -18,25 +18,12 @@ using System;
 using JetBrains.Annotations;
 using UIKit;
 
-namespace FlexiMvvm.Views
+namespace FlexiMvvm.Views.Keyboard
 {
-    public static class UIViewExtensions
+    internal static class UIViewExtensions
     {
-        [NotNull]
-        public static UIView AddLayoutSubview([NotNull] this UIView parentView, [NotNull] UIView childView)
-        {
-            if (parentView == null)
-                throw new ArgumentNullException(nameof(parentView));
-            if (childView == null)
-                throw new ArgumentNullException(nameof(childView));
-
-            parentView.AddSubview(childView);
-
-            return parentView;
-        }
-
         [CanBeNull]
-        public static Tuple<UIView, UIScrollView> FindFirstResponderInScrollView([NotNull] this UIView rootView)
+        internal static Tuple<UIView, UIScrollView> FindFirstResponderInScrollView([NotNull] this UIView rootView)
         {
             if (rootView == null)
                 throw new ArgumentNullException(nameof(rootView));

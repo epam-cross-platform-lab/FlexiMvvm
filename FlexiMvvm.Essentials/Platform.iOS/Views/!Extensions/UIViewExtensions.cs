@@ -13,18 +13,26 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 // =========================================================================
+
 using System;
-using CoreGraphics;
+using JetBrains.Annotations;
+using UIKit;
 
 namespace FlexiMvvm.Views
 {
-    public class KeyboardSizeChangedEventArgs : EventArgs
+    public static class UIViewExtensions
     {
-        public KeyboardSizeChangedEventArgs(CGSize keyboardSize)
+        [NotNull]
+        public static UIView AddLayoutSubview([NotNull] this UIView parentView, [NotNull] UIView childView)
         {
-            KeyboardSize = keyboardSize;
-        }
+            if (parentView == null)
+                throw new ArgumentNullException(nameof(parentView));
+            if (childView == null)
+                throw new ArgumentNullException(nameof(childView));
 
-        public CGSize KeyboardSize { get; }
+            parentView.AddSubview(childView);
+
+            return parentView;
+        }
     }
 }

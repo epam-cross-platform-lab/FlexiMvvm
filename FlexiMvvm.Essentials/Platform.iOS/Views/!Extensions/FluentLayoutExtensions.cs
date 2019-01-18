@@ -23,7 +23,7 @@ using UIKit;
 
 namespace FlexiMvvm.Views
 {
-    public static class AdvancedFluentLayoutExtensions
+    public static class FluentLayoutExtensions
     {
         private const float DefaultMargin = 0;
 

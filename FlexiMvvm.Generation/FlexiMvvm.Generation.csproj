@@ -11,6 +11,14 @@
         <PackageReference Include="System.CodeDom" Version="4.5.0" />
     </ItemGroup>
     <ItemGroup>
+        <None Update="Weak\Subscriptions\Generation\WeakEventsSubscriptionsExtensionsGenerator.tt">
+            <Generator>TextTemplatingFilePreprocessor</Generator>
+            <LastGenOutput>WeakEventsSubscriptionsExtensionsGenerator.cs</LastGenOutput>
+        </None>
+        <None Update="Weak\Subscriptions\Generation\WeakEventSubscriptionGenerator.tt">
+            <Generator>TextTemplatingFilePreprocessor</Generator>
+            <LastGenOutput>WeakEventSubscriptionGenerator.cs</LastGenOutput>
+        </None>
         <None Update="Views\Generation\Android\BindableViewsGenerator.tt">
             <Generator>TextTemplatingFilePreprocessor</Generator>
             <LastGenOutput>BindableViewsGenerator.cs</LastGenOutput>
@@ -32,6 +40,16 @@
         <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
     </ItemGroup>
     <ItemGroup>
+        <Compile Update="Weak\Subscriptions\Generation\WeakEventsSubscriptionsExtensionsGenerator.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>WeakEventsSubscriptionsExtensionsGenerator.tt</DependentUpon>
+        </Compile>
+        <Compile Update="Weak\Subscriptions\Generation\WeakEventSubscriptionGenerator.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>WeakEventSubscriptionGenerator.tt</DependentUpon>
+        </Compile>
         <Compile Update="Views\Generation\Android\BindableViewsGenerator.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>

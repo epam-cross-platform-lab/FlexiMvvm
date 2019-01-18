@@ -15,6 +15,8 @@
 // limitations under the License.
 // =========================================================================
 
+using Android.Support.V4.App;
+using Android.Support.V7.App;
 using System;
 using System.Threading.Tasks;
 using Android.Content;
@@ -30,7 +32,7 @@ using FlexiMvvm.Views.Core;
 namespace FlexiMvvm.Views
 {
     [Register("fleximvvm.views.FlxAppCompatActivity")]
-    public partial class FlxAppCompatActivity : Android.Support.V7.App.AppCompatActivity, IFlxActivity
+    public partial class FlxAppCompatActivity : AppCompatActivity, IFlxActivity
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
 
@@ -195,7 +197,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     [Register("fleximvvm.views.FlxFragment")]
-    public partial class FlxFragment : Android.Support.V4.App.Fragment, IFlxFragment
+    public partial class FlxFragment : Fragment, IFlxFragment
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
 
@@ -363,7 +365,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     [Register("fleximvvm.views.FlxDialogFragment")]
-    public partial class FlxDialogFragment : Android.Support.V4.App.DialogFragment, IFlxFragment
+    public partial class FlxDialogFragment : DialogFragment, IFlxFragment
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
 

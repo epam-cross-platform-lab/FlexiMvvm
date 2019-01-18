@@ -1,0 +1,55 @@
+﻿<#
+// =========================================================================
+// Copyright 2019 EPAM Systems, Inc.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// =========================================================================
+#>
+<#@ template language="C#" #>
+using System;
+using FlexiMvvm.Weak.Delegates;
+using FlexiMvvm.Weak.Subscriptions;
+<# foreach (var typeExtensionsGenerationOptions in TypesExtensionsGenerationOptions) { #>
+
+namespace <#= string.IsNullOrEmpty(typeExtensionsGenerationOptions.TargetNamespace) ? TargetNamespace : typeExtensionsGenerationOptions.TargetNamespace #>
+{
+    public static class <#= typeExtensionsGenerationOptions.GetExtensionsClassName() #>
+    {
+<# foreach (var typeEventGenerationOptions in typeExtensionsGenerationOptions.TypeEventsGenerationOptions) { #>
+        public static IDisposable <#= typeEventGenerationOptions.EventName #>WeakSubscribe(
+            this <#= typeExtensionsGenerationOptions.ClassName #> eventSource,
+            <#= string.IsNullOrWhiteSpace(typeEventGenerationOptions.EventArgsClassName) ? "EventHandler" : $"EventHandler<{typeEventGenerationOptions.EventArgsClassName}>" #> eventHandler)
+        {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
+
+            return new <#= WeakEventSubscriptionGenerator.GetWeakEventSubscriptionClassName(typeExtensionsGenerationOptions.ClassName, typeEventGenerationOptions) #>(
+                eventSource,
+                (source, handler) => source.<#= typeEventGenerationOptions.EventName #> += handler,
+                (source, handler) => source.<#= typeEventGenerationOptions.EventName #> -= handler,
+                eventHandler);
+        }
+
+<# } #>
+<# foreach (var typeEventGenerationOptions in typeExtensionsGenerationOptions.TypeEventsGenerationOptions) {
+    if (WeakEventSubscriptionGenerator.ShouldGenerateCustom(typeEventGenerationOptions)) {
+        var weakEventSubscriptionGenerator = new WeakEventSubscriptionGenerator(typeExtensionsGenerationOptions.ClassName, typeEventGenerationOptions);
+        weakEventSubscriptionGenerator.PushIndent("    ");
+        weakEventSubscriptionGenerator.PushIndent("    "); #>
+<#= weakEventSubscriptionGenerator.TransformText() #>
+<#  }} #>
+    }
+}
+<# } #>

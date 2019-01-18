@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace FlexiMvvm.Views.Generation.Ios
+namespace FlexiMvvm.Weak.Subscriptions.Generation
 {
     using System;
     
@@ -15,9 +15,9 @@ namespace FlexiMvvm.Views.Generation.Ios
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+    #line 1 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventsSubscriptionsExtensionsGenerator.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
-    public partial class ViewsGenerator : ViewsGeneratorBase
+    public partial class WeakEventsSubscriptionsExtensionsGenerator : WeakEventsSubscriptionsExtensionsGeneratorBase
     {
 #line hidden
         /// <summary>
@@ -26,7 +26,7 @@ namespace FlexiMvvm.Views.Generation.Ios
         public virtual string TransformText()
         {
             
-            #line 1 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 1 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventsSubscriptionsExtensionsGenerator.tt"
 
 // =========================================================================
 // Copyright 2019 EPAM Systems, Inc.
@@ -47,254 +47,117 @@ namespace FlexiMvvm.Views.Generation.Ios
             
             #line default
             #line hidden
-            this.Write("using System;\r\nusing System.Threading.Tasks;\r\nusing FlexiMvvm.ViewModels;\r\nusing " +
-                    "FlexiMvvm.ViewModels.Core;\r\nusing FlexiMvvm.Views;\r\nusing FlexiMvvm.Views.Core;\r" +
-                    "\nusing FlexiMvvm.Views.Keyboard;\r\n");
+            this.Write("using System;\r\nusing FlexiMvvm.Weak.Delegates;\r\nusing FlexiMvvm.Weak.Subscription" +
+                    "s;\r\n");
             
-            #line 26 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
- foreach (var viewGenerationOptions in ViewsGenerationOptions) { 
+            #line 22 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventsSubscriptionsExtensionsGenerator.tt"
+ foreach (var typeExtensionsGenerationOptions in TypesExtensionsGenerationOptions) { 
             
             #line default
             #line hidden
             this.Write("\r\nnamespace ");
             
-            #line 28 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(string.IsNullOrWhiteSpace(viewGenerationOptions.TargetNamespace) ? TargetNamespace : viewGenerationOptions.TargetNamespace));
+            #line 24 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventsSubscriptionsExtensionsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(string.IsNullOrEmpty(typeExtensionsGenerationOptions.TargetNamespace) ? TargetNamespace : typeExtensionsGenerationOptions.TargetNamespace));
             
             #line default
             #line hidden
-            this.Write("\r\n{\r\n    public partial class ");
+            this.Write("\r\n{\r\n    public static class ");
             
-            #line 30 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
-            
-            #line default
-            #line hidden
-            this.Write(" : ");
-            
-            #line 30 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.BaseClassName));
+            #line 26 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventsSubscriptionsExtensionsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(typeExtensionsGenerationOptions.GetExtensionsClassName()));
             
             #line default
             #line hidden
-            this.Write(@", IFlxViewController
-    {
-        private IViewLifecycleDelegate _lifecycleDelegate;
-        private KeyboardHandler _keyboardHandler;
-
-        public event EventHandler ViewDidLoadCalled;
-
-        public event EventHandler ViewWillAppearCalled;
-
-        public event EventHandler ViewDidAppearCalled;
-
-        public event EventHandler ViewWillDisappearCalled;
-
-        public event EventHandler ViewDidDisappearCalled;
-
-        protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ?? (_lifecycleDelegate = CreateLifecycleDelegate());
-
-        public virtual bool HandleKeyboard { get; } = ");
+            this.Write("\r\n    {\r\n");
             
-            #line 47 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.HandleKeyboard.ToString().ToLower()));
+            #line 28 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventsSubscriptionsExtensionsGenerator.tt"
+ foreach (var typeEventGenerationOptions in typeExtensionsGenerationOptions.TypeEventsGenerationOptions) { 
             
             #line default
             #line hidden
-            this.Write(";\r\n\r\n        public KeyboardHandler KeyboardHandler => _keyboardHandler;\r\n\r\n     " +
-                    "   protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()\r\n        {" +
-                    "\r\n            return new ViewLifecycleDelegate<");
+            this.Write("        public static IDisposable ");
             
-            #line 53 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            #line 29 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventsSubscriptionsExtensionsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(typeEventGenerationOptions.EventName));
             
             #line default
             #line hidden
-            this.Write(">(this);\r\n        }\r\n\r\n        public override void ViewDidLoad()\r\n        {\r\n   " +
-                    "         base.ViewDidLoad();\r\n\r\n            LifecycleDelegate.ViewDidLoad();\r\n  " +
-                    "          ViewDidLoadCalled?.Invoke(this, EventArgs.Empty);\r\n        }\r\n\r\n      " +
-                    "  public override void ViewWillAppear(bool animated)\r\n        {\r\n            bas" +
-                    "e.ViewWillAppear(animated);\r\n\r\n            LifecycleDelegate.ViewWillAppear();\r\n" +
-                    "            ViewWillAppearCalled?.Invoke(this, EventArgs.Empty);\r\n        }\r\n\r\n " +
-                    "       public override void ViewDidAppear(bool animated)\r\n        {\r\n           " +
-                    " base.ViewDidAppear(animated);\r\n\r\n            ViewDidAppearCalled?.Invoke(this, " +
-                    "EventArgs.Empty);\r\n        }\r\n\r\n        public override void ViewWillDisappear(b" +
-                    "ool animated)\r\n        {\r\n            base.ViewWillDisappear(animated);\r\n\r\n     " +
-                    "       ViewWillDisappearCalled?.Invoke(this, EventArgs.Empty);\r\n        }\r\n\r\n   " +
-                    "     public override void ViewDidDisappear(bool animated)\r\n        {\r\n          " +
-                    "  base.ViewDidDisappear(animated);\r\n\r\n            LifecycleDelegate.ViewDidDisap" +
-                    "pear();\r\n            ViewDidDisappearCalled?.Invoke(this, EventArgs.Empty);\r\n   " +
-                    "     }\r\n\r\n        public override void WillMoveToParentViewController(UIViewCont" +
-                    "roller parent)\r\n        {\r\n            base.WillMoveToParentViewController(paren" +
-                    "t);\r\n\r\n            LifecycleDelegate.WillMoveToParentViewController(parent);\r\n  " +
-                    "      }\r\n\r\n        public override void DismissViewController(bool animated, Act" +
-                    "ion completionHandler)\r\n        {\r\n            LifecycleDelegate.DismissViewCont" +
-                    "roller();\r\n\r\n            base.DismissViewController(animated, completionHandler)" +
-                    ";\r\n        }\r\n\r\n        public override Task DismissViewControllerAsync(bool ani" +
-                    "mated)\r\n        {\r\n            LifecycleDelegate.DismissViewController();\r\n\r\n   " +
-                    "         return base.DismissViewControllerAsync(animated);\r\n        }\r\n\r\n       " +
-                    " void IKeyboardHandlerOwner.SetKeyboardHandler(KeyboardHandler handler)\r\n       " +
-                    " {\r\n            _keyboardHandler = handler;\r\n        }\r\n    }\r\n\r\n    public part" +
-                    "ial class ");
+            this.Write("WeakSubscribe(\r\n            this ");
             
-            #line 121 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            #line 30 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventsSubscriptionsExtensionsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(typeExtensionsGenerationOptions.ClassName));
             
             #line default
             #line hidden
-            this.Write("<TViewModel> : ");
+            this.Write(" eventSource,\r\n            ");
             
-            #line 121 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
-            
-            #line default
-            #line hidden
-            this.Write(@", IFlxViewController<TViewModel>
-        where TViewModel : class, IViewModel
-    {
-        public event EventHandler<ResultSetEventArgs> ResultSet;
-
-        public TViewModel ViewModel { get; private set; }
-
-        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
-        {
-            return new ViewLifecycleDelegate<");
-            
-            #line 130 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            #line 31 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventsSubscriptionsExtensionsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(string.IsNullOrWhiteSpace(typeEventGenerationOptions.EventArgsClassName) ? "EventHandler" : $"EventHandler<{typeEventGenerationOptions.EventArgsClassName}>"));
             
             #line default
             #line hidden
-            this.Write(@"<TViewModel>, TViewModel>(this);
-        }
-
-        public void SetResult(ResultCode resultCode)
+            this.Write(@" eventHandler)
         {
-            LifecycleDelegate.SetResult(resultCode);
-        }
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
+            if (eventHandler == null)
+                throw new ArgumentNullException(nameof(eventHandler));
 
-        public void SetResult(ResultCode resultCode, Result result)
-        {
-            LifecycleDelegate.SetResult(resultCode, result);
-        }
-
-        public void RaiseResultSet(ResultSetEventArgs args)
-        {
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
-            ResultSet?.Invoke(this, args);
-        }
-
-        public void HandleResult(object sender, ResultSetEventArgs args)
-        {
-            if (sender == null)
-                throw new ArgumentNullException(nameof(sender));
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
-            LifecycleDelegate.HandleResult(sender, args);
-        }
-
-        void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
-        {
-            ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
-        }
-
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
-        {
-            return ViewModel.InitializeAsync();
-        }
-    }
-
-    public partial class ");
+            return new ");
             
-            #line 172 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            #line 38 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventsSubscriptionsExtensionsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(WeakEventSubscriptionGenerator.GetWeakEventSubscriptionClassName(typeExtensionsGenerationOptions.ClassName, typeEventGenerationOptions)));
             
             #line default
             #line hidden
-            this.Write("<TViewModel, TParameters> : ");
+            this.Write("(\r\n                eventSource,\r\n                (source, handler) => source.");
             
-            #line 172 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
-            
-            #line default
-            #line hidden
-            this.Write(", IFlxViewController<TViewModel>\r\n        where TViewModel : class, IViewModelWit" +
-                    "hParameters<TParameters>, IParametersOwner<TParameters>\r\n        where TParamete" +
-                    "rs : Parameters\r\n    {\r\n        private readonly TParameters _parameters;\r\n\r\n   " +
-                    "     public ");
-            
-            #line 178 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            #line 40 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventsSubscriptionsExtensionsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(typeEventGenerationOptions.EventName));
             
             #line default
             #line hidden
-            this.Write(@"(TParameters parameters)
-        {
-            _parameters = parameters;
-        }
-
-        public event EventHandler<ResultSetEventArgs> ResultSet;
-
-        public TViewModel ViewModel { get; private set; }
-
-        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
-        {
-            return new ViewLifecycleDelegate<");
+            this.Write(" += handler,\r\n                (source, handler) => source.");
             
-            #line 189 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            #line 41 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventsSubscriptionsExtensionsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(typeEventGenerationOptions.EventName));
             
             #line default
             #line hidden
-            this.Write(@"<TViewModel, TParameters>, TViewModel>(this);
-        }
-
-        public void SetResult(ResultCode resultCode)
-        {
-            LifecycleDelegate.SetResult(resultCode);
-        }
-
-        public void SetResult(ResultCode resultCode, Result result)
-        {
-            LifecycleDelegate.SetResult(resultCode, result);
-        }
-
-        public void RaiseResultSet(ResultSetEventArgs args)
-        {
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
-            ResultSet?.Invoke(this, args);
-        }
-
-        public void HandleResult(object sender, ResultSetEventArgs args)
-        {
-            if (sender == null)
-                throw new ArgumentNullException(nameof(sender));
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
-            LifecycleDelegate.HandleResult(sender, args);
-        }
-
-        void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
-        {
-            ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
-            ViewModel.SetParameters(_parameters);
-        }
-
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
-        {
-            return ViewModel.InitializeAsync();
-        }
-    }
-}
-");
+            this.Write(" -= handler,\r\n                eventHandler);\r\n        }\r\n\r\n");
             
-            #line 232 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 45 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventsSubscriptionsExtensionsGenerator.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 46 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventsSubscriptionsExtensionsGenerator.tt"
+ foreach (var typeEventGenerationOptions in typeExtensionsGenerationOptions.TypeEventsGenerationOptions) {
+    if (WeakEventSubscriptionGenerator.ShouldGenerateCustom(typeEventGenerationOptions)) {
+        var weakEventSubscriptionGenerator = new WeakEventSubscriptionGenerator(typeExtensionsGenerationOptions.ClassName, typeEventGenerationOptions);
+        weakEventSubscriptionGenerator.PushIndent("    ");
+        weakEventSubscriptionGenerator.PushIndent("    "); 
+            
+            #line default
+            #line hidden
+            
+            #line 51 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventsSubscriptionsExtensionsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(weakEventSubscriptionGenerator.TransformText()));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n");
+            
+            #line 52 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventsSubscriptionsExtensionsGenerator.tt"
+  }} 
+            
+            #line default
+            #line hidden
+            this.Write("    }\r\n}\r\n");
+            
+            #line 55 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventsSubscriptionsExtensionsGenerator.tt"
  } 
             
             #line default
@@ -310,7 +173,7 @@ namespace FlexiMvvm.Views.Generation.Ios
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
-    public class ViewsGeneratorBase
+    public class WeakEventsSubscriptionsExtensionsGeneratorBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

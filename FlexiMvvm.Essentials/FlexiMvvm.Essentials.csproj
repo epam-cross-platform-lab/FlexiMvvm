@@ -21,4 +21,38 @@
     <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
         <PackageReference Include="Cirrious.FluentLayout" Version="2.9.0" />
     </ItemGroup>
+    <ItemGroup>
+        <None Update="Shared\!Extensions\WeakEventsSubscriptionsExtensionsGenerator.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>WeakEventsSubscriptionsExtensionsGenerator.cs</LastGenOutput>
+        </None>
+        <None Update="Platform.Android\Views\!Extensions\WeakEventsSubscriptionsExtensionsGenerator.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>WeakEventsSubscriptionsExtensionsGenerator.cs</LastGenOutput>
+        </None>
+        <None Update="Platform.iOS\Views\!Extensions\WeakEventsSubscriptionsExtensionsGenerator.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>WeakEventsSubscriptionsExtensionsGenerator.cs</LastGenOutput>
+        </None>
+    </ItemGroup>
+    <ItemGroup>
+        <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+    </ItemGroup>
+    <ItemGroup>
+        <None Update="Shared\!Extensions\WeakEventsSubscriptionsExtensionsGenerator.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>WeakEventsSubscriptionsExtensionsGenerator.tt</DependentUpon>
+        </None>
+        <None Update="Platform.Android\Views\!Extensions\WeakEventsSubscriptionsExtensionsGenerator.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>WeakEventsSubscriptionsExtensionsGenerator.tt</DependentUpon>
+        </None>
+        <None Include="Platform.iOS\Views\!Extensions\WeakEventsSubscriptionsExtensionsGenerator.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>WeakEventsSubscriptionsExtensionsGenerator.tt</DependentUpon>
+        </None>
+    </ItemGroup>
 </Project>

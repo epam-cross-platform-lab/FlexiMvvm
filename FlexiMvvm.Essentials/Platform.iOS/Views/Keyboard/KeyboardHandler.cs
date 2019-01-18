@@ -20,7 +20,7 @@ using Foundation;
 using JetBrains.Annotations;
 using UIKit;
 
-namespace FlexiMvvm.Views
+namespace FlexiMvvm.Views.Keyboard
 {
     public class KeyboardHandler
     {
