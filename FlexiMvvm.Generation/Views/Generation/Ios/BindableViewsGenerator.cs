@@ -58,7 +58,7 @@ namespace FlexiMvvm.Views.Generation.Ios
             this.Write("\r\nnamespace ");
             
             #line 27 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(string.IsNullOrWhiteSpace(viewGenerationOptions.TargetNamespace) ? TargetNamespace : viewGenerationOptions.TargetNamespace));
+            this.Write(this.ToStringHelper.ToStringWithCulture(GetNamespace(viewGenerationOptions)));
             
             #line default
             #line hidden

@@ -37,5 +37,13 @@ namespace FlexiMvvm.Views.Generation.Android
 
         [NotNull]
         private IEnumerable<BindableViewGenerationOptions> ViewsGenerationOptions { get; }
+
+        [NotNull]
+        private string GetNamespace([NotNull] BindableViewGenerationOptions viewGenerationOptions)
+        {
+            return string.IsNullOrEmpty(viewGenerationOptions.TargetNamespace)
+                ? TargetNamespace
+                : viewGenerationOptions.TargetNamespace;
+        }
     }
 }

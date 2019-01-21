@@ -71,7 +71,7 @@ using FlexiMvvm.Views.Core;
             this.Write("\r\nnamespace ");
             
             #line 36 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(string.IsNullOrWhiteSpace(viewGenerationOptions.TargetNamespace) ? TargetNamespace : viewGenerationOptions.TargetNamespace));
+            this.Write(this.ToStringHelper.ToStringWithCulture(GetNamespace(viewGenerationOptions)));
             
             #line default
             #line hidden
@@ -114,14 +114,14 @@ using FlexiMvvm.Views.Core;
                     "blic event EventHandler OnCreateCalled;\r\n");
             
             #line 44 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
- if (viewGenerationOptions.Kind == ViewKind.Fragment) { 
+      if (viewGenerationOptions.Kind == ViewKind.Fragment) { 
             
             #line default
             #line hidden
             this.Write("\r\n        public event EventHandler OnActivityCreatedCalled;\r\n");
             
             #line 47 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
- } 
+      } 
             
             #line default
             #line hidden
@@ -138,14 +138,14 @@ using FlexiMvvm.Views.Core;
 ");
             
             #line 58 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
- if (viewGenerationOptions.Kind == ViewKind.Activity) { 
+      if (viewGenerationOptions.Kind == ViewKind.Activity) { 
             
             #line default
             #line hidden
             this.Write("\r\n        public event EventHandler<BackPressedEventArgs> OnBackPressedCalled;\r\n");
             
             #line 61 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
- } 
+      } 
             
             #line default
             #line hidden
@@ -174,7 +174,7 @@ using FlexiMvvm.Views.Core;
                     " }\r\n");
             
             #line 77 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
- if (viewGenerationOptions.Kind == ViewKind.Fragment) { 
+      if (viewGenerationOptions.Kind == ViewKind.Fragment) { 
             
             #line default
             #line hidden
@@ -183,7 +183,7 @@ using FlexiMvvm.Views.Core;
                     "ActivityCreatedCalled?.Invoke(this, EventArgs.Empty);\r\n        }\r\n");
             
             #line 85 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
- } 
+      } 
             
             #line default
             #line hidden
@@ -241,7 +241,7 @@ using FlexiMvvm.Views.Core;
 ");
             
             #line 128 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
- if (viewGenerationOptions.Kind == ViewKind.Activity) { 
+      if (viewGenerationOptions.Kind == ViewKind.Activity) { 
             
             #line default
             #line hidden
@@ -259,7 +259,7 @@ using FlexiMvvm.Views.Core;
 ");
             
             #line 140 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
- } 
+      } 
             
             #line default
             #line hidden
@@ -291,7 +291,7 @@ using FlexiMvvm.Views.Core;
                     "ate(outState);\r\n        }\r\n");
             
             #line 155 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
- if (viewGenerationOptions.Kind == ViewKind.Fragment) { 
+      if (viewGenerationOptions.Kind == ViewKind.Fragment) { 
             
             #line default
             #line hidden
@@ -299,7 +299,7 @@ using FlexiMvvm.Views.Core;
                     "elegate.OnDestroyView();\r\n\r\n            base.OnDestroyView();\r\n        }\r\n");
             
             #line 163 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
- } 
+      } 
             
             #line default
             #line hidden

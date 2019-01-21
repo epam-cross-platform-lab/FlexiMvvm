@@ -37,5 +37,13 @@ namespace FlexiMvvm.Views.Generation.Ios
 
         [NotNull]
         private IEnumerable<ViewGenerationOptions> ViewsGenerationOptions { get; }
+
+        [NotNull]
+        private string GetNamespace([NotNull] ViewGenerationOptions viewGenerationOptions)
+        {
+            return string.IsNullOrEmpty(viewGenerationOptions.TargetNamespace)
+                ? TargetNamespace
+                : viewGenerationOptions.TargetNamespace;
+        }
     }
 }

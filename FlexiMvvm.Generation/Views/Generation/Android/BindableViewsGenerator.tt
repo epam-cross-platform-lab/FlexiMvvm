@@ -25,7 +25,7 @@ using FlexiMvvm.Views;
 using FlexiMvvm.Views.Core;
 <# foreach (var viewGenerationOptions in ViewsGenerationOptions) { #>
 
-namespace <#= string.IsNullOrWhiteSpace(viewGenerationOptions.TargetNamespace) ? TargetNamespace : viewGenerationOptions.TargetNamespace #>
+namespace <#= GetNamespace(viewGenerationOptions) #>
 {
     public partial class <#= viewGenerationOptions.ClassName #><TViewModel> : <#= viewGenerationOptions.BaseClassName #><TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, IViewModel, IStateOwner
