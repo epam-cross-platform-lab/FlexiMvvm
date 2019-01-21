@@ -170,7 +170,7 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
         }
     }
 
-    public partial class <#= viewGenerationOptions.ClassName #><TViewModel> : <#= viewGenerationOptions.ClassName #>, <#= viewGenerationOptions.BaseInterfaceName #><TViewModel>
+    public partial class <#= viewGenerationOptions.ClassName #><TViewModel> : <#= viewGenerationOptions.ClassName #>, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModel, IStateOwner
     {
         private RequestCode _requestCode;
@@ -183,6 +183,23 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
         {
             return new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel>, TViewModel>(this);
         }
+<#      if (viewGenerationOptions.Kind == ViewKind.Fragment) { #>
+
+        public void SetResult(Android.App.Result resultCode)
+        {
+            throw new NotSupportedException();
+        }
+
+        public void SetResult(Android.App.Result resultCode, Intent data)
+        {
+            throw new NotSupportedException();
+        }
+
+        public void Finish()
+        {
+            throw new NotImplementedException();
+        }
+<#      } #>
 
         void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
@@ -195,7 +212,7 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
         }
     }
 
-    public partial class <#= viewGenerationOptions.ClassName #><TViewModel, TParameters> : <#= viewGenerationOptions.ClassName #>, <#= viewGenerationOptions.BaseInterfaceName #><TViewModel>
+    public partial class <#= viewGenerationOptions.ClassName #><TViewModel, TParameters> : <#= viewGenerationOptions.ClassName #>, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>, IStateOwner
         where TParameters : Parameters
     {
@@ -209,6 +226,23 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
         {
             return new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel, TParameters>, TViewModel>(this);
         }
+<#      if (viewGenerationOptions.Kind == ViewKind.Fragment) { #>
+
+        public void SetResult(Android.App.Result resultCode)
+        {
+            throw new NotSupportedException();
+        }
+
+        public void SetResult(Android.App.Result resultCode, Intent data)
+        {
+            throw new NotSupportedException();
+        }
+
+        public void Finish()
+        {
+            throw new NotImplementedException();
+        }
+<#      } #>
 
         void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {

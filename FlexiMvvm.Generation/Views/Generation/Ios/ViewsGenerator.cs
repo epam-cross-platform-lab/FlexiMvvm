@@ -77,7 +77,7 @@ namespace FlexiMvvm.Views.Generation.Ios
             
             #line default
             #line hidden
-            this.Write(@", IViewController
+            this.Write(@", IView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
@@ -149,7 +149,7 @@ namespace FlexiMvvm.Views.Generation.Ios
             
             #line default
             #line hidden
-            this.Write(@", IViewController<TViewModel>
+            this.Write(@", INavigationView<TViewModel>, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModel
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
@@ -221,10 +221,13 @@ namespace FlexiMvvm.Views.Generation.Ios
             
             #line default
             #line hidden
-            this.Write(", IViewController<TViewModel>\r\n        where TViewModel : class, IViewModelWithPa" +
-                    "rameters<TParameters>, IParametersOwner<TParameters>\r\n        where TParameters " +
-                    ": Parameters\r\n    {\r\n        private readonly TParameters _parameters;\r\n\r\n      " +
-                    "  public ");
+            this.Write(@", INavigationView<TViewModel>, IViewModelOwner<TViewModel>
+        where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
+        where TParameters : Parameters
+    {
+        private readonly TParameters _parameters;
+
+        public ");
             
             #line 178 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));

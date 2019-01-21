@@ -81,7 +81,7 @@ namespace FlexiMvvm.Views.Core
     }
 
     public class ViewLifecycleDelegate<TView, TViewModel> : ViewLifecycleDelegate<TView>
-        where TView : class, IForwardNavigationView<TViewModel>, IBackwardNavigationView<TViewModel>, IKeyboardHandlerOwner, IViewModelOwner<TViewModel>
+        where TView : class, INavigationView<TViewModel>, IKeyboardHandlerOwner, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModel
     {
         private ResultCode _resultCode = ResultCode.Canceled;
@@ -154,7 +154,7 @@ namespace FlexiMvvm.Views.Core
             }
         }
 
-        private void RaiseResultSetIfNeeded([NotNull] IBackwardNavigationView<IViewModel> view)
+        private void RaiseResultSetIfNeeded([NotNull] INavigationView<IViewModel> view)
         {
             var isViewModelWithResult = view.ViewModel.GetType().GetInterfaces().Any(@interface =>
                 @interface.NotNull().IsGenericType && @interface.GetGenericTypeDefinition() == typeof(IViewModelWithResult<>));

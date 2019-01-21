@@ -30,7 +30,7 @@ using FlexiMvvm.Views.Core;
 namespace FlexiMvvm.Views
 {
     [Register("fleximvvm.views.AppCompatActivity")]
-    public partial class AppCompatActivity : Android.Support.V7.App.AppCompatActivity, IActivity
+    public partial class AppCompatActivity : Android.Support.V7.App.AppCompatActivity, IView, ILifecycleEventSourceActivity
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
 
@@ -138,7 +138,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class AppCompatActivity<TViewModel> : AppCompatActivity, IActivity<TViewModel>
+    public partial class AppCompatActivity<TViewModel> : AppCompatActivity, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModel, IStateOwner
     {
         private RequestCode _requestCode;
@@ -163,7 +163,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class AppCompatActivity<TViewModel, TParameters> : AppCompatActivity, IActivity<TViewModel>
+    public partial class AppCompatActivity<TViewModel, TParameters> : AppCompatActivity, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>, IStateOwner
         where TParameters : Parameters
     {
@@ -195,7 +195,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     [Register("fleximvvm.views.Fragment")]
-    public partial class Fragment : Android.Support.V4.App.Fragment, IFragment
+    public partial class Fragment : Android.Support.V4.App.Fragment, IView, ILifecycleEventSourceFragment
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
 
@@ -306,7 +306,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class Fragment<TViewModel> : Fragment, IFragment<TViewModel>
+    public partial class Fragment<TViewModel> : Fragment, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModel, IStateOwner
     {
         private RequestCode _requestCode;
@@ -320,6 +320,21 @@ namespace FlexiMvvm.Views
             return new ViewLifecycleDelegate<Fragment<TViewModel>, TViewModel>(this);
         }
 
+        public void SetResult(Android.App.Result resultCode)
+        {
+            throw new NotSupportedException();
+        }
+
+        public void SetResult(Android.App.Result resultCode, Intent data)
+        {
+            throw new NotSupportedException();
+        }
+
+        public void Finish()
+        {
+            throw new NotImplementedException();
+        }
+
         void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
@@ -331,7 +346,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class Fragment<TViewModel, TParameters> : Fragment, IFragment<TViewModel>
+    public partial class Fragment<TViewModel, TParameters> : Fragment, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>, IStateOwner
         where TParameters : Parameters
     {
@@ -344,6 +359,21 @@ namespace FlexiMvvm.Views
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
             return new ViewLifecycleDelegate<Fragment<TViewModel, TParameters>, TViewModel>(this);
+        }
+
+        public void SetResult(Android.App.Result resultCode)
+        {
+            throw new NotSupportedException();
+        }
+
+        public void SetResult(Android.App.Result resultCode, Intent data)
+        {
+            throw new NotSupportedException();
+        }
+
+        public void Finish()
+        {
+            throw new NotImplementedException();
         }
 
         void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
@@ -363,7 +393,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     [Register("fleximvvm.views.DialogFragment")]
-    public partial class DialogFragment : Android.Support.V4.App.DialogFragment, IFragment
+    public partial class DialogFragment : Android.Support.V4.App.DialogFragment, IView, ILifecycleEventSourceFragment
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
 
@@ -474,7 +504,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class DialogFragment<TViewModel> : DialogFragment, IFragment<TViewModel>
+    public partial class DialogFragment<TViewModel> : DialogFragment, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModel, IStateOwner
     {
         private RequestCode _requestCode;
@@ -488,6 +518,21 @@ namespace FlexiMvvm.Views
             return new ViewLifecycleDelegate<DialogFragment<TViewModel>, TViewModel>(this);
         }
 
+        public void SetResult(Android.App.Result resultCode)
+        {
+            throw new NotSupportedException();
+        }
+
+        public void SetResult(Android.App.Result resultCode, Intent data)
+        {
+            throw new NotSupportedException();
+        }
+
+        public void Finish()
+        {
+            throw new NotImplementedException();
+        }
+
         void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
@@ -499,7 +544,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class DialogFragment<TViewModel, TParameters> : DialogFragment, IFragment<TViewModel>
+    public partial class DialogFragment<TViewModel, TParameters> : DialogFragment, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>, IStateOwner
         where TParameters : Parameters
     {
@@ -512,6 +557,21 @@ namespace FlexiMvvm.Views
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
             return new ViewLifecycleDelegate<DialogFragment<TViewModel, TParameters>, TViewModel>(this);
+        }
+
+        public void SetResult(Android.App.Result resultCode)
+        {
+            throw new NotSupportedException();
+        }
+
+        public void SetResult(Android.App.Result resultCode, Intent data)
+        {
+            throw new NotSupportedException();
+        }
+
+        public void Finish()
+        {
+            throw new NotImplementedException();
         }
 
         void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)

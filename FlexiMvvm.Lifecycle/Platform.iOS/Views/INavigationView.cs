@@ -14,19 +14,27 @@
 // limitations under the License.
 // =========================================================================
 
-using Android.Content;
+using System;
 using FlexiMvvm.ViewModels;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.Views
 {
-    public interface IBackwardNavigationView<out TViewModel> : IView<TViewModel>
+    public interface INavigationView<out TViewModel> : IView<TViewModel>
         where TViewModel : class, IViewModel
     {
-        void SetResult(Android.App.Result resultCode);
+        event EventHandler<ResultSetEventArgs> ResultSet;
 
-        void SetResult(Android.App.Result resultCode, [CanBeNull] Intent data);
+        bool IsBeingPresented { get; }
 
-        void Finish();
+        void SetResult(ResultCode resultCode);
+
+        void SetResult(ResultCode resultCode, [CanBeNull] Result result);
+
+        void RaiseResultSet([NotNull] ResultSetEventArgs args);
+
+        void HandleResult([NotNull] object sender, [NotNull] ResultSetEventArgs args);
+
+        void DismissViewController(bool animated, [CanBeNull] Action completionHandler);
     }
 }

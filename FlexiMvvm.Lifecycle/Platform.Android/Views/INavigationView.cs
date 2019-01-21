@@ -14,18 +14,31 @@
 // limitations under the License.
 // =========================================================================
 
-using FlexiMvvm.Persistence.Core;
+using Android.Content;
+using Android.OS;
 using FlexiMvvm.ViewModels;
-using FlexiMvvm.ViewModels.Core;
+using JetBrains.Annotations;
 
 namespace FlexiMvvm.Views
 {
-    public interface IFragment : IView, ILifecycleEventSourceFragment
+    public interface INavigationView<out TViewModel> : IView<TViewModel>
+        where TViewModel : class, IViewModel
     {
-    }
+        [NotNull]
+        RequestCode RequestCode { get; }
 
-    public interface IFragment<TViewModel> : IFragment, IForwardNavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModel, IStateOwner
-    {
+        void StartActivity([NotNull] Intent intent);
+
+        void StartActivity([NotNull] Intent intent, [CanBeNull] Bundle options);
+
+        void StartActivityForResult([NotNull] Intent intent, int requestCode);
+
+        void StartActivityForResult([NotNull] Intent intent, int requestCode, [CanBeNull] Bundle options);
+
+        void SetResult(Android.App.Result resultCode);
+
+        void SetResult(Android.App.Result resultCode, [CanBeNull] Intent data);
+
+        void Finish();
     }
 }

@@ -27,7 +27,7 @@ namespace FlexiMvvm.Navigation
     {
         [NotNull]
         public TViewController GetViewController<TViewController, TViewModel>([NotNull] TViewModel viewModel)
-            where TViewController : UIViewController, IViewController<TViewModel>
+            where TViewController : UIViewController, INavigationView<TViewModel>
             where TViewModel : class, IViewModel
         {
             if (viewModel == null)
@@ -37,7 +37,7 @@ namespace FlexiMvvm.Navigation
         }
 
         public void Navigate<TViewController>(
-            [NotNull] IForwardNavigationView<IViewModel> fromView,
+            [NotNull] INavigationView<IViewModel> fromView,
             [NotNull] TViewController toView,
             bool animated,
             [CanBeNull] ForwardNavigationDelegate navigationStrategy = null)
@@ -53,11 +53,11 @@ namespace FlexiMvvm.Navigation
         }
 
         public void NavigateForResult<TViewController, TResult>(
-            [NotNull] IForwardNavigationView<IViewModelWithResultHandler> fromView,
+            [NotNull] INavigationView<IViewModelWithResultHandler> fromView,
             [NotNull] TViewController toView,
             bool animated,
             [CanBeNull] ForwardNavigationDelegate navigationStrategy = null)
-            where TViewController : UIViewController, IBackwardNavigationView<IViewModelWithResult<TResult>>
+            where TViewController : UIViewController, INavigationView<IViewModelWithResult<TResult>>
             where TResult : Result
         {
             if (fromView == null)
@@ -71,7 +71,7 @@ namespace FlexiMvvm.Navigation
         }
 
         public void NavigateBack(
-            [NotNull] IBackwardNavigationView<IViewModel> fromView,
+            [NotNull] INavigationView<IViewModel> fromView,
             bool animated,
             [CanBeNull] BackwardNavigationDelegate navigationStrategy = null)
         {
@@ -83,7 +83,7 @@ namespace FlexiMvvm.Navigation
         }
 
         public void NavigateBack<TResult>(
-            [NotNull] IBackwardNavigationView<IViewModelWithResult<TResult>> fromView,
+            [NotNull] INavigationView<IViewModelWithResult<TResult>> fromView,
             ResultCode resultCode,
             [CanBeNull] TResult result,
             bool animated,
@@ -105,7 +105,7 @@ namespace FlexiMvvm.Navigation
         }
 
         [NotNull]
-        private BackwardNavigationDelegate GetBackwardNavigationStrategy([NotNull] IBackwardNavigationView<IViewModel> fromView)
+        private BackwardNavigationDelegate GetBackwardNavigationStrategy([NotNull] INavigationView<IViewModel> fromView)
         {
             return fromView.IsBeingPresented ? NavigationStrategy.Backward.DismissViewController() : NavigationStrategy.Backward.PopViewController();
         }

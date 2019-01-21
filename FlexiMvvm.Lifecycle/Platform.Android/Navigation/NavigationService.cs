@@ -16,7 +16,6 @@
 
 using System;
 using Android.Content;
-using FlexiMvvm.Persistence.Core;
 using FlexiMvvm.ViewModels;
 using FlexiMvvm.Views;
 using FlexiMvvm.Views.Core;
@@ -30,8 +29,8 @@ namespace FlexiMvvm.Navigation
     {
         [NotNull]
         public TActivity GetActivity<TActivity, TViewModel>([NotNull] TViewModel viewModel)
-            where TActivity : FragmentActivity, IActivity<TViewModel>
-            where TViewModel : class, IViewModel, IStateOwner
+            where TActivity : FragmentActivity, INavigationView<TViewModel>
+            where TViewModel : class, IViewModel
         {
             if (viewModel == null)
                 throw new ArgumentNullException(nameof(viewModel));
@@ -41,8 +40,8 @@ namespace FlexiMvvm.Navigation
 
         [NotNull]
         public TFragment GetFragment<TFragment, TViewModel>([NotNull] TViewModel viewModel)
-            where TFragment : Fragment, IFragment<TViewModel>
-            where TViewModel : class, IViewModel, IStateOwner
+            where TFragment : Fragment, INavigationView<TViewModel>
+            where TViewModel : class, IViewModel
         {
             if (viewModel == null)
                 throw new ArgumentNullException(nameof(viewModel));
@@ -51,7 +50,7 @@ namespace FlexiMvvm.Navigation
         }
 
         public void Navigate(
-            [NotNull] IForwardNavigationView<IViewModel> fromView,
+            [NotNull] INavigationView<IViewModel> fromView,
             [NotNull] Intent intent,
             [CanBeNull] ForwardNavigationDelegate navigationStrategy = null)
         {
@@ -64,7 +63,7 @@ namespace FlexiMvvm.Navigation
         }
 
         public void Navigate<TActivity>(
-            [NotNull] IForwardNavigationView<IViewModel> fromView,
+            [NotNull] INavigationView<IViewModel> fromView,
             [CanBeNull] ForwardNavigationDelegate navigationStrategy = null)
             where TActivity : FragmentActivity, IView<IViewModel>
         {
@@ -77,7 +76,7 @@ namespace FlexiMvvm.Navigation
         }
 
         public void Navigate<TActivity, TParameters>(
-            [NotNull] IForwardNavigationView<IViewModel> fromView,
+            [NotNull] INavigationView<IViewModel> fromView,
             [CanBeNull] TParameters parameters,
             [CanBeNull] ForwardNavigationDelegate navigationStrategy = null)
             where TActivity : FragmentActivity, IView<IViewModelWithParameters<TParameters>>
@@ -93,7 +92,7 @@ namespace FlexiMvvm.Navigation
         }
 
         public void NavigateForResult<TResult>(
-            [NotNull] IForwardNavigationView<IViewModelWithResultHandler> fromView,
+            [NotNull] INavigationView<IViewModelWithResultHandler> fromView,
             [NotNull] Intent intent,
             [NotNull] IResultMapper resultMapper,
             [CanBeNull] ForwardNavigationDelegate navigationStrategy = null)
@@ -111,9 +110,9 @@ namespace FlexiMvvm.Navigation
         }
 
         public void NavigateForResult<TActivity, TResult>(
-            [NotNull] IForwardNavigationView<IViewModelWithResultHandler> fromView,
+            [NotNull] INavigationView<IViewModelWithResultHandler> fromView,
             [CanBeNull] ForwardNavigationDelegate navigationStrategy = null)
-            where TActivity : FragmentActivity, IBackwardNavigationView<IViewModelWithResult<TResult>>
+            where TActivity : FragmentActivity, INavigationView<IViewModelWithResult<TResult>>
             where TResult : Result
         {
             if (fromView == null)
@@ -126,10 +125,10 @@ namespace FlexiMvvm.Navigation
         }
 
         public void NavigateForResult<TActivity, TParameters, TResult>(
-            [NotNull] IForwardNavigationView<IViewModelWithResultHandler> fromView,
+            [NotNull] INavigationView<IViewModelWithResultHandler> fromView,
             [CanBeNull] TParameters parameters,
             [CanBeNull] ForwardNavigationDelegate navigationStrategy = null)
-            where TActivity : FragmentActivity, IView<IViewModelWithParameters<TParameters>>, IBackwardNavigationView<IViewModelWithResult<TResult>>
+            where TActivity : FragmentActivity, IView<IViewModelWithParameters<TParameters>>, INavigationView<IViewModelWithResult<TResult>>
             where TParameters : Parameters
             where TResult : Result
         {
@@ -144,7 +143,7 @@ namespace FlexiMvvm.Navigation
         }
 
         public void NavigateBack(
-            [NotNull] IBackwardNavigationView<IViewModel> fromView,
+            [NotNull] INavigationView<IViewModel> fromView,
             [CanBeNull] BackwardNavigationDelegate navigationStrategy = null)
         {
             if (fromView == null)
@@ -154,7 +153,7 @@ namespace FlexiMvvm.Navigation
         }
 
         public void NavigateBack<TResult>(
-            [NotNull] IBackwardNavigationView<IViewModelWithResult<TResult>> fromView,
+            [NotNull] INavigationView<IViewModelWithResult<TResult>> fromView,
             ResultCode resultCode,
             [CanBeNull] TResult result,
             [CanBeNull] BackwardNavigationDelegate navigationStrategy = null)

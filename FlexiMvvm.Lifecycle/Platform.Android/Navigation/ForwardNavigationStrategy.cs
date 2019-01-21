@@ -23,7 +23,7 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.Navigation
 {
-    public delegate void ForwardNavigationDelegate([NotNull] IForwardNavigationView<IViewModel> fromView, [NotNull] Intent intent, int? requestCode = null);
+    public delegate void ForwardNavigationDelegate([NotNull] INavigationView<IViewModel> fromView, [NotNull] Intent intent, int? requestCode = null);
 
     public sealed class ForwardNavigationStrategy
     {

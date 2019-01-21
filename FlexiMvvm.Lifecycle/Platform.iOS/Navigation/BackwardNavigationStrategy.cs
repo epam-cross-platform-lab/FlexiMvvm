@@ -22,7 +22,7 @@ using UIKit;
 
 namespace FlexiMvvm.Navigation
 {
-    public delegate void BackwardNavigationDelegate([NotNull] UINavigationController navigationController, [NotNull] IBackwardNavigationView<IViewModel> fromView, bool animated);
+    public delegate void BackwardNavigationDelegate([NotNull] UINavigationController navigationController, [NotNull] INavigationView<IViewModel> fromView, bool animated);
 
     public sealed class BackwardNavigationStrategy
     {

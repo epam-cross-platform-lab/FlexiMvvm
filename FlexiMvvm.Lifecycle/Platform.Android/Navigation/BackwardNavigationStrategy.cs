@@ -20,7 +20,7 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.Navigation
 {
-    public delegate void BackwardNavigationDelegate([NotNull] IBackwardNavigationView<IViewModel> fromView);
+    public delegate void BackwardNavigationDelegate([NotNull] INavigationView<IViewModel> fromView);
 
     public sealed class BackwardNavigationStrategy
     {

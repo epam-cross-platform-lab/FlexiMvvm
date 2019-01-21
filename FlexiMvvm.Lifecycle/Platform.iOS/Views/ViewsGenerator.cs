@@ -26,7 +26,7 @@ using FlexiMvvm.Views.Keyboard;
 
 namespace FlexiMvvm.Views
 {
-    public partial class NavigationController : UINavigationController, IViewController
+    public partial class NavigationController : UINavigationController, IView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
@@ -117,7 +117,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class NavigationController<TViewModel> : NavigationController, IViewController<TViewModel>
+    public partial class NavigationController<TViewModel> : NavigationController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModel
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
@@ -168,7 +168,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class NavigationController<TViewModel, TParameters> : NavigationController, IViewController<TViewModel>
+    public partial class NavigationController<TViewModel, TParameters> : NavigationController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
         where TParameters : Parameters
     {
@@ -231,7 +231,7 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class ViewController : UIViewController, IViewController
+    public partial class ViewController : UIViewController, IView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
@@ -322,7 +322,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class ViewController<TViewModel> : ViewController, IViewController<TViewModel>
+    public partial class ViewController<TViewModel> : ViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModel
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
@@ -373,7 +373,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class ViewController<TViewModel, TParameters> : ViewController, IViewController<TViewModel>
+    public partial class ViewController<TViewModel, TParameters> : ViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
         where TParameters : Parameters
     {
@@ -436,7 +436,7 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class TableViewController : UITableViewController, IViewController
+    public partial class TableViewController : UITableViewController, IView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
@@ -527,7 +527,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class TableViewController<TViewModel> : TableViewController, IViewController<TViewModel>
+    public partial class TableViewController<TViewModel> : TableViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModel
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
@@ -578,7 +578,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class TableViewController<TViewModel, TParameters> : TableViewController, IViewController<TViewModel>
+    public partial class TableViewController<TViewModel, TParameters> : TableViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
         where TParameters : Parameters
     {
@@ -641,7 +641,7 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class CollectionViewController : UICollectionViewController, IViewController
+    public partial class CollectionViewController : UICollectionViewController, IView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
@@ -732,7 +732,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class CollectionViewController<TViewModel> : CollectionViewController, IViewController<TViewModel>
+    public partial class CollectionViewController<TViewModel> : CollectionViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModel
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
@@ -783,7 +783,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class CollectionViewController<TViewModel, TParameters> : CollectionViewController, IViewController<TViewModel>
+    public partial class CollectionViewController<TViewModel, TParameters> : CollectionViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
         where TParameters : Parameters
     {
@@ -846,7 +846,7 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class TabBarController : UITabBarController, IViewController
+    public partial class TabBarController : UITabBarController, IView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
@@ -937,7 +937,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class TabBarController<TViewModel> : TabBarController, IViewController<TViewModel>
+    public partial class TabBarController<TViewModel> : TabBarController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModel
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
@@ -988,7 +988,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class TabBarController<TViewModel, TParameters> : TabBarController, IViewController<TViewModel>
+    public partial class TabBarController<TViewModel, TParameters> : TabBarController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
         where TParameters : Parameters
     {
@@ -1051,7 +1051,7 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class PageViewController : UIPageViewController, IViewController
+    public partial class PageViewController : UIPageViewController, IView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
@@ -1142,7 +1142,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class PageViewController<TViewModel> : PageViewController, IViewController<TViewModel>
+    public partial class PageViewController<TViewModel> : PageViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModel
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
@@ -1193,7 +1193,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class PageViewController<TViewModel, TParameters> : PageViewController, IViewController<TViewModel>
+    public partial class PageViewController<TViewModel, TParameters> : PageViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
         where TParameters : Parameters
     {
@@ -1256,7 +1256,7 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class SplitViewController : UISplitViewController, IViewController
+    public partial class SplitViewController : UISplitViewController, IView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
@@ -1347,7 +1347,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class SplitViewController<TViewModel> : SplitViewController, IViewController<TViewModel>
+    public partial class SplitViewController<TViewModel> : SplitViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModel
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
@@ -1398,7 +1398,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class SplitViewController<TViewModel, TParameters> : SplitViewController, IViewController<TViewModel>
+    public partial class SplitViewController<TViewModel, TParameters> : SplitViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
         where TParameters : Parameters
     {

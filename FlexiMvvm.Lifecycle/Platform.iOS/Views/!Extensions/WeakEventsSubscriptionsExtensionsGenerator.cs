@@ -21,16 +21,16 @@ using FlexiMvvm.Weak.Subscriptions;
 
 namespace FlexiMvvm.Views
 {
-    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="IBackwardNavigationView<IViewModel>"/> class events.</summary>
-    public static class BackwardNavigationViewWeakEventsSubscriptionsExtensions
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="INavigationView<IViewModel>"/> class events.</summary>
+    public static class NavigationViewWeakEventsSubscriptionsExtensions
     {
-        /// <summary>Weak subscription on <see cref="IBackwardNavigationView<IViewModel>.ResultSet"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="INavigationView<IViewModel>.ResultSet"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="IBackwardNavigationView<IViewModel>.ResultSet"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="INavigationView<IViewModel>.ResultSet"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable ResultSetWeakSubscribe(
-            this IBackwardNavigationView<IViewModel> eventSource,
+            this INavigationView<IViewModel> eventSource,
             EventHandler<ResultSetEventArgs> eventHandler)
         {
             if (eventSource == null)
@@ -38,7 +38,7 @@ namespace FlexiMvvm.Views
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<IBackwardNavigationView<IViewModel>, ResultSetEventArgs>(
+            return new EventHandlerWeakEventSubscription<INavigationView<IViewModel>, ResultSetEventArgs>(
                 eventSource,
                 (source, handler) => source.ResultSet += handler,
                 (source, handler) => source.ResultSet -= handler,

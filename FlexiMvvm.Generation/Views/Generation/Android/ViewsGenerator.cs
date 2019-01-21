@@ -326,14 +326,7 @@ using FlexiMvvm.Views.Core;
             
             #line default
             #line hidden
-            this.Write(", ");
-            
-            #line 173 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.BaseInterfaceName));
-            
-            #line default
-            #line hidden
-            this.Write(@"<TViewModel>
+            this.Write(@", INavigationView<TViewModel>, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModel, IStateOwner
     {
         private RequestCode _requestCode;
@@ -351,9 +344,36 @@ using FlexiMvvm.Views.Core;
             
             #line default
             #line hidden
-            this.Write(@"<TViewModel>, TViewModel>(this);
+            this.Write("<TViewModel>, TViewModel>(this);\r\n        }\r\n");
+            
+            #line 186 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+      if (viewGenerationOptions.Kind == ViewKind.Fragment) { 
+            
+            #line default
+            #line hidden
+            this.Write(@"
+        public void SetResult(Android.App.Result resultCode)
+        {
+            throw new NotSupportedException();
         }
 
+        public void SetResult(Android.App.Result resultCode, Intent data)
+        {
+            throw new NotSupportedException();
+        }
+
+        public void Finish()
+        {
+            throw new NotImplementedException();
+        }
+");
+            
+            #line 202 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+      } 
+            
+            #line default
+            #line hidden
+            this.Write(@"
         void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
@@ -367,26 +387,19 @@ using FlexiMvvm.Views.Core;
 
     public partial class ");
             
-            #line 198 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            #line 215 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
             this.Write("<TViewModel, TParameters> : ");
             
-            #line 198 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            #line 215 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
-            this.Write(", ");
-            
-            #line 198 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.BaseInterfaceName));
-            
-            #line default
-            #line hidden
-            this.Write(@"<TViewModel>
+            this.Write(@", INavigationView<TViewModel>, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>, IStateOwner
         where TParameters : Parameters
     {
@@ -400,14 +413,41 @@ using FlexiMvvm.Views.Core;
         {
             return new ViewLifecycleDelegate<");
             
-            #line 210 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            #line 227 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
-            this.Write(@"<TViewModel, TParameters>, TViewModel>(this);
+            this.Write("<TViewModel, TParameters>, TViewModel>(this);\r\n        }\r\n");
+            
+            #line 229 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+      if (viewGenerationOptions.Kind == ViewKind.Fragment) { 
+            
+            #line default
+            #line hidden
+            this.Write(@"
+        public void SetResult(Android.App.Result resultCode)
+        {
+            throw new NotSupportedException();
         }
 
+        public void SetResult(Android.App.Result resultCode, Intent data)
+        {
+            throw new NotSupportedException();
+        }
+
+        public void Finish()
+        {
+            throw new NotImplementedException();
+        }
+");
+            
+            #line 245 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+      } 
+            
+            #line default
+            #line hidden
+            this.Write(@"
         void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
@@ -417,7 +457,7 @@ using FlexiMvvm.Views.Core;
         {
             ViewModel.SetParameters(");
             
-            #line 220 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            #line 254 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ParametersSourceName));
             
             #line default
@@ -425,7 +465,7 @@ using FlexiMvvm.Views.Core;
             this.Write("?.GetParameters<TParameters>());\r\n\r\n            return ViewModel.InitializeAsync(" +
                     ");\r\n        }\r\n    }\r\n}\r\n");
             
-            #line 226 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            #line 260 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
  } 
             
             #line default

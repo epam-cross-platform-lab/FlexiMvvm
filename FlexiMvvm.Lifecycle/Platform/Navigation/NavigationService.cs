@@ -25,31 +25,31 @@ namespace FlexiMvvm.Navigation
     public abstract partial class NavigationService
     {
         [NotNull]
-        public static IForwardNavigationView<IViewModel> GetForwardNavigationView([NotNull] IViewModel viewModel)
+        public static INavigationView<IViewModel> GetView([NotNull] IViewModel viewModel)
         {
             if (viewModel == null)
                 throw new ArgumentNullException(nameof(viewModel));
 
-            return ViewCache.Get<IForwardNavigationView<IViewModel>, IViewModel>(viewModel);
+            return ViewCache.Get<INavigationView<IViewModel>, IViewModel>(viewModel);
         }
 
         [NotNull]
-        public static IForwardNavigationView<IViewModelWithResultHandler> GetForwardNavigationView([NotNull] IViewModelWithResultHandler viewModel)
+        public static INavigationView<IViewModelWithResultHandler> GetView([NotNull] IViewModelWithResultHandler viewModel)
         {
             if (viewModel == null)
                 throw new ArgumentNullException(nameof(viewModel));
 
-            return ViewCache.Get<IForwardNavigationView<IViewModelWithResultHandler>, IViewModelWithResultHandler>(viewModel);
+            return ViewCache.Get<INavigationView<IViewModelWithResultHandler>, IViewModelWithResultHandler>(viewModel);
         }
 
         [NotNull]
-        public static IBackwardNavigationView<IViewModelWithResult<TResult>> GetBackwardNavigationView<TResult>([NotNull] IViewModelWithResult<TResult> viewModel)
+        public static INavigationView<IViewModelWithResult<TResult>> GetView<TResult>([NotNull] IViewModelWithResult<TResult> viewModel)
             where TResult : Result
         {
             if (viewModel == null)
                 throw new ArgumentNullException(nameof(viewModel));
 
-            return ViewCache.Get<IBackwardNavigationView<IViewModelWithResult<TResult>>, IViewModelWithResult<TResult>>(viewModel);
+            return ViewCache.Get<INavigationView<IViewModelWithResult<TResult>>, IViewModelWithResult<TResult>>(viewModel);
         }
     }
 }
