@@ -27,7 +27,7 @@ using FlexiMvvm.Views.Keyboard;
 
 namespace <#= GetNamespace(viewGenerationOptions) #>
 {
-    public partial class <#= viewGenerationOptions.ClassName #> : <#= viewGenerationOptions.BaseClassName #>, IFlxViewController
+    public partial class <#= viewGenerationOptions.ClassName #> : <#= viewGenerationOptions.BaseClassName #>, IViewController
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
@@ -118,7 +118,7 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
         }
     }
 
-    public partial class <#= viewGenerationOptions.ClassName #><TViewModel> : <#= viewGenerationOptions.ClassName #>, IFlxViewController<TViewModel>
+    public partial class <#= viewGenerationOptions.ClassName #><TViewModel> : <#= viewGenerationOptions.ClassName #>, IViewController<TViewModel>
         where TViewModel : class, IViewModel
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
@@ -169,7 +169,7 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
         }
     }
 
-    public partial class <#= viewGenerationOptions.ClassName #><TViewModel, TParameters> : <#= viewGenerationOptions.ClassName #>, IFlxViewController<TViewModel>
+    public partial class <#= viewGenerationOptions.ClassName #><TViewModel, TParameters> : <#= viewGenerationOptions.ClassName #>, IViewController<TViewModel>
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
         where TParameters : Parameters
     {

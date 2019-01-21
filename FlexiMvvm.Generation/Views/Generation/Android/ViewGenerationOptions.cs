@@ -30,7 +30,7 @@ namespace FlexiMvvm.Views.Generation.Android
 
             ClassName = className;
             BaseClassName = baseClassName;
-            BaseInterfaceName = kind == ViewKind.Activity ? "IFlxActivity" : "IFlxFragment";
+            BaseInterfaceName = kind == ViewKind.Activity ? "IActivity" : "IFragment";
             LifecycleMethodAccessModifier = kind == ViewKind.Activity ? "protected" : "public";
             ParametersSourceName = kind == ViewKind.Activity ? "Intent" : "Arguments";
             ResultCodeTypeName = kind == ViewKind.Activity ? "Android.App.Result" : "int";

@@ -14,22 +14,18 @@
 // limitations under the License.
 // =========================================================================
 
-using System;
+using FlexiMvvm.Persistence.Core;
 using FlexiMvvm.ViewModels;
-using FlexiMvvm.Views.Core;
-using JetBrains.Annotations;
+using FlexiMvvm.ViewModels.Core;
 
 namespace FlexiMvvm.Views
 {
-    public static class FlxView
+    public interface IActivity : IView, ILifecycleEventSourceActivity
     {
-        [NotNull]
-        public static IView<IViewModel> Get([NotNull] IViewModel viewModel)
-        {
-            if (viewModel == null)
-                throw new ArgumentNullException(nameof(viewModel));
+    }
 
-            return ViewCache.Get<IView<IViewModel>, IViewModel>(viewModel);
-        }
+    public interface IActivity<TViewModel> : IActivity, IForwardNavigationView<TViewModel>, IBackwardNavigationView<TViewModel>, IViewModelOwner<TViewModel>
+        where TViewModel : class, IViewModel, IStateOwner
+    {
     }
 }

@@ -14,18 +14,18 @@
 // limitations under the License.
 // =========================================================================
 
+using FlexiMvvm.Persistence.Core;
 using FlexiMvvm.ViewModels;
 using FlexiMvvm.ViewModels.Core;
-using FlexiMvvm.Views.Core;
 
 namespace FlexiMvvm.Views
 {
-    public interface IFlxViewController : IView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
+    public interface IFragment : IView, ILifecycleEventSourceFragment
     {
     }
 
-    public interface IFlxViewController<TViewModel> : IFlxViewController, IForwardNavigationView<TViewModel>, IBackwardNavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModel
+    public interface IFragment<TViewModel> : IFragment, IForwardNavigationView<TViewModel>, IViewModelOwner<TViewModel>
+        where TViewModel : class, IViewModel, IStateOwner
     {
     }
 }

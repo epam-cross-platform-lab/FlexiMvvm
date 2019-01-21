@@ -20,13 +20,13 @@
         <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0" />
     </ItemGroup>
     <ItemGroup>
-        <None Update="Platform.Android\Views\FlxViewsGenerator.tt">
+        <None Update="Platform.Android\Views\ViewsGenerator.tt">
             <Generator>TextTemplatingFileGenerator</Generator>
-            <LastGenOutput>FlxViewsGenerator.cs</LastGenOutput>
+            <LastGenOutput>ViewsGenerator.cs</LastGenOutput>
         </None>
-        <None Update="Platform.iOS\Views\FlxViewsGenerator.tt">
+        <None Update="Platform.iOS\Views\ViewsGenerator.tt">
             <Generator>TextTemplatingFileGenerator</Generator>
-            <LastGenOutput>FlxViewsGenerator.cs</LastGenOutput>
+            <LastGenOutput>ViewsGenerator.cs</LastGenOutput>
         </None>
         <None Update="Platform.iOS\Views\!Extensions\WeakEventsSubscriptionsExtensionsGenerator.tt">
             <Generator>TextTemplatingFileGenerator</Generator>
@@ -37,15 +37,15 @@
         <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
     </ItemGroup>
     <ItemGroup>
-        <None Update="Platform.Android\Views\FlxViewsGenerator.cs">
+        <None Update="Platform.Android\Views\ViewsGenerator.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
-            <DependentUpon>FlxViewsGenerator.tt</DependentUpon>
+            <DependentUpon>ViewsGenerator.tt</DependentUpon>
         </None>
-        <None Update="Platform.iOS\Views\FlxViewsGenerator.cs">
+        <None Update="Platform.iOS\Views\ViewsGenerator.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
-            <DependentUpon>FlxViewsGenerator.tt</DependentUpon>
+            <DependentUpon>ViewsGenerator.tt</DependentUpon>
         </None>
         <None Update="Platform.iOS\Views\!Extensions\WeakEventsSubscriptionsExtensionsGenerator.cs">
             <DesignTime>True</DesignTime>

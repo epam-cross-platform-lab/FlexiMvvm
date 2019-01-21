@@ -27,7 +27,7 @@ namespace FlexiMvvm.Navigation
     {
         [NotNull]
         public TViewController GetViewController<TViewController, TViewModel>([NotNull] TViewModel viewModel)
-            where TViewController : UIViewController, IFlxViewController<TViewModel>
+            where TViewController : UIViewController, IViewController<TViewModel>
             where TViewModel : class, IViewModel
         {
             if (viewModel == null)

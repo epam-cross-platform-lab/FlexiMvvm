@@ -25,14 +25,14 @@ using FlexiMvvm.Views.Core;
 
 namespace FlexiMvvm.Views
 {
-    public partial class FlxBindableAppCompatActivity<TViewModel> : FlxAppCompatActivity<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
+    public partial class BindableAppCompatActivity<TViewModel> : AppCompatActivity<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, IViewModel, IStateOwner
     {
         public IDisposable BindingSet { get; private set; }
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new BindableViewLifecycleDelegate<FlxBindableAppCompatActivity<TViewModel>, TViewModel>(this);
+            return new BindableViewLifecycleDelegate<BindableAppCompatActivity<TViewModel>, TViewModel>(this);
         }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
@@ -45,7 +45,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class FlxBindableAppCompatActivity<TViewModel, TParameters> : FlxAppCompatActivity<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
+    public partial class BindableAppCompatActivity<TViewModel, TParameters> : AppCompatActivity<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>, IStateOwner
         where TParameters : Parameters
     {
@@ -53,7 +53,7 @@ namespace FlexiMvvm.Views
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new BindableViewLifecycleDelegate<FlxBindableAppCompatActivity<TViewModel, TParameters>, TViewModel>(this);
+            return new BindableViewLifecycleDelegate<BindableAppCompatActivity<TViewModel, TParameters>, TViewModel>(this);
         }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
@@ -69,14 +69,14 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class FlxBindableFragment<TViewModel> : FlxFragment<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
+    public partial class BindableFragment<TViewModel> : Fragment<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, IViewModel, IStateOwner
     {
         public IDisposable BindingSet { get; private set; }
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new BindableViewLifecycleDelegate<FlxBindableFragment<TViewModel>, TViewModel>(this);
+            return new BindableViewLifecycleDelegate<BindableFragment<TViewModel>, TViewModel>(this);
         }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
@@ -89,7 +89,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class FlxBindableFragment<TViewModel, TParameters> : FlxFragment<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
+    public partial class BindableFragment<TViewModel, TParameters> : Fragment<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>, IStateOwner
         where TParameters : Parameters
     {
@@ -97,7 +97,7 @@ namespace FlexiMvvm.Views
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new BindableViewLifecycleDelegate<FlxBindableFragment<TViewModel, TParameters>, TViewModel>(this);
+            return new BindableViewLifecycleDelegate<BindableFragment<TViewModel, TParameters>, TViewModel>(this);
         }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
@@ -113,14 +113,14 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class FlxBindableDialogFragment<TViewModel> : FlxDialogFragment<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
+    public partial class BindableDialogFragment<TViewModel> : DialogFragment<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, IViewModel, IStateOwner
     {
         public IDisposable BindingSet { get; private set; }
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new BindableViewLifecycleDelegate<FlxBindableDialogFragment<TViewModel>, TViewModel>(this);
+            return new BindableViewLifecycleDelegate<BindableDialogFragment<TViewModel>, TViewModel>(this);
         }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
@@ -133,7 +133,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class FlxBindableDialogFragment<TViewModel, TParameters> : FlxDialogFragment<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
+    public partial class BindableDialogFragment<TViewModel, TParameters> : DialogFragment<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>, IStateOwner
         where TParameters : Parameters
     {
@@ -141,7 +141,7 @@ namespace FlexiMvvm.Views
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new BindableViewLifecycleDelegate<FlxBindableDialogFragment<TViewModel, TParameters>, TViewModel>(this);
+            return new BindableViewLifecycleDelegate<BindableDialogFragment<TViewModel, TParameters>, TViewModel>(this);
         }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)

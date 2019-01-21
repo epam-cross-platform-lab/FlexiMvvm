@@ -13,28 +13,35 @@
         <ProjectReference Include="..\FlexiMvvm.Lifecycle\FlexiMvvm.Lifecycle.csproj" />
     </ItemGroup>
     <ItemGroup>
-        <None Update="Platform.Android\Views\FlxBindableViewsGenerator.tt">
+        <None Update="Platform.Android\Views\BindableViewsGenerator.tt">
             <Generator>TextTemplatingFileGenerator</Generator>
-            <LastGenOutput>FlxBindableViewsGenerator.cs</LastGenOutput>
+            <LastGenOutput>BindableViewsGenerator.cs</LastGenOutput>
         </None>
-        <None Update="Platform.iOS\Views\FlxBindableViewsGenerator.tt">
+        <None Update="Platform.iOS\Views\BindableViewsGenerator.tt">
             <Generator>TextTemplatingFileGenerator</Generator>
-            <LastGenOutput>FlxBindableViewsGenerator.cs</LastGenOutput>
+            <LastGenOutput>BindableViewsGenerator.cs</LastGenOutput>
         </None>
     </ItemGroup>
     <ItemGroup>
         <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
     </ItemGroup>
     <ItemGroup>
-        <None Update="Platform.Android\Views\FlxBindableViewsGenerator.cs">
+      <Compile Update="Platform.Android\Views\BindableViewsGenerator.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>BindableViewsGenerator.tt</DependentUpon>
+      </Compile>
+    </ItemGroup>
+    <ItemGroup>
+        <None Update="Platform.Android\Views\BindableViewsGenerator.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
-            <DependentUpon>FlxBindableViewsGenerator.tt</DependentUpon>
+            <DependentUpon>BindableViewsGenerator.tt</DependentUpon>
         </None>
-        <None Update="Platform.iOS\Views\FlxBindableViewsGenerator.cs">
+        <None Update="Platform.iOS\Views\BindableViewsGenerator.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
-            <DependentUpon>FlxBindableViewsGenerator.tt</DependentUpon>
+            <DependentUpon>BindableViewsGenerator.tt</DependentUpon>
         </None>
     </ItemGroup>
 </Project>

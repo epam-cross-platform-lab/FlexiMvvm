@@ -30,7 +30,7 @@ namespace FlexiMvvm.Navigation
     {
         [NotNull]
         public TActivity GetActivity<TActivity, TViewModel>([NotNull] TViewModel viewModel)
-            where TActivity : FragmentActivity, IFlxActivity<TViewModel>
+            where TActivity : FragmentActivity, IActivity<TViewModel>
             where TViewModel : class, IViewModel, IStateOwner
         {
             if (viewModel == null)
@@ -41,7 +41,7 @@ namespace FlexiMvvm.Navigation
 
         [NotNull]
         public TFragment GetFragment<TFragment, TViewModel>([NotNull] TViewModel viewModel)
-            where TFragment : Fragment, IFlxFragment<TViewModel>
+            where TFragment : Fragment, IFragment<TViewModel>
             where TViewModel : class, IViewModel, IStateOwner
         {
             if (viewModel == null)

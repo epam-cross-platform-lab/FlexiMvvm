@@ -15,8 +15,6 @@
 // limitations under the License.
 // =========================================================================
 
-using Android.Support.V4.App;
-using Android.Support.V7.App;
 using System;
 using System.Threading.Tasks;
 using Android.Content;
@@ -31,8 +29,8 @@ using FlexiMvvm.Views.Core;
 
 namespace FlexiMvvm.Views
 {
-    [Register("fleximvvm.views.FlxAppCompatActivity")]
-    public partial class FlxAppCompatActivity : AppCompatActivity, IFlxActivity
+    [Register("fleximvvm.views.AppCompatActivity")]
+    public partial class AppCompatActivity : Android.Support.V7.App.AppCompatActivity, IActivity
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
 
@@ -54,7 +52,7 @@ namespace FlexiMvvm.Views
 
         protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<FlxAppCompatActivity>(this);
+            return new ViewLifecycleDelegate<AppCompatActivity>(this);
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -140,7 +138,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class FlxAppCompatActivity<TViewModel> : FlxAppCompatActivity, IFlxActivity<TViewModel>
+    public partial class AppCompatActivity<TViewModel> : AppCompatActivity, IActivity<TViewModel>
         where TViewModel : class, IViewModel, IStateOwner
     {
         private RequestCode _requestCode;
@@ -151,7 +149,7 @@ namespace FlexiMvvm.Views
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<FlxAppCompatActivity<TViewModel>, TViewModel>(this);
+            return new ViewLifecycleDelegate<AppCompatActivity<TViewModel>, TViewModel>(this);
         }
 
         void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
@@ -165,7 +163,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class FlxAppCompatActivity<TViewModel, TParameters> : FlxAppCompatActivity, IFlxActivity<TViewModel>
+    public partial class AppCompatActivity<TViewModel, TParameters> : AppCompatActivity, IActivity<TViewModel>
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>, IStateOwner
         where TParameters : Parameters
     {
@@ -177,7 +175,7 @@ namespace FlexiMvvm.Views
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<FlxAppCompatActivity<TViewModel, TParameters>, TViewModel>(this);
+            return new ViewLifecycleDelegate<AppCompatActivity<TViewModel, TParameters>, TViewModel>(this);
         }
 
         void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
@@ -196,8 +194,8 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    [Register("fleximvvm.views.FlxFragment")]
-    public partial class FlxFragment : Fragment, IFlxFragment
+    [Register("fleximvvm.views.Fragment")]
+    public partial class Fragment : Android.Support.V4.App.Fragment, IFragment
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
 
@@ -219,7 +217,7 @@ namespace FlexiMvvm.Views
 
         protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<FlxFragment>(this);
+            return new ViewLifecycleDelegate<Fragment>(this);
         }
 
         public override void OnCreate(Bundle savedInstanceState)
@@ -308,7 +306,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class FlxFragment<TViewModel> : FlxFragment, IFlxFragment<TViewModel>
+    public partial class Fragment<TViewModel> : Fragment, IFragment<TViewModel>
         where TViewModel : class, IViewModel, IStateOwner
     {
         private RequestCode _requestCode;
@@ -319,7 +317,7 @@ namespace FlexiMvvm.Views
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<FlxFragment<TViewModel>, TViewModel>(this);
+            return new ViewLifecycleDelegate<Fragment<TViewModel>, TViewModel>(this);
         }
 
         void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
@@ -333,7 +331,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class FlxFragment<TViewModel, TParameters> : FlxFragment, IFlxFragment<TViewModel>
+    public partial class Fragment<TViewModel, TParameters> : Fragment, IFragment<TViewModel>
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>, IStateOwner
         where TParameters : Parameters
     {
@@ -345,7 +343,7 @@ namespace FlexiMvvm.Views
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<FlxFragment<TViewModel, TParameters>, TViewModel>(this);
+            return new ViewLifecycleDelegate<Fragment<TViewModel, TParameters>, TViewModel>(this);
         }
 
         void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
@@ -364,8 +362,8 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    [Register("fleximvvm.views.FlxDialogFragment")]
-    public partial class FlxDialogFragment : DialogFragment, IFlxFragment
+    [Register("fleximvvm.views.DialogFragment")]
+    public partial class DialogFragment : Android.Support.V4.App.DialogFragment, IFragment
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
 
@@ -387,7 +385,7 @@ namespace FlexiMvvm.Views
 
         protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<FlxDialogFragment>(this);
+            return new ViewLifecycleDelegate<DialogFragment>(this);
         }
 
         public override void OnCreate(Bundle savedInstanceState)
@@ -476,7 +474,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class FlxDialogFragment<TViewModel> : FlxDialogFragment, IFlxFragment<TViewModel>
+    public partial class DialogFragment<TViewModel> : DialogFragment, IFragment<TViewModel>
         where TViewModel : class, IViewModel, IStateOwner
     {
         private RequestCode _requestCode;
@@ -487,7 +485,7 @@ namespace FlexiMvvm.Views
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<FlxDialogFragment<TViewModel>, TViewModel>(this);
+            return new ViewLifecycleDelegate<DialogFragment<TViewModel>, TViewModel>(this);
         }
 
         void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
@@ -501,7 +499,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class FlxDialogFragment<TViewModel, TParameters> : FlxDialogFragment, IFlxFragment<TViewModel>
+    public partial class DialogFragment<TViewModel, TParameters> : DialogFragment, IFragment<TViewModel>
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>, IStateOwner
         where TParameters : Parameters
     {
@@ -513,7 +511,7 @@ namespace FlexiMvvm.Views
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<FlxDialogFragment<TViewModel, TParameters>, TViewModel>(this);
+            return new ViewLifecycleDelegate<DialogFragment<TViewModel, TParameters>, TViewModel>(this);
         }
 
         void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)

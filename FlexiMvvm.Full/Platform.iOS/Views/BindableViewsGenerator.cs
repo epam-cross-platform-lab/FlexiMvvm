@@ -24,14 +24,14 @@ using FlexiMvvm.Views.Core;
 
 namespace FlexiMvvm.Views
 {
-    public partial class FlxBindableViewController<TViewModel> : FlxViewController<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
+    public partial class BindableViewController<TViewModel> : ViewController<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, IViewModel
     {
         public IDisposable BindingSet { get; private set; }
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new BindableViewLifecycleDelegate<FlxBindableViewController<TViewModel>, TViewModel>(this);
+            return new BindableViewLifecycleDelegate<BindableViewController<TViewModel>, TViewModel>(this);
         }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
@@ -44,11 +44,11 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class FlxBindableViewController<TViewModel, TParameters> : FlxViewController<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
+    public partial class BindableViewController<TViewModel, TParameters> : ViewController<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
         where TParameters : Parameters
     {
-        public FlxBindableViewController(TParameters parameters)
+        public BindableViewController(TParameters parameters)
             : base(parameters)
         {
         }
@@ -57,7 +57,7 @@ namespace FlexiMvvm.Views
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new BindableViewLifecycleDelegate<FlxBindableViewController<TViewModel, TParameters>, TViewModel>(this);
+            return new BindableViewLifecycleDelegate<BindableViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
@@ -73,14 +73,14 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class FlxBindableTabBarController<TViewModel> : FlxTabBarController<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
+    public partial class BindableTabBarController<TViewModel> : TabBarController<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, IViewModel
     {
         public IDisposable BindingSet { get; private set; }
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new BindableViewLifecycleDelegate<FlxBindableTabBarController<TViewModel>, TViewModel>(this);
+            return new BindableViewLifecycleDelegate<BindableTabBarController<TViewModel>, TViewModel>(this);
         }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
@@ -93,11 +93,11 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class FlxBindableTabBarController<TViewModel, TParameters> : FlxTabBarController<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
+    public partial class BindableTabBarController<TViewModel, TParameters> : TabBarController<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
         where TParameters : Parameters
     {
-        public FlxBindableTabBarController(TParameters parameters)
+        public BindableTabBarController(TParameters parameters)
             : base(parameters)
         {
         }
@@ -106,7 +106,7 @@ namespace FlexiMvvm.Views
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new BindableViewLifecycleDelegate<FlxBindableTabBarController<TViewModel, TParameters>, TViewModel>(this);
+            return new BindableViewLifecycleDelegate<BindableTabBarController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
@@ -122,14 +122,14 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class FlxBindablePageViewController<TViewModel> : FlxPageViewController<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
+    public partial class BindablePageViewController<TViewModel> : PageViewController<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, IViewModel
     {
         public IDisposable BindingSet { get; private set; }
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new BindableViewLifecycleDelegate<FlxBindablePageViewController<TViewModel>, TViewModel>(this);
+            return new BindableViewLifecycleDelegate<BindablePageViewController<TViewModel>, TViewModel>(this);
         }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
@@ -142,11 +142,11 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class FlxBindablePageViewController<TViewModel, TParameters> : FlxPageViewController<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
+    public partial class BindablePageViewController<TViewModel, TParameters> : PageViewController<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
         where TParameters : Parameters
     {
-        public FlxBindablePageViewController(TParameters parameters)
+        public BindablePageViewController(TParameters parameters)
             : base(parameters)
         {
         }
@@ -155,7 +155,7 @@ namespace FlexiMvvm.Views
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new BindableViewLifecycleDelegate<FlxBindablePageViewController<TViewModel, TParameters>, TViewModel>(this);
+            return new BindableViewLifecycleDelegate<BindablePageViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)

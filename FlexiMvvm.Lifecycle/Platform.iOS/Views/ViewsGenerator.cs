@@ -26,7 +26,7 @@ using FlexiMvvm.Views.Keyboard;
 
 namespace FlexiMvvm.Views
 {
-    public partial class FlxNavigationController : UINavigationController, IFlxViewController
+    public partial class NavigationController : UINavigationController, IViewController
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
@@ -49,7 +49,7 @@ namespace FlexiMvvm.Views
 
         protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<FlxNavigationController>(this);
+            return new ViewLifecycleDelegate<NavigationController>(this);
         }
 
         public override void ViewDidLoad()
@@ -117,7 +117,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class FlxNavigationController<TViewModel> : FlxNavigationController, IFlxViewController<TViewModel>
+    public partial class NavigationController<TViewModel> : NavigationController, IViewController<TViewModel>
         where TViewModel : class, IViewModel
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
@@ -126,7 +126,7 @@ namespace FlexiMvvm.Views
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<FlxNavigationController<TViewModel>, TViewModel>(this);
+            return new ViewLifecycleDelegate<NavigationController<TViewModel>, TViewModel>(this);
         }
 
         public void SetResult(ResultCode resultCode)
@@ -168,13 +168,13 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class FlxNavigationController<TViewModel, TParameters> : FlxNavigationController, IFlxViewController<TViewModel>
+    public partial class NavigationController<TViewModel, TParameters> : NavigationController, IViewController<TViewModel>
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
         where TParameters : Parameters
     {
         private readonly TParameters _parameters;
 
-        public FlxNavigationController(TParameters parameters)
+        public NavigationController(TParameters parameters)
         {
             _parameters = parameters;
         }
@@ -185,7 +185,7 @@ namespace FlexiMvvm.Views
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<FlxNavigationController<TViewModel, TParameters>, TViewModel>(this);
+            return new ViewLifecycleDelegate<NavigationController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         public void SetResult(ResultCode resultCode)
@@ -231,7 +231,7 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class FlxViewController : UIViewController, IFlxViewController
+    public partial class ViewController : UIViewController, IViewController
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
@@ -254,7 +254,7 @@ namespace FlexiMvvm.Views
 
         protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<FlxViewController>(this);
+            return new ViewLifecycleDelegate<ViewController>(this);
         }
 
         public override void ViewDidLoad()
@@ -322,7 +322,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class FlxViewController<TViewModel> : FlxViewController, IFlxViewController<TViewModel>
+    public partial class ViewController<TViewModel> : ViewController, IViewController<TViewModel>
         where TViewModel : class, IViewModel
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
@@ -331,7 +331,7 @@ namespace FlexiMvvm.Views
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<FlxViewController<TViewModel>, TViewModel>(this);
+            return new ViewLifecycleDelegate<ViewController<TViewModel>, TViewModel>(this);
         }
 
         public void SetResult(ResultCode resultCode)
@@ -373,13 +373,13 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class FlxViewController<TViewModel, TParameters> : FlxViewController, IFlxViewController<TViewModel>
+    public partial class ViewController<TViewModel, TParameters> : ViewController, IViewController<TViewModel>
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
         where TParameters : Parameters
     {
         private readonly TParameters _parameters;
 
-        public FlxViewController(TParameters parameters)
+        public ViewController(TParameters parameters)
         {
             _parameters = parameters;
         }
@@ -390,7 +390,7 @@ namespace FlexiMvvm.Views
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<FlxViewController<TViewModel, TParameters>, TViewModel>(this);
+            return new ViewLifecycleDelegate<ViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         public void SetResult(ResultCode resultCode)
@@ -436,7 +436,7 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class FlxTableViewController : UITableViewController, IFlxViewController
+    public partial class TableViewController : UITableViewController, IViewController
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
@@ -459,7 +459,7 @@ namespace FlexiMvvm.Views
 
         protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<FlxTableViewController>(this);
+            return new ViewLifecycleDelegate<TableViewController>(this);
         }
 
         public override void ViewDidLoad()
@@ -527,7 +527,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class FlxTableViewController<TViewModel> : FlxTableViewController, IFlxViewController<TViewModel>
+    public partial class TableViewController<TViewModel> : TableViewController, IViewController<TViewModel>
         where TViewModel : class, IViewModel
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
@@ -536,7 +536,7 @@ namespace FlexiMvvm.Views
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<FlxTableViewController<TViewModel>, TViewModel>(this);
+            return new ViewLifecycleDelegate<TableViewController<TViewModel>, TViewModel>(this);
         }
 
         public void SetResult(ResultCode resultCode)
@@ -578,13 +578,13 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class FlxTableViewController<TViewModel, TParameters> : FlxTableViewController, IFlxViewController<TViewModel>
+    public partial class TableViewController<TViewModel, TParameters> : TableViewController, IViewController<TViewModel>
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
         where TParameters : Parameters
     {
         private readonly TParameters _parameters;
 
-        public FlxTableViewController(TParameters parameters)
+        public TableViewController(TParameters parameters)
         {
             _parameters = parameters;
         }
@@ -595,7 +595,7 @@ namespace FlexiMvvm.Views
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<FlxTableViewController<TViewModel, TParameters>, TViewModel>(this);
+            return new ViewLifecycleDelegate<TableViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         public void SetResult(ResultCode resultCode)
@@ -641,7 +641,7 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class FlxCollectionViewController : UICollectionViewController, IFlxViewController
+    public partial class CollectionViewController : UICollectionViewController, IViewController
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
@@ -664,7 +664,7 @@ namespace FlexiMvvm.Views
 
         protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<FlxCollectionViewController>(this);
+            return new ViewLifecycleDelegate<CollectionViewController>(this);
         }
 
         public override void ViewDidLoad()
@@ -732,7 +732,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class FlxCollectionViewController<TViewModel> : FlxCollectionViewController, IFlxViewController<TViewModel>
+    public partial class CollectionViewController<TViewModel> : CollectionViewController, IViewController<TViewModel>
         where TViewModel : class, IViewModel
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
@@ -741,7 +741,7 @@ namespace FlexiMvvm.Views
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<FlxCollectionViewController<TViewModel>, TViewModel>(this);
+            return new ViewLifecycleDelegate<CollectionViewController<TViewModel>, TViewModel>(this);
         }
 
         public void SetResult(ResultCode resultCode)
@@ -783,13 +783,13 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class FlxCollectionViewController<TViewModel, TParameters> : FlxCollectionViewController, IFlxViewController<TViewModel>
+    public partial class CollectionViewController<TViewModel, TParameters> : CollectionViewController, IViewController<TViewModel>
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
         where TParameters : Parameters
     {
         private readonly TParameters _parameters;
 
-        public FlxCollectionViewController(TParameters parameters)
+        public CollectionViewController(TParameters parameters)
         {
             _parameters = parameters;
         }
@@ -800,7 +800,7 @@ namespace FlexiMvvm.Views
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<FlxCollectionViewController<TViewModel, TParameters>, TViewModel>(this);
+            return new ViewLifecycleDelegate<CollectionViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         public void SetResult(ResultCode resultCode)
@@ -846,7 +846,7 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class FlxTabBarController : UITabBarController, IFlxViewController
+    public partial class TabBarController : UITabBarController, IViewController
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
@@ -869,7 +869,7 @@ namespace FlexiMvvm.Views
 
         protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<FlxTabBarController>(this);
+            return new ViewLifecycleDelegate<TabBarController>(this);
         }
 
         public override void ViewDidLoad()
@@ -937,7 +937,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class FlxTabBarController<TViewModel> : FlxTabBarController, IFlxViewController<TViewModel>
+    public partial class TabBarController<TViewModel> : TabBarController, IViewController<TViewModel>
         where TViewModel : class, IViewModel
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
@@ -946,7 +946,7 @@ namespace FlexiMvvm.Views
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<FlxTabBarController<TViewModel>, TViewModel>(this);
+            return new ViewLifecycleDelegate<TabBarController<TViewModel>, TViewModel>(this);
         }
 
         public void SetResult(ResultCode resultCode)
@@ -988,13 +988,13 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class FlxTabBarController<TViewModel, TParameters> : FlxTabBarController, IFlxViewController<TViewModel>
+    public partial class TabBarController<TViewModel, TParameters> : TabBarController, IViewController<TViewModel>
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
         where TParameters : Parameters
     {
         private readonly TParameters _parameters;
 
-        public FlxTabBarController(TParameters parameters)
+        public TabBarController(TParameters parameters)
         {
             _parameters = parameters;
         }
@@ -1005,7 +1005,7 @@ namespace FlexiMvvm.Views
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<FlxTabBarController<TViewModel, TParameters>, TViewModel>(this);
+            return new ViewLifecycleDelegate<TabBarController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         public void SetResult(ResultCode resultCode)
@@ -1051,7 +1051,7 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class FlxPageViewController : UIPageViewController, IFlxViewController
+    public partial class PageViewController : UIPageViewController, IViewController
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
@@ -1074,7 +1074,7 @@ namespace FlexiMvvm.Views
 
         protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<FlxPageViewController>(this);
+            return new ViewLifecycleDelegate<PageViewController>(this);
         }
 
         public override void ViewDidLoad()
@@ -1142,7 +1142,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class FlxPageViewController<TViewModel> : FlxPageViewController, IFlxViewController<TViewModel>
+    public partial class PageViewController<TViewModel> : PageViewController, IViewController<TViewModel>
         where TViewModel : class, IViewModel
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
@@ -1151,7 +1151,7 @@ namespace FlexiMvvm.Views
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<FlxPageViewController<TViewModel>, TViewModel>(this);
+            return new ViewLifecycleDelegate<PageViewController<TViewModel>, TViewModel>(this);
         }
 
         public void SetResult(ResultCode resultCode)
@@ -1193,13 +1193,13 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class FlxPageViewController<TViewModel, TParameters> : FlxPageViewController, IFlxViewController<TViewModel>
+    public partial class PageViewController<TViewModel, TParameters> : PageViewController, IViewController<TViewModel>
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
         where TParameters : Parameters
     {
         private readonly TParameters _parameters;
 
-        public FlxPageViewController(TParameters parameters)
+        public PageViewController(TParameters parameters)
         {
             _parameters = parameters;
         }
@@ -1210,7 +1210,7 @@ namespace FlexiMvvm.Views
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<FlxPageViewController<TViewModel, TParameters>, TViewModel>(this);
+            return new ViewLifecycleDelegate<PageViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         public void SetResult(ResultCode resultCode)
@@ -1256,7 +1256,7 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class FlxSplitViewController : UISplitViewController, IFlxViewController
+    public partial class SplitViewController : UISplitViewController, IViewController
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
@@ -1279,7 +1279,7 @@ namespace FlexiMvvm.Views
 
         protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<FlxSplitViewController>(this);
+            return new ViewLifecycleDelegate<SplitViewController>(this);
         }
 
         public override void ViewDidLoad()
@@ -1347,7 +1347,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class FlxSplitViewController<TViewModel> : FlxSplitViewController, IFlxViewController<TViewModel>
+    public partial class SplitViewController<TViewModel> : SplitViewController, IViewController<TViewModel>
         where TViewModel : class, IViewModel
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
@@ -1356,7 +1356,7 @@ namespace FlexiMvvm.Views
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<FlxSplitViewController<TViewModel>, TViewModel>(this);
+            return new ViewLifecycleDelegate<SplitViewController<TViewModel>, TViewModel>(this);
         }
 
         public void SetResult(ResultCode resultCode)
@@ -1398,13 +1398,13 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class FlxSplitViewController<TViewModel, TParameters> : FlxSplitViewController, IFlxViewController<TViewModel>
+    public partial class SplitViewController<TViewModel, TParameters> : SplitViewController, IViewController<TViewModel>
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
         where TParameters : Parameters
     {
         private readonly TParameters _parameters;
 
-        public FlxSplitViewController(TParameters parameters)
+        public SplitViewController(TParameters parameters)
         {
             _parameters = parameters;
         }
@@ -1415,7 +1415,7 @@ namespace FlexiMvvm.Views
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<FlxSplitViewController<TViewModel, TParameters>, TViewModel>(this);
+            return new ViewLifecycleDelegate<SplitViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         public void SetResult(ResultCode resultCode)
