@@ -27,7 +27,7 @@ using UIKit;
 namespace FlexiMvvm.Views.Core
 {
     public class ViewLifecycleDelegate<TView> : IViewLifecycleDelegate
-        where TView : class, IView, IKeyboardHandlerOwner
+        where TView : class, IIosView, IKeyboardHandlerOwner
     {
         [NotNull]
         [Weak]
@@ -81,7 +81,7 @@ namespace FlexiMvvm.Views.Core
     }
 
     public class ViewLifecycleDelegate<TView, TViewModel> : ViewLifecycleDelegate<TView>
-        where TView : class, INavigationView<TViewModel>, IKeyboardHandlerOwner, IViewModelOwner<TViewModel>
+        where TView : class, IIosView, INavigationView<TViewModel>, IKeyboardHandlerOwner, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModel
     {
         private ResultCode _resultCode = ResultCode.Canceled;

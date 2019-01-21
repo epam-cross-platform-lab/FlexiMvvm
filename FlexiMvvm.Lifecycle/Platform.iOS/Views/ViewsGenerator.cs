@@ -26,7 +26,7 @@ using FlexiMvvm.Views.Keyboard;
 
 namespace FlexiMvvm.Views
 {
-    public partial class NavigationController : UINavigationController, IView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
+    public partial class NavigationController : UINavigationController, IIosView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
@@ -231,7 +231,7 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class ViewController : UIViewController, IView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
+    public partial class ViewController : UIViewController, IIosView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
@@ -436,7 +436,7 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class TableViewController : UITableViewController, IView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
+    public partial class TableViewController : UITableViewController, IIosView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
@@ -641,7 +641,7 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class CollectionViewController : UICollectionViewController, IView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
+    public partial class CollectionViewController : UICollectionViewController, IIosView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
@@ -846,7 +846,7 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class TabBarController : UITabBarController, IView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
+    public partial class TabBarController : UITabBarController, IIosView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
@@ -1051,7 +1051,7 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class PageViewController : UIPageViewController, IView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
+    public partial class PageViewController : UIPageViewController, IIosView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
@@ -1256,7 +1256,7 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class SplitViewController : UISplitViewController, IView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
+    public partial class SplitViewController : UISplitViewController, IIosView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;

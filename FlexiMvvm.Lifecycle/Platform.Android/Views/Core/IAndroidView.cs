@@ -14,19 +14,9 @@
 // limitations under the License.
 // =========================================================================
 
-using FlexiMvvm.ViewModels;
-using JetBrains.Annotations;
-
-namespace FlexiMvvm.Views
+namespace FlexiMvvm.Views.Core
 {
-    public interface IView
+    public interface IAndroidView : IView
     {
-    }
-
-    public interface IView<out TViewModel> : IView
-        where TViewModel : class, IViewModel
-    {
-        [NotNull]
-        TViewModel ViewModel { get; }
     }
 }

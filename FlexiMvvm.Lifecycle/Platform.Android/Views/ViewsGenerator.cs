@@ -30,7 +30,7 @@ using FlexiMvvm.Views.Core;
 namespace FlexiMvvm.Views
 {
     [Register("fleximvvm.views.AppCompatActivity")]
-    public partial class AppCompatActivity : Android.Support.V7.App.AppCompatActivity, IView, ILifecycleEventSourceActivity
+    public partial class AppCompatActivity : Android.Support.V7.App.AppCompatActivity, IAndroidView, ILifecycleEventSourceActivity
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
 
@@ -195,7 +195,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     [Register("fleximvvm.views.Fragment")]
-    public partial class Fragment : Android.Support.V4.App.Fragment, IView, ILifecycleEventSourceFragment
+    public partial class Fragment : Android.Support.V4.App.Fragment, IAndroidView, ILifecycleEventSourceFragment
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
 
@@ -393,7 +393,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     [Register("fleximvvm.views.DialogFragment")]
-    public partial class DialogFragment : Android.Support.V4.App.DialogFragment, IView, ILifecycleEventSourceFragment
+    public partial class DialogFragment : Android.Support.V4.App.DialogFragment, IAndroidView, ILifecycleEventSourceFragment
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
 

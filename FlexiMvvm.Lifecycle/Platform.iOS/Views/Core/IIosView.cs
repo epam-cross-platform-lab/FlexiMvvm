@@ -17,9 +17,9 @@
 using FlexiMvvm.Views.Keyboard;
 using JetBrains.Annotations;
 
-namespace FlexiMvvm.Views
+namespace FlexiMvvm.Views.Core
 {
-    public partial interface IView
+    public interface IIosView : IView
     {
         bool HandleKeyboard { get; }
 

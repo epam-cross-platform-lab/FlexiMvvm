@@ -28,7 +28,7 @@ using JetBrains.Annotations;
 namespace FlexiMvvm.Views.Core
 {
     public class ViewLifecycleDelegate<TView> : IViewLifecycleDelegate
-        where TView : class, IView
+        where TView : class, IAndroidView
     {
         public ViewLifecycleDelegate([NotNull] TView view)
         {
@@ -64,7 +64,7 @@ namespace FlexiMvvm.Views.Core
     }
 
     public class ViewLifecycleDelegate<TView, TViewModel> : ViewLifecycleDelegate<TView>
-        where TView : class, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
+        where TView : class, IAndroidView, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModel, IStateOwner
     {
         private const string ViewModelKeyKey = "FlexiMvvm_ViewModelKey";

@@ -27,7 +27,7 @@ using FlexiMvvm.Views.Keyboard;
 
 namespace <#= GetNamespace(viewGenerationOptions) #>
 {
-    public partial class <#= viewGenerationOptions.ClassName #> : <#= viewGenerationOptions.BaseClassName #>, IView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
+    public partial class <#= viewGenerationOptions.ClassName #> : <#= viewGenerationOptions.BaseClassName #>, IIosView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;

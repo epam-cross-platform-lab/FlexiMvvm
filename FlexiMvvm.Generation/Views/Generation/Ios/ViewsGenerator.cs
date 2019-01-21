@@ -77,7 +77,7 @@ namespace FlexiMvvm.Views.Generation.Ios
             
             #line default
             #line hidden
-            this.Write(@", IView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
+            this.Write(@", IIosView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
