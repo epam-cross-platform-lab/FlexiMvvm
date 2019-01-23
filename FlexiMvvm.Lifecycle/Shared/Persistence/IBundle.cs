@@ -49,6 +49,9 @@ namespace FlexiMvvm.Persistence
         [CanBeNull]
         double[] GetDoubleArray([CanBeNull] double[] defaultValue = default, [CallerMemberName] string propertyName = null);
 
+        T GetEnum<T>(T defaultValue = default, [CallerMemberName] string propertyName = null)
+            where T : Enum;
+
         float GetFloat(float defaultValue = default, [CallerMemberName] string propertyName = null);
 
         [CanBeNull]
@@ -92,6 +95,9 @@ namespace FlexiMvvm.Persistence
         bool SetDouble(double value, [CallerMemberName] string propertyName = null);
 
         bool SetDoubleArray([CanBeNull] double[] value, [CallerMemberName] string propertyName = null);
+
+        bool SetEnum<T>(T value, [CallerMemberName] string propertyName = null)
+            where T : Enum;
 
         bool SetFloat(float value, [CallerMemberName] string propertyName = null);
 

@@ -40,12 +40,9 @@ namespace FlexiMvvm
 
             var dateTimeString = bundle.GetString(key);
 
-            if (!dateTimeString.IsNullOrWhiteSpace())
-            {
-                return DateTime.ParseExact(dateTimeString, Iso8601Format, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind);
-            }
-
-            return defaultValue;
+            return dateTimeString == default
+                ? defaultValue
+                : DateTime.ParseExact(dateTimeString, Iso8601Format, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind);
         }
 
         public static DateTimeOffset GetDateTimeOffset([NotNull] this Bundle bundle, [CanBeNull] string key)
@@ -63,12 +60,22 @@ namespace FlexiMvvm
 
             var dateTimeOffsetString = bundle.GetString(key);
 
-            if (!dateTimeOffsetString.IsNullOrWhiteSpace())
-            {
-                return DateTimeOffset.ParseExact(dateTimeOffsetString, Iso8601Format, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind);
-            }
+            return dateTimeOffsetString == default
+                ? defaultValue
+                : DateTimeOffset.ParseExact(dateTimeOffsetString, Iso8601Format, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind);
+        }
 
-            return defaultValue;
+        public static T GetEnum<T>([NotNull] this Bundle bundle, [CanBeNull] string key, T defaultValue)
+            where T : Enum
+        {
+            if (bundle == null)
+                throw new ArgumentNullException(nameof(bundle));
+
+            var enumString = bundle.GetString(key);
+
+            return enumString == default
+                ? defaultValue
+                : (T)Enum.Parse(typeof(T), enumString);
         }
 
         public static void PutDateTime([NotNull] this Bundle bundle, [CanBeNull] string key, DateTime value)
@@ -85,6 +92,15 @@ namespace FlexiMvvm
                 throw new ArgumentNullException(nameof(bundle));
 
             bundle.PutString(key, value.ToString(Iso8601Format));
+        }
+
+        public static void PutEnum<T>([NotNull] this Bundle bundle, [CanBeNull] string key, T value)
+            where T : Enum
+        {
+            if (bundle == null)
+                throw new ArgumentNullException(nameof(bundle));
+
+            bundle.PutString(key, value.ToString());
         }
     }
 }

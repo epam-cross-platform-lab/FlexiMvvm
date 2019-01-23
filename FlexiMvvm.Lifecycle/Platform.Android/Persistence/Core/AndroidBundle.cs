@@ -15,6 +15,7 @@
 // =========================================================================
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using Android.OS;
 using JetBrains.Annotations;
@@ -115,6 +116,15 @@ namespace FlexiMvvm.Persistence.Core
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
 
             return _bundle.GetDoubleArray(propertyName) ?? defaultValue;
+        }
+
+        public T GetEnum<T>(T defaultValue = default, string propertyName = null)
+            where T : Enum
+        {
+            if (string.IsNullOrWhiteSpace(propertyName))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+
+            return _bundle.GetEnum(propertyName, defaultValue);
         }
 
         public float GetFloat(float defaultValue = default, string propertyName = null)
@@ -351,6 +361,25 @@ namespace FlexiMvvm.Persistence.Core
             if (!ReferenceEquals(existingValue, value) || !ContainsProperty(propertyName))
             {
                 _bundle.PutDoubleArray(propertyName, value);
+                OnPropertyChanged(propertyName);
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool SetEnum<T>(T value, string propertyName = null)
+            where T : Enum
+        {
+            if (string.IsNullOrWhiteSpace(propertyName))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+
+            var existingValue = GetEnum<T>(propertyName: propertyName);
+
+            if (!EqualityComparer<T>.Default.Equals(existingValue, value) || !ContainsProperty(propertyName))
+            {
+                _bundle.PutEnum(propertyName, value);
                 OnPropertyChanged(propertyName);
 
                 return true;

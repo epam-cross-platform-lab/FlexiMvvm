@@ -117,6 +117,15 @@ namespace FlexiMvvm.Persistence.Core
             return (double[])_bundle.GetValueOrDefault(propertyName, defaultValue);
         }
 
+        public T GetEnum<T>(T defaultValue = default, string propertyName = null)
+            where T : Enum
+        {
+            if (string.IsNullOrWhiteSpace(propertyName))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+
+            return (T)_bundle.GetValueOrDefault(propertyName, defaultValue).NotNull();
+        }
+
         public float GetFloat(float defaultValue = default, string propertyName = null)
         {
             if (string.IsNullOrWhiteSpace(propertyName))
@@ -349,6 +358,25 @@ namespace FlexiMvvm.Persistence.Core
             var existingValue = GetDoubleArray(propertyName: propertyName);
 
             if (!ReferenceEquals(existingValue, value) || !ContainsProperty(propertyName))
+            {
+                _bundle[propertyName] = value;
+                OnPropertyChanged(propertyName);
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool SetEnum<T>(T value, string propertyName = null)
+            where T : Enum
+        {
+            if (string.IsNullOrWhiteSpace(propertyName))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+
+            var existingValue = GetEnum<T>(propertyName: propertyName);
+
+            if (!EqualityComparer<T>.Default.Equals(existingValue, value) || !ContainsProperty(propertyName))
             {
                 _bundle[propertyName] = value;
                 OnPropertyChanged(propertyName);
