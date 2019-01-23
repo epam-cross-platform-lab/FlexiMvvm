@@ -21,7 +21,7 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.Views.Core
 {
-    public class BindableViewLifecycleDelegate<TView, TViewModel> : ViewLifecycleDelegate<TView, TViewModel>
+    public class BindableViewLifecycleDelegate<TView, TViewModel> : ViewLifecycleDelegate<TView, TViewModel>, IBindableViewLifecycleDelegate
         where TView : class, IBindableView<TViewModel>, IIosView, INavigationView<TViewModel>, IBindingSetOwner, IKeyboardHandlerOwner, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModel
     {
@@ -34,6 +34,11 @@ namespace FlexiMvvm.Views.Core
         {
             base.ViewWillAppear();
 
+            Bind();
+        }
+
+        public virtual void Bind()
+        {
             if (View.BindingSet == null)
             {
                 var bindingSet = new BindingSet<TViewModel>(View.ViewModel);

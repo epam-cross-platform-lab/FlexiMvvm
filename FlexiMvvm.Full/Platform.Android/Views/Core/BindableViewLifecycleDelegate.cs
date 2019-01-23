@@ -22,7 +22,7 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.Views.Core
 {
-    public class BindableViewLifecycleDelegate<TView, TViewModel> : ViewLifecycleDelegate<TView, TViewModel>
+    public class BindableViewLifecycleDelegate<TView, TViewModel> : ViewLifecycleDelegate<TView, TViewModel>, IBindableViewLifecycleDelegate
         where TView : class, IBindableView<TViewModel>, IAndroidView, INavigationView<TViewModel>, IBindingSetOwner, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModel, IStateOwner
     {
@@ -35,6 +35,11 @@ namespace FlexiMvvm.Views.Core
         {
             base.OnStart();
 
+            Bind();
+        }
+
+        public virtual void Bind()
+        {
             if (View.BindingSet == null)
             {
                 var bindingSet = new BindingSet<TViewModel>(View.ViewModel);

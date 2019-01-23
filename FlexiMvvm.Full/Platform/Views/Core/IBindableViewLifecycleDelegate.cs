@@ -14,21 +14,10 @@
 // limitations under the License.
 // =========================================================================
 
-using System;
-using FlexiMvvm.Bindings;
-using FlexiMvvm.ViewModels;
-using JetBrains.Annotations;
-
 namespace FlexiMvvm.Views.Core
 {
-    public interface IBindableView<TViewModel> : IView<TViewModel>
-        where TViewModel : class, IViewModel
+    public interface IBindableViewLifecycleDelegate : IViewLifecycleDelegate
     {
-        [CanBeNull]
-        IDisposable BindingSet { get; }
-
         void Bind();
-
-        void Bind([NotNull] BindingSet<TViewModel> bindingSet);
     }
 }

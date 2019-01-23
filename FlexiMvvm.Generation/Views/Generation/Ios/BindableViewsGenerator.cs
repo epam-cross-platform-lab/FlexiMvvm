@@ -79,18 +79,25 @@ namespace FlexiMvvm.Views.Generation.Ios
             this.Write(@"<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, IViewModel
     {
+        new protected IBindableViewLifecycleDelegate LifecycleDelegate => (IBindableViewLifecycleDelegate)base.LifecycleDelegate;
+
         public IDisposable BindingSet { get; private set; }
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
             return new BindableViewLifecycleDelegate<");
             
-            #line 36 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
+            #line 38 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
             this.Write(@"<TViewModel>, TViewModel>(this);
+        }
+
+        public void Bind()
+        {
+            LifecycleDelegate.Bind();
         }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
@@ -105,14 +112,14 @@ namespace FlexiMvvm.Views.Generation.Ios
 
     public partial class ");
             
-            #line 49 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
+            #line 56 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
             this.Write("<TViewModel, TParameters> : ");
             
-            #line 49 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
+            #line 56 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.BaseClassName));
             
             #line default
@@ -121,7 +128,7 @@ namespace FlexiMvvm.Views.Generation.Ios
                     "here TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner" +
                     "<TParameters>\r\n        where TParameters : Parameters\r\n    {\r\n        public ");
             
-            #line 53 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
+            #line 60 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
@@ -131,18 +138,25 @@ namespace FlexiMvvm.Views.Generation.Ios
         {
         }
 
+        new protected IBindableViewLifecycleDelegate LifecycleDelegate => (IBindableViewLifecycleDelegate)base.LifecycleDelegate;
+
         public IDisposable BindingSet { get; private set; }
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
             return new BindableViewLifecycleDelegate<");
             
-            #line 62 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
+            #line 71 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
             this.Write(@"<TViewModel, TParameters>, TViewModel>(this);
+        }
+
+        public void Bind()
+        {
+            LifecycleDelegate.Bind();
         }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
@@ -157,7 +171,7 @@ namespace FlexiMvvm.Views.Generation.Ios
 }
 ");
             
-            #line 75 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
+            #line 89 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
  } 
             
             #line default
