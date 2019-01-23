@@ -204,7 +204,7 @@ namespace FlexiMvvm.Persistence.Core
 
             var existingValue = GetBool(propertyName: propertyName);
 
-            if (existingValue != value)
+            if (existingValue != value || !ContainsProperty(propertyName))
             {
                 _bundle[propertyName] = value;
                 OnPropertyChanged(propertyName);
@@ -222,7 +222,7 @@ namespace FlexiMvvm.Persistence.Core
 
             var existingValue = GetBoolArray(propertyName: propertyName);
 
-            if (!ReferenceEquals(existingValue, value))
+            if (!ReferenceEquals(existingValue, value) || !ContainsProperty(propertyName))
             {
                 _bundle[propertyName] = value;
                 OnPropertyChanged(propertyName);
@@ -240,7 +240,7 @@ namespace FlexiMvvm.Persistence.Core
 
             var existingValue = GetByteArray(propertyName: propertyName);
 
-            if (!ReferenceEquals(existingValue, value))
+            if (!ReferenceEquals(existingValue, value) || !ContainsProperty(propertyName))
             {
                 _bundle[propertyName] = value;
                 OnPropertyChanged(propertyName);
@@ -258,7 +258,7 @@ namespace FlexiMvvm.Persistence.Core
 
             var existingValue = GetChar(propertyName: propertyName);
 
-            if (existingValue != value)
+            if (existingValue != value || !ContainsProperty(propertyName))
             {
                 _bundle[propertyName] = value;
                 OnPropertyChanged(propertyName);
@@ -276,7 +276,7 @@ namespace FlexiMvvm.Persistence.Core
 
             var existingValue = GetCharArray(propertyName: propertyName);
 
-            if (!ReferenceEquals(existingValue, value))
+            if (!ReferenceEquals(existingValue, value) || !ContainsProperty(propertyName))
             {
                 _bundle[propertyName] = value;
                 OnPropertyChanged(propertyName);
@@ -294,7 +294,7 @@ namespace FlexiMvvm.Persistence.Core
 
             var existingValue = GetDateTime(propertyName: propertyName);
 
-            if (existingValue != value)
+            if (existingValue != value || !ContainsProperty(propertyName))
             {
                 _bundle[propertyName] = value;
                 OnPropertyChanged(propertyName);
@@ -312,7 +312,7 @@ namespace FlexiMvvm.Persistence.Core
 
             var existingValue = GetDateTimeOffset(propertyName: propertyName);
 
-            if (existingValue != value)
+            if (existingValue != value || !ContainsProperty(propertyName))
             {
                 _bundle[propertyName] = value;
                 OnPropertyChanged(propertyName);
@@ -330,7 +330,7 @@ namespace FlexiMvvm.Persistence.Core
 
             var existingValue = GetDouble(propertyName: propertyName);
 
-            if (Math.Abs(existingValue - value) > ComparisonTolerance)
+            if (Math.Abs(existingValue - value) > ComparisonTolerance || !ContainsProperty(propertyName))
             {
                 _bundle[propertyName] = value;
                 OnPropertyChanged(propertyName);
@@ -348,7 +348,7 @@ namespace FlexiMvvm.Persistence.Core
 
             var existingValue = GetDoubleArray(propertyName: propertyName);
 
-            if (!ReferenceEquals(existingValue, value))
+            if (!ReferenceEquals(existingValue, value) || !ContainsProperty(propertyName))
             {
                 _bundle[propertyName] = value;
                 OnPropertyChanged(propertyName);
@@ -366,7 +366,7 @@ namespace FlexiMvvm.Persistence.Core
 
             var existingValue = GetFloat(propertyName: propertyName);
 
-            if (Math.Abs(existingValue - value) > ComparisonTolerance)
+            if (Math.Abs(existingValue - value) > ComparisonTolerance || !ContainsProperty(propertyName))
             {
                 _bundle[propertyName] = value;
                 OnPropertyChanged(propertyName);
@@ -384,7 +384,7 @@ namespace FlexiMvvm.Persistence.Core
 
             var existingValue = GetFloatArray(propertyName: propertyName);
 
-            if (!ReferenceEquals(existingValue, value))
+            if (!ReferenceEquals(existingValue, value) || !ContainsProperty(propertyName))
             {
                 _bundle[propertyName] = value;
                 OnPropertyChanged(propertyName);
@@ -402,7 +402,7 @@ namespace FlexiMvvm.Persistence.Core
 
             var existingValue = GetInt(propertyName: propertyName);
 
-            if (existingValue != value)
+            if (existingValue != value || !ContainsProperty(propertyName))
             {
                 _bundle[propertyName] = value;
                 OnPropertyChanged(propertyName);
@@ -420,7 +420,7 @@ namespace FlexiMvvm.Persistence.Core
 
             var existingValue = GetIntArray(propertyName: propertyName);
 
-            if (!ReferenceEquals(existingValue, value))
+            if (!ReferenceEquals(existingValue, value) || !ContainsProperty(propertyName))
             {
                 _bundle[propertyName] = value;
                 OnPropertyChanged(propertyName);
@@ -438,7 +438,7 @@ namespace FlexiMvvm.Persistence.Core
 
             var existingValue = GetLong(propertyName: propertyName);
 
-            if (existingValue != value)
+            if (existingValue != value || !ContainsProperty(propertyName))
             {
                 _bundle[propertyName] = value;
                 OnPropertyChanged(propertyName);
@@ -456,7 +456,7 @@ namespace FlexiMvvm.Persistence.Core
 
             var existingValue = GetLongArray(propertyName: propertyName);
 
-            if (!ReferenceEquals(existingValue, value))
+            if (!ReferenceEquals(existingValue, value) || !ContainsProperty(propertyName))
             {
                 _bundle[propertyName] = value;
                 OnPropertyChanged(propertyName);
@@ -474,7 +474,7 @@ namespace FlexiMvvm.Persistence.Core
 
             var existingValue = GetShort(propertyName: propertyName);
 
-            if (existingValue != value)
+            if (existingValue != value || !ContainsProperty(propertyName))
             {
                 _bundle[propertyName] = value;
                 OnPropertyChanged(propertyName);
@@ -492,7 +492,7 @@ namespace FlexiMvvm.Persistence.Core
 
             var existingValue = GetShortArray(propertyName: propertyName);
 
-            if (!ReferenceEquals(existingValue, value))
+            if (!ReferenceEquals(existingValue, value) || !ContainsProperty(propertyName))
             {
                 _bundle[propertyName] = value;
                 OnPropertyChanged(propertyName);
@@ -510,7 +510,7 @@ namespace FlexiMvvm.Persistence.Core
 
             var existingValue = GetString(propertyName: propertyName);
 
-            if (existingValue != value)
+            if (existingValue != value || !ContainsProperty(propertyName))
             {
                 _bundle[propertyName] = value;
                 OnPropertyChanged(propertyName);
@@ -528,7 +528,7 @@ namespace FlexiMvvm.Persistence.Core
 
             var existingValue = GetStringArray(propertyName: propertyName);
 
-            if (!ReferenceEquals(existingValue, value))
+            if (!ReferenceEquals(existingValue, value) || !ContainsProperty(propertyName))
             {
                 _bundle[propertyName] = value;
                 OnPropertyChanged(propertyName);
