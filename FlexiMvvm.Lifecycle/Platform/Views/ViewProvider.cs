@@ -21,7 +21,7 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.Views
 {
-    public static class View
+    public static class ViewProvider
     {
         [NotNull]
         public static IView<IViewModel> Get([NotNull] IViewModel viewModel)
