@@ -2,7 +2,7 @@
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0</TargetFrameworks>
         <AssemblyName>FlexiMvvm.Validation</AssemblyName>
-        <PackageId>FlexiMvvm.Validation</PackageId>
+        <PackageId>FlexiMvvm.Validation.PreRelease</PackageId>
         <Title>FlexiMvvm.Validation</Title>
         <Description>MVVM framework for Xamarin.Native.</Description>
     </PropertyGroup>

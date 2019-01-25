@@ -2,7 +2,7 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <AssemblyName>FlexiMvvm.Common</AssemblyName>
-        <PackageId>FlexiMvvm.Common</PackageId>
+        <PackageId>FlexiMvvm.Common.PreRelease</PackageId>
         <Title>FlexiMvvm.Common</Title>
         <Description>MVVM framework for Xamarin.Native.</Description>
         <EnableDefaultCompileItems>true</EnableDefaultCompileItems>

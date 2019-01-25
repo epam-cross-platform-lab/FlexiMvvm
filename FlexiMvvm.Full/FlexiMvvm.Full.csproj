@@ -2,7 +2,7 @@
     <PropertyGroup>
         <TargetFrameworks>MonoAndroid80;MonoAndroid81;MonoAndroid90;Xamarin.iOS10</TargetFrameworks>
         <AssemblyName>FlexiMvvm.Full</AssemblyName>
-        <PackageId>FlexiMvvm.Full</PackageId>
+        <PackageId>FlexiMvvm.Full.PreRelease</PackageId>
         <Title>FlexiMvvm.Full</Title>
         <Description>MVVM framework for Xamarin.Native.</Description>
     </PropertyGroup>

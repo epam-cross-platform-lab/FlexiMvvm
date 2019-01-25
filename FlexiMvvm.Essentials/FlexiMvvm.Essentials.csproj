@@ -2,7 +2,7 @@
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0;MonoAndroid80;MonoAndroid81;MonoAndroid90;Xamarin.iOS10</TargetFrameworks>
         <AssemblyName>FlexiMvvm.Essentials</AssemblyName>
-        <PackageId>FlexiMvvm.Essentials</PackageId>
+        <PackageId>FlexiMvvm.Essentials.PreRelease</PackageId>
         <Title>FlexiMvvm.Essentials</Title>
         <Description>MVVM framework for Xamarin.Native.</Description>
     </PropertyGroup>
