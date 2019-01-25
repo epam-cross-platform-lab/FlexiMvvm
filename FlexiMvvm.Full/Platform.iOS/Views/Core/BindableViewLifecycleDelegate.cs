@@ -34,7 +34,7 @@ namespace FlexiMvvm.Views.Core
         {
             base.ViewWillAppear();
 
-            ExecuteBindings();
+            View.ExecuteBindings();
         }
 
         public virtual void ExecuteBindings()
