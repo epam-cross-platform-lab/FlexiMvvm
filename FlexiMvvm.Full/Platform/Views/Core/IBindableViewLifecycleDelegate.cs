@@ -18,6 +18,6 @@ namespace FlexiMvvm.Views.Core
 {
     public interface IBindableViewLifecycleDelegate : IViewLifecycleDelegate
     {
-        void Bind();
+        void ExecuteBindings();
     }
 }

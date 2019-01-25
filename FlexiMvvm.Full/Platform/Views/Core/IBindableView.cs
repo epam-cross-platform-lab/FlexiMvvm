@@ -27,7 +27,7 @@ namespace FlexiMvvm.Views.Core
         [CanBeNull]
         IDisposable BindingSet { get; }
 
-        void Bind();
+        void ExecuteBindings();
 
         void Bind([NotNull] BindingSet<TViewModel> bindingSet);
     }

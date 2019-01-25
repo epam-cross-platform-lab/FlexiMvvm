@@ -35,10 +35,10 @@ namespace FlexiMvvm.Views.Core
         {
             base.OnStart();
 
-            Bind();
+            ExecuteBindings();
         }
 
-        public virtual void Bind()
+        public virtual void ExecuteBindings()
         {
             if (View.BindingSet == null)
             {

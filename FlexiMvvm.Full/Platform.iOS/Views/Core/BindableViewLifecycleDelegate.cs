@@ -34,10 +34,10 @@ namespace FlexiMvvm.Views.Core
         {
             base.ViewWillAppear();
 
-            Bind();
+            ExecuteBindings();
         }
 
-        public virtual void Bind()
+        public virtual void ExecuteBindings()
         {
             if (View.BindingSet == null)
             {
