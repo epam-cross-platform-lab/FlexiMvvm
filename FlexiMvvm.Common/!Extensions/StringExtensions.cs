@@ -21,18 +21,6 @@ namespace FlexiMvvm
 {
     public static class StringExtensions
     {
-        [ContractAnnotation("value:null => true")]
-        public static bool IsNullOrEmpty([CanBeNull] this string value)
-        {
-            return string.IsNullOrEmpty(value);
-        }
-
-        [ContractAnnotation("value:null => true")]
-        public static bool IsNullOrWhiteSpace([CanBeNull] this string value)
-        {
-            return string.IsNullOrWhiteSpace(value);
-        }
-
         [ContractAnnotation("=> notnull")]
         public static string SelfOrEmpty([CanBeNull] this string value)
         {
@@ -45,7 +33,7 @@ namespace FlexiMvvm
             if (defaultValue == null)
                 throw new ArgumentNullException(nameof(defaultValue));
 
-            return value.IsNullOrEmpty() ? defaultValue : value;
+            return string.IsNullOrEmpty(value) ? defaultValue : value;
         }
 
         [ContractAnnotation("=> notnull")]
@@ -54,7 +42,7 @@ namespace FlexiMvvm
             if (defaultValue == null)
                 throw new ArgumentNullException(nameof(defaultValue));
 
-            return value.IsNullOrWhiteSpace() ? defaultValue : value;
+            return string.IsNullOrWhiteSpace(value) ? defaultValue : value;
         }
     }
 }
