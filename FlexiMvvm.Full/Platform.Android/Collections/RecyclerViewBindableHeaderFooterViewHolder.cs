@@ -20,8 +20,7 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.Collections
 {
-    public class RecyclerViewBindableHeaderFooterViewHolder<TItemsContext>
-        : RecyclerViewObservableHeaderFooterViewHolder<TItemsContext>
+    public class RecyclerViewBindableHeaderFooterViewHolder<TItemsContext> : RecyclerViewObservableHeaderFooterViewHolder<TItemsContext>
         where TItemsContext : class
     {
         [CanBeNull]

@@ -14,13 +14,16 @@
 // limitations under the License.
 // =========================================================================
 
-using Android.Views;
+using System;
+using CoreGraphics;
 using FlexiMvvm.Bindings;
+using Foundation;
 using JetBrains.Annotations;
+using UIKit;
 
 namespace FlexiMvvm.Collections
 {
-    public class RecyclerViewBindableItemViewHolder<TItemsContext, TItem> : RecyclerViewObservableItemViewHolder<TItemsContext, TItem>
+    public class TableViewBindableItemCell<TItemsContext, TItem> : TableViewObservableItemCell<TItemsContext, TItem>
         where TItemsContext : class
         where TItem : class
     {
@@ -29,8 +32,37 @@ namespace FlexiMvvm.Collections
         [CanBeNull]
         private BindingSet<TItem> _itemBindingSet;
 
-        public RecyclerViewBindableItemViewHolder([NotNull] View itemView)
-            : base(itemView)
+        public TableViewBindableItemCell()
+        {
+        }
+
+        public TableViewBindableItemCell(NSCoder coder)
+            : base(coder)
+        {
+        }
+
+        public TableViewBindableItemCell(CGRect frame)
+            : base(frame)
+        {
+        }
+
+        public TableViewBindableItemCell(UITableViewCellStyle style, string reuseIdentifier)
+            : base(style, reuseIdentifier)
+        {
+        }
+
+        public TableViewBindableItemCell(UITableViewCellStyle style, NSString reuseIdentifier)
+            : base(style, reuseIdentifier)
+        {
+        }
+
+        protected TableViewBindableItemCell(NSObjectFlag t)
+            : base(t)
+        {
+        }
+
+        protected internal TableViewBindableItemCell(IntPtr handle)
+            : base(handle)
         {
         }
 

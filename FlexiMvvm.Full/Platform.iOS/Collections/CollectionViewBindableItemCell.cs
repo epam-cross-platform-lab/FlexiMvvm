@@ -14,13 +14,15 @@
 // limitations under the License.
 // =========================================================================
 
-using Android.Views;
+using System;
+using CoreGraphics;
 using FlexiMvvm.Bindings;
+using Foundation;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.Collections
 {
-    public class RecyclerViewBindableItemViewHolder<TItemsContext, TItem> : RecyclerViewObservableItemViewHolder<TItemsContext, TItem>
+    public class CollectionViewBindableItemCell<TItemsContext, TItem> : CollectionViewObservableItemCell<TItemsContext, TItem>
         where TItemsContext : class
         where TItem : class
     {
@@ -29,8 +31,27 @@ namespace FlexiMvvm.Collections
         [CanBeNull]
         private BindingSet<TItem> _itemBindingSet;
 
-        public RecyclerViewBindableItemViewHolder([NotNull] View itemView)
-            : base(itemView)
+        public CollectionViewBindableItemCell()
+        {
+        }
+
+        public CollectionViewBindableItemCell(NSCoder coder)
+            : base(coder)
+        {
+        }
+
+        public CollectionViewBindableItemCell(CGRect frame)
+            : base(frame)
+        {
+        }
+
+        protected CollectionViewBindableItemCell(NSObjectFlag t)
+            : base(t)
+        {
+        }
+
+        protected internal CollectionViewBindableItemCell(IntPtr handle)
+            : base(handle)
         {
         }
 

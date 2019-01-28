@@ -16,9 +16,9 @@
 
 namespace FlexiMvvm.Collections.Core
 {
-    internal class PlainItemsMapping : ItemsMappingBase
+    internal class PlainItemsMapping : ItemsMapping
     {
-        internal override void Reload(RecyclerViewObservableAdapterBase adapter)
+        internal override void Reload(RecyclerViewObservableAdapter adapter)
         {
             ItemsMap.Clear();
             ItemsMap.Add(ItemMap.CreateForHeader());

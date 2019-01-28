@@ -14,20 +14,46 @@
 // limitations under the License.
 // =========================================================================
 
-using Android.Views;
+using System;
+using CoreGraphics;
 using FlexiMvvm.Bindings;
+using Foundation;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.Collections
 {
-    public class RecyclerViewBindableSectionHeaderFooterViewHolder<TItemsContext> : RecyclerViewObservableSectionHeaderFooterViewHolder<TItemsContext>
+    public class TableViewBindableSectionHeaderFooterCell<TItemsContext> : TableViewObservableSectionHeaderFooterCell<TItemsContext>
         where TItemsContext : class
     {
         [CanBeNull]
         private BindingSet<TItemsContext> _itemsContextBindingSet;
 
-        public RecyclerViewBindableSectionHeaderFooterViewHolder([NotNull] View itemView)
-            : base(itemView)
+        public TableViewBindableSectionHeaderFooterCell()
+        {
+        }
+
+        public TableViewBindableSectionHeaderFooterCell(NSCoder coder)
+            : base(coder)
+        {
+        }
+
+        public TableViewBindableSectionHeaderFooterCell(CGRect frame)
+            : base(frame)
+        {
+        }
+
+        public TableViewBindableSectionHeaderFooterCell(NSString reuseIdentifier)
+            : base(reuseIdentifier)
+        {
+        }
+
+        protected TableViewBindableSectionHeaderFooterCell(NSObjectFlag t)
+            : base(t)
+        {
+        }
+
+        protected internal TableViewBindableSectionHeaderFooterCell(IntPtr handle)
+            : base(handle)
         {
         }
 
@@ -48,7 +74,7 @@ namespace FlexiMvvm.Collections
         }
     }
 
-    public class RecyclerViewBindableSectionHeaderFooterViewHolder<TItemsContext, TGroup> : RecyclerViewObservableSectionHeaderFooterViewHolder<TItemsContext, TGroup>
+    public class TableViewBindableSectionHeaderFooterCell<TItemsContext, TGroup> : TableViewObservableSectionHeaderFooterCell<TItemsContext, TGroup>
         where TItemsContext : class
         where TGroup : class
     {
@@ -57,8 +83,32 @@ namespace FlexiMvvm.Collections
         [CanBeNull]
         private BindingSet<TGroup> _groupBindingSet;
 
-        public RecyclerViewBindableSectionHeaderFooterViewHolder([NotNull] View itemView)
-            : base(itemView)
+        public TableViewBindableSectionHeaderFooterCell()
+        {
+        }
+
+        public TableViewBindableSectionHeaderFooterCell(NSCoder coder)
+            : base(coder)
+        {
+        }
+
+        public TableViewBindableSectionHeaderFooterCell(CGRect frame)
+            : base(frame)
+        {
+        }
+
+        public TableViewBindableSectionHeaderFooterCell(NSString reuseIdentifier)
+            : base(reuseIdentifier)
+        {
+        }
+
+        protected TableViewBindableSectionHeaderFooterCell(NSObjectFlag t)
+            : base(t)
+        {
+        }
+
+        protected internal TableViewBindableSectionHeaderFooterCell(IntPtr handle)
+            : base(handle)
         {
         }
 

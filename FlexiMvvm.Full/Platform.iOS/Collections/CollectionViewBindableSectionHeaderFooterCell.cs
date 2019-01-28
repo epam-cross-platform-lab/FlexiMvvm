@@ -14,20 +14,41 @@
 // limitations under the License.
 // =========================================================================
 
-using Android.Views;
+using System;
+using CoreGraphics;
 using FlexiMvvm.Bindings;
+using Foundation;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.Collections
 {
-    public class RecyclerViewBindableSectionHeaderFooterViewHolder<TItemsContext> : RecyclerViewObservableSectionHeaderFooterViewHolder<TItemsContext>
+    public class CollectionViewBindableSectionHeaderFooterCell<TItemsContext> : CollectionViewObservableSectionHeaderFooterCell<TItemsContext>
         where TItemsContext : class
     {
         [CanBeNull]
         private BindingSet<TItemsContext> _itemsContextBindingSet;
 
-        public RecyclerViewBindableSectionHeaderFooterViewHolder([NotNull] View itemView)
-            : base(itemView)
+        public CollectionViewBindableSectionHeaderFooterCell()
+        {
+        }
+
+        public CollectionViewBindableSectionHeaderFooterCell(NSCoder coder)
+            : base(coder)
+        {
+        }
+
+        public CollectionViewBindableSectionHeaderFooterCell(CGRect frame)
+            : base(frame)
+        {
+        }
+
+        protected CollectionViewBindableSectionHeaderFooterCell(NSObjectFlag t)
+            : base(t)
+        {
+        }
+
+        protected internal CollectionViewBindableSectionHeaderFooterCell(IntPtr handle)
+            : base(handle)
         {
         }
 
@@ -48,7 +69,7 @@ namespace FlexiMvvm.Collections
         }
     }
 
-    public class RecyclerViewBindableSectionHeaderFooterViewHolder<TItemsContext, TGroup> : RecyclerViewObservableSectionHeaderFooterViewHolder<TItemsContext, TGroup>
+    public class CollectionViewBindableSectionHeaderFooterCell<TItemsContext, TGroup> : CollectionViewObservableSectionHeaderFooterCell<TItemsContext, TGroup>
         where TItemsContext : class
         where TGroup : class
     {
@@ -57,8 +78,27 @@ namespace FlexiMvvm.Collections
         [CanBeNull]
         private BindingSet<TGroup> _groupBindingSet;
 
-        public RecyclerViewBindableSectionHeaderFooterViewHolder([NotNull] View itemView)
-            : base(itemView)
+        public CollectionViewBindableSectionHeaderFooterCell()
+        {
+        }
+
+        public CollectionViewBindableSectionHeaderFooterCell(NSCoder coder)
+            : base(coder)
+        {
+        }
+
+        public CollectionViewBindableSectionHeaderFooterCell(CGRect frame)
+            : base(frame)
+        {
+        }
+
+        protected CollectionViewBindableSectionHeaderFooterCell(NSObjectFlag t)
+            : base(t)
+        {
+        }
+
+        protected internal CollectionViewBindableSectionHeaderFooterCell(IntPtr handle)
+            : base(handle)
         {
         }
 

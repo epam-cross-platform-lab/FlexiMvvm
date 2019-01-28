@@ -24,13 +24,13 @@ namespace FlexiMvvm.Bindings
     public static class RecyclerViewObservableAdapterExtensions
     {
         [NotNull]
-        public static TargetItemBinding<RecyclerViewObservableAdapterBase, object> ItemClickedBinding(
-            [NotNull] this IItemReference<RecyclerViewObservableAdapterBase> recyclerViewAdapterReference)
+        public static TargetItemBinding<RecyclerViewObservableAdapter, object> ItemClickedBinding(
+            [NotNull] this IItemReference<RecyclerViewObservableAdapter> recyclerViewAdapterReference)
         {
             if (recyclerViewAdapterReference == null)
                 throw new ArgumentNullException(nameof(recyclerViewAdapterReference));
 
-            return new TargetItemOneWayToSourceCustomBinding<RecyclerViewObservableAdapterBase, object, SelectionChangedEventArgs>(
+            return new TargetItemOneWayToSourceCustomBinding<RecyclerViewObservableAdapter, object, SelectionChangedEventArgs>(
                 recyclerViewAdapterReference,
                 (recyclerViewAdapter, eventHandler) => recyclerViewAdapter.NotNull().ItemClicked += eventHandler,
                 (recyclerViewAdapter, eventHandler) => recyclerViewAdapter.NotNull().ItemClicked -= eventHandler,

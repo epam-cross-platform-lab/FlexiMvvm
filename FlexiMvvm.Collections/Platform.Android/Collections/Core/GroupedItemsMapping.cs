@@ -21,11 +21,11 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.Collections.Core
 {
-    internal class GroupedItemsMapping : ItemsMappingBase
+    internal class GroupedItemsMapping : ItemsMapping
     {
-        internal override void Reload(RecyclerViewObservableAdapterBase adapter)
+        internal override void Reload(RecyclerViewObservableAdapter adapter)
         {
-            var groupedAdapter = (RecyclerViewObservableGroupedAdapterBase)adapter;
+            var groupedAdapter = (RecyclerViewObservableGroupedAdapter)adapter;
 
             ItemsMap.Clear();
             ItemsMap.Add(ItemMap.CreateForHeader());
@@ -89,7 +89,7 @@ namespace FlexiMvvm.Collections.Core
             }
         }
 
-        internal void ReplaceGroups([NotNull] NotifyCollectionChangedEventArgs args, [NotNull] RecyclerViewObservableGroupedAdapterBase adapter)
+        internal void ReplaceGroups([NotNull] NotifyCollectionChangedEventArgs args, [NotNull] RecyclerViewObservableGroupedAdapter adapter)
         {
             RemoveGroups(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, args.OldItems, args.OldStartingIndex), adapter);
             AddGroups(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, args.NewItems, args.NewStartingIndex), adapter);

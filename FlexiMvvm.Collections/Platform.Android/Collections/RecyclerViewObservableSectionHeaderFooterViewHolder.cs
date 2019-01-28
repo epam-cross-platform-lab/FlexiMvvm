@@ -43,8 +43,7 @@ namespace FlexiMvvm.Collections
         }
     }
 
-    public class RecyclerViewObservableSectionHeaderFooterViewHolder<TItemsContext, TGroup>
-        : RecyclerViewObservableSectionHeaderFooterViewHolder<TItemsContext>
+    public class RecyclerViewObservableSectionHeaderFooterViewHolder<TItemsContext, TGroup> : RecyclerViewObservableSectionHeaderFooterViewHolder<TItemsContext>
     {
         public RecyclerViewObservableSectionHeaderFooterViewHolder([NotNull] View itemView)
             : base(itemView)

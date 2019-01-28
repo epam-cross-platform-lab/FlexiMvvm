@@ -27,7 +27,7 @@ namespace FlexiMvvm.Bindings
         [NotNull]
         public static ISourceItemBindingBuilder<TSourceItem, IEnumerable<object>> BindDefault<TSourceItem>(
             [NotNull] this BindingSet<TSourceItem> bindingSet,
-            [CanBeNull] UIPageViewControllerObservableDataSource pageViewControllerDataSource)
+            [CanBeNull] PageViewControllerObservableDataSource pageViewControllerDataSource)
             where TSourceItem : class
         {
             if (bindingSet == null)
@@ -40,7 +40,7 @@ namespace FlexiMvvm.Bindings
         [NotNull]
         public static ISourceItemBindingBuilder<TSourceItem, IEnumerable<object>> BindDefault<TSourceItem>(
             [NotNull] this BindingSet<TSourceItem> bindingSet,
-            [CanBeNull] UIPickerViewObservableModel pickerViewModel)
+            [CanBeNull] PickerViewObservableModel pickerViewModel)
             where TSourceItem : class
         {
             if (bindingSet == null)
@@ -53,7 +53,7 @@ namespace FlexiMvvm.Bindings
         [NotNull]
         public static ISourceItemBindingBuilder<TSourceItem, IEnumerable<IGrouping<object, object>>> BindDefault<TSourceItem>(
             [NotNull] this BindingSet<TSourceItem> bindingSet,
-            [CanBeNull] UICollectionViewObservableGroupedSource collectionViewSource)
+            [CanBeNull] CollectionViewObservableGroupedSource collectionViewSource)
             where TSourceItem : class
         {
             if (bindingSet == null)
@@ -66,7 +66,7 @@ namespace FlexiMvvm.Bindings
         [NotNull]
         public static ISourceItemBindingBuilder<TSourceItem, IEnumerable<object>> BindDefault<TSourceItem>(
             [NotNull] this BindingSet<TSourceItem> bindingSet,
-            [CanBeNull] UICollectionViewObservablePlainSource collectionViewSource)
+            [CanBeNull] CollectionViewObservablePlainSource collectionViewSource)
             where TSourceItem : class
         {
             if (bindingSet == null)
@@ -79,7 +79,7 @@ namespace FlexiMvvm.Bindings
         [NotNull]
         public static ISourceItemBindingBuilder<TSourceItem, IEnumerable<IGrouping<object, object>>> BindDefault<TSourceItem>(
             [NotNull] this BindingSet<TSourceItem> bindingSet,
-            [CanBeNull] UITableViewObservableGroupedSource tableViewSource)
+            [CanBeNull] TableViewObservableGroupedSource tableViewSource)
             where TSourceItem : class
         {
             if (bindingSet == null)
@@ -92,7 +92,7 @@ namespace FlexiMvvm.Bindings
         [NotNull]
         public static ISourceItemBindingBuilder<TSourceItem, IEnumerable<object>> BindDefault<TSourceItem>(
             [NotNull] this BindingSet<TSourceItem> bindingSet,
-            [CanBeNull] UITableViewObservablePlainSource tableViewSource)
+            [CanBeNull] TableViewObservablePlainSource tableViewSource)
             where TSourceItem : class
         {
             if (bindingSet == null)
