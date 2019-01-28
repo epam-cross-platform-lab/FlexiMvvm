@@ -31,7 +31,7 @@ namespace FlexiMvvm.Validation
     {
         /// <summary>
         /// Validates the specified view model.
-        /// Errors are set to <see cref="IValidatableViewModel.Errors" /> property.
+        /// Errors are set to <see cref="IValidatableViewModel.Errors"/> property.
         /// </summary>
         /// <param name="viewModel">The view model to validate.</param>
         /// <returns><c>true</c> if view model is valid, and <c>false</c> otherwise.</returns>
@@ -40,18 +40,18 @@ namespace FlexiMvvm.Validation
 
         /// <summary>
         /// Validates the specified view model based on provided rule set.
-        /// Errors are set to <see cref="IValidatableViewModel.Errors" /> property.
+        /// Errors are set to <see cref="IValidatableViewModel.Errors"/> property.
         /// </summary>
         /// <param name="viewModel">The view model to validate.</param>
         /// <param name="ruleSet">The rule set to validate.</param>
         /// <returns><c>true</c> if view model is valid, and <c>false</c> otherwise.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> or <paramref name="ruleSet"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException"><paramref name="ruleSet"/> is a zero-length string or contains only white space.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="ruleSet"/> is <c>null</c> or a zero-length string or contains only white space.</exception>
         bool Validate([NotNull] TViewModel viewModel, [NotNull] string ruleSet);
 
         /// <summary>
         /// Validates the specified view model based on provided properties.
-        /// Errors are set to <see cref="IValidatableViewModel.Errors" /> property.
+        /// Errors are set to <see cref="IValidatableViewModel.Errors"/> property.
         /// </summary>
         /// <param name="viewModel">The view model to validate.</param>
         /// <param name="properties">The view model properties to validate.</param>
@@ -61,11 +61,10 @@ namespace FlexiMvvm.Validation
 
         /// <summary>
         /// Validates the specified view model asynchronously.
-        /// Errors are set to <see cref="IValidatableViewModel.Errors" /> property.
+        /// Errors are set to <see cref="IValidatableViewModel.Errors"/> property.
         /// </summary>
         /// <param name="viewModel">The view model to validate.</param>
-        /// <param name="cancellationToken">The token to monitor for cancellation requests.
-        /// The default value is <see cref="CancellationToken.None" />.</param>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None"/>.</param>
         /// <returns>
         /// A task that represents the asynchronous validate operation.
         /// The task result contains <c>true</c> if view model is valid, and <c>false</c> otherwise.
@@ -76,38 +75,33 @@ namespace FlexiMvvm.Validation
 
         /// <summary>
         /// Validates the specified view model asynchronously based on provided rule set.
-        /// Errors are set to <see cref="IValidatableViewModel.Errors" /> property.
+        /// Errors are set to <see cref="IValidatableViewModel.Errors"/> property.
         /// </summary>
         /// <param name="viewModel">The view model to validate.</param>
         /// <param name="ruleSet">The rule set to validate.</param>
-        /// <param name="cancellationToken">The token to monitor for cancellation requests.
-        /// The default value is <see cref="CancellationToken.None" />.</param>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None"/>.</param>
         /// <returns>
         /// A task that represents the asynchronous validate operation.
         /// The task result contains <c>true</c> if view model is valid, and <c>false</c> otherwise.
         /// </returns>
-        /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> or <paramref name="ruleSet"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException"><paramref name="ruleSet"/> is a zero-length string or contains only white space.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="ruleSet"/> is <c>null</c> or a zero-length string or contains only white space.</exception>
         [NotNull]
         Task<bool> ValidateAsync([NotNull] TViewModel viewModel, [NotNull] string ruleSet, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Validates the specified view model asynchronously based on provided properties.
-        /// Errors are set to <see cref="IValidatableViewModel.Errors" /> property.
+        /// Errors are set to <see cref="IValidatableViewModel.Errors"/> property.
         /// </summary>
         /// <param name="viewModel">The view model.</param>
         /// <param name="properties">The view model properties to validate.</param>
-        /// <param name="cancellationToken">The token to monitor for cancellation requests.
-        /// The default value is <see cref="CancellationToken.None" />.</param>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None"/>.</param>
         /// <returns>
         /// A task that represents the asynchronous validate operation.
         /// The task result contains <c>true</c> if view model is valid, and <c>false</c> otherwise.
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> or <paramref name="properties"/> is <c>null</c>.</exception>
         [NotNull]
-        Task<bool> ValidateAsync(
-            [NotNull] TViewModel viewModel,
-            [NotNull] IEnumerable<string> properties,
-            CancellationToken cancellationToken = default);
+        Task<bool> ValidateAsync([NotNull] TViewModel viewModel, [NotNull] IEnumerable<string> properties, CancellationToken cancellationToken = default);
     }
 }

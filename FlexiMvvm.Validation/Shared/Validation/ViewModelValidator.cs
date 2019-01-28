@@ -60,8 +60,6 @@ namespace FlexiMvvm.Validation
         {
             if (viewModel == null)
                 throw new ArgumentNullException(nameof(viewModel));
-            if (ruleSet == null)
-                throw new ArgumentNullException(nameof(ruleSet));
             if (string.IsNullOrWhiteSpace(ruleSet))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(ruleSet));
 
@@ -104,8 +102,6 @@ namespace FlexiMvvm.Validation
         {
             if (viewModel == null)
                 throw new ArgumentNullException(nameof(viewModel));
-            if (ruleSet == null)
-                throw new ArgumentNullException(nameof(ruleSet));
             if (string.IsNullOrWhiteSpace(ruleSet))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(ruleSet));
 
@@ -117,10 +113,7 @@ namespace FlexiMvvm.Validation
         }
 
         /// <inheritdoc />
-        public async Task<bool> ValidateAsync(
-            TViewModel viewModel,
-            IEnumerable<string> properties,
-            CancellationToken cancellationToken = default)
+        public async Task<bool> ValidateAsync(TViewModel viewModel, IEnumerable<string> properties, CancellationToken cancellationToken = default)
         {
             if (viewModel == null)
                 throw new ArgumentNullException(nameof(viewModel));
