@@ -1,0 +1,457 @@
+﻿<#@ template language="C#" #>
+<#@ assembly Name="netstandard" #>
+<#@ assembly name="$(SolutionDir)FlexiMvvm.Generation\bin\$(Configuration)\netstandard2.0\FlexiMvvm.Generation.dll" #>
+<#@ import namespace="FlexiMvvm.Weak.Subscriptions.Generation" #>
+<#
+    var weakEventsSubscriptionsExtensionsGenerator = new WeakEventsSubscriptionsExtensionsGenerator(
+        "FlexiMvvm",
+        new ExtensionsGenerationOptions(
+            "Android.AccessibilityServices.AccessibilityService.SoftKeyboardController",
+            new EventGenerationOptions("ShowModeChanged", "Android.AccessibilityServices.AccessibilityService.SoftKeyboardController.ShowModeChangedEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Accounts.AccountManager",
+            new EventGenerationOptions("AccountsUpdated", "Android.Accounts.AccountsUpdateEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Animation.Animator",
+            new EventGenerationOptions("AnimationCancel"),
+            new EventGenerationOptions("AnimationEnd"),
+            new EventGenerationOptions("AnimationPause", "Android.Animation.Animator.AnimationPauseEventArgs"),
+            new EventGenerationOptions("AnimationRepeat"),
+            new EventGenerationOptions("AnimationResume", "Android.Animation.Animator.AnimationResumeEventArgs"),
+            new EventGenerationOptions("AnimationStart")),
+        new ExtensionsGenerationOptions(
+            "Android.Animation.LayoutTransition",
+            new EventGenerationOptions("EndTransition", "Android.Animation.LayoutTransition.EndTransitionEventArgs"),
+            new EventGenerationOptions("StartTransition", "Android.Animation.LayoutTransition.StartTransitionEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Animation.TimeAnimator",
+            new EventGenerationOptions("Time", "Android.Animation.TimeAnimator.TimeEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Animation.ValueAnimator",
+            new EventGenerationOptions("Update", "Android.Animation.ValueAnimator.AnimatorUpdateEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.App.ActionBar",
+            new EventGenerationOptions("MenuVisibility", "Android.App.ActionBar.MenuVisibilityEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.App.ActionBar.Tab",
+            new EventGenerationOptions("TabReselected", "Android.App.ActionBar.TabEventArgs"),
+            new EventGenerationOptions("TabSelected", "Android.App.ActionBar.TabEventArgs"),
+            new EventGenerationOptions("TabUnselected", "Android.App.ActionBar.TabEventArgs"))
+        {
+            ObsoleteDescription = "This class is obsoleted in this android platform."
+        },
+        new ExtensionsGenerationOptions(
+            "Android.App.AlertDialog.Builder",
+            new EventGenerationOptions("ItemSelected", "Android.Widget.AdapterView.ItemSelectedEventArgs"),
+            new EventGenerationOptions("ItemSelectionCleared")
+            {
+                ObsoleteDescription = "Use NothingSelected event instead."
+            },
+            new EventGenerationOptions("NothingSelected", "Android.Widget.AdapterView.NothingSelectedEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.App.DatePickerDialog",
+            new EventGenerationOptions("DateSet", "Android.App.DatePickerDialog.DateSetEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.App.Dialog",
+            new EventGenerationOptions("CancelEvent"),
+            new EventGenerationOptions("DismissEvent"),
+            new EventGenerationOptions("KeyPress", "Android.Content.DialogKeyEventArgs"),
+            new EventGenerationOptions("ShowEvent")),
+        new ExtensionsGenerationOptions(
+            "Android.App.FragmentBreadCrumbs",
+            new EventGenerationOptions("BreadCrumbClick", "Android.App.FragmentBreadCrumbs.BreadCrumbClickEventArgs"))
+        {
+            ObsoleteDescription = "This class is obsoleted in this android platform."
+        },
+        new ExtensionsGenerationOptions(
+            "Android.App.FragmentManager",
+            new EventGenerationOptions("BackStackChanged"))
+        {
+            ObsoleteDescription = "This class is obsoleted in this android platform.",
+            ObsoleteIfPreprocessorDirective = "__ANDROID_28__"
+        },
+        new ExtensionsGenerationOptions(
+            "Android.App.MediaRouteActionProvider",
+            new EventGenerationOptions("ExtendedSettingsClick")),
+        new ExtensionsGenerationOptions(
+            "Android.App.MediaRouteButton",
+            new EventGenerationOptions("ExtendedSettingsClick")),
+        new ExtensionsGenerationOptions(
+            "Android.App.SearchManager",
+            new EventGenerationOptions("Cancel"),
+            new EventGenerationOptions("Dismiss")),
+        new ExtensionsGenerationOptions(
+            "Android.App.UiAutomation",
+            new EventGenerationOptions("AccessibilityEvent", "Android.App.UiAutomation.AccessibilityEventEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Content.ClipboardManager",
+            new EventGenerationOptions("PrimaryClipChanged")),
+        new ExtensionsGenerationOptions(
+            "Android.Drm.DrmManagerClient",
+            new EventGenerationOptions("Error", "Android.Drm.DrmManagerClient.ErrorEventArgs"),
+            new EventGenerationOptions("Event", "Android.Drm.DrmManagerClient.EventEventArgs"),
+            new EventGenerationOptions("Info", "Android.Drm.DrmManagerClient.InfoEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Gestures.GestureOverlayView",
+            new EventGenerationOptions("GestureCancelled", "Android.Gestures.GestureOverlayView.GestureCancelledEventArgs"),
+            new EventGenerationOptions("GestureEnded", "Android.Gestures.GestureOverlayView.GestureEndedEventArgs"),
+            new EventGenerationOptions("GestureEvent", "Android.Gestures.GestureOverlayView.GestureEventArgs"),
+            new EventGenerationOptions("GesturePerformed", "Android.Gestures.GestureOverlayView.GesturePerformedEventArgs"),
+            new EventGenerationOptions("GestureStarted", "Android.Gestures.GestureOverlayView.GestureStartedEventArgs"),
+            new EventGenerationOptions("GesturingEnded", "Android.Gestures.GestureOverlayView.GesturingEndedEventArgs"),
+            new EventGenerationOptions("GesturingStarted", "Android.Gestures.GestureOverlayView.GesturingStartedEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Graphics.ImageDecoder",
+            new EventGenerationOptions("PartialImage", "Android.Graphics.ImageDecoder.PartialImageEventArgs")
+            {
+                IfPreprocessorDirective = "__ANDROID_28__"
+            }),
+        new ExtensionsGenerationOptions(
+            "Android.Graphics.SurfaceTexture",
+            new EventGenerationOptions("FrameAvailable", "Android.Graphics.SurfaceTexture.FrameAvailableEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Hardware.Camera",
+            new EventGenerationOptions("FaceDetection", "Android.Hardware.Camera.FaceDetectionEventArgs"),
+            new EventGenerationOptions("ZoomChange", "Android.Hardware.Camera.ZoomChangeEventArgs"))
+        {
+            ObsoleteDescription = "This class is obsoleted in this android platform."
+        },
+        new ExtensionsGenerationOptions(
+            "Android.InputMethodServices.KeyboardView",
+            new EventGenerationOptions("Key", "Android.InputMethodServices.KeyboardView.KeyEventArgs"),
+            new EventGenerationOptions("Press", "Android.InputMethodServices.KeyboardView.PressEventArgs"),
+            new EventGenerationOptions("Release", "Android.InputMethodServices.KeyboardView.ReleaseEventArgs"),
+            new EventGenerationOptions("SwipeDownEvent"),
+            new EventGenerationOptions("SwipeLeftEvent"),
+            new EventGenerationOptions("SwipeRightEvent"),
+            new EventGenerationOptions("SwipeUpEvent"),
+            new EventGenerationOptions("Text", "Android.InputMethodServices.KeyboardView.TextEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Media.Audiofx.AudioEffect",
+            new EventGenerationOptions("ControlStatus", "Android.Media.Audiofx.AudioEffect.ControlStatusChangeEventArgs"),
+            new EventGenerationOptions("EnableStatus", "Android.Media.Audiofx.AudioEffect.EnableStatusChangeEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Media.Audiofx.BassBoost",
+            new EventGenerationOptions("Parameter", "Android.Media.Audiofx.BassBoost.ParameterChangeEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Media.Audiofx.EnvironmentalReverb",
+            new EventGenerationOptions("Parameter", "Android.Media.Audiofx.EnvironmentalReverb.ParameterChangeEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Media.Audiofx.Equalizer",
+            new EventGenerationOptions("Parameter", "Android.Media.Audiofx.Equalizer.ParameterChangeEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Media.Audiofx.PresetReverb",
+            new EventGenerationOptions("Parameter", "Android.Media.Audiofx.PresetReverb.ParameterChangeEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Media.Audiofx.Virtualizer",
+            new EventGenerationOptions("Parameter", "Android.Media.Audiofx.Virtualizer.ParameterChangeEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Media.AudioRecord",
+            new EventGenerationOptions("MarkerReached", "Android.Media.AudioRecord.MarkerReachedEventArgs"),
+            new EventGenerationOptions("PeriodicNotification", "Android.Media.AudioRecord.PeriodicNotificationEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Media.AudioTrack",
+            new EventGenerationOptions("MarkerReached", "Android.Media.AudioTrack.MarkerReachedEventArgs"),
+            new EventGenerationOptions("PeriodicNotification", "Android.Media.AudioTrack.PeriodicNotificationEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Media.Effect.Effect",
+            new EventGenerationOptions("Update", "Android.Media.Effect.EffectUpdateEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Media.JetPlayer",
+            new EventGenerationOptions("JetEvent", "Android.Media.JetPlayer.JetEventEventArgs"),
+            new EventGenerationOptions("JetNumQueuedSegmentUpdate", "Android.Media.JetPlayer.JetNumQueuedSegmentUpdateEventArgs"),
+            new EventGenerationOptions("JetPauseUpdate", "Android.Media.JetPlayer.JetPauseUpdateEventArgs"),
+            new EventGenerationOptions("JetUserIdUpdate", "Android.Media.JetPlayer.JetUserIdUpdateEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Media.MediaDrm",
+            new EventGenerationOptions("MediaDrmEvent", "Android.Media.MediaDrm.MediaDrmEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Media.MediaPlayer",
+            new EventGenerationOptions("BufferingUpdate", "Android.Media.MediaPlayer.BufferingUpdateEventArgs"),
+            new EventGenerationOptions("Completion"),
+            new EventGenerationOptions("DrmInfoEvent", "Android.Media.MediaPlayer.DrmInfoEventArgs"),
+            new EventGenerationOptions("DrmPrepared", "Android.Media.MediaPlayer.DrmPreparedEventArgs"),
+            new EventGenerationOptions("Error", "Android.Media.MediaPlayer.ErrorEventArgs"),
+            new EventGenerationOptions("Info", "Android.Media.MediaPlayer.InfoEventArgs"),
+            new EventGenerationOptions("MediaTimeDiscontinuity", "Android.Media.MediaPlayer.MediaTimeDiscontinuityEventArgs")
+            {
+                IfPreprocessorDirective = "__ANDROID_28__"
+            },
+            new EventGenerationOptions("Prepared"),
+            new EventGenerationOptions("SeekComplete"),
+            new EventGenerationOptions("SubtitleData", "Android.Media.MediaPlayer.SubtitleDataEventArgs")
+            {
+                IfPreprocessorDirective = "__ANDROID_28__"
+            },
+            new EventGenerationOptions("TimedMetaDataAvailable", "Android.Media.MediaPlayer.TimedMetaDataAvailableEventArgs"),
+            new EventGenerationOptions("TimedText", "Android.Media.MediaPlayer.TimedTextEventArgs"),
+            new EventGenerationOptions("VideoSizeChanged", "Android.Media.MediaPlayer.VideoSizeChangedEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Media.MediaRecorder",
+            new EventGenerationOptions("Error", "Android.Media.MediaRecorder.ErrorEventArgs"),
+            new EventGenerationOptions("Info", "Android.Media.MediaRecorder.InfoEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Media.RemoteControlClient",
+            new EventGenerationOptions("MetadataUpdate", "Android.Media.RemoteControlClient.MetadataUpdateEventArgs"),
+            new EventGenerationOptions("PlaybackPositionUpdate", "Android.Media.RemoteControlClient.PlaybackPositionUpdateEventArgs"))
+        {
+            ObsoleteDescription = "This class is obsoleted in this android platform."
+        },
+        new ExtensionsGenerationOptions(
+            "Android.Media.SoundPool",
+            new EventGenerationOptions("LoadComplete", "Android.Media.SoundPool.LoadCompleteEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Media.TV.TvView",
+            new EventGenerationOptions("UnhandledInputEvent", "Android.Media.TV.TvView.UnhandledInputEventEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Net.ConnectivityManager",
+            new EventGenerationOptions("DefaultNetworkActive")),
+        new ExtensionsGenerationOptions(
+            "Android.OS.CancellationSignal",
+            new EventGenerationOptions("CancelEvent")),
+        new ExtensionsGenerationOptions(
+            "Android.Preferences.Preference",
+            new EventGenerationOptions("PreferenceChange", "Android.Preferences.Preference.PreferenceChangeEventArgs"),
+            new EventGenerationOptions("PreferenceClick", "Android.Preferences.Preference.PreferenceClickEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Renderscripts.Allocation",
+            new EventGenerationOptions("BufferAvailable", "Android.Renderscripts.Allocation.BufferAvailableEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Sax.Element",
+            new EventGenerationOptions("EndElement"),
+            new EventGenerationOptions("EndTextElement", "Android.Sax.EndTextElementEventArgs"),
+            new EventGenerationOptions("StartElement", "Android.Sax.StartElementEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Speech.SpeechRecognizer",
+            new EventGenerationOptions("BeginningOfSpeech"),
+            new EventGenerationOptions("BufferReceived", "Android.Speech.BufferReceivedEventArgs"),
+            new EventGenerationOptions("EndOfSpeech"),
+            new EventGenerationOptions("Error", "Android.Speech.ErrorEventArgs"),
+            new EventGenerationOptions("Event", "Android.Speech.EventEventArgs"),
+            new EventGenerationOptions("PartialResults", "Android.Speech.PartialResultsEventArgs"),
+            new EventGenerationOptions("ReadyForSpeech", "Android.Speech.ReadyForSpeechEventArgs"),
+            new EventGenerationOptions("Results", "Android.Speech.ResultsEventArgs"),
+            new EventGenerationOptions("RmsChanged", "Android.Speech.RmsChangedEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Views.ActionProvider",
+            new EventGenerationOptions("Visibility", "Android.Views.ActionProvider.VisibilityEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Views.Animations.Animation",
+            new EventGenerationOptions("AnimationEnd", "Android.Views.Animations.Animation.AnimationEndEventArgs"),
+            new EventGenerationOptions("AnimationRepeat", "Android.Views.Animations.Animation.AnimationRepeatEventArgs"),
+            new EventGenerationOptions("AnimationStart", "Android.Views.Animations.Animation.AnimationStartEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Views.GestureDetector",
+            new EventGenerationOptions("ContextClick", "Android.Views.GestureDetector.ContextClickEventArgs"),
+            new EventGenerationOptions("DoubleTap", "Android.Views.GestureDetector.DoubleTapEventArgs"),
+            new EventGenerationOptions("DoubleTapEvent", "Android.Views.GestureDetector.DoubleTapEventEventArgs"),
+            new EventGenerationOptions("SingleTapConfirmed", "Android.Views.GestureDetector.SingleTapConfirmedEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Views.TextureView",
+            new EventGenerationOptions("SurfaceTextureAvailable", "Android.Views.TextureView.SurfaceTextureAvailableEventArgs"),
+            new EventGenerationOptions("SurfaceTextureDestroyed", "Android.Views.TextureView.SurfaceTextureDestroyedEventArgs"),
+            new EventGenerationOptions("SurfaceTextureSizeChanged", "Android.Views.TextureView.SurfaceTextureSizeChangedEventArgs"),
+            new EventGenerationOptions("SurfaceTextureUpdated", "Android.Views.TextureView.SurfaceTextureUpdatedEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Views.View",
+            new EventGenerationOptions("CapturedPointer", "Android.Views.View.CapturedPointerEventArgs"),
+            new EventGenerationOptions("Click"),
+            new EventGenerationOptions("ContextClick", "Android.Views.View.ContextClickEventArgs"),
+            new EventGenerationOptions("ContextMenuCreated", "Android.Views.View.CreateContextMenuEventArgs"),
+            new EventGenerationOptions("Drag", "Android.Views.View.DragEventArgs"),
+            new EventGenerationOptions("FocusChange", "Android.Views.View.FocusChangeEventArgs"),
+            new EventGenerationOptions("GenericMotion", "Android.Views.View.GenericMotionEventArgs"),
+            new EventGenerationOptions("Hover", "Android.Views.View.HoverEventArgs"),
+            new EventGenerationOptions("KeyPress", "Android.Views.View.KeyEventArgs"),
+            new EventGenerationOptions("LayoutChange", "Android.Views.View.LayoutChangeEventArgs"),
+            new EventGenerationOptions("LongClick", "Android.Views.View.LongClickEventArgs"),
+            new EventGenerationOptions("ScrollChange", "Android.Views.View.ScrollChangeEventArgs"),
+            new EventGenerationOptions("SystemUiVisibilityChange", "Android.Views.View.SystemUiVisibilityChangeEventArgs"),
+            new EventGenerationOptions("Touch", "Android.Views.View.TouchEventArgs"),
+            new EventGenerationOptions("UnhandledKeyEvent", "Android.Views.View.UnhandledKeyEventEventArgs")
+            {
+                IfPreprocessorDirective = "__ANDROID_28__"
+            },
+            new EventGenerationOptions("ViewAttachedToWindow", "Android.Views.View.ViewAttachedToWindowEventArgs"),
+            new EventGenerationOptions("ViewDetachedFromWindow", "Android.Views.View.ViewDetachedFromWindowEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Views.ViewGroup",
+            new EventGenerationOptions("AnimationEnd", "Android.Views.Animations.Animation.AnimationEndEventArgs"),
+            new EventGenerationOptions("AnimationRepeat", "Android.Views.Animations.Animation.AnimationRepeatEventArgs"),
+            new EventGenerationOptions("AnimationStart", "Android.Views.Animations.Animation.AnimationStartEventArgs"),
+            new EventGenerationOptions("ChildViewAdded", "Android.Views.ViewGroup.ChildViewAddedEventArgs"),
+            new EventGenerationOptions("ChildViewRemoved", "Android.Views.ViewGroup.ChildViewRemovedEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Views.ViewStub",
+            new EventGenerationOptions("InflateEvent", "Android.Views.ViewStub.InflateEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Views.ViewTreeObserver",
+            new EventGenerationOptions("Draw"),
+            new EventGenerationOptions("GlobalFocusChange", "Android.Views.ViewTreeObserver.GlobalFocusChangeEventArgs"),
+            new EventGenerationOptions("GlobalLayout"),
+            new EventGenerationOptions("PreDraw", "Android.Views.ViewTreeObserver.PreDrawEventArgs"),
+            new EventGenerationOptions("ScrollChanged"),
+            new EventGenerationOptions("TouchModeChange", "Android.Views.ViewTreeObserver.TouchModeChangeEventArgs"),
+            new EventGenerationOptions("WindowAttached"),
+            new EventGenerationOptions("WindowDetached"),
+            new EventGenerationOptions("WindowFocusChange", "Android.Views.ViewTreeObserver.WindowFocusChangeEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Views.Window",
+            new EventGenerationOptions("RestrictedCaptionArea", "Android.Views.Window.RestrictedCaptionAreaChangedEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Webkit.WebView",
+            new EventGenerationOptions("Download", "Android.Webkit.DownloadEventArgs"),
+            new EventGenerationOptions("Find", "Android.Webkit.WebView.FindEventArgs"),
+            new EventGenerationOptions("Picture", "Android.Webkit.WebView.PictureEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Widget.AbsListView",
+            new EventGenerationOptions("Recycler", "Android.Widget.AbsListView.RecyclerEventArgs"),
+            new EventGenerationOptions("Scroll", "Android.Widget.AbsListView.ScrollEventArgs"),
+            new EventGenerationOptions("ScrollStateChanged", "Android.Widget.AbsListView.ScrollStateChangedEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Widget.ActionMenuView",
+            new EventGenerationOptions("MenuItemClick", "Android.Widget.ActionMenuView.MenuItemClickEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Widget.AdapterView",
+            new EventGenerationOptions("ItemClick", "Android.Widget.AdapterView.ItemClickEventArgs"),
+            new EventGenerationOptions("ItemLongClick", "Android.Widget.AdapterView.ItemLongClickEventArgs"),
+            new EventGenerationOptions("ItemSelected", "Android.Widget.AdapterView.ItemSelectedEventArgs"),
+            new EventGenerationOptions("ItemSelectionCleared")
+            {
+                ObsoleteDescription = "Use NothingSelected event instead."
+            },
+            new EventGenerationOptions("NothingSelected", "Android.Widget.AdapterView.NothingSelectedEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Widget.AutoCompleteTextView",
+            new EventGenerationOptions("Dismiss"),
+            new EventGenerationOptions("ItemClick", "Android.Widget.AdapterView.ItemClickEventArgs"),
+            new EventGenerationOptions("ItemSelected", "Android.Widget.AdapterView.ItemSelectedEventArgs"),
+            new EventGenerationOptions("ItemSelectionCleared")
+            {
+                ObsoleteDescription = "Use NothingSelected event instead."
+            },
+            new EventGenerationOptions("NothingSelected", "Android.Widget.AdapterView.NothingSelectedEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Widget.CalendarView",
+            new EventGenerationOptions("DateChange", "Android.Widget.CalendarView.DateChangeEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Widget.Chronometer",
+            new EventGenerationOptions("ChronometerTick")),
+        new ExtensionsGenerationOptions(
+            "Android.Widget.CompoundButton",
+            new EventGenerationOptions("CheckedChange", "Android.Widget.CompoundButton.CheckedChangeEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Widget.DatePicker",
+            new EventGenerationOptions("DateChanged", "Android.Widget.DatePicker.DateChangedEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Widget.ExpandableListView",
+            new EventGenerationOptions("ChildClick", "Android.Widget.ExpandableListView.ChildClickEventArgs"),
+            new EventGenerationOptions("GroupClick", "Android.Widget.ExpandableListView.GroupClickEventArgs"),
+            new EventGenerationOptions("GroupCollapse", "Android.Widget.ExpandableListView.GroupCollapseEventArgs"),
+            new EventGenerationOptions("GroupExpand", "Android.Widget.ExpandableListView.GroupExpandEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Widget.ListPopupWindow",
+            new EventGenerationOptions("DismissEvent"),
+            new EventGenerationOptions("ItemClick", "Android.Widget.AdapterView.ItemClickEventArgs"),
+            new EventGenerationOptions("ItemSelected", "Android.Widget.AdapterView.ItemSelectedEventArgs"),
+            new EventGenerationOptions("NothingSelected", "Android.Widget.AdapterView.NothingSelectedEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Widget.MediaController",
+            new EventGenerationOptions("NextClick"),
+            new EventGenerationOptions("PreviousClick")),
+        new ExtensionsGenerationOptions(
+            "Android.Widget.NumberPicker",
+            new EventGenerationOptions("Scroll", "Android.Widget.NumberPicker.ScrollEventArgs"),
+            new EventGenerationOptions("ValueChanged", "Android.Widget.NumberPicker.ValueChangeEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Widget.PopupMenu",
+            new EventGenerationOptions("DismissEvent", "Android.Widget.PopupMenu.DismissEventArgs"),
+            new EventGenerationOptions("MenuItemClick", "Android.Widget.PopupMenu.MenuItemClickEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Widget.PopupWindow",
+            new EventGenerationOptions("DismissEvent"),
+            new EventGenerationOptions("TouchIntercepted", "Android.Views.View.TouchEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Widget.RadioGroup",
+            new EventGenerationOptions("CheckedChange", "Android.Widget.RadioGroup.CheckedChangeEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Widget.RatingBar",
+            new EventGenerationOptions("RatingBarChange", "Android.Widget.RatingBar.RatingBarChangeEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Widget.SearchView",
+            new EventGenerationOptions("Close", "Android.Widget.SearchView.CloseEventArgs"),
+            new EventGenerationOptions("QueryTextChange", "Android.Widget.SearchView.QueryTextChangeEventArgs"),
+            new EventGenerationOptions("QueryTextFocusChange", "Android.Views.View.FocusChangeEventArgs"),
+            new EventGenerationOptions("QueryTextSubmit", "Android.Widget.SearchView.QueryTextSubmitEventArgs"),
+            new EventGenerationOptions("SearchClick"),
+            new EventGenerationOptions("SuggestionClick", "Android.Widget.SearchView.SuggestionClickEventArgs"),
+            new EventGenerationOptions("SuggestionSelect", "Android.Widget.SearchView.SuggestionSelectEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Widget.SeekBar",
+            new EventGenerationOptions("ProgressChanged", "Android.Widget.SeekBar.ProgressChangedEventArgs"),
+            new EventGenerationOptions("StartTrackingTouch", "Android.Widget.SeekBar.StartTrackingTouchEventArgs"),
+            new EventGenerationOptions("StopTrackingTouch", "Android.Widget.SeekBar.StopTrackingTouchEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Widget.ShareActionProvider",
+            new EventGenerationOptions("ShareTargetSelected", "Android.Widget.ShareActionProvider.ShareTargetSelectedEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Widget.SlidingDrawer",
+            new EventGenerationOptions("DrawerClose"),
+            new EventGenerationOptions("DrawerOpen"),
+            new EventGenerationOptions("ScrollEnded"),
+            new EventGenerationOptions("ScrollStarted"))
+        {
+            ObsoleteDescription = "This class is obsoleted in this android platform."
+        },
+        new ExtensionsGenerationOptions(
+            "Android.Widget.TabHost",
+            new EventGenerationOptions("TabChanged", "Android.Widget.TabHost.TabChangeEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Widget.TextView",
+            new EventGenerationOptions("AfterTextChanged", "Android.Text.AfterTextChangedEventArgs"),
+            new EventGenerationOptions("BeforeTextChanged", "Android.Text.TextChangedEventArgs"),
+            new EventGenerationOptions("EditorAction", "Android.Widget.TextView.EditorActionEventArgs"),
+            new EventGenerationOptions("TextChanged", "Android.Text.TextChangedEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Widget.TimePicker",
+            new EventGenerationOptions("TimeChanged", "Android.Widget.TimePicker.TimeChangedEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Widget.Toolbar",
+            new EventGenerationOptions("MenuItemClick", "Android.Widget.Toolbar.MenuItemClickEventArgs"),
+            new EventGenerationOptions("NavigationOnClick")),
+        new ExtensionsGenerationOptions(
+            "Android.Widget.VideoView",
+            new EventGenerationOptions("Completion"),
+            new EventGenerationOptions("Error", "Android.Media.MediaPlayer.ErrorEventArgs"),
+            new EventGenerationOptions("Info", "Android.Media.MediaPlayer.InfoEventArgs"),
+            new EventGenerationOptions("Prepared")),
+        new ExtensionsGenerationOptions(
+            "Android.Widget.ZoomButtonsController",
+            new EventGenerationOptions("VisibilityChanged", "Android.Widget.ZoomButtonsController.VisibilityChangedEventArgs"),
+            new EventGenerationOptions("Zoom", "Android.Widget.ZoomButtonsController.ZoomEventArgs"))
+        {
+            ObsoleteDescription = "This class is obsoleted in this android platform."
+        },
+        new ExtensionsGenerationOptions(
+            "Android.Widget.ZoomControls",
+            new EventGenerationOptions("ZoomInClick"),
+            new EventGenerationOptions("ZoomOutClick")));
+#>
+// <auto-generated />
+// =========================================================================
+// Copyright 2019 EPAM Systems, Inc.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// =========================================================================
+
+<#= weakEventsSubscriptionsExtensionsGenerator.TransformText() #>

@@ -28,7 +28,7 @@
             <Generator>TextTemplatingFileGenerator</Generator>
             <LastGenOutput>ViewsGenerator.cs</LastGenOutput>
         </None>
-        <None Update="Platform.iOS\Views\!Extensions\WeakEventsSubscriptionsExtensionsGenerator.tt">
+        <None Update="Platform.iOS\!Extensions\WeakEventsSubscriptionsExtensionsGenerator.tt">
             <Generator>TextTemplatingFileGenerator</Generator>
             <LastGenOutput>WeakEventsSubscriptionsExtensionsGenerator.cs</LastGenOutput>
         </None>
@@ -47,7 +47,7 @@
             <AutoGen>True</AutoGen>
             <DependentUpon>ViewsGenerator.tt</DependentUpon>
         </None>
-        <None Update="Platform.iOS\Views\!Extensions\WeakEventsSubscriptionsExtensionsGenerator.cs">
+        <None Update="Platform.iOS\!Extensions\WeakEventsSubscriptionsExtensionsGenerator.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
             <DependentUpon>WeakEventsSubscriptionsExtensionsGenerator.tt</DependentUpon>

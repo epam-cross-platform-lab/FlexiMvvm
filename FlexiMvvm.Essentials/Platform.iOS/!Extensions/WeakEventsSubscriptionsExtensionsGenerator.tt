@@ -1,0 +1,202 @@
+﻿<#@ template language="C#" #>
+<#@ assembly Name="netstandard" #>
+<#@ assembly name="$(SolutionDir)FlexiMvvm.Generation\bin\$(Configuration)\netstandard2.0\FlexiMvvm.Generation.dll" #>
+<#@ import namespace="FlexiMvvm.Weak.Subscriptions.Generation" #>
+<#
+    var weakEventsSubscriptionsExtensionsGenerator = new WeakEventsSubscriptionsExtensionsGenerator(
+        "FlexiMvvm",
+        new ExtensionsGenerationOptions(
+            "FlexiMvvm.Views.Keyboard.KeyboardHandler",
+            new EventGenerationOptions("KeyboardDidHide", "FlexiMvvm.Views.Keyboard.KeyboardSizeChangedEventArgs"),
+            new EventGenerationOptions("KeyboardDidShow", "FlexiMvvm.Views.Keyboard.KeyboardSizeChangedEventArgs"),
+            new EventGenerationOptions("KeyboardWillHide", "FlexiMvvm.Views.Keyboard.KeyboardSizeChangedEventArgs"),
+            new EventGenerationOptions("KeyboardWillShow", "FlexiMvvm.Views.Keyboard.KeyboardSizeChangedEventArgs")),
+        new ExtensionsGenerationOptions(
+            "UIKit.UIAccelerometer",
+            new EventGenerationOptions("Acceleration", "UIKit.UIAccelerometerEventArgs")),
+        new ExtensionsGenerationOptions(
+            "UIKit.UIActionSheet",
+            new EventGenerationOptions("Canceled"),
+            new EventGenerationOptions("Clicked", "UIKit.UIButtonEventArgs"),
+            new EventGenerationOptions("Dismissed", "UIKit.UIButtonEventArgs"),
+            new EventGenerationOptions("Presented"),
+            new EventGenerationOptions("WillDismiss", "UIKit.UIButtonEventArgs"),
+            new EventGenerationOptions("WillPresent")),
+        new ExtensionsGenerationOptions(
+            "UIKit.UIAlertView",
+            new EventGenerationOptions("Canceled"),
+            new EventGenerationOptions("Clicked", "UIKit.UIButtonEventArgs"),
+            new EventGenerationOptions("Dismissed", "UIKit.UIButtonEventArgs"),
+            new EventGenerationOptions("Presented"),
+            new EventGenerationOptions("WillDismiss", "UIKit.UIButtonEventArgs"),
+            new EventGenerationOptions("WillPresent")),
+        new ExtensionsGenerationOptions(
+            "UIKit.UIBarButtonItem",
+            new EventGenerationOptions("Clicked")),
+        new ExtensionsGenerationOptions(
+            "UIKit.UICollisionBehavior",
+            new EventGenerationOptions("BeganBoundaryContact", "UIKit.UICollisionBeganBoundaryContactEventArgs"),
+            new EventGenerationOptions("BeganContact", "UIKit.UICollisionBeganContactEventArgs"),
+            new EventGenerationOptions("EndedBoundaryContact", "UIKit.UICollisionEndedBoundaryContactEventArgs"),
+            new EventGenerationOptions("EndedContact", "UIKit.UICollisionEndedContactEventArgs")),
+        new ExtensionsGenerationOptions(
+            "UIKit.UIControl",
+            new EventGenerationOptions("AllEditingEvents"),
+            new EventGenerationOptions("AllEvents"),
+            new EventGenerationOptions("AllTouchEvents"),
+            new EventGenerationOptions("EditingChanged"),
+            new EventGenerationOptions("EditingDidBegin"),
+            new EventGenerationOptions("EditingDidEnd"),
+            new EventGenerationOptions("EditingDidEndOnExit"),
+            new EventGenerationOptions("PrimaryActionTriggered"),
+            new EventGenerationOptions("TouchCancel"),
+            new EventGenerationOptions("TouchDown"),
+            new EventGenerationOptions("TouchDownRepeat"),
+            new EventGenerationOptions("TouchDragEnter"),
+            new EventGenerationOptions("TouchDragExit"),
+            new EventGenerationOptions("TouchDragInside"),
+            new EventGenerationOptions("TouchDragOutside"),
+            new EventGenerationOptions("TouchUpInside"),
+            new EventGenerationOptions("TouchUpOutside"),
+            new EventGenerationOptions("ValueChanged")),
+        new ExtensionsGenerationOptions(
+            "UIKit.UIDocumentInteractionController",
+            new EventGenerationOptions("DidDismissOpenInMenu"),
+            new EventGenerationOptions("DidDismissOptionsMenu"),
+            new EventGenerationOptions("DidEndPreview"),
+            new EventGenerationOptions("DidEndSendingToApplication", "UIKit.UIDocumentSendingToApplicationEventArgs"),
+            new EventGenerationOptions("WillBeginPreview"),
+            new EventGenerationOptions("WillBeginSendingToApplication", "UIKit.UIDocumentSendingToApplicationEventArgs"),
+            new EventGenerationOptions("WillPresentOpenInMenu"),
+            new EventGenerationOptions("WillPresentOptionsMenu")),
+        new ExtensionsGenerationOptions(
+            "UIKit.UIDocumentMenuViewController",
+            new EventGenerationOptions("DidPickDocumentPicker", "UIKit.UIDocumentMenuDocumentPickedEventArgs"),
+            new EventGenerationOptions("WasCancelled")),
+        new ExtensionsGenerationOptions(
+            "UIKit.UIDocumentPickerViewController",
+            new EventGenerationOptions("DidPickDocument", "UIKit.UIDocumentPickedEventArgs"),
+            new EventGenerationOptions("WasCancelled")),
+        new ExtensionsGenerationOptions(
+            "UIKit.UIImagePickerController",
+            new EventGenerationOptions("Canceled"),
+            new EventGenerationOptions("FinishedPickingImage", "UIKit.UIImagePickerImagePickedEventArgs"),
+            new EventGenerationOptions("FinishedPickingMedia", "UIKit.UIImagePickerMediaPickedEventArgs")),
+        new ExtensionsGenerationOptions(
+            "UIKit.UIPageViewController",
+            new EventGenerationOptions("DidFinishAnimating", "UIKit.UIPageViewFinishedAnimationEventArgs"),
+            new EventGenerationOptions("WillTransition", "UIKit.UIPageViewControllerTransitionEventArgs")),
+        new ExtensionsGenerationOptions(
+            "UIKit.UIPopoverController",
+            new EventGenerationOptions("DidDismiss"),
+            new EventGenerationOptions("WillReposition", "UIKit.UIPopoverControllerRepositionEventArgs")),
+        new ExtensionsGenerationOptions(
+            "UIKit.UIPopoverPresentationController",
+            new EventGenerationOptions("DidDismiss"),
+            new EventGenerationOptions("PrepareForPresentation"),
+            new EventGenerationOptions("WillReposition", "UIKit.UIPopoverPresentationControllerRepositionEventArgs")),
+        new ExtensionsGenerationOptions(
+            "UIKit.UIPreviewInteraction",
+            new EventGenerationOptions("DidCancel"),
+            new EventGenerationOptions("DidUpdateCommit", "UIKit.NSPreviewInteractionPreviewUpdateEventArgs"),
+            new EventGenerationOptions("DidUpdatePreviewTransition", "UIKit.NSPreviewInteractionPreviewUpdateEventArgs")),
+        new ExtensionsGenerationOptions(
+            "UIKit.UIPrintInteractionController",
+            new EventGenerationOptions("DidDismissPrinterOptions"),
+            new EventGenerationOptions("DidFinishJob"),
+            new EventGenerationOptions("DidPresentPrinterOptions"),
+            new EventGenerationOptions("WillDismissPrinterOptions"),
+            new EventGenerationOptions("WillPresentPrinterOptions"),
+            new EventGenerationOptions("WillStartJob")),
+        new ExtensionsGenerationOptions(
+            "UIKit.UIScrollView",
+            new EventGenerationOptions("DecelerationEnded"),
+            new EventGenerationOptions("DecelerationStarted"),
+            new EventGenerationOptions("DidZoom"),
+            new EventGenerationOptions("DraggingEnded", "UIKit.DraggingEventArgs"),
+            new EventGenerationOptions("DraggingStarted"),
+            new EventGenerationOptions("ScrollAnimationEnded"),
+            new EventGenerationOptions("Scrolled"),
+            new EventGenerationOptions("ScrolledToTop"),
+            new EventGenerationOptions("WillEndDragging", "UIKit.WillEndDraggingEventArgs"),
+            new EventGenerationOptions("ZoomingEnded", "UIKit.ZoomingEndedEventArgs"),
+            new EventGenerationOptions("ZoomingStarted", "UIKit.UIScrollViewZoomingEventArgs")),
+        new ExtensionsGenerationOptions(
+            "UIKit.UISearchBar",
+            new EventGenerationOptions("BookmarkButtonClicked"),
+            new EventGenerationOptions("CancelButtonClicked"),
+            new EventGenerationOptions("ListButtonClicked"),
+            new EventGenerationOptions("OnEditingStarted"),
+            new EventGenerationOptions("OnEditingStopped"),
+            new EventGenerationOptions("SearchButtonClicked"),
+            new EventGenerationOptions("SelectedScopeButtonIndexChanged", "UIKit.UISearchBarButtonIndexEventArgs"),
+            new EventGenerationOptions("TextChanged", "UIKit.UISearchBarTextChangedEventArgs")),
+        new ExtensionsGenerationOptions(
+            "UIKit.UISplitViewController",
+            new EventGenerationOptions("WillChangeDisplayMode", "UIKit.UISplitViewControllerDisplayModeEventArgs"),
+            new EventGenerationOptions("WillHideViewController", "UIKit.UISplitViewHideEventArgs"),
+            new EventGenerationOptions("WillPresentViewController", "UIKit.UISplitViewPresentEventArgs"),
+            new EventGenerationOptions("WillShowViewController", "UIKit.UISplitViewShowEventArgs")),
+        new ExtensionsGenerationOptions(
+            "UIKit.UITabBar",
+            new EventGenerationOptions("DidBeginCustomizingItems", "UIKit.UITabBarItemsEventArgs"),
+            new EventGenerationOptions("DidEndCustomizingItems", "UIKit.UITabBarFinalItemsEventArgs"),
+            new EventGenerationOptions("ItemSelected", "UIKit.UITabBarItemEventArgs"),
+            new EventGenerationOptions("WillBeginCustomizingItems", "UIKit.UITabBarItemsEventArgs"),
+            new EventGenerationOptions("WillEndCustomizingItems", "UIKit.UITabBarFinalItemsEventArgs")),
+        new ExtensionsGenerationOptions(
+            "UIKit.UITabBarController",
+            new EventGenerationOptions("FinishedCustomizingViewControllers", "UIKit.UITabBarCustomizeChangeEventArgs"),
+            new EventGenerationOptions("OnCustomizingViewControllers", "UIKit.UITabBarCustomizeEventArgs"),
+            new EventGenerationOptions("OnEndCustomizingViewControllers", "UIKit.UITabBarCustomizeChangeEventArgs"),
+            new EventGenerationOptions("ViewControllerSelected", "UIKit.UITabBarSelectionEventArgs")),
+        new ExtensionsGenerationOptions(
+            "UIKit.UITextField",
+            new EventGenerationOptions("Ended"),
+            new EventGenerationOptions("Started")),
+        new ExtensionsGenerationOptions(
+            "UIKit.UITextView",
+            new EventGenerationOptions("Changed"),
+            new EventGenerationOptions("DecelerationEnded"),
+            new EventGenerationOptions("DecelerationStarted"),
+            new EventGenerationOptions("DidZoom"),
+            new EventGenerationOptions("DraggingEnded", "UIKit.DraggingEventArgs"),
+            new EventGenerationOptions("DraggingStarted"),
+            new EventGenerationOptions("Ended"),
+            new EventGenerationOptions("ScrollAnimationEnded"),
+            new EventGenerationOptions("Scrolled"),
+            new EventGenerationOptions("ScrolledToTop"),
+            new EventGenerationOptions("SelectionChanged"),
+            new EventGenerationOptions("Started"),
+            new EventGenerationOptions("WillEndDragging", "UIKit.WillEndDraggingEventArgs"),
+            new EventGenerationOptions("ZoomingEnded", "UIKit.ZoomingEndedEventArgs"),
+            new EventGenerationOptions("ZoomingStarted", "UIKit.UIScrollViewZoomingEventArgs")),
+        new ExtensionsGenerationOptions(
+            "UIKit.UIVideoEditorController",
+            new EventGenerationOptions("Failed", "Foundation.NSErrorEventArgs"),
+            new EventGenerationOptions("Saved", "UIKit.UIPathEventArgs"),
+            new EventGenerationOptions("UserCancelled")),
+        new ExtensionsGenerationOptions(
+            "UIKit.UIWebView",
+            new EventGenerationOptions("LoadError", "UIKit.UIWebErrorArgs"),
+            new EventGenerationOptions("LoadFinished"),
+            new EventGenerationOptions("LoadStarted")));
+#>
+// <auto-generated />
+// =========================================================================
+// Copyright 2019 EPAM Systems, Inc.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// =========================================================================
+
+<#= weakEventsSubscriptionsExtensionsGenerator.TransformText() #>

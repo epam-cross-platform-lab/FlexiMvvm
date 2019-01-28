@@ -19,7 +19,6 @@ using System.Collections.Specialized;
 using Android.Support.V7.Widget;
 using Android.Views;
 using FlexiMvvm.Collections.Core;
-using FlexiMvvm.Views;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.Collections

@@ -65,5 +65,11 @@ namespace FlexiMvvm.Weak.Subscriptions.Generation
 
         [CanBeNull]
         public string IfPreprocessorDirective { get; set; }
+
+        [CanBeNull]
+        public string ObsoleteDescription { get; set; }
+
+        [CanBeNull]
+        public string ObsoleteIfPreprocessorDirective { get; set; }
     }
 }

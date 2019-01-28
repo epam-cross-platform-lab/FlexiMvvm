@@ -23,7 +23,9 @@ namespace FlexiMvvm
         [NotNull]
         internal static string WithoutNamespace([NotNull] this string value)
         {
-            return value.Substring(value.LastIndexOf('.') + 1);
+            var sanitizedClassName = value.WithoutGenericPart();
+
+            return value.Substring(sanitizedClassName.LastIndexOf('.') + 1);
         }
 
         [NotNull]

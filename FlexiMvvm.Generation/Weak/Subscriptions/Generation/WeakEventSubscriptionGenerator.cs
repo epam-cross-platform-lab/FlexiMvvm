@@ -25,7 +25,7 @@ namespace FlexiMvvm.Weak.Subscriptions.Generation
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("private sealed class ");
+            this.Write("private class ");
             
             #line 2 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventSubscriptionGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(GetClassName()));

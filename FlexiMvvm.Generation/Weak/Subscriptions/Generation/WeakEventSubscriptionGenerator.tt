@@ -1,5 +1,5 @@
 ﻿<#@ template visibility="internal" language="C#" #>
-private sealed class <#= GetClassName() #> : <#= GetBaseClassName() #>
+private class <#= GetClassName() #> : <#= GetBaseClassName() #>
     where TEventSource : class
 {
     private readonly Action<TEventSource, <#= GetOriginEventHandlerDeclarationName() #>> _subscribeToEvent;

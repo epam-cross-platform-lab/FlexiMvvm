@@ -70,9 +70,11 @@ namespace FlexiMvvm.Weak.Subscriptions.Generation
             if (typeEventGenerationOptions == null)
                 throw new ArgumentNullException(nameof(typeEventGenerationOptions));
 
+            var sanitizedClassName = typeEventGenerationOptions.EventHandlerClassName.WithoutNamespace().WithoutGenericPart();
+
             return typeEventGenerationOptions.IsGenericEventHandler
-                ? $"{typeEventGenerationOptions.EventHandlerClassName}WeakEventSubscription<{typeClassName}, {typeEventGenerationOptions.EventArgsClassName}>"
-                : $"{typeEventGenerationOptions.EventHandlerClassName}WeakEventSubscription<{typeClassName}>";
+                ? $"{sanitizedClassName}WeakEventSubscription<{typeClassName}, {typeEventGenerationOptions.EventArgsClassName}>"
+                : $"{sanitizedClassName}WeakEventSubscription<{typeClassName}>";
         }
     }
 }
