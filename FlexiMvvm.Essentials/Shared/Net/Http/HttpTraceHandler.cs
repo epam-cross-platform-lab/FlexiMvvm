@@ -23,7 +23,7 @@ using System.Threading.Tasks;
 using FlexiMvvm.Diagnostics;
 using JetBrains.Annotations;
 
-namespace FlexiMvvm.Http
+namespace FlexiMvvm.Net.Http
 {
     public class HttpTraceHandler : DelegatingHandler
     {
