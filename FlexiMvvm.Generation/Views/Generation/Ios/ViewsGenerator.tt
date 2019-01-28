@@ -20,7 +20,6 @@ using System;
 using System.Threading.Tasks;
 using FlexiMvvm.ViewModels;
 using FlexiMvvm.ViewModels.Core;
-using FlexiMvvm.Views;
 using FlexiMvvm.Views.Core;
 using FlexiMvvm.Views.Keyboard;
 <# foreach (var viewGenerationOptions in ViewsGenerationOptions) { #>

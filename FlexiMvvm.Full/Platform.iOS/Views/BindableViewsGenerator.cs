@@ -19,12 +19,11 @@ using System;
 using FlexiMvvm.Bindings;
 using FlexiMvvm.ViewModels;
 using FlexiMvvm.ViewModels.Core;
-using FlexiMvvm.Views;
 using FlexiMvvm.Views.Core;
 
 namespace FlexiMvvm.Views
 {
-    public partial class BindableViewController<TViewModel> : ViewController<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
+    public partial class BindablePageViewController<TViewModel> : FlexiMvvm.Views.PageViewController<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, IViewModel
     {
         protected new IBindableViewLifecycleDelegate LifecycleDelegate => (IBindableViewLifecycleDelegate)base.LifecycleDelegate;
@@ -33,7 +32,7 @@ namespace FlexiMvvm.Views
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new BindableViewLifecycleDelegate<BindableViewController<TViewModel>, TViewModel>(this);
+            return new BindableViewLifecycleDelegate<BindablePageViewController<TViewModel>, TViewModel>(this);
         }
 
         public virtual void ExecuteBindings()
@@ -51,11 +50,11 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class BindableViewController<TViewModel, TParameters> : ViewController<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
+    public partial class BindablePageViewController<TViewModel, TParameters> : FlexiMvvm.Views.PageViewController<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
         where TParameters : Parameters
     {
-        public BindableViewController(TParameters parameters)
+        public BindablePageViewController(TParameters parameters)
             : base(parameters)
         {
         }
@@ -66,7 +65,7 @@ namespace FlexiMvvm.Views
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new BindableViewLifecycleDelegate<BindableViewController<TViewModel, TParameters>, TViewModel>(this);
+            return new BindableViewLifecycleDelegate<BindablePageViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         public virtual void ExecuteBindings()
@@ -87,7 +86,7 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class BindableTabBarController<TViewModel> : TabBarController<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
+    public partial class BindableTabBarController<TViewModel> : FlexiMvvm.Views.TabBarController<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, IViewModel
     {
         protected new IBindableViewLifecycleDelegate LifecycleDelegate => (IBindableViewLifecycleDelegate)base.LifecycleDelegate;
@@ -114,7 +113,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class BindableTabBarController<TViewModel, TParameters> : TabBarController<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
+    public partial class BindableTabBarController<TViewModel, TParameters> : FlexiMvvm.Views.TabBarController<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
         where TParameters : Parameters
     {
@@ -150,7 +149,7 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class BindablePageViewController<TViewModel> : PageViewController<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
+    public partial class BindableViewController<TViewModel> : FlexiMvvm.Views.ViewController<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, IViewModel
     {
         protected new IBindableViewLifecycleDelegate LifecycleDelegate => (IBindableViewLifecycleDelegate)base.LifecycleDelegate;
@@ -159,7 +158,7 @@ namespace FlexiMvvm.Views
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new BindableViewLifecycleDelegate<BindablePageViewController<TViewModel>, TViewModel>(this);
+            return new BindableViewLifecycleDelegate<BindableViewController<TViewModel>, TViewModel>(this);
         }
 
         public virtual void ExecuteBindings()
@@ -177,11 +176,11 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class BindablePageViewController<TViewModel, TParameters> : PageViewController<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
+    public partial class BindableViewController<TViewModel, TParameters> : FlexiMvvm.Views.ViewController<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
         where TParameters : Parameters
     {
-        public BindablePageViewController(TParameters parameters)
+        public BindableViewController(TParameters parameters)
             : base(parameters)
         {
         }
@@ -192,7 +191,7 @@ namespace FlexiMvvm.Views
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new BindableViewLifecycleDelegate<BindablePageViewController<TViewModel, TParameters>, TViewModel>(this);
+            return new BindableViewLifecycleDelegate<BindableViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         public virtual void ExecuteBindings()

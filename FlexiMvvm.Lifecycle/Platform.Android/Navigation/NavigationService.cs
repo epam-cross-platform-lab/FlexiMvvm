@@ -20,8 +20,6 @@ using FlexiMvvm.ViewModels;
 using FlexiMvvm.Views;
 using FlexiMvvm.Views.Core;
 using JetBrains.Annotations;
-using Fragment = Android.Support.V4.App.Fragment;
-using FragmentActivity = Android.Support.V4.App.FragmentActivity;
 
 namespace FlexiMvvm.Navigation
 {
@@ -29,7 +27,7 @@ namespace FlexiMvvm.Navigation
     {
         [NotNull]
         public TActivity GetActivity<TActivity, TViewModel>([NotNull] TViewModel viewModel)
-            where TActivity : FragmentActivity, INavigationView<TViewModel>
+            where TActivity : Android.Support.V4.App.FragmentActivity, INavigationView<TViewModel>
             where TViewModel : class, IViewModel
         {
             if (viewModel == null)
@@ -40,7 +38,7 @@ namespace FlexiMvvm.Navigation
 
         [NotNull]
         public TFragment GetFragment<TFragment, TViewModel>([NotNull] TViewModel viewModel)
-            where TFragment : Fragment, INavigationView<TViewModel>
+            where TFragment : Android.Support.V4.App.Fragment, INavigationView<TViewModel>
             where TViewModel : class, IViewModel
         {
             if (viewModel == null)
@@ -65,7 +63,7 @@ namespace FlexiMvvm.Navigation
         public void Navigate<TActivity>(
             [NotNull] INavigationView<IViewModel> fromView,
             [CanBeNull] ForwardNavigationDelegate navigationStrategy = null)
-            where TActivity : FragmentActivity, IView<IViewModel>
+            where TActivity : Android.Support.V4.App.FragmentActivity, IView<IViewModel>
         {
             if (fromView == null)
                 throw new ArgumentNullException(nameof(fromView));
@@ -79,7 +77,7 @@ namespace FlexiMvvm.Navigation
             [NotNull] INavigationView<IViewModel> fromView,
             [CanBeNull] TParameters parameters,
             [CanBeNull] ForwardNavigationDelegate navigationStrategy = null)
-            where TActivity : FragmentActivity, IView<IViewModelWithParameters<TParameters>>
+            where TActivity : Android.Support.V4.App.FragmentActivity, IView<IViewModelWithParameters<TParameters>>
             where TParameters : Parameters
         {
             if (fromView == null)
@@ -112,7 +110,7 @@ namespace FlexiMvvm.Navigation
         public void NavigateForResult<TActivity, TResult>(
             [NotNull] INavigationView<IViewModelWithResultHandler> fromView,
             [CanBeNull] ForwardNavigationDelegate navigationStrategy = null)
-            where TActivity : FragmentActivity, INavigationView<IViewModelWithResult<TResult>>
+            where TActivity : Android.Support.V4.App.FragmentActivity, INavigationView<IViewModelWithResult<TResult>>
             where TResult : Result
         {
             if (fromView == null)
@@ -128,7 +126,7 @@ namespace FlexiMvvm.Navigation
             [NotNull] INavigationView<IViewModelWithResultHandler> fromView,
             [CanBeNull] TParameters parameters,
             [CanBeNull] ForwardNavigationDelegate navigationStrategy = null)
-            where TActivity : FragmentActivity, IView<IViewModelWithParameters<TParameters>>, INavigationView<IViewModelWithResult<TResult>>
+            where TActivity : Android.Support.V4.App.FragmentActivity, IView<IViewModelWithParameters<TParameters>>, INavigationView<IViewModelWithResult<TResult>>
             where TParameters : Parameters
             where TResult : Result
         {

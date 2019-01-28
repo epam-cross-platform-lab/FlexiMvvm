@@ -16,15 +16,13 @@
 
 using System;
 using JetBrains.Annotations;
-using Fragment = Android.Support.V4.App.Fragment;
-using FragmentActivity = Android.Support.V4.App.FragmentActivity;
 
 namespace FlexiMvvm.Views
 {
     public static class ViewExtensions
     {
         [NotNull]
-        public static FragmentActivity GetActivity([NotNull] this IView view)
+        public static Android.Support.V4.App.FragmentActivity GetActivity([NotNull] this IView view)
         {
             if (view == null)
                 throw new ArgumentNullException(nameof(view));
@@ -36,8 +34,8 @@ namespace FlexiMvvm.Views
 
         public static void As(
             [NotNull] this IView view,
-            [NotNull] Action<FragmentActivity> activityAction,
-            [NotNull] Action<Fragment> fragmentAction)
+            [NotNull] Action<Android.Support.V4.App.FragmentActivity> activityAction,
+            [NotNull] Action<Android.Support.V4.App.Fragment> fragmentAction)
         {
             if (view == null)
                 throw new ArgumentNullException(nameof(view));
@@ -46,11 +44,11 @@ namespace FlexiMvvm.Views
             if (fragmentAction == null)
                 throw new ArgumentNullException(nameof(fragmentAction));
 
-            if (view is FragmentActivity activity)
+            if (view is Android.Support.V4.App.FragmentActivity activity)
             {
                 activityAction(activity);
             }
-            else if (view is Fragment fragment)
+            else if (view is Android.Support.V4.App.Fragment fragment)
             {
                 fragmentAction(fragment);
             }
@@ -59,8 +57,8 @@ namespace FlexiMvvm.Views
         [CanBeNull]
         public static T As<T>(
             [NotNull] this IView view,
-            [NotNull] Func<FragmentActivity, T> activityFunc,
-            [NotNull] Func<Fragment, T> fragmentFunc)
+            [NotNull] Func<Android.Support.V4.App.FragmentActivity, T> activityFunc,
+            [NotNull] Func<Android.Support.V4.App.Fragment, T> fragmentFunc)
         {
             if (view == null)
                 throw new ArgumentNullException(nameof(view));
@@ -71,11 +69,11 @@ namespace FlexiMvvm.Views
 
             T result = default;
 
-            if (view is FragmentActivity activity)
+            if (view is Android.Support.V4.App.FragmentActivity activity)
             {
                 result = activityFunc(activity);
             }
-            else if (view is Fragment fragment)
+            else if (view is Android.Support.V4.App.Fragment fragment)
             {
                 result = fragmentFunc(fragment);
             }

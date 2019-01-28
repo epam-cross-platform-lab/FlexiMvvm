@@ -20,12 +20,11 @@ using FlexiMvvm.Bindings;
 using FlexiMvvm.Persistence.Core;
 using FlexiMvvm.ViewModels;
 using FlexiMvvm.ViewModels.Core;
-using FlexiMvvm.Views;
 using FlexiMvvm.Views.Core;
 
 namespace FlexiMvvm.Views
 {
-    public partial class BindableAppCompatActivity<TViewModel> : AppCompatActivity<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
+    public partial class BindableAppCompatActivity<TViewModel> : FlexiMvvm.Views.AppCompatActivity<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, IViewModel, IStateOwner
     {
         protected new IBindableViewLifecycleDelegate LifecycleDelegate => (IBindableViewLifecycleDelegate)base.LifecycleDelegate;
@@ -52,7 +51,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class BindableAppCompatActivity<TViewModel, TParameters> : AppCompatActivity<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
+    public partial class BindableAppCompatActivity<TViewModel, TParameters> : FlexiMvvm.Views.AppCompatActivity<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>, IStateOwner
         where TParameters : Parameters
     {
@@ -83,65 +82,7 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class BindableFragment<TViewModel> : Fragment<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
-        where TViewModel : class, IViewModel, IStateOwner
-    {
-        protected new IBindableViewLifecycleDelegate LifecycleDelegate => (IBindableViewLifecycleDelegate)base.LifecycleDelegate;
-
-        public IDisposable BindingSet { get; private set; }
-
-        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
-        {
-            return new BindableViewLifecycleDelegate<BindableFragment<TViewModel>, TViewModel>(this);
-        }
-
-        public virtual void ExecuteBindings()
-        {
-            LifecycleDelegate.ExecuteBindings();
-        }
-
-        public virtual void Bind(BindingSet<TViewModel> bindingSet)
-        {
-        }
-
-        void IBindingSetOwner.SetBindingSet(IDisposable bindingSet)
-        {
-            BindingSet = bindingSet;
-        }
-    }
-
-    public partial class BindableFragment<TViewModel, TParameters> : Fragment<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
-        where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>, IStateOwner
-        where TParameters : Parameters
-    {
-        protected new IBindableViewLifecycleDelegate LifecycleDelegate => (IBindableViewLifecycleDelegate)base.LifecycleDelegate;
-
-        public IDisposable BindingSet { get; private set; }
-
-        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
-        {
-            return new BindableViewLifecycleDelegate<BindableFragment<TViewModel, TParameters>, TViewModel>(this);
-        }
-
-        public virtual void ExecuteBindings()
-        {
-            LifecycleDelegate.ExecuteBindings();
-        }
-
-        public virtual void Bind(BindingSet<TViewModel> bindingSet)
-        {
-        }
-
-        void IBindingSetOwner.SetBindingSet(IDisposable bindingSet)
-        {
-            BindingSet = bindingSet;
-        }
-    }
-}
-
-namespace FlexiMvvm.Views
-{
-    public partial class BindableDialogFragment<TViewModel> : DialogFragment<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
+    public partial class BindableDialogFragment<TViewModel> : FlexiMvvm.Views.DialogFragment<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, IViewModel, IStateOwner
     {
         protected new IBindableViewLifecycleDelegate LifecycleDelegate => (IBindableViewLifecycleDelegate)base.LifecycleDelegate;
@@ -168,7 +109,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class BindableDialogFragment<TViewModel, TParameters> : DialogFragment<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
+    public partial class BindableDialogFragment<TViewModel, TParameters> : FlexiMvvm.Views.DialogFragment<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>, IStateOwner
         where TParameters : Parameters
     {
@@ -179,6 +120,64 @@ namespace FlexiMvvm.Views
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
             return new BindableViewLifecycleDelegate<BindableDialogFragment<TViewModel, TParameters>, TViewModel>(this);
+        }
+
+        public virtual void ExecuteBindings()
+        {
+            LifecycleDelegate.ExecuteBindings();
+        }
+
+        public virtual void Bind(BindingSet<TViewModel> bindingSet)
+        {
+        }
+
+        void IBindingSetOwner.SetBindingSet(IDisposable bindingSet)
+        {
+            BindingSet = bindingSet;
+        }
+    }
+}
+
+namespace FlexiMvvm.Views
+{
+    public partial class BindableFragment<TViewModel> : FlexiMvvm.Views.Fragment<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
+        where TViewModel : class, IViewModel, IStateOwner
+    {
+        protected new IBindableViewLifecycleDelegate LifecycleDelegate => (IBindableViewLifecycleDelegate)base.LifecycleDelegate;
+
+        public IDisposable BindingSet { get; private set; }
+
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new BindableViewLifecycleDelegate<BindableFragment<TViewModel>, TViewModel>(this);
+        }
+
+        public virtual void ExecuteBindings()
+        {
+            LifecycleDelegate.ExecuteBindings();
+        }
+
+        public virtual void Bind(BindingSet<TViewModel> bindingSet)
+        {
+        }
+
+        void IBindingSetOwner.SetBindingSet(IDisposable bindingSet)
+        {
+            BindingSet = bindingSet;
+        }
+    }
+
+    public partial class BindableFragment<TViewModel, TParameters> : FlexiMvvm.Views.Fragment<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
+        where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>, IStateOwner
+        where TParameters : Parameters
+    {
+        protected new IBindableViewLifecycleDelegate LifecycleDelegate => (IBindableViewLifecycleDelegate)base.LifecycleDelegate;
+
+        public IDisposable BindingSet { get; private set; }
+
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new BindableViewLifecycleDelegate<BindableFragment<TViewModel, TParameters>, TViewModel>(this);
         }
 
         public virtual void ExecuteBindings()

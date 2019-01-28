@@ -17,11 +17,10 @@
 using System;
 using Android.OS;
 using JetBrains.Annotations;
-using Fragment = Android.Support.V4.App.Fragment;
 
 namespace FlexiMvvm.ViewModels
 {
-    public sealed class ViewModelStoreFragment : Fragment, IViewModelStore
+    public sealed class ViewModelStoreFragment : Android.Support.V4.App.Fragment, IViewModelStore
     {
         [CanBeNull]
         private InMemoryViewModelStore _inMemoryViewModelStore;

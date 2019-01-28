@@ -20,628 +20,12 @@ using System;
 using System.Threading.Tasks;
 using FlexiMvvm.ViewModels;
 using FlexiMvvm.ViewModels.Core;
-using FlexiMvvm.Views;
 using FlexiMvvm.Views.Core;
 using FlexiMvvm.Views.Keyboard;
 
 namespace FlexiMvvm.Views
 {
-    public partial class NavigationController : UINavigationController, IIosView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
-    {
-        private IViewLifecycleDelegate _lifecycleDelegate;
-        private KeyboardHandler _keyboardHandler;
-
-        public event EventHandler ViewDidLoadCalled;
-
-        public event EventHandler ViewWillAppearCalled;
-
-        public event EventHandler ViewDidAppearCalled;
-
-        public event EventHandler ViewWillDisappearCalled;
-
-        public event EventHandler ViewDidDisappearCalled;
-
-        protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ?? (_lifecycleDelegate = CreateLifecycleDelegate());
-
-        public virtual bool HandleKeyboard { get; } = false;
-
-        public KeyboardHandler KeyboardHandler => _keyboardHandler;
-
-        protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
-        {
-            return new ViewLifecycleDelegate<NavigationController>(this);
-        }
-
-        public override void ViewDidLoad()
-        {
-            base.ViewDidLoad();
-
-            LifecycleDelegate.ViewDidLoad();
-            ViewDidLoadCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void ViewWillAppear(bool animated)
-        {
-            base.ViewWillAppear(animated);
-
-            LifecycleDelegate.ViewWillAppear();
-            ViewWillAppearCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void ViewDidAppear(bool animated)
-        {
-            base.ViewDidAppear(animated);
-
-            ViewDidAppearCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void ViewWillDisappear(bool animated)
-        {
-            base.ViewWillDisappear(animated);
-
-            ViewWillDisappearCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void ViewDidDisappear(bool animated)
-        {
-            base.ViewDidDisappear(animated);
-
-            LifecycleDelegate.ViewDidDisappear();
-            ViewDidDisappearCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void WillMoveToParentViewController(UIViewController parent)
-        {
-            base.WillMoveToParentViewController(parent);
-
-            LifecycleDelegate.WillMoveToParentViewController(parent);
-        }
-
-        public override void DismissViewController(bool animated, Action completionHandler)
-        {
-            LifecycleDelegate.DismissViewController();
-
-            base.DismissViewController(animated, completionHandler);
-        }
-
-        public override Task DismissViewControllerAsync(bool animated)
-        {
-            LifecycleDelegate.DismissViewController();
-
-            return base.DismissViewControllerAsync(animated);
-        }
-
-        void IKeyboardHandlerOwner.SetKeyboardHandler(KeyboardHandler handler)
-        {
-            _keyboardHandler = handler;
-        }
-    }
-
-    public partial class NavigationController<TViewModel> : NavigationController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModel
-    {
-        public event EventHandler<ResultSetEventArgs> ResultSet;
-
-        public TViewModel ViewModel { get; private set; }
-
-        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
-        {
-            return new ViewLifecycleDelegate<NavigationController<TViewModel>, TViewModel>(this);
-        }
-
-        public void SetResult(ResultCode resultCode)
-        {
-            LifecycleDelegate.SetResult(resultCode);
-        }
-
-        public void SetResult(ResultCode resultCode, Result result)
-        {
-            LifecycleDelegate.SetResult(resultCode, result);
-        }
-
-        public void RaiseResultSet(ResultSetEventArgs args)
-        {
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
-            ResultSet?.Invoke(this, args);
-        }
-
-        public void HandleResult(object sender, ResultSetEventArgs args)
-        {
-            if (sender == null)
-                throw new ArgumentNullException(nameof(sender));
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
-            LifecycleDelegate.HandleResult(sender, args);
-        }
-
-        void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
-        {
-            ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
-        }
-
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
-        {
-            return ViewModel.InitializeAsync();
-        }
-    }
-
-    public partial class NavigationController<TViewModel, TParameters> : NavigationController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
-        where TParameters : Parameters
-    {
-        private readonly TParameters _parameters;
-
-        public NavigationController(TParameters parameters)
-        {
-            _parameters = parameters;
-        }
-
-        public event EventHandler<ResultSetEventArgs> ResultSet;
-
-        public TViewModel ViewModel { get; private set; }
-
-        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
-        {
-            return new ViewLifecycleDelegate<NavigationController<TViewModel, TParameters>, TViewModel>(this);
-        }
-
-        public void SetResult(ResultCode resultCode)
-        {
-            LifecycleDelegate.SetResult(resultCode);
-        }
-
-        public void SetResult(ResultCode resultCode, Result result)
-        {
-            LifecycleDelegate.SetResult(resultCode, result);
-        }
-
-        public void RaiseResultSet(ResultSetEventArgs args)
-        {
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
-            ResultSet?.Invoke(this, args);
-        }
-
-        public void HandleResult(object sender, ResultSetEventArgs args)
-        {
-            if (sender == null)
-                throw new ArgumentNullException(nameof(sender));
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
-            LifecycleDelegate.HandleResult(sender, args);
-        }
-
-        void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
-        {
-            ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
-            ViewModel.SetParameters(_parameters);
-        }
-
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
-        {
-            return ViewModel.InitializeAsync();
-        }
-    }
-}
-
-namespace FlexiMvvm.Views
-{
-    public partial class ViewController : UIViewController, IIosView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
-    {
-        private IViewLifecycleDelegate _lifecycleDelegate;
-        private KeyboardHandler _keyboardHandler;
-
-        public event EventHandler ViewDidLoadCalled;
-
-        public event EventHandler ViewWillAppearCalled;
-
-        public event EventHandler ViewDidAppearCalled;
-
-        public event EventHandler ViewWillDisappearCalled;
-
-        public event EventHandler ViewDidDisappearCalled;
-
-        protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ?? (_lifecycleDelegate = CreateLifecycleDelegate());
-
-        public virtual bool HandleKeyboard { get; } = true;
-
-        public KeyboardHandler KeyboardHandler => _keyboardHandler;
-
-        protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
-        {
-            return new ViewLifecycleDelegate<ViewController>(this);
-        }
-
-        public override void ViewDidLoad()
-        {
-            base.ViewDidLoad();
-
-            LifecycleDelegate.ViewDidLoad();
-            ViewDidLoadCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void ViewWillAppear(bool animated)
-        {
-            base.ViewWillAppear(animated);
-
-            LifecycleDelegate.ViewWillAppear();
-            ViewWillAppearCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void ViewDidAppear(bool animated)
-        {
-            base.ViewDidAppear(animated);
-
-            ViewDidAppearCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void ViewWillDisappear(bool animated)
-        {
-            base.ViewWillDisappear(animated);
-
-            ViewWillDisappearCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void ViewDidDisappear(bool animated)
-        {
-            base.ViewDidDisappear(animated);
-
-            LifecycleDelegate.ViewDidDisappear();
-            ViewDidDisappearCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void WillMoveToParentViewController(UIViewController parent)
-        {
-            base.WillMoveToParentViewController(parent);
-
-            LifecycleDelegate.WillMoveToParentViewController(parent);
-        }
-
-        public override void DismissViewController(bool animated, Action completionHandler)
-        {
-            LifecycleDelegate.DismissViewController();
-
-            base.DismissViewController(animated, completionHandler);
-        }
-
-        public override Task DismissViewControllerAsync(bool animated)
-        {
-            LifecycleDelegate.DismissViewController();
-
-            return base.DismissViewControllerAsync(animated);
-        }
-
-        void IKeyboardHandlerOwner.SetKeyboardHandler(KeyboardHandler handler)
-        {
-            _keyboardHandler = handler;
-        }
-    }
-
-    public partial class ViewController<TViewModel> : ViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModel
-    {
-        public event EventHandler<ResultSetEventArgs> ResultSet;
-
-        public TViewModel ViewModel { get; private set; }
-
-        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
-        {
-            return new ViewLifecycleDelegate<ViewController<TViewModel>, TViewModel>(this);
-        }
-
-        public void SetResult(ResultCode resultCode)
-        {
-            LifecycleDelegate.SetResult(resultCode);
-        }
-
-        public void SetResult(ResultCode resultCode, Result result)
-        {
-            LifecycleDelegate.SetResult(resultCode, result);
-        }
-
-        public void RaiseResultSet(ResultSetEventArgs args)
-        {
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
-            ResultSet?.Invoke(this, args);
-        }
-
-        public void HandleResult(object sender, ResultSetEventArgs args)
-        {
-            if (sender == null)
-                throw new ArgumentNullException(nameof(sender));
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
-            LifecycleDelegate.HandleResult(sender, args);
-        }
-
-        void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
-        {
-            ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
-        }
-
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
-        {
-            return ViewModel.InitializeAsync();
-        }
-    }
-
-    public partial class ViewController<TViewModel, TParameters> : ViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
-        where TParameters : Parameters
-    {
-        private readonly TParameters _parameters;
-
-        public ViewController(TParameters parameters)
-        {
-            _parameters = parameters;
-        }
-
-        public event EventHandler<ResultSetEventArgs> ResultSet;
-
-        public TViewModel ViewModel { get; private set; }
-
-        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
-        {
-            return new ViewLifecycleDelegate<ViewController<TViewModel, TParameters>, TViewModel>(this);
-        }
-
-        public void SetResult(ResultCode resultCode)
-        {
-            LifecycleDelegate.SetResult(resultCode);
-        }
-
-        public void SetResult(ResultCode resultCode, Result result)
-        {
-            LifecycleDelegate.SetResult(resultCode, result);
-        }
-
-        public void RaiseResultSet(ResultSetEventArgs args)
-        {
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
-            ResultSet?.Invoke(this, args);
-        }
-
-        public void HandleResult(object sender, ResultSetEventArgs args)
-        {
-            if (sender == null)
-                throw new ArgumentNullException(nameof(sender));
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
-            LifecycleDelegate.HandleResult(sender, args);
-        }
-
-        void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
-        {
-            ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
-            ViewModel.SetParameters(_parameters);
-        }
-
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
-        {
-            return ViewModel.InitializeAsync();
-        }
-    }
-}
-
-namespace FlexiMvvm.Views
-{
-    public partial class TableViewController : UITableViewController, IIosView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
-    {
-        private IViewLifecycleDelegate _lifecycleDelegate;
-        private KeyboardHandler _keyboardHandler;
-
-        public event EventHandler ViewDidLoadCalled;
-
-        public event EventHandler ViewWillAppearCalled;
-
-        public event EventHandler ViewDidAppearCalled;
-
-        public event EventHandler ViewWillDisappearCalled;
-
-        public event EventHandler ViewDidDisappearCalled;
-
-        protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ?? (_lifecycleDelegate = CreateLifecycleDelegate());
-
-        public virtual bool HandleKeyboard { get; } = false;
-
-        public KeyboardHandler KeyboardHandler => _keyboardHandler;
-
-        protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
-        {
-            return new ViewLifecycleDelegate<TableViewController>(this);
-        }
-
-        public override void ViewDidLoad()
-        {
-            base.ViewDidLoad();
-
-            LifecycleDelegate.ViewDidLoad();
-            ViewDidLoadCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void ViewWillAppear(bool animated)
-        {
-            base.ViewWillAppear(animated);
-
-            LifecycleDelegate.ViewWillAppear();
-            ViewWillAppearCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void ViewDidAppear(bool animated)
-        {
-            base.ViewDidAppear(animated);
-
-            ViewDidAppearCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void ViewWillDisappear(bool animated)
-        {
-            base.ViewWillDisappear(animated);
-
-            ViewWillDisappearCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void ViewDidDisappear(bool animated)
-        {
-            base.ViewDidDisappear(animated);
-
-            LifecycleDelegate.ViewDidDisappear();
-            ViewDidDisappearCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void WillMoveToParentViewController(UIViewController parent)
-        {
-            base.WillMoveToParentViewController(parent);
-
-            LifecycleDelegate.WillMoveToParentViewController(parent);
-        }
-
-        public override void DismissViewController(bool animated, Action completionHandler)
-        {
-            LifecycleDelegate.DismissViewController();
-
-            base.DismissViewController(animated, completionHandler);
-        }
-
-        public override Task DismissViewControllerAsync(bool animated)
-        {
-            LifecycleDelegate.DismissViewController();
-
-            return base.DismissViewControllerAsync(animated);
-        }
-
-        void IKeyboardHandlerOwner.SetKeyboardHandler(KeyboardHandler handler)
-        {
-            _keyboardHandler = handler;
-        }
-    }
-
-    public partial class TableViewController<TViewModel> : TableViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModel
-    {
-        public event EventHandler<ResultSetEventArgs> ResultSet;
-
-        public TViewModel ViewModel { get; private set; }
-
-        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
-        {
-            return new ViewLifecycleDelegate<TableViewController<TViewModel>, TViewModel>(this);
-        }
-
-        public void SetResult(ResultCode resultCode)
-        {
-            LifecycleDelegate.SetResult(resultCode);
-        }
-
-        public void SetResult(ResultCode resultCode, Result result)
-        {
-            LifecycleDelegate.SetResult(resultCode, result);
-        }
-
-        public void RaiseResultSet(ResultSetEventArgs args)
-        {
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
-            ResultSet?.Invoke(this, args);
-        }
-
-        public void HandleResult(object sender, ResultSetEventArgs args)
-        {
-            if (sender == null)
-                throw new ArgumentNullException(nameof(sender));
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
-            LifecycleDelegate.HandleResult(sender, args);
-        }
-
-        void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
-        {
-            ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
-        }
-
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
-        {
-            return ViewModel.InitializeAsync();
-        }
-    }
-
-    public partial class TableViewController<TViewModel, TParameters> : TableViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
-        where TParameters : Parameters
-    {
-        private readonly TParameters _parameters;
-
-        public TableViewController(TParameters parameters)
-        {
-            _parameters = parameters;
-        }
-
-        public event EventHandler<ResultSetEventArgs> ResultSet;
-
-        public TViewModel ViewModel { get; private set; }
-
-        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
-        {
-            return new ViewLifecycleDelegate<TableViewController<TViewModel, TParameters>, TViewModel>(this);
-        }
-
-        public void SetResult(ResultCode resultCode)
-        {
-            LifecycleDelegate.SetResult(resultCode);
-        }
-
-        public void SetResult(ResultCode resultCode, Result result)
-        {
-            LifecycleDelegate.SetResult(resultCode, result);
-        }
-
-        public void RaiseResultSet(ResultSetEventArgs args)
-        {
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
-            ResultSet?.Invoke(this, args);
-        }
-
-        public void HandleResult(object sender, ResultSetEventArgs args)
-        {
-            if (sender == null)
-                throw new ArgumentNullException(nameof(sender));
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
-            LifecycleDelegate.HandleResult(sender, args);
-        }
-
-        void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
-        {
-            ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
-            ViewModel.SetParameters(_parameters);
-        }
-
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
-        {
-            return ViewModel.InitializeAsync();
-        }
-    }
-}
-
-namespace FlexiMvvm.Views
-{
-    public partial class CollectionViewController : UICollectionViewController, IIosView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
+    public partial class CollectionViewController : UIKit.UICollectionViewController, IIosView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
@@ -846,7 +230,7 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class TabBarController : UITabBarController, IIosView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
+    public partial class NavigationController : UIKit.UINavigationController, IIosView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
@@ -869,7 +253,7 @@ namespace FlexiMvvm.Views
 
         protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<TabBarController>(this);
+            return new ViewLifecycleDelegate<NavigationController>(this);
         }
 
         public override void ViewDidLoad()
@@ -937,7 +321,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class TabBarController<TViewModel> : TabBarController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
+    public partial class NavigationController<TViewModel> : NavigationController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModel
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
@@ -946,7 +330,7 @@ namespace FlexiMvvm.Views
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<TabBarController<TViewModel>, TViewModel>(this);
+            return new ViewLifecycleDelegate<NavigationController<TViewModel>, TViewModel>(this);
         }
 
         public void SetResult(ResultCode resultCode)
@@ -988,13 +372,13 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class TabBarController<TViewModel, TParameters> : TabBarController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
+    public partial class NavigationController<TViewModel, TParameters> : NavigationController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
         where TParameters : Parameters
     {
         private readonly TParameters _parameters;
 
-        public TabBarController(TParameters parameters)
+        public NavigationController(TParameters parameters)
         {
             _parameters = parameters;
         }
@@ -1005,7 +389,7 @@ namespace FlexiMvvm.Views
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<TabBarController<TViewModel, TParameters>, TViewModel>(this);
+            return new ViewLifecycleDelegate<NavigationController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         public void SetResult(ResultCode resultCode)
@@ -1051,7 +435,7 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class PageViewController : UIPageViewController, IIosView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
+    public partial class PageViewController : UIKit.UIPageViewController, IIosView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
@@ -1256,7 +640,7 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class SplitViewController : UISplitViewController, IIosView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
+    public partial class SplitViewController : UIKit.UISplitViewController, IIosView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
@@ -1416,6 +800,621 @@ namespace FlexiMvvm.Views
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
             return new ViewLifecycleDelegate<SplitViewController<TViewModel, TParameters>, TViewModel>(this);
+        }
+
+        public void SetResult(ResultCode resultCode)
+        {
+            LifecycleDelegate.SetResult(resultCode);
+        }
+
+        public void SetResult(ResultCode resultCode, Result result)
+        {
+            LifecycleDelegate.SetResult(resultCode, result);
+        }
+
+        public void RaiseResultSet(ResultSetEventArgs args)
+        {
+            if (args == null)
+                throw new ArgumentNullException(nameof(args));
+
+            ResultSet?.Invoke(this, args);
+        }
+
+        public void HandleResult(object sender, ResultSetEventArgs args)
+        {
+            if (sender == null)
+                throw new ArgumentNullException(nameof(sender));
+            if (args == null)
+                throw new ArgumentNullException(nameof(args));
+
+            LifecycleDelegate.HandleResult(sender, args);
+        }
+
+        void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
+        {
+            ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
+            ViewModel.SetParameters(_parameters);
+        }
+
+        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        {
+            return ViewModel.InitializeAsync();
+        }
+    }
+}
+
+namespace FlexiMvvm.Views
+{
+    public partial class TabBarController : UIKit.UITabBarController, IIosView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
+    {
+        private IViewLifecycleDelegate _lifecycleDelegate;
+        private KeyboardHandler _keyboardHandler;
+
+        public event EventHandler ViewDidLoadCalled;
+
+        public event EventHandler ViewWillAppearCalled;
+
+        public event EventHandler ViewDidAppearCalled;
+
+        public event EventHandler ViewWillDisappearCalled;
+
+        public event EventHandler ViewDidDisappearCalled;
+
+        protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ?? (_lifecycleDelegate = CreateLifecycleDelegate());
+
+        public virtual bool HandleKeyboard { get; } = false;
+
+        public KeyboardHandler KeyboardHandler => _keyboardHandler;
+
+        protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<TabBarController>(this);
+        }
+
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+
+            LifecycleDelegate.ViewDidLoad();
+            ViewDidLoadCalled?.Invoke(this, EventArgs.Empty);
+        }
+
+        public override void ViewWillAppear(bool animated)
+        {
+            base.ViewWillAppear(animated);
+
+            LifecycleDelegate.ViewWillAppear();
+            ViewWillAppearCalled?.Invoke(this, EventArgs.Empty);
+        }
+
+        public override void ViewDidAppear(bool animated)
+        {
+            base.ViewDidAppear(animated);
+
+            ViewDidAppearCalled?.Invoke(this, EventArgs.Empty);
+        }
+
+        public override void ViewWillDisappear(bool animated)
+        {
+            base.ViewWillDisappear(animated);
+
+            ViewWillDisappearCalled?.Invoke(this, EventArgs.Empty);
+        }
+
+        public override void ViewDidDisappear(bool animated)
+        {
+            base.ViewDidDisappear(animated);
+
+            LifecycleDelegate.ViewDidDisappear();
+            ViewDidDisappearCalled?.Invoke(this, EventArgs.Empty);
+        }
+
+        public override void WillMoveToParentViewController(UIViewController parent)
+        {
+            base.WillMoveToParentViewController(parent);
+
+            LifecycleDelegate.WillMoveToParentViewController(parent);
+        }
+
+        public override void DismissViewController(bool animated, Action completionHandler)
+        {
+            LifecycleDelegate.DismissViewController();
+
+            base.DismissViewController(animated, completionHandler);
+        }
+
+        public override Task DismissViewControllerAsync(bool animated)
+        {
+            LifecycleDelegate.DismissViewController();
+
+            return base.DismissViewControllerAsync(animated);
+        }
+
+        void IKeyboardHandlerOwner.SetKeyboardHandler(KeyboardHandler handler)
+        {
+            _keyboardHandler = handler;
+        }
+    }
+
+    public partial class TabBarController<TViewModel> : TabBarController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
+        where TViewModel : class, IViewModel
+    {
+        public event EventHandler<ResultSetEventArgs> ResultSet;
+
+        public TViewModel ViewModel { get; private set; }
+
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<TabBarController<TViewModel>, TViewModel>(this);
+        }
+
+        public void SetResult(ResultCode resultCode)
+        {
+            LifecycleDelegate.SetResult(resultCode);
+        }
+
+        public void SetResult(ResultCode resultCode, Result result)
+        {
+            LifecycleDelegate.SetResult(resultCode, result);
+        }
+
+        public void RaiseResultSet(ResultSetEventArgs args)
+        {
+            if (args == null)
+                throw new ArgumentNullException(nameof(args));
+
+            ResultSet?.Invoke(this, args);
+        }
+
+        public void HandleResult(object sender, ResultSetEventArgs args)
+        {
+            if (sender == null)
+                throw new ArgumentNullException(nameof(sender));
+            if (args == null)
+                throw new ArgumentNullException(nameof(args));
+
+            LifecycleDelegate.HandleResult(sender, args);
+        }
+
+        void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
+        {
+            ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
+        }
+
+        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        {
+            return ViewModel.InitializeAsync();
+        }
+    }
+
+    public partial class TabBarController<TViewModel, TParameters> : TabBarController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
+        where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
+        where TParameters : Parameters
+    {
+        private readonly TParameters _parameters;
+
+        public TabBarController(TParameters parameters)
+        {
+            _parameters = parameters;
+        }
+
+        public event EventHandler<ResultSetEventArgs> ResultSet;
+
+        public TViewModel ViewModel { get; private set; }
+
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<TabBarController<TViewModel, TParameters>, TViewModel>(this);
+        }
+
+        public void SetResult(ResultCode resultCode)
+        {
+            LifecycleDelegate.SetResult(resultCode);
+        }
+
+        public void SetResult(ResultCode resultCode, Result result)
+        {
+            LifecycleDelegate.SetResult(resultCode, result);
+        }
+
+        public void RaiseResultSet(ResultSetEventArgs args)
+        {
+            if (args == null)
+                throw new ArgumentNullException(nameof(args));
+
+            ResultSet?.Invoke(this, args);
+        }
+
+        public void HandleResult(object sender, ResultSetEventArgs args)
+        {
+            if (sender == null)
+                throw new ArgumentNullException(nameof(sender));
+            if (args == null)
+                throw new ArgumentNullException(nameof(args));
+
+            LifecycleDelegate.HandleResult(sender, args);
+        }
+
+        void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
+        {
+            ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
+            ViewModel.SetParameters(_parameters);
+        }
+
+        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        {
+            return ViewModel.InitializeAsync();
+        }
+    }
+}
+
+namespace FlexiMvvm.Views
+{
+    public partial class TableViewController : UIKit.UITableViewController, IIosView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
+    {
+        private IViewLifecycleDelegate _lifecycleDelegate;
+        private KeyboardHandler _keyboardHandler;
+
+        public event EventHandler ViewDidLoadCalled;
+
+        public event EventHandler ViewWillAppearCalled;
+
+        public event EventHandler ViewDidAppearCalled;
+
+        public event EventHandler ViewWillDisappearCalled;
+
+        public event EventHandler ViewDidDisappearCalled;
+
+        protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ?? (_lifecycleDelegate = CreateLifecycleDelegate());
+
+        public virtual bool HandleKeyboard { get; } = false;
+
+        public KeyboardHandler KeyboardHandler => _keyboardHandler;
+
+        protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<TableViewController>(this);
+        }
+
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+
+            LifecycleDelegate.ViewDidLoad();
+            ViewDidLoadCalled?.Invoke(this, EventArgs.Empty);
+        }
+
+        public override void ViewWillAppear(bool animated)
+        {
+            base.ViewWillAppear(animated);
+
+            LifecycleDelegate.ViewWillAppear();
+            ViewWillAppearCalled?.Invoke(this, EventArgs.Empty);
+        }
+
+        public override void ViewDidAppear(bool animated)
+        {
+            base.ViewDidAppear(animated);
+
+            ViewDidAppearCalled?.Invoke(this, EventArgs.Empty);
+        }
+
+        public override void ViewWillDisappear(bool animated)
+        {
+            base.ViewWillDisappear(animated);
+
+            ViewWillDisappearCalled?.Invoke(this, EventArgs.Empty);
+        }
+
+        public override void ViewDidDisappear(bool animated)
+        {
+            base.ViewDidDisappear(animated);
+
+            LifecycleDelegate.ViewDidDisappear();
+            ViewDidDisappearCalled?.Invoke(this, EventArgs.Empty);
+        }
+
+        public override void WillMoveToParentViewController(UIViewController parent)
+        {
+            base.WillMoveToParentViewController(parent);
+
+            LifecycleDelegate.WillMoveToParentViewController(parent);
+        }
+
+        public override void DismissViewController(bool animated, Action completionHandler)
+        {
+            LifecycleDelegate.DismissViewController();
+
+            base.DismissViewController(animated, completionHandler);
+        }
+
+        public override Task DismissViewControllerAsync(bool animated)
+        {
+            LifecycleDelegate.DismissViewController();
+
+            return base.DismissViewControllerAsync(animated);
+        }
+
+        void IKeyboardHandlerOwner.SetKeyboardHandler(KeyboardHandler handler)
+        {
+            _keyboardHandler = handler;
+        }
+    }
+
+    public partial class TableViewController<TViewModel> : TableViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
+        where TViewModel : class, IViewModel
+    {
+        public event EventHandler<ResultSetEventArgs> ResultSet;
+
+        public TViewModel ViewModel { get; private set; }
+
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<TableViewController<TViewModel>, TViewModel>(this);
+        }
+
+        public void SetResult(ResultCode resultCode)
+        {
+            LifecycleDelegate.SetResult(resultCode);
+        }
+
+        public void SetResult(ResultCode resultCode, Result result)
+        {
+            LifecycleDelegate.SetResult(resultCode, result);
+        }
+
+        public void RaiseResultSet(ResultSetEventArgs args)
+        {
+            if (args == null)
+                throw new ArgumentNullException(nameof(args));
+
+            ResultSet?.Invoke(this, args);
+        }
+
+        public void HandleResult(object sender, ResultSetEventArgs args)
+        {
+            if (sender == null)
+                throw new ArgumentNullException(nameof(sender));
+            if (args == null)
+                throw new ArgumentNullException(nameof(args));
+
+            LifecycleDelegate.HandleResult(sender, args);
+        }
+
+        void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
+        {
+            ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
+        }
+
+        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        {
+            return ViewModel.InitializeAsync();
+        }
+    }
+
+    public partial class TableViewController<TViewModel, TParameters> : TableViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
+        where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
+        where TParameters : Parameters
+    {
+        private readonly TParameters _parameters;
+
+        public TableViewController(TParameters parameters)
+        {
+            _parameters = parameters;
+        }
+
+        public event EventHandler<ResultSetEventArgs> ResultSet;
+
+        public TViewModel ViewModel { get; private set; }
+
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<TableViewController<TViewModel, TParameters>, TViewModel>(this);
+        }
+
+        public void SetResult(ResultCode resultCode)
+        {
+            LifecycleDelegate.SetResult(resultCode);
+        }
+
+        public void SetResult(ResultCode resultCode, Result result)
+        {
+            LifecycleDelegate.SetResult(resultCode, result);
+        }
+
+        public void RaiseResultSet(ResultSetEventArgs args)
+        {
+            if (args == null)
+                throw new ArgumentNullException(nameof(args));
+
+            ResultSet?.Invoke(this, args);
+        }
+
+        public void HandleResult(object sender, ResultSetEventArgs args)
+        {
+            if (sender == null)
+                throw new ArgumentNullException(nameof(sender));
+            if (args == null)
+                throw new ArgumentNullException(nameof(args));
+
+            LifecycleDelegate.HandleResult(sender, args);
+        }
+
+        void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
+        {
+            ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
+            ViewModel.SetParameters(_parameters);
+        }
+
+        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        {
+            return ViewModel.InitializeAsync();
+        }
+    }
+}
+
+namespace FlexiMvvm.Views
+{
+    public partial class ViewController : UIKit.UIViewController, IIosView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
+    {
+        private IViewLifecycleDelegate _lifecycleDelegate;
+        private KeyboardHandler _keyboardHandler;
+
+        public event EventHandler ViewDidLoadCalled;
+
+        public event EventHandler ViewWillAppearCalled;
+
+        public event EventHandler ViewDidAppearCalled;
+
+        public event EventHandler ViewWillDisappearCalled;
+
+        public event EventHandler ViewDidDisappearCalled;
+
+        protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ?? (_lifecycleDelegate = CreateLifecycleDelegate());
+
+        public virtual bool HandleKeyboard { get; } = true;
+
+        public KeyboardHandler KeyboardHandler => _keyboardHandler;
+
+        protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<ViewController>(this);
+        }
+
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+
+            LifecycleDelegate.ViewDidLoad();
+            ViewDidLoadCalled?.Invoke(this, EventArgs.Empty);
+        }
+
+        public override void ViewWillAppear(bool animated)
+        {
+            base.ViewWillAppear(animated);
+
+            LifecycleDelegate.ViewWillAppear();
+            ViewWillAppearCalled?.Invoke(this, EventArgs.Empty);
+        }
+
+        public override void ViewDidAppear(bool animated)
+        {
+            base.ViewDidAppear(animated);
+
+            ViewDidAppearCalled?.Invoke(this, EventArgs.Empty);
+        }
+
+        public override void ViewWillDisappear(bool animated)
+        {
+            base.ViewWillDisappear(animated);
+
+            ViewWillDisappearCalled?.Invoke(this, EventArgs.Empty);
+        }
+
+        public override void ViewDidDisappear(bool animated)
+        {
+            base.ViewDidDisappear(animated);
+
+            LifecycleDelegate.ViewDidDisappear();
+            ViewDidDisappearCalled?.Invoke(this, EventArgs.Empty);
+        }
+
+        public override void WillMoveToParentViewController(UIViewController parent)
+        {
+            base.WillMoveToParentViewController(parent);
+
+            LifecycleDelegate.WillMoveToParentViewController(parent);
+        }
+
+        public override void DismissViewController(bool animated, Action completionHandler)
+        {
+            LifecycleDelegate.DismissViewController();
+
+            base.DismissViewController(animated, completionHandler);
+        }
+
+        public override Task DismissViewControllerAsync(bool animated)
+        {
+            LifecycleDelegate.DismissViewController();
+
+            return base.DismissViewControllerAsync(animated);
+        }
+
+        void IKeyboardHandlerOwner.SetKeyboardHandler(KeyboardHandler handler)
+        {
+            _keyboardHandler = handler;
+        }
+    }
+
+    public partial class ViewController<TViewModel> : ViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
+        where TViewModel : class, IViewModel
+    {
+        public event EventHandler<ResultSetEventArgs> ResultSet;
+
+        public TViewModel ViewModel { get; private set; }
+
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<ViewController<TViewModel>, TViewModel>(this);
+        }
+
+        public void SetResult(ResultCode resultCode)
+        {
+            LifecycleDelegate.SetResult(resultCode);
+        }
+
+        public void SetResult(ResultCode resultCode, Result result)
+        {
+            LifecycleDelegate.SetResult(resultCode, result);
+        }
+
+        public void RaiseResultSet(ResultSetEventArgs args)
+        {
+            if (args == null)
+                throw new ArgumentNullException(nameof(args));
+
+            ResultSet?.Invoke(this, args);
+        }
+
+        public void HandleResult(object sender, ResultSetEventArgs args)
+        {
+            if (sender == null)
+                throw new ArgumentNullException(nameof(sender));
+            if (args == null)
+                throw new ArgumentNullException(nameof(args));
+
+            LifecycleDelegate.HandleResult(sender, args);
+        }
+
+        void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
+        {
+            ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
+        }
+
+        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        {
+            return ViewModel.InitializeAsync();
+        }
+    }
+
+    public partial class ViewController<TViewModel, TParameters> : ViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
+        where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
+        where TParameters : Parameters
+    {
+        private readonly TParameters _parameters;
+
+        public ViewController(TParameters parameters)
+        {
+            _parameters = parameters;
+        }
+
+        public event EventHandler<ResultSetEventArgs> ResultSet;
+
+        public TViewModel ViewModel { get; private set; }
+
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<ViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         public void SetResult(ResultCode resultCode)
