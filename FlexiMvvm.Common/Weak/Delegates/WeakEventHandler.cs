@@ -19,7 +19,7 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.Weak.Delegates
 {
-    public sealed class WeakEventHandler : WeakDelegateBase
+    public sealed class WeakEventHandler : WeakDelegate
     {
         public WeakEventHandler([NotNull] EventHandler eventHandler)
             : base(eventHandler)
@@ -39,7 +39,7 @@ namespace FlexiMvvm.Weak.Delegates
         }
     }
 
-    public sealed class WeakEventHandler<TEventArgs> : WeakDelegateBase
+    public sealed class WeakEventHandler<TEventArgs> : WeakDelegate
     {
         public WeakEventHandler([NotNull] EventHandler<TEventArgs> eventHandler)
             : base(eventHandler)

@@ -19,7 +19,7 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.Configuration
 {
-    public sealed class FlexiMvvmConfig : ConfigBase
+    public sealed class FlexiMvvmConfig : Config
     {
         [NotNull]
         private static readonly Lazy<FlexiMvvmConfig> LazyInstance = new Lazy<FlexiMvvmConfig>(() => new FlexiMvvmConfig());

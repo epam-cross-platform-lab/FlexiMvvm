@@ -20,7 +20,7 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.Configuration
 {
-    public abstract class ConfigBase : IConfig
+    public abstract class Config : IConfig
     {
         [CanBeNull]
         private Dictionary<string, object> _values;

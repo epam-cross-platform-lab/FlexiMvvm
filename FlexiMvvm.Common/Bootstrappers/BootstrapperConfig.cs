@@ -18,7 +18,7 @@ using FlexiMvvm.Configuration;
 
 namespace FlexiMvvm.Bootstrappers
 {
-    public sealed class BootstrapperConfig : ConfigBase
+    public sealed class BootstrapperConfig : Config
     {
     }
 }

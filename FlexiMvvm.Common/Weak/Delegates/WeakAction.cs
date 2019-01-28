@@ -19,7 +19,7 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.Weak.Delegates
 {
-    public sealed class WeakAction : WeakDelegateBase, IWeakAction
+    public sealed class WeakAction : WeakDelegate, IWeakAction
     {
         public WeakAction([NotNull] Action action)
             : base(action)
@@ -35,7 +35,7 @@ namespace FlexiMvvm.Weak.Delegates
         }
     }
 
-    public sealed class WeakAction<T> : WeakDelegateBase, IWeakAction<T>
+    public sealed class WeakAction<T> : WeakDelegate, IWeakAction<T>
     {
         public WeakAction([NotNull] Action<T> action)
             : base(action)
@@ -51,7 +51,7 @@ namespace FlexiMvvm.Weak.Delegates
         }
     }
 
-    public sealed class WeakAction<T1, T2> : WeakDelegateBase, IWeakAction<T1, T2>
+    public sealed class WeakAction<T1, T2> : WeakDelegate, IWeakAction<T1, T2>
     {
         public WeakAction([NotNull] Action<T1, T2> action)
             : base(action)
@@ -67,7 +67,7 @@ namespace FlexiMvvm.Weak.Delegates
         }
     }
 
-    public sealed class WeakAction<T1, T2, T3> : WeakDelegateBase, IWeakAction<T1, T2, T3>
+    public sealed class WeakAction<T1, T2, T3> : WeakDelegate, IWeakAction<T1, T2, T3>
     {
         public WeakAction([NotNull] Action<T1, T2, T3> action)
             : base(action)
@@ -83,7 +83,7 @@ namespace FlexiMvvm.Weak.Delegates
         }
     }
 
-    public sealed class WeakAction<T1, T2, T3, T4> : WeakDelegateBase, IWeakAction<T1, T2, T3, T4>
+    public sealed class WeakAction<T1, T2, T3, T4> : WeakDelegate, IWeakAction<T1, T2, T3, T4>
     {
         public WeakAction([NotNull] Action<T1, T2, T3, T4> action)
             : base(action)
@@ -99,7 +99,7 @@ namespace FlexiMvvm.Weak.Delegates
         }
     }
 
-    public sealed class WeakAction<T1, T2, T3, T4, T5> : WeakDelegateBase, IWeakAction<T1, T2, T3, T4, T5>
+    public sealed class WeakAction<T1, T2, T3, T4, T5> : WeakDelegate, IWeakAction<T1, T2, T3, T4, T5>
     {
         public WeakAction([NotNull] Action<T1, T2, T3, T4, T5> action)
             : base(action)

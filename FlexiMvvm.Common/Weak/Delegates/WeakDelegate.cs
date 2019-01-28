@@ -20,14 +20,14 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.Weak.Delegates
 {
-    public abstract class WeakDelegateBase
+    public abstract class WeakDelegate
     {
         [NotNull]
         private readonly WeakReference<object> _targetWeakReference;
         [NotNull]
         private readonly MethodInfo _targetMethodInfo;
 
-        protected WeakDelegateBase([NotNull] Delegate @delegate)
+        protected WeakDelegate([NotNull] Delegate @delegate)
         {
             if (@delegate == null)
                 throw new ArgumentNullException(nameof(@delegate));
