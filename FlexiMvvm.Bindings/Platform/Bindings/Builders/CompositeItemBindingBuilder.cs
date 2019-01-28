@@ -21,6 +21,7 @@ using FlexiMvvm.Bindings.Custom.Core;
 using FlexiMvvm.Bindings.Custom.Core.Composite;
 using FlexiMvvm.Bindings.Custom.Core.Source;
 using FlexiMvvm.ValueConverters;
+using FlexiMvvm.ValueConverters.Core;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.Bindings.Builders
@@ -42,7 +43,7 @@ namespace FlexiMvvm.Bindings.Builders
                 sourceItemBinding,
                 targetItemBinding,
                 BindingMode.TwoWay,
-                new CompositeItemBindingValueConverter<TSourceItem>(typeof(DefaultValueConverter)));
+                new CompositeItemBindingValueConverter<DefaultValueConverter>());
 
             bindingSet.Add(_compositeItemBinding);
         }
@@ -80,25 +81,22 @@ namespace FlexiMvvm.Bindings.Builders
             CultureInfo culture = null)
             where TValueConverter : IValueConverter, new()
         {
-            _compositeItemBinding.ValueConverter = new CompositeItemBindingValueConverter<TSourceItem>(
-                typeof(TValueConverter),
-                parameter,
-                culture);
+            _compositeItemBinding.ValueConverter = new CompositeItemBindingValueConverter<TValueConverter>(parameter, culture);
 
             return this;
         }
 
         public ICompositeItemBindingBuilder<TSourceItem, TTargetItemValue> WithConversion<TValueConverter>(
-            Expression<Func<TSourceItem, object>> parameter,
+            Expression<Func<TSourceItem, object>> parameterExpression,
             CultureInfo culture = null)
             where TValueConverter : IValueConverter, new()
         {
-            if (parameter == null)
-                throw new ArgumentNullException(nameof(parameter));
+            if (parameterExpression == null)
+                throw new ArgumentNullException(nameof(parameterExpression));
 
-            _compositeItemBinding.ValueConverter = new CompositeItemBindingValueConverter<TSourceItem>(
-                typeof(TValueConverter),
-                parameter,
+            _compositeItemBinding.ValueConverter = new CompositeItemBindingValueConverter<TValueConverter, TSourceItem>(
+                _compositeItemBinding.SourceItemBinding.ItemReference,
+                parameterExpression,
                 culture);
 
             return this;

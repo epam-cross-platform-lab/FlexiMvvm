@@ -44,7 +44,7 @@ namespace FlexiMvvm.Bindings
 
         [NotNull]
         ICompositeItemBindingBuilder<TSourceItem, TTargetItemValue> WithConversion<TValueConverter>(
-            [NotNull] Expression<Func<TSourceItem, object>> parameter,
+            [NotNull] Expression<Func<TSourceItem, object>> parameterExpression,
             [CanBeNull] CultureInfo culture = null)
             where TValueConverter : IValueConverter, new();
 

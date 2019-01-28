@@ -18,23 +18,21 @@ using System;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 
-namespace FlexiMvvm.ValueConverters
+namespace FlexiMvvm.ValueConverters.Core
 {
-    internal static class ValueConverterFactory
+    internal static class ValueConverterProvider
     {
-        [NotNull]
-        private static readonly Dictionary<Type, IValueConverter> ValueConverters = new Dictionary<Type, IValueConverter>();
+        [CanBeNull]
+        private static Dictionary<Type, IValueConverter> _valueConverters;
 
         [NotNull]
-        public static IValueConverter GetOrCreate([NotNull] Type valueConverterType)
+        private static Dictionary<Type, IValueConverter> ValueConverters => _valueConverters ?? (_valueConverters = new Dictionary<Type, IValueConverter>());
+
+        [NotNull]
+        internal static TValueConverter Get<TValueConverter>()
+            where TValueConverter : IValueConverter, new()
         {
-            if (!ValueConverters.TryGetValue(valueConverterType, out var valueConverter))
-            {
-                valueConverter = (IValueConverter)Activator.CreateInstance(valueConverterType);
-                ValueConverters[valueConverterType] = valueConverter;
-            }
-
-            return valueConverter.NotNull();
+            return (TValueConverter)ValueConverters.GetOrAdd(typeof(TValueConverter), _ => new TValueConverter()).NotNull();
         }
     }
 }

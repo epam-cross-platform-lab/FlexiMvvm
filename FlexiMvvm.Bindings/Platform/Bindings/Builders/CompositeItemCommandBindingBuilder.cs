@@ -22,12 +22,12 @@ using FlexiMvvm.Bindings.Custom.Core.Composite;
 using FlexiMvvm.Bindings.Custom.Core.Source;
 using FlexiMvvm.Bindings.Custom.Core.Target;
 using FlexiMvvm.ValueConverters;
+using FlexiMvvm.ValueConverters.Core;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.Bindings.Builders
 {
-    internal class CompositeItemCommandBindingBuilder<TSourceItem, TSourceItemValue, TTargetItem, TTargetItemValue>
-        : ICompositeItemCommandBindingBuilder<TSourceItem>
+    internal class CompositeItemCommandBindingBuilder<TSourceItem, TSourceItemValue, TTargetItem, TTargetItemValue> : ICompositeItemCommandBindingBuilder<TSourceItem>
         where TSourceItem : class
         where TTargetItem : class
     {
@@ -45,7 +45,7 @@ namespace FlexiMvvm.Bindings.Builders
                 sourceItemBinding,
                 targetItemBinding,
                 BindingMode.OneWayToSource,
-                new CompositeItemBindingValueConverter<TSourceItem>(typeof(DefaultValueConverter)));
+                new CompositeItemBindingValueConverter<DefaultValueConverter>());
 
             _bindingSet = bindingSet;
             _bindingSet.Add(_compositeItemBinding);
@@ -68,44 +68,17 @@ namespace FlexiMvvm.Bindings.Builders
             _bindingSet.Add(_compositeItemBinding);
         }
 
-        public ICompositeItemCommandBindingBuilder<TSourceItem> WithCommandParameter<TCommandParameterTargetItem, TCommandParameterTargetItemValue>(
-            TCommandParameterTargetItem targetItem,
-            Expression<Func<TCommandParameterTargetItem, TCommandParameterTargetItemValue>> targetItemValue,
-            ItemReferenceType referenceType)
-            where TCommandParameterTargetItem : class
+        public ICompositeItemCommandBindingBuilder<TSourceItem> WithCommandParameter<TCommandParameter>(TCommandParameter parameter)
         {
-            if (targetItem == null)
-                throw new ArgumentNullException(nameof(targetItem));
-            if (targetItemValue == null)
-                throw new ArgumentNullException(nameof(targetItemValue));
-
-            var targetItemReference = new ItemReference<TCommandParameterTargetItem>(targetItem, referenceType);
-            var targetItemValueAccessor = new ItemValueAccessor<TCommandParameterTargetItem, TCommandParameterTargetItemValue>(targetItemValue);
-            var targetItemCommandParameterBinding = new TargetItemPropertyBinding<TCommandParameterTargetItem, TCommandParameterTargetItemValue>(
-                targetItemReference,
-                targetItemValueAccessor);
-
-            var targetItemCommandBinding = new TargetItemCommandBinding<TTargetItem, TTargetItemValue, TCommandParameterTargetItem, TCommandParameterTargetItemValue>(
+            var targetItemBinding = new TargetItemCustomValueBinding<TTargetItem, TTargetItemValue, TCommandParameter>(
                 _compositeItemBinding.TargetItemBinding,
-                targetItemCommandParameterBinding);
+                parameter);
 
-            return new CompositeItemCommandBindingBuilder<TSourceItem, TSourceItemValue, TTargetItem, TCommandParameterTargetItemValue>(
+            return new CompositeItemCommandBindingBuilder<TSourceItem, TSourceItemValue, TTargetItem, TCommandParameter>(
                 _compositeItemBinding.SourceItemBinding,
-                targetItemCommandBinding,
+                targetItemBinding,
                 _bindingSet,
                 _compositeItemBinding);
-        }
-
-        public ICompositeItemCommandBindingBuilder<TSourceItem> WithCommandParameter<TCommandParameterItemValue>(
-            TCommandParameterItemValue commandParameterTargetItemValue)
-        {
-            var commandParameterTargetItem = new TargetItemCommandParameter<TCommandParameterItemValue>(
-                commandParameterTargetItemValue);
-
-            return WithCommandParameter(
-                commandParameterTargetItem,
-                v => v.Value,
-                ItemReferenceType.Strong);
         }
 
         public ICompositeItemCommandBindingBuilder<TSourceItem> WithConversion<TValueConverter>(
@@ -113,25 +86,22 @@ namespace FlexiMvvm.Bindings.Builders
             CultureInfo culture = null)
             where TValueConverter : IValueConverter, new()
         {
-            _compositeItemBinding.ValueConverter = new CompositeItemBindingValueConverter<TSourceItem>(
-                typeof(TValueConverter),
-                parameter,
-                culture);
+            _compositeItemBinding.ValueConverter = new CompositeItemBindingValueConverter<TValueConverter>(parameter, culture);
 
             return this;
         }
 
         public ICompositeItemCommandBindingBuilder<TSourceItem> WithConversion<TValueConverter>(
-            Expression<Func<TSourceItem, object>> parameter,
+            Expression<Func<TSourceItem, object>> parameterExpression,
             CultureInfo culture = null)
             where TValueConverter : IValueConverter, new()
         {
-            if (parameter == null)
-                throw new ArgumentNullException(nameof(parameter));
+            if (parameterExpression == null)
+                throw new ArgumentNullException(nameof(parameterExpression));
 
-            _compositeItemBinding.ValueConverter = new CompositeItemBindingValueConverter<TSourceItem>(
-                typeof(TValueConverter),
-                parameter,
+            _compositeItemBinding.ValueConverter = new CompositeItemBindingValueConverter<TValueConverter, TSourceItem>(
+                _compositeItemBinding.SourceItemBinding.ItemReference,
+                parameterExpression,
                 culture);
 
             return this;

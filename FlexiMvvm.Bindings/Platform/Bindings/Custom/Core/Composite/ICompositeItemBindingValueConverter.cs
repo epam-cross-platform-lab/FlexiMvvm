@@ -14,18 +14,20 @@
 // limitations under the License.
 // =========================================================================
 
+using System;
+using FlexiMvvm.Diagnostics;
 using JetBrains.Annotations;
 
-namespace FlexiMvvm.Bindings.Custom.Core.Target
+namespace FlexiMvvm.Bindings.Custom.Core.Composite
 {
-    internal class TargetItemCommandParameter<TValue>
+    internal interface ICompositeItemBindingValueConverter
     {
-        internal TargetItemCommandParameter([CanBeNull] TValue value)
-        {
-            Value = value;
-        }
+        [CanBeNull]
+        object Convert([CanBeNull] object value, [NotNull] Type targetType);
 
         [CanBeNull]
-        internal TValue Value { get; }
+        object ConvertBack([CanBeNull] object value, [NotNull] Type targetType);
+
+        void SetLogger([NotNull] ILogger logger);
     }
 }

@@ -15,19 +15,22 @@
 // =========================================================================
 
 using System;
-using FlexiMvvm.Bindings.Custom.Core;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.Bindings
 {
-    public abstract class TargetItemBinding<TItem, TValue> : ItemBinding<TItem, TValue>
-        where TItem : class
+    public static class ItemReferenceExtensions
     {
-        protected TargetItemBinding(
-            [NotNull] IItemReference<TItem> itemReference,
-            [NotNull] Func<string> itemValuePathAccessor)
-            : base(itemReference, itemValuePathAccessor)
+        [ContractAnnotation("=> true, item: notnull; => false, item: null")]
+        public static bool TryGetItem<TItem>([NotNull] this IItemReference<TItem> itemReference, out TItem item)
+            where TItem : class
         {
+            if (itemReference == null)
+                throw new ArgumentNullException(nameof(itemReference));
+
+            item = itemReference.GetItem();
+
+            return item != null;
         }
     }
 }

@@ -31,7 +31,7 @@ namespace FlexiMvvm.Bindings.Custom.Core.Composite
             [NotNull] SourceItemCommandBinding<TSourceItem, TSourceItemValue> sourceItemCommandBinding,
             [NotNull] TargetItemBinding<TTargetItem, TTargetItemValue> targetItemBinding,
             BindingMode requestedBindingMode,
-            [NotNull] CompositeItemBindingValueConverter<TSourceItem> valueConverter)
+            [NotNull] ICompositeItemBindingValueConverter valueConverter)
             : base(sourceItemCommandBinding, targetItemBinding, requestedBindingMode, valueConverter)
         {
         }
@@ -88,11 +88,7 @@ namespace FlexiMvvm.Bindings.Custom.Core.Composite
             {
                 if (TryGetTargetItemValue(targetItem, out var targetItemCommandParameter))
                 {
-                    var valueConverterParameter = ValueConverter.ParameterAccessor.Get(sourceItem);
-                    var sourceItemCommandParameter = ValueConverter.ConvertBack(
-                        targetItemCommandParameter,
-                        typeof(TSourceItemValue),
-                        valueConverterParameter);
+                    var sourceItemCommandParameter = ValueConverter.ConvertBack(targetItemCommandParameter, typeof(TSourceItemValue));
 
                     if (sourceItemCommandParameter != BindingValue.UnsetValue)
                     {

@@ -38,7 +38,7 @@ namespace FlexiMvvm.Bindings.Custom.Core
         internal event EventHandler<ValueChangedEventArgs<TValue>> ValueChanged;
 
         [NotNull]
-        private protected IItemReference<TItem> ItemReference { get; set; }
+        protected internal IItemReference<TItem> ItemReference { get; private protected set; }
 
         [NotNull]
         internal Func<string> ItemValuePathAccessor { get; }

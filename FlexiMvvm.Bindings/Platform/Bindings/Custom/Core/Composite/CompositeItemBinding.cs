@@ -31,7 +31,7 @@ namespace FlexiMvvm.Bindings.Custom.Core.Composite
             [NotNull] SourceItemBinding<TSourceItem, TSourceItemValue> sourceItemBinding,
             [NotNull] TargetItemBinding<TTargetItem, TTargetItemValue> targetItemBinding,
             BindingMode requestedBindingMode,
-            [NotNull] CompositeItemBindingValueConverter<TSourceItem> valueConverter)
+            [NotNull] ICompositeItemBindingValueConverter valueConverter)
             : base(sourceItemBinding, targetItemBinding, requestedBindingMode, valueConverter)
         {
         }

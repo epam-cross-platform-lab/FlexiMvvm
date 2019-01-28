@@ -19,94 +19,135 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq.Expressions;
 using FlexiMvvm.Diagnostics;
+using FlexiMvvm.Formatters;
 using FlexiMvvm.ValueConverters;
+using FlexiMvvm.ValueConverters.Core;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.Bindings.Custom.Core.Composite
 {
-    internal class CompositeItemBindingValueConverter<TSourceItem>
+    internal class CompositeItemBindingValueConverter<TValueConverter> : ICompositeItemBindingValueConverter
+        where TValueConverter : IValueConverter, new()
     {
-        [NotNull]
-        private readonly Type _converterType;
+        [CanBeNull]
+        private readonly object _parameter;
         [NotNull]
         private readonly CultureInfo _converterCulture;
         [CanBeNull]
         private DelegatingLogger _delegatingLogger;
 
-        internal CompositeItemBindingValueConverter(
-            [NotNull] Type converterType,
-            [CanBeNull] object parameter = null,
-            [CanBeNull] CultureInfo converterCulture = null)
+        protected CompositeItemBindingValueConverter([CanBeNull] CultureInfo converterCulture = null)
         {
-            _converterType = converterType;
-            ParameterAccessor = new CompositeItemBindingValueConverterParameterAccessor<TSourceItem>(parameter);
             _converterCulture = converterCulture ?? CultureInfo.CurrentUICulture.NotNull();
         }
 
-        internal CompositeItemBindingValueConverter(
-            [NotNull] Type converterType,
-            [NotNull] Expression<Func<TSourceItem, object>> parameter,
-            [CanBeNull] CultureInfo converterCulture = null)
+        internal CompositeItemBindingValueConverter([CanBeNull] object parameter = null, [CanBeNull] CultureInfo converterCulture = null)
+            : this(converterCulture)
         {
-            _converterType = converterType;
-            ParameterAccessor = new CompositeItemBindingValueConverterParameterAccessor<TSourceItem>(parameter);
-            _converterCulture = converterCulture ?? CultureInfo.CurrentUICulture.NotNull();
+            _parameter = parameter;
         }
 
         [NotNull]
         private DelegatingLogger DelegatingLogger => _delegatingLogger ?? (_delegatingLogger = new DelegatingLogger());
 
-        [NotNull]
-        internal CompositeItemBindingValueConverterParameterAccessor<TSourceItem> ParameterAccessor { get; }
-
-        [CanBeNull]
-        internal object Convert([CanBeNull] object value, [NotNull] Type targetType, [CanBeNull] object parameter)
+        [ContractAnnotation("=> true, parameter: notnull; => false, parameter: null")]
+        private protected virtual bool TryGetParameter(out object parameter)
         {
-            var valueConverter = ValueConverterFactory.GetOrCreate(_converterType);
+            parameter = _parameter;
 
-            try
-            {
-                return valueConverter.Convert(value, targetType, parameter, _converterCulture);
-            }
-            catch (Exception ex)
-            {
-                Log($"An \"{LogFormatter.FormatException(ex)}\" exception occurred while converting \"{value ?? "null"}\" value from the source item to the target one " +
-                    $"using \"{LogFormatter.FormatTypeName(_converterType)}\" value converter. This might reduce binding performance. " +
-                    $"Please return \"{nameof(BindingValue)}.{nameof(BindingValue.UnsetValue)}\" value instead of rising an exception.");
-
-                return BindingValue.UnsetValue;
-            }
+            return true;
         }
 
-        [CanBeNull]
-        internal object ConvertBack([CanBeNull] object value, [NotNull] Type targetType, [CanBeNull] object parameter)
+        public object Convert(object value, Type targetType)
         {
-            var valueConverter = ValueConverterFactory.GetOrCreate(_converterType);
+            if (targetType == null)
+                throw new ArgumentNullException(nameof(targetType));
 
-            try
-            {
-                return valueConverter.ConvertBack(value, targetType, parameter, _converterCulture);
-            }
-            catch (Exception ex)
-            {
-                Log($"An \"{LogFormatter.FormatException(ex)}\" exception occurred while converting \"{value ?? "null"}\" value from the target item to the source one " +
-                    $"using \"{LogFormatter.FormatTypeName(_converterType)}\" value converter. This might reduce binding performance. " +
-                    $"Please return \"{nameof(BindingValue)}.{nameof(BindingValue.UnsetValue)}\" value instead of rising an exception.");
+            var valueConverter = ValueConverterProvider.Get<TValueConverter>();
+            var convertedValue = BindingValue.UnsetValue;
 
-                return BindingValue.UnsetValue;
+            if (TryGetParameter(out var parameter))
+            {
+                try
+                {
+                    convertedValue = valueConverter.Convert(value, targetType, parameter, _converterCulture);
+                }
+                catch (Exception ex)
+                {
+                    Log($"An '{LogFormatter.FormatException(ex)}' exception occurred while converting '{value ?? "null"}' value from the source item to the target one " +
+                        $"using '{TypeFormatter.FormatName<TValueConverter>()}' value converter.");
+                }
             }
+
+            return convertedValue;
         }
 
-        [Conditional("DEBUG")]
-        internal void SetLogger([NotNull] ILogger logger)
+        public object ConvertBack(object value, Type targetType)
         {
-            DelegatingLogger.Logger = logger;
+            if (targetType == null)
+                throw new ArgumentNullException(nameof(targetType));
+
+            var valueConverter = ValueConverterProvider.Get<TValueConverter>();
+            var convertedValue = BindingValue.UnsetValue;
+
+            if (TryGetParameter(out var parameter))
+            {
+                try
+                {
+                    convertedValue = valueConverter.ConvertBack(value, targetType, parameter, _converterCulture);
+                }
+                catch (Exception ex)
+                {
+                    Log($"An \"{LogFormatter.FormatException(ex)}\" exception occurred while converting \"{value ?? "null"}\" value from the target item to the source one " +
+                        $"using \"{TypeFormatter.FormatName<TValueConverter>()}\" value converter.");
+                }
+            }
+
+            return convertedValue;
+        }
+
+        public void SetLogger(ILogger logger)
+        {
+            DelegatingLogger.Logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         [Conditional("DEBUG")]
         protected void Log([CanBeNull] string message)
         {
             DelegatingLogger.Log(message);
+        }
+    }
+
+    internal class CompositeItemBindingValueConverter<TValueConverter, TItem> : CompositeItemBindingValueConverter<TValueConverter>
+        where TValueConverter : IValueConverter, new()
+        where TItem : class
+    {
+        [NotNull]
+        private readonly IItemReference<TItem> _itemReference;
+        [NotNull]
+        private readonly ItemValueAccessor<TItem, object> _parameterAccessor;
+
+        internal CompositeItemBindingValueConverter(
+            [NotNull] IItemReference<TItem> itemReference,
+            [NotNull] Expression<Func<TItem, object>> parameterExpression,
+            [CanBeNull] CultureInfo converterCulture = null)
+            : base(converterCulture)
+        {
+            _itemReference = itemReference ?? throw new ArgumentNullException(nameof(itemReference));
+            _parameterAccessor = new ItemValueAccessor<TItem, object>(parameterExpression);
+        }
+
+        private protected override bool TryGetParameter(out object parameter)
+        {
+            parameter = null;
+            var succeed = false;
+
+            if (_itemReference.TryGetItem(out var item))
+            {
+                succeed = _parameterAccessor.TryGetValue(item, out parameter);
+            }
+
+            return succeed;
         }
     }
 }

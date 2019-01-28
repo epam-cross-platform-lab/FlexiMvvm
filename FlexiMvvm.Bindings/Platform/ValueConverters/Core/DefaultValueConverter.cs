@@ -17,29 +17,19 @@
 using System;
 using System.Globalization;
 
-#if __IOS__
-using Foundation;
-#endif
-
-namespace FlexiMvvm.ValueConverters
+namespace FlexiMvvm.ValueConverters.Core
 {
     internal class DefaultValueConverter : ValueConverter<object, object>
     {
-        [Linking.Preserve(Conditional = true)]
-        public DefaultValueConverter()
-        {
-        }
-
         protected override ConversionResult<object> Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (targetType.IsInstanceOfType(value))
             {
                 return ConversionResult<object>.SetValue(value);
             }
-
+#if __IOS__
             switch (value)
             {
-#if __IOS__
                 // https://docs.microsoft.com/en-us/xamarin/cross-platform/macios/nativetypes
                 case int intValue when targetType == typeof(nint):
                     return ConversionResult<object>.SetValue((nint)intValue);
@@ -53,19 +43,12 @@ namespace FlexiMvvm.ValueConverters
                     return ConversionResult<object>.SetValue((nfloat)floatValue);
                 case double doubleValue when targetType == typeof(nfloat):
                     return ConversionResult<object>.SetValue((nfloat)doubleValue);
-                case DateTime dateTimeValue when targetType == typeof(NSDate):
-                    return ConversionResult<object>.SetValue((NSDate)dateTimeValue);
-                case DateTimeOffset dateTimeOffsetValue when targetType == typeof(NSDate):
-                    return ConversionResult<object>.SetValue((NSDate)dateTimeOffsetValue.UtcDateTime);
-                case Enum enumValue when targetType == typeof(nint):
-                    return ConversionResult<object>.SetValue((nint)System.Convert.ToInt32(enumValue));
+                case DateTime dateTimeValue when targetType == typeof(Foundation.NSDate):
+                    return ConversionResult<object>.SetValue((Foundation.NSDate)dateTimeValue);
+                case DateTimeOffset dateTimeOffsetValue when targetType == typeof(Foundation.NSDate):
+                    return ConversionResult<object>.SetValue((Foundation.NSDate)dateTimeOffsetValue.UtcDateTime);
+        }
 #endif
-                case Enum enumValue when targetType == typeof(int):
-                    return ConversionResult<object>.SetValue(System.Convert.ToInt32(enumValue));
-                case NamedValue namedValue when targetType == typeof(string):
-                    return ConversionResult<object>.SetValue(namedValue.ToString());
-            }
-
             return ConversionResult<object>.SetValue(System.Convert.ChangeType(value, targetType));
         }
 
@@ -75,25 +58,19 @@ namespace FlexiMvvm.ValueConverters
             {
                 return ConversionResult<object>.SetValue(value);
             }
-
+#if __IOS__
             switch (value)
             {
-#if __IOS__
-                case NSDate dateTimeValue when targetType == typeof(DateTime):
+                case Foundation.NSDate dateTimeValue when targetType == typeof(DateTime):
                     return ConversionResult<object>.SetValue((DateTime)dateTimeValue);
-                case NSDate dateTimeValue when targetType == typeof(DateTime?):
+                case Foundation.NSDate dateTimeValue when targetType == typeof(DateTime?):
                     return ConversionResult<object>.SetValue((DateTime?)dateTimeValue);
-                case NSDate dateTimeValue when targetType == typeof(DateTimeOffset):
+                case Foundation.NSDate dateTimeValue when targetType == typeof(DateTimeOffset):
                     return ConversionResult<object>.SetValue((DateTimeOffset)(DateTime)dateTimeValue);
-                case NSDate dateTimeValue when targetType == typeof(DateTimeOffset?):
+                case Foundation.NSDate dateTimeValue when targetType == typeof(DateTimeOffset?):
                     return ConversionResult<object>.SetValue((DateTimeOffset?)(DateTime?)dateTimeValue);
-                case nint enumValue when targetType.IsEnum:
-                    return ConversionResult<object>.SetValue(Enum.ToObject(targetType, enumValue));
+        }
 #endif
-                case int enumValue when targetType.IsEnum:
-                    return ConversionResult<object>.SetValue(Enum.ToObject(targetType, enumValue));
-            }
-
             return ConversionResult<object>.SetValue(System.Convert.ChangeType(value, targetType));
         }
     }

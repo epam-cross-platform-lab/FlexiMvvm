@@ -25,7 +25,7 @@ namespace FlexiMvvm.Bindings.Custom.Core.Composite
         BindingMode RequestedBindingMode { get; }
 
         [NotNull]
-        CompositeItemBindingValueConverter<TSourceItem> ValueConverter { get; }
+        ICompositeItemBindingValueConverter ValueConverter { get; }
 
         void SetSourceItemReference([NotNull] IItemReference<TSourceItem> itemReference);
 

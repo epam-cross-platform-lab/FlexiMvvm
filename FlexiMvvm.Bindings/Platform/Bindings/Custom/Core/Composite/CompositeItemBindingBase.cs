@@ -35,7 +35,7 @@ namespace FlexiMvvm.Bindings.Custom.Core.Composite
             [NotNull] SourceItemBinding<TSourceItem, TSourceItemValue> sourceItemBinding,
             [NotNull] TargetItemBinding<TTargetItem, TTargetItemValue> targetItemBinding,
             BindingMode requestedBindingMode,
-            [NotNull] CompositeItemBindingValueConverter<TSourceItem> valueConverter)
+            [NotNull] ICompositeItemBindingValueConverter valueConverter)
         {
             SourceItemBinding = sourceItemBinding;
             TargetItemBinding = targetItemBinding;
@@ -53,7 +53,7 @@ namespace FlexiMvvm.Bindings.Custom.Core.Composite
 
         public BindingMode RequestedBindingMode { get; set; }
 
-        public CompositeItemBindingValueConverter<TSourceItem> ValueConverter { get; set; }
+        public ICompositeItemBindingValueConverter ValueConverter { get; set; }
 
         [CanBeNull]
         internal CompositeItemBindingFallbackValue<TTargetItemValue> FallbackValue { get; set; }
@@ -199,8 +199,7 @@ namespace FlexiMvvm.Bindings.Custom.Core.Composite
 
         protected void SetSourceItemValue([NotNull] TSourceItem sourceItem, [CanBeNull] TTargetItemValue targetItemValue)
         {
-            var valueConverterParameter = ValueConverter.ParameterAccessor.Get(sourceItem);
-            var sourceItemValue = ValueConverter.ConvertBack(targetItemValue, typeof(TSourceItemValue), valueConverterParameter);
+            var sourceItemValue = ValueConverter.ConvertBack(targetItemValue, typeof(TSourceItemValue));
 
             if (sourceItemValue != BindingValue.UnsetValue)
             {
@@ -218,8 +217,7 @@ namespace FlexiMvvm.Bindings.Custom.Core.Composite
 
         protected void SetTargetItemValue([NotNull] TTargetItem targetItem, [NotNull] TSourceItem sourceItem, [CanBeNull] TSourceItemValue sourceItemValue)
         {
-            var valueConverterParameter = ValueConverter.ParameterAccessor.Get(sourceItem);
-            var targetItemValue = ValueConverter.Convert(sourceItemValue, typeof(TTargetItemValue), valueConverterParameter);
+            var targetItemValue = ValueConverter.Convert(sourceItemValue, typeof(TTargetItemValue));
 
             SetTargetItemValue(targetItem, targetItemValue);
         }

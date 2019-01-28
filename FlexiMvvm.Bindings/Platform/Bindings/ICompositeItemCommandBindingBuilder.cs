@@ -25,15 +25,8 @@ namespace FlexiMvvm.Bindings
     public interface ICompositeItemCommandBindingBuilder<TSourceItem>
     {
         [NotNull]
-        ICompositeItemCommandBindingBuilder<TSourceItem> WithCommandParameter<TCommandParameterTargetItem, TCommandParameterTargetItemValue>(
-            [NotNull] TCommandParameterTargetItem targetItem,
-            [NotNull] Expression<Func<TCommandParameterTargetItem, TCommandParameterTargetItemValue>> targetItemValue,
-            ItemReferenceType referenceType)
-            where TCommandParameterTargetItem : class;
-
-        [NotNull]
         ICompositeItemCommandBindingBuilder<TSourceItem> WithCommandParameter<TCommandParameter>(
-            [CanBeNull] TCommandParameter value);
+            [CanBeNull] TCommandParameter parameter);
 
         [NotNull]
         ICompositeItemCommandBindingBuilder<TSourceItem> WithConversion<TValueConverter>(
@@ -43,7 +36,7 @@ namespace FlexiMvvm.Bindings
 
         [NotNull]
         ICompositeItemCommandBindingBuilder<TSourceItem> WithConversion<TValueConverter>(
-            [NotNull] Expression<Func<TSourceItem, object>> parameter,
+            [NotNull] Expression<Func<TSourceItem, object>> parameterExpression,
             [CanBeNull] CultureInfo culture = null)
             where TValueConverter : IValueConverter, new();
     }
