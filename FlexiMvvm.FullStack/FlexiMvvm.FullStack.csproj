@@ -1,9 +1,9 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras/1.6.65">
     <PropertyGroup>
         <TargetFrameworks>MonoAndroid80;MonoAndroid81;MonoAndroid90;Xamarin.iOS10</TargetFrameworks>
-        <AssemblyName>FlexiMvvm.Full</AssemblyName>
-        <PackageId>FlexiMvvm.Full.PreRelease</PackageId>
-        <Title>FlexiMvvm.Full</Title>
+        <AssemblyName>FlexiMvvm.FullStack</AssemblyName>
+        <PackageId>FlexiMvvm.FullStack.PreRelease</PackageId>
+        <Title>FlexiMvvm.FullStack</Title>
         <Description>MVVM framework for Xamarin.Native.</Description>
     </PropertyGroup>
     <ItemGroup>

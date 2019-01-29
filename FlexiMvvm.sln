@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlexiMvvm.Full", "FlexiMvvm.Full\FlexiMvvm.Full.csproj", "{FA0504CC-D0A6-4FD1-A042-CA68C85E038F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlexiMvvm.FullStack", "FlexiMvvm.FullStack\FlexiMvvm.FullStack.csproj", "{FA0504CC-D0A6-4FD1-A042-CA68C85E038F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlexiMvvm.Lifecycle", "FlexiMvvm.Lifecycle\FlexiMvvm.Lifecycle.csproj", "{0DDE781D-0C7D-4225-87BD-0343E9C746DC}"
 EndProject
