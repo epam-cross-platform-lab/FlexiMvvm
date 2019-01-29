@@ -25,7 +25,7 @@ namespace FlexiMvvm.Navigation
     public abstract partial class NavigationService
     {
         [NotNull]
-        public static INavigationView<IViewModel> GetView([NotNull] IViewModel viewModel)
+        public INavigationView<IViewModel> GetView([NotNull] IViewModel viewModel)
         {
             if (viewModel == null)
                 throw new ArgumentNullException(nameof(viewModel));
@@ -34,7 +34,7 @@ namespace FlexiMvvm.Navigation
         }
 
         [NotNull]
-        public static INavigationView<IViewModelWithResultHandler> GetView([NotNull] IViewModelWithResultHandler viewModel)
+        public INavigationView<IViewModelWithResultHandler> GetView([NotNull] IViewModelWithResultHandler viewModel)
         {
             if (viewModel == null)
                 throw new ArgumentNullException(nameof(viewModel));
@@ -43,7 +43,7 @@ namespace FlexiMvvm.Navigation
         }
 
         [NotNull]
-        public static INavigationView<IViewModelWithResult<TResult>> GetView<TResult>([NotNull] IViewModelWithResult<TResult> viewModel)
+        public INavigationView<IViewModelWithResult<TResult>> GetView<TResult>([NotNull] IViewModelWithResult<TResult> viewModel)
             where TResult : Result
         {
             if (viewModel == null)
