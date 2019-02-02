@@ -18,7 +18,7 @@
 using System;
 using FlexiMvvm.Weak.Subscriptions;
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="FlexiMvvm.Views.INavigationView<FlexiMvvm.ViewModels.IViewModel>"/> class events.</summary>
     public static class NavigationViewWeakEventsSubscriptionsExtensions

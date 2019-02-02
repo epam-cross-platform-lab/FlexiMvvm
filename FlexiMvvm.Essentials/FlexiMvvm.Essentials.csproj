@@ -17,11 +17,11 @@
             <Generator>TextTemplatingFileGenerator</Generator>
             <LastGenOutput>WeakEventsSubscriptionsExtensionsGenerator.cs</LastGenOutput>
         </None>
-        <None Update="Platform.Android\!Extensions\WeakEventsSubscriptionsExtensionsGenerator.tt">
+        <None Update="Platform.Android\Views\!Extensions\WeakEventsSubscriptionsExtensionsGenerator.tt">
             <Generator>TextTemplatingFileGenerator</Generator>
             <LastGenOutput>WeakEventsSubscriptionsExtensionsGenerator.cs</LastGenOutput>
         </None>
-        <None Update="Platform.iOS\!Extensions\WeakEventsSubscriptionsExtensionsGenerator.tt">
+        <None Update="Platform.iOS\Views\!Extensions\WeakEventsSubscriptionsExtensionsGenerator.tt">
             <Generator>TextTemplatingFileGenerator</Generator>
             <LastGenOutput>WeakEventsSubscriptionsExtensionsGenerator.cs</LastGenOutput>
         </None>
@@ -35,12 +35,12 @@
             <AutoGen>True</AutoGen>
             <DependentUpon>WeakEventsSubscriptionsExtensionsGenerator.tt</DependentUpon>
         </None>
-        <None Update="Platform.Android\!Extensions\WeakEventsSubscriptionsExtensionsGenerator.cs">
+        <None Update="Platform.Android\Views\!Extensions\WeakEventsSubscriptionsExtensionsGenerator.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
             <DependentUpon>WeakEventsSubscriptionsExtensionsGenerator.tt</DependentUpon>
         </None>
-        <None Update="Platform.iOS\!Extensions\WeakEventsSubscriptionsExtensionsGenerator.cs">
+        <None Update="Platform.iOS\Views\!Extensions\WeakEventsSubscriptionsExtensionsGenerator.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
             <DependentUpon>WeakEventsSubscriptionsExtensionsGenerator.tt</DependentUpon>

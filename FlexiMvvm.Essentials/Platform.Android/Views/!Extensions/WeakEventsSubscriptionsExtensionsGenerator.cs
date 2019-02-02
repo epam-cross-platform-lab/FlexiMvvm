@@ -18,7 +18,7 @@
 using System;
 using FlexiMvvm.Weak.Subscriptions;
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.AccessibilityServices.AccessibilityService.SoftKeyboardController"/> class events.</summary>
     public static class SoftKeyboardControllerWeakEventsSubscriptionsExtensions
@@ -47,7 +47,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Accounts.AccountManager"/> class events.</summary>
     public static class AccountManagerWeakEventsSubscriptionsExtensions
@@ -76,7 +76,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Animation.Animator"/> class events.</summary>
     public static class AnimatorWeakEventsSubscriptionsExtensions
@@ -210,7 +210,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Animation.LayoutTransition"/> class events.</summary>
     public static class LayoutTransitionWeakEventsSubscriptionsExtensions
@@ -260,7 +260,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Animation.TimeAnimator"/> class events.</summary>
     public static class TimeAnimatorWeakEventsSubscriptionsExtensions
@@ -289,7 +289,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Animation.ValueAnimator"/> class events.</summary>
     public static class ValueAnimatorWeakEventsSubscriptionsExtensions
@@ -318,7 +318,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.App.ActionBar"/> class events.</summary>
     public static class ActionBarWeakEventsSubscriptionsExtensions
@@ -347,7 +347,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.App.ActionBar.Tab"/> class events.</summary>
     [Obsolete("This class is obsoleted in this android platform.")]
@@ -419,7 +419,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.App.AlertDialog.Builder"/> class events.</summary>
     public static class BuilderWeakEventsSubscriptionsExtensions
@@ -491,7 +491,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.App.DatePickerDialog"/> class events.</summary>
     public static class DatePickerDialogWeakEventsSubscriptionsExtensions
@@ -520,7 +520,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.App.Dialog"/> class events.</summary>
     public static class DialogWeakEventsSubscriptionsExtensions
@@ -612,7 +612,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.App.FragmentBreadCrumbs"/> class events.</summary>
     [Obsolete("This class is obsoleted in this android platform.")]
@@ -642,7 +642,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.App.FragmentManager"/> class events.</summary>
 #if __ANDROID_28__
@@ -674,7 +674,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.App.MediaRouteActionProvider"/> class events.</summary>
     public static class MediaRouteActionProviderWeakEventsSubscriptionsExtensions
@@ -703,7 +703,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.App.MediaRouteButton"/> class events.</summary>
     public static class MediaRouteButtonWeakEventsSubscriptionsExtensions
@@ -732,7 +732,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.App.SearchManager"/> class events.</summary>
     public static class SearchManagerWeakEventsSubscriptionsExtensions
@@ -782,7 +782,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.App.UiAutomation"/> class events.</summary>
     public static class UiAutomationWeakEventsSubscriptionsExtensions
@@ -811,7 +811,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Content.ClipboardManager"/> class events.</summary>
     public static class ClipboardManagerWeakEventsSubscriptionsExtensions
@@ -840,7 +840,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Drm.DrmManagerClient"/> class events.</summary>
     public static class DrmManagerClientWeakEventsSubscriptionsExtensions
@@ -911,7 +911,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Gestures.GestureOverlayView"/> class events.</summary>
     public static class GestureOverlayViewWeakEventsSubscriptionsExtensions
@@ -1066,7 +1066,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Graphics.ImageDecoder"/> class events.</summary>
     public static class mageDecoderWeakEventsSubscriptionsExtensions
@@ -1097,7 +1097,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Graphics.SurfaceTexture"/> class events.</summary>
     public static class SurfaceTextureWeakEventsSubscriptionsExtensions
@@ -1126,7 +1126,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Hardware.Camera"/> class events.</summary>
     [Obsolete("This class is obsoleted in this android platform.")]
@@ -1177,7 +1177,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.InputMethodServices.KeyboardView"/> class events.</summary>
     public static class KeyboardViewWeakEventsSubscriptionsExtensions
@@ -1353,7 +1353,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Media.Audiofx.AudioEffect"/> class events.</summary>
     public static class AudioEffectWeakEventsSubscriptionsExtensions
@@ -1403,7 +1403,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Media.Audiofx.BassBoost"/> class events.</summary>
     public static class BassBoostWeakEventsSubscriptionsExtensions
@@ -1432,7 +1432,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Media.Audiofx.EnvironmentalReverb"/> class events.</summary>
     public static class EnvironmentalReverbWeakEventsSubscriptionsExtensions
@@ -1461,7 +1461,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Media.Audiofx.Equalizer"/> class events.</summary>
     public static class EqualizerWeakEventsSubscriptionsExtensions
@@ -1490,7 +1490,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Media.Audiofx.PresetReverb"/> class events.</summary>
     public static class PresetReverbWeakEventsSubscriptionsExtensions
@@ -1519,7 +1519,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Media.Audiofx.Virtualizer"/> class events.</summary>
     public static class VirtualizerWeakEventsSubscriptionsExtensions
@@ -1548,7 +1548,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Media.AudioRecord"/> class events.</summary>
     public static class AudioRecordWeakEventsSubscriptionsExtensions
@@ -1598,7 +1598,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Media.AudioTrack"/> class events.</summary>
     public static class AudioTrackWeakEventsSubscriptionsExtensions
@@ -1648,7 +1648,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Media.Effect.Effect"/> class events.</summary>
     public static class EffectWeakEventsSubscriptionsExtensions
@@ -1677,7 +1677,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Media.JetPlayer"/> class events.</summary>
     public static class JetPlayerWeakEventsSubscriptionsExtensions
@@ -1769,7 +1769,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Media.MediaDrm"/> class events.</summary>
     public static class MediaDrmWeakEventsSubscriptionsExtensions
@@ -1798,7 +1798,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Media.MediaPlayer"/> class events.</summary>
     public static class MediaPlayerWeakEventsSubscriptionsExtensions
@@ -2083,7 +2083,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Media.MediaRecorder"/> class events.</summary>
     public static class MediaRecorderWeakEventsSubscriptionsExtensions
@@ -2133,7 +2133,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Media.RemoteControlClient"/> class events.</summary>
     [Obsolete("This class is obsoleted in this android platform.")]
@@ -2184,7 +2184,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Media.SoundPool"/> class events.</summary>
     public static class SoundPoolWeakEventsSubscriptionsExtensions
@@ -2213,7 +2213,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Media.TV.TvView"/> class events.</summary>
     public static class TvViewWeakEventsSubscriptionsExtensions
@@ -2242,7 +2242,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Net.ConnectivityManager"/> class events.</summary>
     public static class ConnectivityManagerWeakEventsSubscriptionsExtensions
@@ -2271,7 +2271,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.OS.CancellationSignal"/> class events.</summary>
     public static class CancellationSignalWeakEventsSubscriptionsExtensions
@@ -2300,7 +2300,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Preferences.Preference"/> class events.</summary>
     public static class PreferenceWeakEventsSubscriptionsExtensions
@@ -2350,7 +2350,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Renderscripts.Allocation"/> class events.</summary>
     public static class AllocationWeakEventsSubscriptionsExtensions
@@ -2379,7 +2379,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Sax.Element"/> class events.</summary>
     public static class ElementWeakEventsSubscriptionsExtensions
@@ -2450,7 +2450,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Speech.SpeechRecognizer"/> class events.</summary>
     public static class SpeechRecognizerWeakEventsSubscriptionsExtensions
@@ -2647,7 +2647,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Views.ActionProvider"/> class events.</summary>
     public static class ActionProviderWeakEventsSubscriptionsExtensions
@@ -2676,7 +2676,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Views.Animations.Animation"/> class events.</summary>
     public static class AnimationWeakEventsSubscriptionsExtensions
@@ -2747,7 +2747,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Views.GestureDetector"/> class events.</summary>
     public static class GestureDetectorWeakEventsSubscriptionsExtensions
@@ -2839,7 +2839,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Views.TextureView"/> class events.</summary>
     public static class TextureViewWeakEventsSubscriptionsExtensions
@@ -2931,7 +2931,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Views.View"/> class events.</summary>
     public static class ViewWeakEventsSubscriptionsExtensions
@@ -3298,7 +3298,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Views.ViewGroup"/> class events.</summary>
     public static class ViewGroupWeakEventsSubscriptionsExtensions
@@ -3411,7 +3411,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Views.ViewStub"/> class events.</summary>
     public static class ViewStubWeakEventsSubscriptionsExtensions
@@ -3440,7 +3440,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Views.ViewTreeObserver"/> class events.</summary>
     public static class ViewTreeObserverWeakEventsSubscriptionsExtensions
@@ -3637,7 +3637,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Views.Window"/> class events.</summary>
     public static class WindowWeakEventsSubscriptionsExtensions
@@ -3666,7 +3666,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Webkit.WebView"/> class events.</summary>
     public static class WebViewWeakEventsSubscriptionsExtensions
@@ -3737,7 +3737,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Widget.AbsListView"/> class events.</summary>
     public static class AbsListViewWeakEventsSubscriptionsExtensions
@@ -3808,7 +3808,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Widget.ActionMenuView"/> class events.</summary>
     public static class ActionMenuViewWeakEventsSubscriptionsExtensions
@@ -3837,7 +3837,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Widget.AdapterView"/> class events.</summary>
     public static class AdapterViewWeakEventsSubscriptionsExtensions
@@ -3951,7 +3951,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Widget.AutoCompleteTextView"/> class events.</summary>
     public static class AutoCompleteTextViewWeakEventsSubscriptionsExtensions
@@ -4065,7 +4065,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Widget.CalendarView"/> class events.</summary>
     public static class CalendarViewWeakEventsSubscriptionsExtensions
@@ -4094,7 +4094,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Widget.Chronometer"/> class events.</summary>
     public static class ChronometerWeakEventsSubscriptionsExtensions
@@ -4123,7 +4123,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Widget.CompoundButton"/> class events.</summary>
     public static class CompoundButtonWeakEventsSubscriptionsExtensions
@@ -4152,7 +4152,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Widget.DatePicker"/> class events.</summary>
     public static class DatePickerWeakEventsSubscriptionsExtensions
@@ -4181,7 +4181,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Widget.ExpandableListView"/> class events.</summary>
     public static class ExpandableListViewWeakEventsSubscriptionsExtensions
@@ -4273,7 +4273,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Widget.ListPopupWindow"/> class events.</summary>
     public static class ListPopupWindowWeakEventsSubscriptionsExtensions
@@ -4365,7 +4365,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Widget.MediaController"/> class events.</summary>
     public static class MediaControllerWeakEventsSubscriptionsExtensions
@@ -4415,7 +4415,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Widget.NumberPicker"/> class events.</summary>
     public static class NumberPickerWeakEventsSubscriptionsExtensions
@@ -4465,7 +4465,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Widget.PopupMenu"/> class events.</summary>
     public static class PopupMenuWeakEventsSubscriptionsExtensions
@@ -4515,7 +4515,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Widget.PopupWindow"/> class events.</summary>
     public static class PopupWindowWeakEventsSubscriptionsExtensions
@@ -4565,7 +4565,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Widget.RadioGroup"/> class events.</summary>
     public static class RadioGroupWeakEventsSubscriptionsExtensions
@@ -4594,7 +4594,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Widget.RatingBar"/> class events.</summary>
     public static class RatingBarWeakEventsSubscriptionsExtensions
@@ -4623,7 +4623,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Widget.SearchView"/> class events.</summary>
     public static class SearchViewWeakEventsSubscriptionsExtensions
@@ -4778,7 +4778,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Widget.SeekBar"/> class events.</summary>
     public static class SeekBarWeakEventsSubscriptionsExtensions
@@ -4849,7 +4849,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Widget.ShareActionProvider"/> class events.</summary>
     public static class ShareActionProviderWeakEventsSubscriptionsExtensions
@@ -4878,7 +4878,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Widget.SlidingDrawer"/> class events.</summary>
     [Obsolete("This class is obsoleted in this android platform.")]
@@ -4971,7 +4971,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Widget.TabHost"/> class events.</summary>
     public static class TabHostWeakEventsSubscriptionsExtensions
@@ -5000,7 +5000,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Widget.TextView"/> class events.</summary>
     public static class TextViewWeakEventsSubscriptionsExtensions
@@ -5092,7 +5092,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Widget.TimePicker"/> class events.</summary>
     public static class TimePickerWeakEventsSubscriptionsExtensions
@@ -5121,7 +5121,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Widget.Toolbar"/> class events.</summary>
     public static class ToolbarWeakEventsSubscriptionsExtensions
@@ -5171,7 +5171,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Widget.VideoView"/> class events.</summary>
     public static class VideoViewWeakEventsSubscriptionsExtensions
@@ -5263,7 +5263,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Widget.ZoomButtonsController"/> class events.</summary>
     [Obsolete("This class is obsoleted in this android platform.")]
@@ -5314,7 +5314,7 @@ namespace FlexiMvvm
     }
 }
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Widget.ZoomControls"/> class events.</summary>
     public static class ZoomControlsWeakEventsSubscriptionsExtensions

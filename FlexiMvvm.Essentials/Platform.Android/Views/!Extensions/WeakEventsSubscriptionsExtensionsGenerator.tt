@@ -4,7 +4,7 @@
 <#@ import namespace="FlexiMvvm.Weak.Subscriptions.Generation" #>
 <#
     var weakEventsSubscriptionsExtensionsGenerator = new WeakEventsSubscriptionsExtensionsGenerator(
-        "FlexiMvvm",
+        "FlexiMvvm.Views",
         new ExtensionsGenerationOptions(
             "Android.AccessibilityServices.AccessibilityService.SoftKeyboardController",
             new EventGenerationOptions("ShowModeChanged", "Android.AccessibilityServices.AccessibilityService.SoftKeyboardController.ShowModeChangedEventArgs")),

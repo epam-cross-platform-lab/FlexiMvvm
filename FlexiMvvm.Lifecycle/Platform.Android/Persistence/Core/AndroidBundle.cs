@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Android.OS;
+using FlexiMvvm.Views;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.Persistence.Core

@@ -4,13 +4,16 @@
 <#@ import namespace="FlexiMvvm.Weak.Subscriptions.Generation" #>
 <#
     var weakEventsSubscriptionsExtensionsGenerator = new WeakEventsSubscriptionsExtensionsGenerator(
-        "FlexiMvvm",
+        "FlexiMvvm.Views",
         new ExtensionsGenerationOptions(
             "FlexiMvvm.Views.Keyboard.KeyboardHandler",
             new EventGenerationOptions("KeyboardDidHide", "FlexiMvvm.Views.Keyboard.KeyboardSizeChangedEventArgs"),
             new EventGenerationOptions("KeyboardDidShow", "FlexiMvvm.Views.Keyboard.KeyboardSizeChangedEventArgs"),
             new EventGenerationOptions("KeyboardWillHide", "FlexiMvvm.Views.Keyboard.KeyboardSizeChangedEventArgs"),
-            new EventGenerationOptions("KeyboardWillShow", "FlexiMvvm.Views.Keyboard.KeyboardSizeChangedEventArgs")),
+            new EventGenerationOptions("KeyboardWillShow", "FlexiMvvm.Views.Keyboard.KeyboardSizeChangedEventArgs"))
+        {
+            TargetNamespace = "FlexiMvvm.Views.Keyboard"
+        },
         new ExtensionsGenerationOptions(
             "UIKit.UIAccelerometer",
             new EventGenerationOptions("Acceleration", "UIKit.UIAccelerometerEventArgs")),

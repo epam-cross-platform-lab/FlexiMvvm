@@ -19,7 +19,7 @@ using System.Globalization;
 using Android.OS;
 using JetBrains.Annotations;
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Views
 {
     public static class BundleExtensions
     {

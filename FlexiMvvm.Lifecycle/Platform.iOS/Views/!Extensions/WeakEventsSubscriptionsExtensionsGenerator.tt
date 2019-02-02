@@ -4,7 +4,7 @@
 <#@ import namespace="FlexiMvvm.Weak.Subscriptions.Generation" #>
 <#
     var weakEventsSubscriptionsExtensionsGenerator = new WeakEventsSubscriptionsExtensionsGenerator(
-        "FlexiMvvm",
+        "FlexiMvvm.Views",
         new ExtensionsGenerationOptions(
             "FlexiMvvm.Views.INavigationView<FlexiMvvm.ViewModels.IViewModel>",
             new EventGenerationOptions("ResultSet", "FlexiMvvm.Views.ResultSetEventArgs")));
