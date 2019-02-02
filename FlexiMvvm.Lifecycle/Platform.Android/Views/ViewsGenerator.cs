@@ -33,16 +33,6 @@ namespace FlexiMvvm.Views
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
 
-        public event EventHandler OnCreateCalled;
-
-        public event EventHandler OnStartCalled;
-
-        public event EventHandler OnResumeCalled;
-
-        public event EventHandler OnPauseCalled;
-
-        public event EventHandler OnStopCalled;
-
         public event EventHandler<OptionsItemSelectedEventArgs> OnOptionsItemSelectedCalled;
 
         public event EventHandler<BackPressedEventArgs> OnBackPressedCalled;
@@ -59,7 +49,6 @@ namespace FlexiMvvm.Views
             base.OnCreate(savedInstanceState);
 
             LifecycleDelegate.OnCreate(savedInstanceState);
-            OnCreateCalled?.Invoke(this, EventArgs.Empty);
         }
 
         protected override void OnStart()
@@ -67,28 +56,6 @@ namespace FlexiMvvm.Views
             base.OnStart();
 
             LifecycleDelegate.OnStart();
-            OnStartCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        protected override void OnResume()
-        {
-            base.OnResume();
-
-            OnResumeCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        protected override void OnPause()
-        {
-            base.OnPause();
-
-            OnPauseCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        protected override void OnStop()
-        {
-            base.OnStop();
-
-            OnStopCalled?.Invoke(this, EventArgs.Empty);
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
@@ -198,18 +165,6 @@ namespace FlexiMvvm.Views
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
 
-        public event EventHandler OnCreateCalled;
-
-        public event EventHandler OnActivityCreatedCalled;
-
-        public event EventHandler OnStartCalled;
-
-        public event EventHandler OnResumeCalled;
-
-        public event EventHandler OnPauseCalled;
-
-        public event EventHandler OnStopCalled;
-
         public event EventHandler<OptionsItemSelectedEventArgs> OnOptionsItemSelectedCalled;
 
         protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ?? (_lifecycleDelegate = CreateLifecycleDelegate());
@@ -224,14 +179,6 @@ namespace FlexiMvvm.Views
             base.OnCreate(savedInstanceState);
 
             LifecycleDelegate.OnCreate(savedInstanceState);
-            OnCreateCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void OnActivityCreated(Bundle savedInstanceState)
-        {
-            base.OnActivityCreated(savedInstanceState);
-
-            OnActivityCreatedCalled?.Invoke(this, EventArgs.Empty);
         }
 
         public override void OnStart()
@@ -239,28 +186,6 @@ namespace FlexiMvvm.Views
             base.OnStart();
 
             LifecycleDelegate.OnStart();
-            OnStartCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void OnResume()
-        {
-            base.OnResume();
-
-            OnResumeCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void OnPause()
-        {
-            base.OnPause();
-
-            OnPauseCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void OnStop()
-        {
-            base.OnStop();
-
-            OnStopCalled?.Invoke(this, EventArgs.Empty);
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
@@ -396,18 +321,6 @@ namespace FlexiMvvm.Views
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
 
-        public event EventHandler OnCreateCalled;
-
-        public event EventHandler OnActivityCreatedCalled;
-
-        public event EventHandler OnStartCalled;
-
-        public event EventHandler OnResumeCalled;
-
-        public event EventHandler OnPauseCalled;
-
-        public event EventHandler OnStopCalled;
-
         public event EventHandler<OptionsItemSelectedEventArgs> OnOptionsItemSelectedCalled;
 
         protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ?? (_lifecycleDelegate = CreateLifecycleDelegate());
@@ -422,14 +335,6 @@ namespace FlexiMvvm.Views
             base.OnCreate(savedInstanceState);
 
             LifecycleDelegate.OnCreate(savedInstanceState);
-            OnCreateCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void OnActivityCreated(Bundle savedInstanceState)
-        {
-            base.OnActivityCreated(savedInstanceState);
-
-            OnActivityCreatedCalled?.Invoke(this, EventArgs.Empty);
         }
 
         public override void OnStart()
@@ -437,28 +342,6 @@ namespace FlexiMvvm.Views
             base.OnStart();
 
             LifecycleDelegate.OnStart();
-            OnStartCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void OnResume()
-        {
-            base.OnResume();
-
-            OnResumeCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void OnPause()
-        {
-            base.OnPause();
-
-            OnPauseCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void OnStop()
-        {
-            base.OnStop();
-
-            OnStopCalled?.Invoke(this, EventArgs.Empty);
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)

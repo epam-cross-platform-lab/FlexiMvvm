@@ -77,26 +77,16 @@ namespace FlexiMvvm.Views.Generation.Ios
             
             #line default
             #line hidden
-            this.Write(@", IIosView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
+            this.Write(@", IIosView, IKeyboardHandlerOwner
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
-
-        public event EventHandler ViewDidLoadCalled;
-
-        public event EventHandler ViewWillAppearCalled;
-
-        public event EventHandler ViewDidAppearCalled;
-
-        public event EventHandler ViewWillDisappearCalled;
-
-        public event EventHandler ViewDidDisappearCalled;
 
         protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ?? (_lifecycleDelegate = CreateLifecycleDelegate());
 
         public virtual bool HandleKeyboard { get; } = ");
             
-            #line 46 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 36 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.HandleKeyboard.ToString().ToLower()));
             
             #line default
@@ -105,46 +95,72 @@ namespace FlexiMvvm.Views.Generation.Ios
                     "   protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()\r\n        {" +
                     "\r\n            return new ViewLifecycleDelegate<");
             
-            #line 52 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 42 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
-            this.Write(">(this);\r\n        }\r\n\r\n        public override void ViewDidLoad()\r\n        {\r\n   " +
-                    "         base.ViewDidLoad();\r\n\r\n            LifecycleDelegate.ViewDidLoad();\r\n  " +
-                    "          ViewDidLoadCalled?.Invoke(this, EventArgs.Empty);\r\n        }\r\n\r\n      " +
-                    "  public override void ViewWillAppear(bool animated)\r\n        {\r\n            bas" +
-                    "e.ViewWillAppear(animated);\r\n\r\n            LifecycleDelegate.ViewWillAppear();\r\n" +
-                    "            ViewWillAppearCalled?.Invoke(this, EventArgs.Empty);\r\n        }\r\n\r\n " +
-                    "       public override void ViewDidAppear(bool animated)\r\n        {\r\n           " +
-                    " base.ViewDidAppear(animated);\r\n\r\n            ViewDidAppearCalled?.Invoke(this, " +
-                    "EventArgs.Empty);\r\n        }\r\n\r\n        public override void ViewWillDisappear(b" +
-                    "ool animated)\r\n        {\r\n            base.ViewWillDisappear(animated);\r\n\r\n     " +
-                    "       ViewWillDisappearCalled?.Invoke(this, EventArgs.Empty);\r\n        }\r\n\r\n   " +
-                    "     public override void ViewDidDisappear(bool animated)\r\n        {\r\n          " +
-                    "  base.ViewDidDisappear(animated);\r\n\r\n            LifecycleDelegate.ViewDidDisap" +
-                    "pear();\r\n            ViewDidDisappearCalled?.Invoke(this, EventArgs.Empty);\r\n   " +
-                    "     }\r\n\r\n        public override void WillMoveToParentViewController(UIViewCont" +
-                    "roller parent)\r\n        {\r\n            base.WillMoveToParentViewController(paren" +
-                    "t);\r\n\r\n            LifecycleDelegate.WillMoveToParentViewController(parent);\r\n  " +
-                    "      }\r\n\r\n        public override void DismissViewController(bool animated, Act" +
-                    "ion completionHandler)\r\n        {\r\n            LifecycleDelegate.DismissViewCont" +
-                    "roller();\r\n\r\n            base.DismissViewController(animated, completionHandler)" +
-                    ";\r\n        }\r\n\r\n        public override Task DismissViewControllerAsync(bool ani" +
-                    "mated)\r\n        {\r\n            LifecycleDelegate.DismissViewController();\r\n\r\n   " +
-                    "         return base.DismissViewControllerAsync(animated);\r\n        }\r\n\r\n       " +
-                    " void IKeyboardHandlerOwner.SetKeyboardHandler(KeyboardHandler handler)\r\n       " +
-                    " {\r\n            _keyboardHandler = handler;\r\n        }\r\n    }\r\n\r\n    public part" +
-                    "ial class ");
+            this.Write(@">(this);
+        }
+
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+
+            LifecycleDelegate.ViewDidLoad();
+        }
+
+        public override void ViewWillAppear(bool animated)
+        {
+            base.ViewWillAppear(animated);
+
+            LifecycleDelegate.ViewWillAppear();
+        }
+
+        public override void ViewDidDisappear(bool animated)
+        {
+            base.ViewDidDisappear(animated);
+
+            LifecycleDelegate.ViewDidDisappear();
+        }
+
+        public override void WillMoveToParentViewController(UIViewController parent)
+        {
+            base.WillMoveToParentViewController(parent);
+
+            LifecycleDelegate.WillMoveToParentViewController(parent);
+        }
+
+        public override void DismissViewController(bool animated, Action completionHandler)
+        {
+            LifecycleDelegate.DismissViewController();
+
+            base.DismissViewController(animated, completionHandler);
+        }
+
+        public override Task DismissViewControllerAsync(bool animated)
+        {
+            LifecycleDelegate.DismissViewController();
+
+            return base.DismissViewControllerAsync(animated);
+        }
+
+        void IKeyboardHandlerOwner.SetKeyboardHandler(KeyboardHandler handler)
+        {
+            _keyboardHandler = handler;
+        }
+    }
+
+    public partial class ");
             
-            #line 120 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 93 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
             this.Write("<TViewModel> : ");
             
-            #line 120 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 93 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
@@ -160,7 +176,7 @@ namespace FlexiMvvm.Views.Generation.Ios
         {
             return new ViewLifecycleDelegate<");
             
-            #line 129 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 102 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
@@ -209,14 +225,14 @@ namespace FlexiMvvm.Views.Generation.Ios
 
     public partial class ");
             
-            #line 171 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 144 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
             this.Write("<TViewModel, TParameters> : ");
             
-            #line 171 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 144 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
@@ -229,7 +245,7 @@ namespace FlexiMvvm.Views.Generation.Ios
 
         public ");
             
-            #line 177 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 150 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
@@ -247,7 +263,7 @@ namespace FlexiMvvm.Views.Generation.Ios
         {
             return new ViewLifecycleDelegate<");
             
-            #line 188 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 161 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
@@ -297,7 +313,7 @@ namespace FlexiMvvm.Views.Generation.Ios
 }
 ");
             
-            #line 231 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 204 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
  } 
             
             #line default

@@ -25,20 +25,10 @@ using FlexiMvvm.Views.Keyboard;
 
 namespace FlexiMvvm.Views
 {
-    public partial class CollectionViewController : UIKit.UICollectionViewController, IIosView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
+    public partial class CollectionViewController : UIKit.UICollectionViewController, IIosView, IKeyboardHandlerOwner
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
-
-        public event EventHandler ViewDidLoadCalled;
-
-        public event EventHandler ViewWillAppearCalled;
-
-        public event EventHandler ViewDidAppearCalled;
-
-        public event EventHandler ViewWillDisappearCalled;
-
-        public event EventHandler ViewDidDisappearCalled;
 
         protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ?? (_lifecycleDelegate = CreateLifecycleDelegate());
 
@@ -56,7 +46,6 @@ namespace FlexiMvvm.Views
             base.ViewDidLoad();
 
             LifecycleDelegate.ViewDidLoad();
-            ViewDidLoadCalled?.Invoke(this, EventArgs.Empty);
         }
 
         public override void ViewWillAppear(bool animated)
@@ -64,21 +53,6 @@ namespace FlexiMvvm.Views
             base.ViewWillAppear(animated);
 
             LifecycleDelegate.ViewWillAppear();
-            ViewWillAppearCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void ViewDidAppear(bool animated)
-        {
-            base.ViewDidAppear(animated);
-
-            ViewDidAppearCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void ViewWillDisappear(bool animated)
-        {
-            base.ViewWillDisappear(animated);
-
-            ViewWillDisappearCalled?.Invoke(this, EventArgs.Empty);
         }
 
         public override void ViewDidDisappear(bool animated)
@@ -86,7 +60,6 @@ namespace FlexiMvvm.Views
             base.ViewDidDisappear(animated);
 
             LifecycleDelegate.ViewDidDisappear();
-            ViewDidDisappearCalled?.Invoke(this, EventArgs.Empty);
         }
 
         public override void WillMoveToParentViewController(UIViewController parent)
@@ -230,20 +203,10 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class NavigationController : UIKit.UINavigationController, IIosView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
+    public partial class NavigationController : UIKit.UINavigationController, IIosView, IKeyboardHandlerOwner
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
-
-        public event EventHandler ViewDidLoadCalled;
-
-        public event EventHandler ViewWillAppearCalled;
-
-        public event EventHandler ViewDidAppearCalled;
-
-        public event EventHandler ViewWillDisappearCalled;
-
-        public event EventHandler ViewDidDisappearCalled;
 
         protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ?? (_lifecycleDelegate = CreateLifecycleDelegate());
 
@@ -261,7 +224,6 @@ namespace FlexiMvvm.Views
             base.ViewDidLoad();
 
             LifecycleDelegate.ViewDidLoad();
-            ViewDidLoadCalled?.Invoke(this, EventArgs.Empty);
         }
 
         public override void ViewWillAppear(bool animated)
@@ -269,21 +231,6 @@ namespace FlexiMvvm.Views
             base.ViewWillAppear(animated);
 
             LifecycleDelegate.ViewWillAppear();
-            ViewWillAppearCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void ViewDidAppear(bool animated)
-        {
-            base.ViewDidAppear(animated);
-
-            ViewDidAppearCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void ViewWillDisappear(bool animated)
-        {
-            base.ViewWillDisappear(animated);
-
-            ViewWillDisappearCalled?.Invoke(this, EventArgs.Empty);
         }
 
         public override void ViewDidDisappear(bool animated)
@@ -291,7 +238,6 @@ namespace FlexiMvvm.Views
             base.ViewDidDisappear(animated);
 
             LifecycleDelegate.ViewDidDisappear();
-            ViewDidDisappearCalled?.Invoke(this, EventArgs.Empty);
         }
 
         public override void WillMoveToParentViewController(UIViewController parent)
@@ -435,20 +381,10 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class PageViewController : UIKit.UIPageViewController, IIosView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
+    public partial class PageViewController : UIKit.UIPageViewController, IIosView, IKeyboardHandlerOwner
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
-
-        public event EventHandler ViewDidLoadCalled;
-
-        public event EventHandler ViewWillAppearCalled;
-
-        public event EventHandler ViewDidAppearCalled;
-
-        public event EventHandler ViewWillDisappearCalled;
-
-        public event EventHandler ViewDidDisappearCalled;
 
         protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ?? (_lifecycleDelegate = CreateLifecycleDelegate());
 
@@ -466,7 +402,6 @@ namespace FlexiMvvm.Views
             base.ViewDidLoad();
 
             LifecycleDelegate.ViewDidLoad();
-            ViewDidLoadCalled?.Invoke(this, EventArgs.Empty);
         }
 
         public override void ViewWillAppear(bool animated)
@@ -474,21 +409,6 @@ namespace FlexiMvvm.Views
             base.ViewWillAppear(animated);
 
             LifecycleDelegate.ViewWillAppear();
-            ViewWillAppearCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void ViewDidAppear(bool animated)
-        {
-            base.ViewDidAppear(animated);
-
-            ViewDidAppearCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void ViewWillDisappear(bool animated)
-        {
-            base.ViewWillDisappear(animated);
-
-            ViewWillDisappearCalled?.Invoke(this, EventArgs.Empty);
         }
 
         public override void ViewDidDisappear(bool animated)
@@ -496,7 +416,6 @@ namespace FlexiMvvm.Views
             base.ViewDidDisappear(animated);
 
             LifecycleDelegate.ViewDidDisappear();
-            ViewDidDisappearCalled?.Invoke(this, EventArgs.Empty);
         }
 
         public override void WillMoveToParentViewController(UIViewController parent)
@@ -640,20 +559,10 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class SplitViewController : UIKit.UISplitViewController, IIosView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
+    public partial class SplitViewController : UIKit.UISplitViewController, IIosView, IKeyboardHandlerOwner
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
-
-        public event EventHandler ViewDidLoadCalled;
-
-        public event EventHandler ViewWillAppearCalled;
-
-        public event EventHandler ViewDidAppearCalled;
-
-        public event EventHandler ViewWillDisappearCalled;
-
-        public event EventHandler ViewDidDisappearCalled;
 
         protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ?? (_lifecycleDelegate = CreateLifecycleDelegate());
 
@@ -671,7 +580,6 @@ namespace FlexiMvvm.Views
             base.ViewDidLoad();
 
             LifecycleDelegate.ViewDidLoad();
-            ViewDidLoadCalled?.Invoke(this, EventArgs.Empty);
         }
 
         public override void ViewWillAppear(bool animated)
@@ -679,21 +587,6 @@ namespace FlexiMvvm.Views
             base.ViewWillAppear(animated);
 
             LifecycleDelegate.ViewWillAppear();
-            ViewWillAppearCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void ViewDidAppear(bool animated)
-        {
-            base.ViewDidAppear(animated);
-
-            ViewDidAppearCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void ViewWillDisappear(bool animated)
-        {
-            base.ViewWillDisappear(animated);
-
-            ViewWillDisappearCalled?.Invoke(this, EventArgs.Empty);
         }
 
         public override void ViewDidDisappear(bool animated)
@@ -701,7 +594,6 @@ namespace FlexiMvvm.Views
             base.ViewDidDisappear(animated);
 
             LifecycleDelegate.ViewDidDisappear();
-            ViewDidDisappearCalled?.Invoke(this, EventArgs.Empty);
         }
 
         public override void WillMoveToParentViewController(UIViewController parent)
@@ -845,20 +737,10 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class TabBarController : UIKit.UITabBarController, IIosView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
+    public partial class TabBarController : UIKit.UITabBarController, IIosView, IKeyboardHandlerOwner
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
-
-        public event EventHandler ViewDidLoadCalled;
-
-        public event EventHandler ViewWillAppearCalled;
-
-        public event EventHandler ViewDidAppearCalled;
-
-        public event EventHandler ViewWillDisappearCalled;
-
-        public event EventHandler ViewDidDisappearCalled;
 
         protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ?? (_lifecycleDelegate = CreateLifecycleDelegate());
 
@@ -876,7 +758,6 @@ namespace FlexiMvvm.Views
             base.ViewDidLoad();
 
             LifecycleDelegate.ViewDidLoad();
-            ViewDidLoadCalled?.Invoke(this, EventArgs.Empty);
         }
 
         public override void ViewWillAppear(bool animated)
@@ -884,21 +765,6 @@ namespace FlexiMvvm.Views
             base.ViewWillAppear(animated);
 
             LifecycleDelegate.ViewWillAppear();
-            ViewWillAppearCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void ViewDidAppear(bool animated)
-        {
-            base.ViewDidAppear(animated);
-
-            ViewDidAppearCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void ViewWillDisappear(bool animated)
-        {
-            base.ViewWillDisappear(animated);
-
-            ViewWillDisappearCalled?.Invoke(this, EventArgs.Empty);
         }
 
         public override void ViewDidDisappear(bool animated)
@@ -906,7 +772,6 @@ namespace FlexiMvvm.Views
             base.ViewDidDisappear(animated);
 
             LifecycleDelegate.ViewDidDisappear();
-            ViewDidDisappearCalled?.Invoke(this, EventArgs.Empty);
         }
 
         public override void WillMoveToParentViewController(UIViewController parent)
@@ -1050,20 +915,10 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class TableViewController : UIKit.UITableViewController, IIosView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
+    public partial class TableViewController : UIKit.UITableViewController, IIosView, IKeyboardHandlerOwner
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
-
-        public event EventHandler ViewDidLoadCalled;
-
-        public event EventHandler ViewWillAppearCalled;
-
-        public event EventHandler ViewDidAppearCalled;
-
-        public event EventHandler ViewWillDisappearCalled;
-
-        public event EventHandler ViewDidDisappearCalled;
 
         protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ?? (_lifecycleDelegate = CreateLifecycleDelegate());
 
@@ -1081,7 +936,6 @@ namespace FlexiMvvm.Views
             base.ViewDidLoad();
 
             LifecycleDelegate.ViewDidLoad();
-            ViewDidLoadCalled?.Invoke(this, EventArgs.Empty);
         }
 
         public override void ViewWillAppear(bool animated)
@@ -1089,21 +943,6 @@ namespace FlexiMvvm.Views
             base.ViewWillAppear(animated);
 
             LifecycleDelegate.ViewWillAppear();
-            ViewWillAppearCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void ViewDidAppear(bool animated)
-        {
-            base.ViewDidAppear(animated);
-
-            ViewDidAppearCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void ViewWillDisappear(bool animated)
-        {
-            base.ViewWillDisappear(animated);
-
-            ViewWillDisappearCalled?.Invoke(this, EventArgs.Empty);
         }
 
         public override void ViewDidDisappear(bool animated)
@@ -1111,7 +950,6 @@ namespace FlexiMvvm.Views
             base.ViewDidDisappear(animated);
 
             LifecycleDelegate.ViewDidDisappear();
-            ViewDidDisappearCalled?.Invoke(this, EventArgs.Empty);
         }
 
         public override void WillMoveToParentViewController(UIViewController parent)
@@ -1255,20 +1093,10 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class ViewController : UIKit.UIViewController, IIosView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
+    public partial class ViewController : UIKit.UIViewController, IIosView, IKeyboardHandlerOwner
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
-
-        public event EventHandler ViewDidLoadCalled;
-
-        public event EventHandler ViewWillAppearCalled;
-
-        public event EventHandler ViewDidAppearCalled;
-
-        public event EventHandler ViewWillDisappearCalled;
-
-        public event EventHandler ViewDidDisappearCalled;
 
         protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ?? (_lifecycleDelegate = CreateLifecycleDelegate());
 
@@ -1286,7 +1114,6 @@ namespace FlexiMvvm.Views
             base.ViewDidLoad();
 
             LifecycleDelegate.ViewDidLoad();
-            ViewDidLoadCalled?.Invoke(this, EventArgs.Empty);
         }
 
         public override void ViewWillAppear(bool animated)
@@ -1294,21 +1121,6 @@ namespace FlexiMvvm.Views
             base.ViewWillAppear(animated);
 
             LifecycleDelegate.ViewWillAppear();
-            ViewWillAppearCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void ViewDidAppear(bool animated)
-        {
-            base.ViewDidAppear(animated);
-
-            ViewDidAppearCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void ViewWillDisappear(bool animated)
-        {
-            base.ViewWillDisappear(animated);
-
-            ViewWillDisappearCalled?.Invoke(this, EventArgs.Empty);
         }
 
         public override void ViewDidDisappear(bool animated)
@@ -1316,7 +1128,6 @@ namespace FlexiMvvm.Views
             base.ViewDidDisappear(animated);
 
             LifecycleDelegate.ViewDidDisappear();
-            ViewDidDisappearCalled?.Invoke(this, EventArgs.Empty);
         }
 
         public override void WillMoveToParentViewController(UIViewController parent)

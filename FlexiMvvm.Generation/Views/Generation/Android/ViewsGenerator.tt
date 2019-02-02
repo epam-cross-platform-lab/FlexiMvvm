@@ -39,20 +39,6 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
 
-        public event EventHandler OnCreateCalled;
-<#      if (viewGenerationOptions.Kind == ViewKind.Fragment) { #>
-
-        public event EventHandler OnActivityCreatedCalled;
-<#      } #>
-
-        public event EventHandler OnStartCalled;
-
-        public event EventHandler OnResumeCalled;
-
-        public event EventHandler OnPauseCalled;
-
-        public event EventHandler OnStopCalled;
-
         public event EventHandler<OptionsItemSelectedEventArgs> OnOptionsItemSelectedCalled;
 <#      if (viewGenerationOptions.Kind == ViewKind.Activity) { #>
 
@@ -71,45 +57,13 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
             base.OnCreate(savedInstanceState);
 
             LifecycleDelegate.OnCreate(savedInstanceState);
-            OnCreateCalled?.Invoke(this, EventArgs.Empty);
         }
-<#      if (viewGenerationOptions.Kind == ViewKind.Fragment) { #>
-
-        public override void OnActivityCreated(Bundle savedInstanceState)
-        {
-            base.OnActivityCreated(savedInstanceState);
-
-            OnActivityCreatedCalled?.Invoke(this, EventArgs.Empty);
-        }
-<#      } #>
 
         <#= viewGenerationOptions.LifecycleMethodAccessModifier #> override void OnStart()
         {
             base.OnStart();
 
             LifecycleDelegate.OnStart();
-            OnStartCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        <#= viewGenerationOptions.LifecycleMethodAccessModifier #> override void OnResume()
-        {
-            base.OnResume();
-
-            OnResumeCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        <#= viewGenerationOptions.LifecycleMethodAccessModifier #> override void OnPause()
-        {
-            base.OnPause();
-
-            OnPauseCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        <#= viewGenerationOptions.LifecycleMethodAccessModifier #> override void OnStop()
-        {
-            base.OnStop();
-
-            OnStopCalled?.Invoke(this, EventArgs.Empty);
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)

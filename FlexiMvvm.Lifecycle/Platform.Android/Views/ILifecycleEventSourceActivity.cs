@@ -20,16 +20,6 @@ namespace FlexiMvvm.Views
 {
     public interface ILifecycleEventSourceActivity
     {
-        event EventHandler OnCreateCalled;
-
-        event EventHandler OnStartCalled;
-
-        event EventHandler OnResumeCalled;
-
-        event EventHandler OnPauseCalled;
-
-        event EventHandler OnStopCalled;
-
         event EventHandler<OptionsItemSelectedEventArgs> OnOptionsItemSelectedCalled;
 
         event EventHandler<BackPressedEventArgs> OnBackPressedCalled;

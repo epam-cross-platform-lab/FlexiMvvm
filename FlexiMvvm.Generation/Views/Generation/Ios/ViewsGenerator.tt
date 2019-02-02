@@ -26,20 +26,10 @@ using FlexiMvvm.Views.Keyboard;
 
 namespace <#= GetNamespace(viewGenerationOptions) #>
 {
-    public partial class <#= viewGenerationOptions.ClassName #> : <#= viewGenerationOptions.BaseClassName #>, IIosView, ILifecycleEventSourceViewController, IKeyboardHandlerOwner
+    public partial class <#= viewGenerationOptions.ClassName #> : <#= viewGenerationOptions.BaseClassName #>, IIosView, IKeyboardHandlerOwner
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
         private KeyboardHandler _keyboardHandler;
-
-        public event EventHandler ViewDidLoadCalled;
-
-        public event EventHandler ViewWillAppearCalled;
-
-        public event EventHandler ViewDidAppearCalled;
-
-        public event EventHandler ViewWillDisappearCalled;
-
-        public event EventHandler ViewDidDisappearCalled;
 
         protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ?? (_lifecycleDelegate = CreateLifecycleDelegate());
 
@@ -57,7 +47,6 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
             base.ViewDidLoad();
 
             LifecycleDelegate.ViewDidLoad();
-            ViewDidLoadCalled?.Invoke(this, EventArgs.Empty);
         }
 
         public override void ViewWillAppear(bool animated)
@@ -65,21 +54,6 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
             base.ViewWillAppear(animated);
 
             LifecycleDelegate.ViewWillAppear();
-            ViewWillAppearCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void ViewDidAppear(bool animated)
-        {
-            base.ViewDidAppear(animated);
-
-            ViewDidAppearCalled?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void ViewWillDisappear(bool animated)
-        {
-            base.ViewWillDisappear(animated);
-
-            ViewWillDisappearCalled?.Invoke(this, EventArgs.Empty);
         }
 
         public override void ViewDidDisappear(bool animated)
@@ -87,7 +61,6 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
             base.ViewDidDisappear(animated);
 
             LifecycleDelegate.ViewDidDisappear();
-            ViewDidDisappearCalled?.Invoke(this, EventArgs.Empty);
         }
 
         public override void WillMoveToParentViewController(UIViewController parent)
