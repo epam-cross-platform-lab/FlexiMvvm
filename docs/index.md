@@ -3,13 +3,14 @@
 ## Prerequisites
 
 Firstly, we need to recap how to do this with Xamarin originally, having these steps completed:
-1) Our Xamarin development environment is ready:
-- [Xamarin.iOS Setup and Installation](https://docs.microsoft.com/en-us/xamarin/ios/get-started/index)
-- [Xamarin.Droid Setup and Installation](https://docs.microsoft.com/en-us/xamarin/android/get-started/installation/index)
-2) We're able to build and run such iOS and Android Quickstart samples:
-- [Hello, iOS](https://docs.microsoft.com/en-us/xamarin/ios/get-started/hello-ios/hello-ios-quickstart?pivots=windows)
-- [Hello, Android](https://docs.microsoft.com/en-us/xamarin/android/get-started/hello-android/hello-android-quickstart?pivots=windows)
-3) And we're familiar with MVVM. Consider Wintellect's [blog post](https://www.wintellect.com/model-view-viewmodel-mvvm-explained/) to revisit core concepts through the .NET and related frameworks perspective.
+
+1. Our Xamarin development environment is ready:
+  - [Xamarin.iOS Setup and Installation](https://docs.microsoft.com/en-us/xamarin/ios/get-started/index)
+  - [Xamarin.Droid Setup and Installation](https://docs.microsoft.com/en-us/xamarin/android/get-started/installation/index)
+1. We're able to build and run such iOS and Android Quickstart samples:
+  - [Hello, iOS](https://docs.microsoft.com/en-us/xamarin/ios/get-started/hello-ios/hello-ios-quickstart?pivots=windows)
+  - [Hello, Android](https://docs.microsoft.com/en-us/xamarin/android/get-started/hello-android/hello-android-quickstart?pivots=windows)
+1. And we're familiar with MVVM. Consider Wintellect's [blog post](https://www.wintellect.com/model-view-viewmodel-mvvm-explained/) to revisit core concepts through the .NET and related frameworks perspective.
 
 ## Ideas drove the creation
 
