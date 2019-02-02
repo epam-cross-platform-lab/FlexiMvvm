@@ -17,7 +17,7 @@ git clone https://github.com/epam-xamarin-lab/FlexiMvvm.git
 
 ## Current Status
 
-Current state should be considered as a **Developer Preview** version.
+Current state should be considered as a **Preview** version.
 Some of compatibility breaking changes are still possible due to continuous enhancements based on the early usage.
 According to current plans, first release is considered in 2019 Q1.
 
@@ -31,6 +31,10 @@ According to current plans, first release is considered in 2019 Q1.
 * FluentValidation (https://github.com/JeremySkinner/FluentValidation): for accelerating Validation features implementation
 * Cirrious.FluentLayout (https://github.com/FluentLayout/Cirrious.FluentLayout): for a better way to build constraint-based layouts in Xamarin.iOS.
 * Android Support Library v7 AppCompat: for better support of Android Material Design and guidelines
+
+## More
+
+More details, tutorials, reference are on [GitHub Pages](https://epam-xamarin-lab.github.io/FlexiMvvm/)
 
 ## License Information
 
