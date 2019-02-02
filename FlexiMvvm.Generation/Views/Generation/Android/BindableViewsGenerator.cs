@@ -80,25 +80,18 @@ namespace FlexiMvvm.Views.Generation.Android
             this.Write(@"<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, IViewModel, IStateOwner
     {
-        protected new IBindableViewLifecycleDelegate LifecycleDelegate => (IBindableViewLifecycleDelegate)base.LifecycleDelegate;
-
         public IDisposable BindingSet { get; private set; }
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
             return new BindableViewLifecycleDelegate<");
             
-            #line 38 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\BindableViewsGenerator.tt"
+            #line 36 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
             this.Write(@"<TViewModel>, TViewModel>(this);
-        }
-
-        public virtual void ExecuteBindings()
-        {
-            LifecycleDelegate.ExecuteBindings();
         }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
@@ -113,14 +106,14 @@ namespace FlexiMvvm.Views.Generation.Android
 
     public partial class ");
             
-            #line 56 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\BindableViewsGenerator.tt"
+            #line 49 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
             this.Write("<TViewModel, TParameters> : ");
             
-            #line 56 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\BindableViewsGenerator.tt"
+            #line 49 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.BaseClassName));
             
             #line default
@@ -129,25 +122,18 @@ namespace FlexiMvvm.Views.Generation.Android
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>, IStateOwner
         where TParameters : Parameters
     {
-        protected new IBindableViewLifecycleDelegate LifecycleDelegate => (IBindableViewLifecycleDelegate)base.LifecycleDelegate;
-
         public IDisposable BindingSet { get; private set; }
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
             return new BindableViewLifecycleDelegate<");
             
-            #line 66 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\BindableViewsGenerator.tt"
+            #line 57 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
             this.Write(@"<TViewModel, TParameters>, TViewModel>(this);
-        }
-
-        public virtual void ExecuteBindings()
-        {
-            LifecycleDelegate.ExecuteBindings();
         }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
@@ -162,7 +148,7 @@ namespace FlexiMvvm.Views.Generation.Android
 }
 ");
             
-            #line 84 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\BindableViewsGenerator.tt"
+            #line 70 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\BindableViewsGenerator.tt"
  } 
             
             #line default

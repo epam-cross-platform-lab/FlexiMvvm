@@ -79,25 +79,18 @@ namespace FlexiMvvm.Views.Generation.Ios
             this.Write(@"<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, IViewModel
     {
-        protected new IBindableViewLifecycleDelegate LifecycleDelegate => (IBindableViewLifecycleDelegate)base.LifecycleDelegate;
-
         public IDisposable BindingSet { get; private set; }
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
             return new BindableViewLifecycleDelegate<");
             
-            #line 37 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
+            #line 35 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
             this.Write(@"<TViewModel>, TViewModel>(this);
-        }
-
-        public virtual void ExecuteBindings()
-        {
-            LifecycleDelegate.ExecuteBindings();
         }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
@@ -112,14 +105,14 @@ namespace FlexiMvvm.Views.Generation.Ios
 
     public partial class ");
             
-            #line 55 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
+            #line 48 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
             this.Write("<TViewModel, TParameters> : ");
             
-            #line 55 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
+            #line 48 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.BaseClassName));
             
             #line default
@@ -128,7 +121,7 @@ namespace FlexiMvvm.Views.Generation.Ios
                     "here TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner" +
                     "<TParameters>\r\n        where TParameters : Parameters\r\n    {\r\n        public ");
             
-            #line 59 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
+            #line 52 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
@@ -138,25 +131,18 @@ namespace FlexiMvvm.Views.Generation.Ios
         {
         }
 
-        protected new IBindableViewLifecycleDelegate LifecycleDelegate => (IBindableViewLifecycleDelegate)base.LifecycleDelegate;
-
         public IDisposable BindingSet { get; private set; }
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
             return new BindableViewLifecycleDelegate<");
             
-            #line 70 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
+            #line 61 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
             this.Write(@"<TViewModel, TParameters>, TViewModel>(this);
-        }
-
-        public virtual void ExecuteBindings()
-        {
-            LifecycleDelegate.ExecuteBindings();
         }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
@@ -171,7 +157,7 @@ namespace FlexiMvvm.Views.Generation.Ios
 }
 ");
             
-            #line 88 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
+            #line 74 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
  } 
             
             #line default

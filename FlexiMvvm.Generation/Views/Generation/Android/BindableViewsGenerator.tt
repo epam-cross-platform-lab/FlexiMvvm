@@ -29,18 +29,11 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
     public partial class <#= viewGenerationOptions.ClassName #><TViewModel> : <#= viewGenerationOptions.BaseClassName #><TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, IViewModel, IStateOwner
     {
-        protected new IBindableViewLifecycleDelegate LifecycleDelegate => (IBindableViewLifecycleDelegate)base.LifecycleDelegate;
-
         public IDisposable BindingSet { get; private set; }
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
             return new BindableViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel>, TViewModel>(this);
-        }
-
-        public virtual void ExecuteBindings()
-        {
-            LifecycleDelegate.ExecuteBindings();
         }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
@@ -57,18 +50,11 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
         where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>, IStateOwner
         where TParameters : Parameters
     {
-        protected new IBindableViewLifecycleDelegate LifecycleDelegate => (IBindableViewLifecycleDelegate)base.LifecycleDelegate;
-
         public IDisposable BindingSet { get; private set; }
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
             return new BindableViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel, TParameters>, TViewModel>(this);
-        }
-
-        public virtual void ExecuteBindings()
-        {
-            LifecycleDelegate.ExecuteBindings();
         }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)

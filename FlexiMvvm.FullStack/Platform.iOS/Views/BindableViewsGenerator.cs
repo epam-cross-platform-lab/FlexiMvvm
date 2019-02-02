@@ -26,18 +26,11 @@ namespace FlexiMvvm.Views
     public partial class BindablePageViewController<TViewModel> : FlexiMvvm.Views.PageViewController<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, IViewModel
     {
-        protected new IBindableViewLifecycleDelegate LifecycleDelegate => (IBindableViewLifecycleDelegate)base.LifecycleDelegate;
-
         public IDisposable BindingSet { get; private set; }
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
             return new BindableViewLifecycleDelegate<BindablePageViewController<TViewModel>, TViewModel>(this);
-        }
-
-        public virtual void ExecuteBindings()
-        {
-            LifecycleDelegate.ExecuteBindings();
         }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
@@ -59,18 +52,11 @@ namespace FlexiMvvm.Views
         {
         }
 
-        protected new IBindableViewLifecycleDelegate LifecycleDelegate => (IBindableViewLifecycleDelegate)base.LifecycleDelegate;
-
         public IDisposable BindingSet { get; private set; }
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
             return new BindableViewLifecycleDelegate<BindablePageViewController<TViewModel, TParameters>, TViewModel>(this);
-        }
-
-        public virtual void ExecuteBindings()
-        {
-            LifecycleDelegate.ExecuteBindings();
         }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
@@ -89,18 +75,11 @@ namespace FlexiMvvm.Views
     public partial class BindableTabBarController<TViewModel> : FlexiMvvm.Views.TabBarController<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, IViewModel
     {
-        protected new IBindableViewLifecycleDelegate LifecycleDelegate => (IBindableViewLifecycleDelegate)base.LifecycleDelegate;
-
         public IDisposable BindingSet { get; private set; }
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
             return new BindableViewLifecycleDelegate<BindableTabBarController<TViewModel>, TViewModel>(this);
-        }
-
-        public virtual void ExecuteBindings()
-        {
-            LifecycleDelegate.ExecuteBindings();
         }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
@@ -122,18 +101,11 @@ namespace FlexiMvvm.Views
         {
         }
 
-        protected new IBindableViewLifecycleDelegate LifecycleDelegate => (IBindableViewLifecycleDelegate)base.LifecycleDelegate;
-
         public IDisposable BindingSet { get; private set; }
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
             return new BindableViewLifecycleDelegate<BindableTabBarController<TViewModel, TParameters>, TViewModel>(this);
-        }
-
-        public virtual void ExecuteBindings()
-        {
-            LifecycleDelegate.ExecuteBindings();
         }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
@@ -152,18 +124,11 @@ namespace FlexiMvvm.Views
     public partial class BindableViewController<TViewModel> : FlexiMvvm.Views.ViewController<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, IViewModel
     {
-        protected new IBindableViewLifecycleDelegate LifecycleDelegate => (IBindableViewLifecycleDelegate)base.LifecycleDelegate;
-
         public IDisposable BindingSet { get; private set; }
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
             return new BindableViewLifecycleDelegate<BindableViewController<TViewModel>, TViewModel>(this);
-        }
-
-        public virtual void ExecuteBindings()
-        {
-            LifecycleDelegate.ExecuteBindings();
         }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
@@ -185,18 +150,11 @@ namespace FlexiMvvm.Views
         {
         }
 
-        protected new IBindableViewLifecycleDelegate LifecycleDelegate => (IBindableViewLifecycleDelegate)base.LifecycleDelegate;
-
         public IDisposable BindingSet { get; private set; }
 
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
             return new BindableViewLifecycleDelegate<BindableViewController<TViewModel, TParameters>, TViewModel>(this);
-        }
-
-        public virtual void ExecuteBindings()
-        {
-            LifecycleDelegate.ExecuteBindings();
         }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
