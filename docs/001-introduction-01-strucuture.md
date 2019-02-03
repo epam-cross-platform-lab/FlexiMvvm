@@ -1,8 +1,10 @@
-[CONTENTS](index.md)
+[... CONTENTS](index.md)
 
 ---
+---
+---
 
-## FlexiMvvm structure
+# FlexiMvvm structure
 
 ### Core vs Platform
 
@@ -21,17 +23,17 @@ As FlexiMvvm is modular in nature and has several Nuget packages which cover spe
 
 ### NuGet Packages
 
-| Package | Solution Projects to add | Description |
-| --- | --- | --- |
-| **FlexiMvvm.Lifecycle** | Core (or its Presentation for advanced structure)   | One of the most important pieces which enables MVVM adoption and proper navigation approach on iOS and Android, leveraging native lifecycle specifics.  |
-| **FlexiMvvm.FullStack** | iOS and Android platform projects | Contains iOS and Android implementations, so this package is suited for platform-dependent projects |
-| FlexiMvvm.Bindings | - | Automatically added as a dependency by FlexiMvvm.Lifecycle or FlexiMvvm.FullStack, bringing Data Bindings support in terms of MVVM pattern adoption |
-| FlexiMvvm.Essentials | - | Automatically added as a dependency by FlexiMvvm.Lifecycle or FlexiMvvm.FullStack, contains important stuff which provides typical but time consuming implementations |
-| FlexiMvvm.Common | - | Automatically added as a dependency by FlexiMvvm.Lifecycle or FlexiMvvm.FullStack, shared building blocks |
-| FlexiMvvm.Collections | TBD | TBD |
-| FlexiMvvm.Validation | TBD | TBD |
-| FlexiMvvm.Generation | TBD | TBD |
+| Package                      | Solution Projects to add | Description |
+| ---                          | --- | --- |
+| **FlexiMvvm.Lifecycle**      | Core (Presentation layer) | One of the most important pieces which enables MVVM adoption and proper navigation approach on iOS and Android, leveraging native lifecycle specifics. Needed on common and platform code. |
+| **FlexiMvvm.FullStack**      | iOS App,  Android App | This package is suited for platform-dependent projects bringing everything needed there |
+| FlexiMvvm.Bindings           | - | Automatically added as a dependency by FlexiMvvm.FullStack, adding Data Bindings support in terms of MVVM pattern adoption |
+| FlexiMvvm.Essentials         | - | Automatically added as a dependency by FlexiMvvm.Lifecycle or FlexiMvvm.FullStack, contains important stuff which provides typical but time consuming implementations |
+| FlexiMvvm.Common             | - | Automatically added as a dependency by FlexiMvvm.Lifecycle or FlexiMvvm.FullStack, contains shared building blocks |
+| FlexiMvvm.Collections        | TBD | TBD |
+| FlexiMvvm.Validation         | TBD | TBD |
+| FlexiMvvm.Generation         | TBD | TBD |
 
 ---
 
-[Next: First Screen (TBD)](index.md)
+[Next: First Screen ...](001-introduction-02-first-screen.md)

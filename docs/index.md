@@ -1,11 +1,15 @@
+# CONTENTS
+
 - [INTRODUCTION](index.md)
 	- [FlexiMvvm Structure](001-introduction-01-strucuture.md)
 
 ---
+---
+---
 
 # INTRODUCTION
 
-## Prerequisites
+### Prerequisites
 
 Firstly, we need to recap how to do this with Xamarin originally, having these steps completed:
 
@@ -17,7 +21,7 @@ Firstly, we need to recap how to do this with Xamarin originally, having these s
   - [Hello, Android](https://docs.microsoft.com/en-us/xamarin/android/get-started/hello-android/hello-android-quickstart?pivots=windows)
 3. And we're familiar with MVVM. Consider Wintellect's [blog post](https://www.wintellect.com/model-view-viewmodel-mvvm-explained/) to revisit core concepts through the .NET and related frameworks perspective.
 
-## Ideas drove the creation
+### Ideas drove the creation
 
 Based on the experience gained building mobile cross-platform applications with Xamarin and leveraging this framework's major advantages, implementing FlexiMvvm became crucial to address the minimal **time to market** demand and maintain overall product **quality** constrained to high standards for our clients.
 
@@ -25,7 +29,7 @@ Time to market means we're able to deliver advantage with Xamarin over mobile na
 
 Quality is a more complex term reflecting many aspects of a product, the mobile app in hands of a consumer. It comprises system and user quality attributes like Usability, Performance, Native look and feel, etc. We believe, a mobile solution which properly leverages iOS and Android native capabilities with less customizations over a common denominator, has higher chances for 5 consumer feedback stars.
 
-### Aims
+#### Aims
 
 The following aims were pursued while implementing FlexiMvvm:
 
@@ -37,4 +41,4 @@ The following aims were pursued while implementing FlexiMvvm:
 
 ---
 
-[Next: FlexiMvvm Structure](001-introduction-01-strucuture.md)
+[Next: FlexiMvvm Structure ...](001-introduction-01-strucuture.md)
