@@ -2,6 +2,8 @@
 
 - [INTRODUCTION](index.md)
 	- [FlexiMvvm Structure](001-introduction-01-strucuture.md)
+	- [First screen](001-introduction-02-first-screen.md)
+	- [Second Screen with Parameters](001-introduction-03-second-screen-with-parameters.md)
 
 ---
 ---
