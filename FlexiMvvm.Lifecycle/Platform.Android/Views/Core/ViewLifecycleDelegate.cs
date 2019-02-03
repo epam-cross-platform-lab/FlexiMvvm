@@ -83,7 +83,7 @@ namespace FlexiMvvm.Views.Core
         {
             base.OnCreate(savedInstanceState);
 
-            var store = ViewModelStoreProvider.Get(View);
+            var store = ViewModelStoreProvider.Get(View).NotNull();
             _viewModelKey = savedInstanceState?.GetString(ViewModelKeyKey) ?? Guid.NewGuid().ToString();
             var factory = ViewModelProvider.GetFactory();
             var state = savedInstanceState?.GetState();
@@ -138,7 +138,7 @@ namespace FlexiMvvm.Views.Core
             base.OnDestroy();
 
             var store = ViewModelStoreProvider.Get(View);
-            store.Remove(_viewModelKey.NotNull());
+            store?.Remove(_viewModelKey.NotNull());
             ViewCache.Remove(View);
         }
     }

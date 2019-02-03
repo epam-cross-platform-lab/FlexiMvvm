@@ -23,20 +23,25 @@ namespace FlexiMvvm.Views.Core
     {
         private const string ViewModelStoreTag = "FlexiMvvm_ViewModelStore";
 
-        [NotNull]
+        [CanBeNull]
         internal static IViewModelStore Get([NotNull] IView view)
         {
             var fragmentManager = view.GetActivity().SupportFragmentManager.NotNull();
-            var store = (ViewModelStoreFragment)fragmentManager.FindFragmentByTag(ViewModelStoreTag);
+            ViewModelStoreFragment store = null;
 
-            if (store == null)
+            if (!fragmentManager.IsDestroyed)
             {
-                store = ViewModelStoreFragment.NewInstance();
+                store = (ViewModelStoreFragment)fragmentManager.FindFragmentByTag(ViewModelStoreTag);
 
-                fragmentManager
-                    .BeginTransaction().NotNull()
-                    .Add(store, ViewModelStoreTag).NotNull()
-                    .Commit();
+                if (store == null)
+                {
+                    store = ViewModelStoreFragment.NewInstance();
+
+                    fragmentManager
+                        .BeginTransaction().NotNull()
+                        .Add(store, ViewModelStoreTag).NotNull()
+                        .Commit();
+                }
             }
 
             return store;
