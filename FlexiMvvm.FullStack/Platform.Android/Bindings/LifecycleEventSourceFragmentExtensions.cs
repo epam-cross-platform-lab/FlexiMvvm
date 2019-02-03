@@ -18,6 +18,7 @@ using System;
 using FlexiMvvm.Bindings.Custom;
 using FlexiMvvm.Views;
 using JetBrains.Annotations;
+using Fragment = Android.Support.V4.App.Fragment;
 
 namespace FlexiMvvm.Bindings
 {
@@ -48,7 +49,7 @@ namespace FlexiMvvm.Bindings
 
                     return false;
                 },
-                () => "OnOptionsItemSelected");
+                () => $"{nameof(Fragment.OnOptionsItemSelected)}");
         }
     }
 }

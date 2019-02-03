@@ -14,6 +14,7 @@
 // limitations under the License.
 // =========================================================================
 
+using System;
 using Android.Views;
 using FlexiMvvm.Bindings.Custom;
 using JetBrains.Annotations;
@@ -27,6 +28,9 @@ namespace FlexiMvvm.Bindings
             [NotNull] this IItemReference<View> viewReference,
             bool trackCanExecuteCommandChanged = false)
         {
+            if (viewReference == null)
+                throw new ArgumentNullException(nameof(viewReference));
+
             return new TargetItemOneWayToSourceCustomBinding<View, object>(
                 viewReference,
                 (view, eventHandler) => view.NotNull().Click += eventHandler,
@@ -39,15 +43,31 @@ namespace FlexiMvvm.Bindings
                     }
                 },
                 view => null,
-                () => "Click");
+                () => $"{nameof(View.Click)}");
+        }
+
+        [NotNull]
+        public static TargetItemBinding<View, bool> EnabledBinding(
+            [NotNull] this IItemReference<View> viewReference)
+        {
+            if (viewReference == null)
+                throw new ArgumentNullException(nameof(viewReference));
+
+            return new TargetItemOneWayCustomBinding<View, bool>(
+                viewReference,
+                (view, enabled) => view.NotNull().Enabled = enabled,
+                () => $"{nameof(View.Enabled)}");
         }
 
         [NotNull]
         public static TargetItemBinding<View, object> FocusChangeBinding(
             [NotNull] this IItemReference<View> viewReference,
-            FocusDirection focusDirection,
+            FocusDirection focusDirection = FocusDirection.InOut,
             bool trackCanExecuteCommandChanged = false)
         {
+            if (viewReference == null)
+                throw new ArgumentNullException(nameof(viewReference));
+
             return new TargetItemOneWayToSourceCustomBinding<View, object, View.FocusChangeEventArgs>(
                 viewReference,
                 (view, eventHandler) => view.NotNull().FocusChange += eventHandler,
@@ -59,6 +79,7 @@ namespace FlexiMvvm.Bindings
                         view.NotNull().Enabled = canExecuteCommand;
                     }
                 },
+                (view, eventArgs) => null,
                 (view, eventArgs) =>
                 {
                     switch (focusDirection)
@@ -73,7 +94,20 @@ namespace FlexiMvvm.Bindings
                             return false;
                     }
                 },
-                () => "FocusChange");
+                () => $"{nameof(View.FocusChange)}");
+        }
+
+        [NotNull]
+        public static TargetItemBinding<View, bool> KeepScreenOnBinding(
+            [NotNull] this IItemReference<View> viewReference)
+        {
+            if (viewReference == null)
+                throw new ArgumentNullException(nameof(viewReference));
+
+            return new TargetItemOneWayCustomBinding<View, bool>(
+                viewReference,
+                (view, keepScreenOn) => view.NotNull().KeepScreenOn = keepScreenOn,
+                () => $"{nameof(View.KeepScreenOn)}");
         }
 
         [NotNull]
@@ -81,6 +115,9 @@ namespace FlexiMvvm.Bindings
             [NotNull] this IItemReference<View> viewReference,
             bool trackCanExecuteCommandChanged = false)
         {
+            if (viewReference == null)
+                throw new ArgumentNullException(nameof(viewReference));
+
             return new TargetItemOneWayToSourceCustomBinding<View, object, View.LongClickEventArgs>(
                 viewReference,
                 (view, eventHandler) => view.NotNull().LongClick += eventHandler,
@@ -93,7 +130,33 @@ namespace FlexiMvvm.Bindings
                     }
                 },
                 (view, eventArgs) => null,
-                () => "LongClick");
+                () => $"{nameof(View.LongClick)}");
+        }
+
+        [NotNull]
+        public static TargetItemBinding<View, bool> SelectedBinding(
+            [NotNull] this IItemReference<View> viewReference)
+        {
+            if (viewReference == null)
+                throw new ArgumentNullException(nameof(viewReference));
+
+            return new TargetItemOneWayCustomBinding<View, bool>(
+                viewReference,
+                (view, selected) => view.NotNull().Selected = selected,
+                () => $"{nameof(View.Selected)}");
+        }
+
+        [NotNull]
+        public static TargetItemBinding<View, ViewStates> VisibilityBinding(
+            [NotNull] this IItemReference<View> viewReference)
+        {
+            if (viewReference == null)
+                throw new ArgumentNullException(nameof(viewReference));
+
+            return new TargetItemOneWayCustomBinding<View, ViewStates>(
+                viewReference,
+                (view, visibility) => view.NotNull().Visibility = visibility,
+                () => $"{nameof(View.Visibility)}");
         }
     }
 }

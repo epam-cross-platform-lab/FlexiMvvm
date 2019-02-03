@@ -35,8 +35,8 @@ namespace FlexiMvvm.Bindings
                 (recyclerViewAdapter, eventHandler) => recyclerViewAdapter.NotNull().ItemClicked += eventHandler,
                 (recyclerViewAdapter, eventHandler) => recyclerViewAdapter.NotNull().ItemClicked -= eventHandler,
                 (recyclerViewAdapter, canExecuteCommand) => { },
-                (recyclerViewAdapter, eventArgs) => eventArgs?.Item,
-                () => "ItemClicked");
+                (recyclerViewAdapter, eventArgs) => eventArgs.NotNull().Item,
+                () => $"{nameof(RecyclerViewObservableAdapter.ItemClicked)}");
         }
     }
 }

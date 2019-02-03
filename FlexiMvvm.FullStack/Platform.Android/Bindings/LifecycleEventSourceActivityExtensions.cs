@@ -15,6 +15,7 @@
 // =========================================================================
 
 using System;
+using Android.App;
 using FlexiMvvm.Bindings.Custom;
 using FlexiMvvm.Views;
 using JetBrains.Annotations;
@@ -48,7 +49,7 @@ namespace FlexiMvvm.Bindings
 
                     return false;
                 },
-                () => "OnOptionsItemSelected");
+                () => $"{nameof(Activity.OnOptionsItemSelected)}");
         }
 
         [NotNull]
@@ -70,7 +71,7 @@ namespace FlexiMvvm.Bindings
 
                     return true;
                 },
-                () => "OnBackPressed");
+                () => $"{nameof(Activity.OnBackPressed)}");
         }
     }
 }
