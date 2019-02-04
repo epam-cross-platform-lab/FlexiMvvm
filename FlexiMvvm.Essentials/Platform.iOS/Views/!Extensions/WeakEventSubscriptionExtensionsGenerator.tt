@@ -3,7 +3,7 @@
 <#@ assembly name="$(SolutionDir)FlexiMvvm.Generation\bin\$(Configuration)\netstandard2.0\FlexiMvvm.Generation.dll" #>
 <#@ import namespace="FlexiMvvm.Weak.Subscriptions.Generation" #>
 <#
-    var weakEventsSubscriptionsExtensionsGenerator = new WeakEventsSubscriptionsExtensionsGenerator(
+    var weakEventSubscriptionExtensionsGenerator = new WeakEventSubscriptionExtensionsGenerator(
         "FlexiMvvm.Views",
         new ExtensionsGenerationOptions(
             "FlexiMvvm.Views.Keyboard.KeyboardHandler",
@@ -202,4 +202,4 @@
 // limitations under the License.
 // =========================================================================
 
-<#= weakEventsSubscriptionsExtensionsGenerator.TransformText() #>
+<#= weakEventSubscriptionExtensionsGenerator.TransformText() #>

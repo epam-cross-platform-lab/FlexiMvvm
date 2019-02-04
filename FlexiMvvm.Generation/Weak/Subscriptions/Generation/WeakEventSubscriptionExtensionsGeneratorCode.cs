@@ -21,9 +21,9 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.Weak.Subscriptions.Generation
 {
-    public partial class WeakEventsSubscriptionsExtensionsGenerator
+    public partial class WeakEventSubscriptionExtensionsGenerator
     {
-        public WeakEventsSubscriptionsExtensionsGenerator([NotNull] string targetNamespace, [CanBeNull] params ExtensionsGenerationOptions[] extensionsGenerationOptions)
+        public WeakEventSubscriptionExtensionsGenerator([NotNull] string targetNamespace, [CanBeNull] params ExtensionsGenerationOptions[] extensionsGenerationOptions)
         {
             if (string.IsNullOrWhiteSpace(targetNamespace))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(targetNamespace));
@@ -49,9 +49,11 @@ namespace FlexiMvvm.Weak.Subscriptions.Generation
         [NotNull]
         private string GetClassName([NotNull] ExtensionsGenerationOptions typeExtensionsGenerationOptions)
         {
-            var sanitizedClassName = typeExtensionsGenerationOptions.ClassName.WithoutNamespace().WithoutInterfacePrefix().WithoutGenericPart();
+            var sanitizedClassName = string.IsNullOrWhiteSpace(typeExtensionsGenerationOptions.ExtensionsCustomClassName)
+                ? typeExtensionsGenerationOptions.ClassName.WithoutNamespace().WithoutInterfacePrefix().WithoutGenericPart()
+                : typeExtensionsGenerationOptions.ExtensionsCustomClassName.WithoutNamespace().WithoutInterfacePrefix().WithoutGenericPart();
 
-            return $"{sanitizedClassName}WeakEventsSubscriptionsExtensions";
+            return $"{sanitizedClassName}WeakEventSubscriptionExtensions";
         }
 
         [NotNull]

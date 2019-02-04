@@ -3,7 +3,7 @@
 <#@ assembly name="$(SolutionDir)FlexiMvvm.Generation\bin\$(Configuration)\netstandard2.0\FlexiMvvm.Generation.dll" #>
 <#@ import namespace="FlexiMvvm.Weak.Subscriptions.Generation" #>
 <#
-    var weakEventsSubscriptionsExtensionsGenerator = new WeakEventsSubscriptionsExtensionsGenerator(
+    var weakEventSubscriptionExtensionsGenerator = new WeakEventSubscriptionExtensionsGenerator(
         "FlexiMvvm.Views",
         new ExtensionsGenerationOptions(
             "Android.AccessibilityServices.AccessibilityService.SoftKeyboardController",
@@ -233,6 +233,137 @@
             new EventGenerationOptions("Results", "Android.Speech.ResultsEventArgs"),
             new EventGenerationOptions("RmsChanged", "Android.Speech.RmsChangedEventArgs")),
         new ExtensionsGenerationOptions(
+            "Android.Support.Design.Widget.AppBarLayout",
+            new EventGenerationOptions("OffsetChanged", "Android.Support.Design.Widget.AppBarLayout.OffsetChangedEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Support.Design.Widget.BottomNavigationView",
+            new EventGenerationOptions("NavigationItemReselected", "Android.Support.Design.Widget.BottomNavigationView.NavigationItemReselectedEventArgs"),
+            new EventGenerationOptions("NavigationItemSelected", "Android.Support.Design.Widget.BottomNavigationView.NavigationItemSelectedEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Support.Design.Widget.NavigationView",
+            new EventGenerationOptions("NavigationItemSelected", "Android.Support.Design.Widget.NavigationView.NavigationItemSelectedEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Support.Design.Widget.TabLayout",
+            new EventGenerationOptions("TabReselected", "Android.Support.Design.Widget.TabLayout.TabReselectedEventArgs"),
+            new EventGenerationOptions("TabSelected", "Android.Support.Design.Widget.TabLayout.TabSelectedEventArgs"),
+            new EventGenerationOptions("TabUnselected", "Android.Support.Design.Widget.TabLayout.TabUnselectedEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Support.V4.App.FragmentManager",
+            new EventGenerationOptions("BackStackChanged"))
+        {
+            ExtensionsCustomClassName = "SupportFragmentManager"
+        },
+        new ExtensionsGenerationOptions(
+            "Android.Support.V4.OS.CancellationSignal",
+            new EventGenerationOptions("CancelEvent"))
+        {
+            ExtensionsCustomClassName = "SupportCancellationSignal"
+        },
+        new ExtensionsGenerationOptions(
+            "Android.Support.V4.View.ActionProvider",
+            new EventGenerationOptions("SubUiVisibility", "Android.Support.V4.View.ActionProvider.SubUiVisibilityEventArgs"),
+            new EventGenerationOptions("Visibility", "Android.Support.V4.View.ActionProvider.VisibilityEventArgs"))
+        {
+            ExtensionsCustomClassName = "SupportActionProvider"
+        },
+        new ExtensionsGenerationOptions(
+            "Android.Support.V4.View.ViewPager",
+            new EventGenerationOptions("AdapterChange", "Android.Support.V4.View.ViewPager.AdapterChangeEventArgs"),
+            new EventGenerationOptions("PageScrolled", "Android.Support.V4.View.ViewPager.PageScrolledEventArgs"),
+            new EventGenerationOptions("PageScrollStateChanged", "Android.Support.V4.View.ViewPager.PageScrollStateChangedEventArgs"),
+            new EventGenerationOptions("PageSelected", "Android.Support.V4.View.ViewPager.PageSelectedEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Support.V4.Widget.DrawerLayout",
+            new EventGenerationOptions("DrawerClosed", "Android.Support.V4.Widget.DrawerLayout.DrawerClosedEventArgs"),
+            new EventGenerationOptions("DrawerOpened", "Android.Support.V4.Widget.DrawerLayout.DrawerOpenedEventArgs"),
+            new EventGenerationOptions("DrawerSlide", "Android.Support.V4.Widget.DrawerLayout.DrawerSlideEventArgs"),
+            new EventGenerationOptions("DrawerStateChanged", "Android.Support.V4.Widget.DrawerLayout.DrawerStateChangedEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Support.V4.Widget.NestedScrollView",
+            new EventGenerationOptions("ScrollChange", "Android.Support.V4.Widget.NestedScrollView.ScrollChangeEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Support.V4.Widget.SlidingPaneLayout",
+            new EventGenerationOptions("PanelClosed", "Android.Support.V4.Widget.SlidingPaneLayout.PanelClosedEventArgs"),
+            new EventGenerationOptions("PanelOpened", "Android.Support.V4.Widget.SlidingPaneLayout.PanelOpenedEventArgs"),
+            new EventGenerationOptions("PanelSlide", "Android.Support.V4.Widget.SlidingPaneLayout.PanelSlideEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Support.V4.Widget.SwipeRefreshLayout",
+            new EventGenerationOptions("Refresh")),
+        new ExtensionsGenerationOptions(
+            "Android.Support.V7.App.ActionBar",
+            new EventGenerationOptions("MenuVisibility", "Android.Support.V7.App.ActionBar.MenuVisibilityEventArgs"))
+        {
+            ExtensionsCustomClassName = "SupportActionBar"
+        },
+        new ExtensionsGenerationOptions(
+            "Android.Support.V7.App.WindowDecorActionBar",
+            new EventGenerationOptions("MenuVisibility", "Android.Support.V7.App.ActionBar.MenuVisibilityEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Support.V7.Widget.ActionMenuView",
+            new EventGenerationOptions("MenuItemClick", "Android.Support.V7.Widget.ActionMenuView.MenuItemClickEventArgs"))
+        {
+            ExtensionsCustomClassName = "SupportActionMenuView"
+        },
+        new ExtensionsGenerationOptions(
+            "Android.Support.V7.Widget.ContentFrameLayout",
+            new EventGenerationOptions("AttachedFromWindow"),
+            new EventGenerationOptions("DetachedFromWindow")),
+        new ExtensionsGenerationOptions(
+            "Android.Support.V7.Widget.FitWindowsFrameLayout",
+            new EventGenerationOptions("FitSystemWindows", "Android.Support.V7.Widget.FitWindowsViewGroupOnFitSystemWindowsEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Support.V7.Widget.FitWindowsLinearLayout",
+            new EventGenerationOptions("FitSystemWindows", "Android.Support.V7.Widget.FitWindowsViewGroupOnFitSystemWindowsEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Support.V7.Widget.MenuPopupWindow",
+            new EventGenerationOptions("ItemHoverEnter", "Android.Support.V7.Widget.ItemHoverEnterEventArgs"),
+            new EventGenerationOptions("ItemHoverExit", "Android.Support.V7.Widget.ItemHoverExitEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Support.V7.Widget.MenuPopupWindow.MenuDropDownListView",
+            new EventGenerationOptions("ItemHoverEnter", "Android.Support.V7.Widget.ItemHoverEnterEventArgs"),
+            new EventGenerationOptions("ItemHoverExit", "Android.Support.V7.Widget.ItemHoverExitEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Support.V7.Widget.PopupMenu",
+            new EventGenerationOptions("DismissEvent", "Android.Support.V7.Widget.PopupMenu.DismissEventArgs"),
+            new EventGenerationOptions("MenuItemClick", "Android.Support.V7.Widget.PopupMenu.MenuItemClickEventArgs"))
+        {
+            ExtensionsCustomClassName = "SupportPopupMenu"
+        },
+        new ExtensionsGenerationOptions(
+            "Android.Support.V7.Widget.RecyclerView",
+            new EventGenerationOptions("ChildViewAttachedToWindow", "Android.Support.V7.Widget.RecyclerView.ChildViewAttachedToWindowEventArgs"),
+            new EventGenerationOptions("ChildViewDetachedFromWindow", "Android.Support.V7.Widget.RecyclerView.ChildViewDetachedFromWindowEventArgs"),
+            new EventGenerationOptions("InterceptTouchEvent", "Android.Support.V7.Widget.RecyclerView.InterceptTouchEventEventArgs"),
+            new EventGenerationOptions("RecyclerEvent", "Android.Support.V7.Widget.RecyclerView.RecyclerEventArgs"),
+            new EventGenerationOptions("RequestDisallowInterceptTouchEvent", "Android.Support.V7.Widget.RecyclerView.RequestDisallowInterceptTouchEventEventArgs"),
+            new EventGenerationOptions("TouchEvent", "Android.Support.V7.Widget.RecyclerView.TouchEventEventArgs")),
+        new ExtensionsGenerationOptions(
+            "Android.Support.V7.Widget.SearchView",
+            new EventGenerationOptions("Close", "Android.Support.V7.Widget.SearchView.CloseEventArgs"),
+            new EventGenerationOptions("QueryTextChange", "Android.Support.V7.Widget.SearchView.QueryTextChangeEventArgs"),
+            new EventGenerationOptions("QueryTextSubmit", "Android.Support.V7.Widget.SearchView.QueryTextSubmitEventArgs"),
+            new EventGenerationOptions("SuggestionClick", "Android.Support.V7.Widget.SearchView.SuggestionClickEventArgs"),
+            new EventGenerationOptions("SuggestionSelect", "Android.Support.V7.Widget.SearchView.SuggestionSelectEventArgs"))
+        {
+            ExtensionsCustomClassName = "SupportSearchView"
+        },
+        new ExtensionsGenerationOptions(
+            "Android.Support.V7.Widget.ShareActionProvider",
+            new EventGenerationOptions("ShareTargetSelected", "Android.Support.V7.Widget.ShareActionProvider.ShareTargetSelectedEventArgs"))
+        {
+            ExtensionsCustomClassName = "SupportShareActionProvider"
+        },
+        new ExtensionsGenerationOptions(
+            "Android.Support.V7.Widget.Toolbar",
+            new EventGenerationOptions("MenuItemClick", "Android.Support.V7.Widget.Toolbar.MenuItemClickEventArgs"),
+            new EventGenerationOptions("NavigationClick", "Android.Support.V7.Widget.Toolbar.NavigationClickEventArgs"))
+        {
+            ExtensionsCustomClassName = "SupportToolbar"
+        },
+        new ExtensionsGenerationOptions(
+            "Android.Support.V7.Widget.ViewStubCompat",
+            new EventGenerationOptions("InflateEvent", "Android.Support.V7.Widget.ViewStubCompat.InflateEventArgs")),
+        new ExtensionsGenerationOptions(
             "Android.Views.ActionProvider",
             new EventGenerationOptions("Visibility", "Android.Views.ActionProvider.VisibilityEventArgs")),
         new ExtensionsGenerationOptions(
@@ -454,4 +585,4 @@
 // limitations under the License.
 // =========================================================================
 
-<#= weakEventsSubscriptionsExtensionsGenerator.TransformText() #>
+<#= weakEventSubscriptionExtensionsGenerator.TransformText() #>

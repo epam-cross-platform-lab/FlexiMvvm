@@ -49,6 +49,9 @@ namespace FlexiMvvm.Weak.Subscriptions.Generation
         public IEnumerable<EventGenerationOptions> TypeEventsWithCustomEventHandlerGenerationOptions { get; }
 
         [CanBeNull]
+        public string ExtensionsCustomClassName { get; set; }
+
+        [CanBeNull]
         public string ObsoleteDescription { get; set; }
 
         [CanBeNull]

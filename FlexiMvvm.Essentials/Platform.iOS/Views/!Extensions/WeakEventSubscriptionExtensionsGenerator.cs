@@ -21,7 +21,7 @@ using FlexiMvvm.Weak.Subscriptions;
 namespace FlexiMvvm.Views.Keyboard
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="FlexiMvvm.Views.Keyboard.KeyboardHandler"/> class events.</summary>
-    public static class KeyboardHandlerWeakEventsSubscriptionsExtensions
+    public static class KeyboardHandlerWeakEventSubscriptionExtensions
     {
         /// <summary>Weak subscription on <see cref="FlexiMvvm.Views.Keyboard.KeyboardHandler.KeyboardDidHide"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
@@ -113,7 +113,7 @@ namespace FlexiMvvm.Views.Keyboard
 namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIKit.UIAccelerometer"/> class events.</summary>
-    public static class UIAccelerometerWeakEventsSubscriptionsExtensions
+    public static class UIAccelerometerWeakEventSubscriptionExtensions
     {
         /// <summary>Weak subscription on <see cref="UIKit.UIAccelerometer.Acceleration"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
@@ -142,7 +142,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIKit.UIActionSheet"/> class events.</summary>
-    public static class UIActionSheetWeakEventsSubscriptionsExtensions
+    public static class UIActionSheetWeakEventSubscriptionExtensions
     {
         /// <summary>Weak subscription on <see cref="UIKit.UIActionSheet.Canceled"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
@@ -276,7 +276,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIKit.UIAlertView"/> class events.</summary>
-    public static class UIAlertViewWeakEventsSubscriptionsExtensions
+    public static class UIAlertViewWeakEventSubscriptionExtensions
     {
         /// <summary>Weak subscription on <see cref="UIKit.UIAlertView.Canceled"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
@@ -410,7 +410,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIKit.UIBarButtonItem"/> class events.</summary>
-    public static class UIBarButtonItemWeakEventsSubscriptionsExtensions
+    public static class UIBarButtonItemWeakEventSubscriptionExtensions
     {
         /// <summary>Weak subscription on <see cref="UIKit.UIBarButtonItem.Clicked"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
@@ -439,7 +439,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIKit.UICollisionBehavior"/> class events.</summary>
-    public static class UICollisionBehaviorWeakEventsSubscriptionsExtensions
+    public static class UICollisionBehaviorWeakEventSubscriptionExtensions
     {
         /// <summary>Weak subscription on <see cref="UIKit.UICollisionBehavior.BeganBoundaryContact"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
@@ -531,7 +531,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIKit.UIControl"/> class events.</summary>
-    public static class UIControlWeakEventsSubscriptionsExtensions
+    public static class UIControlWeakEventSubscriptionExtensions
     {
         /// <summary>Weak subscription on <see cref="UIKit.UIControl.AllEditingEvents"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
@@ -917,7 +917,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIKit.UIDocumentInteractionController"/> class events.</summary>
-    public static class UIDocumentInteractionControllerWeakEventsSubscriptionsExtensions
+    public static class UIDocumentInteractionControllerWeakEventSubscriptionExtensions
     {
         /// <summary>Weak subscription on <see cref="UIKit.UIDocumentInteractionController.DidDismissOpenInMenu"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
@@ -1093,7 +1093,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIKit.UIDocumentMenuViewController"/> class events.</summary>
-    public static class UIDocumentMenuViewControllerWeakEventsSubscriptionsExtensions
+    public static class UIDocumentMenuViewControllerWeakEventSubscriptionExtensions
     {
         /// <summary>Weak subscription on <see cref="UIKit.UIDocumentMenuViewController.DidPickDocumentPicker"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
@@ -1143,7 +1143,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIKit.UIDocumentPickerViewController"/> class events.</summary>
-    public static class UIDocumentPickerViewControllerWeakEventsSubscriptionsExtensions
+    public static class UIDocumentPickerViewControllerWeakEventSubscriptionExtensions
     {
         /// <summary>Weak subscription on <see cref="UIKit.UIDocumentPickerViewController.DidPickDocument"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
@@ -1193,7 +1193,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIKit.UIImagePickerController"/> class events.</summary>
-    public static class UIImagePickerControllerWeakEventsSubscriptionsExtensions
+    public static class UIImagePickerControllerWeakEventSubscriptionExtensions
     {
         /// <summary>Weak subscription on <see cref="UIKit.UIImagePickerController.Canceled"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
@@ -1264,7 +1264,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIKit.UIPageViewController"/> class events.</summary>
-    public static class UIPageViewControllerWeakEventsSubscriptionsExtensions
+    public static class UIPageViewControllerWeakEventSubscriptionExtensions
     {
         /// <summary>Weak subscription on <see cref="UIKit.UIPageViewController.DidFinishAnimating"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
@@ -1314,7 +1314,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIKit.UIPopoverController"/> class events.</summary>
-    public static class UIPopoverControllerWeakEventsSubscriptionsExtensions
+    public static class UIPopoverControllerWeakEventSubscriptionExtensions
     {
         /// <summary>Weak subscription on <see cref="UIKit.UIPopoverController.DidDismiss"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
@@ -1364,7 +1364,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIKit.UIPopoverPresentationController"/> class events.</summary>
-    public static class UIPopoverPresentationControllerWeakEventsSubscriptionsExtensions
+    public static class UIPopoverPresentationControllerWeakEventSubscriptionExtensions
     {
         /// <summary>Weak subscription on <see cref="UIKit.UIPopoverPresentationController.DidDismiss"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
@@ -1435,7 +1435,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIKit.UIPreviewInteraction"/> class events.</summary>
-    public static class UIPreviewInteractionWeakEventsSubscriptionsExtensions
+    public static class UIPreviewInteractionWeakEventSubscriptionExtensions
     {
         /// <summary>Weak subscription on <see cref="UIKit.UIPreviewInteraction.DidCancel"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
@@ -1506,7 +1506,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIKit.UIPrintInteractionController"/> class events.</summary>
-    public static class UIPrintInteractionControllerWeakEventsSubscriptionsExtensions
+    public static class UIPrintInteractionControllerWeakEventSubscriptionExtensions
     {
         /// <summary>Weak subscription on <see cref="UIKit.UIPrintInteractionController.DidDismissPrinterOptions"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
@@ -1640,7 +1640,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIKit.UIScrollView"/> class events.</summary>
-    public static class UIScrollViewWeakEventsSubscriptionsExtensions
+    public static class UIScrollViewWeakEventSubscriptionExtensions
     {
         /// <summary>Weak subscription on <see cref="UIKit.UIScrollView.DecelerationEnded"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
@@ -1879,7 +1879,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIKit.UISearchBar"/> class events.</summary>
-    public static class UISearchBarWeakEventsSubscriptionsExtensions
+    public static class UISearchBarWeakEventSubscriptionExtensions
     {
         /// <summary>Weak subscription on <see cref="UIKit.UISearchBar.BookmarkButtonClicked"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
@@ -2055,7 +2055,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIKit.UISplitViewController"/> class events.</summary>
-    public static class UISplitViewControllerWeakEventsSubscriptionsExtensions
+    public static class UISplitViewControllerWeakEventSubscriptionExtensions
     {
         /// <summary>Weak subscription on <see cref="UIKit.UISplitViewController.WillChangeDisplayMode"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
@@ -2147,7 +2147,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIKit.UITabBar"/> class events.</summary>
-    public static class UITabBarWeakEventsSubscriptionsExtensions
+    public static class UITabBarWeakEventSubscriptionExtensions
     {
         /// <summary>Weak subscription on <see cref="UIKit.UITabBar.DidBeginCustomizingItems"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
@@ -2260,7 +2260,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIKit.UITabBarController"/> class events.</summary>
-    public static class UITabBarControllerWeakEventsSubscriptionsExtensions
+    public static class UITabBarControllerWeakEventSubscriptionExtensions
     {
         /// <summary>Weak subscription on <see cref="UIKit.UITabBarController.FinishedCustomizingViewControllers"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
@@ -2352,7 +2352,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIKit.UITextField"/> class events.</summary>
-    public static class UITextFieldWeakEventsSubscriptionsExtensions
+    public static class UITextFieldWeakEventSubscriptionExtensions
     {
         /// <summary>Weak subscription on <see cref="UIKit.UITextField.Ended"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
@@ -2402,7 +2402,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIKit.UITextView"/> class events.</summary>
-    public static class UITextViewWeakEventsSubscriptionsExtensions
+    public static class UITextViewWeakEventSubscriptionExtensions
     {
         /// <summary>Weak subscription on <see cref="UIKit.UITextView.Changed"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
@@ -2725,7 +2725,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIKit.UIVideoEditorController"/> class events.</summary>
-    public static class UIVideoEditorControllerWeakEventsSubscriptionsExtensions
+    public static class UIVideoEditorControllerWeakEventSubscriptionExtensions
     {
         /// <summary>Weak subscription on <see cref="UIKit.UIVideoEditorController.Failed"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
@@ -2796,7 +2796,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="UIKit.UIWebView"/> class events.</summary>
-    public static class UIWebViewWeakEventsSubscriptionsExtensions
+    public static class UIWebViewWeakEventSubscriptionExtensions
     {
         /// <summary>Weak subscription on <see cref="UIKit.UIWebView.LoadError"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>

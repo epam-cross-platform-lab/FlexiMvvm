@@ -11,9 +11,9 @@
         <PackageReference Include="System.CodeDom" Version="4.5.0" />
     </ItemGroup>
     <ItemGroup>
-        <None Update="Weak\Subscriptions\Generation\WeakEventsSubscriptionsExtensionsGenerator.tt">
+        <None Update="Weak\Subscriptions\Generation\WeakEventSubscriptionExtensionsGenerator.tt">
             <Generator>TextTemplatingFilePreprocessor</Generator>
-            <LastGenOutput>WeakEventsSubscriptionsExtensionsGenerator.cs</LastGenOutput>
+            <LastGenOutput>WeakEventSubscriptionExtensionsGenerator.cs</LastGenOutput>
         </None>
         <None Update="Weak\Subscriptions\Generation\WeakEventSubscriptionGenerator.tt">
             <Generator>TextTemplatingFilePreprocessor</Generator>
@@ -40,10 +40,10 @@
         <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Update="Weak\Subscriptions\Generation\WeakEventsSubscriptionsExtensionsGenerator.cs">
+        <Compile Update="Weak\Subscriptions\Generation\WeakEventSubscriptionExtensionsGenerator.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
-            <DependentUpon>WeakEventsSubscriptionsExtensionsGenerator.tt</DependentUpon>
+            <DependentUpon>WeakEventSubscriptionExtensionsGenerator.tt</DependentUpon>
         </Compile>
         <Compile Update="Weak\Subscriptions\Generation\WeakEventSubscriptionGenerator.cs">
             <DesignTime>True</DesignTime>

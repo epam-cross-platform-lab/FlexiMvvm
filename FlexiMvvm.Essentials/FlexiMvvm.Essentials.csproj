@@ -9,41 +9,50 @@
     <ItemGroup>
         <ProjectReference Include="..\FlexiMvvm.Common\FlexiMvvm.Common.csproj" />
     </ItemGroup>
+    <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid80')) ">
+        <PackageReference Include="Xamarin.Android.Support.Design" Version="26.1.0.1" />
+    </ItemGroup>
+    <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid81')) ">
+        <PackageReference Include="Xamarin.Android.Support.Design" Version="27.0.2.1" />
+    </ItemGroup>
+    <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid90')) ">
+        <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.1" />
+    </ItemGroup>
     <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
         <PackageReference Include="Cirrious.FluentLayout" Version="2.9.0" />
     </ItemGroup>
     <ItemGroup>
-        <None Update="Shared\!Extensions\WeakEventsSubscriptionsExtensionsGenerator.tt">
+        <None Update="Shared\!Extensions\WeakEventSubscriptionExtensionsGenerator.tt">
             <Generator>TextTemplatingFileGenerator</Generator>
-            <LastGenOutput>WeakEventsSubscriptionsExtensionsGenerator.cs</LastGenOutput>
+            <LastGenOutput>WeakEventSubscriptionExtensionsGenerator.cs</LastGenOutput>
         </None>
-        <None Update="Platform.Android\Views\!Extensions\WeakEventsSubscriptionsExtensionsGenerator.tt">
+        <None Update="Platform.Android\Views\!Extensions\WeakEventSubscriptionExtensionsGenerator.tt">
             <Generator>TextTemplatingFileGenerator</Generator>
-            <LastGenOutput>WeakEventsSubscriptionsExtensionsGenerator.cs</LastGenOutput>
+            <LastGenOutput>WeakEventSubscriptionExtensionsGenerator.cs</LastGenOutput>
         </None>
-        <None Update="Platform.iOS\Views\!Extensions\WeakEventsSubscriptionsExtensionsGenerator.tt">
+        <None Update="Platform.iOS\Views\!Extensions\WeakEventSubscriptionExtensionsGenerator.tt">
             <Generator>TextTemplatingFileGenerator</Generator>
-            <LastGenOutput>WeakEventsSubscriptionsExtensionsGenerator.cs</LastGenOutput>
+            <LastGenOutput>WeakEventSubscriptionExtensionsGenerator.cs</LastGenOutput>
         </None>
     </ItemGroup>
     <ItemGroup>
         <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
     </ItemGroup>
     <ItemGroup>
-        <None Update="Shared\!Extensions\WeakEventsSubscriptionsExtensionsGenerator.cs">
+        <None Update="Shared\!Extensions\WeakEventSubscriptionExtensionsGenerator.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
-            <DependentUpon>WeakEventsSubscriptionsExtensionsGenerator.tt</DependentUpon>
+            <DependentUpon>WeakEventSubscriptionExtensionsGenerator.tt</DependentUpon>
         </None>
-        <None Update="Platform.Android\Views\!Extensions\WeakEventsSubscriptionsExtensionsGenerator.cs">
+        <None Update="Platform.Android\Views\!Extensions\WeakEventSubscriptionExtensionsGenerator.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
-            <DependentUpon>WeakEventsSubscriptionsExtensionsGenerator.tt</DependentUpon>
+            <DependentUpon>WeakEventSubscriptionExtensionsGenerator.tt</DependentUpon>
         </None>
-        <None Update="Platform.iOS\Views\!Extensions\WeakEventsSubscriptionsExtensionsGenerator.cs">
+        <None Update="Platform.iOS\Views\!Extensions\WeakEventSubscriptionExtensionsGenerator.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
-            <DependentUpon>WeakEventsSubscriptionsExtensionsGenerator.tt</DependentUpon>
+            <DependentUpon>WeakEventSubscriptionExtensionsGenerator.tt</DependentUpon>
         </None>
     </ItemGroup>
 </Project>
