@@ -21,7 +21,7 @@ using UIKit;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class UIControlBindings
+    public static class UIControlExtensions
     {
         [NotNull]
         public static TargetItemBinding<UIControl, object> AllEditingEventsBinding(
@@ -43,7 +43,7 @@ namespace FlexiMvvm.Bindings
                     }
                 },
                 control => null,
-                () => "AllEditingEvents");
+                () => $"{nameof(UIControl.AllEditingEvents)}");
         }
 
         [NotNull]
@@ -66,7 +66,7 @@ namespace FlexiMvvm.Bindings
                     }
                 },
                 control => null,
-                () => "AllEvents");
+                () => $"{nameof(UIControl.AllEvents)}");
         }
 
         [NotNull]
@@ -89,7 +89,7 @@ namespace FlexiMvvm.Bindings
                     }
                 },
                 control => null,
-                () => "AllTouchEvents");
+                () => $"{nameof(UIControl.AllTouchEvents)}");
         }
 
         [NotNull]
@@ -112,7 +112,7 @@ namespace FlexiMvvm.Bindings
                     }
                 },
                 control => null,
-                () => "EditingChanged");
+                () => $"{nameof(UIControl.EditingChanged)}");
         }
 
         [NotNull]
@@ -135,7 +135,7 @@ namespace FlexiMvvm.Bindings
                     }
                 },
                 control => null,
-                () => "EditingDidBegin");
+                () => $"{nameof(UIControl.EditingDidBegin)}");
         }
 
         [NotNull]
@@ -158,7 +158,7 @@ namespace FlexiMvvm.Bindings
                     }
                 },
                 control => null,
-                () => "EditingDidEnd");
+                () => $"{nameof(UIControl.EditingDidEnd)}");
         }
 
         [NotNull]
@@ -181,7 +181,7 @@ namespace FlexiMvvm.Bindings
                     }
                 },
                 control => null,
-                () => "EditingDidEndOnExit");
+                () => $"{nameof(UIControl.EditingDidEndOnExit)}");
         }
 
         [NotNull]
@@ -194,7 +194,21 @@ namespace FlexiMvvm.Bindings
             return new TargetItemOneWayCustomBinding<UIControl, bool>(
                 controlReference,
                 (control, enabled) => control.NotNull().Enabled = enabled,
-                () => "Enabled");
+                () => $"{nameof(UIControl.Enabled)}");
+        }
+
+        [NotNull]
+        public static TargetItemBinding<UIControl, bool> HighlightedBinding(
+            [NotNull] this IItemReference<UIControl> controlReference,
+            UIControlState forState = UIControlState.Normal)
+        {
+            if (controlReference == null)
+                throw new ArgumentNullException(nameof(controlReference));
+
+            return new TargetItemOneWayCustomBinding<UIControl, bool>(
+                controlReference,
+                (control, highlighted) => control.Highlighted = highlighted,
+                () => $"{nameof(UIControl.Highlighted)}");
         }
 
         [NotNull]
@@ -217,7 +231,21 @@ namespace FlexiMvvm.Bindings
                     }
                 },
                 control => null,
-                () => "PrimaryActionTriggered");
+                () => $"{nameof(UIControl.PrimaryActionTriggered)}");
+        }
+
+        [NotNull]
+        public static TargetItemBinding<UIControl, bool> SelectedBinding(
+            [NotNull] this IItemReference<UIControl> controlReference,
+            UIControlState forState = UIControlState.Normal)
+        {
+            if (controlReference == null)
+                throw new ArgumentNullException(nameof(controlReference));
+
+            return new TargetItemOneWayCustomBinding<UIControl, bool>(
+                controlReference,
+                (control, selected) => control.Selected = selected,
+                () => $"{nameof(UIControl.Selected)}");
         }
 
         [NotNull]
@@ -240,7 +268,7 @@ namespace FlexiMvvm.Bindings
                     }
                 },
                 control => null,
-                () => "TouchCancel");
+                () => $"{nameof(UIControl.TouchCancel)}");
         }
 
         [NotNull]
@@ -263,7 +291,7 @@ namespace FlexiMvvm.Bindings
                     }
                 },
                 control => null,
-                () => "TouchDown");
+                () => $"{nameof(UIControl.TouchDown)}");
         }
 
         [NotNull]
@@ -286,7 +314,7 @@ namespace FlexiMvvm.Bindings
                     }
                 },
                 control => null,
-                () => "TouchDownRepeat");
+                () => $"{nameof(UIControl.TouchDownRepeat)}");
         }
 
         [NotNull]
@@ -309,7 +337,7 @@ namespace FlexiMvvm.Bindings
                     }
                 },
                 control => null,
-                () => "TouchDragEnter");
+                () => $"{nameof(UIControl.TouchDragEnter)}");
         }
 
         [NotNull]
@@ -332,7 +360,7 @@ namespace FlexiMvvm.Bindings
                     }
                 },
                 control => null,
-                () => "TouchDragExit");
+                () => $"{nameof(UIControl.TouchDragExit)}");
         }
 
         [NotNull]
@@ -355,7 +383,7 @@ namespace FlexiMvvm.Bindings
                     }
                 },
                 control => null,
-                () => "TouchDragInside");
+                () => $"{nameof(UIControl.TouchDragInside)}");
         }
 
         [NotNull]
@@ -378,7 +406,7 @@ namespace FlexiMvvm.Bindings
                     }
                 },
                 control => null,
-                () => "TouchDragOutside");
+                () => $"{nameof(UIControl.TouchDragOutside)}");
         }
 
         [NotNull]
@@ -401,7 +429,7 @@ namespace FlexiMvvm.Bindings
                     }
                 },
                 control => null,
-                () => "TouchUpInside");
+                () => $"{nameof(UIControl.TouchUpInside)}");
         }
 
         [NotNull]
@@ -424,7 +452,7 @@ namespace FlexiMvvm.Bindings
                     }
                 },
                 control => null,
-                () => "TouchUpOutside");
+                () => $"{nameof(UIControl.TouchUpOutside)}");
         }
 
         [NotNull]
@@ -447,7 +475,7 @@ namespace FlexiMvvm.Bindings
                     }
                 },
                 control => null,
-                () => "ValueChanged");
+                () => $"{nameof(UIControl.ValueChanged)}");
         }
     }
 }
