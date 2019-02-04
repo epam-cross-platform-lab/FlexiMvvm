@@ -1,8 +1,6 @@
 [... Back to CONTENTS](index.md)
 
 ---
----
----
 
 # Second Screen with Parameters
 

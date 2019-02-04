@@ -6,8 +6,6 @@
 	- [Second Screen with Parameters](001-introduction-03-second-screen-with-parameters.md)
 
 ---
----
----
 
 # INTRODUCTION
 

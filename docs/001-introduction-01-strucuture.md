@@ -1,8 +1,6 @@
 [... CONTENTS](index.md)
 
 ---
----
----
 
 # FlexiMvvm structure
 
