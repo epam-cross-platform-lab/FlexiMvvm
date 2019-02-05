@@ -11,21 +11,21 @@ For simplicity, let's assume you have three projects within:
 
 ![First Screen solution](images/001-Intro-003-FirstScreen-Solution.png)
 
-- *FirstScreen.Core* for the shared code
+- **FirstScreen.Core** for the shared code
 	- It's compliant to ``.net standard 2.0`` multiplatform spec:
 	![.net standard 2.0](images/001-Intro-004-FirstScreen-NetStandard.png)
-- *FirstScreen.Droid* for the Android code
-	- It has a reference to the *FirstScreen.Core* project
-	- Appropriate target Android SDK is selected. Consider any starting from Android 8.0 (Oreo):
+- **FirstScreen.Droid** for the Android code
+	- It has a reference to the FirstScreen.Core project
+	- Appropriate target Android SDK is selected. Consider any starting **from Android 8.0 (Oreo)**:
 	![Target Android](images/001-Intro-005-FirstScreen-TargetDroid.png)
-	- Android versions range is set we're going to support. For our case, we have API Level 21+ support:
+	- Android versions range is set we're going to support. For our case, we have API Level 21+ support, though API Level 19+ (Android 4.4 (KitKat)) may be supported
 	![Android versions](images/001-Intro-006-FirstScreen-DroidApiLevels.png)
-- *FirstScreen.iOS* for the iOS platform code
-	- It has a reference to the *FirstScreen.Core* project
+- **FirstScreen.iOS** for the iOS platform code
+	- It has a reference to the FirstScreen.Core project
 	- Info.plist file has selected Deployment Target. For instance, iOS 11+:
 	![iOS versions](images/001-Intro-007-FirstScreen-TargetiOS.png)
 
-> It's recommended to use "Droid" suffix for your Android project, instead of "Android" to make life a bit easier for IDE to distinguish our versus Xamarin SDK namespaces
+> It's recommended to use **"Droid"** suffix for your Android project, instead of "Android" to make life a bit easier for IDE to distinguish our versus Xamarin SDK namespaces
 
 Our sample app is going to show just a single screen on start, with a basic Profile form where user can provide the information via text entry fields and save it:
 - First Name
@@ -40,12 +40,12 @@ Our sample app is going to show just a single screen on start, with a basic Prof
 | *FirstScreen.Droid* | **FlexiMvvm.FullStack**
 | *FirstScreen.iOS* | **FlexiMvvm.FullStack**
 
-> On the time of documentation, FlexiMvvm was in the Preview mode, with "PreRelease" suffixes. Also showing Preview packages option was required to be enabled for NuGet Manager.
+> On the time of documentation, FlexiMvvm was in the Preview mode, with **"PreRelease"** suffixes. Also showing Preview packages option was required to be enabled for NuGet Manager.
 
 ### View Models
 
 Having all needed external dependencies added, we may try to build the solution and proceed to implementing some core stuff.
-Let's create a View Model class for our Profile form, *FirstScreen.Core* / Presentation / ViewModels:
+Let's create a View Model class for our Profile form, FirstScreen.Core / Presentation / ViewModels:
 
 ```cs
 using System.Windows.Input;
@@ -103,20 +103,19 @@ To simplify the code, FlexiMvvm provides useful ``CommandProvider`` to setup Com
 ### Initialization at the minimum
 
 In the tutorial we have no specific application initialization procedure, the only thing FlexiMvvm should know about is which View Models we're going to use through the app. So we need to register our newly coded ``UserProfileViewModel`` and show how to instantiate it. 
-For that, FlexiMvvm introduces ``Bootstrappers``: types which are capable to initialize their related module. In our case we have 3 such modules: *Core*, *iOS App* and *Android App*. Each of them should have own bootstrapper.
+For that, FlexiMvvm introduces ``Bootstrappers``: types which are capable to initialize their related module. In our case we have 3 such modules: Core, iOS App and Android App. Each of them should have own bootstrapper.
 
-For the tutorial's purposes it's enough to add a bootstrapper for *Core* only. Let's add a new type, *FirstScreen.Core* / Bootstrappers:
+But for the tutorial's purposes let's not engage this mechanism now and just add a new plain class, FirstScreen.Core / Bootstrappers:
 ```cs
 using FirstScreen.Core.Presentation.ViewModels;
-using FlexiMvvm.Bootstrappers;
 using FlexiMvvm.Ioc;
 using FlexiMvvm.ViewModels;
 
 namespace FirstScreen.Core.Bootstrappers
 {
-    public class CoreBootstrapper : IBootstrapper
+    public sealed class CoreBootstrapper
     {
-        public void Execute(BootstrapperConfig config)
+        public void Execute()
         {
             var container = new SimpleIoc();
             container.Register(() => new UserProfileViewModel());
@@ -125,25 +124,104 @@ namespace FirstScreen.Core.Bootstrappers
         }
     }
 }
-
 ```
-
-This type implements the single ``IBootstrapper``'s ``Execute()`` method, ignoring its ``config`` parameter for now - Configuration part as well as more sophisticated and real life ready bootstrapping approach will be revisited in details later.
 
 ``SimpleIoc`` is available as an out-of-the-box Inversion of Control (IoC) container, to hold dependencies and provide their instances on demand. **No Reflection** is used by FlexiMvvm to automate dependencies resolution. All the instantiation logic is provided by us explicitly via the ``Register()`` method. For now we have just a single registration entry, our ``UserProfileViewModel``.
 
 > On mobile, performance and application start time specifically are pretty critial qualities. ``SimpleIoc`` is good on that. It's recommended though not mandatory - any container may be involved instead.
 
-Then we use ``ViewModelProvider`` which is central for View Models provisioning and leverage existing factory passed in, ``DependencyProviderViewModelFactory``. It gets our container ready with the registered View Model.
+Then we use ``ViewModelProvider`` which is central for View Model instance provisioning and leverage the existing factory passed in, ``DependencyProviderViewModelFactory``. The latter gets our container (and uses it internally) with the registered View Model.
 
-The only thing is left is to call this Bootstrapper when the app is loading, let's go ahead and create some iOS and Android things.
+The only thing is left is to call this Bootstrapper when the app is loading, so let's go ahead and create some native things.
 
 ### Views
 
+#### Android
+
+Starting with Android, let's scaffold a minimal app with a single Activity. The following points are quite regular for any Xamarin.Android app and just summarised:
+
+1. FirstScreen.Droid / Resources / layout / Main.axml: UI layout for the sample Activity. Just ``TextViews``, ``EditText`` and ``Button`` controls withing ``LinearLayout``s.
+2. FirstScreen.Droid / Resources / values / styles.xml: Theme setup
+3. FirstScreen.Droid / Resources / values / styles.xml: Colors definitions
+4. FirstScreen.Droid / Resources / values / strings.xml: string resources
+
+Finally, we approached the Activity which needs FlexiMvvm specific customizations.
+
+5. FirstScreen.Droid / Views / ``UserProfileActivity``. Here is its full definition:
+
+```cs
+using Android.App;
+using Android.OS;
+using Android.Widget;
+using FirstScreen.Core.Bootstrappers;
+using FirstScreen.Core.Presentation.ViewModels;
+using FlexiMvvm.Bindings;
+using FlexiMvvm.Views;
+
+namespace FirstScreen.Droid.Views
+{
+    [Activity(MainLauncher = true, NoHistory = true, Theme = "@style/AppTheme")]
+    public class UserProfileActivity : BindableAppCompatActivity<UserProfileViewModel>
+    {
+        private EditText _firstName;
+        private EditText _lastName;
+        private EditText _email;
+        private Button _save;
+
+        protected override void OnCreate(Bundle savedInstanceState)
+        {
+            var bootstrapper = new CoreBootstrapper();
+            bootstrapper.Execute();
+
+            SetContentView(Resource.Layout.Main);
+
+            _firstName = FindViewById<EditText>(Resource.Id.firstName);
+            _lastName = FindViewById<EditText>(Resource.Id.lastName);
+            _email = FindViewById<EditText>(Resource.Id.email);
+            _save = FindViewById<Button>(Resource.Id.save);
+
+            base.OnCreate(savedInstanceState);
+        }
+
+        public override void Bind(BindingSet<UserProfileViewModel> bindingSet)
+        {
+            base.Bind(bindingSet);
+
+            bindingSet.Bind(_firstName)
+                .For(v => v.TextAndTextChangedBinding())
+                .To(vm => vm.FirstName);
+
+            bindingSet.Bind(_lastName)
+                .For(v => v.TextAndTextChangedBinding())
+                .To(vm => vm.LastName);
+
+            bindingSet.Bind(_email)
+                .For(v => v.TextAndTextChangedBinding())
+                .To(vm => vm.Email);
+
+            bindingSet.Bind(_save)
+              .For(v => v.ClickBinding())
+              .To(vm => vm.SaveCommand);
+        }
+    }
+}
+```
+
+We see this ``UserProfileActivity`` has uncommon base class, FlexiMvvm's ``BindableAppCompatActivity`` which has got our View Model as the type parameter. Doing this, we indirectly link our View with its View Model. And by overriding ``Bind()`` method, we are able to define all required Data Bindings between the User Interface and the observable Data.
+
+> Later a better way will be demostrated with code-generated ``ViewHolder``s, without the need to inflate each user control and preserve in a private field.
+
+FlexiMvvm provides a wide range of default Data Bindings to iOS and Android standard controls. Custom Data Binding is possible as well.
+
+#### iOS
+
 TBD
 
+### Data Bindings in action
 
-### Lifecycle
+Just to demonstrate that Data Bindings work two-way, from source View Model and back from target View, let's initialize Data Properties with some values and let Data Bindings to propagate changes onto UI.
+
+For that, each ``ViewModel`` inheritor has ``InitializeAsync()`` and ``Initialize()`` methods.
 
 TBD
 

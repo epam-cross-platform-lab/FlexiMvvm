@@ -16,7 +16,7 @@ As FlexiMvvm is modular in nature and has several Nuget packages which cover spe
 
 ### NuGet Packages
 
-> On the time of documentation, FlexiMvvm was in the Preview mode, with "PreRelease" suffixes in the titles.
+> On the time of documentation, FlexiMvvm was in the Preview mode, with **"PreRelease"** suffixes in the titles.
 
 | Package                      | Solution Projects to add | Description |
 | ---                          | --- | --- |
