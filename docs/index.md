@@ -1,7 +1,7 @@
 # CONTENTS
 
 - [INTRODUCTION](index.md)
-	- [FlexiMvvm Structure](001-introduction-01-strucuture.md)
+	- [FlexiMvvm Structure](001-introduction-01-structure.md)
 	- [First screen](001-introduction-02-first-screen.md)
 	- [Second Screen with Parameters](001-introduction-03-second-screen-with-parameters.md)
 
@@ -41,4 +41,4 @@ The following aims were pursued while implementing FlexiMvvm:
 
 ---
 
-[Next: FlexiMvvm Structure ...](001-introduction-01-strucuture.md)
+[Next: FlexiMvvm Structure ...](001-introduction-01-structure.md)
