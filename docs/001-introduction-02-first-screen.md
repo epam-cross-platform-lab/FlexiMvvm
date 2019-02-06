@@ -100,40 +100,6 @@ Also ``SaveCommand`` is added and used to call the ``Save()`` method when the us
 As we will see later, such ``ICommand`` driven handlers is a widely used approach across .net apps development introducing some extra advantages along with Data Bindings. Use of Commands is considered as a **recommended** way of user events handling.
 To simplify the code, FlexiMvvm provides useful ``CommandProvider`` to setup Commands in different ways. Later we will review it in details.
 
-### Initialization at the minimum
-
-In the tutorial we have no specific application initialization procedure, the only thing FlexiMvvm should know about is which View Models we're going to use through the app. So we need to register our newly coded ``UserProfileViewModel`` and show how to instantiate it. 
-For that, FlexiMvvm introduces ``Bootstrappers``: types which are capable to initialize their related module. In our case we have 3 such modules: Core, iOS App and Android App. Each of them should have own bootstrapper.
-
-But for the tutorial's purposes let's not engage this mechanism now and just add a new plain class, FirstScreen.Core / Bootstrappers:
-```cs
-using FirstScreen.Core.Presentation.ViewModels;
-using FlexiMvvm.Ioc;
-using FlexiMvvm.ViewModels;
-
-namespace FirstScreen.Core.Bootstrappers
-{
-    public sealed class CoreBootstrapper
-    {
-        public void Execute()
-        {
-            var container = new SimpleIoc();
-            container.Register(() => new UserProfileViewModel());
-
-            ViewModelProvider.SetFactory(new DependencyProviderViewModelFactory(container));
-        }
-    }
-}
-```
-
-``SimpleIoc`` is available as an out-of-the-box Inversion of Control (IoC) container, to hold dependencies and provide their instances on demand. **No Reflection** is used by FlexiMvvm to automate dependencies resolution. All the instantiation logic is provided by us explicitly via the ``Register()`` method. For now we have just a single registration entry, our ``UserProfileViewModel``.
-
-> On mobile, performance and application start time specifically are pretty critial qualities. ``SimpleIoc`` is good on that. It's recommended though not mandatory - any container may be involved instead.
-
-Then we use ``ViewModelProvider`` which is central for View Model instance provisioning and leverage the existing factory passed in, ``DependencyProviderViewModelFactory``. The latter gets our container (and uses it internally) with the registered View Model.
-
-The only thing is left is to call this Bootstrapper when the app is loading, so let's go ahead and create some native things.
-
 ### Views
 
 #### Android
@@ -145,17 +111,16 @@ Starting with Android, let's scaffold a minimal app with a single Activity. The 
 3. FirstScreen.Droid / Resources / values / styles.xml: Colors definitions
 4. FirstScreen.Droid / Resources / values / strings.xml: string resources
 
-Finally, we approached the Activity which needs FlexiMvvm specific customizations.
-
-5. FirstScreen.Droid / Views / ``UserProfileActivity``. Here is its full definition:
+Finally, we approached the Activity which needs FlexiMvvm specific customizations. FirstScreen.Droid / Views / ``UserProfileActivity``. Here is its full definition:
 
 ```cs
 using Android.App;
 using Android.OS;
 using Android.Widget;
-using FirstScreen.Core.Bootstrappers;
 using FirstScreen.Core.Presentation.ViewModels;
 using FlexiMvvm.Bindings;
+using FlexiMvvm.Ioc;
+using FlexiMvvm.ViewModels;
 using FlexiMvvm.Views;
 
 namespace FirstScreen.Droid.Views
@@ -170,8 +135,7 @@ namespace FirstScreen.Droid.Views
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            var bootstrapper = new CoreBootstrapper();
-            bootstrapper.Execute();
+            Init();
 
             SetContentView(Resource.Layout.Main);
 
@@ -203,6 +167,14 @@ namespace FirstScreen.Droid.Views
               .For(v => v.ClickBinding())
               .To(vm => vm.SaveCommand);
         }
+
+        private void Init()
+        {
+            var container = new SimpleIoc();
+            container.Register(() => new UserProfileViewModel());
+
+            ViewModelProvider.SetFactory(new DependencyProviderViewModelFactory(container));
+        }
     }
 }
 ```
@@ -212,6 +184,12 @@ We see this ``UserProfileActivity`` has uncommon base class, FlexiMvvm's ``Binda
 > Later a better way will be demostrated with code-generated ``ViewHolder``s, without the need to inflate each user control and preserve in a private field.
 
 FlexiMvvm provides a wide range of default Data Bindings to iOS and Android standard controls. Custom Data Binding is possible as well.
+
+And another major part here is the ``Init()`` method which is placed in Activity for simplicity. ``SimpleIoc`` is available as an out-of-the-box Inversion of Control (IoC) container, to hold dependencies and provide their instances on demand. For now we have just a single registration entry, our ``UserProfileViewModel``.
+
+> On mobile, performance and application start time specifically are pretty critial qualities. ``SimpleIoc`` is good on that. **No Reflection** is used by ``SimpleIoc`` to automate dependencies resolution but all the instantiation logic is provided by us explicitly via the ``Register()`` method. It's recommended though not mandatory - any container may be involved instead.
+
+Then we use ``ViewModelProvider`` which is central for View Model instance provisioning and leverage the existing factory passed in, ``DependencyProviderViewModelFactory``. The latter gets our container (and uses it internally) with the registered View Model.
 
 #### iOS
 
