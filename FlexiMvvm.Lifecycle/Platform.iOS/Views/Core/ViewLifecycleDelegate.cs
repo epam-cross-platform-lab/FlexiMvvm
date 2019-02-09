@@ -87,6 +87,7 @@ namespace FlexiMvvm.Views.Core
         private ResultCode _resultCode = ResultCode.Canceled;
         [CanBeNull]
         private Result _result;
+        private bool _isViewModelCreated;
         [NotNull]
         private Task _viewModelAsyncInitialization = Task.CompletedTask;
 
@@ -95,16 +96,21 @@ namespace FlexiMvvm.Views.Core
         {
             var factory = ViewModelProvider.GetFactory();
             var viewModel = factory.Create<TViewModel>();
+            _isViewModelCreated = true;
 
             View.SetViewModel(viewModel);
             ViewCache.Add(View);
         }
 
-        public override void ViewDidLoad()
+        public override void ViewWillAppear()
         {
-            base.ViewDidLoad();
+            base.ViewWillAppear();
 
-            _viewModelAsyncInitialization = View.InitializeViewModelAsync();
+            if (_isViewModelCreated)
+            {
+                _viewModelAsyncInitialization = View.InitializeViewModelAsync();
+                _isViewModelCreated = false;
+            }
         }
 
         public override void WillMoveToParentViewController(UIViewController parent)
