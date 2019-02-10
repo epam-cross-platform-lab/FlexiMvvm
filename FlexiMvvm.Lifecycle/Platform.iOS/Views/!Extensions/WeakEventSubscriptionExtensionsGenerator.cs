@@ -20,15 +20,15 @@ using FlexiMvvm.Weak.Subscriptions;
 
 namespace FlexiMvvm.Views
 {
-    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="FlexiMvvm.Views.INavigationView<FlexiMvvm.ViewModels.IViewModel>"/> class events.</summary>
-    public static class NavigationViewWeakEventSubscriptionExtensions
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="FlexiMvvm.Views.INavigationView{FlexiMvvm.ViewModels.IViewModel}"/> class events.</summary>
+    public static class INavigationViewWeakEventSubscriptionExtensions
     {
-        /// <summary>Weak subscription on <see cref="FlexiMvvm.Views.INavigationView<FlexiMvvm.ViewModels.IViewModel>.ResultSet"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="FlexiMvvm.Views.INavigationView{FlexiMvvm.ViewModels.IViewModel}.ResultSet"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="FlexiMvvm.Views.INavigationView<FlexiMvvm.ViewModels.IViewModel>.ResultSet"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="FlexiMvvm.Views.INavigationView{FlexiMvvm.ViewModels.IViewModel}.ResultSet"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
-        public static IDisposable ResultSetWeakSubscribe(
+        public static IDisposable ResultSetWeakSubscribe<FlexiMvvm.ViewModels.IViewModel>(
             this FlexiMvvm.Views.INavigationView<FlexiMvvm.ViewModels.IViewModel> eventSource,
             EventHandler<FlexiMvvm.Views.ResultSetEventArgs> eventHandler)
         {

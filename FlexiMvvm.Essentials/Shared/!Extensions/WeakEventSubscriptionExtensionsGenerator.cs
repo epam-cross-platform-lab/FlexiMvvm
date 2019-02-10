@@ -21,7 +21,7 @@ using FlexiMvvm.Weak.Subscriptions;
 namespace FlexiMvvm
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="System.Collections.Specialized.INotifyCollectionChanged"/> class events.</summary>
-    public static class NotifyCollectionChangedWeakEventSubscriptionExtensions
+    public static class INotifyCollectionChangedWeakEventSubscriptionExtensions
     {
         /// <summary>Weak subscription on <see cref="System.Collections.Specialized.INotifyCollectionChanged.CollectionChanged"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
@@ -86,7 +86,7 @@ namespace FlexiMvvm
 namespace FlexiMvvm
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="System.ComponentModel.INotifyPropertyChanged"/> class events.</summary>
-    public static class NotifyPropertyChangedWeakEventSubscriptionExtensions
+    public static class INotifyPropertyChangedWeakEventSubscriptionExtensions
     {
         /// <summary>Weak subscription on <see cref="System.ComponentModel.INotifyPropertyChanged.PropertyChanged"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>

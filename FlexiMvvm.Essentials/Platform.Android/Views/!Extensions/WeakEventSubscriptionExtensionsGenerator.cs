@@ -1069,7 +1069,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Graphics.ImageDecoder"/> class events.</summary>
-    public static class mageDecoderWeakEventSubscriptionExtensions
+    public static class ImageDecoderWeakEventSubscriptionExtensions
     {
 #if __ANDROID_28__
         /// <summary>Weak subscription on <see cref="Android.Graphics.ImageDecoder.PartialImage"/> event.</summary>
