@@ -65,7 +65,7 @@ namespace FlexiMvvm.Weak.Subscriptions.Generation
                     "<see cref=\"");
             
             #line 25 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventSubscriptionExtensionsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(typeExtensionsGenerationOptions.ClassName));
+            this.Write(this.ToStringHelper.ToStringWithCulture(typeExtensionsGenerationOptions.ClassName.AsCrefName()));
             
             #line default
             #line hidden
@@ -150,7 +150,7 @@ namespace FlexiMvvm.Weak.Subscriptions.Generation
             this.Write("        /// <summary>Weak subscription on <see cref=\"");
             
             #line 41 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventSubscriptionExtensionsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(typeExtensionsGenerationOptions.ClassName));
+            this.Write(this.ToStringHelper.ToStringWithCulture(typeExtensionsGenerationOptions.ClassName.AsCrefName()));
             
             #line default
             #line hidden
@@ -167,7 +167,7 @@ namespace FlexiMvvm.Weak.Subscriptions.Generation
                     " <see cref=\"");
             
             #line 44 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventSubscriptionExtensionsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(typeExtensionsGenerationOptions.ClassName));
+            this.Write(this.ToStringHelper.ToStringWithCulture(typeExtensionsGenerationOptions.ClassName.AsCrefName()));
             
             #line default
             #line hidden
@@ -232,11 +232,11 @@ namespace FlexiMvvm.Weak.Subscriptions.Generation
             this.Write("        public static IDisposable ");
             
             #line 55 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventSubscriptionExtensionsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(typeEventGenerationOptions.EventName));
+            this.Write(this.ToStringHelper.ToStringWithCulture(GetWeakSubscribeMethodName(typeExtensionsGenerationOptions, typeEventGenerationOptions)));
             
             #line default
             #line hidden
-            this.Write("WeakSubscribe(\r\n");
+            this.Write("(\r\n");
             
             #line 56 "C:\FlexiMvvm\FlexiMvvm.Generation\Weak\Subscriptions\Generation\WeakEventSubscriptionExtensionsGenerator.tt"
           if (typeEventGenerationOptions.IsStaticEvent) { 
