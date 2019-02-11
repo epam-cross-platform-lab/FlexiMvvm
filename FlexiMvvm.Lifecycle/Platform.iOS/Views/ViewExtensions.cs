@@ -15,7 +15,6 @@
 // =========================================================================
 
 using System;
-using System.Linq;
 using JetBrains.Annotations;
 using UIKit;
 
@@ -23,7 +22,7 @@ namespace FlexiMvvm.Views
 {
     public static class ViewExtensions
     {
-        [CanBeNull]
+        [NotNull]
         public static UINavigationController GetNavigationController([NotNull] this IView view)
         {
             if (view == null)
@@ -32,7 +31,7 @@ namespace FlexiMvvm.Views
             return view.As(
                 navigationController => navigationController,
                 viewController => viewController.NotNull().NavigationController,
-                childViewController => FindParentViewController(childViewController.NotNull()).NavigationController);
+                childViewController => FindParentViewController(childViewController.NotNull()).NavigationController).NotNull();
         }
 
         internal static void As(
@@ -99,7 +98,7 @@ namespace FlexiMvvm.Views
 
         private static bool IsChildViewController([NotNull] UIViewController viewController)
         {
-            return viewController.ParentViewController?.ChildViewControllers?.Contains(viewController) ?? false;
+            return viewController.ParentViewController != null && !(viewController.ParentViewController is UINavigationController);
         }
 
         [NotNull]
