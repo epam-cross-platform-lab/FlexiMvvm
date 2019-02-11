@@ -35,12 +35,6 @@ namespace FlexiMvvm
         }
 
         [NotNull]
-        internal static string GetGenericPart([NotNull] this string value)
-        {
-            return value.Contains("<") ? value.Substring(value.IndexOf('<')) : string.Empty;
-        }
-
-        [NotNull]
         internal static string AsCrefName([NotNull] this string value)
         {
             return value.Replace("<", "{").Replace(">", "}");

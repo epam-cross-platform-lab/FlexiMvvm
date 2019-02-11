@@ -251,20 +251,20 @@
             "Android.Support.V4.App.FragmentManager",
             new EventGenerationOptions("BackStackChanged"))
         {
-            ExtensionsCustomClassName = "SupportFragmentManager"
+            ExtensionsClassCustomName = "SupportFragmentManager"
         },
         new ExtensionsGenerationOptions(
             "Android.Support.V4.OS.CancellationSignal",
             new EventGenerationOptions("CancelEvent"))
         {
-            ExtensionsCustomClassName = "SupportCancellationSignal"
+            ExtensionsClassCustomName = "SupportCancellationSignal"
         },
         new ExtensionsGenerationOptions(
             "Android.Support.V4.View.ActionProvider",
             new EventGenerationOptions("SubUiVisibility", "Android.Support.V4.View.ActionProvider.SubUiVisibilityEventArgs"),
             new EventGenerationOptions("Visibility", "Android.Support.V4.View.ActionProvider.VisibilityEventArgs"))
         {
-            ExtensionsCustomClassName = "SupportActionProvider"
+            ExtensionsClassCustomName = "SupportActionProvider"
         },
         new ExtensionsGenerationOptions(
             "Android.Support.V4.View.ViewPager",
@@ -293,7 +293,7 @@
             "Android.Support.V7.App.ActionBar",
             new EventGenerationOptions("MenuVisibility", "Android.Support.V7.App.ActionBar.MenuVisibilityEventArgs"))
         {
-            ExtensionsCustomClassName = "SupportActionBar"
+            ExtensionsClassCustomName = "SupportActionBar"
         },
         new ExtensionsGenerationOptions(
             "Android.Support.V7.App.WindowDecorActionBar",
@@ -302,7 +302,7 @@
             "Android.Support.V7.Widget.ActionMenuView",
             new EventGenerationOptions("MenuItemClick", "Android.Support.V7.Widget.ActionMenuView.MenuItemClickEventArgs"))
         {
-            ExtensionsCustomClassName = "SupportActionMenuView"
+            ExtensionsClassCustomName = "SupportActionMenuView"
         },
         new ExtensionsGenerationOptions(
             "Android.Support.V7.Widget.ContentFrameLayout",
@@ -327,7 +327,7 @@
             new EventGenerationOptions("DismissEvent", "Android.Support.V7.Widget.PopupMenu.DismissEventArgs"),
             new EventGenerationOptions("MenuItemClick", "Android.Support.V7.Widget.PopupMenu.MenuItemClickEventArgs"))
         {
-            ExtensionsCustomClassName = "SupportPopupMenu"
+            ExtensionsClassCustomName = "SupportPopupMenu"
         },
         new ExtensionsGenerationOptions(
             "Android.Support.V7.Widget.RecyclerView",
@@ -345,20 +345,20 @@
             new EventGenerationOptions("SuggestionClick", "Android.Support.V7.Widget.SearchView.SuggestionClickEventArgs"),
             new EventGenerationOptions("SuggestionSelect", "Android.Support.V7.Widget.SearchView.SuggestionSelectEventArgs"))
         {
-            ExtensionsCustomClassName = "SupportSearchView"
+            ExtensionsClassCustomName = "SupportSearchView"
         },
         new ExtensionsGenerationOptions(
             "Android.Support.V7.Widget.ShareActionProvider",
             new EventGenerationOptions("ShareTargetSelected", "Android.Support.V7.Widget.ShareActionProvider.ShareTargetSelectedEventArgs"))
         {
-            ExtensionsCustomClassName = "SupportShareActionProvider"
+            ExtensionsClassCustomName = "SupportShareActionProvider"
         },
         new ExtensionsGenerationOptions(
             "Android.Support.V7.Widget.Toolbar",
             new EventGenerationOptions("MenuItemClick", "Android.Support.V7.Widget.Toolbar.MenuItemClickEventArgs"),
             new EventGenerationOptions("NavigationClick", "Android.Support.V7.Widget.Toolbar.NavigationClickEventArgs"))
         {
-            ExtensionsCustomClassName = "SupportToolbar"
+            ExtensionsClassCustomName = "SupportToolbar"
         },
         new ExtensionsGenerationOptions(
             "Android.Support.V7.Widget.ViewStubCompat",

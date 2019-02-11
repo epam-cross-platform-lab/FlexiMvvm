@@ -28,7 +28,7 @@ namespace FlexiMvvm.Views
         /// <param name="eventSource">The source of the event.</param>
         /// <param name="eventHandler">Represents the method that will handle the <see cref="FlexiMvvm.Views.INavigationView{FlexiMvvm.ViewModels.IViewModel}.ResultSet"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
-        public static IDisposable ResultSetWeakSubscribe<FlexiMvvm.ViewModels.IViewModel>(
+        public static IDisposable ResultSetWeakSubscribe(
             this FlexiMvvm.Views.INavigationView<FlexiMvvm.ViewModels.IViewModel> eventSource,
             EventHandler<FlexiMvvm.Views.ResultSetEventArgs> eventHandler)
         {
