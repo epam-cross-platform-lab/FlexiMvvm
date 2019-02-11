@@ -20,16 +20,27 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.Navigation
 {
-    public delegate void BackwardNavigationDelegate([NotNull] INavigationView<IViewModel> fromView);
+    /// <summary>
+    /// Defines the contract for backward navigation.
+    /// </summary>
+    /// <param name="sourceView">The source view from which navigation is performed from.</param>
+    public delegate void BackwardNavigationDelegate([NotNull] INavigationView<IViewModel> sourceView);
 
+    /// <summary>
+    /// Provides a set of backward navigation strategies.
+    /// </summary>
     public sealed class BackwardNavigationStrategy
     {
+        /// <summary>
+        /// Backward navigation using <see cref="INavigationView{TViewModel}.Finish()"/> method.
+        /// </summary>
+        /// <returns>The backward navigation delegate.</returns>
         [NotNull]
         public BackwardNavigationDelegate Finish()
         {
-            return fromView =>
+            return sourceView =>
             {
-                fromView.NotNull().Finish();
+                sourceView.NotNull().Finish();
             };
         }
     }

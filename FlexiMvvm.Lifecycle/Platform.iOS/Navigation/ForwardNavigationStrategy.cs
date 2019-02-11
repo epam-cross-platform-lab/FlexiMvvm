@@ -20,41 +20,68 @@ using UIKit;
 
 namespace FlexiMvvm.Navigation
 {
-    public delegate void ForwardNavigationDelegate([NotNull] UINavigationController navigationController, [NotNull] UIViewController toView, bool animated);
+    /// <summary>
+    /// Defines the contract for forward navigation.
+    /// </summary>
+    /// <param name="navigationController">The source view navigation controller.</param>
+    /// <param name="targetView">The target view for navigation.</param>
+    /// <param name="animated">Determines if the transition is to be animated.</param>
+    public delegate void ForwardNavigationDelegate([NotNull] UINavigationController navigationController, [NotNull] UIViewController targetView, bool animated);
 
+    /// <summary>
+    /// Provides a set of forward navigation strategies.
+    /// </summary>
     public sealed class ForwardNavigationStrategy
     {
+        /// <summary>
+        /// Forward navigation using <see cref="UINavigationController.PushViewController(UIViewController, bool)"/> method.
+        /// </summary>
+        /// <returns>The forward navigation delegate.</returns>
         [NotNull]
         public ForwardNavigationDelegate PushViewController()
         {
-            return (navigationController, toView, animated) =>
+            return (navigationController, targetView, animated) =>
             {
-                navigationController.NotNull().PushViewController(toView.NotNull(), animated);
+                navigationController.NotNull().PushViewController(targetView.NotNull(), animated);
             };
         }
 
+        /// <summary>
+        /// Forward navigation using <see cref="UIViewController.PresentViewController(UIViewController, bool, Action)"/> method.
+        /// </summary>
+        /// <param name="completionHandler">The method to invoke when the animation completes.</param>
+        /// <returns>The forward navigation delegate.</returns>
         [NotNull]
         public ForwardNavigationDelegate PresentViewController([CanBeNull] Action completionHandler = null)
         {
-            return (navigationController, toView, animated) =>
+            return (navigationController, targetView, animated) =>
             {
-                navigationController.NotNull().PresentViewController(toView.NotNull(), animated, completionHandler);
+                navigationController.NotNull().PresentViewController(targetView.NotNull(), animated, completionHandler);
             };
         }
 
+        /// <summary>
+        /// Forward navigation using <see cref="UINavigationController.SetViewControllers(UIViewController[], bool)"/> method.
+        /// </summary>
+        /// <returns>The forward navigation delegate.</returns>
         [NotNull]
         public ForwardNavigationDelegate SetViewControllers()
         {
-            return (navigationController, toView, animated) =>
+            return (navigationController, targetView, animated) =>
             {
-                navigationController.NotNull().SetViewControllers(new UIViewController[] { toView.NotNull() }, animated);
+                navigationController.NotNull().SetViewControllers(new UIViewController[] { targetView.NotNull() }, animated);
             };
         }
 
+        /// <summary>
+        /// Forward navigation using <see cref="UINavigationController.SetViewControllers(UIViewController[], bool)"/> method.
+        /// </summary>
+        /// <param name="viewControllers">The array of view controllers to be set. Target view delegate parameter will be ignored.</param>
+        /// <returns>The forward navigation delegate.</returns>
         [NotNull]
         public ForwardNavigationDelegate SetViewControllers([CanBeNull] UIViewController[] viewControllers)
         {
-            return (navigationController, toView, animated) =>
+            return (navigationController, targetView, animated) =>
             {
                 navigationController.NotNull().SetViewControllers(viewControllers, animated);
             };

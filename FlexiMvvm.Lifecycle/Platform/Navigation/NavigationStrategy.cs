@@ -18,11 +18,20 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.Navigation
 {
+    /// <summary>
+    /// Provides strategies for forward and backward navigation.
+    /// </summary>
     public static class NavigationStrategy
     {
+        /// <summary>
+        /// Gets the forward navigation strategy.
+        /// </summary>
         [NotNull]
         public static ForwardNavigationStrategy Forward { get; } = new ForwardNavigationStrategy();
 
+        /// <summary>
+        /// Gets the backward navigation strategy.
+        /// </summary>
         [NotNull]
         public static BackwardNavigationStrategy Backward { get; } = new BackwardNavigationStrategy();
     }
