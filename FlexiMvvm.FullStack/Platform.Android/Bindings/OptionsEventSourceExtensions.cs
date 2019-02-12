@@ -15,24 +15,23 @@
 // =========================================================================
 
 using System;
-using Android.App;
 using FlexiMvvm.Bindings.Custom;
 using FlexiMvvm.Views;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class LifecycleEventSourceActivityExtensions
+    public static class OptionsEventSourceExtensions
     {
         [NotNull]
-        public static TargetItemBinding<ILifecycleEventSourceActivity, object> OnOptionsItemSelectedBinding(
-            [NotNull] this IItemReference<ILifecycleEventSourceActivity> activityReference,
+        public static TargetItemBinding<IOptionsEventSource, object> OnOptionsItemSelectedBinding(
+            [NotNull] this IItemReference<IOptionsEventSource> activityReference,
             int itemId)
         {
             if (activityReference == null)
                 throw new ArgumentNullException(nameof(activityReference));
 
-            return new TargetItemOneWayToSourceCustomBinding<ILifecycleEventSourceActivity, object, OptionsItemSelectedEventArgs>(
+            return new TargetItemOneWayToSourceCustomBinding<IOptionsEventSource, object, OptionsItemSelectedEventArgs>(
                 activityReference,
                 (activity, eventHandler) => activity.NotNull().OnOptionsItemSelectedCalled += eventHandler,
                 (activity, eventHandler) => activity.NotNull().OnOptionsItemSelectedCalled -= eventHandler,
@@ -49,29 +48,7 @@ namespace FlexiMvvm.Bindings
 
                     return false;
                 },
-                () => $"{nameof(Activity.OnOptionsItemSelected)}");
-        }
-
-        [NotNull]
-        public static TargetItemBinding<ILifecycleEventSourceActivity, object> OnBackPressedBinding(
-            [NotNull] this IItemReference<ILifecycleEventSourceActivity> activityReference)
-        {
-            if (activityReference == null)
-                throw new ArgumentNullException(nameof(activityReference));
-
-            return new TargetItemOneWayToSourceCustomBinding<ILifecycleEventSourceActivity, object, BackPressedEventArgs>(
-                activityReference,
-                (activity, eventHandler) => activity.NotNull().OnBackPressedCalled += eventHandler,
-                (activity, eventHandler) => activity.NotNull().OnBackPressedCalled -= eventHandler,
-                (activity, canExecuteCommand) => { },
-                (activity, eventArgs) => null,
-                (activity, eventArgs) =>
-                {
-                    eventArgs.NotNull().Handled = true;
-
-                    return true;
-                },
-                () => $"{nameof(Activity.OnBackPressed)}");
+                () => $"OnOptionsItemSelected");
         }
     }
 }

@@ -35,15 +35,11 @@ using FlexiMvvm.Views.Core;
 namespace <#= GetNamespace(viewGenerationOptions) #>
 {
     [Register("<#= TargetNamespace.ToLower() #>.<#= viewGenerationOptions.ClassName #>")]
-    public partial class <#= viewGenerationOptions.ClassName #> : <#= viewGenerationOptions.BaseClassName #>, <#= viewGenerationOptions.BaseInterfaceName #>
+    public partial class <#= viewGenerationOptions.ClassName #> : <#= viewGenerationOptions.BaseClassName #>, IAndroidView, IOptionsEventSource
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
 
         public event EventHandler<OptionsItemSelectedEventArgs> OnOptionsItemSelectedCalled;
-<#      if (viewGenerationOptions.Kind == ViewKind.Activity) { #>
-
-        public event EventHandler<BackPressedEventArgs> OnBackPressedCalled;
-<#      } #>
 
         protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ?? (_lifecycleDelegate = CreateLifecycleDelegate());
 
@@ -78,19 +74,6 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
 
             return base.OnOptionsItemSelected(item);
         }
-<#      if (viewGenerationOptions.Kind == ViewKind.Activity) { #>
-
-        public override void OnBackPressed()
-        {
-            var backPressedEventArgs = new BackPressedEventArgs();
-            OnBackPressedCalled?.Invoke(this, backPressedEventArgs);
-
-            if (!backPressedEventArgs.Handled)
-            {
-                base.OnBackPressed();
-            }
-        }
-<#      } #>
 
         <#= viewGenerationOptions.LifecycleMethodAccessModifier #> override void OnActivityResult(int requestCode, <#= viewGenerationOptions.ResultCodeTypeName #> resultCode, Intent data)
         {
