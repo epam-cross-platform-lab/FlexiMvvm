@@ -28,7 +28,7 @@ namespace FlexiMvvm.Configuration
         [NotNull]
         private Dictionary<string, object> Values => _values ?? (_values = new Dictionary<string, object>());
 
-        public T GetValue<T>(string key, T defaultValue)
+        public T GetValue<T>(string key, T defaultValue = default)
         {
             if (string.IsNullOrWhiteSpace(key))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
