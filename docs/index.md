@@ -3,7 +3,8 @@
 - [INTRODUCTION](index.md)
 	- [FlexiMvvm Structure](001-introduction-01-structure.md)
 	- [First screen](001-introduction-02-first-screen.md)
-	- [Screen with Parameters](001-introduction-03-screen-with-parameters.md)
+	- [Basic Navigation](001-introduction-03-navigation.md)
+	- [Navigation with Parameters](001-introduction-04-screen-with-parameters.md)
 
 ---
 
