@@ -153,11 +153,6 @@ namespace FlexiMvvm.Views.Core
                 await _viewModelAsyncInitialization;
                 viewModelWithResultHandler.HandleResult(args.ResultCode, args.Result);
             }
-            else
-            {
-                throw new InvalidOperationException($"\"{TypeFormatter.FormatName(View.ViewModel.GetType())}\" view model doesn't implement " +
-                    $"\"{TypeFormatter.FormatName<IViewModelWithResultHandler>()}\" interface.");
-            }
         }
 
         private void RaiseResultSetIfNeeded([NotNull] INavigationView<IViewModel> view)

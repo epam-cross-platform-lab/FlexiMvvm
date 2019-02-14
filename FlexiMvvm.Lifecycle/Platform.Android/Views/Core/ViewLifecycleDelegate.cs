@@ -125,11 +125,6 @@ namespace FlexiMvvm.Views.Core
                         $"method and you call \"{nameof(Activity.StartActivityForResult)}\" method for appropriate activity/fragment.");
                 }
             }
-            else
-            {
-                throw new InvalidOperationException($"\"{TypeFormatter.FormatName(View.ViewModel.GetType())}\" view model doesn't implement " +
-                    $"\"{TypeFormatter.FormatName<IViewModelWithResultHandler>()}\" interface.");
-            }
         }
 
         public override void OnSaveInstanceState(Bundle outState)
