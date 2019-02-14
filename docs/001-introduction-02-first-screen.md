@@ -4,26 +4,30 @@
 
 # First screen
 
+As a first tutorial, let's build a minimalistic single screen app like this:
+
+![First screen](001-introduction-02-first-screen/020-run.png)
+
 ### New Visual Studio solution
 
-To get started, prepare your Visual Studio solution for the app.
-For simplicity, let's assume you have three projects within:
+To get started, we prepare a Visual Studio solution for the app.
+For simplicity, let's add three projects within:
 
-![First Screen solution](images/001-Intro-003-FirstScreen-Solution.png)
+![First Screen solution](001-introduction-02-first-screen/030-solution.png)
 
 - **FirstScreen.Core** for the shared code
 	- It's compliant to ``.net standard 2.0`` multiplatform spec:
-	![.net standard 2.0](images/001-Intro-004-FirstScreen-NetStandard.png)
+	![.net standard 2.0](001-introduction-02-first-screen/040-netstandard.png)
 - **FirstScreen.Droid** for the Android code
 	- It has a reference to the FirstScreen.Core project
 	- Appropriate target Android SDK is selected. Consider any starting **from Android 8.0 (Oreo)**:
-	![Target Android](images/001-Intro-005-FirstScreen-TargetDroid.png)
+	![Target Android](001-introduction-02-first-screen/050-droid.png)
 	- Android versions range is set we're going to support. For our case, we have API Level 21+ support, though API Level 19+ (Android 4.4 (KitKat)) may be supported
-	![Android versions](images/001-Intro-006-FirstScreen-DroidApiLevels.png)
+	![Android versions](001-introduction-02-first-screen/060-droid-api.png)
 - **FirstScreen.iOS** for the iOS platform code
 	- It has a reference to the FirstScreen.Core project
 	- Info.plist file has selected Deployment Target. For instance, iOS 11+:
-	![iOS versions](images/001-Intro-007-FirstScreen-TargetiOS.png)
+	![iOS versions](001-introduction-02-first-screen/070-ios.png)
 
 > It's recommended to use **"Droid"** suffix for your Android project, instead of "Android" to make life a bit easier for IDE to distinguish our versus Xamarin SDK namespaces
 

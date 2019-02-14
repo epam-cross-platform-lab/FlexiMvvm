@@ -35,7 +35,7 @@ namespace FirstScreen.Core.Presentation.ViewModels
 
 So it has a single ``Email`` property the target View Model will be interested in to retrieve while initializing. Base class is used to inherit the parameters propagation via native APIs - and we can see in ``Email``'s setter and getter the ``Bundle`` entry property from the base class is used. It provides the wide range of methods to get or set primitive types. Internally, the data preserved as a dictionary on iOS, or as a native Bundle on Android.
 
-![Bundle](images/001-Intro-008-ParamsBundle.png)
+![Bundle](001-introduction-04-screen-with-parameters/010-bundle.png)
 
 ### View Model with Parameters
 

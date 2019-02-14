@@ -10,7 +10,7 @@ For tutorials simplicity, let's define just 2 project types for our Visual Studi
 - In *Some.Product.Core* project which we traditionally name where code is shared between the mobile platforms, we define common abstractions, Infrastrucutre, View Models with Application Services like Navigation, Validation, Exception Handling, Connectivity, and so on.
 - In *Some.Product.iOS* and *Some.Product.Droid* platform projects, all the mobile specific code is settled (View Controllers, Cell Views, Activities, Fragments, mobile native services, whatever else). These projects have references to the *Some.Product.Core*.
 
-![Simple projects structure](images/001-Intro-001-Projects-Simple.png)
+![Simple projects structure](001-introduction-01-structure/010-solution.png)
 
 As FlexiMvvm is modular in nature and has several Nuget packages which cover specific functionality and do depend on "Core" or platform projects, we'll review where FlexiMvvm works best and which NuGet packages are suitable.
 
