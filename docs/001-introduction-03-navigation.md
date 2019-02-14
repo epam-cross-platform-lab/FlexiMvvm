@@ -68,9 +68,128 @@ We see ``EntryViewModel`` receives ``INavigationService`` as the dependency and 
 
 #### Android
 
-TBD
+##### NavigationService
+
+Starting from Android, we're adding new ``NavigationService`` which engages standard Android's ``Intent`` for transitioning to an ``Activity`` or settlement of a ``Fragment`` on the screen. In our case it's just a simple Actvity-to-Activity switch:
+
+```cs
+using Android.Content;
+using FlexiMvvm.Views;
+using FirstScreen.Core.Presentation.Navigation;
+using FirstScreen.Core.Presentation.ViewModels;
+using FirstScreen.Droid.Views;
+
+namespace FirstScreen.Droid.Navigation
+{
+    public class NavigationService : FlexiMvvm.Navigation.NavigationService, INavigationService
+    {
+        public void NavigateToUserProfile(EntryViewModel from)
+        {
+            var splashScreenActivity = GetActivity<SplashScreenActivity, EntryViewModel>(from);
+            var intent = new Intent(splashScreenActivity, typeof(UserProfileActivity));
+            intent.AddFlags(ActivityFlags.ClearTask | ActivityFlags.ClearTop | ActivityFlags.NewTask);
+            splashScreenActivity.StartActivity(intent);
+        }
+    }
+}
+
+```
+
+We see here base ``GetActivity()`` method which is capable to resolve current View context by the View Model provided, ``EntryViewModel``. And following lines are typical for Xamarin.Android app when switching from one Activity to another. Due to the first one is the splash screen and we do not want to keep it on Backstack, appropriate flags were added into ``Intent``.
+
+After that we need to add & update our ``Activities``.
+
+##### UserProfileActivity
+
+Compared to the previous [First screen](001-introduction-02-first-screen.md) tutorial, we need to remove ``InitApp()`` method as this ``Activity`` is not starting one anymore. Also no need to keep it as ``MainLauncher``. As before, this View is "linked" with ``UserProfileViewModel``:
+
+```cs
+using Android.App;
+using Android.OS;
+using Android.Widget;
+using FirstScreen.Core.Presentation.ViewModels;
+using FlexiMvvm.Bindings;
+using FlexiMvvm.Views;
+
+namespace FirstScreen.Droid.Views
+{
+    [Activity(Theme = "@style/AppTheme")]
+    public class UserProfileActivity : BindableAppCompatActivity<UserProfileViewModel>
+    {
+        //// ... some existing code is hidden for convenience
+
+        protected override void OnCreate(Bundle savedInstanceState)
+        {
+            SetContentView(Resource.Layout.Main);
+
+            _firstName = FindViewById<EditText>(Resource.Id.firstName);
+            _lastName = FindViewById<EditText>(Resource.Id.lastName);
+            _email = FindViewById<EditText>(Resource.Id.email);
+            _save = FindViewById<Button>(Resource.Id.save);
+
+            base.OnCreate(savedInstanceState);
+        }
+
+        //// ... some existing code is hidden for convenience
+    }
+}
+```
+
+##### SplashScreenActivity
+
+This is a new one, connected with ``EntryViewModel``, as a starting entry for the Android app, FirstScreen.Droid / Views / SplashScreenActivity.cs:
+
+```cs
+using Android.App;
+using Android.OS;
+using FirstScreen.Core.Infrastructure.Data;
+using FirstScreen.Core.Presentation.Navigation;
+using FirstScreen.Core.Presentation.ViewModels;
+using FirstScreen.Droid.Navigation;
+using FlexiMvvm.Ioc;
+using FlexiMvvm.ViewModels;
+using FlexiMvvm.Views;
+
+namespace FirstScreen.Droid.Views
+{
+    [Activity(
+        MainLauncher = true,
+        NoHistory = true,
+        Theme = "@style/SplashTheme")]
+    public class SplashScreenActivity : AppCompatActivity<EntryViewModel>
+    {
+        protected override void OnCreate(Bundle savedInstanceState)
+        {
+            InitApp();
+
+            base.OnCreate(savedInstanceState);
+        }
+
+        private void InitApp()
+        {
+            var container = new SimpleIoc();
+
+            container.Register<INavigationService>(
+                () => new NavigationService());
+
+            container.Register(
+                () => new EntryViewModel(
+                    container.Get<INavigationService>()));
+
+            container.Register(
+                () => new UserProfileViewModel());
+
+            ViewModelProvider.SetFactory(new DependencyProviderViewModelFactory(container));
+        }
+    }
+}
+```
+
+``InitApp()`` is moved here. Also it has got two new registrations on ``SimpleIoc``, for ``NavigationService`` and ``EntryViewModel`` entries.
 
 #### iOS
+
+##### NavigationService
 
 Here is the iOS implementation, FirstScreen.iOS / Navigation / NavigationService.cs
 
@@ -95,6 +214,8 @@ namespace FirstScreen.iOS.Navigation
 
 It inherits base features and also implements our ``INavigationService`` defined above. ``GetViewController`` from the base class allows to resolve appropriate View Controller for the source View Model, ``EntryViewModel``. Then iOS native capabilities are used: ``RootNavigationViewController`` which is shown below, pushes our ``UserProfileViewController`` onto iOS navigation stack.
 
+##### Root ViewController
+
 FirstScreen.iOS / Views / RootNavigationViewController.cs:
 
 ```cs
@@ -111,7 +232,7 @@ namespace FirstScreen.iOS.Views
 
 As we can see, ``RootNavigationViewController`` uses ``EntryViewModel`` behind.
 
-##### iOS application setup
+##### App Delegate
 
 ``RootNavigationViewController`` plays the important role to receive the control when iOS app starts. As usual, we specify it in FirstScreen.iOS / AppDelegate.cs, as a ``RootViewController`` for ``UIWindow``. But also as we have got ``NavigationService`` which has to be provided for ``EntryViewModel``, we use out-of-the-box ``SimpleIoc`` container to register this service as well:
 

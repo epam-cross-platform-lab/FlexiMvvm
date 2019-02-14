@@ -89,7 +89,51 @@ namespace FirstScreen.Core.Presentation.Navigation
 
 #### Android
 
-TBD
+There's a slight update on Android ``NavigationService`` to pass the Parameters object, FirstScreen.Droid / Navigation / NavigationService.cs:
+
+```cs
+using Android.Content;
+using FlexiMvvm.Views;
+using FirstScreen.Core.Presentation.Navigation;
+using FirstScreen.Core.Presentation.ViewModels;
+using FirstScreen.Droid.Views;
+
+namespace FirstScreen.Droid.Navigation
+{
+    public class NavigationService : FlexiMvvm.Navigation.NavigationService, INavigationService
+    {
+        public void NavigateToUserProfile(EntryViewModel from, UserProfileParameters parameters)
+        {
+            var splashScreenActivity = GetActivity<SplashScreenActivity, EntryViewModel>(from);
+            var intent = new Intent(splashScreenActivity, typeof(UserProfileActivity));
+            intent.AddFlags(ActivityFlags.ClearTask | ActivityFlags.ClearTop | ActivityFlags.NewTask);
+            intent.PutParameters(parameters);
+            splashScreenActivity.StartActivity(intent);
+        }
+    }
+}
+
+```
+
+``PutParameters()`` extention method is used over ``Intent``, to propagate ``UserProfileParameters`` to the target View Model. Also on ``UserProfileActivity`` View the ``UserProfileParameters`` type parameter should be specified:
+
+```cs
+using Android.App;
+using Android.OS;
+using Android.Widget;
+using FirstScreen.Core.Presentation.ViewModels;
+using FlexiMvvm.Bindings;
+using FlexiMvvm.Views;
+
+namespace FirstScreen.Droid.Views
+{
+    [Activity(Theme = "@style/AppTheme")]
+    public class UserProfileActivity : BindableAppCompatActivity<UserProfileViewModel, UserProfileParameters>
+    {
+        //// ... some existing code is hidden for convenience
+    }
+}
+```
 
 #### iOS
 
@@ -140,7 +184,6 @@ namespace FirstScreen.iOS.Views
 ```
 
 We see here that the second type parameter is used over the generic base class and constructor is added to make the Parameters instance required for ``UserProfileViewController``.
-
 
 ### Last step
 
