@@ -1,4 +1,10 @@
 # FlexiMvvm Release Notes
+## v.0.10.3 (preview)
+
+### Existing functionality changes
+
+ - FlexiMvvm-adapted activity doesn't throw an exception anymore in Activity.OnActivityResult callback if its model doesn't implement IViewModelWithResultHandler. Reason: activities might communicate with each other without transmission the result to the view model.
+
 ## v.0.10.2 (preview)
 
 ### New functionality
