@@ -339,7 +339,7 @@ namespace FirstScreen.iOS.Views
 
             this.AddConstraints(
                 FirstNameLabel.AtLeftOf(this, Theme.Dimensions.Inset2x),
-                FirstNameLabel.AtTopOf(this, Theme.Dimensions.Inset6x),
+                FirstNameLabel.AtTopOfSafeArea(this, Theme.Dimensions.Inset2x),
                 FirstNameLabel.AtRightOf(this, Theme.Dimensions.Inset2x),
                 FirstNameLabel.Height().EqualTo(Theme.Dimensions.LabelBodyHeight));
             this.AddConstraints(
@@ -481,4 +481,4 @@ As a result,
 
 ---
 
-[Next: Second Screen with Parameters...](001-introduction-03-second-screen-with-parameters.md)
+[Next: Screen with Parameters...](001-introduction-03-screen-with-parameters.md)
