@@ -6,7 +6,7 @@
 
 Navigation is View Model driven. At the same time, FlexiMvvm **encourages to use native APIs for navigation**. For that, the following approach is suggested:
 
-1. ``INavigationService`` contract is defined in a shared code;
+1. ``INavigationService`` contract is defined in shared code;
 2. iOS and Android ``NavigationService`` implementations provide suitable native behavior.
 3. View Models use ``INavigationService`` dependency for initiating navigation.
 
@@ -14,7 +14,7 @@ For our previous [First Screen](001-introduction-02-first-screen.md) tutorial, l
 
 ### Shared Contract
 
-Let's start with the interface. The interface defines the contract which may be used across the app when moving from a screen to screen (or a subview on the screen, if you need). So, the interface is placed into the **Core** project, FirstScreen.Core / Presentation / Navigation / INavigationService.cs:
+Let's start with the interface. It defines the contract which may be used across the app when moving through screens (or to a subview on the screen, if needed). So, the interface is placed into the **Core** project, FirstScreen.Core / Presentation / Navigation / INavigationService.cs:
 
 ```cs
 using FirstScreen.Core.Presentation.ViewModels;
@@ -109,6 +109,8 @@ namespace FirstScreen.iOS.Views
 }
 ```
 
+As we can see, ``RootNavigationViewController`` uses ``EntryViewModel`` behind.
+
 ##### iOS application setup
 
 ``RootNavigationViewController`` plays the important role to receive the control when iOS app starts. As usual, we specify it in FirstScreen.iOS / AppDelegate.cs, as a ``RootViewController`` for ``UIWindow``. But also as we have got ``NavigationService`` which has to be provided for ``EntryViewModel``, we use out-of-the-box ``SimpleIoc`` container to register this service as well:
@@ -135,7 +137,11 @@ namespace FirstScreen.iOS
         {
             InitApp();
 
-            Window = new UIWindow(UIScreen.MainScreen.Bounds) { RootViewController = new RootNavigationViewController() };
+            Window = new UIWindow(UIScreen.MainScreen.Bounds)
+            {
+                RootViewController = new RootNavigationViewController()
+            };
+
             Window.MakeKeyAndVisible();
 
             return true;

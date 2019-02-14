@@ -35,13 +35,13 @@ namespace FirstScreen.Core.Presentation.ViewModels
 
 So it has a single ``Email`` property the target View Model will be interested in to retrieve while initializing. Base class is used to inherit the parameters propagation via native APIs - and we can see in ``Email``'s setter and getter the ``Bundle`` entry property from the base class is used. It provides the wide range of methods to get or set primitive types. Internally, the data preserved as a dictionaly on iOS, or as a native Bundle on Android.
 
-![Bundle](001-Intro-008-ParamsBundle.png)
+![Bundle](images/001-Intro-008-ParamsBundle.png)
 
 ### View Model with Parameters
 
-Having ``UserProfileParameters``, we update the View Model:
-1. Make it generic
-2. Using base ``Parameters`` property which has now the ``Email`` property.
+Having ``UserProfileParameters``, we update ``UserProfileViewModel``:
+1. Making it generic
+2. Using base ``Parameters`` property which is strongly typed now and provides the ``Email`` passed in.
 
 ```cs
 
@@ -61,7 +61,8 @@ namespace FirstScreen.Core.Presentation.ViewModels
         {
             await base.InitializeAsync();
 
-            System.Diagnostics.Debug.WriteLine($"Using Parameters... Email = {Parameters.Email}");
+            System.Diagnostics.Debug.WriteLine(
+                $"Using Parameters... Email = {Parameters.Email}");
         }        
 
         //// ... some existing code is hidden for convenience
@@ -106,7 +107,9 @@ namespace FirstScreen.iOS.Navigation
     {
         public void NavigateToUserProfile(EntryViewModel from, UserProfileParameters parameters)
         {
-            var controller = GetViewController<RootNavigationViewController, EntryViewModel>(from);
+            var controller =
+                GetViewController<RootNavigationViewController, EntryViewModel>(from);
+                
             controller.PushViewController(new UserProfileViewController(parameters), false);
         }
     }
