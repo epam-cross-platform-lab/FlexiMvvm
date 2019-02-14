@@ -22,46 +22,73 @@ using UIKit;
 
 namespace FlexiMvvm.Navigation
 {
-    public delegate void BackwardNavigationDelegate([NotNull] UINavigationController navigationController, [NotNull] INavigationView<IViewModel> fromView, bool animated);
+    /// <summary>
+    /// Defines the contract for backward navigation.
+    /// </summary>
+    /// <param name="navigationController">The source view navigation controller.</param>
+    /// <param name="sourceView">The source view from which navigation is performed from.</param>
+    /// <param name="animated">Determines if the transition is to be animated.</param>
+    public delegate void BackwardNavigationDelegate([NotNull] UINavigationController navigationController, [NotNull] INavigationView<IViewModel> sourceView, bool animated);
 
+    /// <summary>
+    /// Provides a set of backward navigation strategies.
+    /// </summary>
     public sealed class BackwardNavigationStrategy
     {
+        /// <summary>
+        /// Backward navigation using <see cref="UINavigationController.PopViewController(bool)"/> method.
+        /// </summary>
+        /// <returns>The backward navigation delegate.</returns>
         [NotNull]
         public BackwardNavigationDelegate PopViewController()
         {
-            return (navigationController, fromView, animated) =>
+            return (navigationController, sourceView, animated) =>
             {
                 navigationController.NotNull().PopViewController(animated);
             };
         }
 
+        /// <summary>
+        /// Backward navigation using <see cref="UINavigationController.PopToViewController(UIViewController, bool)"/> method.
+        /// </summary>
+        /// <param name="targetView">The target view for navigation.</param>
+        /// <returns>The backward navigation delegate.</returns>
         [NotNull]
-        public BackwardNavigationDelegate PopToViewController([NotNull] UIViewController toView)
+        public BackwardNavigationDelegate PopToViewController([NotNull] UIViewController targetView)
         {
-            if (toView == null)
-                throw new ArgumentNullException(nameof(toView));
+            if (targetView == null)
+                throw new ArgumentNullException(nameof(targetView));
 
-            return (navigationController, fromView, animated) =>
+            return (navigationController, sourceView, animated) =>
             {
-                navigationController.NotNull().PopToViewController(toView, animated);
+                navigationController.NotNull().PopToViewController(targetView, animated);
             };
         }
 
+        /// <summary>
+        /// Backward navigation using <see cref="UINavigationController.PopToRootViewController(bool)"/> method.
+        /// </summary>
+        /// <returns>The backward navigation delegate.</returns>
         [NotNull]
         public BackwardNavigationDelegate PopToRootViewController()
         {
-            return (navigationController, fromView, animated) =>
+            return (navigationController, sourceView, animated) =>
             {
                 navigationController.NotNull().PopToRootViewController(animated);
             };
         }
 
+        /// <summary>
+        /// Backward navigation using <see cref="INavigationView{TViewModel}.DismissViewController(bool, Action)"/> method.
+        /// </summary>
+        /// <param name="completionHandler">The method to invoke when the animation completes.</param>
+        /// <returns>The backward navigation delegate.</returns>
         [NotNull]
         public BackwardNavigationDelegate DismissViewController([CanBeNull] Action completionHandler = null)
         {
-            return (navigationController, fromView, animated) =>
+            return (navigationController, sourceView, animated) =>
             {
-                fromView.NotNull().DismissViewController(animated, completionHandler);
+                sourceView.NotNull().DismissViewController(animated, completionHandler);
             };
         }
     }

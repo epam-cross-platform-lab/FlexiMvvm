@@ -71,6 +71,7 @@ namespace FlexiMvvm.Views.Core
 
         [CanBeNull]
         private string _viewModelKey;
+        private bool _isViewModelCreated;
         [NotNull]
         private Task _viewModelAsyncInitialization = Task.CompletedTask;
 
@@ -87,14 +88,20 @@ namespace FlexiMvvm.Views.Core
             _viewModelKey = savedInstanceState?.GetString(ViewModelKeyKey) ?? Guid.NewGuid().ToString();
             var factory = ViewModelProvider.GetFactory();
             var state = savedInstanceState?.GetState();
-            var viewModel = ViewModelProvider.Get<TViewModel>(store, _viewModelKey, factory, state, out var created);
+            var viewModel = ViewModelProvider.Get<TViewModel>(store, _viewModelKey, factory, state, out _isViewModelCreated);
 
             View.SetViewModel(viewModel);
             ViewCache.Add(View);
+        }
 
-            if (created)
+        public override void OnStart()
+        {
+            base.OnStart();
+
+            if (_isViewModelCreated)
             {
                 _viewModelAsyncInitialization = View.InitializeViewModelAsync();
+                _isViewModelCreated = false;
             }
         }
 

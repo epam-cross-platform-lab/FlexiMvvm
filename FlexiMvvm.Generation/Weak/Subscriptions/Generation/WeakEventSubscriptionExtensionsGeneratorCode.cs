@@ -49,11 +49,21 @@ namespace FlexiMvvm.Weak.Subscriptions.Generation
         [NotNull]
         private string GetClassName([NotNull] ExtensionsGenerationOptions typeExtensionsGenerationOptions)
         {
-            var sanitizedClassName = string.IsNullOrWhiteSpace(typeExtensionsGenerationOptions.ExtensionsCustomClassName)
-                ? typeExtensionsGenerationOptions.ClassName.WithoutNamespace().WithoutInterfacePrefix().WithoutGenericPart()
-                : typeExtensionsGenerationOptions.ExtensionsCustomClassName.WithoutNamespace().WithoutInterfacePrefix().WithoutGenericPart();
+            var sanitizedClassName = string.IsNullOrWhiteSpace(typeExtensionsGenerationOptions.ExtensionsClassCustomName)
+                ? typeExtensionsGenerationOptions.ClassName.WithoutNamespace().WithoutGenericPart()
+                : typeExtensionsGenerationOptions.ExtensionsClassCustomName.WithoutNamespace().WithoutGenericPart();
 
             return $"{sanitizedClassName}WeakEventSubscriptionExtensions";
+        }
+
+        [NotNull]
+        private string GetWeakSubscribeMethodName(
+            [NotNull] ExtensionsGenerationOptions typeExtensionsGenerationOptions,
+            [NotNull] EventGenerationOptions typeEventGenerationOptions)
+        {
+            return string.IsNullOrWhiteSpace(typeExtensionsGenerationOptions.ExtensionsMethodsGenericTypeParameters)
+                ? $"{typeEventGenerationOptions.EventName}WeakSubscribe"
+                : $"{typeEventGenerationOptions.EventName}WeakSubscribe<{typeExtensionsGenerationOptions.ExtensionsMethodsGenericTypeParameters}>";
         }
 
         [NotNull]

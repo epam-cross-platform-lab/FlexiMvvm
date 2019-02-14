@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FlexiMvvm.Formatters;
 using FlexiMvvm.ViewModels;
 using JetBrains.Annotations;
@@ -55,10 +56,17 @@ namespace FlexiMvvm.Views.Core
 
             if (view == null)
             {
-                throw new InvalidOperationException($"Unable to find a view instance for the \"{TypeFormatter.FormatName(viewModel.GetType())}\" view model.");
+                throw new ArgumentException($"View instance is missing for provided \"{TypeFormatter.FormatName(viewModel.GetType())}\" view model.", nameof(viewModel));
             }
 
             return view;
+        }
+
+        [CanBeNull]
+        internal static TView GetLastOrDefault<TView>()
+            where TView : class, IView<IViewModel>
+        {
+            return (TView)_viewsWeakReferences?.LastOrDefault()?.GetTarget();
         }
 
         internal static void Add([NotNull] IView<IViewModel> view)

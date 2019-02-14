@@ -28,7 +28,7 @@ namespace FlexiMvvm.Configuration
             if (config == null)
                 throw new ArgumentNullException(nameof(config));
 
-            return ((IConfig)config).GetValue(ShouldRaisePropertyChangedKey, true);
+            return config.GetValue(ShouldRaisePropertyChangedKey, true);
         }
 
         public static void ShouldRaisePropertyChanged([NotNull] this FlexiMvvmConfig config, bool value)
@@ -36,7 +36,7 @@ namespace FlexiMvvm.Configuration
             if (config == null)
                 throw new ArgumentNullException(nameof(config));
 
-            ((IConfig)config).SetValue(ShouldRaisePropertyChangedKey, value);
+            config.SetValue(ShouldRaisePropertyChangedKey, value);
         }
     }
 }

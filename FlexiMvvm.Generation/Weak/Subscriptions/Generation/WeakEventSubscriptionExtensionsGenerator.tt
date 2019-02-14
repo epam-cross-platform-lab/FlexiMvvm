@@ -22,7 +22,7 @@ using FlexiMvvm.Weak.Subscriptions;
 
 namespace <#= GetNamespace(typeExtensionsGenerationOptions) #>
 {
-    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="<#= typeExtensionsGenerationOptions.ClassName #>"/> class events.</summary>
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="<#= typeExtensionsGenerationOptions.ClassName.AsCrefName() #>"/> class events.</summary>
 <#  if (!string.IsNullOrWhiteSpace(typeExtensionsGenerationOptions.ObsoleteDescription)) {
         if (!string.IsNullOrWhiteSpace(typeExtensionsGenerationOptions.ObsoleteIfPreprocessorDirective)) { #>
 #if <#= typeExtensionsGenerationOptions.ObsoleteIfPreprocessorDirective #>
@@ -38,10 +38,10 @@ namespace <#= GetNamespace(typeExtensionsGenerationOptions) #>
             if (!string.IsNullOrWhiteSpace(typeEventGenerationOptions.IfPreprocessorDirective)) { #>
 #if <#= typeEventGenerationOptions.IfPreprocessorDirective #>
 <#          } #>
-        /// <summary>Weak subscription on <see cref="<#= typeExtensionsGenerationOptions.ClassName #>.<#= typeEventGenerationOptions.EventName #>"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="<#= typeExtensionsGenerationOptions.ClassName.AsCrefName() #>.<#= typeEventGenerationOptions.EventName #>"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="<#= typeExtensionsGenerationOptions.ClassName #>.<#= typeEventGenerationOptions.EventName #>"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="<#= typeExtensionsGenerationOptions.ClassName.AsCrefName() #>.<#= typeEventGenerationOptions.EventName #>"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
 <#      if (!string.IsNullOrWhiteSpace(typeEventGenerationOptions.ObsoleteDescription)) {
             if (!string.IsNullOrWhiteSpace(typeEventGenerationOptions.ObsoleteIfPreprocessorDirective)) { #>
@@ -52,7 +52,7 @@ namespace <#= GetNamespace(typeExtensionsGenerationOptions) #>
 #endif
 <#          } #>
 <#      } #>
-        public static IDisposable <#= typeEventGenerationOptions.EventName #>WeakSubscribe(
+        public static IDisposable <#= GetWeakSubscribeMethodName(typeExtensionsGenerationOptions, typeEventGenerationOptions) #>(
 <#          if (typeEventGenerationOptions.IsStaticEvent) { #>
             <#= typeExtensionsGenerationOptions.ClassName #> eventSource,
 <#          } else { #>

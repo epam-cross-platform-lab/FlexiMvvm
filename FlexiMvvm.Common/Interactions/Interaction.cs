@@ -15,33 +15,30 @@
 // =========================================================================
 
 using System;
-using System.Collections.Generic;
 using JetBrains.Annotations;
 
-namespace FlexiMvvm.Configuration
+namespace FlexiMvvm.Interactions
 {
-    public abstract class Config : IConfig
+    public class Interaction
     {
-        [CanBeNull]
-        private Dictionary<string, object> _values;
+        public event EventHandler Requested;
 
-        [NotNull]
-        private Dictionary<string, object> Values => _values ?? (_values = new Dictionary<string, object>());
-
-        public T GetValue<T>(string key, T defaultValue = default)
+        public void RaiseRequested()
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
-
-            return (T)_values.GetValueOrDefault(key, defaultValue);
+            Requested?.Invoke(this, EventArgs.Empty);
         }
+    }
 
-        public void SetValue<T>(string key, T value)
+    public class Interaction<T>
+    {
+        public event EventHandler<InteractionRequestEventArgs<T>> Requested;
+
+        public void RaiseRequested([NotNull] T request)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (request == null)
+                throw new ArgumentNullException(nameof(request));
 
-            Values[key] = value;
+            Requested?.Invoke(this, new InteractionRequestEventArgs<T>(request));
         }
     }
 }

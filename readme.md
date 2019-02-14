@@ -20,6 +20,7 @@ git clone https://github.com/epam-xamarin-lab/FlexiMvvm.git
 Current state should be considered as a **Preview** version.
 Some of compatibility breaking changes are still possible due to continuous enhancements based on the early usage.
 According to current plans, first release is considered in 2019 Q1.
+Preview release notes are available [here](https://github.com/epam-xamarin-lab/FlexiMvvm/blob/master/release_notes.md).
 
 ## Authors
 

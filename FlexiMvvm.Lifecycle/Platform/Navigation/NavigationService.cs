@@ -22,8 +22,18 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.Navigation
 {
+    /// <summary>
+    /// Provides a set of methods for performing navigation.
+    /// </summary>
     public abstract partial class NavigationService
     {
+        /// <summary>
+        /// Gets the view.
+        /// </summary>
+        /// <param name="viewModel">The model used for getting a bound view.</param>
+        /// <returns>The view instance.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentException">View instance is missing for provided <paramref name="viewModel"/>.</exception>
         [NotNull]
         public INavigationView<IViewModel> GetView([NotNull] IViewModel viewModel)
         {
@@ -33,6 +43,13 @@ namespace FlexiMvvm.Navigation
             return ViewCache.Get<INavigationView<IViewModel>, IViewModel>(viewModel);
         }
 
+        /// <summary>
+        /// Gets the view which can handle passed result.
+        /// </summary>
+        /// <param name="viewModel">The model used for getting a bound view.</param>
+        /// <returns>The view instance.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentException">View instance is missing for provided <paramref name="viewModel"/>.</exception>
         [NotNull]
         public INavigationView<IViewModelWithResultHandler> GetView([NotNull] IViewModelWithResultHandler viewModel)
         {
@@ -42,6 +59,14 @@ namespace FlexiMvvm.Navigation
             return ViewCache.Get<INavigationView<IViewModelWithResultHandler>, IViewModelWithResultHandler>(viewModel);
         }
 
+        /// <summary>
+        /// Gets the view which can return a result.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the view model result.</typeparam>
+        /// <param name="viewModel">The model used for getting a bound view.</param>
+        /// <returns>The view instance.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentException">View instance is missing for provided <paramref name="viewModel"/>.</exception>
         [NotNull]
         public INavigationView<IViewModelWithResult<TResult>> GetView<TResult>([NotNull] IViewModelWithResult<TResult> viewModel)
             where TResult : Result
@@ -50,6 +75,16 @@ namespace FlexiMvvm.Navigation
                 throw new ArgumentNullException(nameof(viewModel));
 
             return ViewCache.Get<INavigationView<IViewModelWithResult<TResult>>, IViewModelWithResult<TResult>>(viewModel);
+        }
+
+        /// <summary>
+        /// Gets the last navigated view.
+        /// </summary>
+        /// <returns>The view instance.</returns>
+        [CanBeNull]
+        public INavigationView<IViewModel> GetLastNavigatedView()
+        {
+            return ViewCache.GetLastOrDefault<INavigationView<IViewModel>>();
         }
     }
 }

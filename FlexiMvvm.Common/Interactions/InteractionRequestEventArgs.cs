@@ -14,25 +14,22 @@
 // limitations under the License.
 // =========================================================================
 
+using System;
 using JetBrains.Annotations;
 
-namespace FlexiMvvm.Navigation
+namespace FlexiMvvm.Interactions
 {
-    /// <summary>
-    /// Provides strategies for forward and backward navigation.
-    /// </summary>
-    public static class NavigationStrategy
+    public class InteractionRequestEventArgs<T> : EventArgs
     {
-        /// <summary>
-        /// Gets the forward navigation strategy.
-        /// </summary>
-        [NotNull]
-        public static ForwardNavigationStrategy Forward { get; } = new ForwardNavigationStrategy();
+        public InteractionRequestEventArgs([NotNull] T request)
+        {
+            if (request == null)
+                throw new ArgumentNullException(nameof(request));
 
-        /// <summary>
-        /// Gets the backward navigation strategy.
-        /// </summary>
+            Request = request;
+        }
+
         [NotNull]
-        public static BackwardNavigationStrategy Backward { get; } = new BackwardNavigationStrategy();
+        public T Request { get; }
     }
 }

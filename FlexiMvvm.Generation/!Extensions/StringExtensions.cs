@@ -29,15 +29,15 @@ namespace FlexiMvvm
         }
 
         [NotNull]
-        internal static string WithoutInterfacePrefix([NotNull] this string value)
-        {
-            return value.TrimStart('I');
-        }
-
-        [NotNull]
         internal static string WithoutGenericPart([NotNull] this string value)
         {
             return value.Contains("<") ? value.Substring(0, value.IndexOf('<')) : value;
+        }
+
+        [NotNull]
+        internal static string AsCrefName([NotNull] this string value)
+        {
+            return value.Replace("<", "{").Replace(">", "}");
         }
     }
 }
