@@ -30,7 +30,6 @@ namespace FlexiMvvm.Views.Generation.Android
 
             ClassName = className;
             BaseClassName = baseClassName;
-            BaseInterfaceName = kind == ViewKind.Activity ? "IAndroidView, ILifecycleEventSourceActivity" : "IAndroidView, ILifecycleEventSourceFragment";
             LifecycleMethodAccessModifier = kind == ViewKind.Activity ? "protected" : "public";
             ParametersSourceName = kind == ViewKind.Activity ? "Intent" : "Arguments";
             ResultCodeTypeName = kind == ViewKind.Activity ? "Android.App.Result" : "int";
@@ -45,9 +44,6 @@ namespace FlexiMvvm.Views.Generation.Android
 
         [NotNull]
         public string BaseClassName { get; }
-
-        [NotNull]
-        public string BaseInterfaceName { get; }
 
         [NotNull]
         public string LifecycleMethodAccessModifier { get; }

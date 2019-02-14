@@ -18,10 +18,8 @@ using System;
 
 namespace FlexiMvvm.Views
 {
-    public interface ILifecycleEventSourceActivity
+    public interface IOptionsEventSource
     {
         event EventHandler<OptionsItemSelectedEventArgs> OnOptionsItemSelectedCalled;
-
-        event EventHandler<BackPressedEventArgs> OnBackPressedCalled;
     }
 }

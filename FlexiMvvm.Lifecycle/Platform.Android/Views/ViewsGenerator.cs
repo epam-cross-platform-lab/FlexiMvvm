@@ -29,13 +29,11 @@ using FlexiMvvm.Views.Core;
 namespace FlexiMvvm.Views
 {
     [Register("fleximvvm.views.AppCompatActivity")]
-    public partial class AppCompatActivity : Android.Support.V7.App.AppCompatActivity, IAndroidView, ILifecycleEventSourceActivity
+    public partial class AppCompatActivity : Android.Support.V7.App.AppCompatActivity, IAndroidView, IOptionsEventSource
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
 
         public event EventHandler<OptionsItemSelectedEventArgs> OnOptionsItemSelectedCalled;
-
-        public event EventHandler<BackPressedEventArgs> OnBackPressedCalled;
 
         protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ?? (_lifecycleDelegate = CreateLifecycleDelegate());
 
@@ -69,17 +67,6 @@ namespace FlexiMvvm.Views
             }
 
             return base.OnOptionsItemSelected(item);
-        }
-
-        public override void OnBackPressed()
-        {
-            var backPressedEventArgs = new BackPressedEventArgs();
-            OnBackPressedCalled?.Invoke(this, backPressedEventArgs);
-
-            if (!backPressedEventArgs.Handled)
-            {
-                base.OnBackPressed();
-            }
         }
 
         protected override void OnActivityResult(int requestCode, Android.App.Result resultCode, Intent data)
@@ -161,7 +148,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     [Register("fleximvvm.views.DialogFragment")]
-    public partial class DialogFragment : Android.Support.V4.App.DialogFragment, IAndroidView, ILifecycleEventSourceFragment
+    public partial class DialogFragment : Android.Support.V4.App.DialogFragment, IAndroidView, IOptionsEventSource
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
 
@@ -317,7 +304,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     [Register("fleximvvm.views.Fragment")]
-    public partial class Fragment : Android.Support.V4.App.Fragment, IAndroidView, ILifecycleEventSourceFragment
+    public partial class Fragment : Android.Support.V4.App.Fragment, IAndroidView, IOptionsEventSource
     {
         private IViewLifecycleDelegate _lifecycleDelegate;
 
