@@ -56,6 +56,17 @@ namespace FlexiMvvm.Operations
             return this;
         }
 
+        public IOperationHandlerBuilder<TResult> OnSuccess(Action handler)
+        {
+            if (handler == null)
+                throw new ArgumentNullException(nameof(handler));
+
+            return OnSuccess(_ =>
+            {
+                handler();
+            });
+        }
+
         public IOperationHandlerBuilder<TResult> OnSuccess(Action<TResult> handler)
         {
             if (handler == null)
@@ -66,6 +77,17 @@ namespace FlexiMvvm.Operations
                 handler(result);
 
                 return Task.CompletedTask;
+            });
+        }
+
+        public IOperationHandlerBuilder<TResult> OnSuccessAsync(Func<CancellationToken, Task> handler)
+        {
+            if (handler == null)
+                throw new ArgumentNullException(nameof(handler));
+
+            return OnSuccessAsync((_, cancellationToken) =>
+            {
+                return handler(cancellationToken);
             });
         }
 

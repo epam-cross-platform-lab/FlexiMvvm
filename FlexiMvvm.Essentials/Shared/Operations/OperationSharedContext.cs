@@ -42,7 +42,7 @@ namespace FlexiMvvm.Operations
         private Dictionary<Type, int> NotificationCounter => _notificationCounter ?? (_notificationCounter = new Dictionary<Type, int>());
 
         public int GetNotificationCount<TNotification>()
-            where TNotification : OperationNotificationBase
+            where TNotification : OperationNotification
         {
             return GetNotificationCount(typeof(TNotification));
         }

@@ -30,7 +30,13 @@ namespace FlexiMvvm.Operations
         IOperationHandlerBuilder<TResult> OnStartAsync([NotNull] Func<CancellationToken, Task> handler);
 
         [NotNull]
+        IOperationHandlerBuilder<TResult> OnSuccess([NotNull] Action handler);
+
+        [NotNull]
         IOperationHandlerBuilder<TResult> OnSuccess([NotNull] Action<TResult> handler);
+
+        [NotNull]
+        IOperationHandlerBuilder<TResult> OnSuccessAsync([NotNull] Func<CancellationToken, Task> handler);
 
         [NotNull]
         IOperationHandlerBuilder<TResult> OnSuccessAsync([NotNull] Func<TResult, CancellationToken, Task> handler);

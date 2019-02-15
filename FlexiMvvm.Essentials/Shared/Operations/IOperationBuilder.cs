@@ -24,13 +24,19 @@ namespace FlexiMvvm.Operations
     public interface IOperationBuilder
     {
         [NotNull]
-        IOperationBuilder WithNotification([CanBeNull] OperationNotificationBase notification);
+        IOperationBuilder WithNotification([CanBeNull] OperationNotification notification);
 
         [NotNull]
-        IOperationBuilder WithCondition([CanBeNull] OperationConditionBase condition);
+        IOperationBuilder WithCondition([CanBeNull] OperationCondition condition);
+
+        [NotNull]
+        IOperationHandlerBuilder<Void> WithExpression([NotNull] Action expression);
 
         [NotNull]
         IOperationHandlerBuilder<TResult> WithExpression<TResult>([NotNull] Func<TResult> expression);
+
+        [NotNull]
+        IOperationHandlerBuilder<Void> WithExpressionAsync([NotNull] Func<CancellationToken, Task> expression);
 
         [NotNull]
         IOperationHandlerBuilder<TResult> WithExpressionAsync<TResult>([NotNull] Func<CancellationToken, Task<TResult>> expression);

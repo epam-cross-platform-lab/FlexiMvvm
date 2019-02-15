@@ -20,7 +20,7 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.Operations
 {
-    public abstract class OperationConditionBase
+    public abstract class OperationCondition
     {
         [NotNull]
         public abstract Task<bool> CheckAsync([NotNull] OperationContext context, CancellationToken cancellationToken);

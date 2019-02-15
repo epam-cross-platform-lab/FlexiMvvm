@@ -26,27 +26,40 @@ namespace FlexiMvvm.Operations
         [NotNull]
         private readonly OperationContext _context;
         [CanBeNull]
-        private OperationNotificationBase _notification;
+        private OperationNotification _notification;
         [CanBeNull]
-        private OperationConditionBase _condition;
+        private OperationCondition _condition;
 
         internal OperationBuilder([NotNull] OperationContext context)
         {
             _context = context;
         }
 
-        public IOperationBuilder WithNotification(OperationNotificationBase notification)
+        public IOperationBuilder WithNotification(OperationNotification notification)
         {
             _notification = notification;
 
             return this;
         }
 
-        public IOperationBuilder WithCondition(OperationConditionBase condition)
+        public IOperationBuilder WithCondition(OperationCondition condition)
         {
             _condition = condition;
 
             return this;
+        }
+
+        public IOperationHandlerBuilder<Void> WithExpression(Action expression)
+        {
+            if (expression == null)
+                throw new ArgumentNullException(nameof(expression));
+
+            return WithExpression(() =>
+            {
+                expression();
+
+                return default(Void);
+            });
         }
 
         public IOperationHandlerBuilder<TResult> WithExpression<TResult>(Func<TResult> expression)
@@ -59,6 +72,19 @@ namespace FlexiMvvm.Operations
                 await Task.Yield();
 
                 return expression();
+            });
+        }
+
+        public IOperationHandlerBuilder<Void> WithExpressionAsync(Func<CancellationToken, Task> expression)
+        {
+            if (expression == null)
+                throw new ArgumentNullException(nameof(expression));
+
+            return WithExpressionAsync(async cancellationToken =>
+            {
+                await expression(cancellationToken).NotNull();
+
+                return default(Void);
             });
         }
 

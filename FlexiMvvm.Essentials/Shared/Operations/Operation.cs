@@ -35,8 +35,8 @@ namespace FlexiMvvm.Operations
 
         internal Operation(
             [NotNull] Func<CancellationToken, Task<TResult>> expression,
-            [CanBeNull] OperationNotificationBase notification,
-            [CanBeNull] OperationConditionBase condition)
+            [CanBeNull] OperationNotification notification,
+            [CanBeNull] OperationCondition condition)
         {
             _expression = expression;
             Notification = notification;
@@ -44,10 +44,10 @@ namespace FlexiMvvm.Operations
         }
 
         [CanBeNull]
-        private OperationNotificationBase Notification { get; }
+        private OperationNotification Notification { get; }
 
         [CanBeNull]
-        private OperationConditionBase Condition { get; }
+        private OperationCondition Condition { get; }
 
         [CanBeNull]
         internal Func<CancellationToken, Task> StartHandler { get; set; }

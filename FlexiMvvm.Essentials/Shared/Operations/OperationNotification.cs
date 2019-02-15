@@ -20,12 +20,12 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.Operations
 {
-    public abstract class OperationNotificationBase
+    public abstract class OperationNotification
     {
         private readonly int _delay;
         private readonly int _minDuration;
 
-        protected OperationNotificationBase(int delay, int minDuration, bool isCancelable)
+        protected OperationNotification(int delay, int minDuration, bool isCancelable)
         {
             _delay = delay;
             _minDuration = minDuration;
