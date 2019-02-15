@@ -13,7 +13,7 @@ Our sample app is going to show just a single screen on start, with a basic Prof
 - Last Name
 - Email
 
-Whole sample code is [available in the repository](000-samples/010-Intro-FirstScreen).
+Whole sample code is [available in the repository](https://github.com/epam-xamarin-lab/FlexiMvvm/tree/master/samples/010-Intro-FirstScreen/).
 
 ### New Visual Studio solution
 
@@ -118,8 +118,8 @@ To simplify the code, FlexiMvvm provides useful ``CommandProvider`` to setup Com
 
 Starting with Android, let's scaffold a minimal app with a single Activity. The following points are quite regular for any Xamarin.Android app and just summarised. Complete solution is available as a sample: [First Screen sample](000-samples/010-Intro-FirstScreen)
 
-1. [FirstScreen.Droid / Resources / layout / Main.axml](000-samples/010-Intro-FirstScreen/Droid/Resources/layout/Main.axml): basic UI layout for the new Activity. Just ``TextViews``, ``EditText`` and ``Button`` controls within ``LinearLayout``s.
-2. [FirstScreen.Droid / Resources / values / styles.xml](000-samples/010-Intro-FirstScreen/Droid/Resources/values/styles.xml): Theme setup
+1. FirstScreen.Droid / Resources / layout / [Main.axml](https://github.com/epam-xamarin-lab/FlexiMvvm/tree/master/samples/010-Intro-FirstScreen/Droid/Resources/layout/Main.axml): basic UI layout for the new Activity. Just ``TextViews``, ``EditText`` and ``Button`` controls within ``LinearLayout``s.
+2. FirstScreen.Droid / Resources / values / [styles.xml](https://github.com/epam-xamarin-lab/FlexiMvvm/tree/master/samples/010-Intro-FirstScreen/Droid/Resources/values/styles.xml): Theme setup
 
 Finally, we approached the Activity which needs FlexiMvvm specific customizations. FirstScreen.Droid / Views / ``UserProfileActivity``. Here is its full definition:
 
