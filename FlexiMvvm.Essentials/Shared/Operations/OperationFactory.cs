@@ -22,31 +22,27 @@ namespace FlexiMvvm.Operations
 {
     public class OperationFactory : IOperationFactory
     {
-        [CanBeNull]
-        private readonly IDependencyProvider _dependencyProvider;
         [NotNull]
-        private readonly IErrorHandler _errorHandler;
+        private readonly OperationSharedContext _sharedContext;
 
-        public OperationFactory([CanBeNull] IDependencyProvider dependencyProvider, [NotNull] IErrorHandler errorHandler)
+        public OperationFactory([NotNull] IDependencyProvider dependencyProvider, [NotNull] IErrorHandler errorHandler)
         {
-            _dependencyProvider = dependencyProvider;
-            _errorHandler = errorHandler ?? throw new ArgumentNullException(nameof(errorHandler));
+            if (dependencyProvider == null)
+                throw new ArgumentNullException(nameof(dependencyProvider));
+            if (errorHandler == null)
+                throw new ArgumentNullException(nameof(errorHandler));
+
+            _sharedContext = new OperationSharedContext(dependencyProvider, errorHandler);
         }
 
-        public IOperationBuilder CreateOperation(OperationContext context)
-        {
-            if (context == null)
-                throw new ArgumentNullException(nameof(context));
-
-            return new OperationBuilder(context);
-        }
-
-        public OperationContext CreateContext(object owner)
+        public IOperationBuilder Create(object owner)
         {
             if (owner == null)
                 throw new ArgumentNullException(nameof(owner));
 
-            return new OperationContext(_dependencyProvider, owner, _errorHandler);
+            var context = new OperationContext(owner, _sharedContext);
+
+            return new OperationBuilder(context);
         }
     }
 }

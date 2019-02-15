@@ -21,9 +21,6 @@ namespace FlexiMvvm.Operations
     public interface IOperationFactory
     {
         [NotNull]
-        IOperationBuilder CreateOperation([NotNull] OperationContext context);
-
-        [NotNull]
-        OperationContext CreateContext([NotNull] object owner);
+        IOperationBuilder Create([NotNull] object owner);
     }
 }
