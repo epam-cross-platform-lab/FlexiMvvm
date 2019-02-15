@@ -8,35 +8,43 @@ As a first tutorial, let's build a minimalistic single screen app like this:
 
 ![First screen](001-introduction-02-first-screen/020-run.png)
 
-### New Visual Studio solution
-
-To get started, we prepare a Visual Studio solution for the app.
-For simplicity, let's add three projects within:
-
-![First Screen solution](001-introduction-02-first-screen/030-solution.png)
-
-- **FirstScreen.Core** for the shared code
-	- It's compliant to ``.net standard 2.0`` multiplatform spec:
-	![.net standard 2.0](001-introduction-02-first-screen/040-netstandard.png)
-- **FirstScreen.Droid** for the Android code
-	- It has a reference to the FirstScreen.Core project
-	- Appropriate target Android SDK is selected. Consider any starting **from Android 8.0 (Oreo)**:
-	![Target Android](001-introduction-02-first-screen/050-droid.png)
-	- Android versions range is set we're going to support. For our case, we have API Level 21+ support, though API Level 19+ (Android 4.4 (KitKat)) may be supported
-	![Android versions](001-introduction-02-first-screen/060-droid-api.png)
-- **FirstScreen.iOS** for the iOS platform code
-	- It has a reference to the FirstScreen.Core project
-	- Info.plist file has selected Deployment Target. For instance, iOS 11+:
-	![iOS versions](001-introduction-02-first-screen/070-ios.png)
-
-> It's recommended to use **"Droid"** suffix for your Android project, instead of "Android" to make life a bit easier for IDE to distinguish our versus Xamarin SDK namespaces
-
-Our sample app is going to show just a single screen on start, with a basic Profile form where user can provide the information via text entry fields and save it:
+Our sample app is going to show just a single screen on start, with a basic Profile form where user can provide the information via text entry fields and "save" it:
 - First Name
 - Last Name
 - Email
 
-### Adding NuGet Packages
+Whole sample code is [available in the repository](000-samples/010-Intro-FirstScreen).
+
+### New Visual Studio solution
+
+To get started, we prepare a Visual Studio solution for the app.
+For simplicity, let's add just three projects within:
+
+![First Screen solution](001-introduction-02-first-screen/030-solution.png)
+
+> It's recommended to use **"Droid"** suffix for your Android project, instead of "Android" to make life a bit easier for IDE to distinguish our versus Xamarin SDK namespaces
+
+#### FirstScreen.Core
+
+It has to be compliant to ``.net standard 2.0`` multiplatform spec:
+
+![.net standard 2.0](001-introduction-02-first-screen/040-netstandard.png)
+
+#### FirstScreen.Droid
+
+1. The reference to the FirstScreen.Core project has to be added.
+2. Appropriate target Android SDK is needed. Consider any starting **from Android 8.0 (Oreo)**:
+![Target Android](001-introduction-02-first-screen/050-droid.png)
+3. Android versions range is needed to be set we're going to support. For our case, we have API Level 21+ support, though API **Level 19+ (Android 4.4, KitKat) may be supported**:
+![Android versions](001-introduction-02-first-screen/060-droid-api.png)
+
+#### FirstScreen.iOS
+
+1. The reference to the FirstScreen.Core project has to be added.
+2. **Info.plist** file needs an appropriate Deployment Target. For instance, iOS 11+:
+![iOS versions](001-introduction-02-first-screen/070-ios.png)
+
+### NuGet Packages
 
 | Project | Package |
 | --- | --- |
@@ -44,9 +52,9 @@ Our sample app is going to show just a single screen on start, with a basic Prof
 | *FirstScreen.Droid* | **FlexiMvvm.FullStack**
 | *FirstScreen.iOS* | **FlexiMvvm.FullStack**
 
-> On the time of documentation, FlexiMvvm was in the Preview mode, with **"PreRelease"** suffixes. Also showing Preview packages option was required to be enabled for NuGet Manager.
+> **Preview version**. On the time of documentation, FlexiMvvm was in the Preview mode, with **"PreRelease"** suffixes. Also showing Preview packages option was required to be enabled for NuGet Manager.
 
-### View Models
+### View Model
 
 Having all needed external dependencies added, we may try to build the solution and proceed to implementing some core stuff.
 Let's create a View Model class for our Profile form, FirstScreen.Core / Presentation / ViewModels:
@@ -108,12 +116,10 @@ To simplify the code, FlexiMvvm provides useful ``CommandProvider`` to setup Com
 
 #### Android
 
-Starting with Android, let's scaffold a minimal app with a single Activity. The following points are quite regular for any Xamarin.Android app and just summarised:
+Starting with Android, let's scaffold a minimal app with a single Activity. The following points are quite regular for any Xamarin.Android app and just summarised. Complete solution is available as a sample: [First Screen sample](000-samples/010-Intro-FirstScreen)
 
-1. FirstScreen.Droid / Resources / layout / Main.axml: basic UI layout for the new Activity. Just ``TextViews``, ``EditText`` and ``Button`` controls within ``LinearLayout``s.
-2. FirstScreen.Droid / Resources / values / styles.xml: Theme setup
-3. FirstScreen.Droid / Resources / values / colors.xml: Colors definitions
-4. FirstScreen.Droid / Resources / values / Strings.xml: string resources
+1. [FirstScreen.Droid / Resources / layout / Main.axml](000-samples/010-Intro-FirstScreen/Droid/Resources/layout/Main.axml): basic UI layout for the new Activity. Just ``TextViews``, ``EditText`` and ``Button`` controls within ``LinearLayout``s.
+2. [FirstScreen.Droid / Resources / values / styles.xml](000-samples/010-Intro-FirstScreen/Droid/Resources/values/styles.xml): Theme setup
 
 Finally, we approached the Activity which needs FlexiMvvm specific customizations. FirstScreen.Droid / Views / ``UserProfileActivity``. Here is its full definition:
 
