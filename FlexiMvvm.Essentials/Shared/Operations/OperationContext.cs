@@ -16,7 +16,6 @@
 
 using System;
 using System.Collections.Generic;
-using FlexiMvvm.Ioc;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.Operations
@@ -24,52 +23,23 @@ namespace FlexiMvvm.Operations
     public class OperationContext
     {
         [CanBeNull]
-        private Dictionary<Type, int> _notificationsCounter;
+        private IDictionary<string, object> _customData;
 
-        public OperationContext([CanBeNull] IDependencyProvider dependencyProvider, [NotNull] object owner, [NotNull] IErrorHandler errorHandler)
+        public OperationContext([NotNull] object owner, [NotNull] OperationSharedContext sharedContext)
         {
-            DependencyProvider = dependencyProvider;
             Owner = owner ?? throw new ArgumentNullException(nameof(owner));
-            ErrorHandler = errorHandler ?? throw new ArgumentNullException(nameof(errorHandler));
+            Shared = sharedContext ?? throw new ArgumentNullException(nameof(sharedContext));
         }
-
-        [CanBeNull]
-        public IDependencyProvider DependencyProvider { get; }
 
         [NotNull]
         public object Owner { get; }
 
         [NotNull]
-        internal IErrorHandler ErrorHandler { get; }
+        public OperationSharedContext Shared { get; }
 
         [NotNull]
-        private Dictionary<Type, int> NotificationsCounter => _notificationsCounter ?? (_notificationsCounter = new Dictionary<Type, int>());
+        public IDictionary<string, object> CustomData => _customData ?? (_customData = new Dictionary<string, object>());
 
-        public int GetNotificationsCount<TNotification>()
-            where TNotification : OperationNotificationBase
-        {
-            return GetNotificationsCount(typeof(TNotification));
-        }
-
-        internal int GetNotificationsCount([NotNull] Type notificationType)
-        {
-            var count = 0;
-
-            _notificationsCounter?.TryGetValue(notificationType, out count);
-
-            return count;
-        }
-
-        internal void IncreaseNotificationsCount([NotNull] Type notificationType)
-        {
-            var count = GetNotificationsCount(notificationType);
-            NotificationsCounter[notificationType] = ++count;
-        }
-
-        internal void DecreaseNotificationsCount([NotNull] Type notificationType)
-        {
-            var count = GetNotificationsCount(notificationType);
-            NotificationsCounter[notificationType] = Math.Max(--count, 0);
-        }
+        public int AttemptCount { get; internal set; }
     }
 }

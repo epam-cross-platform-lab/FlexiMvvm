@@ -87,6 +87,7 @@ namespace FlexiMvvm.Operations
 
                     try
                     {
+                        context.AttemptCount++;
                         var notificationDelayTask = Notification?.DelayAsync(linkedCancellationToken) ?? Task.CompletedTask;
                         await ExecuteOperationStartHandlerAsync(linkedCancellationToken);
                         var operationTask = ExecuteExpressionWithConditionCheckAsync(context, linkedCancellationToken);
@@ -242,7 +243,7 @@ namespace FlexiMvvm.Operations
             [NotNull] Exception ex,
             CancellationToken cancellationToken)
         {
-            var errorHandler = new OperationErrorHandler<Exception>(context.ErrorHandler.HandleAsync);
+            var errorHandler = new OperationErrorHandler<Exception>(context.Shared.ErrorHandler.HandleAsync);
 
             return await errorHandler.HandleAsync(context, ex, cancellationToken);
         }
@@ -261,7 +262,7 @@ namespace FlexiMvvm.Operations
                 if (!operationTask.IsCompleted)
                 {
                     Notification.Show(context);
-                    context.IncreaseNotificationsCount(Notification.GetType());
+                    context.Shared.IncreaseNotificationCount(Notification.GetType());
                     _isNotificationShowed = true;
 
                     await Notification.MinDurationDelayAsync(cancellationToken);
@@ -275,7 +276,7 @@ namespace FlexiMvvm.Operations
         {
             if (Notification != null && _isNotificationShowed && !_isNotificationHidden)
             {
-                context.DecreaseNotificationsCount(Notification.GetType());
+                context.Shared.DecreaseNotificationCount(Notification.GetType());
                 Notification.Hide(context, status);
                 _isNotificationHidden = true;
             }

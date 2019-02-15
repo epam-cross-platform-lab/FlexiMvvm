@@ -24,8 +24,6 @@ namespace FlexiMvvm.ViewModels
     {
         [CanBeNull]
         private readonly IOperationFactory _operationFactory;
-        [CanBeNull]
-        private OperationContext _operationContext;
 
         protected ItemViewModel()
         {
@@ -38,9 +36,6 @@ namespace FlexiMvvm.ViewModels
 
         [NotNull]
         protected IOperationFactory OperationFactory => _operationFactory ?? throw new InvalidOperationException(
-            $"\"{nameof(OperationFactory)}\" property is \"null\". Make sure that the operation factory is passed as a constructor parameter.");
-
-        [NotNull]
-        protected OperationContext OperationContext => _operationContext ?? (_operationContext = OperationFactory.CreateContext(this));
+            $"'{nameof(OperationFactory)}' property is 'null'. Make sure that the operation factory is passed as a constructor parameter.");
     }
 }
