@@ -166,7 +166,7 @@ namespace FlexiMvvm.Views.Generation.Ios
             #line default
             #line hidden
             this.Write(@", INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModel
+        where TViewModel : class, IViewModelWithoutParameters
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
@@ -217,9 +217,9 @@ namespace FlexiMvvm.Views.Generation.Ios
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
-            return ViewModel.InitializeAsync();
+            await ViewModel.InitializeAsync();
         }
     }
 
@@ -237,13 +237,10 @@ namespace FlexiMvvm.Views.Generation.Ios
             
             #line default
             #line hidden
-            this.Write(@", INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
-        where TParameters : Parameters
-    {
-        private readonly TParameters _parameters;
-
-        public ");
+            this.Write(", INavigationView<TViewModel>, IViewModelOwner<TViewModel>\r\n        where TViewMo" +
+                    "del : class, IViewModelWithParameters<TParameters>\r\n        where TParameters : " +
+                    "Parameters\r\n    {\r\n        private readonly TParameters _parameters;\r\n\r\n        " +
+                    "public ");
             
             #line 150 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
@@ -302,18 +299,17 @@ namespace FlexiMvvm.Views.Generation.Ios
         void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
-            ViewModel.SetParameters(_parameters);
         }
 
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
-            return ViewModel.InitializeAsync();
+            await ViewModel.InitializeAsync(_parameters);
         }
     }
 }
 ");
             
-            #line 204 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 203 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
  } 
             
             #line default

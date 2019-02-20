@@ -20,7 +20,7 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.ViewModels
 {
-    public abstract class ItemViewModel : ObservableObject
+    public abstract class ItemViewModel : ObservableObject, IViewModel
     {
         [CanBeNull]
         private readonly IOperationFactory _operationFactory;

@@ -78,7 +78,7 @@ namespace FlexiMvvm.Views.Generation.Android
             #line default
             #line hidden
             this.Write(@"<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
-        where TViewModel : class, IViewModel, IStateOwner
+        where TViewModel : class, IViewModelWithoutParameters, IStateOwner
     {
         public IDisposable BindingSet { get; private set; }
 
@@ -119,7 +119,7 @@ namespace FlexiMvvm.Views.Generation.Android
             #line default
             #line hidden
             this.Write(@"<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
-        where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>, IStateOwner
+        where TViewModel : class, IViewModelWithParameters<TParameters>, IStateOwner
         where TParameters : Parameters
     {
         public IDisposable BindingSet { get; private set; }

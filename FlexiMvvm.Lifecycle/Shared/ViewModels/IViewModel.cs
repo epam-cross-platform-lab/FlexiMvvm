@@ -14,22 +14,31 @@
 // limitations under the License.
 // =========================================================================
 
+using System.ComponentModel;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.ViewModels
 {
-    public interface IViewModel
+    public interface IViewModel : INotifyPropertyChanged
+    {
+    }
+
+    public interface IViewModelWithoutParameters : IViewModel
     {
         [NotNull]
         Task InitializeAsync();
+
+        void Initialize();
     }
 
-    public interface IViewModelWithParameters<out TParameters> : IViewModel
+    public interface IViewModelWithParameters<TParameters> : IViewModel
         where TParameters : Parameters
     {
-        [CanBeNull]
-        TParameters Parameters { get; }
+        [NotNull]
+        Task InitializeAsync([CanBeNull] TParameters parameters);
+
+        void Initialize([CanBeNull] TParameters parameters);
     }
 
     public interface IViewModelWithResult<in TResult> : IViewModel

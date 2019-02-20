@@ -219,7 +219,7 @@ using FlexiMvvm.Views.Core;
             #line default
             #line hidden
             this.Write(@", INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModel, IStateOwner
+        where TViewModel : class, IViewModelWithoutParameters, IStateOwner
     {
         private RequestCode _requestCode;
 
@@ -271,9 +271,9 @@ using FlexiMvvm.Views.Core;
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
-            return ViewModel.InitializeAsync();
+            await ViewModel.InitializeAsync();
         }
     }
 
@@ -292,7 +292,7 @@ using FlexiMvvm.Views.Core;
             #line default
             #line hidden
             this.Write(@", INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>, IStateOwner
+        where TViewModel : class, IViewModelWithParameters<TParameters>, IStateOwner
         where TParameters : Parameters
     {
         private RequestCode _requestCode;
@@ -345,19 +345,18 @@ using FlexiMvvm.Views.Core;
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
-            ViewModel.SetParameters(");
+            await ViewModel.InitializeAsync(");
             
             #line 190 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ParametersSourceName));
             
             #line default
             #line hidden
-            this.Write("?.GetParameters<TParameters>());\r\n\r\n            return ViewModel.InitializeAsync(" +
-                    ");\r\n        }\r\n    }\r\n}\r\n");
+            this.Write("?.GetParameters<TParameters>());\r\n        }\r\n    }\r\n}\r\n");
             
-            #line 196 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            #line 194 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
  } 
             
             #line default

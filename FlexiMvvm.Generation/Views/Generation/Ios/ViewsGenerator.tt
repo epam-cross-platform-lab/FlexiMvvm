@@ -91,7 +91,7 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
     }
 
     public partial class <#= viewGenerationOptions.ClassName #><TViewModel> : <#= viewGenerationOptions.ClassName #>, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModel
+        where TViewModel : class, IViewModelWithoutParameters
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
@@ -135,14 +135,14 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
-            return ViewModel.InitializeAsync();
+            await ViewModel.InitializeAsync();
         }
     }
 
     public partial class <#= viewGenerationOptions.ClassName #><TViewModel, TParameters> : <#= viewGenerationOptions.ClassName #>, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
+        where TViewModel : class, IViewModelWithParameters<TParameters>
         where TParameters : Parameters
     {
         private readonly TParameters _parameters;
@@ -192,12 +192,11 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
         void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
-            ViewModel.SetParameters(_parameters);
         }
 
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
-            return ViewModel.InitializeAsync();
+            await ViewModel.InitializeAsync(_parameters);
         }
     }
 }
