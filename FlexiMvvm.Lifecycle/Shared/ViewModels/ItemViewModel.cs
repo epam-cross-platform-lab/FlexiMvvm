@@ -14,28 +14,9 @@
 // limitations under the License.
 // =========================================================================
 
-using System;
-using FlexiMvvm.Operations;
-using JetBrains.Annotations;
-
 namespace FlexiMvvm.ViewModels
 {
     public abstract class ItemViewModel : ObservableObject, IViewModel
     {
-        [CanBeNull]
-        private readonly IOperationFactory _operationFactory;
-
-        protected ItemViewModel()
-        {
-        }
-
-        protected ItemViewModel([NotNull] IOperationFactory operationFactory)
-        {
-            _operationFactory = operationFactory ?? throw new ArgumentNullException(nameof(operationFactory));
-        }
-
-        [NotNull]
-        protected IOperationFactory OperationFactory => _operationFactory ?? throw new InvalidOperationException(
-            $"'{nameof(OperationFactory)}' property is 'null'. Make sure that the operation factory is passed as a constructor parameter.");
     }
 }

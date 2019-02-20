@@ -14,12 +14,10 @@
 // limitations under the License.
 // =========================================================================
 
-using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using FlexiMvvm.Commands;
 using FlexiMvvm.Configuration;
-using FlexiMvvm.Operations;
 using FlexiMvvm.Persistence;
 using FlexiMvvm.Persistence.Core;
 using JetBrains.Annotations;
@@ -29,24 +27,9 @@ namespace FlexiMvvm.ViewModels
     public abstract class ViewModel : ObservableObject, IViewModelWithoutParameters, IStateOwner
     {
         [CanBeNull]
-        private readonly IOperationFactory _operationFactory;
-        [CanBeNull]
         private IBundle _state;
         [CanBeNull]
         private CommandProvider _commandProvider;
-
-        protected ViewModel()
-        {
-        }
-
-        protected ViewModel([NotNull] IOperationFactory operationFactory)
-        {
-            _operationFactory = operationFactory ?? throw new ArgumentNullException(nameof(operationFactory));
-        }
-
-        [NotNull]
-        protected IOperationFactory OperationFactory => _operationFactory ?? throw new InvalidOperationException(
-            $"'{nameof(OperationFactory)}' property is 'null'. Make sure that the operation factory is passed as a constructor parameter.");
 
         [NotNull]
         protected IBundle State
@@ -106,24 +89,9 @@ namespace FlexiMvvm.ViewModels
         where TParameters : Parameters
     {
         [CanBeNull]
-        private readonly IOperationFactory _operationFactory;
-        [CanBeNull]
         private IBundle _state;
         [CanBeNull]
         private CommandProvider _commandProvider;
-
-        protected ViewModel()
-        {
-        }
-
-        protected ViewModel([NotNull] IOperationFactory operationFactory)
-        {
-            _operationFactory = operationFactory ?? throw new ArgumentNullException(nameof(operationFactory));
-        }
-
-        [NotNull]
-        protected IOperationFactory OperationFactory => _operationFactory ?? throw new InvalidOperationException(
-            $"'{nameof(OperationFactory)}' property is 'null'. Make sure that the operation factory is passed as a constructor parameter.");
 
         [NotNull]
         protected IBundle State
