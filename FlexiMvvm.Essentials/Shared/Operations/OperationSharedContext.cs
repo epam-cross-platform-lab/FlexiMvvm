@@ -33,7 +33,7 @@ namespace FlexiMvvm.Operations
         }
 
         [NotNull]
-        public IDependencyProvider DependencyProvider { get; }
+        internal IDependencyProvider DependencyProvider { get; }
 
         [NotNull]
         internal IErrorHandler ErrorHandler { get; }

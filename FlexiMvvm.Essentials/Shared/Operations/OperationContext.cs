@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections.Generic;
+using FlexiMvvm.Ioc;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.Operations
@@ -36,6 +37,9 @@ namespace FlexiMvvm.Operations
 
         [NotNull]
         public OperationSharedContext Shared { get; }
+
+        [NotNull]
+        public IDependencyProvider DependencyProvider => Shared.DependencyProvider;
 
         [NotNull]
         public IDictionary<string, object> CustomData => _customData ?? (_customData = new Dictionary<string, object>());
