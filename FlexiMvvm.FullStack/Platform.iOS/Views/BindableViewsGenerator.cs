@@ -24,7 +24,7 @@ using FlexiMvvm.Views.Core;
 namespace FlexiMvvm.Views
 {
     public partial class BindablePageViewController<TViewModel> : FlexiMvvm.Views.PageViewController<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
-        where TViewModel : class, IViewModel
+        where TViewModel : class, IViewModelWithoutParameters
     {
         public IDisposable BindingSet { get; private set; }
 
@@ -44,7 +44,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class BindablePageViewController<TViewModel, TParameters> : FlexiMvvm.Views.PageViewController<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
-        where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
+        where TViewModel : class, IViewModelWithParameters<TParameters>
         where TParameters : Parameters
     {
         public BindablePageViewController(TParameters parameters)
@@ -73,7 +73,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     public partial class BindableTabBarController<TViewModel> : FlexiMvvm.Views.TabBarController<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
-        where TViewModel : class, IViewModel
+        where TViewModel : class, IViewModelWithoutParameters
     {
         public IDisposable BindingSet { get; private set; }
 
@@ -93,7 +93,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class BindableTabBarController<TViewModel, TParameters> : FlexiMvvm.Views.TabBarController<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
-        where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
+        where TViewModel : class, IViewModelWithParameters<TParameters>
         where TParameters : Parameters
     {
         public BindableTabBarController(TParameters parameters)
@@ -122,7 +122,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     public partial class BindableViewController<TViewModel> : FlexiMvvm.Views.ViewController<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
-        where TViewModel : class, IViewModel
+        where TViewModel : class, IViewModelWithoutParameters
     {
         public IDisposable BindingSet { get; private set; }
 
@@ -142,7 +142,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class BindableViewController<TViewModel, TParameters> : FlexiMvvm.Views.ViewController<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
-        where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
+        where TViewModel : class, IViewModelWithParameters<TParameters>
         where TParameters : Parameters
     {
         public BindableViewController(TParameters parameters)

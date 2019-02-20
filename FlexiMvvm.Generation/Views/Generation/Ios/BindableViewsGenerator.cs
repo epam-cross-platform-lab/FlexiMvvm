@@ -77,7 +77,7 @@ namespace FlexiMvvm.Views.Generation.Ios
             #line default
             #line hidden
             this.Write(@"<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
-        where TViewModel : class, IViewModel
+        where TViewModel : class, IViewModelWithoutParameters
     {
         public IDisposable BindingSet { get; private set; }
 
@@ -118,8 +118,8 @@ namespace FlexiMvvm.Views.Generation.Ios
             #line default
             #line hidden
             this.Write("<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner\r\n        w" +
-                    "here TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner" +
-                    "<TParameters>\r\n        where TParameters : Parameters\r\n    {\r\n        public ");
+                    "here TViewModel : class, IViewModelWithParameters<TParameters>\r\n        where TP" +
+                    "arameters : Parameters\r\n    {\r\n        public ");
             
             #line 52 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));

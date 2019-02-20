@@ -92,7 +92,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class AppCompatActivity<TViewModel> : AppCompatActivity, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModel, IStateOwner
+        where TViewModel : class, IViewModelWithoutParameters, IStateOwner
     {
         private RequestCode _requestCode;
 
@@ -110,14 +110,14 @@ namespace FlexiMvvm.Views
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
-            return ViewModel.InitializeAsync();
+            await ViewModel.InitializeAsync();
         }
     }
 
     public partial class AppCompatActivity<TViewModel, TParameters> : AppCompatActivity, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>, IStateOwner
+        where TViewModel : class, IViewModelWithParameters<TParameters>, IStateOwner
         where TParameters : Parameters
     {
         private RequestCode _requestCode;
@@ -136,11 +136,9 @@ namespace FlexiMvvm.Views
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
-            ViewModel.SetParameters(Intent?.GetParameters<TParameters>());
-
-            return ViewModel.InitializeAsync();
+            await ViewModel.InitializeAsync(Intent?.GetParameters<TParameters>());
         }
     }
 }
@@ -218,7 +216,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class DialogFragment<TViewModel> : DialogFragment, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModel, IStateOwner
+        where TViewModel : class, IViewModelWithoutParameters, IStateOwner
     {
         private RequestCode _requestCode;
 
@@ -251,14 +249,14 @@ namespace FlexiMvvm.Views
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
-            return ViewModel.InitializeAsync();
+            await ViewModel.InitializeAsync();
         }
     }
 
     public partial class DialogFragment<TViewModel, TParameters> : DialogFragment, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>, IStateOwner
+        where TViewModel : class, IViewModelWithParameters<TParameters>, IStateOwner
         where TParameters : Parameters
     {
         private RequestCode _requestCode;
@@ -292,11 +290,9 @@ namespace FlexiMvvm.Views
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
-            ViewModel.SetParameters(Arguments?.GetParameters<TParameters>());
-
-            return ViewModel.InitializeAsync();
+            await ViewModel.InitializeAsync(Arguments?.GetParameters<TParameters>());
         }
     }
 }
@@ -374,7 +370,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class Fragment<TViewModel> : Fragment, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModel, IStateOwner
+        where TViewModel : class, IViewModelWithoutParameters, IStateOwner
     {
         private RequestCode _requestCode;
 
@@ -407,14 +403,14 @@ namespace FlexiMvvm.Views
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
-            return ViewModel.InitializeAsync();
+            await ViewModel.InitializeAsync();
         }
     }
 
     public partial class Fragment<TViewModel, TParameters> : Fragment, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>, IStateOwner
+        where TViewModel : class, IViewModelWithParameters<TParameters>, IStateOwner
         where TParameters : Parameters
     {
         private RequestCode _requestCode;
@@ -448,11 +444,9 @@ namespace FlexiMvvm.Views
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
-            ViewModel.SetParameters(Arguments?.GetParameters<TParameters>());
-
-            return ViewModel.InitializeAsync();
+            await ViewModel.InitializeAsync(Arguments?.GetParameters<TParameters>());
         }
     }
 }

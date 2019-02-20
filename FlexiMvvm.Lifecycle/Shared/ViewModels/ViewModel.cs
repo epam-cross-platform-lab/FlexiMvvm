@@ -22,12 +22,11 @@ using FlexiMvvm.Configuration;
 using FlexiMvvm.Operations;
 using FlexiMvvm.Persistence;
 using FlexiMvvm.Persistence.Core;
-using FlexiMvvm.ViewModels.Core;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.ViewModels
 {
-    public abstract class ViewModel : ObservableObject, IViewModel, IStateOwner
+    public abstract class ViewModel : ObservableObject, IViewModelWithoutParameters, IStateOwner
     {
         [CanBeNull]
         private readonly IOperationFactory _operationFactory;
@@ -103,26 +102,80 @@ namespace FlexiMvvm.ViewModels
         }
     }
 
-    public abstract class ViewModel<TParameters> : ViewModel, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
+    public abstract class ViewModel<TParameters> : ObservableObject, IViewModelWithParameters<TParameters>, IStateOwner
         where TParameters : Parameters
     {
         [CanBeNull]
-        private TParameters _parameters;
+        private readonly IOperationFactory _operationFactory;
+        [CanBeNull]
+        private IBundle _state;
+        [CanBeNull]
+        private CommandProvider _commandProvider;
 
         protected ViewModel()
         {
         }
 
         protected ViewModel([NotNull] IOperationFactory operationFactory)
-            : base(operationFactory)
+        {
+            _operationFactory = operationFactory ?? throw new ArgumentNullException(nameof(operationFactory));
+        }
+
+        [NotNull]
+        protected IOperationFactory OperationFactory => _operationFactory ?? throw new InvalidOperationException(
+            $"'{nameof(OperationFactory)}' property is 'null'. Make sure that the operation factory is passed as a constructor parameter.");
+
+        [NotNull]
+        protected IBundle State
+        {
+            get
+            {
+                if (_state == null)
+                {
+                    _state = BundleFactory.Create();
+
+                    if (FlexiMvvmConfig.Instance.ShouldRaisePropertyChanged())
+                    {
+                        _state.PropertyChangedWeakSubscribe(State_PropertyChanged);
+                    }
+                }
+
+                return _state;
+            }
+        }
+
+        [NotNull]
+        protected CommandProvider CommandProvider => _commandProvider ?? (_commandProvider = new CommandProvider());
+
+        public virtual Task InitializeAsync(TParameters parameters)
+        {
+            Initialize(parameters);
+
+            return Task.CompletedTask;
+        }
+
+        public virtual void Initialize(TParameters parameters)
         {
         }
 
-        public TParameters Parameters => _parameters;
-
-        void IParametersOwner<TParameters>.SetParameters(TParameters parameters)
+        void IStateOwner.ImportState(IBundle state)
         {
-            _parameters = parameters;
+            _state = state;
+
+            if (_state != null && FlexiMvvmConfig.Instance.ShouldRaisePropertyChanged())
+            {
+                _state.PropertyChangedWeakSubscribe(State_PropertyChanged);
+            }
+        }
+
+        IBundle IStateOwner.ExportState()
+        {
+            return _state;
+        }
+
+        private void State_PropertyChanged([NotNull] object sender, [NotNull] PropertyChangedEventArgs e)
+        {
+            RaisePropertyChanged(e.PropertyName);
         }
     }
 }

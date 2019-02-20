@@ -90,7 +90,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class CollectionViewController<TViewModel> : CollectionViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModel
+        where TViewModel : class, IViewModelWithoutParameters
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
@@ -134,14 +134,14 @@ namespace FlexiMvvm.Views
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
-            return ViewModel.InitializeAsync();
+            await ViewModel.InitializeAsync();
         }
     }
 
     public partial class CollectionViewController<TViewModel, TParameters> : CollectionViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
+        where TViewModel : class, IViewModelWithParameters<TParameters>
         where TParameters : Parameters
     {
         private readonly TParameters _parameters;
@@ -191,12 +191,11 @@ namespace FlexiMvvm.Views
         void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
-            ViewModel.SetParameters(_parameters);
         }
 
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
-            return ViewModel.InitializeAsync();
+            await ViewModel.InitializeAsync(_parameters);
         }
     }
 }
@@ -268,7 +267,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class NavigationController<TViewModel> : NavigationController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModel
+        where TViewModel : class, IViewModelWithoutParameters
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
@@ -312,14 +311,14 @@ namespace FlexiMvvm.Views
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
-            return ViewModel.InitializeAsync();
+            await ViewModel.InitializeAsync();
         }
     }
 
     public partial class NavigationController<TViewModel, TParameters> : NavigationController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
+        where TViewModel : class, IViewModelWithParameters<TParameters>
         where TParameters : Parameters
     {
         private readonly TParameters _parameters;
@@ -369,12 +368,11 @@ namespace FlexiMvvm.Views
         void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
-            ViewModel.SetParameters(_parameters);
         }
 
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
-            return ViewModel.InitializeAsync();
+            await ViewModel.InitializeAsync(_parameters);
         }
     }
 }
@@ -446,7 +444,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class PageViewController<TViewModel> : PageViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModel
+        where TViewModel : class, IViewModelWithoutParameters
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
@@ -490,14 +488,14 @@ namespace FlexiMvvm.Views
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
-            return ViewModel.InitializeAsync();
+            await ViewModel.InitializeAsync();
         }
     }
 
     public partial class PageViewController<TViewModel, TParameters> : PageViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
+        where TViewModel : class, IViewModelWithParameters<TParameters>
         where TParameters : Parameters
     {
         private readonly TParameters _parameters;
@@ -547,12 +545,11 @@ namespace FlexiMvvm.Views
         void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
-            ViewModel.SetParameters(_parameters);
         }
 
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
-            return ViewModel.InitializeAsync();
+            await ViewModel.InitializeAsync(_parameters);
         }
     }
 }
@@ -624,7 +621,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class SplitViewController<TViewModel> : SplitViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModel
+        where TViewModel : class, IViewModelWithoutParameters
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
@@ -668,14 +665,14 @@ namespace FlexiMvvm.Views
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
-            return ViewModel.InitializeAsync();
+            await ViewModel.InitializeAsync();
         }
     }
 
     public partial class SplitViewController<TViewModel, TParameters> : SplitViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
+        where TViewModel : class, IViewModelWithParameters<TParameters>
         where TParameters : Parameters
     {
         private readonly TParameters _parameters;
@@ -725,12 +722,11 @@ namespace FlexiMvvm.Views
         void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
-            ViewModel.SetParameters(_parameters);
         }
 
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
-            return ViewModel.InitializeAsync();
+            await ViewModel.InitializeAsync(_parameters);
         }
     }
 }
@@ -802,7 +798,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class TabBarController<TViewModel> : TabBarController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModel
+        where TViewModel : class, IViewModelWithoutParameters
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
@@ -846,14 +842,14 @@ namespace FlexiMvvm.Views
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
-            return ViewModel.InitializeAsync();
+            await ViewModel.InitializeAsync();
         }
     }
 
     public partial class TabBarController<TViewModel, TParameters> : TabBarController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
+        where TViewModel : class, IViewModelWithParameters<TParameters>
         where TParameters : Parameters
     {
         private readonly TParameters _parameters;
@@ -903,12 +899,11 @@ namespace FlexiMvvm.Views
         void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
-            ViewModel.SetParameters(_parameters);
         }
 
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
-            return ViewModel.InitializeAsync();
+            await ViewModel.InitializeAsync(_parameters);
         }
     }
 }
@@ -980,7 +975,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class TableViewController<TViewModel> : TableViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModel
+        where TViewModel : class, IViewModelWithoutParameters
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
@@ -1024,14 +1019,14 @@ namespace FlexiMvvm.Views
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
-            return ViewModel.InitializeAsync();
+            await ViewModel.InitializeAsync();
         }
     }
 
     public partial class TableViewController<TViewModel, TParameters> : TableViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
+        where TViewModel : class, IViewModelWithParameters<TParameters>
         where TParameters : Parameters
     {
         private readonly TParameters _parameters;
@@ -1081,12 +1076,11 @@ namespace FlexiMvvm.Views
         void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
-            ViewModel.SetParameters(_parameters);
         }
 
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
-            return ViewModel.InitializeAsync();
+            await ViewModel.InitializeAsync(_parameters);
         }
     }
 }
@@ -1158,7 +1152,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class ViewController<TViewModel> : ViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModel
+        where TViewModel : class, IViewModelWithoutParameters
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
@@ -1202,14 +1196,14 @@ namespace FlexiMvvm.Views
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
-            return ViewModel.InitializeAsync();
+            await ViewModel.InitializeAsync();
         }
     }
 
     public partial class ViewController<TViewModel, TParameters> : ViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithParameters<TParameters>, IParametersOwner<TParameters>
+        where TViewModel : class, IViewModelWithParameters<TParameters>
         where TParameters : Parameters
     {
         private readonly TParameters _parameters;
@@ -1259,12 +1253,11 @@ namespace FlexiMvvm.Views
         void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
-            ViewModel.SetParameters(_parameters);
         }
 
-        Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
-            return ViewModel.InitializeAsync();
+            await ViewModel.InitializeAsync(_parameters);
         }
     }
 }
