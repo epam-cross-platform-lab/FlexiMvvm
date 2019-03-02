@@ -18,7 +18,7 @@ namespace FirstScreen.Droid.Views
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            SetContentView(Resource.Layout.Main);
+            SetContentView(Resource.Layout.activity_user_profile);
 
             _firstName = FindViewById<EditText>(Resource.Id.firstName);
             _lastName = FindViewById<EditText>(Resource.Id.lastName);

@@ -39,7 +39,12 @@ namespace FirstScreen.Droid.Views
 
             container.Register(
                 () => new UserProfileViewModel(
-                    container.Get<IUserProfileRepository>()));
+                    container.Get<IUserProfileRepository>(),
+                    container.Get<INavigationService>()));
+
+            container.Register(
+                () => new LanguagesViewModel(
+                    container.Get<INavigationService>()));
 
             ViewModelProvider.SetFactory(new DependencyProviderViewModelFactory(container));
         }

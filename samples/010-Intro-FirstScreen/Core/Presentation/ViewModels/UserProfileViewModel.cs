@@ -1,21 +1,26 @@
 ﻿using System.Threading.Tasks;
 using System.Windows.Input;
 using FirstScreen.Core.Infrastructure.Data;
+using FirstScreen.Core.Presentation.Navigation;
 using FlexiMvvm.ViewModels;
 
 namespace FirstScreen.Core.Presentation.ViewModels
 {
-    public class UserProfileViewModel : ViewModel<UserProfileParameters>
+    public class UserProfileViewModel : ViewModel<UserProfileParameters>, IViewModelWithResultHandler
     {
         private readonly IUserProfileRepository _userProfileRepository;
+        private INavigationService _navigationService;
 
         private string _firstName;
         private string _lastName;
         private string _email;
 
-        public UserProfileViewModel(IUserProfileRepository userProfileRepository)
+        public UserProfileViewModel(
+            IUserProfileRepository userProfileRepository,
+            INavigationService navigationService)
         {
             _userProfileRepository = userProfileRepository;
+            _navigationService = navigationService;
         }
 
         ////
@@ -58,6 +63,23 @@ namespace FirstScreen.Core.Presentation.ViewModels
             }
         }
 
+        ////
+
+        public void HandleResult(ResultCode resultCode, Result result)
+        {
+            if (result is SelectedLanguageResult selectedLanguageResult)
+            {
+                if (resultCode == ResultCode.Ok)
+                {
+                    // TODO
+                }
+                else if (resultCode == ResultCode.Canceled)
+                {
+                    // TODO
+                }
+            }
+        }
+
         private async void Save()
         {
             //// TODO: Validate the input
@@ -68,6 +90,8 @@ namespace FirstScreen.Core.Presentation.ViewModels
                 FirstName = FirstName,
                 LastName = LastName
             });
+
+            _navigationService.NavigateToLanguages(this);
         }
     }
 }
