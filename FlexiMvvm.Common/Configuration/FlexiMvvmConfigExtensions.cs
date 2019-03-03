@@ -15,15 +15,24 @@
 // =========================================================================
 
 using System;
-using JetBrains.Annotations;
+using System.ComponentModel;
 
 namespace FlexiMvvm.Configuration
 {
+    /// <summary>
+    /// Provides a set of static methods for <see cref="FlexiMvvmConfig"/>.
+    /// </summary>
     public static class FlexiMvvmConfigExtensions
     {
         private const string ShouldRaisePropertyChangedKey = "ShouldRaisePropertyChanged";
 
-        public static bool ShouldRaisePropertyChanged([NotNull] this FlexiMvvmConfig config)
+        /// <summary>
+        /// Determines whether FlexiMvvm classes which implement <see cref="INotifyPropertyChanged"/> should raise <see cref="INotifyPropertyChanged.PropertyChanged"/> event.
+        /// </summary>
+        /// <param name="config">>The FlexiMvvm configuration.</param>
+        /// <returns><c>true</c> if FlexiMvvm classes raise <see cref="INotifyPropertyChanged.PropertyChanged"/> event; otherwise, <c>false</c>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="config"/> is <c>null</c>.</exception>
+        public static bool ShouldRaisePropertyChanged(this FlexiMvvmConfig config)
         {
             if (config == null)
                 throw new ArgumentNullException(nameof(config));
@@ -31,7 +40,13 @@ namespace FlexiMvvm.Configuration
             return config.GetValue(ShouldRaisePropertyChangedKey, true);
         }
 
-        public static void ShouldRaisePropertyChanged([NotNull] this FlexiMvvmConfig config, bool value)
+        /// <summary>
+        /// Determines whether FlexiMvvm classes which implement <see cref="INotifyPropertyChanged"/> should raise <see cref="INotifyPropertyChanged.PropertyChanged"/> event.
+        /// </summary>
+        /// <param name="config">The FlexiMvvm configuration.</param>
+        /// <param name="value"><c>true</c> if FlexiMvvm classes should raise <see cref="INotifyPropertyChanged.PropertyChanged"/> event; otherwise, <c>false</c>.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="config"/> is <c>null</c>.</exception>
+        public static void ShouldRaisePropertyChanged(this FlexiMvvmConfig config, bool value)
         {
             if (config == null)
                 throw new ArgumentNullException(nameof(config));
