@@ -15,11 +15,12 @@
 // =========================================================================
 
 using System;
+using FlexiMvvm.Collections;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.Configuration
 {
-    public sealed class FlexiMvvmConfig : Config
+    public sealed class FlexiMvvmConfig : ValueSet
     {
         [NotNull]
         private static readonly Lazy<FlexiMvvmConfig> LazyInstance = new Lazy<FlexiMvvmConfig>(() => new FlexiMvvmConfig());

@@ -14,11 +14,11 @@
 // limitations under the License.
 // =========================================================================
 
-using FlexiMvvm.Configuration;
+using FlexiMvvm.Collections;
 
 namespace FlexiMvvm.Bootstrappers
 {
-    public sealed class BootstrapperConfig : Config
+    public sealed class BootstrapperConfig : ValueSet
     {
     }
 }
