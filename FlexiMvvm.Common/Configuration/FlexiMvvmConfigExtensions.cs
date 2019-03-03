@@ -30,7 +30,7 @@ namespace FlexiMvvm.Configuration
         /// Determines whether FlexiMvvm classes which implement <see cref="INotifyPropertyChanged"/> should raise <see cref="INotifyPropertyChanged.PropertyChanged"/> event.
         /// </summary>
         /// <param name="config">>The FlexiMvvm configuration.</param>
-        /// <returns><c>true</c> if FlexiMvvm classes raise <see cref="INotifyPropertyChanged.PropertyChanged"/> event; otherwise, <c>false</c>.</returns>
+        /// <returns><c>true</c> if FlexiMvvm classes raise <see cref="INotifyPropertyChanged.PropertyChanged"/> event; otherwise, <c>false</c>. Returns <c>true</c> by default.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="config"/> is <c>null</c>.</exception>
         public static bool ShouldRaisePropertyChanged(this FlexiMvvmConfig config)
         {
