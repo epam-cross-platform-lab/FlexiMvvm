@@ -16,8 +16,14 @@
 
 namespace FlexiMvvm.Exceptions
 {
+    /// <summary>
+    /// Used as a marker for an exception that has a user-friendly message.
+    /// </summary>
     public interface IUserFriendlyException
     {
+        /// <summary>
+        /// Gets the user-friendly message.
+        /// </summary>
         string Message { get; }
     }
 }
