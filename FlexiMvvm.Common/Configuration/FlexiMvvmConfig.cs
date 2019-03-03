@@ -16,20 +16,23 @@
 
 using System;
 using FlexiMvvm.Collections;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Configuration
 {
+    /// <summary>
+    /// Represents a FlexiMvvm configuration. Used for FlexiMvvm customization.
+    /// </summary>
     public sealed class FlexiMvvmConfig : ValueSet
     {
-        [NotNull]
         private static readonly Lazy<FlexiMvvmConfig> LazyInstance = new Lazy<FlexiMvvmConfig>(() => new FlexiMvvmConfig());
 
         private FlexiMvvmConfig()
         {
         }
 
-        [NotNull]
-        public static FlexiMvvmConfig Instance => LazyInstance.Value.NotNull();
+        /// <summary>
+        /// Gets the current instance of <see cref="FlexiMvvmConfig"/>.
+        /// </summary>
+        public static FlexiMvvmConfig Instance => LazyInstance.Value;
     }
 }
