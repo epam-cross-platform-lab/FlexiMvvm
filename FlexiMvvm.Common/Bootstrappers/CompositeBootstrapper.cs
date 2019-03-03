@@ -15,20 +15,26 @@
 // =========================================================================
 
 using System;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Bootstrappers
 {
+    /// <summary>
+    /// Represent a bootstrappers composition. Executes bootstrappers sequentially in the same order in which they are passed to the constructor.
+    /// </summary>
     public sealed class CompositeBootstrapper : IBootstrapper
     {
-        [CanBeNull]
         private readonly IBootstrapper[] _bootstrappers;
 
-        public CompositeBootstrapper([CanBeNull] params IBootstrapper[] bootstrappers)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CompositeBootstrapper"/> class.
+        /// </summary>
+        /// <param name="bootstrappers">The collection of bootstrappers to be executed.</param>
+        public CompositeBootstrapper(params IBootstrapper[] bootstrappers)
         {
             _bootstrappers = bootstrappers;
         }
 
+        /// <inheritdoc />
         public void Execute(BootstrapperConfig config)
         {
             if (config == null)

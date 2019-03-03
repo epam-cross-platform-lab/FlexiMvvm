@@ -14,12 +14,20 @@
 // limitations under the License.
 // =========================================================================
 
-using JetBrains.Annotations;
+using System;
 
 namespace FlexiMvvm.Bootstrappers
 {
+    /// <summary>
+    /// Defines the contract for a bootstrapper. Bootstrapper is used for a module or assembly initialization.
+    /// </summary>
     public interface IBootstrapper
     {
-        void Execute([NotNull] BootstrapperConfig config);
+        /// <summary>
+        /// Executes the bootstrapper.
+        /// </summary>
+        /// <param name="config">The bootstrapper configuration.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="config"/> is <c>null</c>.</exception>
+        void Execute(BootstrapperConfig config);
     }
 }
