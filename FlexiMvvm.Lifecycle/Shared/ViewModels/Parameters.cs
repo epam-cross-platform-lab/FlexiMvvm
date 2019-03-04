@@ -14,27 +14,28 @@
 // limitations under the License.
 // =========================================================================
 
-using System;
 using FlexiMvvm.Persistence;
-using FlexiMvvm.Persistence.Core;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.ViewModels
 {
-    public abstract class Parameters : IBundleOwner
+    /// <summary>
+    /// Represents a container for storing view model parameters.
+    /// </summary>
+    public abstract class Parameters
     {
-        [CanBeNull]
-        private IBundle _bundle;
+        private IBundle? _bundle;
 
-        [NotNull]
+        /// <summary>
+        /// Gets the bundle which stores view model parameters as a collection of key/value pairs.
+        /// </summary>
         protected IBundle Bundle => _bundle ?? (_bundle = BundleFactory.Create());
 
-        void IBundleOwner.ImportBundle(IBundle bundle)
+        internal void ImportBundle(IBundle bundle)
         {
-            _bundle = bundle ?? throw new ArgumentNullException(nameof(bundle));
+            _bundle = bundle;
         }
 
-        IBundle IBundleOwner.ExportBundle()
+        internal IBundle ExportBundle()
         {
             return Bundle;
         }

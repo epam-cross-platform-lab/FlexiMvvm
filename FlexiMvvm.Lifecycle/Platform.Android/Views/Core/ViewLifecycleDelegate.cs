@@ -67,7 +67,8 @@ namespace FlexiMvvm.Views.Core
         where TView : class, IAndroidView, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
         where TViewModel : class, IViewModel, IStateOwner
     {
-        private const string ViewModelKeyKey = "FlexiMvvm_ViewModelKey";
+        private const string ViewModelKeyKey = "FlexiMvvm_ViewModel_Key";
+        private const string ViewModelStateKey = "FlexiMvvm_ViewModel_State";
 
         [CanBeNull]
         private string _viewModelKey;
@@ -87,7 +88,7 @@ namespace FlexiMvvm.Views.Core
             var store = ViewModelStoreProvider.Get(View).NotNull();
             _viewModelKey = savedInstanceState?.GetString(ViewModelKeyKey) ?? Guid.NewGuid().ToString();
             var factory = ViewModelProvider.GetFactory();
-            var state = savedInstanceState?.GetState();
+            var state = savedInstanceState?.GetState(ViewModelStateKey);
             var viewModel = ViewModelProvider.Get<TViewModel>(store, _viewModelKey, factory, state, out _isViewModelCreated);
 
             View.SetViewModel(viewModel);
@@ -132,7 +133,7 @@ namespace FlexiMvvm.Views.Core
             base.OnSaveInstanceState(outState);
 
             outState.PutString(ViewModelKeyKey, _viewModelKey);
-            outState.PutState(View.ViewModel.ExportState());
+            outState.PutState(ViewModelStateKey, View.ViewModel.ExportState());
         }
 
         public override void OnDestroy()
