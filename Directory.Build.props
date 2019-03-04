@@ -10,8 +10,9 @@
         <Owners>EPAM Systems</Owners>
         <NeutralLanguage>en</NeutralLanguage>
         <Copyright>EPAM Systems, Inc.</Copyright>
-        <LangVersion>latest</LangVersion>
+        <LangVersion>8.0</LangVersion>
         <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+        <NullableContextOptions>enable</NullableContextOptions>
         <Configurations>Debug;Release</Configurations>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)'=='Release' ">
