@@ -69,7 +69,7 @@ namespace FlexiMvvm.Views
             if (bundle == null)
                 throw new ArgumentNullException(nameof(bundle));
 
-            var parametersNativeBundleOwner = parameters?.ExportBundle() as INativeBundleOwner;
+            var parametersNativeBundleOwner = (INativeBundleOwner?)parameters?.ExportBundle();
             var parametersNativeBundle = parametersNativeBundleOwner?.ExportNativeBundle();
 
             if (parametersNativeBundle != null)
@@ -116,7 +116,7 @@ namespace FlexiMvvm.Views
             if (bundle == null)
                 throw new ArgumentNullException(nameof(bundle));
 
-            var resultNativeBundleOwner = result?.ExportBundle() as INativeBundleOwner;
+            var resultNativeBundleOwner = (INativeBundleOwner?)result?.ExportBundle();
             var resultNativeBundle = resultNativeBundleOwner?.ExportNativeBundle();
 
             if (resultNativeBundle != null)
@@ -140,7 +140,7 @@ namespace FlexiMvvm.Views
 
         internal static void PutState(this Bundle bundle, string key, IBundle? state)
         {
-            var stateNativeBundleOwner = state as INativeBundleOwner;
+            var stateNativeBundleOwner = (INativeBundleOwner?)state;
             var stateNativeBundle = stateNativeBundleOwner?.ExportNativeBundle();
 
             if (stateNativeBundle != null)
