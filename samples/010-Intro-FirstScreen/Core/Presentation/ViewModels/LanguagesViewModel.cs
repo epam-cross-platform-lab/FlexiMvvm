@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using FirstScreen.Core.Presentation.Navigation;
+﻿using FirstScreen.Core.Presentation.Navigation;
+using FlexiMvvm.Commands;
 using FlexiMvvm.ViewModels;
 
 namespace FirstScreen.Core.Presentation.ViewModels
@@ -13,16 +13,18 @@ namespace FirstScreen.Core.Presentation.ViewModels
             _navigationService = navigationService;
         }
 
-        public override async Task InitializeAsync()
-        {
-            await base.InitializeAsync();
-
-            SetResult(ResultCode.Ok, new SelectedLanguageResult(true, "English"));
-        }
+        public Command<string> SelectLanguage => CommandProvider.Get<string>(OnSelectLanguage);
 
         public void SetResult(ResultCode resultCode, SelectedLanguageResult result)
         {
             _navigationService.NavigateBack(this, resultCode, result);
+        }
+
+        private void OnSelectLanguage(string @value)
+        {
+            System.Diagnostics.Debug.WriteLine(@value);
+
+            SetResult(ResultCode.Ok, new SelectedLanguageResult(true, @value));
         }
     }
 

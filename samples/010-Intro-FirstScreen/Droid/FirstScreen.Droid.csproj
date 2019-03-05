@@ -176,6 +176,7 @@
     <Compile Include="Views\SplashScreenActivity.cs" />
     <Compile Include="Navigation\NavigationService.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Views\LanguagesActivityBindings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

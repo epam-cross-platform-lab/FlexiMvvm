@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Android.App;
 using Android.OS;
@@ -6,6 +7,8 @@ using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
 using FirstScreen.Core.Presentation.ViewModels;
+using FlexiMvvm.Bindings;
+using FlexiMvvm.Bindings.Custom;
 
 namespace FlexiMvvm.Views
 {
@@ -13,7 +16,13 @@ namespace FlexiMvvm.Views
     public class LanguagesActivity : BindableAppCompatActivity<LanguagesViewModel>
     {
         private RecyclerView _recyclerView;
-        private RecyclerView.Adapter _adapter;
+
+        public event EventHandler<string> LanguageSelected;
+
+        public void InvokeLanguageSelected(string @value)
+        {
+            LanguageSelected?.Invoke(this, @value);
+        }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -23,14 +32,21 @@ namespace FlexiMvvm.Views
 
             _recyclerView = FindViewById<RecyclerView>(Resource.Id.recycler_view);
             _recyclerView.SetLayoutManager(new LinearLayoutManager(this, 1, false));
-
-            _adapter = new LanguagesRecyclerAdapter(
+            _recyclerView.SetAdapter(new LanguagesRecyclerAdapter(
                 new List<Language>()
                 {
                     new Language { Title = "English" },
                     new Language { Title = "Español" },
-                });
-            _recyclerView.SetAdapter(_adapter);
+                }));
+        }
+
+        public override void Bind(BindingSet<LanguagesViewModel> bindingSet)
+        {
+            base.Bind(bindingSet);
+
+            bindingSet.Bind(this)
+              .For(v => v.LanguageSelectedBinding())
+              .To(vm => vm.SelectLanguage);
         }
     }
 
@@ -65,9 +81,16 @@ namespace FlexiMvvm.Views
         public LanguageRecyclerViewHolder(View itemView, TextView txtTitle)
             : base(itemView)
         {
+            itemView.Click += ItemViewClick;
             Title = txtTitle;
         }
 
         public TextView Title { get; private set; }
+
+        private void ItemViewClick(object sender, System.EventArgs e)
+        {
+            var a = (LanguagesActivity)ItemView.Context;
+            a.InvokeLanguageSelected(Title.Text);
+        }
     }
 }
