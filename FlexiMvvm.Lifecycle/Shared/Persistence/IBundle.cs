@@ -17,106 +17,97 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Persistence
 {
     public interface IBundle : INotifyPropertyChanged
     {
+        int Count { get; }
+
         bool IsEmpty { get; }
 
-        bool ContainsProperty([NotNull] string propertyName);
+        bool ContainsKey(string key);
 
-        bool GetBool(bool defaultValue = default, [CallerMemberName] string propertyName = null);
+        bool GetBool(bool defaultValue = default, [CallerMemberName] string? key = null);
 
-        [CanBeNull]
-        bool[] GetBoolArray([CanBeNull] bool[] defaultValue = default, [CallerMemberName] string propertyName = null);
+        bool[]? GetBoolArray(bool[]? defaultValue = default, [CallerMemberName] string? key = null);
 
-        [CanBeNull]
-        byte[] GetByteArray([CanBeNull] byte[] defaultValue = default, [CallerMemberName] string propertyName = null);
+        byte[]? GetByteArray(byte[]? defaultValue = default, [CallerMemberName] string? key = null);
 
-        char GetChar(char defaultValue = default, [CallerMemberName] string propertyName = null);
+        char GetChar(char defaultValue = default, [CallerMemberName] string? key = null);
 
-        [CanBeNull]
-        char[] GetCharArray([CanBeNull] char[] defaultValue = default, [CallerMemberName] string propertyName = null);
+        char[]? GetCharArray(char[]? defaultValue = default, [CallerMemberName] string? key = null);
 
-        DateTime GetDateTime(DateTime defaultValue = default, [CallerMemberName] string propertyName = null);
+        DateTime GetDateTime(DateTime defaultValue = default, [CallerMemberName] string? key = null);
 
-        DateTimeOffset GetDateTimeOffset(DateTimeOffset defaultValue = default, [CallerMemberName] string propertyName = null);
+        DateTimeOffset GetDateTimeOffset(DateTimeOffset defaultValue = default, [CallerMemberName] string? key = null);
 
-        double GetDouble(double defaultValue = default, [CallerMemberName] string propertyName = null);
+        double GetDouble(double defaultValue = default, [CallerMemberName] string? key = null);
 
-        [CanBeNull]
-        double[] GetDoubleArray([CanBeNull] double[] defaultValue = default, [CallerMemberName] string propertyName = null);
+        double[]? GetDoubleArray(double[]? defaultValue = default, [CallerMemberName] string? key = null);
 
-        T GetEnum<T>(T defaultValue = default, [CallerMemberName] string propertyName = null)
-            where T : Enum;
+        T GetEnum<T>(T defaultValue = default, [CallerMemberName] string? key = null)
+            where T : struct, Enum;
 
-        float GetFloat(float defaultValue = default, [CallerMemberName] string propertyName = null);
+        float GetFloat(float defaultValue = default, [CallerMemberName] string? key = null);
 
-        [CanBeNull]
-        float[] GetFloatArray([CanBeNull] float[] defaultValue = default, [CallerMemberName] string propertyName = null);
+        float[]? GetFloatArray(float[]? defaultValue = default, [CallerMemberName] string? key = null);
 
-        int GetInt(int defaultValue = default, [CallerMemberName] string propertyName = null);
+        int GetInt(int defaultValue = default, [CallerMemberName] string? key = null);
 
-        [CanBeNull]
-        int[] GetIntArray([CanBeNull] int[] defaultValue = default, [CallerMemberName] string propertyName = null);
+        int[]? GetIntArray(int[]? defaultValue = default, [CallerMemberName] string? key = null);
 
-        long GetLong(long defaultValue = default, [CallerMemberName] string propertyName = null);
+        long GetLong(long defaultValue = default, [CallerMemberName] string? key = null);
 
-        [CanBeNull]
-        long[] GetLongArray([CanBeNull] long[] defaultValue = default, [CallerMemberName] string propertyName = null);
+        long[]? GetLongArray(long[]? defaultValue = default, [CallerMemberName] string? key = null);
 
-        short GetShort(short defaultValue = default, [CallerMemberName] string propertyName = null);
+        short GetShort(short defaultValue = default, [CallerMemberName] string? key = null);
 
-        [CanBeNull]
-        short[] GetShortArray([CanBeNull] short[] defaultValue = default, [CallerMemberName] string propertyName = null);
+        short[]? GetShortArray(short[]? defaultValue = default, [CallerMemberName] string? key = null);
 
-        [CanBeNull]
-        string GetString([CanBeNull] string defaultValue = default, [CallerMemberName] string propertyName = null);
+        string? GetString(string? defaultValue = default, [CallerMemberName] string? key = null);
 
-        [CanBeNull]
-        string[] GetStringArray([CanBeNull] string[] defaultValue = default, [CallerMemberName] string propertyName = null);
+        string[]? GetStringArray(string[]? defaultValue = default, [CallerMemberName] string? key = null);
 
-        bool SetBool(bool value, [CallerMemberName] string propertyName = null);
+        bool SetBool(bool value, [CallerMemberName] string? key = null);
 
-        bool SetBoolArray([CanBeNull] bool[] value, [CallerMemberName] string propertyName = null);
+        bool SetBoolArray(bool[]? value, [CallerMemberName] string? key = null);
 
-        bool SetByteArray([CanBeNull] byte[] value, [CallerMemberName] string propertyName = null);
+        bool SetByteArray(byte[]? value, [CallerMemberName] string? key = null);
 
-        bool SetChar(char value, [CallerMemberName] string propertyName = null);
+        bool SetChar(char value, [CallerMemberName] string? key = null);
 
-        bool SetCharArray([CanBeNull] char[] value, [CallerMemberName] string propertyName = null);
+        bool SetCharArray(char[]? value, [CallerMemberName] string? key = null);
 
-        bool SetDateTime(DateTime value, [CallerMemberName] string propertyName = null);
+        bool SetDateTime(DateTime value, [CallerMemberName] string? key = null);
 
-        bool SetDateTimeOffset(DateTimeOffset value, [CallerMemberName] string propertyName = null);
+        bool SetDateTimeOffset(DateTimeOffset value, [CallerMemberName] string? key = null);
 
-        bool SetDouble(double value, [CallerMemberName] string propertyName = null);
+        bool SetDouble(double value, [CallerMemberName] string? key = null);
 
-        bool SetDoubleArray([CanBeNull] double[] value, [CallerMemberName] string propertyName = null);
+        bool SetDoubleArray(double[]? value, [CallerMemberName] string? key = null);
 
-        bool SetEnum<T>(T value, [CallerMemberName] string propertyName = null)
-            where T : Enum;
+        bool SetEnum<T>(T value, [CallerMemberName] string? key = null)
+            where T : struct, Enum;
 
-        bool SetFloat(float value, [CallerMemberName] string propertyName = null);
+        bool SetFloat(float value, [CallerMemberName] string? key = null);
 
-        bool SetFloatArray([CanBeNull] float[] value, [CallerMemberName] string propertyName = null);
+        bool SetFloatArray(float[]? value, [CallerMemberName] string? key = null);
 
-        bool SetInt(int value, [CallerMemberName] string propertyName = null);
+        bool SetInt(int value, [CallerMemberName] string? key = null);
 
-        bool SetIntArray([CanBeNull] int[] value, [CallerMemberName] string propertyName = null);
+        bool SetIntArray(int[]? value, [CallerMemberName] string? key = null);
 
-        bool SetLong(long value, [CallerMemberName] string propertyName = null);
+        bool SetLong(long value, [CallerMemberName] string? key = null);
 
-        bool SetLongArray([CanBeNull] long[] value, [CallerMemberName] string propertyName = null);
+        bool SetLongArray(long[]? value, [CallerMemberName] string? key = null);
 
-        bool SetShort(short value, [CallerMemberName] string propertyName = null);
+        bool SetShort(short value, [CallerMemberName] string? key = null);
 
-        bool SetShortArray([CanBeNull] short[] value, [CallerMemberName] string propertyName = null);
+        bool SetShortArray(short[]? value, [CallerMemberName] string? key = null);
 
-        bool SetString([CanBeNull] string value, [CallerMemberName] string propertyName = null);
+        bool SetString(string? value, [CallerMemberName] string? key = null);
 
-        bool SetStringArray([CanBeNull] string[] value, [CallerMemberName] string propertyName = null);
+        bool SetStringArray(string[]? value, [CallerMemberName] string? key = null);
     }
 }
