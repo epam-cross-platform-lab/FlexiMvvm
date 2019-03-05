@@ -16,17 +16,12 @@
 
 using System;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm
 {
     public static class DictionaryExtensions
     {
-        [CanBeNull]
-        public static TValue GetOrAdd<TKey, TValue>(
-            [NotNull] this IDictionary<TKey, TValue> dictionary,
-            [NotNull] TKey key,
-            [NotNull] Func<TKey, TValue> valueFactory)
+        public static TValue GetOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, Func<TKey, TValue> valueFactory)
         {
             if (dictionary == null)
                 throw new ArgumentNullException(nameof(dictionary));
@@ -44,11 +39,7 @@ namespace FlexiMvvm
             return value;
         }
 
-        [CanBeNull]
-        public static TValue GetValueOrDefault<TKey, TValue>(
-            [CanBeNull] this IDictionary<TKey, TValue> dictionary,
-            [NotNull] TKey key,
-            [CanBeNull] TValue defaultValue = default)
+        public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue>? dictionary, TKey key, TValue defaultValue = default)
         {
             if (key == null)
                 throw new ArgumentNullException(nameof(key));

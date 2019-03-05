@@ -19,7 +19,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using Android.OS;
 using FlexiMvvm.Views;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Persistence.Core
 {
@@ -27,198 +26,199 @@ namespace FlexiMvvm.Persistence.Core
     {
         private const double ComparisonTolerance = 1E-10;
 
-        [NotNull]
         private readonly Bundle _bundle;
 
-        internal AndroidBundle([NotNull] Bundle bundle)
+        internal AndroidBundle(Bundle bundle)
         {
             _bundle = bundle;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public int Count => _bundle.KeySet().Count;
+
         public bool IsEmpty => _bundle.IsEmpty;
 
-        public bool ContainsProperty(string propertyName)
+        public bool ContainsKey(string key)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            return _bundle.ContainsKey(propertyName);
+            return _bundle.ContainsKey(key);
         }
 
-        public bool GetBool(bool defaultValue = default, string propertyName = null)
+        public bool GetBool(bool defaultValue = default, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            return _bundle.GetBoolean(propertyName, defaultValue);
+            return _bundle.GetBoolean(key, defaultValue);
         }
 
-        public bool[] GetBoolArray(bool[] defaultValue = default, string propertyName = null)
+        public bool[]? GetBoolArray(bool[]? defaultValue = default, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            return _bundle.GetBooleanArray(propertyName) ?? defaultValue;
+            return _bundle.GetBooleanArray(key) ?? defaultValue;
         }
 
-        public byte[] GetByteArray(byte[] defaultValue = default, string propertyName = null)
+        public byte[]? GetByteArray(byte[]? defaultValue = default, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            return _bundle.GetByteArray(propertyName) ?? defaultValue;
+            return _bundle.GetByteArray(key) ?? defaultValue;
         }
 
-        public char GetChar(char defaultValue = default, string propertyName = null)
+        public char GetChar(char defaultValue = default, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            return _bundle.GetChar(propertyName, defaultValue);
+            return _bundle.GetChar(key, defaultValue);
         }
 
-        public char[] GetCharArray(char[] defaultValue = default, string propertyName = null)
+        public char[]? GetCharArray(char[]? defaultValue = default, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            return _bundle.GetCharArray(propertyName) ?? defaultValue;
+            return _bundle.GetCharArray(key) ?? defaultValue;
         }
 
-        public DateTime GetDateTime(DateTime defaultValue = default, string propertyName = null)
+        public DateTime GetDateTime(DateTime defaultValue = default, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            return _bundle.GetDateTime(propertyName, defaultValue);
+            return _bundle.GetDateTime(key, defaultValue);
         }
 
-        public DateTimeOffset GetDateTimeOffset(DateTimeOffset defaultValue = default, string propertyName = null)
+        public DateTimeOffset GetDateTimeOffset(DateTimeOffset defaultValue = default, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            return _bundle.GetDateTimeOffset(propertyName, defaultValue);
+            return _bundle.GetDateTimeOffset(key, defaultValue);
         }
 
-        public double GetDouble(double defaultValue = default, string propertyName = null)
+        public double GetDouble(double defaultValue = default, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            return _bundle.GetDouble(propertyName, defaultValue);
+            return _bundle.GetDouble(key, defaultValue);
         }
 
-        public double[] GetDoubleArray(double[] defaultValue = default, string propertyName = null)
+        public double[]? GetDoubleArray(double[]? defaultValue = default, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            return _bundle.GetDoubleArray(propertyName) ?? defaultValue;
+            return _bundle.GetDoubleArray(key) ?? defaultValue;
         }
 
-        public T GetEnum<T>(T defaultValue = default, string propertyName = null)
-            where T : Enum
+        public T GetEnum<T>(T defaultValue = default, string? key = null)
+            where T : struct, Enum
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            return _bundle.GetEnum(propertyName, defaultValue);
+            return _bundle.GetEnum(key, defaultValue);
         }
 
-        public float GetFloat(float defaultValue = default, string propertyName = null)
+        public float GetFloat(float defaultValue = default, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            return _bundle.GetFloat(propertyName, defaultValue);
+            return _bundle.GetFloat(key, defaultValue);
         }
 
-        public float[] GetFloatArray(float[] defaultValue = default, string propertyName = null)
+        public float[]? GetFloatArray(float[]? defaultValue = default, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            return _bundle.GetFloatArray(propertyName) ?? defaultValue;
+            return _bundle.GetFloatArray(key) ?? defaultValue;
         }
 
-        public int GetInt(int defaultValue = default, string propertyName = null)
+        public int GetInt(int defaultValue = default, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            return _bundle.GetInt(propertyName, defaultValue);
+            return _bundle.GetInt(key, defaultValue);
         }
 
-        public int[] GetIntArray(int[] defaultValue = default, string propertyName = null)
+        public int[]? GetIntArray(int[]? defaultValue = default, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            return _bundle.GetIntArray(propertyName) ?? defaultValue;
+            return _bundle.GetIntArray(key) ?? defaultValue;
         }
 
-        public long GetLong(long defaultValue = default, string propertyName = null)
+        public long GetLong(long defaultValue = default, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            return _bundle.GetLong(propertyName, defaultValue);
+            return _bundle.GetLong(key, defaultValue);
         }
 
-        public long[] GetLongArray(long[] defaultValue = default, string propertyName = null)
+        public long[]? GetLongArray(long[]? defaultValue = default, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            return _bundle.GetLongArray(propertyName) ?? defaultValue;
+            return _bundle.GetLongArray(key) ?? defaultValue;
         }
 
-        public short GetShort(short defaultValue = default, string propertyName = null)
+        public short GetShort(short defaultValue = default, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            return _bundle.GetShort(propertyName, defaultValue);
+            return _bundle.GetShort(key, defaultValue);
         }
 
-        public short[] GetShortArray(short[] defaultValue = default, string propertyName = null)
+        public short[]? GetShortArray(short[]? defaultValue = default, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            return _bundle.GetShortArray(propertyName) ?? defaultValue;
+            return _bundle.GetShortArray(key) ?? defaultValue;
         }
 
-        public string GetString(string defaultValue = default, string propertyName = null)
+        public string? GetString(string? defaultValue = default, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            return _bundle.GetString(propertyName, defaultValue);
+            return _bundle.GetString(key, defaultValue);
         }
 
-        public string[] GetStringArray(string[] defaultValue = default, string propertyName = null)
+        public string[]? GetStringArray(string[]? defaultValue = default, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            return _bundle.GetStringArray(propertyName) ?? defaultValue;
+            return _bundle.GetStringArray(key) ?? defaultValue;
         }
 
-        public bool SetBool(bool value, string propertyName = null)
+        public bool SetBool(bool value, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            var existingValue = GetBool(propertyName: propertyName);
+            var existingValue = GetBool(key: key);
 
-            if (existingValue != value || !ContainsProperty(propertyName))
+            if (existingValue != value || !ContainsKey(key))
             {
-                _bundle.PutBoolean(propertyName, value);
-                OnPropertyChanged(propertyName);
+                _bundle.PutBoolean(key, value);
+                OnPropertyChanged(key);
 
                 return true;
             }
@@ -226,17 +226,17 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetBoolArray(bool[] value, string propertyName = null)
+        public bool SetBoolArray(bool[]? value, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            var existingValue = GetBoolArray(propertyName: propertyName);
+            var existingValue = GetBoolArray(key: key);
 
-            if (!ReferenceEquals(existingValue, value) || !ContainsProperty(propertyName))
+            if (!ReferenceEquals(existingValue, value) || !ContainsKey(key))
             {
-                _bundle.PutBooleanArray(propertyName, value);
-                OnPropertyChanged(propertyName);
+                _bundle.PutBooleanArray(key, value);
+                OnPropertyChanged(key);
 
                 return true;
             }
@@ -244,17 +244,17 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetByteArray(byte[] value, string propertyName = null)
+        public bool SetByteArray(byte[]? value, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            var existingValue = GetByteArray(propertyName: propertyName);
+            var existingValue = GetByteArray(key: key);
 
-            if (!ReferenceEquals(existingValue, value) || !ContainsProperty(propertyName))
+            if (!ReferenceEquals(existingValue, value) || !ContainsKey(key))
             {
-                _bundle.PutByteArray(propertyName, value);
-                OnPropertyChanged(propertyName);
+                _bundle.PutByteArray(key, value);
+                OnPropertyChanged(key);
 
                 return true;
             }
@@ -262,17 +262,17 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetChar(char value, string propertyName = null)
+        public bool SetChar(char value, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            var existingValue = GetChar(propertyName: propertyName);
+            var existingValue = GetChar(key: key);
 
-            if (existingValue != value || !ContainsProperty(propertyName))
+            if (existingValue != value || !ContainsKey(key))
             {
-                _bundle.PutChar(propertyName, value);
-                OnPropertyChanged(propertyName);
+                _bundle.PutChar(key, value);
+                OnPropertyChanged(key);
 
                 return true;
             }
@@ -280,17 +280,17 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetCharArray(char[] value, string propertyName = null)
+        public bool SetCharArray(char[]? value, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            var existingValue = GetCharArray(propertyName: propertyName);
+            var existingValue = GetCharArray(key: key);
 
-            if (!ReferenceEquals(existingValue, value) || !ContainsProperty(propertyName))
+            if (!ReferenceEquals(existingValue, value) || !ContainsKey(key))
             {
-                _bundle.PutCharArray(propertyName, value);
-                OnPropertyChanged(propertyName);
+                _bundle.PutCharArray(key, value);
+                OnPropertyChanged(key);
 
                 return true;
             }
@@ -298,17 +298,17 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetDateTime(DateTime value, string propertyName = null)
+        public bool SetDateTime(DateTime value, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            var existingValue = GetDateTime(propertyName: propertyName);
+            var existingValue = GetDateTime(key: key);
 
-            if (existingValue != value || !ContainsProperty(propertyName))
+            if (existingValue != value || !ContainsKey(key))
             {
-                _bundle.PutDateTime(propertyName, value);
-                OnPropertyChanged(propertyName);
+                _bundle.PutDateTime(key, value);
+                OnPropertyChanged(key);
 
                 return true;
             }
@@ -316,17 +316,17 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetDateTimeOffset(DateTimeOffset value, string propertyName = null)
+        public bool SetDateTimeOffset(DateTimeOffset value, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            var existingValue = GetDateTimeOffset(propertyName: propertyName);
+            var existingValue = GetDateTimeOffset(key: key);
 
-            if (existingValue != value || !ContainsProperty(propertyName))
+            if (existingValue != value || !ContainsKey(key))
             {
-                _bundle.PutDateTimeOffset(propertyName, value);
-                OnPropertyChanged(propertyName);
+                _bundle.PutDateTimeOffset(key, value);
+                OnPropertyChanged(key);
 
                 return true;
             }
@@ -334,17 +334,17 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetDouble(double value, string propertyName = null)
+        public bool SetDouble(double value, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            var existingValue = GetDouble(propertyName: propertyName);
+            var existingValue = GetDouble(key: key);
 
-            if (Math.Abs(existingValue - value) > ComparisonTolerance || !ContainsProperty(propertyName))
+            if (Math.Abs(existingValue - value) > ComparisonTolerance || !ContainsKey(key))
             {
-                _bundle.PutDouble(propertyName, value);
-                OnPropertyChanged(propertyName);
+                _bundle.PutDouble(key, value);
+                OnPropertyChanged(key);
 
                 return true;
             }
@@ -352,17 +352,17 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetDoubleArray(double[] value, string propertyName = null)
+        public bool SetDoubleArray(double[]? value, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            var existingValue = GetDoubleArray(propertyName: propertyName);
+            var existingValue = GetDoubleArray(key: key);
 
-            if (!ReferenceEquals(existingValue, value) || !ContainsProperty(propertyName))
+            if (!ReferenceEquals(existingValue, value) || !ContainsKey(key))
             {
-                _bundle.PutDoubleArray(propertyName, value);
-                OnPropertyChanged(propertyName);
+                _bundle.PutDoubleArray(key, value);
+                OnPropertyChanged(key);
 
                 return true;
             }
@@ -370,18 +370,18 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetEnum<T>(T value, string propertyName = null)
-            where T : Enum
+        public bool SetEnum<T>(T value, string? key = null)
+            where T : struct, Enum
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            var existingValue = GetEnum<T>(propertyName: propertyName);
+            var existingValue = GetEnum<T>(key: key);
 
-            if (!EqualityComparer<T>.Default.Equals(existingValue, value) || !ContainsProperty(propertyName))
+            if (!EqualityComparer<T>.Default.Equals(existingValue, value) || !ContainsKey(key))
             {
-                _bundle.PutEnum(propertyName, value);
-                OnPropertyChanged(propertyName);
+                _bundle.PutEnum(key, value);
+                OnPropertyChanged(key);
 
                 return true;
             }
@@ -389,17 +389,17 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetFloat(float value, string propertyName = null)
+        public bool SetFloat(float value, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            var existingValue = GetFloat(propertyName: propertyName);
+            var existingValue = GetFloat(key: key);
 
-            if (Math.Abs(existingValue - value) > ComparisonTolerance || !ContainsProperty(propertyName))
+            if (Math.Abs(existingValue - value) > ComparisonTolerance || !ContainsKey(key))
             {
-                _bundle.PutFloat(propertyName, value);
-                OnPropertyChanged(propertyName);
+                _bundle.PutFloat(key, value);
+                OnPropertyChanged(key);
 
                 return true;
             }
@@ -407,17 +407,17 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetFloatArray(float[] value, string propertyName = null)
+        public bool SetFloatArray(float[]? value, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            var existingValue = GetFloatArray(propertyName: propertyName);
+            var existingValue = GetFloatArray(key: key);
 
-            if (!ReferenceEquals(existingValue, value) || !ContainsProperty(propertyName))
+            if (!ReferenceEquals(existingValue, value) || !ContainsKey(key))
             {
-                _bundle.PutFloatArray(propertyName, value);
-                OnPropertyChanged(propertyName);
+                _bundle.PutFloatArray(key, value);
+                OnPropertyChanged(key);
 
                 return true;
             }
@@ -425,17 +425,17 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetInt(int value, string propertyName = null)
+        public bool SetInt(int value, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            var existingValue = GetInt(propertyName: propertyName);
+            var existingValue = GetInt(key: key);
 
-            if (existingValue != value || !ContainsProperty(propertyName))
+            if (existingValue != value || !ContainsKey(key))
             {
-                _bundle.PutInt(propertyName, value);
-                OnPropertyChanged(propertyName);
+                _bundle.PutInt(key, value);
+                OnPropertyChanged(key);
 
                 return true;
             }
@@ -443,17 +443,17 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetIntArray(int[] value, string propertyName = null)
+        public bool SetIntArray(int[]? value, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            var existingValue = GetIntArray(propertyName: propertyName);
+            var existingValue = GetIntArray(key: key);
 
-            if (!ReferenceEquals(existingValue, value) || !ContainsProperty(propertyName))
+            if (!ReferenceEquals(existingValue, value) || !ContainsKey(key))
             {
-                _bundle.PutIntArray(propertyName, value);
-                OnPropertyChanged(propertyName);
+                _bundle.PutIntArray(key, value);
+                OnPropertyChanged(key);
 
                 return true;
             }
@@ -461,17 +461,17 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetLong(long value, string propertyName = null)
+        public bool SetLong(long value, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            var existingValue = GetLong(propertyName: propertyName);
+            var existingValue = GetLong(key: key);
 
-            if (existingValue != value || !ContainsProperty(propertyName))
+            if (existingValue != value || !ContainsKey(key))
             {
-                _bundle.PutLong(propertyName, value);
-                OnPropertyChanged(propertyName);
+                _bundle.PutLong(key, value);
+                OnPropertyChanged(key);
 
                 return true;
             }
@@ -479,17 +479,17 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetLongArray(long[] value, string propertyName = null)
+        public bool SetLongArray(long[]? value, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            var existingValue = GetLongArray(propertyName: propertyName);
+            var existingValue = GetLongArray(key: key);
 
-            if (!ReferenceEquals(existingValue, value) || !ContainsProperty(propertyName))
+            if (!ReferenceEquals(existingValue, value) || !ContainsKey(key))
             {
-                _bundle.PutLongArray(propertyName, value);
-                OnPropertyChanged(propertyName);
+                _bundle.PutLongArray(key, value);
+                OnPropertyChanged(key);
 
                 return true;
             }
@@ -497,17 +497,17 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetShort(short value, string propertyName = null)
+        public bool SetShort(short value, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            var existingValue = GetShort(propertyName: propertyName);
+            var existingValue = GetShort(key: key);
 
-            if (existingValue != value || !ContainsProperty(propertyName))
+            if (existingValue != value || !ContainsKey(key))
             {
-                _bundle.PutShort(propertyName, value);
-                OnPropertyChanged(propertyName);
+                _bundle.PutShort(key, value);
+                OnPropertyChanged(key);
 
                 return true;
             }
@@ -515,17 +515,17 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetShortArray(short[] value, string propertyName = null)
+        public bool SetShortArray(short[]? value, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            var existingValue = GetShortArray(propertyName: propertyName);
+            var existingValue = GetShortArray(key: key);
 
-            if (!ReferenceEquals(existingValue, value) || !ContainsProperty(propertyName))
+            if (!ReferenceEquals(existingValue, value) || !ContainsKey(key))
             {
-                _bundle.PutShortArray(propertyName, value);
-                OnPropertyChanged(propertyName);
+                _bundle.PutShortArray(key, value);
+                OnPropertyChanged(key);
 
                 return true;
             }
@@ -533,17 +533,17 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetString(string value, string propertyName = null)
+        public bool SetString(string? value, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            var existingValue = GetString(propertyName: propertyName);
+            var existingValue = GetString(key: key);
 
-            if (existingValue != value || !ContainsProperty(propertyName))
+            if (existingValue != value || !ContainsKey(key))
             {
-                _bundle.PutString(propertyName, value);
-                OnPropertyChanged(propertyName);
+                _bundle.PutString(key, value);
+                OnPropertyChanged(key);
 
                 return true;
             }
@@ -551,17 +551,17 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetStringArray(string[] value, string propertyName = null)
+        public bool SetStringArray(string[]? value, string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(propertyName));
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
 
-            var existingValue = GetStringArray(propertyName: propertyName);
+            var existingValue = GetStringArray(key: key);
 
-            if (!ReferenceEquals(existingValue, value) || !ContainsProperty(propertyName))
+            if (!ReferenceEquals(existingValue, value) || !ContainsKey(key))
             {
-                _bundle.PutStringArray(propertyName, value);
-                OnPropertyChanged(propertyName);
+                _bundle.PutStringArray(key, value);
+                OnPropertyChanged(key);
 
                 return true;
             }
@@ -574,10 +574,9 @@ namespace FlexiMvvm.Persistence.Core
             return _bundle;
         }
 
-        [NotifyPropertyChangedInvocator]
-        private void OnPropertyChanged([NotNull] string propertyName)
+        private void OnPropertyChanged(string key)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(key));
         }
     }
 }

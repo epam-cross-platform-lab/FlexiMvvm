@@ -15,13 +15,11 @@
 // =========================================================================
 
 using Android.OS;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Persistence.Core
 {
     internal interface INativeBundleOwner
     {
-        [NotNull]
         Bundle ExportNativeBundle();
     }
 }

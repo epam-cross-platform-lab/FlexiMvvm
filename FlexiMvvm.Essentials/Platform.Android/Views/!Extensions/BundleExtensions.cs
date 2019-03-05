@@ -17,7 +17,6 @@
 using System;
 using System.Globalization;
 using Android.OS;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Views
 {
@@ -25,7 +24,7 @@ namespace FlexiMvvm.Views
     {
         private const string Iso8601Format = "O";
 
-        public static DateTime GetDateTime([NotNull] this Bundle bundle, [CanBeNull] string key)
+        public static DateTime GetDateTime(this Bundle bundle, string? key)
         {
             if (bundle == null)
                 throw new ArgumentNullException(nameof(bundle));
@@ -33,7 +32,7 @@ namespace FlexiMvvm.Views
             return GetDateTime(bundle, key, default);
         }
 
-        public static DateTime GetDateTime([NotNull] this Bundle bundle, [CanBeNull] string key, DateTime defaultValue)
+        public static DateTime GetDateTime(this Bundle bundle, string? key, DateTime defaultValue)
         {
             if (bundle == null)
                 throw new ArgumentNullException(nameof(bundle));
@@ -45,7 +44,7 @@ namespace FlexiMvvm.Views
                 : DateTime.ParseExact(dateTimeString, Iso8601Format, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind);
         }
 
-        public static DateTimeOffset GetDateTimeOffset([NotNull] this Bundle bundle, [CanBeNull] string key)
+        public static DateTimeOffset GetDateTimeOffset(this Bundle bundle, string? key)
         {
             if (bundle == null)
                 throw new ArgumentNullException(nameof(bundle));
@@ -53,7 +52,7 @@ namespace FlexiMvvm.Views
             return GetDateTimeOffset(bundle, key, default);
         }
 
-        public static DateTimeOffset GetDateTimeOffset([NotNull] this Bundle bundle, [CanBeNull] string key, DateTimeOffset defaultValue)
+        public static DateTimeOffset GetDateTimeOffset(this Bundle bundle, string? key, DateTimeOffset defaultValue)
         {
             if (bundle == null)
                 throw new ArgumentNullException(nameof(bundle));
@@ -65,8 +64,8 @@ namespace FlexiMvvm.Views
                 : DateTimeOffset.ParseExact(dateTimeOffsetString, Iso8601Format, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind);
         }
 
-        public static T GetEnum<T>([NotNull] this Bundle bundle, [CanBeNull] string key, T defaultValue)
-            where T : Enum
+        public static T GetEnum<T>(this Bundle bundle, string? key, T defaultValue)
+            where T : struct, Enum
         {
             if (bundle == null)
                 throw new ArgumentNullException(nameof(bundle));
@@ -78,7 +77,7 @@ namespace FlexiMvvm.Views
                 : (T)Enum.Parse(typeof(T), enumString);
         }
 
-        public static void PutDateTime([NotNull] this Bundle bundle, [CanBeNull] string key, DateTime value)
+        public static void PutDateTime(this Bundle bundle, string? key, DateTime value)
         {
             if (bundle == null)
                 throw new ArgumentNullException(nameof(bundle));
@@ -86,7 +85,7 @@ namespace FlexiMvvm.Views
             bundle.PutString(key, value.ToString(Iso8601Format));
         }
 
-        public static void PutDateTimeOffset([NotNull] this Bundle bundle, [CanBeNull] string key, DateTimeOffset value)
+        public static void PutDateTimeOffset(this Bundle bundle, string? key, DateTimeOffset value)
         {
             if (bundle == null)
                 throw new ArgumentNullException(nameof(bundle));
@@ -94,8 +93,8 @@ namespace FlexiMvvm.Views
             bundle.PutString(key, value.ToString(Iso8601Format));
         }
 
-        public static void PutEnum<T>([NotNull] this Bundle bundle, [CanBeNull] string key, T value)
-            where T : Enum
+        public static void PutEnum<T>(this Bundle bundle, string? key, T value)
+            where T : struct, Enum
         {
             if (bundle == null)
                 throw new ArgumentNullException(nameof(bundle));
