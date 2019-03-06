@@ -13,7 +13,9 @@ namespace FirstScreen.Core.Presentation.ViewModels
             _navigationService = navigationService;
         }
 
+
         public Command<string> SelectLanguage => CommandProvider.Get<string>(OnSelectLanguage);
+
 
         public void SetResult(ResultCode resultCode, SelectedLanguageResult result)
         {
@@ -22,14 +24,7 @@ namespace FirstScreen.Core.Presentation.ViewModels
 
         private void OnSelectLanguage(string @value)
         {
-            System.Diagnostics.Debug.WriteLine(@value);
-
             SetResult(ResultCode.Ok, new SelectedLanguageResult(true, @value));
         }
-    }
-
-    public class Language
-    {
-        public string Title { get; set; }
     }
 }

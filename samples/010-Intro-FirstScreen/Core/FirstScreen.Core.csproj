@@ -24,5 +24,6 @@
     <Compile Include="Presentation\ViewModels\LanguagesViewModel.cs" />
     <Compile Include="Presentation\ViewModels\UserProfileParameters.cs" />
     <Compile Include="Presentation\ViewModels\UserProfileViewModel.cs" />
+    <Compile Include="Presentation\ViewModels\Language.cs" />
   </ItemGroup>
 </Project>

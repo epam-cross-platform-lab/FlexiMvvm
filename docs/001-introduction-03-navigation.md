@@ -2,7 +2,7 @@
 
 ---
 
-# Navigation
+# Basic Navigation
 
 Navigation is View Model driven. At the same time, FlexiMvvm **encourages to use native APIs for navigation**. For that, the following approach is suggested:
 

@@ -8,7 +8,6 @@ using Android.Views;
 using Android.Widget;
 using FirstScreen.Core.Presentation.ViewModels;
 using FlexiMvvm.Bindings;
-using FlexiMvvm.Bindings.Custom;
 
 namespace FlexiMvvm.Views
 {

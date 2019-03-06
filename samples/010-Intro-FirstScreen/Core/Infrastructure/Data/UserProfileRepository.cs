@@ -19,7 +19,7 @@ namespace FirstScreen.Core.Infrastructure.Data
             await Task.Delay(100);
 
             System.Diagnostics.Debug.WriteLine(
-                $"Updated: {profile.Email} -> {profile.FirstName} {profile.LastName}");
+                $"Updated: {profile.Email} -> {profile.FirstName} {profile.LastName}. Language: {profile.Language}");
         }
     }
 }

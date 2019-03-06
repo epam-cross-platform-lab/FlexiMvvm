@@ -2,7 +2,7 @@
 
 ---
 
-# Screen with Parameters
+# Navigation with Parameters
 
 Usually while navigating to a screen, we need to pass some parameters visible by View Model to run appropriate initialization. iOS and Android have completely different native approaches how to do this.
 - On iOS we can simply instanciate new View Controller instance and store needed data in Properties
@@ -211,4 +211,4 @@ namespace FirstScreen.Core.Presentation.ViewModels
 ```
 ---
 
-[Next: ...](index.md)
+[Next: Navigation for a Result](001-introduction-05-result.md)

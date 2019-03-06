@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using System.Windows.Input;
 using FirstScreen.Core.Infrastructure.Data;
 using FirstScreen.Core.Presentation.Navigation;
+using FlexiMvvm.Commands;
 using FlexiMvvm.ViewModels;
 
 namespace FirstScreen.Core.Presentation.ViewModels
@@ -14,6 +14,7 @@ namespace FirstScreen.Core.Presentation.ViewModels
         private string _firstName;
         private string _lastName;
         private string _email;
+        private string _language;
 
         public UserProfileViewModel(
             IUserProfileRepository userProfileRepository,
@@ -43,9 +44,15 @@ namespace FirstScreen.Core.Presentation.ViewModels
             set => SetValue(ref _email, value);
         }
 
+        public string Language
+        {
+            get => _language;
+            set => SetValue(ref _language, value);
+        }
+
         ////
 
-        public ICommand SaveCommand => CommandProvider.Get(Save);
+        public Command SaveCommand => CommandProvider.Get(Save);
 
         ////
 
@@ -60,22 +67,27 @@ namespace FirstScreen.Core.Presentation.ViewModels
                 Email = profile.Email;
                 FirstName = profile.FirstName;
                 LastName = profile.LastName;
+                Language = profile.Language;
             }
         }
 
         ////
 
-        public void HandleResult(ResultCode resultCode, Result result)
+        public async void HandleResult(ResultCode resultCode, Result result)
         {
             if (result is SelectedLanguageResult selectedLanguageResult)
             {
-                if (resultCode == ResultCode.Ok)
+                if (resultCode == ResultCode.Ok && selectedLanguageResult.IsSelected)
                 {
-                    // TODO
-                }
-                else if (resultCode == ResultCode.Canceled)
-                {
-                    // TODO
+                    Language = selectedLanguageResult.SelectedLanguage;
+
+                    await _userProfileRepository.Update(new UserProfile
+                    {
+                        Email = Email,
+                        FirstName = FirstName,
+                        LastName = LastName,
+                        Language = Language
+                    });
                 }
             }
         }
@@ -88,7 +100,8 @@ namespace FirstScreen.Core.Presentation.ViewModels
             {
                 Email = Email,
                 FirstName = FirstName,
-                LastName = LastName
+                LastName = LastName,
+                Language = Language
             });
 
             _navigationService.NavigateToLanguages(this);

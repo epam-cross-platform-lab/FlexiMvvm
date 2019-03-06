@@ -5,6 +5,7 @@
 	- [First screen](001-introduction-02-first-screen.md)
 	- [Basic Navigation](001-introduction-03-navigation.md)
 	- [Navigation with Parameters](001-introduction-04-screen-with-parameters.md)
+	- [Navigation for a Result](001-introduction-05-result.md)
 
 ---
 
