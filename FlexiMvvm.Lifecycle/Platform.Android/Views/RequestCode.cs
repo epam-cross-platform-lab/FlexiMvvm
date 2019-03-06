@@ -15,58 +15,57 @@
 // =========================================================================
 
 using System;
-using System.Collections.Generic;
+using FlexiMvvm.Persistence;
 using FlexiMvvm.ViewModels;
-using FlexiMvvm.Views.Core;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Views
 {
     public sealed class RequestCode
     {
-        [CanBeNull]
-        [ItemNotNull]
-        private List<Type> _requestsCodes;
-        [CanBeNull]
-        [ItemNotNull]
-        private List<IResultMapper> _resultsMappers;
+        private const int InvalidRequestCode = -1;
 
-        [NotNull]
-        [ItemNotNull]
-        private List<Type> RequestsCodes => _requestsCodes ?? (_requestsCodes = new List<Type>());
+        private IBundle? _state;
 
-        [NotNull]
-        [ItemNotNull]
-        private List<IResultMapper> ResultsMappers => _resultsMappers ?? (_resultsMappers = new List<IResultMapper>());
+        private IBundle State => _state ?? (_state = BundleFactory.Create());
 
-        public int GetFor<TResult>([CanBeNull] IResultMapper mapper = null)
-            where TResult : Result
+        public int GetFor<TResultMapper>()
+            where TResultMapper : IResultMapper<Result>, new()
         {
-            var resultType = typeof(TResult);
-            var requestCode = RequestsCodes.IndexOf(resultType);
+            var resultMapperAssemblyQualifiedName = typeof(TResultMapper).AssemblyQualifiedName;
+            var requestCode = State.GetInt(InvalidRequestCode, resultMapperAssemblyQualifiedName);
 
-            if (requestCode == -1)
+            if (requestCode == InvalidRequestCode)
             {
-                RequestsCodes.Add(resultType);
-                ResultsMappers.Add(mapper ?? new ResultMapper<TResult>());
-
-                requestCode = RequestsCodes.Count - 1;
+                requestCode = State.Count;
+                State.SetInt(requestCode, resultMapperAssemblyQualifiedName);
+                State.SetString(resultMapperAssemblyQualifiedName, requestCode.ToString());
             }
 
             return requestCode;
         }
 
-        [CanBeNull]
-        internal IResultMapper GetResultMapper(int requestCode)
+        internal IResultMapper<Result>? GetResultMapper(int requestCode)
         {
-            IResultMapper mapper = null;
+            IResultMapper<Result>? resultMapper = null;
+            var resultMapperAssemblyQualifiedName = _state?.GetString(null, requestCode.ToString());
 
-            if (requestCode > -1 && requestCode < ResultsMappers.Count)
+            if (!string.IsNullOrWhiteSpace(resultMapperAssemblyQualifiedName))
             {
-                mapper = ResultsMappers[requestCode];
+                var resultMapperType = Type.GetType(resultMapperAssemblyQualifiedName);
+                resultMapper = (IResultMapper<Result>)Activator.CreateInstance(resultMapperType);
             }
 
-            return mapper;
+            return resultMapper;
+        }
+
+        internal void ImportState(IBundle? state)
+        {
+            _state = state;
+        }
+
+        internal IBundle? ExportState()
+        {
+            return _state;
         }
     }
 }

@@ -69,6 +69,7 @@ namespace FlexiMvvm.Views.Core
     {
         private const string ViewModelKeyKey = "FlexiMvvm_ViewModel_Key";
         private const string ViewModelStateKey = "FlexiMvvm_ViewModel_State";
+        private const string ViewRequestCodeStateKey = "FlexiMvvm_View_RequestCode_State";
 
         [CanBeNull]
         private string _viewModelKey;
@@ -85,13 +86,16 @@ namespace FlexiMvvm.Views.Core
         {
             base.OnCreate(savedInstanceState);
 
-            var store = ViewModelStoreProvider.Get(View).NotNull();
             _viewModelKey = savedInstanceState?.GetString(ViewModelKeyKey) ?? Guid.NewGuid().ToString();
-            var factory = ViewModelProvider.GetFactory();
-            var state = savedInstanceState?.GetState(ViewModelStateKey);
-            var viewModel = ViewModelProvider.Get<TViewModel>(store, _viewModelKey, factory, state, out _isViewModelCreated);
+            var viewModelState = savedInstanceState?.GetState(ViewModelStateKey);
+            var viewRequestCodeState = savedInstanceState?.GetState(ViewRequestCodeStateKey);
+
+            var viewModelStore = ViewModelStoreProvider.Get(View).NotNull();
+            var viewModelFactory = ViewModelProvider.GetFactory();
+            var viewModel = ViewModelProvider.Get<TViewModel>(viewModelStore, _viewModelKey, viewModelFactory, viewModelState, out _isViewModelCreated);
 
             View.SetViewModel(viewModel);
+            View.RequestCode.ImportState(viewRequestCodeState);
             ViewCache.Add(View);
         }
 
@@ -134,6 +138,7 @@ namespace FlexiMvvm.Views.Core
 
             outState.PutString(ViewModelKeyKey, _viewModelKey);
             outState.PutState(ViewModelStateKey, View.ViewModel.ExportState());
+            outState.PutState(ViewRequestCodeStateKey, View.RequestCode.ExportState());
         }
 
         public override void OnDestroy()
