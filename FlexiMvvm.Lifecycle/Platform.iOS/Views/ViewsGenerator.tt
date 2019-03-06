@@ -33,5 +33,4 @@
 // limitations under the License.
 // =========================================================================
 
-using UIKit;
 <#= viewsGenerator.TransformText() #>
