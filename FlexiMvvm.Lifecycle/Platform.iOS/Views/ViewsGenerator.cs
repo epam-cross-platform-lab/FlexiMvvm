@@ -15,7 +15,6 @@
 // limitations under the License.
 // =========================================================================
 
-using UIKit;
 using System;
 using System.Threading.Tasks;
 using FlexiMvvm.ViewModels;
@@ -55,32 +54,18 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.ViewWillAppear();
         }
 
+        public override void ViewWillDisappear(bool animated)
+        {
+            base.ViewWillDisappear(animated);
+
+            LifecycleDelegate.ViewWillDisappear();
+        }
+
         public override void ViewDidDisappear(bool animated)
         {
             base.ViewDidDisappear(animated);
 
             LifecycleDelegate.ViewDidDisappear();
-        }
-
-        public override void WillMoveToParentViewController(UIViewController parent)
-        {
-            base.WillMoveToParentViewController(parent);
-
-            LifecycleDelegate.WillMoveToParentViewController(parent);
-        }
-
-        public override void DismissViewController(bool animated, Action completionHandler)
-        {
-            LifecycleDelegate.DismissViewController();
-
-            base.DismissViewController(animated, completionHandler);
-        }
-
-        public override Task DismissViewControllerAsync(bool animated)
-        {
-            LifecycleDelegate.DismissViewController();
-
-            return base.DismissViewControllerAsync(animated);
         }
 
         void IKeyboardHandlerOwner.SetKeyboardHandler(KeyboardHandler handler)
@@ -111,12 +96,9 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.SetResult(resultCode, result);
         }
 
-        public void RaiseResultSet(ResultSetEventArgs args)
+        public void RaiseResultSet(ResultCode resultCode, Result? result)
         {
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
-            ResultSet?.Invoke(this, args);
+            ResultSet?.Invoke(this, new ResultSetEventArgs(resultCode, result));
         }
 
         public void HandleResult(object sender, ResultSetEventArgs args)
@@ -170,12 +152,9 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.SetResult(resultCode, result);
         }
 
-        public void RaiseResultSet(ResultSetEventArgs args)
+        public void RaiseResultSet(ResultCode resultCode, Result? result)
         {
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
-            ResultSet?.Invoke(this, args);
+            ResultSet?.Invoke(this, new ResultSetEventArgs(resultCode, result));
         }
 
         public void HandleResult(object sender, ResultSetEventArgs args)
@@ -232,32 +211,18 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.ViewWillAppear();
         }
 
+        public override void ViewWillDisappear(bool animated)
+        {
+            base.ViewWillDisappear(animated);
+
+            LifecycleDelegate.ViewWillDisappear();
+        }
+
         public override void ViewDidDisappear(bool animated)
         {
             base.ViewDidDisappear(animated);
 
             LifecycleDelegate.ViewDidDisappear();
-        }
-
-        public override void WillMoveToParentViewController(UIViewController parent)
-        {
-            base.WillMoveToParentViewController(parent);
-
-            LifecycleDelegate.WillMoveToParentViewController(parent);
-        }
-
-        public override void DismissViewController(bool animated, Action completionHandler)
-        {
-            LifecycleDelegate.DismissViewController();
-
-            base.DismissViewController(animated, completionHandler);
-        }
-
-        public override Task DismissViewControllerAsync(bool animated)
-        {
-            LifecycleDelegate.DismissViewController();
-
-            return base.DismissViewControllerAsync(animated);
         }
 
         void IKeyboardHandlerOwner.SetKeyboardHandler(KeyboardHandler handler)
@@ -288,12 +253,9 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.SetResult(resultCode, result);
         }
 
-        public void RaiseResultSet(ResultSetEventArgs args)
+        public void RaiseResultSet(ResultCode resultCode, Result? result)
         {
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
-            ResultSet?.Invoke(this, args);
+            ResultSet?.Invoke(this, new ResultSetEventArgs(resultCode, result));
         }
 
         public void HandleResult(object sender, ResultSetEventArgs args)
@@ -347,12 +309,9 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.SetResult(resultCode, result);
         }
 
-        public void RaiseResultSet(ResultSetEventArgs args)
+        public void RaiseResultSet(ResultCode resultCode, Result? result)
         {
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
-            ResultSet?.Invoke(this, args);
+            ResultSet?.Invoke(this, new ResultSetEventArgs(resultCode, result));
         }
 
         public void HandleResult(object sender, ResultSetEventArgs args)
@@ -409,32 +368,18 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.ViewWillAppear();
         }
 
+        public override void ViewWillDisappear(bool animated)
+        {
+            base.ViewWillDisappear(animated);
+
+            LifecycleDelegate.ViewWillDisappear();
+        }
+
         public override void ViewDidDisappear(bool animated)
         {
             base.ViewDidDisappear(animated);
 
             LifecycleDelegate.ViewDidDisappear();
-        }
-
-        public override void WillMoveToParentViewController(UIViewController parent)
-        {
-            base.WillMoveToParentViewController(parent);
-
-            LifecycleDelegate.WillMoveToParentViewController(parent);
-        }
-
-        public override void DismissViewController(bool animated, Action completionHandler)
-        {
-            LifecycleDelegate.DismissViewController();
-
-            base.DismissViewController(animated, completionHandler);
-        }
-
-        public override Task DismissViewControllerAsync(bool animated)
-        {
-            LifecycleDelegate.DismissViewController();
-
-            return base.DismissViewControllerAsync(animated);
         }
 
         void IKeyboardHandlerOwner.SetKeyboardHandler(KeyboardHandler handler)
@@ -465,12 +410,9 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.SetResult(resultCode, result);
         }
 
-        public void RaiseResultSet(ResultSetEventArgs args)
+        public void RaiseResultSet(ResultCode resultCode, Result? result)
         {
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
-            ResultSet?.Invoke(this, args);
+            ResultSet?.Invoke(this, new ResultSetEventArgs(resultCode, result));
         }
 
         public void HandleResult(object sender, ResultSetEventArgs args)
@@ -524,12 +466,9 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.SetResult(resultCode, result);
         }
 
-        public void RaiseResultSet(ResultSetEventArgs args)
+        public void RaiseResultSet(ResultCode resultCode, Result? result)
         {
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
-            ResultSet?.Invoke(this, args);
+            ResultSet?.Invoke(this, new ResultSetEventArgs(resultCode, result));
         }
 
         public void HandleResult(object sender, ResultSetEventArgs args)
@@ -586,32 +525,18 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.ViewWillAppear();
         }
 
+        public override void ViewWillDisappear(bool animated)
+        {
+            base.ViewWillDisappear(animated);
+
+            LifecycleDelegate.ViewWillDisappear();
+        }
+
         public override void ViewDidDisappear(bool animated)
         {
             base.ViewDidDisappear(animated);
 
             LifecycleDelegate.ViewDidDisappear();
-        }
-
-        public override void WillMoveToParentViewController(UIViewController parent)
-        {
-            base.WillMoveToParentViewController(parent);
-
-            LifecycleDelegate.WillMoveToParentViewController(parent);
-        }
-
-        public override void DismissViewController(bool animated, Action completionHandler)
-        {
-            LifecycleDelegate.DismissViewController();
-
-            base.DismissViewController(animated, completionHandler);
-        }
-
-        public override Task DismissViewControllerAsync(bool animated)
-        {
-            LifecycleDelegate.DismissViewController();
-
-            return base.DismissViewControllerAsync(animated);
         }
 
         void IKeyboardHandlerOwner.SetKeyboardHandler(KeyboardHandler handler)
@@ -642,12 +567,9 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.SetResult(resultCode, result);
         }
 
-        public void RaiseResultSet(ResultSetEventArgs args)
+        public void RaiseResultSet(ResultCode resultCode, Result? result)
         {
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
-            ResultSet?.Invoke(this, args);
+            ResultSet?.Invoke(this, new ResultSetEventArgs(resultCode, result));
         }
 
         public void HandleResult(object sender, ResultSetEventArgs args)
@@ -701,12 +623,9 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.SetResult(resultCode, result);
         }
 
-        public void RaiseResultSet(ResultSetEventArgs args)
+        public void RaiseResultSet(ResultCode resultCode, Result? result)
         {
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
-            ResultSet?.Invoke(this, args);
+            ResultSet?.Invoke(this, new ResultSetEventArgs(resultCode, result));
         }
 
         public void HandleResult(object sender, ResultSetEventArgs args)
@@ -763,32 +682,18 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.ViewWillAppear();
         }
 
+        public override void ViewWillDisappear(bool animated)
+        {
+            base.ViewWillDisappear(animated);
+
+            LifecycleDelegate.ViewWillDisappear();
+        }
+
         public override void ViewDidDisappear(bool animated)
         {
             base.ViewDidDisappear(animated);
 
             LifecycleDelegate.ViewDidDisappear();
-        }
-
-        public override void WillMoveToParentViewController(UIViewController parent)
-        {
-            base.WillMoveToParentViewController(parent);
-
-            LifecycleDelegate.WillMoveToParentViewController(parent);
-        }
-
-        public override void DismissViewController(bool animated, Action completionHandler)
-        {
-            LifecycleDelegate.DismissViewController();
-
-            base.DismissViewController(animated, completionHandler);
-        }
-
-        public override Task DismissViewControllerAsync(bool animated)
-        {
-            LifecycleDelegate.DismissViewController();
-
-            return base.DismissViewControllerAsync(animated);
         }
 
         void IKeyboardHandlerOwner.SetKeyboardHandler(KeyboardHandler handler)
@@ -819,12 +724,9 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.SetResult(resultCode, result);
         }
 
-        public void RaiseResultSet(ResultSetEventArgs args)
+        public void RaiseResultSet(ResultCode resultCode, Result? result)
         {
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
-            ResultSet?.Invoke(this, args);
+            ResultSet?.Invoke(this, new ResultSetEventArgs(resultCode, result));
         }
 
         public void HandleResult(object sender, ResultSetEventArgs args)
@@ -878,12 +780,9 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.SetResult(resultCode, result);
         }
 
-        public void RaiseResultSet(ResultSetEventArgs args)
+        public void RaiseResultSet(ResultCode resultCode, Result? result)
         {
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
-            ResultSet?.Invoke(this, args);
+            ResultSet?.Invoke(this, new ResultSetEventArgs(resultCode, result));
         }
 
         public void HandleResult(object sender, ResultSetEventArgs args)
@@ -940,32 +839,18 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.ViewWillAppear();
         }
 
+        public override void ViewWillDisappear(bool animated)
+        {
+            base.ViewWillDisappear(animated);
+
+            LifecycleDelegate.ViewWillDisappear();
+        }
+
         public override void ViewDidDisappear(bool animated)
         {
             base.ViewDidDisappear(animated);
 
             LifecycleDelegate.ViewDidDisappear();
-        }
-
-        public override void WillMoveToParentViewController(UIViewController parent)
-        {
-            base.WillMoveToParentViewController(parent);
-
-            LifecycleDelegate.WillMoveToParentViewController(parent);
-        }
-
-        public override void DismissViewController(bool animated, Action completionHandler)
-        {
-            LifecycleDelegate.DismissViewController();
-
-            base.DismissViewController(animated, completionHandler);
-        }
-
-        public override Task DismissViewControllerAsync(bool animated)
-        {
-            LifecycleDelegate.DismissViewController();
-
-            return base.DismissViewControllerAsync(animated);
         }
 
         void IKeyboardHandlerOwner.SetKeyboardHandler(KeyboardHandler handler)
@@ -996,12 +881,9 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.SetResult(resultCode, result);
         }
 
-        public void RaiseResultSet(ResultSetEventArgs args)
+        public void RaiseResultSet(ResultCode resultCode, Result? result)
         {
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
-            ResultSet?.Invoke(this, args);
+            ResultSet?.Invoke(this, new ResultSetEventArgs(resultCode, result));
         }
 
         public void HandleResult(object sender, ResultSetEventArgs args)
@@ -1055,12 +937,9 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.SetResult(resultCode, result);
         }
 
-        public void RaiseResultSet(ResultSetEventArgs args)
+        public void RaiseResultSet(ResultCode resultCode, Result? result)
         {
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
-            ResultSet?.Invoke(this, args);
+            ResultSet?.Invoke(this, new ResultSetEventArgs(resultCode, result));
         }
 
         public void HandleResult(object sender, ResultSetEventArgs args)
@@ -1117,32 +996,18 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.ViewWillAppear();
         }
 
+        public override void ViewWillDisappear(bool animated)
+        {
+            base.ViewWillDisappear(animated);
+
+            LifecycleDelegate.ViewWillDisappear();
+        }
+
         public override void ViewDidDisappear(bool animated)
         {
             base.ViewDidDisappear(animated);
 
             LifecycleDelegate.ViewDidDisappear();
-        }
-
-        public override void WillMoveToParentViewController(UIViewController parent)
-        {
-            base.WillMoveToParentViewController(parent);
-
-            LifecycleDelegate.WillMoveToParentViewController(parent);
-        }
-
-        public override void DismissViewController(bool animated, Action completionHandler)
-        {
-            LifecycleDelegate.DismissViewController();
-
-            base.DismissViewController(animated, completionHandler);
-        }
-
-        public override Task DismissViewControllerAsync(bool animated)
-        {
-            LifecycleDelegate.DismissViewController();
-
-            return base.DismissViewControllerAsync(animated);
         }
 
         void IKeyboardHandlerOwner.SetKeyboardHandler(KeyboardHandler handler)
@@ -1173,12 +1038,9 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.SetResult(resultCode, result);
         }
 
-        public void RaiseResultSet(ResultSetEventArgs args)
+        public void RaiseResultSet(ResultCode resultCode, Result? result)
         {
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
-            ResultSet?.Invoke(this, args);
+            ResultSet?.Invoke(this, new ResultSetEventArgs(resultCode, result));
         }
 
         public void HandleResult(object sender, ResultSetEventArgs args)
@@ -1232,12 +1094,9 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.SetResult(resultCode, result);
         }
 
-        public void RaiseResultSet(ResultSetEventArgs args)
+        public void RaiseResultSet(ResultCode resultCode, Result? result)
         {
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
-            ResultSet?.Invoke(this, args);
+            ResultSet?.Invoke(this, new ResultSetEventArgs(resultCode, result));
         }
 
         public void HandleResult(object sender, ResultSetEventArgs args)

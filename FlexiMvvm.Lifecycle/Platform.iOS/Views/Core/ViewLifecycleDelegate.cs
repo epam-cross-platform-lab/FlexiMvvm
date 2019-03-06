@@ -15,9 +15,7 @@
 // =========================================================================
 
 using System;
-using System.Linq;
 using System.Threading.Tasks;
-using FlexiMvvm.Formatters;
 using FlexiMvvm.ViewModels;
 using FlexiMvvm.ViewModels.Core;
 using FlexiMvvm.Views.Keyboard;
@@ -54,17 +52,13 @@ namespace FlexiMvvm.Views.Core
             View.KeyboardHandler?.RegisterForKeyboardNotifications();
         }
 
+        public virtual void ViewWillDisappear()
+        {
+        }
+
         public virtual void ViewDidDisappear()
         {
             View.KeyboardHandler?.UnregisterFromKeyboardNotifications();
-        }
-
-        public virtual void WillMoveToParentViewController(UIViewController parent)
-        {
-        }
-
-        public virtual void DismissViewController()
-        {
         }
 
         public virtual void SetResult(ResultCode resultCode)
@@ -113,21 +107,14 @@ namespace FlexiMvvm.Views.Core
             }
         }
 
-        public override void WillMoveToParentViewController(UIViewController parent)
+        public override void ViewWillDisappear()
         {
-            base.WillMoveToParentViewController(parent);
+            base.ViewWillDisappear();
 
-            if (parent == null)
+            if (View.IsMovingFromParentViewController || View.IsBeingDismissed)
             {
-                RaiseResultSetIfNeeded(View);
+                View.RaiseResultSet(_resultCode, _result);
             }
-        }
-
-        public override void DismissViewController()
-        {
-            base.DismissViewController();
-
-            RaiseResultSetIfNeeded(View);
         }
 
         public override void SetResult(ResultCode resultCode)
@@ -152,17 +139,6 @@ namespace FlexiMvvm.Views.Core
             {
                 await _viewModelAsyncInitialization;
                 viewModelWithResultHandler.HandleResult(args.ResultCode, args.Result);
-            }
-        }
-
-        private void RaiseResultSetIfNeeded([NotNull] INavigationView<IViewModel> view)
-        {
-            var isViewModelWithResult = view.ViewModel.GetType().GetInterfaces().Any(@interface =>
-                @interface.NotNull().IsGenericType && @interface.GetGenericTypeDefinition() == typeof(IViewModelWithResult<>));
-
-            if (isViewModelWithResult)
-            {
-                view.RaiseResultSet(new ResultSetEventArgs(_resultCode, _result));
             }
         }
     }

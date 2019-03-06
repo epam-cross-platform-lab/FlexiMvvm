@@ -16,7 +16,6 @@
 
 using FlexiMvvm.ViewModels;
 using JetBrains.Annotations;
-using UIKit;
 
 namespace FlexiMvvm.Views.Core
 {
@@ -26,11 +25,9 @@ namespace FlexiMvvm.Views.Core
 
         void ViewWillAppear();
 
+        void ViewWillDisappear();
+
         void ViewDidDisappear();
-
-        void WillMoveToParentViewController([CanBeNull] UIViewController parent);
-
-        void DismissViewController();
 
         void SetResult(ResultCode resultCode);
 

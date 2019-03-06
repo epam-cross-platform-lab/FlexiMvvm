@@ -27,11 +27,15 @@ namespace FlexiMvvm.Views
 
         bool IsBeingPresented { get; }
 
+        bool IsBeingDismissed { get; }
+
+        bool IsMovingFromParentViewController { get; }
+
         void SetResult(ResultCode resultCode);
 
         void SetResult(ResultCode resultCode, [CanBeNull] Result result);
 
-        void RaiseResultSet([NotNull] ResultSetEventArgs args);
+        void RaiseResultSet(ResultCode resultCode, Result? result);
 
         void HandleResult([NotNull] object sender, [NotNull] ResultSetEventArgs args);
 
