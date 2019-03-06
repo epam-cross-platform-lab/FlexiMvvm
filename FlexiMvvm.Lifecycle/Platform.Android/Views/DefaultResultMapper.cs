@@ -17,12 +17,12 @@
 using Android.Content;
 using FlexiMvvm.ViewModels;
 
-namespace FlexiMvvm.Views.Core
+namespace FlexiMvvm.Views
 {
-    internal sealed class ResultMapper<TResult> : IResultMapper
+    public sealed class DefaultResultMapper<TResult> : IResultMapper<TResult>
         where TResult : Result
     {
-        public Result Map(Intent data)
+        public TResult? Map(Intent? data)
         {
             return data?.GetResult<TResult>();
         }

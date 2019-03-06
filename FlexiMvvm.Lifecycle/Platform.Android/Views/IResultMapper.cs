@@ -16,13 +16,12 @@
 
 using Android.Content;
 using FlexiMvvm.ViewModels;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Views
 {
-    public interface IResultMapper
+    public interface IResultMapper<out TResult>
+        where TResult : Result
     {
-        [CanBeNull]
-        Result Map([CanBeNull] Intent data);
+        TResult? Map(Intent? data);
     }
 }

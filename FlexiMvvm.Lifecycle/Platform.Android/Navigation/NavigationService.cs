@@ -153,27 +153,23 @@ namespace FlexiMvvm.Navigation
         /// <summary>
         /// Performs forward navigation from the <paramref name="sourceView"/> to the target one with receiving a result when it finished.
         /// </summary>
-        /// <typeparam name="TResult">The type of the target view model result.</typeparam>
+        /// <typeparam name="TResultMapper">The type of the target view model result mapper.</typeparam>
         /// <param name="sourceView">The source view from which navigation is performed from.</param>
         /// <param name="targetViewIntent">The description of the target view.</param>
-        /// <param name="resultMapper">Target view result mapper.</param>
         /// <param name="navigationStrategy">The strategy used for performing navigation. Default is <see cref="ForwardNavigationStrategy.StartActivityForResult(Android.OS.Bundle)"/>.</param>
         /// <exception cref="ArgumentNullException"><paramref name="sourceView"/> or <paramref name="targetViewIntent"/> or <paramref name="resultMapper"/> is <c>null</c>.</exception>
-        public void NavigateForResult<TResult>(
-            [NotNull] INavigationView<IViewModelWithResultHandler> sourceView,
-            [NotNull] Intent targetViewIntent,
-            [NotNull] IResultMapper resultMapper,
-            [CanBeNull] ForwardNavigationDelegate navigationStrategy = null)
-            where TResult : Result
+        public void NavigateForResult<TResultMapper>(
+            INavigationView<IViewModelWithResultHandler> sourceView,
+            Intent targetViewIntent,
+            ForwardNavigationDelegate? navigationStrategy = null)
+            where TResultMapper : IResultMapper<Result>, new()
         {
             if (sourceView == null)
                 throw new ArgumentNullException(nameof(sourceView));
             if (targetViewIntent == null)
                 throw new ArgumentNullException(nameof(targetViewIntent));
-            if (resultMapper == null)
-                throw new ArgumentNullException(nameof(resultMapper));
 
-            var requestCode = sourceView.RequestCode.GetFor<TResult>(resultMapper);
+            var requestCode = sourceView.RequestCode.GetFor<TResultMapper>();
             (navigationStrategy ?? NavigationStrategy.Forward.StartActivityForResult()).Invoke(sourceView, targetViewIntent, requestCode);
         }
 
@@ -190,8 +186,8 @@ namespace FlexiMvvm.Navigation
         ///     <para><see cref="Android.Support.V4.App.FragmentActivity"/> returned by <paramref name="sourceView"/> is <c>null</c>.</para>
         /// </exception>
         public void NavigateForResult<TTargetView, TResult>(
-            [NotNull] INavigationView<IViewModelWithResultHandler> sourceView,
-            [CanBeNull] ForwardNavigationDelegate navigationStrategy = null)
+            INavigationView<IViewModelWithResultHandler> sourceView,
+            ForwardNavigationDelegate? navigationStrategy = null)
             where TTargetView : Android.Support.V4.App.FragmentActivity, INavigationView<IViewModelWithResult<TResult>>
             where TResult : Result
         {
@@ -206,7 +202,7 @@ namespace FlexiMvvm.Navigation
             }
 
             var intent = new Intent(context, typeof(TTargetView));
-            var requestCode = sourceView.RequestCode.GetFor<TResult>();
+            var requestCode = sourceView.RequestCode.GetFor<DefaultResultMapper<TResult>>();
             (navigationStrategy ?? NavigationStrategy.Forward.StartActivityForResult()).Invoke(sourceView, intent, requestCode);
         }
 
@@ -225,9 +221,9 @@ namespace FlexiMvvm.Navigation
         ///     <para><see cref="Android.Support.V4.App.FragmentActivity"/> returned by <paramref name="sourceView"/> is <c>null</c>.</para>
         /// </exception>
         public void NavigateForResult<TTargetView, TParameters, TResult>(
-            [NotNull] INavigationView<IViewModelWithResultHandler> sourceView,
-            [CanBeNull] TParameters parameters,
-            [CanBeNull] ForwardNavigationDelegate navigationStrategy = null)
+            INavigationView<IViewModelWithResultHandler> sourceView,
+            TParameters? parameters,
+            ForwardNavigationDelegate? navigationStrategy = null)
             where TTargetView : Android.Support.V4.App.FragmentActivity, IView<IViewModelWithParameters<TParameters>>, INavigationView<IViewModelWithResult<TResult>>
             where TParameters : Parameters
             where TResult : Result
@@ -244,7 +240,7 @@ namespace FlexiMvvm.Navigation
 
             var intent = new Intent(context, typeof(TTargetView));
             intent.PutParameters(parameters);
-            var requestCode = sourceView.RequestCode.GetFor<TResult>();
+            var requestCode = sourceView.RequestCode.GetFor<DefaultResultMapper<TResult>>();
             (navigationStrategy ?? NavigationStrategy.Forward.StartActivityForResult()).Invoke(sourceView, intent, requestCode);
         }
 
