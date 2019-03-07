@@ -18,20 +18,17 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text.RegularExpressions;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Diagnostics
 {
     public static class LogFormatter
     {
-        [NotNull]
         public static string FormatTypeName<T>()
         {
             return FormatTypeName(typeof(T));
         }
 
-        [NotNull]
-        public static string FormatTypeName<T>([NotNull] WeakReference<T> weakReference)
+       public static string FormatTypeName<T>(WeakReference<T> weakReference)
             where T : class
         {
             if (weakReference == null)
@@ -45,14 +42,12 @@ namespace FlexiMvvm.Diagnostics
             return FormatTypeName<T>();
         }
 
-        [NotNull]
-        public static string FormatTypeName([CanBeNull] object value)
+        public static string FormatTypeName(object? value)
         {
             return value == null ? "null" : FormatTypeName(value.GetType());
         }
 
-        [NotNull]
-        public static string FormatTypeName([NotNull] Type type)
+        public static string FormatTypeName(Type type)
         {
             if (type == null)
                 throw new ArgumentNullException(nameof(type));
@@ -67,8 +62,7 @@ namespace FlexiMvvm.Diagnostics
             return name;
         }
 
-        [NotNull]
-        public static string FormatException([NotNull] Exception ex)
+        public static string FormatException(Exception ex)
         {
             if (ex == null)
                 throw new ArgumentNullException(nameof(ex));
@@ -81,16 +75,14 @@ namespace FlexiMvvm.Diagnostics
             return FormatExceptionMessage(ex);
         }
 
-        [NotNull]
-        public static string FormatExpression([CanBeNull] LambdaExpression expression)
+        public static string FormatExpression(LambdaExpression? expression)
         {
             return expression == null
                 ? "[expression is null]"
                 : Regex.Replace(expression.ToString(), "^.+=>.+\\.", string.Empty);
         }
 
-        [NotNull]
-        private static string GetNameWithoutGenericArity([NotNull] Type type)
+        private static string GetNameWithoutGenericArity(Type type)
         {
             var name = type.Name;
             var index = name.IndexOf('`');
@@ -98,8 +90,7 @@ namespace FlexiMvvm.Diagnostics
             return index == -1 ? name : name.Substring(0, index);
         }
 
-        [NotNull]
-        private static string FormatExceptionMessage([NotNull] Exception ex)
+        private static string FormatExceptionMessage(Exception ex)
         {
             return $"{ex.GetType().NotNull().FullName}: {ex.Message}";
         }

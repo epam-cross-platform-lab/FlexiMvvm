@@ -15,7 +15,6 @@
 // =========================================================================
 
 using System;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Interactions
 {
@@ -33,7 +32,7 @@ namespace FlexiMvvm.Interactions
     {
         public event EventHandler<InteractionRequestEventArgs<T>> Requested;
 
-        public void RaiseRequested([NotNull] T request)
+        public void RaiseRequested(T request)
         {
             if (request == null)
                 throw new ArgumentNullException(nameof(request));

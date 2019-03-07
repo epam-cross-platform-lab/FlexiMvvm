@@ -16,19 +16,16 @@
 
 using System;
 using FlexiMvvm.Weak.Delegates;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Weak.Subscriptions
 {
     public abstract class WeakEventSubscription<TEventSource, TEventArgs> : IDisposable
         where TEventSource : class
     {
-        [NotNull]
         private readonly WeakReference<TEventSource> _eventSourceWeakReference;
-        [CanBeNull]
-        private readonly WeakEventHandler<TEventArgs> _weakEventHandler;
+        private readonly WeakEventHandler<TEventArgs>? _weakEventHandler;
 
-        private protected WeakEventSubscription([NotNull] TEventSource eventSource)
+        private protected WeakEventSubscription(TEventSource eventSource)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
@@ -36,7 +33,7 @@ namespace FlexiMvvm.Weak.Subscriptions
             _eventSourceWeakReference = new WeakReference<TEventSource>(eventSource);
         }
 
-        protected WeakEventSubscription([NotNull] TEventSource eventSource, [NotNull] EventHandler<TEventArgs> eventHandler)
+        protected WeakEventSubscription(TEventSource eventSource, EventHandler<TEventArgs> eventHandler)
             : this(eventSource)
         {
             if (eventHandler == null)
@@ -53,7 +50,7 @@ namespace FlexiMvvm.Weak.Subscriptions
             }
         }
 
-        protected abstract void SubscribeToEvent([NotNull] TEventSource eventSource);
+        protected abstract void SubscribeToEvent(TEventSource eventSource);
 
         protected void UnsubscribeFromEvent()
         {
@@ -63,18 +60,18 @@ namespace FlexiMvvm.Weak.Subscriptions
             }
         }
 
-        protected abstract void UnsubscribeFromEvent([NotNull] TEventSource eventSource);
+        protected abstract void UnsubscribeFromEvent(TEventSource eventSource);
 
-        private protected virtual bool TryInvokeEventHandler([NotNull] object sender, [NotNull] TEventArgs e)
+        private protected virtual bool TryInvokeEventHandler(object sender, TEventArgs args)
         {
             if (sender == null)
                 throw new ArgumentNullException(nameof(sender));
-            if (e == null)
-                throw new ArgumentNullException(nameof(e));
+            if (args == null)
+                throw new ArgumentNullException(nameof(args));
 
-            if (_weakEventHandler.NotNull().TryGetTarget(out var target))
+            if (_weakEventHandler!.TryGetTarget(out var target))
             {
-                _weakEventHandler.Invoke(target, sender, e);
+                _weakEventHandler.Invoke(target!, sender, args);
 
                 return true;
             }
@@ -82,14 +79,14 @@ namespace FlexiMvvm.Weak.Subscriptions
             return false;
         }
 
-        protected void OnSourceEvent([NotNull] object sender, [NotNull] TEventArgs e)
+        protected void OnSourceEvent(object sender, TEventArgs args)
         {
             if (sender == null)
                 throw new ArgumentNullException(nameof(sender));
-            if (e == null)
-                throw new ArgumentNullException(nameof(e));
+            if (args == null)
+                throw new ArgumentNullException(nameof(args));
 
-            if (!TryInvokeEventHandler(sender, e))
+            if (!TryInvokeEventHandler(sender, args))
             {
                 UnsubscribeFromEvent();
             }
@@ -113,10 +110,9 @@ namespace FlexiMvvm.Weak.Subscriptions
     public abstract class WeakEventSubscription<TEventSource> : WeakEventSubscription<TEventSource, EventArgs>
         where TEventSource : class
     {
-        [NotNull]
         private readonly WeakEventHandler _weakEventHandler;
 
-        protected WeakEventSubscription([NotNull] TEventSource eventSource, [NotNull] EventHandler eventHandler)
+        protected WeakEventSubscription(TEventSource eventSource, EventHandler eventHandler)
             : base(eventSource)
         {
             if (eventHandler == null)
@@ -125,16 +121,16 @@ namespace FlexiMvvm.Weak.Subscriptions
             _weakEventHandler = new WeakEventHandler(eventHandler);
         }
 
-        private protected override bool TryInvokeEventHandler(object sender, EventArgs e)
+        private protected override bool TryInvokeEventHandler(object sender, EventArgs args)
         {
             if (sender == null)
                 throw new ArgumentNullException(nameof(sender));
-            if (e == null)
-                throw new ArgumentNullException(nameof(e));
+            if (args == null)
+                throw new ArgumentNullException(nameof(args));
 
             if (_weakEventHandler.TryGetTarget(out var target))
             {
-                _weakEventHandler.Invoke(target, sender, e);
+                _weakEventHandler.Invoke(target!, sender, args);
 
                 return true;
             }

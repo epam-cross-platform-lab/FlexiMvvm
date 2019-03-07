@@ -19,7 +19,6 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Collections
 {
@@ -32,12 +31,12 @@ namespace FlexiMvvm.Collections
         {
         }
 
-        public ObservableCollection([NotNull] IEnumerable<TItem> items)
+        public ObservableCollection(IEnumerable<TItem> items)
             : base(items)
         {
         }
 
-        public void AddRange([NotNull] IEnumerable<TItem> items)
+        public void AddRange(IEnumerable<TItem> items)
         {
             if (items == null)
                 throw new ArgumentNullException(nameof(items));
@@ -47,7 +46,7 @@ namespace FlexiMvvm.Collections
             InsertRange(startIndex, items);
         }
 
-        public void InsertRange(int index, [NotNull] IEnumerable<TItem> items)
+        public void InsertRange(int index, IEnumerable<TItem> items)
         {
             if (items == null)
                 throw new ArgumentNullException(nameof(items));
@@ -98,7 +97,7 @@ namespace FlexiMvvm.Collections
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, removedItems, startIndex));
         }
 
-        public void ReplaceRange(int index, [NotNull] IEnumerable<TItem> items)
+        public void ReplaceRange(int index, IEnumerable<TItem> items)
         {
             if (items == null)
                 throw new ArgumentNullException(nameof(items));
@@ -130,7 +129,7 @@ namespace FlexiMvvm.Collections
 
     public class ObservableCollection<TGroup, TItem> : ObservableCollection<TItem>, IGrouping<TGroup, TItem>
     {
-        public ObservableCollection([NotNull] TGroup key)
+        public ObservableCollection(TGroup key)
         {
             if (key == null)
                 throw new ArgumentNullException(nameof(key));
@@ -138,7 +137,7 @@ namespace FlexiMvvm.Collections
             Key = key;
         }
 
-        public ObservableCollection([NotNull] TGroup key, [NotNull] IEnumerable<TItem> items)
+        public ObservableCollection(TGroup key, IEnumerable<TItem> items)
             : base(items)
         {
             if (key == null)
@@ -147,7 +146,6 @@ namespace FlexiMvvm.Collections
             Key = key;
         }
 
-        [NotNull]
         public TGroup Key { get; }
     }
 }

@@ -17,16 +17,14 @@
 using System;
 using System.Windows.Input;
 using FlexiMvvm.Formatters;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Commands
 {
     public abstract class Command : ICommand
     {
-        [CanBeNull]
-        private readonly string _name;
+        private readonly string? _name;
 
-        protected Command([CanBeNull] string name = null)
+        protected Command(string? name = null)
         {
             _name = name;
         }
@@ -69,17 +67,16 @@ namespace FlexiMvvm.Commands
 
     public abstract class Command<T> : ICommand
     {
-        [CanBeNull]
-        private readonly string _name;
+        private readonly string? _name;
 
-        protected Command([CanBeNull] string name = null)
+        protected Command(string? name = null)
         {
             _name = name;
         }
 
         public event EventHandler CanExecuteChanged;
 
-        bool ICommand.CanExecute([CanBeNull] object parameter)
+        bool ICommand.CanExecute(object parameter)
         {
             T typedParameter;
 
@@ -100,7 +97,7 @@ namespace FlexiMvvm.Commands
 
         public abstract bool CanExecute(T parameter);
 
-        void ICommand.Execute([CanBeNull] object parameter)
+        void ICommand.Execute(object parameter)
         {
             T typedParameter;
 

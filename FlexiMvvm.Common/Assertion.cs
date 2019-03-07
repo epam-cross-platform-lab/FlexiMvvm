@@ -16,18 +16,16 @@
 
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm
 {
     public static class Assertion
     {
-        [AssertionMethod]
         [DebuggerStepThrough]
         public static T NotNull<T>(
-            [AssertionCondition(AssertionConditionType.IS_NOT_NULL)] this T value,
-            [CallerMemberName] string memberName = null,
-            [CallerFilePath] string filePath = null,
+            this T value,
+            [CallerMemberName] string? memberName = null,
+            [CallerFilePath] string? filePath = null,
             [CallerLineNumber] int lineNumber = 0)
         {
             if (value != null)

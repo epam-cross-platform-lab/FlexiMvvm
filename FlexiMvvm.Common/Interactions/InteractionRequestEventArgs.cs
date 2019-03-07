@@ -15,13 +15,12 @@
 // =========================================================================
 
 using System;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Interactions
 {
     public class InteractionRequestEventArgs<T> : EventArgs
     {
-        public InteractionRequestEventArgs([NotNull] T request)
+        public InteractionRequestEventArgs(T request)
         {
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
@@ -29,7 +28,6 @@ namespace FlexiMvvm.Interactions
             Request = request;
         }
 
-        [NotNull]
         public T Request { get; }
     }
 }

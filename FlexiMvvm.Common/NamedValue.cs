@@ -14,23 +14,19 @@
 // limitations under the License.
 // =========================================================================
 
-using JetBrains.Annotations;
-
 namespace FlexiMvvm
 {
     public class NamedValue
     {
-        public NamedValue([CanBeNull] object value, [CanBeNull] string name)
+        public NamedValue(object? value, string? name)
         {
             Value = value;
             Name = name;
         }
 
-        [CanBeNull]
-        public object Value { get; }
+        public object? Value { get; }
 
-        [CanBeNull]
-        public string Name { get; }
+        public string? Name { get; }
 
         public override string ToString()
         {

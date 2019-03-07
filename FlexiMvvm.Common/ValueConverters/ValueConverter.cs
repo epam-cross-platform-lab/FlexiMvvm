@@ -16,40 +16,41 @@
 
 using System;
 using System.Globalization;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.ValueConverters
 {
     public abstract class ValueConverter<TSourceValue, TTargetValue> : IValueConverter
     {
-        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        object? IValueConverter.Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             if (targetType == null)
                 throw new ArgumentNullException(nameof(targetType));
             if (culture == null)
                 throw new ArgumentNullException(nameof(culture));
 
+#nullable disable
             return Convert((TSourceValue)value, targetType, parameter, culture).Value;
+#nullable enable
         }
 
-        [NotNull]
-        protected virtual ConversionResult<TTargetValue> Convert([CanBeNull] TSourceValue value, [NotNull] Type targetType, [CanBeNull] object parameter, [NotNull] CultureInfo culture)
+        protected virtual ConversionResult<TTargetValue> Convert(TSourceValue value, Type targetType, object? parameter, CultureInfo culture)
         {
             return ConversionResult<TTargetValue>.UnsetValue();
         }
 
-        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        object? IValueConverter.ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             if (targetType == null)
                 throw new ArgumentNullException(nameof(targetType));
             if (culture == null)
                 throw new ArgumentNullException(nameof(culture));
 
+#nullable disable
             return ConvertBack((TTargetValue)value, targetType, parameter, culture).Value;
+#nullable enable
         }
 
-        [NotNull]
-        protected virtual ConversionResult<TSourceValue> ConvertBack([CanBeNull] TTargetValue value, [NotNull] Type targetType, [CanBeNull] object parameter, [NotNull] CultureInfo culture)
+        protected virtual ConversionResult<TSourceValue> ConvertBack(TTargetValue value, Type targetType, object? parameter, CultureInfo culture)
         {
             return ConversionResult<TSourceValue>.UnsetValue();
         }
