@@ -145,7 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FlexiMvvm.FullStack.PreRelease">
-      <Version>0.10.3-prerelease</Version>
+      <Version>0.10.5-prerelease</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

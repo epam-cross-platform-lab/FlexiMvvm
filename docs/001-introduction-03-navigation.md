@@ -4,10 +4,11 @@
 
 # Basic Navigation
 
-Navigation is View Model driven. At the same time, FlexiMvvm **encourages to use native APIs for navigation**. For that, the following approach is suggested:
+Navigation is **View Model driven**. At the same time, FlexiMvvm **encourages to use native APIs for navigation**. From many applications developed, we believe this is one of the major factors to deliver native look and feel for mobile users.
+For that, the following approach is suggested:
 
 1. ``INavigationService`` contract is defined in shared code;
-2. iOS and Android ``NavigationService`` implementations provide suitable native behavior.
+2. iOS and Android ``NavigationService`` implementations provide suitable native behavior, having full power of Android ``Intent``s or iOS ``UINavigationController``.
 3. View Models use ``INavigationService`` dependency for initiating navigation.
 
 For our previous [First Screen](001-introduction-02-first-screen.md) tutorial, let's introduce some basic navigation: when applications completes its loading, it navigates to our User Profile screen.
@@ -86,8 +87,10 @@ namespace FirstScreen.Droid.Navigation
         public void NavigateToUserProfile(EntryViewModel from)
         {
             var splashScreenActivity = GetActivity<SplashScreenActivity, EntryViewModel>(from);
+
             var intent = new Intent(splashScreenActivity, typeof(UserProfileActivity));
             intent.AddFlags(ActivityFlags.ClearTask | ActivityFlags.ClearTop | ActivityFlags.NewTask);
+
             splashScreenActivity.StartActivity(intent);
         }
     }

@@ -5,7 +5,7 @@
 # Navigation for a Result
 
 Another important navigation pattern is the result back propagation.
-On Android, such scenario is supported explicitly: [Getting a Result from an Activity](https://developer.android.com/training/basics/intents/result), usually for moving onto a picker screen, choosing some item and returning it back to the initial screen. On iOS, to accommodate recommended navigation and View Controllers creation via code, things are a bit easier: we create a new View Controller and subscribe for its results from the calling View Controller.
+On Android, such scenario is supported explicitly: [Getting a Result from an Activity](https://developer.android.com/training/basics/intents/result), usually for moving onto a picker screen, choosing some item and returning it back to the initial screen. On iOS, to accommodate recommended **code-driven UI approach**, things are a bit easier: we create a new target View Controller and subscribe for its results from the calling source View Controller.
 
 FlexiMvvm incorporates both platform specific patterns, exposing a common straighforward approach for us. Briefly, we do the following:
 1. Add new ``Result`` type representing the result data.
@@ -51,6 +51,8 @@ namespace FirstScreen.Core.Presentation.Navigation
 The important point is that it inherits from ``Result`` base class which is capable to preserve the result during transitioning to the source screen. Our result holds two data properties which will be used on the source View Model. As you can see, base ``Bundle`` is used to safely preserve the values.
 
 ### Source View Model
+
+We're updating a bit the View Model used in the previous tutorials.
 
 ```cs
 using System.Threading.Tasks;
@@ -191,7 +193,9 @@ namespace FirstScreen.Droid.Navigation
             var intent = new Intent(userProfileActivity, typeof(LanguagesActivity));
 
             var requestCode = new RequestCode();
-            userProfileActivity.StartActivityForResult(intent, requestCode.GetFor<SelectedLanguageResult>());
+            var code = requestCode.GetFor<DefaultResultMapper<SelectedLanguageResult>>();
+
+            userProfileActivity.StartActivityForResult(intent, code);
         }
 
         public void NavigateBack(LanguagesViewModel from, ResultCode resultCode, SelectedLanguageResult result)
@@ -209,10 +213,10 @@ namespace FirstScreen.Droid.Navigation
 
 ```
 
-On Android, we leverage the native capability for results navigation. ``NavigateToLanguages()`` calls ``StartActivityForResult()`` as usual.
-But with ``RequestCode`` provided by FlexiMvvm we are specifying our ``SelectedLanguageResult`` instance as an expected result to propagate back.
+On Android, we leverage the native capability for results navigation. ``NavigateToLanguages()`` calls ``StartActivityForResult()`` as usual on Android.
+But before, with ``RequestCode`` provided by FlexiMvvm we are specifying our ``SelectedLanguageResult`` instance as an expected result to propagate back. 
 
-Also as we already used by ``LanguagesViewModel`` when calling our Navigation service, ``NavigateBack()`` is being provided with the operation's ``ResultCode`` and ``SelectedLanguageResult`` parameters which then passed via Intent's ``PutResult()`` and target screen Activity's ``SetResult()`` methods.
+Also as we already added above in ``LanguagesViewModel`` when calling our Navigation service, ``NavigateBack()`` is being provided with the operation's ``ResultCode`` and ``SelectedLanguageResult`` parameters which then passed via Intent's ``PutResult()`` and target screen Activity's ``SetResult()`` methods.
 
 Of course, we also need the Languages list screen Activity to add, though it's out of the tutorial scope - this may be any Android app screen which leads to the result expected. The [sample contains](https://github.com/epam-xamarin-lab/FlexiMvvm/blob/master/samples/010-Intro-FirstScreen/Droid/Views/LanguagesActivity.cs) a very basic ``RecyclerView`` driven list screen the User can choose the Language from.
 

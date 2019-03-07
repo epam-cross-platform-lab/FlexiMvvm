@@ -8,7 +8,7 @@
     <Compile Remove="Class1.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FlexiMvvm.Lifecycle.PreRelease" Version="0.10.3-prerelease" />
+    <PackageReference Include="FlexiMvvm.Lifecycle.PreRelease" Version="0.10.5-prerelease" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Infrastructure\" />

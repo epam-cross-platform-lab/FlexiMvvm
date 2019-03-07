@@ -28,7 +28,9 @@ namespace FirstScreen.Droid.Navigation
             var intent = new Intent(userProfileActivity, typeof(LanguagesActivity));
 
             var requestCode = new RequestCode();
-            userProfileActivity.StartActivityForResult(intent, requestCode.GetFor<SelectedLanguageResult>());
+            var code = requestCode.GetFor<DefaultResultMapper<SelectedLanguageResult>>();
+
+            userProfileActivity.StartActivityForResult(intent, code);
         }
 
         public void NavigateBack(LanguagesViewModel from, ResultCode resultCode, SelectedLanguageResult result)

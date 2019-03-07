@@ -56,13 +56,13 @@ namespace FirstScreen.Core.Presentation.ViewModels
 
         ////
 
-        public override async Task InitializeAsync()
+        public override async Task InitializeAsync(UserProfileParameters parameters)
         {
-            await base.InitializeAsync();
+            await base.InitializeAsync(parameters);
 
-            if (!string.IsNullOrEmpty(Parameters.Email))
+            if (!string.IsNullOrEmpty(parameters.Email))
             {
-                var profile = await _userProfileRepository.Get(Parameters.Email);
+                var profile = await _userProfileRepository.Get(parameters.Email);
 
                 Email = profile.Email;
                 FirstName = profile.FirstName;
