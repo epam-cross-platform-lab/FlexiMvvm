@@ -1,4 +1,32 @@
 # FlexiMvvm Release Notes
+
+## v.0.10.5 (preview)
+
+### Existing functionality changes
+
+- Switch on C# 8 for FlexiMvvm source code (main reason - nullable reference types support).
+- Starting removing Jetbrains Code Annotations and replace them with nullable reference types.
+- Replace `FlexiMvvm.Configuration.Config` class with `FlexiMvvm.Collections.ValueSet`(API not changed, just renaming).
+
+### Bug fixes
+
+- If navigate from ActivityA to ActivityB for result and ActivityA killed by the Android then app crashes if return back.
+- Cascading return result doesn't work properly in iOS.
+
+### Code documentation
+
+- Bootstrappers*, Configuration*, Parameter, Result classes have been documented.
+
+## v.0.10.4 (preview)
+
+### Existing functionality changes
+
+- Remove `OperationFactory property` from the `ViewModel` class.
+
+### Bug fixes
+
+- View models parameters are not passed to a `UITabBarController`.
+
 ## v.0.10.3 (preview)
 
 ### Existing functionality changes
