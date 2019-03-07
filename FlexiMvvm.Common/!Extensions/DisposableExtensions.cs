@@ -16,13 +16,12 @@
 
 using System;
 using FlexiMvvm.Collections;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm
 {
     public static class DisposableExtensions
     {
-        public static void DisposeWith([NotNull] this IDisposable disposable, [NotNull] DisposableCollection collection)
+        public static void DisposeWith(this IDisposable disposable, DisposableCollection collection)
         {
             if (disposable == null)
                 throw new ArgumentNullException(nameof(disposable));

@@ -15,29 +15,24 @@
 // =========================================================================
 
 using System;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Ioc
 {
     internal class ItemProvider
     {
-        [NotNull]
-        private readonly Func<object> _factory;
+        private readonly Func<object?> _factory;
         private readonly Reuse _reuse;
-        [CanBeNull]
-        private Lazy<object> _lazyItem;
+        private Lazy<object?>? _lazyItem;
 
-        internal ItemProvider([NotNull] Func<object> factory, Reuse reuse)
+        internal ItemProvider(Func<object?> factory, Reuse reuse)
         {
             _factory = factory;
             _reuse = reuse;
         }
 
-        [NotNull]
-        private Lazy<object> LazyItem => _lazyItem ?? (_lazyItem = new Lazy<object>(() => _factory()));
+        private Lazy<object?> LazyItem => _lazyItem ?? (_lazyItem = new Lazy<object?>(() => _factory()));
 
-        [CanBeNull]
-        internal object Get()
+        internal object? Get()
         {
             return _reuse == Reuse.Singleton ? LazyItem.Value : _factory();
         }

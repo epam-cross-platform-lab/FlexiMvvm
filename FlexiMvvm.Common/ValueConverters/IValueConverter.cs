@@ -16,16 +16,13 @@
 
 using System;
 using System.Globalization;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.ValueConverters
 {
     public interface IValueConverter
     {
-        [CanBeNull]
-        object Convert([CanBeNull] object value, [NotNull] Type targetType, [CanBeNull] object parameter, [NotNull] CultureInfo culture);
+        object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture);
 
-        [CanBeNull]
-        object ConvertBack([CanBeNull] object value, [NotNull] Type targetType, [CanBeNull] object parameter, [NotNull] CultureInfo culture);
+        object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture);
     }
 }

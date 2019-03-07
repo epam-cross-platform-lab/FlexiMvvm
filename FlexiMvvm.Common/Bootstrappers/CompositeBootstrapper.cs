@@ -23,13 +23,13 @@ namespace FlexiMvvm.Bootstrappers
     /// </summary>
     public sealed class CompositeBootstrapper : IBootstrapper
     {
-        private readonly IBootstrapper[] _bootstrappers;
+        private readonly IBootstrapper[]? _bootstrappers;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CompositeBootstrapper"/> class.
         /// </summary>
         /// <param name="bootstrappers">The collection of bootstrappers to be executed.</param>
-        public CompositeBootstrapper(params IBootstrapper[] bootstrappers)
+        public CompositeBootstrapper(params IBootstrapper[]? bootstrappers)
         {
             _bootstrappers = bootstrappers;
         }

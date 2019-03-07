@@ -14,27 +14,22 @@
 // limitations under the License.
 // =========================================================================
 
-using JetBrains.Annotations;
-
 namespace FlexiMvvm.ValueConverters
 {
     public class ConversionResult<TValue>
     {
-        private ConversionResult([CanBeNull] object value)
+        private ConversionResult(object? value)
         {
             Value = value;
         }
 
-        [CanBeNull]
-        internal object Value { get; }
+        internal object? Value { get; }
 
-        [NotNull]
-        public static ConversionResult<TValue> SetValue([CanBeNull] TValue value)
+        public static ConversionResult<TValue> SetValue(TValue value)
         {
             return new ConversionResult<TValue>(value);
         }
 
-        [NotNull]
         public static ConversionResult<TValue> UnsetValue()
         {
             return new ConversionResult<TValue>(BindingValue.UnsetValue);

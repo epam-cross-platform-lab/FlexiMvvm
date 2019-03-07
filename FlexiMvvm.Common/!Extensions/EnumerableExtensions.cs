@@ -16,14 +16,12 @@
 
 using System;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm
 {
     public static class EnumerableExtensions
     {
-        [NotNull]
-        public static IEnumerable<T> DistinctBy<T, TKey>([NotNull] this IEnumerable<T> source, [NotNull] Func<T, TKey> keySelector)
+        public static IEnumerable<T> DistinctBy<T, TKey>(this IEnumerable<T> source, Func<T, TKey> keySelector)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));

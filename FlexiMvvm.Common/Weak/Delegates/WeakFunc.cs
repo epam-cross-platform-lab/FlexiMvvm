@@ -15,13 +15,12 @@
 // =========================================================================
 
 using System;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Weak.Delegates
 {
     public sealed class WeakFunc<TResult> : WeakDelegate, IWeakFunc<TResult>
     {
-        public WeakFunc([NotNull] Func<TResult> func)
+        public WeakFunc(Func<TResult> func)
             : base(func)
         {
         }
@@ -37,7 +36,7 @@ namespace FlexiMvvm.Weak.Delegates
 
     public sealed class WeakFunc<T, TResult> : WeakDelegate, IWeakFunc<T, TResult>
     {
-        public WeakFunc([NotNull] Func<T, TResult> action)
+        public WeakFunc(Func<T, TResult> action)
             : base(action)
         {
         }
@@ -53,7 +52,7 @@ namespace FlexiMvvm.Weak.Delegates
 
     public sealed class WeakFunc<T1, T2, TResult> : WeakDelegate, IWeakFunc<T1, T2, TResult>
     {
-        public WeakFunc([NotNull] Action<T1, T2> action)
+        public WeakFunc(Action<T1, T2> action)
             : base(action)
         {
         }
@@ -69,7 +68,7 @@ namespace FlexiMvvm.Weak.Delegates
 
     public sealed class WeakFunc<T1, T2, T3, TResult> : WeakDelegate, IWeakFunc<T1, T2, T3, TResult>
     {
-        public WeakFunc([NotNull] Action<T1, T2, T3> action)
+        public WeakFunc(Action<T1, T2, T3> action)
             : base(action)
         {
         }
@@ -85,7 +84,7 @@ namespace FlexiMvvm.Weak.Delegates
 
     public sealed class WeakFunc<T1, T2, T3, T4, TResult> : WeakDelegate, IWeakFunc<T1, T2, T3, T4, TResult>
     {
-        public WeakFunc([NotNull] Action<T1, T2, T3, T4> action)
+        public WeakFunc(Action<T1, T2, T3, T4> action)
             : base(action)
         {
         }
@@ -101,7 +100,7 @@ namespace FlexiMvvm.Weak.Delegates
 
     public sealed class WeakFunc<T1, T2, T3, T4, T5, TResult> : WeakDelegate, IWeakFunc<T1, T2, T3, T4, T5, TResult>
     {
-        public WeakFunc([NotNull] Action<T1, T2, T3, T4, T5> action)
+        public WeakFunc(Action<T1, T2, T3, T4, T5> action)
             : base(action)
         {
         }

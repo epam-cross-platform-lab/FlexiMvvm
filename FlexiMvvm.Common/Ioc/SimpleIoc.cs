@@ -17,16 +17,13 @@
 using System;
 using System.Collections.Generic;
 using FlexiMvvm.Formatters;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Ioc
 {
     public sealed class SimpleIoc : ISimpleIoc
     {
-        [CanBeNull]
-        private Dictionary<Type, ItemProvider> _itemsProviders;
+        private Dictionary<Type, ItemProvider>? _itemsProviders;
 
-        [NotNull]
         private Dictionary<Type, ItemProvider> ItemsProviders => _itemsProviders ?? (_itemsProviders = new Dictionary<Type, ItemProvider>());
 
         public void Register<T>(Func<T> factory, Reuse reuse = Reuse.Transient)
@@ -41,7 +38,7 @@ namespace FlexiMvvm.Ioc
         {
             if (_itemsProviders != null && _itemsProviders.TryGetValue(typeof(T), out var itemProvider))
             {
-                var instance = (T)itemProvider.Get();
+                var instance = itemProvider.Get();
 
                 if (instance == null)
                 {
@@ -50,7 +47,7 @@ namespace FlexiMvvm.Ioc
                         $"returned \"null\" for the \"{TypeFormatter.FormatName<T>()}>\" type instance.");
                 }
 
-                return instance;
+                return (T)instance;
             }
 
             throw new InvalidOperationException(

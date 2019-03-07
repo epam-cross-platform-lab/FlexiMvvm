@@ -14,13 +14,10 @@
 // limitations under the License.
 // =========================================================================
 
-using JetBrains.Annotations;
-
 namespace FlexiMvvm.Ioc
 {
     public interface IDependencyProvider
     {
-        [NotNull]
         T Get<T>();
     }
 }

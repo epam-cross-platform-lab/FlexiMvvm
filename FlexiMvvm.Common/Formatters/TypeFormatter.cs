@@ -16,20 +16,17 @@
 
 using System;
 using System.Linq;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Formatters
 {
     public static class TypeFormatter
     {
-        [NotNull]
         public static string FormatName<T>()
         {
             return FormatName(typeof(T));
         }
 
-        [NotNull]
-        public static string FormatName([NotNull] Type type)
+        public static string FormatName(Type type)
         {
             if (type == null)
                 throw new ArgumentNullException(nameof(type));
@@ -44,8 +41,7 @@ namespace FlexiMvvm.Formatters
             return name;
         }
 
-        [NotNull]
-        private static string GetNameWithoutGenericArity([NotNull] Type type)
+        private static string GetNameWithoutGenericArity(Type type)
         {
             var name = type.Name;
             var index = name.IndexOf('`');
