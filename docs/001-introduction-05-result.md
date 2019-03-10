@@ -121,9 +121,7 @@ namespace FirstScreen.Core.Presentation.ViewModels
             _navigationService = navigationService;
         }
 
-
         public Command<string> SelectLanguage => CommandProvider.Get<string>(OnSelectLanguage);
-
 
         public void SetResult(ResultCode resultCode, SelectedLanguageResult result)
         {
@@ -214,15 +212,59 @@ namespace FirstScreen.Droid.Navigation
 ```
 
 On Android, we leverage the native capability for results navigation. ``NavigateToLanguages()`` calls ``StartActivityForResult()`` as usual on Android.
-But before, with ``RequestCode`` provided by FlexiMvvm we are specifying our ``SelectedLanguageResult`` instance as an expected result to propagate back. 
+But before, with the ``RequestCode`` instance we are specifying our ``SelectedLanguageResult`` as an expected result to propagate back when ready.
 
-Also as we already added above in ``LanguagesViewModel`` when calling our Navigation service, ``NavigateBack()`` is being provided with the operation's ``ResultCode`` and ``SelectedLanguageResult`` parameters which then passed via Intent's ``PutResult()`` and target screen Activity's ``SetResult()`` methods.
+Then ``NavigateBack()`` is being provided (and called by ``LanguagesViewModel`` as we've seen above) with the operation's ``ResultCode`` and ``SelectedLanguageResult`` parameters which then passed via Intent's ``PutResult()`` and target Activity's ``SetResult()`` methods.
 
-Of course, we also need the Languages list screen Activity to add, though it's out of the tutorial scope - this may be any Android app screen which leads to the result expected. The [sample contains](https://github.com/epam-xamarin-lab/FlexiMvvm/blob/master/samples/010-Intro-FirstScreen/Droid/Views/LanguagesActivity.cs) a very basic ``RecyclerView`` driven list screen the User can choose the Language from.
+> Of course, we also need the Languages list screen Activity, though it's out of the tutorial scope - this may be any Android screen which can provide the result. The [sample contains](https://github.com/epam-xamarin-lab/FlexiMvvm/blob/master/samples/010-Intro-FirstScreen/Droid/Views/LanguagesActivity.cs) a very basic ``RecyclerView`` driven list screen the User can choose the Language from. Basically this new screen raises ``SelectLanguage`` command of the ``LanguagesViewModel``, which leads to the results propagation we have implemented.
 
 #### iOS
 
-TBD
+FirstScreen.iOS / Navigation / NavigationService.cs:
+
+```cs
+using System;
+using FirstScreen.Core.Presentation.Navigation;
+using FirstScreen.Core.Presentation.ViewModels;
+using FirstScreen.iOS.Views;
+using FlexiMvvm.ViewModels;
+using FlexiMvvm.Views;
+
+namespace FirstScreen.iOS.Navigation
+{
+    public class NavigationService : FlexiMvvm.Navigation.NavigationService, INavigationService
+    {
+        //// ... some existing code is hidden for convenience
+
+        public void NavigateToLanguages(UserProfileViewModel from)
+        {
+            var controller = GetViewController<UserProfileViewController, UserProfileViewModel>(from);
+
+            var targetController = new LanguagesViewController();
+            targetController.ResultSetWeakSubscribe(controller.HandleResult);
+
+            controller
+                .GetNavigationController()
+                .PushViewController(targetController, animated:true);
+        }
+
+        public void NavigateBack(LanguagesViewModel from, ResultCode code, SelectedLanguageResult result)
+        {
+            var controller = GetViewController<LanguagesViewController, LanguagesViewModel>(from);
+            
+            controller.SetResult(code, result);
+
+            controller
+                .GetNavigationController()
+                .PopViewController(animated:true);
+        }
+    }
+}
+```
+
+On iOS we see the usage of the native UINavigationController retrieved safely by ``GetNavigationController()`` FlexiMvvm extension method. The trick here is with the ``ResultSetWeakSubscribe()`` which subscribes via a weak reference to the Result and ``SetResult()`` which raises the Result propagation.
+
+> Again, iOS Languages list view screen to select a Language for the result is out of scope of this tutorial - this may be any iOS screen which raises the ``SelectLanguage`` command of the ``LanguagesViewModel`` we have built above. But this [sample shows](https://github.com/epam-xamarin-lab/FlexiMvvm/blob/master/samples/010-Intro-FirstScreen/iOS/Views/LanguagesViewController.cs) a trivial approach to bind the view's event with the ViewModel's ``SelectLanguage`` command.
 
 ---
 

@@ -9,18 +9,12 @@ namespace FirstScreen.iOS.Views
     public class UserProfileView : LayoutView
     {
         public UITextField FirstName { get; set; }
-
         public UITextField LastName { get; set; }
-
         public UITextField Email { get; set; }
-
-        private UILabel FirstNameLabel { get; set; }
-
-        private UILabel LastNameLabel { get; set; }
-
-        private UILabel EmailLabel { get; set; }
-
         public UIButton SaveButton { get; private set; }
+        private UILabel FirstNameLabel { get; set; }
+        private UILabel LastNameLabel { get; set; }
+        private UILabel EmailLabel { get; set; }
 
         protected override void SetupSubviews()
         {
