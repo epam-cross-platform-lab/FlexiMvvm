@@ -191,6 +191,28 @@ namespace FlexiMvvm.Bindings
         }
 
         /// <summary>
+        /// Two way binding on <see cref="AdapterView.SetSelection(int)"/> method and <see cref="AdapterView.ItemSelected"/> event. Item position is passed as a value.
+        /// </summary>
+        /// <typeparam name="TSourceItem">The type of the binding set source item.</typeparam>
+        /// <param name="bindingSet">The binding set to which add the binding.</param>
+        /// <param name="spinner">The spinner for which create the binding. Can be <c>null</c>.</param>
+        /// <param name="trackCanExecuteCommandChanged">If set to <c>true</c> then <see cref="AdapterView.Enabled"/> value will be updated based on <see cref="ICommand.CanExecute(object)"/> result.</param>
+        /// <returns>The binding builder instance.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="bindingSet"/> is <c>null</c>.</exception>
+        public static ISourceItemBindingBuilder<TSourceItem, int> BindDefault<TSourceItem>(
+            this BindingSet<TSourceItem> bindingSet,
+            Spinner? spinner,
+            bool trackCanExecuteCommandChanged = false)
+            where TSourceItem : class
+        {
+            if (bindingSet == null)
+                throw new ArgumentNullException(nameof(bindingSet));
+
+            return bindingSet.Bind(spinner)
+                .For(v => v.SetSelectionAndItemSelectedBinding(trackCanExecuteCommandChanged));
+        }
+
+        /// <summary>
         /// One way binding on <see cref="TextView.Text"/> property.
         /// </summary>
         /// <typeparam name="TSourceItem">The type of the binding set source item.</typeparam>
