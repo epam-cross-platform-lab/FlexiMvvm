@@ -42,8 +42,12 @@ namespace FlexiMvvm.Collections
         /// </summary>
         /// <param name="context">The current context.</param>
         /// <param name="resource">The resource ID for a layout file containing a <see cref="TextView"/> to use when instantiating views.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="context"/> is <c>null</c>.</exception>
         public SpinnerObservableAdapter(Context context, int resource)
         {
+            if (context == null)
+                throw new ArgumentNullException(nameof(context));
+
             _adapter = new ArrayAdapter<T>(context, resource);
             _adapter.SetNotifyOnChange(false);
         }
@@ -54,8 +58,12 @@ namespace FlexiMvvm.Collections
         /// <param name="context">The current context.</param>
         /// <param name="resource">The resource ID for a layout file containing a <see cref="TextView"/> to use when instantiating views.</param>
         /// <param name="textViewResourceId">The id of the <see cref="TextView"/> within the layout resource to be populated.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="context"/> is <c>null</c>.</exception>
         public SpinnerObservableAdapter(Context context, int resource, int textViewResourceId)
         {
+            if (context == null)
+                throw new ArgumentNullException(nameof(context));
+
             _adapter = new ArrayAdapter<T>(context, resource, textViewResourceId);
             _adapter.SetNotifyOnChange(false);
         }
@@ -155,8 +163,12 @@ namespace FlexiMvvm.Collections
         /// <param name="convertView">The old view to reuse, if possible. Can be <c>null</c>.</param>
         /// <param name="parent">The parent that this view will eventually be attached to.</param>
         /// <returns>A <see cref="View"/> corresponding to the data at the specified position.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="parent"/> is <c>null</c>.</exception>
         public override View GetView(int position, View? convertView, ViewGroup parent)
         {
+            if (parent == null)
+                throw new ArgumentNullException(nameof(parent));
+
             return _adapter.GetView(position, convertView, parent);
         }
 
@@ -167,8 +179,12 @@ namespace FlexiMvvm.Collections
         /// <param name="convertView">The old view to reuse, if possible. Can be <c>null</c>.</param>
         /// <param name="parent">The parent that this view will eventually be attached to.</param>
         /// <returns>A <see cref="View"/> corresponding to the data at the specified position.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="parent"/> is <c>null</c>.</exception>
         public override View GetDropDownView(int position, View? convertView, ViewGroup parent)
         {
+            if (parent == null)
+                throw new ArgumentNullException(nameof(parent));
+
             return _adapter.GetDropDownView(position, convertView, parent);
         }
 
@@ -185,8 +201,12 @@ namespace FlexiMvvm.Collections
         /// Updates the adapter based on passed <paramref name="args"/>. Notifies the <see cref="Spinner"/> about changes.
         /// </summary>
         /// <param name="args">The <see cref="Items"/> collection changes needs to be applied.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="args"/> is <c>null</c>.</exception>
         protected virtual void Reload(NotifyCollectionChangedEventArgs args)
         {
+            if (args == null)
+                throw new ArgumentNullException(nameof(args));
+
             switch (args.Action)
             {
                 case NotifyCollectionChangedAction.Add:
@@ -231,6 +251,7 @@ namespace FlexiMvvm.Collections
             Reload(e);
         }
 
+        /// <inheritdoc />
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -240,6 +261,43 @@ namespace FlexiMvvm.Collections
             }
 
             base.Dispose(disposing);
+        }
+    }
+
+    /// <inheritdoc />
+    public class SpinnerObservableAdapter : SpinnerObservableAdapter<object>
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SpinnerObservableAdapter"/> class.
+        /// </summary>
+        /// <param name="context">The current context.</param>
+        /// <param name="resource">The resource ID for a layout file containing a <see cref="TextView"/> to use when instantiating views.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="context"/> is <c>null</c>.</exception>
+        public SpinnerObservableAdapter(Context context, int resource)
+            : base(context, resource)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SpinnerObservableAdapter"/> class.
+        /// </summary>
+        /// <param name="context">The current context.</param>
+        /// <param name="resource">The resource ID for a layout file containing a <see cref="TextView"/> to use when instantiating views.</param>
+        /// <param name="textViewResourceId">The id of the <see cref="TextView"/> within the layout resource to be populated.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="context"/> is <c>null</c>.</exception>
+        public SpinnerObservableAdapter(Context context, int resource, int textViewResourceId)
+            : base(context, resource, textViewResourceId)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SpinnerObservableAdapter"/> class. Used when creating managed representations of JNI objects; called by the runtime.
+        /// </summary>
+        /// <param name="handle">A <see cref="IntPtr"/> containing a Java Native Interface (JNI) object reference.</param>
+        /// <param name="transfer">A <see cref="JniHandleOwnership"/> indicating how to handle <paramref name="handle"/>.</param>
+        public SpinnerObservableAdapter(IntPtr handle, JniHandleOwnership transfer)
+            : base(handle, transfer)
+        {
         }
     }
 }
