@@ -1,5 +1,20 @@
 # FlexiMvvm Release Notes
 
+## v.0.10.6 (preview)
+
+### New functionality
+
+- Added SpinnerObservableAdapter.
+- Added bindings for AdapterView, Spinner, UIPickerView, IItemsSource.
+
+### Existing functionality changes
+
+- PickerViewObservableModel refactoring. Now it is more simple and works with positions instead of objects. New implementation is not compatible with old one.
+
+### Bug fixes
+
+- ValueSet crashes when call GetValue method.
+
 ## v.0.10.5 (preview)
 
 ### Existing functionality changes
