@@ -18,39 +18,42 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-using JetBrains.Annotations;
 using UIKit;
 
 namespace FlexiMvvm.Collections
 {
-    public class PickerViewObservableModel : UIPickerViewModel
+    /// <summary>
+    /// A concrete <see cref="UIPickerViewModel"/> that is backed by a collection of arbitrary objects for consumption by a <see cref="UIPickerView"/>.
+    /// Can track changes of <see cref="INotifyCollectionChanged"/> and notify <see cref="UIPickerView"/> about them.
+    /// </summary>
+    /// <typeparam name="T">The type of the collection item.</typeparam>
+    public class PickerViewObservableModel<T> : UIPickerViewModel, IItemsSource<T>
     {
-        private const int ComponentDefaultCount = 1;
-        private const int ComponentDefaultIndex = 0;
+        private const int DefaultComponentCount = 1;
+        private const int DefaultComponentIndex = 0;
 
-        [NotNull]
-        private readonly WeakReference<UIPickerView> _pickerViewWeakReference;
-        [CanBeNull]
-        [ItemCanBeNull]
-        private IEnumerable<object> _items;
-        [CanBeNull]
-        private object _selectedItem;
-        [CanBeNull]
-        private DisposableCollection _itemsSubscriptions;
+        [Weak]
+        private readonly UIPickerView _pickerView;
+        private IEnumerable<T>? _items;
+        private DisposableCollection? _itemsSubscriptions;
 
-        public PickerViewObservableModel([NotNull] UIPickerView pickerView)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PickerViewObservableModel{T}"/> class.
+        /// </summary>
+        /// <param name="pickerView">The picker view.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="pickerView"/> is <c>null</c>.</exception>
+        public PickerViewObservableModel(UIPickerView pickerView)
         {
-            if (pickerView == null)
-                throw new ArgumentNullException(nameof(pickerView));
-
-            _pickerViewWeakReference = new WeakReference<UIPickerView>(pickerView);
+            _pickerView = pickerView ?? throw new ArgumentNullException(nameof(pickerView));
         }
 
-        public event EventHandler<SelectionChangedEventArgs> SelectedCalled;
+        /// <summary>
+        /// Raised when <see cref="Selected(UIPickerView, nint, nint)"/> method has called.
+        /// </summary>
+        public event EventHandler<PickerViewItemSelectedEventArgs> SelectedCalled;
 
-        [CanBeNull]
-        [ItemCanBeNull]
-        public IEnumerable<object> Items
+        /// <inheritdoc />
+        public IEnumerable<T>? Items
         {
             get => _items;
             set
@@ -60,80 +63,100 @@ namespace FlexiMvvm.Collections
                     _items = value;
 
                     RefreshItemsSubscriptions();
-                    ReloadComponent(ComponentDefaultIndex);
+                    ReloadComponent(_pickerView, DefaultComponentIndex);
                 }
             }
         }
 
-        [CanBeNull]
-        public object SelectedItem
-        {
-            get => GetSelectedItem();
-            set
-            {
-                if (SetSelectedItem(value, false))
-                {
-                    SelectItem(value, ComponentDefaultIndex);
-                }
-            }
-        }
-
-        [NotNull]
         private DisposableCollection ItemsSubscriptions => _itemsSubscriptions ?? (_itemsSubscriptions = new DisposableCollection());
 
-        [CanBeNull]
-        private object GetSelectedItem()
+        /// <summary>
+        /// Called by the picker view when it needs the number of components.
+        /// </summary>
+        /// <param name="pickerView">The picker view.</param>
+        /// <returns>The number of components that the picker view should display.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="pickerView"/> is <c>null</c>.</exception>
+        public override nint GetComponentCount(UIPickerView pickerView)
         {
-            return _selectedItem;
+            if (pickerView == null)
+                throw new ArgumentNullException(nameof(pickerView));
+
+            // TODO: add multiple components support
+            return DefaultComponentCount;
         }
 
-        private bool SetSelectedItem([CanBeNull] object item, bool raiseEvent = true)
+        /// <summary>
+        /// Called by the picker view when it needs the number of rows for a specified component.
+        /// </summary>
+        /// <param name="pickerView">The picker view.</param>
+        /// <param name="component">The component index of the <paramref name="pickerView"/>.</param>
+        /// <returns>The number of rows for the component.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="pickerView"/> is <c>null</c>.</exception>
+        public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
         {
-            if (!ReferenceEquals(_selectedItem, item))
-            {
-                _selectedItem = item;
+            if (pickerView == null)
+                throw new ArgumentNullException(nameof(pickerView));
 
-                if (raiseEvent)
-                {
-                    SelectedCalled?.Invoke(this, new SelectionChangedEventArgs(_selectedItem));
-                }
-
-                return true;
-            }
-
-            return false;
+            // TODO: add multiple components support
+            return component == DefaultComponentIndex
+                ? Items?.Count() ?? 0
+                : 0;
         }
 
-        public override nint GetComponentCount([NotNull] UIPickerView pickerView)
+        /// <summary>
+        /// Called by the picker view when it needs the title to use for a given row in a given component.
+        /// </summary>
+        /// <param name="pickerView">The picker view.</param>
+        /// <param name="row">The row index of the <paramref name="component"/>.</param>
+        /// <param name="component">The component index of the <paramref name="pickerView"/>.</param>
+        /// <returns>The title of the indicated component row.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="pickerView"/> is <c>null</c>.</exception>
+        public override string GetTitle(UIPickerView pickerView, nint row, nint component)
         {
-            return ComponentDefaultCount;
+            if (pickerView == null)
+                throw new ArgumentNullException(nameof(pickerView));
+
+            // TODO: add multiple components support
+            var index = (int)row;
+
+            return component == DefaultComponentIndex
+                ? Items?.ElementAt(index)?.ToString() ?? string.Empty
+                : string.Empty;
         }
 
-        public override nint GetRowsInComponent([NotNull] UIPickerView pickerView, nint component)
+        /// <summary>
+        /// Called by the picker view when the user selects a row in a component.
+        /// </summary>
+        /// <param name="pickerView">The picker view.</param>
+        /// <param name="row">The row index of the <paramref name="component"/>.</param>
+        /// <param name="component">The component index of the <paramref name="pickerView"/>.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="pickerView"/> is <c>null</c>.</exception>
+        public override void Selected(UIPickerView pickerView, nint row, nint component)
         {
-            return Items?.Count() ?? 0;
+            if (pickerView == null)
+                throw new ArgumentNullException(nameof(pickerView));
+
+            SelectedCalled?.Invoke(this, new PickerViewItemSelectedEventArgs(row, component));
         }
 
-        public override string GetTitle([NotNull] UIPickerView pickerView, nint row, nint component)
+        /// <summary>
+        /// Reloads a particular component of the picker view.
+        /// </summary>
+        /// <param name="pickerView">The picker view.</param>
+        /// <param name="component">The component index of the <paramref name="pickerView"/>.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="pickerView"/> is <c>null</c>.</exception>
+        protected virtual void ReloadComponent(UIPickerView pickerView, nint component)
         {
-            return GetItem(row)?.ToString();
-        }
+            if (pickerView == null)
+                throw new ArgumentNullException(nameof(pickerView));
 
-        public override void Selected([NotNull] UIPickerView pickerView, nint row, nint component)
-        {
-            SetSelectedItem(GetItem(row));
-        }
-
-        [CanBeNull]
-        private object GetItem(nint row)
-        {
-            return Items?.ElementAt((int)row);
+            pickerView.ReloadComponent(component);
         }
 
         private void RefreshItemsSubscriptions()
         {
             _itemsSubscriptions?.Dispose();
-            _itemsSubscriptions = new DisposableCollection();
+            _itemsSubscriptions = null;
 
             if (Items is INotifyCollectionChanged observableItems)
             {
@@ -141,39 +164,35 @@ namespace FlexiMvvm.Collections
             }
         }
 
-        private void ReloadComponent(int component)
+        private void Items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (_pickerViewWeakReference.TryGetTarget(out var pickerView))
-            {
-                pickerView.ReloadComponent(component);
-            }
+            ReloadComponent(_pickerView, DefaultComponentIndex);
         }
 
-        private void SelectItem([CanBeNull] object selectedItem, int component)
+        /// <inheritdoc />
+        protected override void Dispose(bool disposing)
         {
-            if (_pickerViewWeakReference.TryGetTarget(out var pickerView) && Items != null)
+            if (disposing)
             {
-                var selectedItemPosition = -1;
-
-                for (var i = 0; i < Items.Count(); i++)
-                {
-                    if (ReferenceEquals(Items.ElementAt(i), selectedItem))
-                    {
-                        selectedItemPosition = i;
-                        break;
-                    }
-                }
-
-                if (selectedItemPosition != -1)
-                {
-                    pickerView.Select(selectedItemPosition, component, true);
-                }
+                _itemsSubscriptions?.Dispose();
+                _itemsSubscriptions = null;
             }
-        }
 
-        private void Items_CollectionChanged([NotNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
+            base.Dispose(disposing);
+        }
+    }
+
+    /// <inheritdoc />
+    public class PickerViewObservableModel : PickerViewObservableModel<object>
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PickerViewObservableModel"/> class.
+        /// </summary>
+        /// <param name="pickerView">The picker view.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="pickerView"/> is <c>null</c>.</exception>
+        public PickerViewObservableModel(UIPickerView pickerView)
+            : base(pickerView)
         {
-            ReloadComponent(ComponentDefaultIndex);
         }
     }
 }
