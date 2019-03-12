@@ -38,19 +38,6 @@ namespace FlexiMvvm.Bindings
         }
 
         [NotNull]
-        public static ISourceItemBindingBuilder<TSourceItem, IEnumerable<object>> BindDefault<TSourceItem>(
-            [NotNull] this BindingSet<TSourceItem> bindingSet,
-            [CanBeNull] PickerViewObservableModel pickerViewModel)
-            where TSourceItem : class
-        {
-            if (bindingSet == null)
-                throw new ArgumentNullException(nameof(bindingSet));
-
-            return bindingSet.Bind(pickerViewModel)
-                .For(v => v.NotNull().ItemsBinding());
-        }
-
-        [NotNull]
         public static ISourceItemBindingBuilder<TSourceItem, IEnumerable<IGrouping<object, object>>> BindDefault<TSourceItem>(
             [NotNull] this BindingSet<TSourceItem> bindingSet,
             [CanBeNull] CollectionViewObservableGroupedSource collectionViewSource)
