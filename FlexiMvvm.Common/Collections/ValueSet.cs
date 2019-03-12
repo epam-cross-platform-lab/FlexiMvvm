@@ -36,14 +36,11 @@ namespace FlexiMvvm.Collections
         /// <param name="defaultValue">The default value if the key not found.</param>
         /// <returns>The value that is associated with the specified key, if the key is found; otherwise, the default value.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="key"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">An element with the same <paramref name="key"/> already exists in the set.</exception>
         /// <exception cref="InvalidCastException">The value cannot be cast to <typeparamref name="T"/>.</exception>
         public T GetValue<T>(string key, T defaultValue = default)
         {
             if (key == null)
                 throw new ArgumentNullException(nameof(key));
-            if (_values?.ContainsKey(key) ?? false)
-                throw new ArgumentException(nameof(key));
 
             return (T)_values.GetValueOrDefault(key, defaultValue);
         }
