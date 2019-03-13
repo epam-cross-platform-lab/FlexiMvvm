@@ -18,53 +18,15 @@ using System;
 using Android.Content;
 using FlexiMvvm.ViewModels;
 using FlexiMvvm.Views;
-using FlexiMvvm.Views.Core;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.Navigation
 {
-    public abstract partial class NavigationService
+    /// <summary>
+    /// Provides a set of methods for performing navigation.
+    /// </summary>
+    public abstract class NavigationService
     {
-        /// <summary>
-        /// Gets the typed view inherited from the <see cref="Android.Support.V4.App.FragmentActivity"/>.
-        /// </summary>
-        /// <typeparam name="TView">The type of the view.</typeparam>
-        /// <typeparam name="TViewModel">The type of the view model.</typeparam>
-        /// <param name="viewModel">The model used for getting a bound view.</param>
-        /// <returns>The typed view instance.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">View instance is missing for provided <paramref name="viewModel"/>.</exception>
-        [NotNull]
-        public TView GetActivity<TView, TViewModel>([NotNull] TViewModel viewModel)
-            where TView : Android.Support.V4.App.FragmentActivity, INavigationView<TViewModel>
-            where TViewModel : class, IViewModel
-        {
-            if (viewModel == null)
-                throw new ArgumentNullException(nameof(viewModel));
-
-            return ViewCache.Get<TView, TViewModel>(viewModel);
-        }
-
-        /// <summary>
-        /// Gets the typed view inherited from the <see cref="Android.Support.V4.App.Fragment"/>.
-        /// </summary>
-        /// <typeparam name="TView">The type of the view.</typeparam>
-        /// <typeparam name="TViewModel">The type of the view model.</typeparam>
-        /// <param name="viewModel">The model used for getting a bound view.</param>
-        /// <returns>The typed view instance.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">View instance is missing for provided <paramref name="viewModel"/>.</exception>
-        [NotNull]
-        public TView GetFragment<TView, TViewModel>([NotNull] TViewModel viewModel)
-            where TView : Android.Support.V4.App.Fragment, INavigationView<TViewModel>
-            where TViewModel : class, IViewModel
-        {
-            if (viewModel == null)
-                throw new ArgumentNullException(nameof(viewModel));
-
-            return ViewCache.Get<TView, TViewModel>(viewModel);
-        }
-
         /// <summary>
         /// Performs forward navigation from the <paramref name="sourceView"/> to the target one.
         /// </summary>
