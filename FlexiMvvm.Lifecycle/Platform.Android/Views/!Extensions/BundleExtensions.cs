@@ -24,7 +24,7 @@ using FlexiMvvm.ViewModels;
 namespace FlexiMvvm.Views
 {
     /// <summary>
-    /// Provides a set of static methods for getting and putting custom data from/in the bundle.
+    /// Provides a set of static methods for getting and putting custom data from/to the <see cref="Bundle"/>.
     /// </summary>
     public static class BundleExtensions
     {
@@ -32,11 +32,11 @@ namespace FlexiMvvm.Views
         private const string ResultKey = "FlexiMvvm_ViewModel_Result";
 
         /// <summary>
-        /// Extracts view model parameters from the bundle.
+        /// Gets the view model parameters from the <paramref name="bundle"/>.
         /// </summary>
         /// <typeparam name="TParameters">The type of the view model parameters.</typeparam>
-        /// <param name="bundle">The bundle from which to extract view model parameters.</param>
-        /// <returns>View model parameters instance if the bundle contains parameters; otherwise, <c>null</c>.</returns>
+        /// <param name="bundle">The bundle to extract the view model parameters from.</param>
+        /// <returns>The view model parameters instance if the <paramref name="bundle"/> contains the parameters; otherwise, <c>null</c>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="bundle"/> is <c>null</c>.</exception>
         public static TParameters? GetParameters<TParameters>(this Bundle bundle)
             where TParameters : Parameters
@@ -57,10 +57,10 @@ namespace FlexiMvvm.Views
         }
 
         /// <summary>
-        /// Puts view model parameters to the bundle.
+        /// Puts the view model parameters to the <paramref name="bundle"/>.
         /// </summary>
         /// <typeparam name="TParameters">The type of the view model parameters.</typeparam>
-        /// <param name="bundle">The bundle to put view model parameters.</param>
+        /// <param name="bundle">The bundle to put the view model parameters to.</param>
         /// <param name="parameters">The view model parameters. Can be <c>null</c>.</param>
         /// <exception cref="ArgumentNullException"><paramref name="bundle"/> is <c>null</c>.</exception>
         public static void PutParameters<TParameters>(this Bundle bundle, TParameters? parameters)
@@ -79,11 +79,11 @@ namespace FlexiMvvm.Views
         }
 
         /// <summary>
-        /// Extracts view model result from the bundle.
+        /// Gets the view model result from the <paramref name="bundle"/>.
         /// </summary>
         /// <typeparam name="TResult">The type of the view model result.</typeparam>
-        /// <param name="bundle">The bundle from which to extract view model result.</param>
-        /// <returns>View model result instance if the bundle contains result; otherwise, <c>null</c>.</returns>
+        /// <param name="bundle">The bundle to extract the view model result from.</param>
+        /// <returns>The view model result instance if the <paramref name="bundle"/> contains the result; otherwise, <c>null</c>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="bundle"/> is <c>null</c>.</exception>
         public static TResult? GetResult<TResult>(this Bundle bundle)
             where TResult : Result
@@ -104,10 +104,10 @@ namespace FlexiMvvm.Views
         }
 
         /// <summary>
-        /// Puts view model result to the bundle.
+        /// Puts the view model result to the <paramref name="bundle"/>.
         /// </summary>
         /// <typeparam name="TResult">The type of the view model result.</typeparam>
-        /// <param name="bundle">The bundle to put view model result.</param>
+        /// <param name="bundle">The bundle to put the view model result to.</param>
         /// <param name="result">The view model result. Can be <c>null</c>.</param>
         /// <exception cref="ArgumentNullException"><paramref name="bundle"/> is <c>null</c>.</exception>
         public static void PutResult<TResult>(this Bundle bundle, TResult? result)

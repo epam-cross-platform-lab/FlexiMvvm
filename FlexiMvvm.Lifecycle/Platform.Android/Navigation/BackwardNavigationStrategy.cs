@@ -16,15 +16,14 @@
 
 using FlexiMvvm.ViewModels;
 using FlexiMvvm.Views;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Navigation
 {
     /// <summary>
     /// Defines the contract for backward navigation.
     /// </summary>
-    /// <param name="sourceView">The source view from which navigation is performed from.</param>
-    public delegate void BackwardNavigationDelegate([NotNull] INavigationView<IViewModel> sourceView);
+    /// <param name="sourceView">The source navigation view from which navigation is performed from.</param>
+    public delegate void BackwardNavigationDelegate(INavigationView<IViewModel> sourceView);
 
     /// <summary>
     /// Provides a set of backward navigation strategies.
@@ -35,12 +34,11 @@ namespace FlexiMvvm.Navigation
         /// Backward navigation using <see cref="INavigationView{TViewModel}.Finish()"/> method.
         /// </summary>
         /// <returns>The backward navigation delegate.</returns>
-        [NotNull]
         public BackwardNavigationDelegate Finish()
         {
             return sourceView =>
             {
-                sourceView.NotNull().Finish();
+                sourceView.Finish();
             };
         }
     }

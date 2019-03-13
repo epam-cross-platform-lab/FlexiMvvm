@@ -16,7 +16,6 @@
 
 using System;
 using FlexiMvvm.ViewModels;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Views
 {
@@ -33,12 +32,12 @@ namespace FlexiMvvm.Views
 
         void SetResult(ResultCode resultCode);
 
-        void SetResult(ResultCode resultCode, [CanBeNull] Result result);
+        void SetResult(ResultCode resultCode, Result? result);
 
         void RaiseResultSet(ResultCode resultCode, Result? result);
 
-        void HandleResult([NotNull] object sender, [NotNull] ResultSetEventArgs args);
+        void HandleResult(object sender, ResultSetEventArgs args);
 
-        void DismissViewController(bool animated, [CanBeNull] Action completionHandler);
+        void DismissViewController(bool animated, Action? completionHandler);
     }
 }

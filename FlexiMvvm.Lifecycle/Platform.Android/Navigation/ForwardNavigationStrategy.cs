@@ -14,22 +14,20 @@
 // limitations under the License.
 // =========================================================================
 
-using System;
 using Android.Content;
 using Android.OS;
 using FlexiMvvm.ViewModels;
 using FlexiMvvm.Views;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Navigation
 {
     /// <summary>
     /// Defines the contract for forward navigation.
     /// </summary>
-    /// <param name="sourceView">The source view from which navigation is performed from.</param>
+    /// <param name="sourceView">The source navigation view from which navigation is performed from.</param>
     /// <param name="targetViewIntent">The description of the target view.</param>
     /// <param name="requestCode">The target view result identifier.</param>
-    public delegate void ForwardNavigationDelegate([NotNull] INavigationView<IViewModel> sourceView, [NotNull] Intent targetViewIntent, int? requestCode = null);
+    public delegate void ForwardNavigationDelegate(INavigationView<IViewModel> sourceView, Intent targetViewIntent, int requestCode);
 
     /// <summary>
     /// Provides a set of forward navigation strategies.
@@ -37,36 +35,28 @@ namespace FlexiMvvm.Navigation
     public sealed class ForwardNavigationStrategy
     {
         /// <summary>
-        /// Forward navigation using <see cref="INavigationView{TViewModel}.StartActivity(Intent, Bundle)"/> method.
+        /// Forward navigation using <see cref="INavigationView{TViewModel}.StartActivity(Intent, Bundle?)"/> method.
         /// </summary>
-        /// <param name="options">Additional options for how the target view should be started.</param>
+        /// <param name="options">Additional options for how the target view should be started. Can be <c>null</c>.</param>
         /// <returns>The forward navigation delegate.</returns>
-        [NotNull]
-        public ForwardNavigationDelegate StartActivity([CanBeNull] Bundle options = null)
+        public ForwardNavigationDelegate StartActivity(Bundle? options = null)
         {
             return (sourceView, targetViewIntent, requestCode) =>
             {
-                sourceView.NotNull().StartActivity(targetViewIntent.NotNull(), options);
+                sourceView.StartActivity(targetViewIntent, options);
             };
         }
 
         /// <summary>
-        /// Forward navigation using <see cref="INavigationView{TViewModel}.StartActivityForResult(Intent, int, Bundle)"/> method.
+        /// Forward navigation using <see cref="INavigationView{TViewModel}.StartActivityForResult(Intent, int, Bundle?)"/> method.
         /// </summary>
-        /// <param name="options">Additional options for how the target view should be started.</param>
+        /// <param name="options">Additional options for how the target view should be started. Can be <c>null</c>.</param>
         /// <returns>The forward navigation delegate.</returns>
-        [NotNull]
-        public ForwardNavigationDelegate StartActivityForResult([CanBeNull] Bundle options = null)
+        public ForwardNavigationDelegate StartActivityForResult(Bundle? options = null)
         {
             return (sourceView, targetViewIntent, requestCode) =>
             {
-                if (requestCode == null)
-                {
-                    throw new ArgumentNullException(
-                        $"Request code should be specified for '{nameof(StartActivityForResult)}' navigation strategy.", nameof(requestCode));
-                }
-
-                sourceView.NotNull().StartActivityForResult(targetViewIntent.NotNull(), requestCode.Value, options);
+                sourceView.StartActivityForResult(targetViewIntent, requestCode, options);
             };
         }
     }

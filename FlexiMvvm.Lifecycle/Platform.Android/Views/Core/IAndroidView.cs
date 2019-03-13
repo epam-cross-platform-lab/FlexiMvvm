@@ -16,7 +16,7 @@
 
 namespace FlexiMvvm.Views.Core
 {
-    public interface IAndroidView : IView
+    public interface IAndroidView
     {
     }
 }

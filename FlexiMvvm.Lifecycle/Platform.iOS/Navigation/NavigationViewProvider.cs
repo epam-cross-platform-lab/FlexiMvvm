@@ -29,10 +29,10 @@ namespace FlexiMvvm.Navigation
         /// </summary>
         /// <typeparam name="TView">The type of the view.</typeparam>
         /// <typeparam name="TViewModel">The type of the view model.</typeparam>
-        /// <param name="viewModel">The model used for getting a bound view.</param>
+        /// <param name="viewModel">The view model used for getting a bound view.</param>
         /// <returns>The navigation view.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">The view instance is missing for provided <paramref name="viewModel"/>.</exception>
+        /// <exception cref="ArgumentException">The view instance is missing for the provided <paramref name="viewModel"/>.</exception>
         public static TView GetViewController<TView, TViewModel>(TViewModel viewModel)
             where TView : UIViewController, INavigationView<TViewModel>
             where TViewModel : class, IViewModel

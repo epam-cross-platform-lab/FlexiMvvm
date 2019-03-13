@@ -49,7 +49,7 @@ namespace FlexiMvvm.Views.Core
 
             if (view == null)
             {
-                throw new ArgumentException($"View instance is missing for provided '{TypeFormatter.FormatName(viewModel.GetType())}' view model.", nameof(viewModel));
+                throw new ArgumentException($"View instance is missing for the provided '{TypeFormatter.FormatName(viewModel.GetType())}' view model.", nameof(viewModel));
             }
 
             return view;

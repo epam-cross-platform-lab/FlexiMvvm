@@ -15,7 +15,6 @@
 // =========================================================================
 
 using FlexiMvvm.ViewModels;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Views.Core
 {
@@ -23,11 +22,12 @@ namespace FlexiMvvm.Views.Core
     {
         private const string ViewModelStoreTag = "FlexiMvvm_ViewModelStore";
 
-        [CanBeNull]
-        internal static IViewModelStore Get([NotNull] IView view)
+        internal static IViewModelStore? Get(IView<IViewModel> view)
         {
-            var fragmentManager = view.GetActivity().SupportFragmentManager.NotNull();
-            ViewModelStoreFragment store = null;
+            ViewModelStoreFragment? store = null;
+            var fragmentManager = view.As(
+                activity => activity.SupportFragmentManager,
+                fragment => fragment.Activity.SupportFragmentManager);
 
             if (!fragmentManager.IsDestroyed)
             {
@@ -38,8 +38,8 @@ namespace FlexiMvvm.Views.Core
                     store = ViewModelStoreFragment.NewInstance();
 
                     fragmentManager
-                        .BeginTransaction().NotNull()
-                        .Add(store, ViewModelStoreTag).NotNull()
+                        .BeginTransaction()
+                        .Add(store, ViewModelStoreTag)
                         .Commit();
                 }
             }
