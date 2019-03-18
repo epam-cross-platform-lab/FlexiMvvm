@@ -15,7 +15,9 @@
 // =========================================================================
 
 using System;
-using JetBrains.Annotations;
+using FlexiMvvm.Formatters;
+using FlexiMvvm.ViewModels;
+using FlexiMvvm.Views;
 using UIKit;
 
 namespace FlexiMvvm.Navigation
@@ -23,10 +25,10 @@ namespace FlexiMvvm.Navigation
     /// <summary>
     /// Defines the contract for forward navigation.
     /// </summary>
-    /// <param name="navigationController">The source view navigation controller.</param>
+    /// <param name="sourceView">The source navigation view from which navigation is performed from.</param>
     /// <param name="targetView">The target view for navigation.</param>
     /// <param name="animated">Determines if the transition is to be animated.</param>
-    public delegate void ForwardNavigationDelegate([NotNull] UINavigationController navigationController, [NotNull] UIViewController targetView, bool animated);
+    public delegate void ForwardNavigationDelegate(INavigationView<IViewModel> sourceView, UIViewController targetView, bool animated);
 
     /// <summary>
     /// Provides a set of forward navigation strategies.
@@ -37,39 +39,52 @@ namespace FlexiMvvm.Navigation
         /// Forward navigation using <see cref="UINavigationController.PushViewController(UIViewController, bool)"/> method.
         /// </summary>
         /// <returns>The forward navigation delegate.</returns>
-        [NotNull]
         public ForwardNavigationDelegate PushViewController()
         {
-            return (navigationController, targetView, animated) =>
+            return (sourceView, targetView, animated) =>
             {
-                navigationController.NotNull().PushViewController(targetView.NotNull(), animated);
+                var navigationController = sourceView.GetNavigationController();
+
+                if (navigationController == null)
+                {
+                    throw new InvalidOperationException(
+                        $"'{TypeFormatter.FormatName(sourceView.GetType())}.{nameof(NavigationViewExtensions.GetNavigationController)}' returned 'null' value.");
+                }
+
+                navigationController.PushViewController(targetView, animated);
             };
         }
 
         /// <summary>
-        /// Forward navigation using <see cref="UIViewController.PresentViewController(UIViewController, bool, Action)"/> method.
+        /// Forward navigation using <see cref="INavigationView{TViewModel}.PresentViewController(UIViewController, bool, Action?)"/> method.
         /// </summary>
-        /// <param name="completionHandler">The method to invoke when the animation completes.</param>
+        /// <param name="completionHandler">The method to invoke when the animation completes. Can be <c>null</c>.</param>
         /// <returns>The forward navigation delegate.</returns>
-        [NotNull]
-        public ForwardNavigationDelegate PresentViewController([CanBeNull] Action completionHandler = null)
+        public ForwardNavigationDelegate PresentViewController(Action? completionHandler = null)
         {
-            return (navigationController, targetView, animated) =>
+            return (sourceView, targetView, animated) =>
             {
-                navigationController.NotNull().PresentViewController(targetView.NotNull(), animated, completionHandler);
+                sourceView.PresentViewController(targetView, animated, completionHandler);
             };
         }
 
         /// <summary>
-        /// Forward navigation using <see cref="UINavigationController.SetViewControllers(UIViewController[], bool)"/> method.
+        /// Forward navigation using <see cref="UINavigationController.SetViewControllers(UIViewController[], bool)"/> method. Target view delegate parameter is passed as a value.
         /// </summary>
         /// <returns>The forward navigation delegate.</returns>
-        [NotNull]
         public ForwardNavigationDelegate SetViewControllers()
         {
-            return (navigationController, targetView, animated) =>
+            return (sourceView, targetView, animated) =>
             {
-                navigationController.NotNull().SetViewControllers(new UIViewController[] { targetView.NotNull() }, animated);
+                var navigationController = sourceView.GetNavigationController();
+
+                if (navigationController == null)
+                {
+                    throw new InvalidOperationException(
+                        $"'{TypeFormatter.FormatName(sourceView.GetType())}.{nameof(NavigationViewExtensions.GetNavigationController)}' returned 'null' value.");
+                }
+
+                navigationController.SetViewControllers(new UIViewController[] { targetView }, animated);
             };
         }
 
@@ -78,12 +93,23 @@ namespace FlexiMvvm.Navigation
         /// </summary>
         /// <param name="viewControllers">The array of view controllers to be set. Target view delegate parameter will be ignored.</param>
         /// <returns>The forward navigation delegate.</returns>
-        [NotNull]
-        public ForwardNavigationDelegate SetViewControllers([CanBeNull] UIViewController[] viewControllers)
+        /// <exception cref="ArgumentNullException"><paramref name="viewControllers"/> is <c>null</c>.</exception>
+        public ForwardNavigationDelegate SetViewControllers(UIViewController[] viewControllers)
         {
-            return (navigationController, targetView, animated) =>
+            if (viewControllers == null)
+                throw new ArgumentNullException(nameof(viewControllers));
+
+            return (sourceView, targetView, animated) =>
             {
-                navigationController.NotNull().SetViewControllers(viewControllers, animated);
+                var navigationController = sourceView.GetNavigationController();
+
+                if (navigationController == null)
+                {
+                    throw new InvalidOperationException(
+                        $"'{TypeFormatter.FormatName(sourceView.GetType())}.{nameof(NavigationViewExtensions.GetNavigationController)}' returned 'null' value.");
+                }
+
+                navigationController.SetViewControllers(viewControllers, animated);
             };
         }
     }

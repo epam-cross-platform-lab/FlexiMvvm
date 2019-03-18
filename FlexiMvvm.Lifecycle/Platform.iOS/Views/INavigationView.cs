@@ -16,7 +16,7 @@
 
 using System;
 using FlexiMvvm.ViewModels;
-using JetBrains.Annotations;
+using UIKit;
 
 namespace FlexiMvvm.Views
 {
@@ -25,20 +25,26 @@ namespace FlexiMvvm.Views
     {
         event EventHandler<ResultSetEventArgs> ResultSet;
 
+        bool IsMovingToParentViewController { get; }
+
+        bool IsMovingFromParentViewController { get; }
+
         bool IsBeingPresented { get; }
 
         bool IsBeingDismissed { get; }
 
-        bool IsMovingFromParentViewController { get; }
+        UIViewController? PresentingViewController { get; }
+
+        void PresentViewController(UIViewController viewControllerToPresent, bool animated, Action? completionHandler);
+
+        void DismissViewController(bool animated, Action? completionHandler);
 
         void SetResult(ResultCode resultCode);
 
-        void SetResult(ResultCode resultCode, [CanBeNull] Result result);
+        void SetResult(ResultCode resultCode, Result? result);
 
         void RaiseResultSet(ResultCode resultCode, Result? result);
 
-        void HandleResult([NotNull] object sender, [NotNull] ResultSetEventArgs args);
-
-        void DismissViewController(bool animated, [CanBeNull] Action completionHandler);
+        void HandleResult(object sender, ResultSetEventArgs args);
     }
 }
