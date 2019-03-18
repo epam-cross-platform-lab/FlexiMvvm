@@ -15,46 +15,31 @@
 // =========================================================================
 
 using System;
-using JetBrains.Annotations;
+using FlexiMvvm.Formatters;
+using FlexiMvvm.ViewModels;
 using UIKit;
 
 namespace FlexiMvvm.Views
 {
     /// <summary>
-    /// Provides a set of <c>static</c> methods for accessing the <see cref="IView"/>.
+    /// Provides a set of static methods for accessing the <see cref="IView{TViewModel}"/>.
     /// </summary>
     public static class ViewExtensions
     {
         /// <summary>
-        /// Gets self if <paramref name="view"/> is <see cref="UINavigationController"/> or
-        /// <see cref="UIViewController.NavigationController"/> property value if <paramref name="view"/> is <see cref="UIViewController"/>.
+        /// Executes appropriate handler based on actual type of the <paramref name="view"/>.
         /// </summary>
-        /// <param name="view">The view reference.</param>
-        /// <returns>The <see cref="UINavigationController"/> instance.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="view"/> is <c>null</c>.</exception>
-        [CanBeNull]
-        public static UINavigationController GetNavigationController([NotNull] this IView view)
-        {
-            if (view == null)
-                throw new ArgumentNullException(nameof(view));
-
-            return view.As(
-                navigationController => navigationController,
-                viewController => viewController.NotNull().NavigationController);
-        }
-
-        /// <summary>
-        /// Executes <paramref name="navigationControllerHandler"/> if <paramref name="view"/> is <see cref="UINavigationController"/> or
-        /// <paramref name="viewControllerHandler"/> if <paramref name="view"/> is <see cref="UIViewController"/>.
-        /// </summary>
-        /// <param name="view">The view reference.</param>
-        /// <param name="navigationControllerHandler">The navigation controller handler.</param>
-        /// <param name="viewControllerHandler">The view controller handler.</param>
+        /// <param name="view">The view that is represented by a navigation or view controller.</param>
+        /// <param name="navigationControllerHandler">The handler to execute if the <paramref name="view"/> is <see cref="UINavigationController"/>.</param>
+        /// <param name="viewControllerHandler">The handler to execute if the <paramref name="view"/> is <see cref="UIViewController"/>.</param>
         /// <exception cref="ArgumentNullException"><paramref name="view" /> or <paramref name="navigationControllerHandler" /> or <paramref name="viewControllerHandler" /> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentException">
+        /// <paramref name="view" /> is derived from a class other than the <see cref="UINavigationController"/> or <see cref="UIViewController"/>.
+        /// </exception>
         public static void As(
-            [NotNull] this IView view,
-            [NotNull] Action<UINavigationController> navigationControllerHandler,
-            [NotNull] Action<UIViewController> viewControllerHandler)
+            this IView<IViewModel> view,
+            Action<UINavigationController> navigationControllerHandler,
+            Action<UIViewController> viewControllerHandler)
         {
             if (view == null)
                 throw new ArgumentNullException(nameof(view));
@@ -71,23 +56,30 @@ namespace FlexiMvvm.Views
             {
                 viewControllerHandler(viewController);
             }
+            else
+            {
+                throw new ArgumentException(
+                    $"Only views derived from '{TypeFormatter.FormatName<UINavigationController>()}' or " +
+                    $"'{TypeFormatter.FormatName<UIViewController>()}' are supported.", nameof(view));
+            }
         }
 
         /// <summary>
-        /// Returns result of <paramref name="navigationControllerHandler"/> if <paramref name="view"/> is <see cref="UINavigationController"/> or
-        /// <paramref name="viewControllerHandler"/> if <paramref name="view"/> is <see cref="UIViewController"/>.
+        /// Executes appropriate handler based on actual type of the <paramref name="view"/> with returning a result.
         /// </summary>
         /// <typeparam name="T">The type of the result.</typeparam>
-        /// <param name="view">The view reference.</param>
-        /// <param name="navigationControllerHandler">The navigation controller handler.</param>
-        /// <param name="viewControllerHandler">The view controller handler.</param>
+        /// <param name="view">The view that is represented by a navigation or view controller.</param>
+        /// <param name="navigationControllerHandler">The handler to execute if the <paramref name="view"/> is <see cref="UINavigationController"/>.</param>
+        /// <param name="viewControllerHandler">The handler to execute if the <paramref name="view"/> is <see cref="UIViewController"/>.</param>
+        /// <returns>A result returned by appropriate handler.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="view" /> or <paramref name="navigationControllerHandler" /> or <paramref name="viewControllerHandler" /> is <c>null</c>.</exception>
-        /// <returns>Result of navigation controller or view controller handler.</returns>
-        [CanBeNull]
+        /// <exception cref="ArgumentException">
+        /// <paramref name="view" /> is derived from a class other than the <see cref="UINavigationController"/> or <see cref="UIViewController"/>.
+        /// </exception>
         public static T As<T>(
-            [NotNull] this IView view,
-            [NotNull] Func<UINavigationController, T> navigationControllerHandler,
-            [NotNull] Func<UIViewController, T> viewControllerHandler)
+            this IView<IViewModel> view,
+            Func<UINavigationController, T> navigationControllerHandler,
+            Func<UIViewController, T> viewControllerHandler)
         {
             if (view == null)
                 throw new ArgumentNullException(nameof(view));
@@ -96,7 +88,7 @@ namespace FlexiMvvm.Views
             if (viewControllerHandler == null)
                 throw new ArgumentNullException(nameof(viewControllerHandler));
 
-            T result = default;
+            T result;
 
             if (view is UINavigationController navigationController)
             {
@@ -105,6 +97,12 @@ namespace FlexiMvvm.Views
             else if (view is UIViewController viewController)
             {
                 result = viewControllerHandler(viewController);
+            }
+            else
+            {
+                throw new ArgumentException(
+                    $"Only views derived from '{TypeFormatter.FormatName<UINavigationController>()}' or " +
+                    $"'{TypeFormatter.FormatName<UIViewController>()}' are supported.", nameof(view));
             }
 
             return result;
