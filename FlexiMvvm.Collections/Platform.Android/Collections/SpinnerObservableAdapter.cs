@@ -28,14 +28,14 @@ namespace FlexiMvvm.Collections
 {
     /// <summary>
     /// A concrete <see cref="BaseAdapter"/> that is backed by a collection of arbitrary objects for consumption by a <see cref="Spinner"/>.
-    /// Can track changes of <see cref="INotifyCollectionChanged"/> and notify <see cref="Spinner"/> about them.
+    /// Can track changes of <see cref="INotifyCollectionChanged"/> Items and notify <see cref="Spinner"/> about them.
     /// </summary>
     /// <typeparam name="T">The type of the collection item.</typeparam>
     public class SpinnerObservableAdapter<T> : BaseAdapter<T>, IThemedSpinnerAdapter, IItemsSource<T>
     {
         private readonly ArrayAdapter<T> _adapter;
-        private IEnumerable<T>? _items;
         private DisposableCollection? _itemsSubscriptions;
+        private IEnumerable<T>? _items;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SpinnerObservableAdapter{T}"/> class.
@@ -80,6 +80,8 @@ namespace FlexiMvvm.Collections
             _adapter.SetNotifyOnChange(false);
         }
 
+        private DisposableCollection ItemsSubscriptions => _itemsSubscriptions ?? (_itemsSubscriptions = new DisposableCollection());
+
         /// <summary>
         /// Gets the context associated with this adapter.
         /// <para>The context is used to create views from the resource passed to the constructor.</para>
@@ -116,8 +118,6 @@ namespace FlexiMvvm.Collections
             get => _adapter.DropDownViewTheme;
             set => _adapter.DropDownViewTheme = value;
         }
-
-        private DisposableCollection ItemsSubscriptions => _itemsSubscriptions ?? (_itemsSubscriptions = new DisposableCollection());
 
         /// <summary>
         /// Gets the item at the specified position in the collection.

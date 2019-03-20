@@ -19,32 +19,40 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using Android.Support.V4.App;
-using JetBrains.Annotations;
+using Android.Support.V4.View;
 
 namespace FlexiMvvm.Collections
 {
-    public class FragmentStatePagerObservableAdapter : FragmentStatePagerAdapter
+    /// <summary>
+    /// Implementation of <see cref="PagerAdapter"/> that uses a <see cref="Fragment"/> to manage each page.
+    /// This class also handles saving and restoring of fragment's state.
+    /// Can track changes of <see cref="INotifyCollectionChanged"/> Items and notify adapter consumer about them.
+    /// </summary>
+    /// <typeparam name="T">The type of the collection item.</typeparam>
+    public class FragmentStatePagerObservableAdapter<T> : FragmentStatePagerAdapter, IItemsSource<T>
     {
-        [NotNull]
-        private readonly Func<object, Fragment> _fragmentFactory;
-        [CanBeNull]
-        [ItemCanBeNull]
-        private IEnumerable<object> _items;
-        [CanBeNull]
-        [ItemNotNull]
-        private DisposableCollection _itemsSubscriptions;
+        private readonly Func<T, Fragment> _fragmentFactory;
+        private DisposableCollection? _itemsSubscriptions;
+        private IEnumerable<T>? _items;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FragmentStatePagerObservableAdapter{T}"/> class.
+        /// </summary>
+        /// <param name="fragmentManager">The fragment manager.</param>
+        /// <param name="fragmentFactory">The factory which creates <see cref="Fragment"/> instance for the provided item.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="fragmentFactory"/> is <c>null</c>.</exception>
         public FragmentStatePagerObservableAdapter(
-            [NotNull] FragmentManager fragmentManager,
-            [NotNull] Func<object, Fragment> fragmentFactory)
+            FragmentManager fragmentManager,
+            Func<T, Fragment> fragmentFactory)
             : base(fragmentManager)
         {
             _fragmentFactory = fragmentFactory ?? throw new ArgumentNullException(nameof(fragmentFactory));
         }
 
-        [CanBeNull]
-        [ItemCanBeNull]
-        public IEnumerable<object> Items
+        private DisposableCollection ItemsSubscriptions => _itemsSubscriptions ?? (_itemsSubscriptions = new DisposableCollection());
+
+        /// <inheritdoc />
+        public IEnumerable<T>? Items
         {
             get => _items;
             set
@@ -54,29 +62,47 @@ namespace FlexiMvvm.Collections
                     _items = value;
 
                     RefreshItemsSubscriptions();
-                    NotifyDataSetChanged();
+                    Reload(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
                 }
             }
         }
 
+        /// <summary>
+        /// Gets the count of items that are in the collection represented by this adapter.
+        /// </summary>
         public override int Count => Items?.Count() ?? 0;
 
-        [NotNull]
-        [ItemNotNull]
-        private DisposableCollection ItemsSubscriptions => _itemsSubscriptions ?? (_itemsSubscriptions = new DisposableCollection());
-
+        /// <summary>
+        /// Return the <see cref="Fragment"/> associated with a specified position.
+        /// </summary>
+        /// <param name="position">The position for which the fragment should be returned.</param>
+        /// <returns>The <see cref="Fragment"/> instance.</returns>
+        /// <exception cref="InvalidOperationException">Unable to get item due to <see cref="Items"/> collection is <c>null</c>.</exception>
         public override Fragment GetItem(int position)
         {
             if (Items == null)
-                throw new InvalidOperationException($"Unable to get item at \"{position}\" position due to \"{nameof(Items)}\" collection is null.");
+                throw new InvalidOperationException($"Unable to get item at '{position}' position due to '{nameof(Items)}' collection is 'null'.");
 
             return _fragmentFactory(Items.ElementAt(position));
+        }
+
+        /// <summary>
+        /// Updates the adapter based on passed <paramref name="args"/>. Notifies the adapter consumer about changes.
+        /// </summary>
+        /// <param name="args">The <see cref="Items"/> collection changes needs to be applied.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="args"/> is <c>null</c>.</exception>
+        protected virtual void Reload(NotifyCollectionChangedEventArgs args)
+        {
+            if (args == null)
+                throw new ArgumentNullException(nameof(args));
+
+            NotifyDataSetChanged();
         }
 
         private void RefreshItemsSubscriptions()
         {
             _itemsSubscriptions?.Dispose();
-            _itemsSubscriptions = new DisposableCollection();
+            _itemsSubscriptions = null;
 
             if (Items is INotifyCollectionChanged observableItems)
             {
@@ -84,9 +110,38 @@ namespace FlexiMvvm.Collections
             }
         }
 
-        private void Items_CollectionChanged([NotNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
+        private void Items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            NotifyDataSetChanged();
+            Reload(e);
+        }
+
+        /// <inheritdoc />
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _itemsSubscriptions?.Dispose();
+                _itemsSubscriptions = null;
+            }
+
+            base.Dispose(disposing);
+        }
+    }
+
+    /// <inheritdoc />
+    public class FragmentStatePagerObservableAdapter : FragmentStatePagerObservableAdapter<object>
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FragmentStatePagerObservableAdapter"/> class.
+        /// </summary>
+        /// <param name="fragmentManager">The fragment manager.</param>
+        /// <param name="fragmentFactory">The factory which creates <see cref="Fragment"/> instance for the provided item.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="fragmentFactory"/> is <c>null</c>.</exception>
+        public FragmentStatePagerObservableAdapter(
+            FragmentManager fragmentManager,
+            Func<object, Fragment> fragmentFactory)
+            : base(fragmentManager, fragmentFactory)
+        {
         }
     }
 }
