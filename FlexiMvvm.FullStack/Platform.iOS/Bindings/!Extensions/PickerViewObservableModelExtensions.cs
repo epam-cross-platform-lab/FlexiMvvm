@@ -26,7 +26,7 @@ namespace FlexiMvvm.Bindings
     public static class PickerViewObservableModelExtensions
     {
         /// <summary>
-        /// One way binding on <see cref="PickerViewObservableModel{T}.SelectedCalled"/> event. Row index is passed as a value.
+        /// One way to source binding on <see cref="PickerViewObservableModel{T}.SelectedCalled"/> event. Row index is passed as a value.
         /// </summary>
         /// <typeparam name="T">The type of the picker view model collection item.</typeparam>
         /// <param name="pickerViewModelReference">The picker view model reference.</param>
