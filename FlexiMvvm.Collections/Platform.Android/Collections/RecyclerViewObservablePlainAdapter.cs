@@ -24,7 +24,7 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.Collections
 {
-    public abstract class RecyclerViewObservablePlainAdapter : RecyclerViewObservableAdapter
+    public abstract class RecyclerViewObservablePlainAdapter : RecyclerViewObservableAdapter, IItemsSource<object>
     {
         protected const int DefaultSection = 0;
         protected const int DefaultSectionCount = 1;
@@ -33,7 +33,7 @@ namespace FlexiMvvm.Collections
         private readonly PlainItemsMapping _itemsMapping = new PlainItemsMapping();
         [CanBeNull]
         [ItemCanBeNull]
-        private IEnumerable<object> _items;
+        private IEnumerable<object>? _items;
 
         protected RecyclerViewObservablePlainAdapter([NotNull] RecyclerView recyclerView)
             : base(recyclerView)
@@ -42,7 +42,7 @@ namespace FlexiMvvm.Collections
 
         [CanBeNull]
         [ItemCanBeNull]
-        public IEnumerable<object> Items
+        public IEnumerable<object>? Items
         {
             get => _items;
             set
