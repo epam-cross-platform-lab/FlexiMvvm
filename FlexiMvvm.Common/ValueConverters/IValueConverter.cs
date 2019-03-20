@@ -16,16 +16,34 @@
 
 using System;
 using System.Globalization;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.ValueConverters
 {
+    /// <summary>
+    /// Exposes methods that allow the value to be modified as it passes through the binding engine.
+    /// </summary>
     public interface IValueConverter
     {
-        [CanBeNull]
-        object Convert([CanBeNull] object value, [NotNull] Type targetType, [CanBeNull] object parameter, [NotNull] CultureInfo culture);
+        /// <summary>
+        /// Modifies the source value before passing it to the target for display in the UI.
+        /// </summary>
+        /// <param name="value">The source value being passed to the target. Can be <c>null</c>.</param>
+        /// <param name="targetType">The type of the target property, as a type reference.</param>
+        /// <param name="parameter">The parameter to be used in the converter logic. Can be <c>null</c>.</param>
+        /// <param name="culture">The culture to be used in the converter.</param>
+        /// <returns>A converted value. If the method returns <c>null</c>, the valid <c>null</c> value is used.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="targetType"/> or <paramref name="culture"/> is <c>null</c>.</exception>
+        object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture);
 
-        [CanBeNull]
-        object ConvertBack([CanBeNull] object value, [NotNull] Type targetType, [CanBeNull] object parameter, [NotNull] CultureInfo culture);
+        /// <summary>
+        /// Modifies the target value before passing it to the source object.
+        /// </summary>
+        /// <param name="value">The target value being passed to the source. Can be <c>null</c>.</param>
+        /// <param name="targetType">The type of the target property, as a type reference.</param>
+        /// <param name="parameter">The parameter to be used in the converter logic. Can be <c>null</c>.</param>
+        /// <param name="culture">The culture to be used in the converter.</param>
+        /// <returns>A converted value. If the method returns <c>null</c>, the valid <c>null</c> value is used.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="targetType"/> or <paramref name="culture"/> is <c>null</c>.</exception>
+        object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture);
     }
 }

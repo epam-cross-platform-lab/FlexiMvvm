@@ -16,40 +16,64 @@
 
 using System;
 using System.Globalization;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.ValueConverters
 {
+    /// <summary>
+    /// Exposes methods that allow the value to be modified as it passes through the binding engine.
+    /// </summary>
+    /// <typeparam name="TSourceValue">The type of the source value.</typeparam>
+    /// <typeparam name="TTargetValue">The type of the target value.</typeparam>
     public abstract class ValueConverter<TSourceValue, TTargetValue> : IValueConverter
     {
-        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        /// <inheritdoc />
+        object? IValueConverter.Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             if (targetType == null)
                 throw new ArgumentNullException(nameof(targetType));
             if (culture == null)
                 throw new ArgumentNullException(nameof(culture));
 
+#nullable disable
             return Convert((TSourceValue)value, targetType, parameter, culture).Value;
+#nullable enable
         }
 
-        [NotNull]
-        protected virtual ConversionResult<TTargetValue> Convert([CanBeNull] TSourceValue value, [NotNull] Type targetType, [CanBeNull] object parameter, [NotNull] CultureInfo culture)
+        /// <summary>
+        /// Modifies the source value before passing it to the target for display in the UI. Returns unset value conversion result by default.
+        /// </summary>
+        /// <param name="value">The source value being passed to the target.</param>
+        /// <param name="targetType">The type of the target property, as a type reference.</param>
+        /// <param name="parameter">The parameter to be used in the converter logic. Can be <c>null</c>.</param>
+        /// <param name="culture">The culture to be used in the converter.</param>
+        /// <returns>The conversion result instance.</returns>
+        protected virtual ConversionResult<TTargetValue> Convert(TSourceValue value, Type targetType, object? parameter, CultureInfo culture)
         {
             return ConversionResult<TTargetValue>.UnsetValue();
         }
 
-        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        /// <inheritdoc />
+        object? IValueConverter.ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             if (targetType == null)
                 throw new ArgumentNullException(nameof(targetType));
             if (culture == null)
                 throw new ArgumentNullException(nameof(culture));
 
+#nullable disable
             return ConvertBack((TTargetValue)value, targetType, parameter, culture).Value;
+#nullable enable
         }
 
-        [NotNull]
-        protected virtual ConversionResult<TSourceValue> ConvertBack([CanBeNull] TTargetValue value, [NotNull] Type targetType, [CanBeNull] object parameter, [NotNull] CultureInfo culture)
+        /// <summary>
+        /// Modifies the target value before passing it to the source object. Returns unset value conversion result by default.
+        /// </summary>
+        /// <param name="value">The target value being passed to the source.</param>
+        /// <param name="targetType">The type of the target property, as a type reference.</param>
+        /// <param name="parameter">The parameter to be used in the converter logic. Can be <c>null</c>.</param>
+        /// <param name="culture">The culture to be used in the converter.</param>
+        /// <returns>The conversion result instance.</returns>
+        protected virtual ConversionResult<TSourceValue> ConvertBack(TTargetValue value, Type targetType, object? parameter, CultureInfo culture)
         {
             return ConversionResult<TSourceValue>.UnsetValue();
         }

@@ -14,27 +14,36 @@
 // limitations under the License.
 // =========================================================================
 
-using JetBrains.Annotations;
-
 namespace FlexiMvvm.ValueConverters
 {
+    /// <summary>
+    /// Represents a value conversion result.
+    /// </summary>
+    /// <typeparam name="TValue">The type of the value.</typeparam>
     public class ConversionResult<TValue>
     {
-        private ConversionResult([CanBeNull] object value)
+        private ConversionResult(object? value)
         {
             Value = value;
         }
 
-        [CanBeNull]
-        internal object Value { get; }
+        internal object? Value { get; }
 
-        [NotNull]
-        public static ConversionResult<TValue> SetValue([CanBeNull] TValue value)
+        /// <summary>
+        /// Sets <paramref name="value"/> as a conversion result and passes it through the binding engine.
+        /// </summary>
+        /// <param name="value">The converted value.</param>
+        /// <returns>The conversion result instance.</returns>
+        public static ConversionResult<TValue> SetValue(TValue value)
         {
             return new ConversionResult<TValue>(value);
         }
 
-        [NotNull]
+        /// <summary>
+        /// Sets <see cref="BindingValue.UnsetValue"/> as a conversion result. It indicates that the value converter produced no value
+        /// and that the binding engine will use the FallbackValue, if available, or the default value instead.
+        /// </summary>
+        /// <returns>The conversion result instance.</returns>
         public static ConversionResult<TValue> UnsetValue()
         {
             return new ConversionResult<TValue>(BindingValue.UnsetValue);
