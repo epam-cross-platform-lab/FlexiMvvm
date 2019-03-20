@@ -16,8 +16,15 @@
 
 namespace FlexiMvvm.ValueConverters
 {
+    /// <summary>
+    /// Defines the binding engine values.
+    /// </summary>
     public class BindingValue
     {
+        /// <summary>
+        /// Gets the binding engine value indicating that the value converter produced no value
+        /// and that the binding engine uses the FallbackValue, if available, or the default value instead.
+        /// </summary>
         public static object UnsetValue { get; } = new BindingValue();
     }
 }
