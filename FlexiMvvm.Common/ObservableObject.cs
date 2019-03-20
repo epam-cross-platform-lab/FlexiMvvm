@@ -64,7 +64,7 @@ namespace FlexiMvvm
         }
 
         /// <summary>
-        /// Raises <see cref="INotifyPropertyChanged.PropertyChanged"/> event with the <paramref name="propertyName"/> value.
+        /// Raises <see cref="INotifyPropertyChanged.PropertyChanged"/> event with <paramref name="propertyName"/> value.
         /// </summary>
         /// <param name="propertyName">The property name which value was changed.</param>
         /// <exception cref="ArgumentNullException"><paramref name="propertyName"/> is <c>null</c>.</exception>

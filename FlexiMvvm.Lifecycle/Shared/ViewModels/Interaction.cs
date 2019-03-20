@@ -15,30 +15,46 @@
 // =========================================================================
 
 using System;
-using JetBrains.Annotations;
 
-namespace FlexiMvvm.Interactions
+namespace FlexiMvvm.ViewModels
 {
+    /// <summary>
+    /// Defines the contract for a view model to view interaction.
+    /// </summary>
     public class Interaction
     {
+        /// <summary>
+        /// Raised when the view model requested the interaction.
+        /// </summary>
         public event EventHandler Requested;
 
+        /// <summary>
+        /// Raises <see cref="Requested"/> event.
+        /// </summary>
         public void RaiseRequested()
         {
             Requested?.Invoke(this, EventArgs.Empty);
         }
     }
 
+    /// <summary>
+    /// Defines the contract for a view model to view interaction.
+    /// </summary>
+    /// <typeparam name="T">The type of the request.</typeparam>
     public class Interaction<T>
     {
-        public event EventHandler<InteractionRequestEventArgs<T>> Requested;
+        /// <summary>
+        /// Raised when the view model requested the interaction.
+        /// </summary>
+        public event EventHandler<InteractionRequestedEventArgs<T>> Requested;
 
-        public void RaiseRequested([NotNull] T request)
+        /// <summary>
+        /// Raises <see cref="Requested"/> event.
+        /// </summary>
+        /// <param name="request">The request to be passed in the event arguments.</param>
+        public void RaiseRequested(T request)
         {
-            if (request == null)
-                throw new ArgumentNullException(nameof(request));
-
-            Requested?.Invoke(this, new InteractionRequestEventArgs<T>(request));
+            Requested?.Invoke(this, new InteractionRequestedEventArgs<T>(request));
         }
     }
 }
