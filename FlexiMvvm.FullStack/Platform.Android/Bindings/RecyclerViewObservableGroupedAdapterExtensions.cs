@@ -16,25 +16,24 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FlexiMvvm.Bindings.Custom;
 using FlexiMvvm.Collections;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class TableViewObservablePlainSourceBindings
+    public static class RecyclerViewObservableGroupedAdapterExtensions
     {
-        [NotNull]
-        public static TargetItemBinding<TableViewObservablePlainSource, IEnumerable<object>> ItemsBinding(
-            [NotNull] this IItemReference<TableViewObservablePlainSource> tableViewSourceReference)
+        public static TargetItemBinding<RecyclerViewObservableGroupedAdapter, IEnumerable<IGrouping<object, object>>> GroupedItemsBinding(
+            this IItemReference<RecyclerViewObservableGroupedAdapter> recyclerViewAdapterReference)
         {
-            if (tableViewSourceReference == null)
-                throw new ArgumentNullException(nameof(tableViewSourceReference));
+            if (recyclerViewAdapterReference == null)
+                throw new ArgumentNullException(nameof(recyclerViewAdapterReference));
 
-            return new TargetItemOneWayCustomBinding<TableViewObservablePlainSource, IEnumerable<object>>(
-                tableViewSourceReference,
-                (tableViewSource, items) => tableViewSource.NotNull().Items = items,
-                () => "Items");
+            return new TargetItemOneWayCustomBinding<RecyclerViewObservableGroupedAdapter, IEnumerable<IGrouping<object, object>>>(
+                recyclerViewAdapterReference,
+                (recyclerViewAdapter, groupedItems) => recyclerViewAdapter.GroupedItems = groupedItems,
+                () => $"{nameof(RecyclerViewObservableGroupedAdapter.GroupedItems)}");
         }
     }
 }

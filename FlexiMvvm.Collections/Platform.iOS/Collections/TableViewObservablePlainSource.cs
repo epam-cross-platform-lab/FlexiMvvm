@@ -24,7 +24,7 @@ using UIKit;
 
 namespace FlexiMvvm.Collections
 {
-    public class TableViewObservablePlainSource : TableViewObservableSource
+    public class TableViewObservablePlainSource : TableViewObservableSource, IItemsSource<object>
     {
         protected const int DefaultSection = 0;
         protected const int DefaultSectionCount = 1;
@@ -35,7 +35,7 @@ namespace FlexiMvvm.Collections
         private readonly Func<string> _sectionFooterCellReuseIdFactory;
         [CanBeNull]
         [ItemCanBeNull]
-        private IEnumerable<object> _items;
+        private IEnumerable<object>? _items;
 
         public TableViewObservablePlainSource(
             [NotNull] UITableView tableView,
@@ -50,7 +50,7 @@ namespace FlexiMvvm.Collections
 
         [CanBeNull]
         [ItemCanBeNull]
-        public IEnumerable<object> Items
+        public IEnumerable<object>? Items
         {
             get => _items;
             set

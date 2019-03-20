@@ -24,7 +24,7 @@ using UIKit;
 
 namespace FlexiMvvm.Collections
 {
-    public class CollectionViewObservablePlainSource : CollectionViewObservableSource
+    public class CollectionViewObservablePlainSource : CollectionViewObservableSource, IItemsSource<object>
     {
         protected const int DefaultSection = 0;
         protected const int DefaultSectionCount = 1;
@@ -33,7 +33,7 @@ namespace FlexiMvvm.Collections
         private readonly Func<UICollectionElementKindSection, string> _sectionHeaderFooterCellReuseIdFactory;
         [CanBeNull]
         [ItemCanBeNull]
-        private IEnumerable<object> _items;
+        private IEnumerable<object>? _items;
 
         public CollectionViewObservablePlainSource(
             [NotNull] UICollectionView collectionView,
@@ -46,7 +46,7 @@ namespace FlexiMvvm.Collections
 
         [CanBeNull]
         [ItemCanBeNull]
-        public IEnumerable<object> Items
+        public IEnumerable<object>? Items
         {
             get => _items;
             set
