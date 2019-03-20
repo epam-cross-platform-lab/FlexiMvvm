@@ -32,6 +32,10 @@
             <Generator>TextTemplatingFileGenerator</Generator>
             <LastGenOutput>WeakEventSubscriptionExtensionsGenerator.cs</LastGenOutput>
         </None>
+        <None Update="Shared\ViewModels\!Extensions\WeakEventSubscriptionExtensionsGenerator.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>WeakEventSubscriptionExtensionsGenerator.cs</LastGenOutput>
+        </None>
     </ItemGroup>
     <ItemGroup>
         <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
@@ -48,6 +52,11 @@
             <DependentUpon>ViewsGenerator.tt</DependentUpon>
         </None>
         <None Update="Platform.iOS\Views\!Extensions\WeakEventSubscriptionExtensionsGenerator.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>WeakEventSubscriptionExtensionsGenerator.tt</DependentUpon>
+        </None>
+        <None Update="Shared\ViewModels\!Extensions\WeakEventSubscriptionExtensionsGenerator.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
             <DependentUpon>WeakEventSubscriptionExtensionsGenerator.tt</DependentUpon>

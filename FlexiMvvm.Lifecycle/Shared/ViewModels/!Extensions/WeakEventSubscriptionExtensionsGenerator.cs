@@ -18,18 +18,18 @@
 using System;
 using FlexiMvvm.Weak.Subscriptions;
 
-namespace FlexiMvvm.Interactions
+namespace FlexiMvvm.ViewModels
 {
-    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="FlexiMvvm.Interactions.Interaction"/> class events.</summary>
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="FlexiMvvm.ViewModels.Interaction"/> class events.</summary>
     public static class InteractionWeakEventSubscriptionExtensions
     {
-        /// <summary>Weak subscription on <see cref="FlexiMvvm.Interactions.Interaction.Requested"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="FlexiMvvm.ViewModels.Interaction.Requested"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="FlexiMvvm.Interactions.Interaction.Requested"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="FlexiMvvm.ViewModels.Interaction.Requested"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable RequestedWeakSubscribe(
-            this FlexiMvvm.Interactions.Interaction eventSource,
+            this FlexiMvvm.ViewModels.Interaction eventSource,
             EventHandler eventHandler)
         {
             if (eventSource == null)
@@ -37,7 +37,7 @@ namespace FlexiMvvm.Interactions
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<FlexiMvvm.Interactions.Interaction>(
+            return new EventHandlerWeakEventSubscription<FlexiMvvm.ViewModels.Interaction>(
                 eventSource,
                 (source, handler) => source.Requested += handler,
                 (source, handler) => source.Requested -= handler,
@@ -47,26 +47,26 @@ namespace FlexiMvvm.Interactions
     }
 }
 
-namespace FlexiMvvm.Interactions
+namespace FlexiMvvm.ViewModels
 {
-    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="FlexiMvvm.Interactions.Interaction{T}"/> class events.</summary>
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="FlexiMvvm.ViewModels.Interaction{T}"/> class events.</summary>
     public static class GenericInteractionWeakEventSubscriptionExtensions
     {
-        /// <summary>Weak subscription on <see cref="FlexiMvvm.Interactions.Interaction{T}.Requested"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="FlexiMvvm.ViewModels.Interaction{T}.Requested"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="FlexiMvvm.Interactions.Interaction{T}.Requested"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="FlexiMvvm.ViewModels.Interaction{T}.Requested"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable RequestedWeakSubscribe<T>(
-            this FlexiMvvm.Interactions.Interaction<T> eventSource,
-            EventHandler<FlexiMvvm.Interactions.InteractionRequestEventArgs<T>> eventHandler)
+            this FlexiMvvm.ViewModels.Interaction<T> eventSource,
+            EventHandler<FlexiMvvm.ViewModels.InteractionRequestedEventArgs<T>> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<FlexiMvvm.Interactions.Interaction<T>, FlexiMvvm.Interactions.InteractionRequestEventArgs<T>>(
+            return new EventHandlerWeakEventSubscription<FlexiMvvm.ViewModels.Interaction<T>, FlexiMvvm.ViewModels.InteractionRequestedEventArgs<T>>(
                 eventSource,
                 (source, handler) => source.Requested += handler,
                 (source, handler) => source.Requested -= handler,

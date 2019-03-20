@@ -4,18 +4,14 @@
 <#@ import namespace="FlexiMvvm.Weak.Subscriptions.Generation" #>
 <#
     var weakEventSubscriptionExtensionsGenerator = new WeakEventSubscriptionExtensionsGenerator(
-        "FlexiMvvm",
+        "FlexiMvvm.ViewModels",
         new ExtensionsGenerationOptions(
-            "FlexiMvvm.Interactions.Interaction",
-            new EventGenerationOptions("Requested"))
-        {
-            TargetNamespace = "FlexiMvvm.Interactions"
-        },
+            "FlexiMvvm.ViewModels.Interaction",
+            new EventGenerationOptions("Requested")),
         new ExtensionsGenerationOptions(
-            "FlexiMvvm.Interactions.Interaction<T>",
-            new EventGenerationOptions("Requested", "FlexiMvvm.Interactions.InteractionRequestEventArgs<T>"))
+            "FlexiMvvm.ViewModels.Interaction<T>",
+            new EventGenerationOptions("Requested", "FlexiMvvm.ViewModels.InteractionRequestedEventArgs<T>"))
         {
-            TargetNamespace = "FlexiMvvm.Interactions",
             ExtensionsClassCustomName = "GenericInteraction",
             ExtensionsMethodsGenericTypeParameters = "T"
         });

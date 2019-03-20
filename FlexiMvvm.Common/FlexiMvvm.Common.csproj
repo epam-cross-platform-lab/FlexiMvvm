@@ -7,20 +7,4 @@
         <Description>MVVM framework for Xamarin.Native.</Description>
         <EnableDefaultCompileItems>true</EnableDefaultCompileItems>
     </PropertyGroup>
-    <ItemGroup>
-        <None Update="!Extensions\WeakEventSubscriptionExtensionsGenerator.tt">
-            <Generator>TextTemplatingFileGenerator</Generator>
-            <LastGenOutput>WeakEventSubscriptionExtensionsGenerator.cs</LastGenOutput>
-        </None>
-    </ItemGroup>
-    <ItemGroup>
-        <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Update="!Extensions\WeakEventSubscriptionExtensionsGenerator.cs">
-            <DesignTime>True</DesignTime>
-            <AutoGen>True</AutoGen>
-            <DependentUpon>WeakEventSubscriptionExtensionsGenerator.tt</DependentUpon>
-        </Compile>
-    </ItemGroup>
 </Project>

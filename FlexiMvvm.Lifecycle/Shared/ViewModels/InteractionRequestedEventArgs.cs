@@ -15,21 +15,27 @@
 // =========================================================================
 
 using System;
-using JetBrains.Annotations;
 
-namespace FlexiMvvm.Interactions
+namespace FlexiMvvm.ViewModels
 {
-    public class InteractionRequestEventArgs<T> : EventArgs
+    /// <summary>
+    /// Provides data for the <see cref="Interaction{T}.Requested"/> event.
+    /// </summary>
+    /// <typeparam name="T">The type of the request.</typeparam>
+    public class InteractionRequestedEventArgs<T> : EventArgs
     {
-        public InteractionRequestEventArgs([NotNull] T request)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="InteractionRequestedEventArgs{T}"/> class.
+        /// </summary>
+        /// <param name="request">The request to be passed by the view model to view.</param>
+        public InteractionRequestedEventArgs(T request)
         {
-            if (request == null)
-                throw new ArgumentNullException(nameof(request));
-
             Request = request;
         }
 
-        [NotNull]
+        /// <summary>
+        /// Gets the request sent by the view model.
+        /// </summary>
         public T Request { get; }
     }
 }
