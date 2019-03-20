@@ -16,6 +16,10 @@
 
 namespace FlexiMvvm.ValueConverters
 {
+    /// <summary>
+    /// Represents a value conversion result.
+    /// </summary>
+    /// <typeparam name="TValue">The type of the value.</typeparam>
     public class ConversionResult<TValue>
     {
         private ConversionResult(object? value)
@@ -25,11 +29,21 @@ namespace FlexiMvvm.ValueConverters
 
         internal object? Value { get; }
 
+        /// <summary>
+        /// Sets <paramref name="value"/> as a conversion result and passes it through the binding engine.
+        /// </summary>
+        /// <param name="value">The converted value.</param>
+        /// <returns>The conversion result instance.</returns>
         public static ConversionResult<TValue> SetValue(TValue value)
         {
             return new ConversionResult<TValue>(value);
         }
 
+        /// <summary>
+        /// Sets <see cref="BindingValue.UnsetValue"/> as a conversion result. It indicates that the value converter produced no value
+        /// and that the binding engine will use the FallbackValue, if available, or the default value instead.
+        /// </summary>
+        /// <returns>The conversion result instance.</returns>
         public static ConversionResult<TValue> UnsetValue()
         {
             return new ConversionResult<TValue>(BindingValue.UnsetValue);
