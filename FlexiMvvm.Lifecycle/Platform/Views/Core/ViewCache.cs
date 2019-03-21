@@ -23,14 +23,14 @@ namespace FlexiMvvm.Views.Core
 {
     internal static class ViewCache
     {
-        private static List<WeakReference<IView<IViewModel>>>? _viewsWeakReferences;
+        private static List<WeakReference<IView<ILifecycleViewModel>>>? _viewsWeakReferences;
 
-        private static List<WeakReference<IView<IViewModel>>> ViewsWeakReferences =>
-            _viewsWeakReferences ?? (_viewsWeakReferences = new List<WeakReference<IView<IViewModel>>>());
+        private static List<WeakReference<IView<ILifecycleViewModel>>> ViewsWeakReferences =>
+            _viewsWeakReferences ?? (_viewsWeakReferences = new List<WeakReference<IView<ILifecycleViewModel>>>());
 
         internal static TView Get<TView, TViewModel>(TViewModel viewModel)
             where TView : class, IView<TViewModel>
-            where TViewModel : class, IViewModel
+            where TViewModel : class, ILifecycleViewModel
         {
             TView? view = null;
 
@@ -56,12 +56,12 @@ namespace FlexiMvvm.Views.Core
             return view;
         }
 
-        internal static void Add(IView<IViewModel> view)
+        internal static void Add(IView<ILifecycleViewModel> view)
         {
-            ViewsWeakReferences.Add(new WeakReference<IView<IViewModel>>(view));
+            ViewsWeakReferences.Add(new WeakReference<IView<ILifecycleViewModel>>(view));
         }
 
-        internal static void Remove(IView<IViewModel> view)
+        internal static void Remove(IView<ILifecycleViewModel> view)
         {
             foreach (var viewWeakReference in ViewsWeakReferences)
             {

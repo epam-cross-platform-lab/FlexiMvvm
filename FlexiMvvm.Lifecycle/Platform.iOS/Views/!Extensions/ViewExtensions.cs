@@ -37,7 +37,7 @@ namespace FlexiMvvm.Views
         /// <paramref name="view" /> is derived from a class other than the <see cref="UINavigationController"/> or <see cref="UIViewController"/>.
         /// </exception>
         public static void As(
-            this IView<IViewModel> view,
+            this IView<ILifecycleViewModel> view,
             Action<UINavigationController> navigationControllerHandler,
             Action<UIViewController> viewControllerHandler)
         {
@@ -77,7 +77,7 @@ namespace FlexiMvvm.Views
         /// <paramref name="view" /> is derived from a class other than the <see cref="UINavigationController"/> or <see cref="UIViewController"/>.
         /// </exception>
         public static T As<T>(
-            this IView<IViewModel> view,
+            this IView<ILifecycleViewModel> view,
             Func<UINavigationController, T> navigationControllerHandler,
             Func<UIViewController, T> viewControllerHandler)
         {

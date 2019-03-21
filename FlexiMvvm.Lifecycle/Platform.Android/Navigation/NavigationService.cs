@@ -38,7 +38,7 @@ namespace FlexiMvvm.Navigation
         /// </param>
         /// <exception cref="ArgumentNullException"><paramref name="sourceView"/> or <paramref name="targetViewIntent"/> is <c>null</c>.</exception>
         public void Navigate(
-            INavigationView<IViewModel> sourceView,
+            INavigationView<ILifecycleViewModel> sourceView,
             Intent targetViewIntent,
             ForwardNavigationDelegate? navigationStrategy = null)
         {
@@ -64,12 +64,12 @@ namespace FlexiMvvm.Navigation
         /// <paramref name="sourceView" /> is derived from a class other than the <see cref="FragmentActivity"/> or <see cref="Fragment"/>.
         /// </exception>
         /// <exception cref="InvalidOperationException">
-        /// <see cref="NavigationViewExtensions.GetActivity(INavigationView{IViewModel})"/> returned <c>null</c> value for the <paramref name="sourceView"/>.
+        /// <see cref="NavigationViewExtensions.GetActivity(INavigationView{ILifecycleViewModel})"/> returned <c>null</c> value for the <paramref name="sourceView"/>.
         /// </exception>
         public void Navigate<TTargetView>(
-            INavigationView<IViewModel> sourceView,
+            INavigationView<ILifecycleViewModel> sourceView,
             ForwardNavigationDelegate? navigationStrategy = null)
-            where TTargetView : FragmentActivity, IView<IViewModel>
+            where TTargetView : FragmentActivity, IView<ILifecycleViewModel>
         {
             if (sourceView == null)
                 throw new ArgumentNullException(nameof(sourceView));
@@ -102,13 +102,13 @@ namespace FlexiMvvm.Navigation
         /// <paramref name="sourceView" /> is derived from a class other than the <see cref="FragmentActivity"/> or <see cref="Fragment"/>.
         /// </exception>
         /// <exception cref="InvalidOperationException">
-        /// <see cref="NavigationViewExtensions.GetActivity(INavigationView{IViewModel})"/> returned <c>null</c> value for the <paramref name="sourceView"/>.
+        /// <see cref="NavigationViewExtensions.GetActivity(INavigationView{ILifecycleViewModel})"/> returned <c>null</c> value for the <paramref name="sourceView"/>.
         /// </exception>
         public void Navigate<TTargetView, TParameters>(
-            INavigationView<IViewModel> sourceView,
+            INavigationView<ILifecycleViewModel> sourceView,
             TParameters? parameters,
             ForwardNavigationDelegate? navigationStrategy = null)
-            where TTargetView : FragmentActivity, IView<IViewModelWithParameters<TParameters>>
+            where TTargetView : FragmentActivity, IView<ILifecycleViewModelWithParameters<TParameters>>
             where TParameters : Parameters
         {
             if (sourceView == null)
@@ -139,7 +139,7 @@ namespace FlexiMvvm.Navigation
         /// </param>
         /// <exception cref="ArgumentNullException"><paramref name="sourceView"/> or <paramref name="targetViewIntent"/> is <c>null</c>.</exception>
         public void NavigateForResult<TResultMapper>(
-            INavigationView<IViewModelWithResultHandler> sourceView,
+            INavigationView<ILifecycleViewModelWithResultHandler> sourceView,
             Intent targetViewIntent,
             ForwardNavigationDelegate? navigationStrategy = null)
             where TResultMapper : IResultMapper<Result>, new()
@@ -168,12 +168,12 @@ namespace FlexiMvvm.Navigation
         /// <paramref name="sourceView" /> is derived from a class other than the <see cref="FragmentActivity"/> or <see cref="Fragment"/>.
         /// </exception>
         /// <exception cref="InvalidOperationException">
-        /// <see cref="NavigationViewExtensions.GetActivity(INavigationView{IViewModel})"/> returned <c>null</c> value for the <paramref name="sourceView"/>.
+        /// <see cref="NavigationViewExtensions.GetActivity(INavigationView{ILifecycleViewModel})"/> returned <c>null</c> value for the <paramref name="sourceView"/>.
         /// </exception>
         public void NavigateForResult<TTargetView, TResult>(
-            INavigationView<IViewModelWithResultHandler> sourceView,
+            INavigationView<ILifecycleViewModelWithResultHandler> sourceView,
             ForwardNavigationDelegate? navigationStrategy = null)
-            where TTargetView : FragmentActivity, INavigationView<IViewModelWithResult<TResult>>
+            where TTargetView : FragmentActivity, INavigationView<ILifecycleViewModelWithResult<TResult>>
             where TResult : Result
         {
             if (sourceView == null)
@@ -209,13 +209,13 @@ namespace FlexiMvvm.Navigation
         /// <paramref name="sourceView" /> is derived from a class other than the <see cref="FragmentActivity"/> or <see cref="Fragment"/>.
         /// </exception>
         /// <exception cref="InvalidOperationException">
-        /// <see cref="NavigationViewExtensions.GetActivity(INavigationView{IViewModel})"/> returned <c>null</c> value for the <paramref name="sourceView"/>.
+        /// <see cref="NavigationViewExtensions.GetActivity(INavigationView{ILifecycleViewModel})"/> returned <c>null</c> value for the <paramref name="sourceView"/>.
         /// </exception>
         public void NavigateForResult<TTargetView, TParameters, TResult>(
-            INavigationView<IViewModelWithResultHandler> sourceView,
+            INavigationView<ILifecycleViewModelWithResultHandler> sourceView,
             TParameters? parameters,
             ForwardNavigationDelegate? navigationStrategy = null)
-            where TTargetView : FragmentActivity, IView<IViewModelWithParameters<TParameters>>, INavigationView<IViewModelWithResult<TResult>>
+            where TTargetView : FragmentActivity, IView<ILifecycleViewModelWithParameters<TParameters>>, INavigationView<ILifecycleViewModelWithResult<TResult>>
             where TParameters : Parameters
             where TResult : Result
         {
@@ -246,7 +246,7 @@ namespace FlexiMvvm.Navigation
         /// </param>
         /// <exception cref="ArgumentNullException"><paramref name="sourceView"/> is <c>null</c>.</exception>
         public void NavigateBack(
-            INavigationView<IViewModel> sourceView,
+            INavigationView<ILifecycleViewModel> sourceView,
             BackwardNavigationDelegate? navigationStrategy = null)
         {
             if (sourceView == null)
@@ -268,7 +268,7 @@ namespace FlexiMvvm.Navigation
         /// </param>
         /// <exception cref="ArgumentNullException"><paramref name="sourceView"/> is <c>null</c>.</exception>
         public void NavigateBack<TResult>(
-            INavigationView<IViewModelWithResult<TResult>> sourceView,
+            INavigationView<ILifecycleViewModelWithResult<TResult>> sourceView,
             ResultCode resultCode,
             TResult? result,
             BackwardNavigationDelegate? navigationStrategy = null)

@@ -36,7 +36,7 @@ namespace FlexiMvvm.Navigation
         /// <exception cref="ArgumentException">
         /// <paramref name="view" /> is derived from a class other than the <see cref="UINavigationController"/> or <see cref="UIViewController"/>.
         /// </exception>
-        public static UINavigationController? GetNavigationController(this INavigationView<IViewModel> view)
+        public static UINavigationController? GetNavigationController(this INavigationView<ILifecycleViewModel> view)
         {
             if (view == null)
                 throw new ArgumentNullException(nameof(view));

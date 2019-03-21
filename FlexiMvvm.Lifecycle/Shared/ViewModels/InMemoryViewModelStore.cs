@@ -23,13 +23,13 @@ namespace FlexiMvvm.ViewModels
     public sealed class InMemoryViewModelStore : IViewModelStore
     {
         [CanBeNull]
-        private Dictionary<string, IViewModel> _viewModels;
+        private Dictionary<string, ILifecycleViewModel> _viewModels;
 
         [NotNull]
-        private Dictionary<string, IViewModel> ViewModels => _viewModels ?? (_viewModels = new Dictionary<string, IViewModel>());
+        private Dictionary<string, ILifecycleViewModel> ViewModels => _viewModels ?? (_viewModels = new Dictionary<string, ILifecycleViewModel>());
 
         public TViewModel Get<TViewModel>(string key)
-            where TViewModel : class, IViewModel
+            where TViewModel : class, ILifecycleViewModel
         {
             if (string.IsNullOrWhiteSpace(key))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
@@ -38,7 +38,7 @@ namespace FlexiMvvm.ViewModels
         }
 
         public void Add<TViewModel>(string key, TViewModel viewModel)
-            where TViewModel : class, IViewModel
+            where TViewModel : class, ILifecycleViewModel
         {
             if (string.IsNullOrWhiteSpace(key))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));

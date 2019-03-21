@@ -76,7 +76,7 @@ namespace FlexiMvvm.Views.Core
 
     public class ViewLifecycleDelegate<TView, TViewModel> : ViewLifecycleDelegate<TView>
         where TView : class, IIosView, INavigationView<TViewModel>, IKeyboardHandlerOwner, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModel
+        where TViewModel : class, ILifecycleViewModel
     {
         private ResultCode _resultCode = ResultCode.Canceled;
         [CanBeNull]
@@ -135,7 +135,7 @@ namespace FlexiMvvm.Views.Core
             if (args == null)
                 throw new ArgumentNullException(nameof(args));
 
-            if (View.ViewModel is IViewModelWithResultHandler viewModelWithResultHandler)
+            if (View.ViewModel is ILifecycleViewModelWithResultHandler viewModelWithResultHandler)
             {
                 await _viewModelAsyncInitialization;
                 viewModelWithResultHandler.HandleResult(args.ResultCode, args.Result);

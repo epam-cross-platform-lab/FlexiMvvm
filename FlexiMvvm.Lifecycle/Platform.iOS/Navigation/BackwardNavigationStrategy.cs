@@ -27,7 +27,7 @@ namespace FlexiMvvm.Navigation
     /// </summary>
     /// <param name="sourceView">The source navigation view from which navigation is performed from.</param>
     /// <param name="animated">Determines if the transition is to be animated.</param>
-    public delegate void BackwardNavigationDelegate(INavigationView<IViewModel> sourceView, bool animated);
+    public delegate void BackwardNavigationDelegate(INavigationView<ILifecycleViewModel> sourceView, bool animated);
 
     /// <summary>
     /// Provides a set of backward navigation strategies.

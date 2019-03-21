@@ -26,10 +26,10 @@ namespace FlexiMvvm.ViewModels
     {
         [NotNull]
         protected abstract TViewModel CreateInstance<TViewModel>()
-            where TViewModel : class, IViewModel;
+            where TViewModel : class, ILifecycleViewModel;
 
         public TViewModel Create<TViewModel>()
-            where TViewModel : class, IViewModel
+            where TViewModel : class, ILifecycleViewModel
         {
             var viewModel = CreateInstance<TViewModel>();
 
@@ -43,7 +43,7 @@ namespace FlexiMvvm.ViewModels
         }
 
         public TViewModel Create<TViewModel>(IBundle state)
-            where TViewModel : class, IViewModel, IStateOwner
+            where TViewModel : class, ILifecycleViewModel, IStateOwner
         {
             var viewModel = Create<TViewModel>();
             viewModel.ImportState(state);

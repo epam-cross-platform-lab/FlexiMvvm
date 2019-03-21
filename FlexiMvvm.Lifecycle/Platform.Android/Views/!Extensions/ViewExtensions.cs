@@ -36,7 +36,7 @@ namespace FlexiMvvm.Views
         /// <paramref name="view" /> is derived from a class other than the <see cref="Android.Support.V4.App.FragmentActivity"/> or <see cref="Android.Support.V4.App.Fragment"/>.
         /// </exception>
         public static void As(
-            this IView<IViewModel> view,
+            this IView<ILifecycleViewModel> view,
             Action<Android.Support.V4.App.FragmentActivity> activityHandler,
             Action<Android.Support.V4.App.Fragment> fragmentHandler)
         {
@@ -76,7 +76,7 @@ namespace FlexiMvvm.Views
         /// <paramref name="view" /> is derived from a class other than the <see cref="Android.Support.V4.App.FragmentActivity"/> or <see cref="Android.Support.V4.App.Fragment"/>.
         /// </exception>
         public static T As<T>(
-            this IView<IViewModel> view,
+            this IView<ILifecycleViewModel> view,
             Func<Android.Support.V4.App.FragmentActivity, T> activityHandler,
             Func<Android.Support.V4.App.Fragment, T> fragmentHandler)
         {

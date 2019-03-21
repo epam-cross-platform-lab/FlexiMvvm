@@ -28,7 +28,7 @@ namespace FlexiMvvm.Navigation
     /// <param name="sourceView">The source navigation view from which navigation is performed from.</param>
     /// <param name="targetView">The target view for navigation.</param>
     /// <param name="animated">Determines if the transition is to be animated.</param>
-    public delegate void ForwardNavigationDelegate(INavigationView<IViewModel> sourceView, UIViewController targetView, bool animated);
+    public delegate void ForwardNavigationDelegate(INavigationView<ILifecycleViewModel> sourceView, UIViewController targetView, bool animated);
 
     /// <summary>
     /// Provides a set of forward navigation strategies.

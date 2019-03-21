@@ -35,7 +35,7 @@ namespace FlexiMvvm.Navigation
         /// <exception cref="InvalidOperationException">The view instance is missing for <paramref name="viewModel"/> instance.</exception>
         public static TView GetViewController<TView, TViewModel>(TViewModel viewModel)
             where TView : UIViewController, INavigationView<TViewModel>
-            where TViewModel : class, IViewModel
+            where TViewModel : class, ILifecycleViewModel
         {
             if (viewModel == null)
                 throw new ArgumentNullException(nameof(viewModel));

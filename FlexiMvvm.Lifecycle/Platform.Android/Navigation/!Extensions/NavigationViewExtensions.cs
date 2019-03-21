@@ -37,7 +37,7 @@ namespace FlexiMvvm.Navigation
         /// <exception cref="ArgumentException">
         /// <paramref name="view" /> is derived from a class other than the <see cref="FragmentActivity"/> or <see cref="Fragment"/>.
         /// </exception>
-        public static FragmentActivity? GetActivity(this INavigationView<IViewModel> view)
+        public static FragmentActivity? GetActivity(this INavigationView<ILifecycleViewModel> view)
         {
             if (view == null)
                 throw new ArgumentNullException(nameof(view));

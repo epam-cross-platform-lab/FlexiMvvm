@@ -23,7 +23,7 @@ namespace FlexiMvvm.Views.Core
 {
     public class BindableViewLifecycleDelegate<TView, TViewModel> : ViewLifecycleDelegate<TView, TViewModel>
         where TView : class, IBindableView<TViewModel>, IIosView, INavigationView<TViewModel>, IBindingSetOwner, IKeyboardHandlerOwner, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModel
+        where TViewModel : class, ILifecycleViewModel
     {
         public BindableViewLifecycleDelegate([NotNull] TView view)
             : base(view)

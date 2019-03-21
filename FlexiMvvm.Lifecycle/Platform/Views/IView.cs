@@ -23,7 +23,7 @@ namespace FlexiMvvm.Views
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
     public interface IView<out TViewModel>
-        where TViewModel : class, IViewModel
+        where TViewModel : class, ILifecycleViewModel
     {
         /// <summary>
         /// Gets the view model.

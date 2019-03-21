@@ -65,7 +65,7 @@ namespace FlexiMvvm.Views.Core
 
     public class ViewLifecycleDelegate<TView, TViewModel> : ViewLifecycleDelegate<TView>
         where TView : class, IAndroidView, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModel, IStateOwner
+        where TViewModel : class, ILifecycleViewModel, IStateOwner
     {
         private const string ViewModelKeyKey = "FlexiMvvm_ViewModel_Key";
         private const string ViewModelStateKey = "FlexiMvvm_ViewModel_State";
@@ -114,7 +114,7 @@ namespace FlexiMvvm.Views.Core
         {
             base.OnActivityResult(requestCode, resultCode, data);
 
-            if (View.ViewModel is IViewModelWithResultHandler viewModelWithResultHandler)
+            if (View.ViewModel is ILifecycleViewModelWithResultHandler viewModelWithResultHandler)
             {
                 var resultMapper = View.RequestCode.GetResultMapper(requestCode);
 

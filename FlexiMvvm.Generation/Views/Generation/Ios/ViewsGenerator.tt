@@ -77,7 +77,7 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
     }
 
     public partial class <#= viewGenerationOptions.ClassName #><TViewModel> : <#= viewGenerationOptions.ClassName #>, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithoutParameters
+        where TViewModel : class, ILifecycleViewModelWithoutParameters
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
@@ -125,7 +125,7 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
     }
 
     public partial class <#= viewGenerationOptions.ClassName #><TViewModel, TParameters> : <#= viewGenerationOptions.ClassName #>, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithParameters<TParameters>
+        where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>
         where TParameters : Parameters
     {
         private readonly TParameters _parameters;

@@ -33,12 +33,12 @@ namespace FlexiMvvm.Navigation
         /// <returns>The navigation view.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> is <c>null</c>.</exception>
         /// <exception cref="InvalidOperationException">The view instance is missing for <paramref name="viewModel"/> instance.</exception>
-        public static INavigationView<IViewModel> Get(IViewModel viewModel)
+        public static INavigationView<ILifecycleViewModel> Get(ILifecycleViewModel viewModel)
         {
             if (viewModel == null)
                 throw new ArgumentNullException(nameof(viewModel));
 
-            return ViewCache.Get<INavigationView<IViewModel>, IViewModel>(viewModel);
+            return ViewCache.Get<INavigationView<ILifecycleViewModel>, ILifecycleViewModel>(viewModel);
         }
 
         /// <summary>
@@ -48,12 +48,12 @@ namespace FlexiMvvm.Navigation
         /// <returns>The navigation view.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> is <c>null</c>.</exception>
         /// <exception cref="InvalidOperationException">The view instance is missing for <paramref name="viewModel"/> instance.</exception>
-        public static INavigationView<IViewModelWithResultHandler> Get(IViewModelWithResultHandler viewModel)
+        public static INavigationView<ILifecycleViewModelWithResultHandler> Get(ILifecycleViewModelWithResultHandler viewModel)
         {
             if (viewModel == null)
                 throw new ArgumentNullException(nameof(viewModel));
 
-            return ViewCache.Get<INavigationView<IViewModelWithResultHandler>, IViewModelWithResultHandler>(viewModel);
+            return ViewCache.Get<INavigationView<ILifecycleViewModelWithResultHandler>, ILifecycleViewModelWithResultHandler>(viewModel);
         }
 
         /// <summary>
@@ -64,13 +64,13 @@ namespace FlexiMvvm.Navigation
         /// <returns>The navigation view.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> is <c>null</c>.</exception>
         /// <exception cref="InvalidOperationException">The view instance is missing for <paramref name="viewModel"/> instance.</exception>
-        public static INavigationView<IViewModelWithResult<TResult>> Get<TResult>(IViewModelWithResult<TResult> viewModel)
+        public static INavigationView<ILifecycleViewModelWithResult<TResult>> Get<TResult>(ILifecycleViewModelWithResult<TResult> viewModel)
             where TResult : Result
         {
             if (viewModel == null)
                 throw new ArgumentNullException(nameof(viewModel));
 
-            return ViewCache.Get<INavigationView<IViewModelWithResult<TResult>>, IViewModelWithResult<TResult>>(viewModel);
+            return ViewCache.Get<INavigationView<ILifecycleViewModelWithResult<TResult>>, ILifecycleViewModelWithResult<TResult>>(viewModel);
         }
     }
 }
