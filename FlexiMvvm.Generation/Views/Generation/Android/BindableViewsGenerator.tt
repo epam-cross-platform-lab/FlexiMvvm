@@ -27,7 +27,7 @@ using FlexiMvvm.Views.Core;
 namespace <#= GetNamespace(viewGenerationOptions) #>
 {
     public partial class <#= viewGenerationOptions.ClassName #><TViewModel> : <#= viewGenerationOptions.BaseClassName #><TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
-        where TViewModel : class, IViewModelWithoutParameters, IStateOwner
+        where TViewModel : class, ILifecycleViewModelWithoutParameters, IStateOwner
     {
         public IDisposable BindingSet { get; private set; }
 
@@ -47,7 +47,7 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
     }
 
     public partial class <#= viewGenerationOptions.ClassName #><TViewModel, TParameters> : <#= viewGenerationOptions.BaseClassName #><TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
-        where TViewModel : class, IViewModelWithParameters<TParameters>, IStateOwner
+        where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>, IStateOwner
         where TParameters : Parameters
     {
         public IDisposable BindingSet { get; private set; }

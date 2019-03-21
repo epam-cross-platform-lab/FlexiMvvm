@@ -14,15 +14,12 @@
 // limitations under the License.
 // =========================================================================
 
-using JetBrains.Annotations;
-
 namespace FlexiMvvm.Persistence.Core
 {
     public interface IStateOwner
     {
-        void ImportState([CanBeNull] IBundle state);
+        void ImportState(IBundle? state);
 
-        [CanBeNull]
-        IBundle ExportState();
+        IBundle? ExportState();
     }
 }

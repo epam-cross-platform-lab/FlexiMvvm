@@ -22,7 +22,7 @@ namespace FlexiMvvm.Views.Core
     {
         private const string ViewModelStoreTag = "FlexiMvvm_ViewModelStore";
 
-        internal static IViewModelStore? Get(IView<IViewModel> view)
+        internal static IViewModelStore? Get(IView<ILifecycleViewModel> view)
         {
             ViewModelStoreFragment? store = null;
             var fragmentManager = view.As(

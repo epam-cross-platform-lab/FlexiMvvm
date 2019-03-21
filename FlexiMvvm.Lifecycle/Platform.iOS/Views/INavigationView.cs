@@ -21,7 +21,7 @@ using UIKit;
 namespace FlexiMvvm.Views
 {
     public interface INavigationView<out TViewModel> : IView<TViewModel>
-        where TViewModel : class, IViewModel
+        where TViewModel : class, ILifecycleViewModel
     {
         event EventHandler<ResultSetEventArgs> ResultSet;
 

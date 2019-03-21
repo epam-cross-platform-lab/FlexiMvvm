@@ -20,7 +20,7 @@ using JetBrains.Annotations;
 namespace FlexiMvvm.ViewModels.Core
 {
     public interface IViewModelOwner<in TViewModel>
-        where TViewModel : class, IViewModel
+        where TViewModel : class, ILifecycleViewModel
     {
         void SetViewModel([NotNull] TViewModel viewModel);
 

@@ -20,16 +20,16 @@ using FlexiMvvm.Weak.Subscriptions;
 
 namespace FlexiMvvm.Views
 {
-    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="FlexiMvvm.Views.INavigationView{FlexiMvvm.ViewModels.IViewModel}"/> class events.</summary>
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="FlexiMvvm.Views.INavigationView{FlexiMvvm.ViewModels.ILifecycleViewModel}"/> class events.</summary>
     public static class INavigationViewWeakEventSubscriptionExtensions
     {
-        /// <summary>Weak subscription on <see cref="FlexiMvvm.Views.INavigationView{FlexiMvvm.ViewModels.IViewModel}.ResultSet"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="FlexiMvvm.Views.INavigationView{FlexiMvvm.ViewModels.ILifecycleViewModel}.ResultSet"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="FlexiMvvm.Views.INavigationView{FlexiMvvm.ViewModels.IViewModel}.ResultSet"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="FlexiMvvm.Views.INavigationView{FlexiMvvm.ViewModels.ILifecycleViewModel}.ResultSet"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable ResultSetWeakSubscribe(
-            this FlexiMvvm.Views.INavigationView<FlexiMvvm.ViewModels.IViewModel> eventSource,
+            this FlexiMvvm.Views.INavigationView<FlexiMvvm.ViewModels.ILifecycleViewModel> eventSource,
             EventHandler<FlexiMvvm.Views.ResultSetEventArgs> eventHandler)
         {
             if (eventSource == null)
@@ -37,7 +37,7 @@ namespace FlexiMvvm.Views
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<FlexiMvvm.Views.INavigationView<FlexiMvvm.ViewModels.IViewModel>, FlexiMvvm.Views.ResultSetEventArgs>(
+            return new EventHandlerWeakEventSubscription<FlexiMvvm.Views.INavigationView<FlexiMvvm.ViewModels.ILifecycleViewModel>, FlexiMvvm.Views.ResultSetEventArgs>(
                 eventSource,
                 (source, handler) => source.ResultSet += handler,
                 (source, handler) => source.ResultSet -= handler,

@@ -21,7 +21,7 @@ using FlexiMvvm.ViewModels;
 namespace FlexiMvvm.Views
 {
     public interface INavigationView<out TViewModel> : IView<TViewModel>
-        where TViewModel : class, IViewModel
+        where TViewModel : class, ILifecycleViewModel
     {
         RequestCode RequestCode { get; }
 

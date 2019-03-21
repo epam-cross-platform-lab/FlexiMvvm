@@ -33,7 +33,7 @@ namespace FlexiMvvm.ViewModels
             [NotNull] IViewModelFactory factory,
             [CanBeNull] IBundle state,
             out bool created)
-            where TViewModel : class, IViewModel, IStateOwner
+            where TViewModel : class, ILifecycleViewModel, IStateOwner
         {
             if (store == null)
                 throw new ArgumentNullException(nameof(store));
