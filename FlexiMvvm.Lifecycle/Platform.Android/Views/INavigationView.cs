@@ -17,27 +17,25 @@
 using Android.Content;
 using Android.OS;
 using FlexiMvvm.ViewModels;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Views
 {
     public interface INavigationView<out TViewModel> : IView<TViewModel>
         where TViewModel : class, IViewModel
     {
-        [NotNull]
         RequestCode RequestCode { get; }
 
-        void StartActivity([NotNull] Intent intent);
+        void StartActivity(Intent intent);
 
-        void StartActivity([NotNull] Intent intent, [CanBeNull] Bundle options);
+        void StartActivity(Intent intent, Bundle? options);
 
-        void StartActivityForResult([NotNull] Intent intent, int requestCode);
+        void StartActivityForResult(Intent intent, int requestCode);
 
-        void StartActivityForResult([NotNull] Intent intent, int requestCode, [CanBeNull] Bundle options);
+        void StartActivityForResult(Intent intent, int requestCode, Bundle? options);
 
         void SetResult(Android.App.Result resultCode);
 
-        void SetResult(Android.App.Result resultCode, [CanBeNull] Intent data);
+        void SetResult(Android.App.Result resultCode, Intent? data);
 
         void Finish();
     }
