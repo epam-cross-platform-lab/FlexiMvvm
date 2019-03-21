@@ -15,40 +15,10 @@
 // =========================================================================
 
 using System.ComponentModel;
-using System.Threading.Tasks;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.ViewModels
 {
     public interface IViewModel : INotifyPropertyChanged
     {
-    }
-
-    public interface IViewModelWithoutParameters : IViewModel
-    {
-        [NotNull]
-        Task InitializeAsync();
-
-        void Initialize();
-    }
-
-    public interface IViewModelWithParameters<TParameters> : IViewModel
-        where TParameters : Parameters
-    {
-        [NotNull]
-        Task InitializeAsync([CanBeNull] TParameters parameters);
-
-        void Initialize([CanBeNull] TParameters parameters);
-    }
-
-    public interface IViewModelWithResult<in TResult> : IViewModel
-        where TResult : Result
-    {
-        void SetResult(ResultCode resultCode, [CanBeNull] TResult result);
-    }
-
-    public interface IViewModelWithResultHandler : IViewModel
-    {
-        void HandleResult(ResultCode resultCode, [CanBeNull] Result result);
     }
 }

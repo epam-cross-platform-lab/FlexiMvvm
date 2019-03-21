@@ -36,7 +36,7 @@ namespace FlexiMvvm.Navigation
         /// <exception cref="InvalidOperationException">The view instance is missing for <paramref name="viewModel"/> instance.</exception>
         public static TView GetActivity<TView, TViewModel>(TViewModel viewModel)
             where TView : FragmentActivity, INavigationView<TViewModel>
-            where TViewModel : class, IViewModel
+            where TViewModel : class, ILifecycleViewModel
         {
             if (viewModel == null)
                 throw new ArgumentNullException(nameof(viewModel));
@@ -55,7 +55,7 @@ namespace FlexiMvvm.Navigation
         /// <exception cref="InvalidOperationException">The view instance is missing for <paramref name="viewModel"/> instance.</exception>
         public static TView GetFragment<TView, TViewModel>(TViewModel viewModel)
             where TView : Fragment, INavigationView<TViewModel>
-            where TViewModel : class, IViewModel
+            where TViewModel : class, ILifecycleViewModel
         {
             if (viewModel == null)
                 throw new ArgumentNullException(nameof(viewModel));

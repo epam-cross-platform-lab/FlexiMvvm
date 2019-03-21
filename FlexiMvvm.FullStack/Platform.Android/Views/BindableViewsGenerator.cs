@@ -25,7 +25,7 @@ using FlexiMvvm.Views.Core;
 namespace FlexiMvvm.Views
 {
     public partial class BindableAppCompatActivity<TViewModel> : FlexiMvvm.Views.AppCompatActivity<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
-        where TViewModel : class, IViewModelWithoutParameters, IStateOwner
+        where TViewModel : class, ILifecycleViewModelWithoutParameters, IStateOwner
     {
         public IDisposable BindingSet { get; private set; }
 
@@ -45,7 +45,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class BindableAppCompatActivity<TViewModel, TParameters> : FlexiMvvm.Views.AppCompatActivity<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
-        where TViewModel : class, IViewModelWithParameters<TParameters>, IStateOwner
+        where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>, IStateOwner
         where TParameters : Parameters
     {
         public IDisposable BindingSet { get; private set; }
@@ -69,7 +69,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     public partial class BindableDialogFragment<TViewModel> : FlexiMvvm.Views.DialogFragment<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
-        where TViewModel : class, IViewModelWithoutParameters, IStateOwner
+        where TViewModel : class, ILifecycleViewModelWithoutParameters, IStateOwner
     {
         public IDisposable BindingSet { get; private set; }
 
@@ -89,7 +89,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class BindableDialogFragment<TViewModel, TParameters> : FlexiMvvm.Views.DialogFragment<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
-        where TViewModel : class, IViewModelWithParameters<TParameters>, IStateOwner
+        where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>, IStateOwner
         where TParameters : Parameters
     {
         public IDisposable BindingSet { get; private set; }
@@ -113,7 +113,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     public partial class BindableFragment<TViewModel> : FlexiMvvm.Views.Fragment<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
-        where TViewModel : class, IViewModelWithoutParameters, IStateOwner
+        where TViewModel : class, ILifecycleViewModelWithoutParameters, IStateOwner
     {
         public IDisposable BindingSet { get; private set; }
 
@@ -133,7 +133,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class BindableFragment<TViewModel, TParameters> : FlexiMvvm.Views.Fragment<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
-        where TViewModel : class, IViewModelWithParameters<TParameters>, IStateOwner
+        where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>, IStateOwner
         where TParameters : Parameters
     {
         public IDisposable BindingSet { get; private set; }

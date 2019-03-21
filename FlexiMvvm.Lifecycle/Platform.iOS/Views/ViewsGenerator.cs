@@ -75,7 +75,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class CollectionViewController<TViewModel> : CollectionViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithoutParameters
+        where TViewModel : class, ILifecycleViewModelWithoutParameters
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
@@ -123,7 +123,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class CollectionViewController<TViewModel, TParameters> : CollectionViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithParameters<TParameters>
+        where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>
         where TParameters : Parameters
     {
         private readonly TParameters _parameters;
@@ -232,7 +232,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class NavigationController<TViewModel> : NavigationController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithoutParameters
+        where TViewModel : class, ILifecycleViewModelWithoutParameters
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
@@ -280,7 +280,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class NavigationController<TViewModel, TParameters> : NavigationController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithParameters<TParameters>
+        where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>
         where TParameters : Parameters
     {
         private readonly TParameters _parameters;
@@ -389,7 +389,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class PageViewController<TViewModel> : PageViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithoutParameters
+        where TViewModel : class, ILifecycleViewModelWithoutParameters
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
@@ -437,7 +437,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class PageViewController<TViewModel, TParameters> : PageViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithParameters<TParameters>
+        where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>
         where TParameters : Parameters
     {
         private readonly TParameters _parameters;
@@ -546,7 +546,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class SplitViewController<TViewModel> : SplitViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithoutParameters
+        where TViewModel : class, ILifecycleViewModelWithoutParameters
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
@@ -594,7 +594,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class SplitViewController<TViewModel, TParameters> : SplitViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithParameters<TParameters>
+        where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>
         where TParameters : Parameters
     {
         private readonly TParameters _parameters;
@@ -703,7 +703,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class TabBarController<TViewModel> : TabBarController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithoutParameters
+        where TViewModel : class, ILifecycleViewModelWithoutParameters
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
@@ -751,7 +751,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class TabBarController<TViewModel, TParameters> : TabBarController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithParameters<TParameters>
+        where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>
         where TParameters : Parameters
     {
         private readonly TParameters _parameters;
@@ -860,7 +860,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class TableViewController<TViewModel> : TableViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithoutParameters
+        where TViewModel : class, ILifecycleViewModelWithoutParameters
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
@@ -908,7 +908,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class TableViewController<TViewModel, TParameters> : TableViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithParameters<TParameters>
+        where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>
         where TParameters : Parameters
     {
         private readonly TParameters _parameters;
@@ -1017,7 +1017,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class ViewController<TViewModel> : ViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithoutParameters
+        where TViewModel : class, ILifecycleViewModelWithoutParameters
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
@@ -1065,7 +1065,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class ViewController<TViewModel, TParameters> : ViewController, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithParameters<TParameters>
+        where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>
         where TParameters : Parameters
     {
         private readonly TParameters _parameters;

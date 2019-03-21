@@ -23,7 +23,7 @@ namespace FlexiMvvm.Navigation
     /// Defines the contract for backward navigation.
     /// </summary>
     /// <param name="sourceView">The source navigation view from which navigation is performed from.</param>
-    public delegate void BackwardNavigationDelegate(INavigationView<IViewModel> sourceView);
+    public delegate void BackwardNavigationDelegate(INavigationView<ILifecycleViewModel> sourceView);
 
     /// <summary>
     /// Provides a set of backward navigation strategies.

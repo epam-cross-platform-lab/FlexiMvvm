@@ -24,10 +24,10 @@ namespace FlexiMvvm.ViewModels
     {
         [NotNull]
         TViewModel Create<TViewModel>()
-            where TViewModel : class, IViewModel;
+            where TViewModel : class, ILifecycleViewModel;
 
         [NotNull]
         TViewModel Create<TViewModel>([CanBeNull] IBundle state)
-            where TViewModel : class, IViewModel, IStateOwner;
+            where TViewModel : class, ILifecycleViewModel, IStateOwner;
     }
 }

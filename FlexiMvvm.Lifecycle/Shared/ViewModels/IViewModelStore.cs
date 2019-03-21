@@ -22,10 +22,10 @@ namespace FlexiMvvm.ViewModels
     {
         [CanBeNull]
         TViewModel Get<TViewModel>([NotNull] string key)
-            where TViewModel : class, IViewModel;
+            where TViewModel : class, ILifecycleViewModel;
 
         void Add<TViewModel>([NotNull] string key, [NotNull] TViewModel viewModel)
-            where TViewModel : class, IViewModel;
+            where TViewModel : class, ILifecycleViewModel;
 
         void Remove([NotNull] string key);
     }

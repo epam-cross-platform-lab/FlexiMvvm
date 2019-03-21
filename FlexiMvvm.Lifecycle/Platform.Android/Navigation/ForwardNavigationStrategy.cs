@@ -27,7 +27,7 @@ namespace FlexiMvvm.Navigation
     /// <param name="sourceView">The source navigation view from which navigation is performed from.</param>
     /// <param name="targetViewIntent">The description of the target view.</param>
     /// <param name="requestCode">The target view result identifier.</param>
-    public delegate void ForwardNavigationDelegate(INavigationView<IViewModel> sourceView, Intent targetViewIntent, int requestCode);
+    public delegate void ForwardNavigationDelegate(INavigationView<ILifecycleViewModel> sourceView, Intent targetViewIntent, int requestCode);
 
     /// <summary>
     /// Provides a set of forward navigation strategies.

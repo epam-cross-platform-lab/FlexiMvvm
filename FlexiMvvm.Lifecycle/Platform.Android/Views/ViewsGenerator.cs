@@ -92,7 +92,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class AppCompatActivity<TViewModel> : AppCompatActivity, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithoutParameters, IStateOwner
+        where TViewModel : class, ILifecycleViewModelWithoutParameters, IStateOwner
     {
         private RequestCode _requestCode;
 
@@ -117,7 +117,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class AppCompatActivity<TViewModel, TParameters> : AppCompatActivity, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithParameters<TParameters>, IStateOwner
+        where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>, IStateOwner
         where TParameters : Parameters
     {
         private RequestCode _requestCode;
@@ -216,7 +216,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class DialogFragment<TViewModel> : DialogFragment, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithoutParameters, IStateOwner
+        where TViewModel : class, ILifecycleViewModelWithoutParameters, IStateOwner
     {
         private RequestCode _requestCode;
 
@@ -256,7 +256,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class DialogFragment<TViewModel, TParameters> : DialogFragment, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithParameters<TParameters>, IStateOwner
+        where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>, IStateOwner
         where TParameters : Parameters
     {
         private RequestCode _requestCode;
@@ -370,7 +370,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class Fragment<TViewModel> : Fragment, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithoutParameters, IStateOwner
+        where TViewModel : class, ILifecycleViewModelWithoutParameters, IStateOwner
     {
         private RequestCode _requestCode;
 
@@ -410,7 +410,7 @@ namespace FlexiMvvm.Views
     }
 
     public partial class Fragment<TViewModel, TParameters> : Fragment, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
-        where TViewModel : class, IViewModelWithParameters<TParameters>, IStateOwner
+        where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>, IStateOwner
         where TParameters : Parameters
     {
         private RequestCode _requestCode;

@@ -22,7 +22,7 @@ using JetBrains.Annotations;
 namespace FlexiMvvm.Views.Core
 {
     public interface IBindableView<TViewModel> : IView<TViewModel>
-        where TViewModel : class, IViewModel
+        where TViewModel : class, ILifecycleViewModel
     {
         [CanBeNull]
         IDisposable BindingSet { get; }

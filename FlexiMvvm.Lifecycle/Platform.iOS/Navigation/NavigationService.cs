@@ -37,7 +37,7 @@ namespace FlexiMvvm.Navigation
         /// </param>
         /// <exception cref="ArgumentNullException"><paramref name="sourceView"/> or <paramref name="targetView"/> is <c>null</c>.</exception>
         public void Navigate<TTargetView>(
-            INavigationView<IViewModel> sourceView,
+            INavigationView<ILifecycleViewModel> sourceView,
             TTargetView targetView,
             bool animated,
             ForwardNavigationDelegate? navigationStrategy = null)
@@ -66,11 +66,11 @@ namespace FlexiMvvm.Navigation
         /// </param>
         /// <exception cref="ArgumentNullException"><paramref name="sourceView"/> or <paramref name="targetView"/> is <c>null</c>.</exception>
         public void NavigateForResult<TTargetView, TResult>(
-            INavigationView<IViewModelWithResultHandler> sourceView,
+            INavigationView<ILifecycleViewModelWithResultHandler> sourceView,
             TTargetView targetView,
             bool animated,
             ForwardNavigationDelegate? navigationStrategy = null)
-            where TTargetView : UIViewController, INavigationView<IViewModelWithResult<TResult>>
+            where TTargetView : UIViewController, INavigationView<ILifecycleViewModelWithResult<TResult>>
             where TResult : Result
         {
             if (sourceView == null)
@@ -94,7 +94,7 @@ namespace FlexiMvvm.Navigation
         /// </param>
         /// <exception cref="ArgumentNullException"><paramref name="sourceView"/> is <c>null</c>.</exception>
         public void NavigateBack(
-            INavigationView<IViewModel> sourceView,
+            INavigationView<ILifecycleViewModel> sourceView,
             bool animated,
             BackwardNavigationDelegate? navigationStrategy = null)
         {
@@ -119,7 +119,7 @@ namespace FlexiMvvm.Navigation
         /// </param>
         /// <exception cref="ArgumentNullException"><paramref name="sourceView"/> is <c>null</c>.</exception>
         public void NavigateBack<TResult>(
-            INavigationView<IViewModelWithResult<TResult>> sourceView,
+            INavigationView<ILifecycleViewModelWithResult<TResult>> sourceView,
             ResultCode resultCode,
             TResult? result,
             bool animated,
@@ -138,7 +138,7 @@ namespace FlexiMvvm.Navigation
             return targetView is UINavigationController ? NavigationStrategy.Forward.PresentViewController() : NavigationStrategy.Forward.PushViewController();
         }
 
-        private BackwardNavigationDelegate GetBackwardNavigationStrategy(INavigationView<IViewModel> sourceView)
+        private BackwardNavigationDelegate GetBackwardNavigationStrategy(INavigationView<ILifecycleViewModel> sourceView)
         {
             var isPresented = sourceView.PresentingViewController?.PresentedViewController == sourceView;
 
