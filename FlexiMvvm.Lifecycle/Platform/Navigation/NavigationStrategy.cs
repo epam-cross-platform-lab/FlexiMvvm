@@ -14,8 +14,6 @@
 // limitations under the License.
 // =========================================================================
 
-using JetBrains.Annotations;
-
 namespace FlexiMvvm.Navigation
 {
     /// <summary>
@@ -26,13 +24,11 @@ namespace FlexiMvvm.Navigation
         /// <summary>
         /// Gets the forward navigation strategy.
         /// </summary>
-        [NotNull]
         public static ForwardNavigationStrategy Forward { get; } = new ForwardNavigationStrategy();
 
         /// <summary>
         /// Gets the backward navigation strategy.
         /// </summary>
-        [NotNull]
         public static BackwardNavigationStrategy Backward { get; } = new BackwardNavigationStrategy();
     }
 }

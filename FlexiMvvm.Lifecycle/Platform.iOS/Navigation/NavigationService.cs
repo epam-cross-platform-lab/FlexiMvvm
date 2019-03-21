@@ -17,32 +17,12 @@
 using System;
 using FlexiMvvm.ViewModels;
 using FlexiMvvm.Views;
-using FlexiMvvm.Views.Core;
 using UIKit;
 
 namespace FlexiMvvm.Navigation
 {
-    public abstract partial class NavigationService
+    public abstract class NavigationService
     {
-        /// <summary>
-        /// Gets the typed view inherited from the <see cref="UIViewController"/>.
-        /// </summary>
-        /// <typeparam name="TView">The type of the view.</typeparam>
-        /// <typeparam name="TViewModel">The type of the view model.</typeparam>
-        /// <param name="viewModel">The model used for getting a bound view.</param>
-        /// <returns>The typed view instance.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">View instance is missing for provided <paramref name="viewModel"/>.</exception>
-        public TView GetViewController<TView, TViewModel>(TViewModel viewModel)
-            where TView : UIViewController, INavigationView<TViewModel>
-            where TViewModel : class, IViewModel
-        {
-            if (viewModel == null)
-                throw new ArgumentNullException(nameof(viewModel));
-
-            return ViewCache.Get<TView, TViewModel>(viewModel);
-        }
-
         /// <summary>
         /// Performs forward navigation from the <paramref name="sourceView"/> to the <paramref name="targetView"/>.
         /// </summary>
