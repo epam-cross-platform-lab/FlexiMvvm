@@ -16,44 +16,58 @@
 
 using System;
 using System.Collections.Generic;
-using JetBrains.Annotations;
+using Android.OS;
+using Fragment = Android.Support.V4.App.Fragment;
 
-namespace FlexiMvvm.ViewModels
+namespace FlexiMvvm.ViewModels.Core
 {
-    public sealed class InMemoryViewModelStore : IViewModelStore
+    internal sealed class LifecycleViewModelStoreFragment : Fragment, ILifecycleViewModelStore
     {
-        [CanBeNull]
-        private Dictionary<string, ILifecycleViewModel> _viewModels;
+        private Dictionary<string, ILifecycleViewModel>? _viewModels;
 
-        [NotNull]
         private Dictionary<string, ILifecycleViewModel> ViewModels => _viewModels ?? (_viewModels = new Dictionary<string, ILifecycleViewModel>());
 
-        public TViewModel Get<TViewModel>(string key)
+        internal static LifecycleViewModelStoreFragment NewInstance()
+        {
+            return new LifecycleViewModelStoreFragment();
+        }
+
+        public override void OnCreate(Bundle savedInstanceState)
+        {
+            base.OnCreate(savedInstanceState);
+
+            RetainInstance = true;
+        }
+
+        /// <inheritdoc />
+        public TViewModel? Get<TViewModel>(string key)
             where TViewModel : class, ILifecycleViewModel
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             return (TViewModel)_viewModels.GetValueOrDefault(key);
         }
 
+        /// <inheritdoc />
         public void Add<TViewModel>(string key, TViewModel viewModel)
             where TViewModel : class, ILifecycleViewModel
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
             if (viewModel == null)
                 throw new ArgumentNullException(nameof(viewModel));
             if (ViewModels.ContainsKey(key))
-                throw new ArgumentException($"View model store has a view model with the \"{key}\" key.");
+                throw new ArgumentException($"The lifecycle-aware view model store already has a view model with the '{key}' key.");
 
             ViewModels[key] = viewModel;
         }
 
+        /// <inheritdoc />
         public void Remove(string key)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             ViewModels.Remove(key);
         }

@@ -28,7 +28,6 @@ using Android.Runtime;
 using Android.Views;
 using FlexiMvvm.Persistence.Core;
 using FlexiMvvm.ViewModels;
-using FlexiMvvm.ViewModels.Core;
 using FlexiMvvm.Views.Core;
 <# foreach (var viewGenerationOptions in ViewsGenerationOptions) { #>
 
@@ -106,7 +105,7 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
         }
     }
 
-    public partial class <#= viewGenerationOptions.ClassName #><TViewModel> : <#= viewGenerationOptions.ClassName #>, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
+    public partial class <#= viewGenerationOptions.ClassName #><TViewModel> : <#= viewGenerationOptions.ClassName #>, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithoutParameters, IStateOwner
     {
         private RequestCode _requestCode;
@@ -137,18 +136,18 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
         }
 <#      } #>
 
-        void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
+        void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
             await ViewModel.InitializeAsync();
         }
     }
 
-    public partial class <#= viewGenerationOptions.ClassName #><TViewModel, TParameters> : <#= viewGenerationOptions.ClassName #>, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
+    public partial class <#= viewGenerationOptions.ClassName #><TViewModel, TParameters> : <#= viewGenerationOptions.ClassName #>, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>, IStateOwner
         where TParameters : Parameters
     {
@@ -180,12 +179,12 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
         }
 <#      } #>
 
-        void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
+        void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
             await ViewModel.InitializeAsync(<#= viewGenerationOptions.ParametersSourceName #>?.GetParameters<TParameters>());
         }

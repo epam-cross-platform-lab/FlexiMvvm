@@ -14,28 +14,28 @@
 // limitations under the License.
 // =========================================================================
 
-using FlexiMvvm.ViewModels;
+using FlexiMvvm.Views;
 
-namespace FlexiMvvm.Views.Core
+namespace FlexiMvvm.ViewModels.Core
 {
-    internal static class ViewModelStoreProvider
+    internal static class LifecycleViewModelStoreProvider
     {
         private const string ViewModelStoreTag = "FlexiMvvm_ViewModelStore";
 
-        internal static IViewModelStore? Get(IView<ILifecycleViewModel> view)
+        internal static ILifecycleViewModelStore? Get(IView<ILifecycleViewModel> view)
         {
-            ViewModelStoreFragment? store = null;
+            LifecycleViewModelStoreFragment? store = null;
             var fragmentManager = view.As(
                 activity => activity.SupportFragmentManager,
                 fragment => fragment.Activity.SupportFragmentManager);
 
             if (!fragmentManager.IsDestroyed)
             {
-                store = (ViewModelStoreFragment)fragmentManager.FindFragmentByTag(ViewModelStoreTag);
+                store = (LifecycleViewModelStoreFragment)fragmentManager.FindFragmentByTag(ViewModelStoreTag);
 
                 if (store == null)
                 {
-                    store = ViewModelStoreFragment.NewInstance();
+                    store = LifecycleViewModelStoreFragment.NewInstance();
 
                     fragmentManager
                         .BeginTransaction()

@@ -18,10 +18,16 @@ using FlexiMvvm.Commands;
 
 namespace FlexiMvvm.ViewModels
 {
+    /// <summary>
+    /// Base class for a view model implementation. Typically, such view models are used as children of lifecycle-aware view models.
+    /// </summary>
     public abstract class ViewModel : ObservableObject, IViewModel
     {
         private CommandProvider? _commandProvider;
 
+        /// <summary>
+        /// Gets an existing command provider or creates a new one in the scope of the view model.
+        /// </summary>
         protected CommandProvider CommandProvider => _commandProvider ?? (_commandProvider = new CommandProvider());
     }
 }

@@ -16,21 +16,29 @@
 
 using System;
 using FlexiMvvm.Ioc;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.ViewModels
 {
-    public sealed class DependencyProviderViewModelFactory : ViewModelFactory
+    /// <summary>
+    /// Default implementation of the lifecycle-aware view model factory. <see cref="IDependencyProvider"/> is used to create a view model instance.
+    /// </summary>
+    public sealed class DefaultLifecycleViewModelFactory : ILifecycleViewModelFactory
     {
-        [NotNull]
         private readonly IDependencyProvider _dependencyProvider;
 
-        public DependencyProviderViewModelFactory([NotNull] IDependencyProvider dependencyProvider)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DefaultLifecycleViewModelFactory"/> class.
+        /// </summary>
+        /// <param name="dependencyProvider">The dependency provider that is used to create a view model instance.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="dependencyProvider"/> is <c>null</c>.</exception>
+        public DefaultLifecycleViewModelFactory(IDependencyProvider dependencyProvider)
         {
             _dependencyProvider = dependencyProvider ?? throw new ArgumentNullException(nameof(dependencyProvider));
         }
 
-        protected override TViewModel CreateInstance<TViewModel>()
+        /// <inheritdoc />
+        public TViewModel Create<TViewModel>()
+            where TViewModel : class, ILifecycleViewModel
         {
             return _dependencyProvider.Get<TViewModel>();
         }

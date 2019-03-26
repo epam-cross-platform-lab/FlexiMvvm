@@ -17,13 +17,12 @@
 using FlexiMvvm.Bindings;
 using FlexiMvvm.Persistence.Core;
 using FlexiMvvm.ViewModels;
-using FlexiMvvm.ViewModels.Core;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.Views.Core
 {
     public class BindableViewLifecycleDelegate<TView, TViewModel> : ViewLifecycleDelegate<TView, TViewModel>
-        where TView : class, IBindableView<TViewModel>, IAndroidView, INavigationView<TViewModel>, IBindingSetOwner, IViewModelOwner<TViewModel>
+        where TView : class, IBindableView<TViewModel>, IAndroidView, INavigationView<TViewModel>, IBindingSetOwner, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModel, IStateOwner
     {
         public BindableViewLifecycleDelegate([NotNull] TView view)

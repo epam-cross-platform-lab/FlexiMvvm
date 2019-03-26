@@ -15,7 +15,7 @@ namespace FlexiMvvm.Views.Generation.Android
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\yauhe\Desktop\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\BindableViewsGenerator.tt"
+    #line 1 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\BindableViewsGenerator.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
     public partial class BindableViewsGenerator : BindableViewsGeneratorBase
     {
@@ -26,7 +26,7 @@ namespace FlexiMvvm.Views.Generation.Android
         public virtual string TransformText()
         {
             
-            #line 1 "C:\Users\yauhe\Desktop\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\BindableViewsGenerator.tt"
+            #line 1 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\BindableViewsGenerator.tt"
 
 // =========================================================================
 // Copyright 2019 EPAM Systems, Inc.
@@ -48,31 +48,30 @@ namespace FlexiMvvm.Views.Generation.Android
             #line default
             #line hidden
             this.Write("using System;\r\nusing FlexiMvvm.Bindings;\r\nusing FlexiMvvm.Persistence.Core;\r\nusin" +
-                    "g FlexiMvvm.ViewModels;\r\nusing FlexiMvvm.ViewModels.Core;\r\nusing FlexiMvvm.Views" +
-                    ".Core;\r\n");
+                    "g FlexiMvvm.ViewModels;\r\nusing FlexiMvvm.Views.Core;\r\n");
             
-            #line 25 "C:\Users\yauhe\Desktop\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\BindableViewsGenerator.tt"
+            #line 24 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\BindableViewsGenerator.tt"
  foreach (var viewGenerationOptions in ViewsGenerationOptions) { 
             
             #line default
             #line hidden
             this.Write("\r\nnamespace ");
             
-            #line 27 "C:\Users\yauhe\Desktop\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\BindableViewsGenerator.tt"
+            #line 26 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(GetNamespace(viewGenerationOptions)));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n    public partial class ");
             
-            #line 29 "C:\Users\yauhe\Desktop\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\BindableViewsGenerator.tt"
+            #line 28 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
             this.Write("<TViewModel> : ");
             
-            #line 29 "C:\Users\yauhe\Desktop\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\BindableViewsGenerator.tt"
+            #line 28 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.BaseClassName));
             
             #line default
@@ -86,7 +85,7 @@ namespace FlexiMvvm.Views.Generation.Android
         {
             return new BindableViewLifecycleDelegate<");
             
-            #line 36 "C:\Users\yauhe\Desktop\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\BindableViewsGenerator.tt"
+            #line 35 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
@@ -106,14 +105,14 @@ namespace FlexiMvvm.Views.Generation.Android
 
     public partial class ");
             
-            #line 49 "C:\Users\yauhe\Desktop\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\BindableViewsGenerator.tt"
+            #line 48 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
             this.Write("<TViewModel, TParameters> : ");
             
-            #line 49 "C:\Users\yauhe\Desktop\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\BindableViewsGenerator.tt"
+            #line 48 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.BaseClassName));
             
             #line default
@@ -128,7 +127,7 @@ namespace FlexiMvvm.Views.Generation.Android
         {
             return new BindableViewLifecycleDelegate<");
             
-            #line 57 "C:\Users\yauhe\Desktop\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\BindableViewsGenerator.tt"
+            #line 56 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
@@ -148,7 +147,7 @@ namespace FlexiMvvm.Views.Generation.Android
 }
 ");
             
-            #line 70 "C:\Users\yauhe\Desktop\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\BindableViewsGenerator.tt"
+            #line 69 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\BindableViewsGenerator.tt"
  } 
             
             #line default
