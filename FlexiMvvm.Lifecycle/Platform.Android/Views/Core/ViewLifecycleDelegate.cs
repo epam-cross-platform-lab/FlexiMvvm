@@ -64,7 +64,7 @@ namespace FlexiMvvm.Views.Core
     }
 
     public class ViewLifecycleDelegate<TView, TViewModel> : ViewLifecycleDelegate<TView>
-        where TView : class, IAndroidView, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
+        where TView : class, IAndroidView, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModel, IStateOwner
     {
         private const string ViewModelKeyKey = "FlexiMvvm_ViewModel_Key";
@@ -90,9 +90,9 @@ namespace FlexiMvvm.Views.Core
             var viewModelState = savedInstanceState?.GetState(ViewModelStateKey);
             var viewRequestCodeState = savedInstanceState?.GetState(ViewRequestCodeStateKey);
 
-            var viewModelStore = ViewModelStoreProvider.Get(View).NotNull();
-            var viewModelFactory = ViewModelProvider.GetFactory();
-            var viewModel = ViewModelProvider.Get<TViewModel>(viewModelStore, _viewModelKey, viewModelFactory, viewModelState, out _isViewModelCreated);
+            var viewModelStore = LifecycleViewModelStoreProvider.Get(View);
+            var viewModelFactory = LifecycleViewModelProvider.GetFactory();
+            var viewModel = LifecycleViewModelProvider.Get<TViewModel>(viewModelStore!, _viewModelKey, viewModelFactory, viewModelState, out _isViewModelCreated);
 
             View.SetViewModel(viewModel);
             View.RequestCode.ImportState(viewRequestCodeState);
@@ -145,7 +145,7 @@ namespace FlexiMvvm.Views.Core
         {
             base.OnDestroy();
 
-            var store = ViewModelStoreProvider.Get(View);
+            var store = LifecycleViewModelStoreProvider.Get(View);
             store?.Remove(_viewModelKey.NotNull());
             ViewCache.Remove(View);
         }

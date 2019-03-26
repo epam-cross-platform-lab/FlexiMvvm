@@ -16,6 +16,7 @@
 
 using System;
 using System.Threading.Tasks;
+using FlexiMvvm.Formatters;
 using FlexiMvvm.ViewModels;
 using FlexiMvvm.ViewModels.Core;
 using FlexiMvvm.Views.Keyboard;
@@ -75,7 +76,7 @@ namespace FlexiMvvm.Views.Core
     }
 
     public class ViewLifecycleDelegate<TView, TViewModel> : ViewLifecycleDelegate<TView>
-        where TView : class, IIosView, INavigationView<TViewModel>, IKeyboardHandlerOwner, IViewModelOwner<TViewModel>
+        where TView : class, IIosView, INavigationView<TViewModel>, IKeyboardHandlerOwner, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModel
     {
         private ResultCode _resultCode = ResultCode.Canceled;
@@ -88,8 +89,16 @@ namespace FlexiMvvm.Views.Core
         public ViewLifecycleDelegate([NotNull] TView view)
             : base(view)
         {
-            var factory = ViewModelProvider.GetFactory();
-            var viewModel = factory.Create<TViewModel>();
+            var viewModelFactory = LifecycleViewModelProvider.GetFactory();
+            var viewModel = viewModelFactory.Create<TViewModel>();
+
+            if (viewModel == null)
+            {
+                throw new InvalidOperationException(
+                    $"'{TypeFormatter.FormatName(viewModelFactory.GetType())}.{nameof(ILifecycleViewModelFactory.Create)}' " +
+                    $"returned 'null' value for the '{TypeFormatter.FormatName<TViewModel>()}>' view model.");
+            }
+
             _isViewModelCreated = true;
 
             View.SetViewModel(viewModel);

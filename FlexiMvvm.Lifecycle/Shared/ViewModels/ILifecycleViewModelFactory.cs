@@ -14,19 +14,19 @@
 // limitations under the License.
 // =========================================================================
 
-using JetBrains.Annotations;
-
 namespace FlexiMvvm.ViewModels
 {
-    public interface IViewModelStore
+    /// <summary>
+    /// Defines the contract for a lifecycle-aware view model factory.
+    /// </summary>
+    public interface ILifecycleViewModelFactory
     {
-        [CanBeNull]
-        TViewModel Get<TViewModel>([NotNull] string key)
+        /// <summary>
+        /// Creates a new instance of the lifecycle-aware view model.
+        /// </summary>
+        /// <typeparam name="TViewModel">The type of the view model to create.</typeparam>
+        /// <returns>The view model instance.</returns>
+         TViewModel Create<TViewModel>()
             where TViewModel : class, ILifecycleViewModel;
-
-        void Add<TViewModel>([NotNull] string key, [NotNull] TViewModel viewModel)
-            where TViewModel : class, ILifecycleViewModel;
-
-        void Remove([NotNull] string key);
     }
 }

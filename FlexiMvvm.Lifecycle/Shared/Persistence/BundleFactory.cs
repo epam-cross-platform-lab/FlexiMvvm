@@ -25,11 +25,11 @@ namespace FlexiMvvm.Persistence
         public static IBundle Create()
         {
 #if NETSTANDARD2_0
-            return new InMemoryBundle(new System.Collections.Generic.Dictionary<string, object>());
+            return new InMemoryBundle(new System.Collections.Generic.Dictionary<string, object?>());
 #elif __ANDROID__
             return new AndroidBundle(new Android.OS.Bundle());
 #elif __IOS__
-            return new InMemoryBundle(new System.Collections.Generic.Dictionary<string, object>());
+            return new InMemoryBundle(new System.Collections.Generic.Dictionary<string, object?>());
 #else
             throw new System.NotImplementedException($"\"{nameof(IBundle)}\" is not implemented in the portable version of this assembly. " +
                 "You should reference the NuGet package from your main application project in order " +
