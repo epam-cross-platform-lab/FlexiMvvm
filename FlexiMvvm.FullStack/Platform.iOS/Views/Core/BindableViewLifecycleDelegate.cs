@@ -16,13 +16,12 @@
 
 using FlexiMvvm.Bindings;
 using FlexiMvvm.ViewModels;
-using FlexiMvvm.ViewModels.Core;
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.Views.Core
 {
     public class BindableViewLifecycleDelegate<TView, TViewModel> : ViewLifecycleDelegate<TView, TViewModel>
-        where TView : class, IBindableView<TViewModel>, IIosView, INavigationView<TViewModel>, IBindingSetOwner, IKeyboardHandlerOwner, IViewModelOwner<TViewModel>
+        where TView : class, IBindableView<TViewModel>, IIosView, INavigationView<TViewModel>, IBindingSetOwner, IKeyboardHandlerOwner, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModel
     {
         public BindableViewLifecycleDelegate([NotNull] TView view)

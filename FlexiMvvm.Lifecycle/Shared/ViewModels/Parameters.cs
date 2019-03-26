@@ -19,14 +19,14 @@ using FlexiMvvm.Persistence;
 namespace FlexiMvvm.ViewModels
 {
     /// <summary>
-    /// Represents a container for storing view model parameters.
+    /// Represents a container for storing lifecycle-aware view model parameters.
     /// </summary>
     public abstract class Parameters
     {
         private IBundle? _bundle;
 
         /// <summary>
-        /// Gets the bundle which stores view model parameters as a collection of key/value pairs.
+        /// Gets the bundle that stores lifecycle-aware view model parameters as a set of key/value pairs.
         /// </summary>
         protected IBundle Bundle => _bundle ?? (_bundle = BundleFactory.Create());
 

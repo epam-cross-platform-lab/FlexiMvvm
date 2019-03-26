@@ -18,6 +18,9 @@ using System.ComponentModel;
 
 namespace FlexiMvvm.ViewModels
 {
+    /// <summary>
+    /// Defines the contract for a view model. Typically, such view models are used as children of lifecycle-aware view models.
+    /// </summary>
     public interface IViewModel : INotifyPropertyChanged
     {
     }

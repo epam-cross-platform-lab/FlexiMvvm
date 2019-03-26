@@ -14,17 +14,26 @@
 // limitations under the License.
 // =========================================================================
 
-using System.Threading.Tasks;
-using JetBrains.Annotations;
+using FlexiMvvm.ViewModels.Core;
 
-namespace FlexiMvvm.ViewModels.Core
+namespace FlexiMvvm.ViewModels
 {
-    public interface IViewModelOwner<in TViewModel>
-        where TViewModel : class, ILifecycleViewModel
+    /// <summary>
+    /// Represents a lifecycle-aware view model store factory.
+    /// </summary>
+    public static class LifecycleViewModelStoreFactory
     {
-        void SetViewModel([NotNull] TViewModel viewModel);
-
-        [NotNull]
-        Task InitializeViewModelAsync();
+        /// <summary>
+        /// Creates a new instance of the lifecycle-aware view model store.
+        /// </summary>
+        /// <returns>The view model store instance.</returns>
+        public static ILifecycleViewModelStore Create()
+        {
+#if __ANDROID__
+            return LifecycleViewModelStoreFragment.NewInstance();
+#else
+            return new InMemoryLifecycleViewModelStore();
+#endif
+        }
     }
 }

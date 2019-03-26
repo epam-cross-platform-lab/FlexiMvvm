@@ -15,7 +15,7 @@ namespace FlexiMvvm.Views.Generation.Ios
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\yauhe\Desktop\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+    #line 1 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
     public partial class ViewsGenerator : ViewsGeneratorBase
     {
@@ -26,7 +26,7 @@ namespace FlexiMvvm.Views.Generation.Ios
         public virtual string TransformText()
         {
             
-            #line 1 "C:\Users\yauhe\Desktop\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 1 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
 
 // =========================================================================
 // Copyright 2019 EPAM Systems, Inc.
@@ -48,31 +48,30 @@ namespace FlexiMvvm.Views.Generation.Ios
             #line default
             #line hidden
             this.Write("using System;\r\nusing System.Threading.Tasks;\r\nusing FlexiMvvm.ViewModels;\r\nusing " +
-                    "FlexiMvvm.ViewModels.Core;\r\nusing FlexiMvvm.Views.Core;\r\nusing FlexiMvvm.Views.K" +
-                    "eyboard;\r\n");
+                    "FlexiMvvm.Views.Core;\r\nusing FlexiMvvm.Views.Keyboard;\r\n");
             
-            #line 25 "C:\Users\yauhe\Desktop\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 24 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
  foreach (var viewGenerationOptions in ViewsGenerationOptions) { 
             
             #line default
             #line hidden
             this.Write("\r\nnamespace ");
             
-            #line 27 "C:\Users\yauhe\Desktop\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 26 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(GetNamespace(viewGenerationOptions)));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n    public partial class ");
             
-            #line 29 "C:\Users\yauhe\Desktop\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 28 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
             this.Write(" : ");
             
-            #line 29 "C:\Users\yauhe\Desktop\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 28 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.BaseClassName));
             
             #line default
@@ -86,7 +85,7 @@ namespace FlexiMvvm.Views.Generation.Ios
 
         public virtual bool HandleKeyboard { get; } = ");
             
-            #line 36 "C:\Users\yauhe\Desktop\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 35 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.HandleKeyboard.ToString().ToLower()));
             
             #line default
@@ -95,7 +94,7 @@ namespace FlexiMvvm.Views.Generation.Ios
                     "   protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()\r\n        {" +
                     "\r\n            return new ViewLifecycleDelegate<");
             
-            #line 42 "C:\Users\yauhe\Desktop\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 41 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
@@ -139,19 +138,19 @@ namespace FlexiMvvm.Views.Generation.Ios
 
     public partial class ");
             
-            #line 79 "C:\Users\yauhe\Desktop\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 78 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
             this.Write("<TViewModel> : ");
             
-            #line 79 "C:\Users\yauhe\Desktop\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 78 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
-            this.Write(@", INavigationView<TViewModel>, IViewModelOwner<TViewModel>
+            this.Write(@", INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithoutParameters
     {
         public event EventHandler<ResultSetEventArgs> ResultSet;
@@ -162,7 +161,7 @@ namespace FlexiMvvm.Views.Generation.Ios
         {
             return new ViewLifecycleDelegate<");
             
-            #line 88 "C:\Users\yauhe\Desktop\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 87 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
@@ -195,12 +194,12 @@ namespace FlexiMvvm.Views.Generation.Ios
             LifecycleDelegate.HandleResult(sender, args);
         }
 
-        void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
+        void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
             await ViewModel.InitializeAsync();
         }
@@ -208,19 +207,19 @@ namespace FlexiMvvm.Views.Generation.Ios
 
     public partial class ");
             
-            #line 127 "C:\Users\yauhe\Desktop\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 126 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
             this.Write("<TViewModel, TParameters> : ");
             
-            #line 127 "C:\Users\yauhe\Desktop\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 126 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
-            this.Write(@", INavigationView<TViewModel>, IViewModelOwner<TViewModel>
+            this.Write(@", INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>
         where TParameters : Parameters
     {
@@ -228,7 +227,7 @@ namespace FlexiMvvm.Views.Generation.Ios
 
         public ");
             
-            #line 133 "C:\Users\yauhe\Desktop\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 132 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
@@ -246,7 +245,7 @@ namespace FlexiMvvm.Views.Generation.Ios
         {
             return new ViewLifecycleDelegate<");
             
-            #line 144 "C:\Users\yauhe\Desktop\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 143 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
@@ -279,12 +278,12 @@ namespace FlexiMvvm.Views.Generation.Ios
             LifecycleDelegate.HandleResult(sender, args);
         }
 
-        void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
+        void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
             await ViewModel.InitializeAsync(_parameters);
         }
@@ -292,7 +291,7 @@ namespace FlexiMvvm.Views.Generation.Ios
 }
 ");
             
-            #line 183 "C:\Users\yauhe\Desktop\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 182 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
  } 
             
             #line default

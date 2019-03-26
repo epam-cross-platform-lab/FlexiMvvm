@@ -22,10 +22,16 @@ using FlexiMvvm.Persistence.Core;
 
 namespace FlexiMvvm.ViewModels
 {
+    /// <summary>
+    /// Base class for a lifecycle-aware view model implementation.
+    /// </summary>
     public abstract class LifecycleViewModel : ViewModel, ILifecycleViewModelWithoutParameters, IStateOwner
     {
         private IBundle? _state;
 
+        /// <summary>
+        /// Gets the bundle that stores the lifecycle-aware view model state as a set of key/value pairs.
+        /// </summary>
         protected IBundle State
         {
             get
@@ -44,6 +50,7 @@ namespace FlexiMvvm.ViewModels
             }
         }
 
+        /// <inheritdoc />
         public virtual Task InitializeAsync()
         {
             Initialize();
@@ -51,6 +58,7 @@ namespace FlexiMvvm.ViewModels
             return Task.CompletedTask;
         }
 
+        /// <inheritdoc />
         public virtual void Initialize()
         {
         }
@@ -76,11 +84,18 @@ namespace FlexiMvvm.ViewModels
         }
     }
 
+    /// <summary>
+    /// Base class for a lifecycle-aware view model implementation with parameters.
+    /// </summary>
+    /// <typeparam name="TParameters">The type of the view model parameters.</typeparam>
     public abstract class LifecycleViewModel<TParameters> : ViewModel, ILifecycleViewModelWithParameters<TParameters>, IStateOwner
         where TParameters : Parameters
     {
         private IBundle? _state;
 
+        /// <summary>
+        /// Gets the bundle that stores the lifecycle-aware view model state as a set of key/value pairs.
+        /// </summary>
         protected IBundle State
         {
             get
@@ -99,6 +114,7 @@ namespace FlexiMvvm.ViewModels
             }
         }
 
+        /// <inheritdoc />
         public virtual Task InitializeAsync(TParameters? parameters)
         {
             Initialize(parameters);
@@ -106,6 +122,7 @@ namespace FlexiMvvm.ViewModels
             return Task.CompletedTask;
         }
 
+        /// <inheritdoc />
         public virtual void Initialize(TParameters? parameters)
         {
         }

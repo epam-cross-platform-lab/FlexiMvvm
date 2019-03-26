@@ -18,7 +18,6 @@
 using System;
 using FlexiMvvm.Bindings;
 using FlexiMvvm.ViewModels;
-using FlexiMvvm.ViewModels.Core;
 using FlexiMvvm.Views.Core;
 
 namespace FlexiMvvm.Views

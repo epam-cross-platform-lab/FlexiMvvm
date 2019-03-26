@@ -23,7 +23,6 @@ using Android.Runtime;
 using Android.Views;
 using FlexiMvvm.Persistence.Core;
 using FlexiMvvm.ViewModels;
-using FlexiMvvm.ViewModels.Core;
 using FlexiMvvm.Views.Core;
 
 namespace FlexiMvvm.Views
@@ -91,7 +90,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class AppCompatActivity<TViewModel> : AppCompatActivity, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
+    public partial class AppCompatActivity<TViewModel> : AppCompatActivity, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithoutParameters, IStateOwner
     {
         private RequestCode _requestCode;
@@ -105,18 +104,18 @@ namespace FlexiMvvm.Views
             return new ViewLifecycleDelegate<AppCompatActivity<TViewModel>, TViewModel>(this);
         }
 
-        void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
+        void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
             await ViewModel.InitializeAsync();
         }
     }
 
-    public partial class AppCompatActivity<TViewModel, TParameters> : AppCompatActivity, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
+    public partial class AppCompatActivity<TViewModel, TParameters> : AppCompatActivity, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>, IStateOwner
         where TParameters : Parameters
     {
@@ -131,12 +130,12 @@ namespace FlexiMvvm.Views
             return new ViewLifecycleDelegate<AppCompatActivity<TViewModel, TParameters>, TViewModel>(this);
         }
 
-        void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
+        void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
             await ViewModel.InitializeAsync(Intent?.GetParameters<TParameters>());
         }
@@ -215,7 +214,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class DialogFragment<TViewModel> : DialogFragment, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
+    public partial class DialogFragment<TViewModel> : DialogFragment, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithoutParameters, IStateOwner
     {
         private RequestCode _requestCode;
@@ -244,18 +243,18 @@ namespace FlexiMvvm.Views
             throw new NotImplementedException();
         }
 
-        void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
+        void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
             await ViewModel.InitializeAsync();
         }
     }
 
-    public partial class DialogFragment<TViewModel, TParameters> : DialogFragment, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
+    public partial class DialogFragment<TViewModel, TParameters> : DialogFragment, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>, IStateOwner
         where TParameters : Parameters
     {
@@ -285,12 +284,12 @@ namespace FlexiMvvm.Views
             throw new NotImplementedException();
         }
 
-        void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
+        void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
             await ViewModel.InitializeAsync(Arguments?.GetParameters<TParameters>());
         }
@@ -369,7 +368,7 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class Fragment<TViewModel> : Fragment, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
+    public partial class Fragment<TViewModel> : Fragment, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithoutParameters, IStateOwner
     {
         private RequestCode _requestCode;
@@ -398,18 +397,18 @@ namespace FlexiMvvm.Views
             throw new NotImplementedException();
         }
 
-        void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
+        void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
             await ViewModel.InitializeAsync();
         }
     }
 
-    public partial class Fragment<TViewModel, TParameters> : Fragment, INavigationView<TViewModel>, IViewModelOwner<TViewModel>
+    public partial class Fragment<TViewModel, TParameters> : Fragment, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>, IStateOwner
         where TParameters : Parameters
     {
@@ -439,12 +438,12 @@ namespace FlexiMvvm.Views
             throw new NotImplementedException();
         }
 
-        void IViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
+        void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        async Task IViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync()
         {
             await ViewModel.InitializeAsync(Arguments?.GetParameters<TParameters>());
         }
