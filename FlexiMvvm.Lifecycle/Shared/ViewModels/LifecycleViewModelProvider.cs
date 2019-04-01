@@ -40,7 +40,7 @@ namespace FlexiMvvm.ViewModels
         /// <param name="created"><c>true</c> if the view model is created by <paramref name="factory"/>; otherwise, <c>false</c>.</param>
         /// <returns>The view model instance.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="store"/> or <paramref name="key"/> or <paramref name="factory"/> is <c>null</c>.</exception>
-        /// <exception cref="InvalidOperationException"><paramref name="factory"/> returned 'null' value for the <typeparamref name="TViewModel"/>.</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="factory"/> returned <c>null</c> value for the <typeparamref name="TViewModel"/>.</exception>
         public static TViewModel Get<TViewModel>(
             ILifecycleViewModelStore store,
             string key,

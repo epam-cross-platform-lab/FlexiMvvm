@@ -14,25 +14,69 @@
 // limitations under the License.
 // =========================================================================
 
+using System;
 using FlexiMvvm.ViewModels;
-using JetBrains.Annotations;
+using UIKit;
 
 namespace FlexiMvvm.Views.Core
 {
+    /// <summary>
+    /// Defines the contract for a view lifecycle delegate. Can perform custom actions when view's lifecycle method is called.
+    /// <para>This interface is intended for internal use by the FlexiMvvm.</para>
+    /// </summary>
     public interface IViewLifecycleDelegate
     {
+        /// <summary>
+        /// Can perform custom actions when <see cref="UIViewController.WillMoveToParentViewController(UIViewController?)"/> method is called.
+        /// </summary>
+        /// <param name="parent">The parent view. Can be <c>null</c>.</param>
+        void WillMoveToParentViewController(UIViewController? parent);
+
+        /// <summary>
+        /// Can perform custom actions when <see cref="UIViewController.ViewDidLoad"/> method is called.
+        /// </summary>
         void ViewDidLoad();
 
+        /// <summary>
+        /// Can perform custom actions when <see cref="UIViewController.ViewWillAppear(bool)"/> method is called.
+        /// </summary>
         void ViewWillAppear();
 
+        /// <summary>
+        /// Can perform custom actions when <see cref="UIViewController.ViewDidAppear(bool)"/> method is called.
+        /// </summary>
+        void ViewDidAppear();
+
+        /// <summary>
+        /// Can perform custom actions when <see cref="UIViewController.ViewWillDisappear(bool)"/> method is called.
+        /// </summary>
         void ViewWillDisappear();
 
+        /// <summary>
+        /// Can perform custom actions when <see cref="UIViewController.ViewDidDisappear(bool)"/> method is called.
+        /// </summary>
         void ViewDidDisappear();
 
-        void SetResult(ResultCode resultCode);
+        /// <summary>
+        /// Can perform custom actions when <see cref="UIViewController.DidMoveToParentViewController(UIViewController?)"/> method is called.
+        /// </summary>
+        /// <param name="parent">The parent view. Can be <c>null</c>.</param>
+        void DidMoveToParentViewController(UIViewController? parent);
 
-        void SetResult(ResultCode resultCode, [CanBeNull] Result result);
+        /// <summary>
+        /// Sets the lifecycle-aware view model result to be returned to the calling view's model.
+        /// </summary>
+        /// <param name="resultCode">Determines whether the result should be set as successful or not due to cancellation by the user.</param>
+        /// <param name="result">The view model result. Can be <c>null</c>.</param>
+        void SetResult(ResultCode resultCode, Result? result);
 
-        void HandleResult([NotNull] object sender, [NotNull] ResultSetEventArgs args);
+        /// <summary>
+        /// The event handler which forwards the lifecycle-aware view model result processing to the lifecycle-aware view model
+        /// if it implements the <see cref="ILifecycleViewModelWithResultHandler"/> interface.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="args">The event arguments containing the view model result.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="sender"/> or <paramref name="args"/> is <c>null</c>.</exception>
+        void HandleResult(object sender, ResultSetEventArgs args);
     }
 }

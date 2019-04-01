@@ -14,12 +14,12 @@
 // limitations under the License.
 // =========================================================================
 
-using System;
-
 namespace FlexiMvvm.Views
 {
-    public interface IOptionsEventSource
+    /// <summary>
+    /// Defines the contract for a platform-specific view.
+    /// </summary>
+    public interface IAndroidView
     {
-        event EventHandler<OptionsItemSelectedEventArgs> OnOptionsItemSelectedCalled;
     }
 }

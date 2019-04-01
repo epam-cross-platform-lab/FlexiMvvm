@@ -25,8 +25,7 @@ namespace FlexiMvvm.Views.Core
     {
         private static List<WeakReference<IView<ILifecycleViewModel>>>? _viewsWeakReferences;
 
-        private static List<WeakReference<IView<ILifecycleViewModel>>> ViewsWeakReferences =>
-            _viewsWeakReferences ?? (_viewsWeakReferences = new List<WeakReference<IView<ILifecycleViewModel>>>());
+        private static List<WeakReference<IView<ILifecycleViewModel>>> ViewsWeakReferences => _viewsWeakReferences ??= new List<WeakReference<IView<ILifecycleViewModel>>>();
 
         internal static TView Get<TView, TViewModel>(TViewModel viewModel)
             where TView : class, IView<TViewModel>
@@ -50,7 +49,7 @@ namespace FlexiMvvm.Views.Core
             if (view == null)
             {
                 throw new InvalidOperationException(
-                    $"View instance is missing for '{TypeFormatter.FormatName(viewModel.GetType())}' view model instance.");
+                    $"The view instance is missing for the provided '{TypeFormatter.FormatName(viewModel.GetType())}' view model one.");
             }
 
             return view;

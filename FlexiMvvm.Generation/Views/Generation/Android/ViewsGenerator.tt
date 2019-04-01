@@ -15,17 +15,21 @@
 // limitations under the License.
 // =========================================================================
 #>
+#nullable enable
+
 <#@ template language="C#" #>
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
+using FlexiMvvm.Collections;
 using FlexiMvvm.Persistence.Core;
 using FlexiMvvm.ViewModels;
 using FlexiMvvm.Views.Core;
@@ -33,27 +37,42 @@ using FlexiMvvm.Views.Core;
 
 namespace <#= GetNamespace(viewGenerationOptions) #>
 {
+    /// <summary>
+    /// Represents the <see cref="<#= viewGenerationOptions.BaseClassName #>"/> that is adapted for use with the FlexiMvvm.
+    /// </summary>
     [Register("<#= TargetNamespace.ToLower() #>.<#= viewGenerationOptions.ClassName #>")]
-    public partial class <#= viewGenerationOptions.ClassName #> : <#= viewGenerationOptions.BaseClassName #>, IAndroidView, IOptionsEventSource
+    public partial class <#= viewGenerationOptions.ClassName #> : <#= viewGenerationOptions.BaseClassName #>, IAndroidView, IOptionsMenuSource
     {
-        private IViewLifecycleDelegate _lifecycleDelegate;
-
-        public event EventHandler<OptionsItemSelectedEventArgs> OnOptionsItemSelectedCalled;
-
-        protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ?? (_lifecycleDelegate = CreateLifecycleDelegate());
-
-        protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
+        /// <inheritdoc />
+        public <#= viewGenerationOptions.ClassName #>()
         {
-            return new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #>>(this);
+            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #>>(this);
         }
 
-        <#= viewGenerationOptions.LifecycleMethodAccessModifier #> override void OnCreate(Bundle savedInstanceState)
+        /// <inheritdoc />
+        protected <#= viewGenerationOptions.ClassName #>(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #>>(this);
+        }
+
+        /// <inheritdoc />
+        public event EventHandler<OptionsItemSelectedEventArgs> OnOptionsItemSelectedCalled;
+
+        /// <summary>
+        /// Gets the view lifecycle delegate. Intended for internal use by the FlexiMvvm.
+        /// </summary>
+        protected virtual IViewLifecycleDelegate LifecycleDelegate { get; }
+
+        /// <inheritdoc />
+        <#= viewGenerationOptions.LifecycleMethodAccessModifier #> override void OnCreate(Bundle? savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             LifecycleDelegate.OnCreate(savedInstanceState);
         }
 
+        /// <inheritdoc />
         <#= viewGenerationOptions.LifecycleMethodAccessModifier #> override void OnStart()
         {
             base.OnStart();
@@ -61,12 +80,37 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
             LifecycleDelegate.OnStart();
         }
 
+        /// <inheritdoc />
+        <#= viewGenerationOptions.LifecycleMethodAccessModifier #> override void OnResume()
+        {
+            base.OnResume();
+
+            LifecycleDelegate.OnResume();
+        }
+
+        /// <inheritdoc />
+        <#= viewGenerationOptions.LifecycleMethodAccessModifier #> override void OnPause()
+        {
+            base.OnPause();
+
+            LifecycleDelegate.OnPause();
+        }
+
+        /// <inheritdoc />
+        <#= viewGenerationOptions.LifecycleMethodAccessModifier #> override void OnStop()
+        {
+            base.OnStop();
+
+            LifecycleDelegate.OnStop();
+        }
+
+        /// <inheritdoc />
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             var optionsItemSelectedEventArgs = new OptionsItemSelectedEventArgs(item);
             OnOptionsItemSelectedCalled?.Invoke(this, optionsItemSelectedEventArgs);
 
-            if (optionsItemSelectedEventArgs.Handled)
+            if (optionsItemSelectedEventArgs.IsHandled)
             {
                 return true;
             }
@@ -74,13 +118,15 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
             return base.OnOptionsItemSelected(item);
         }
 
-        <#= viewGenerationOptions.LifecycleMethodAccessModifier #> override void OnActivityResult(int requestCode, <#= viewGenerationOptions.ResultCodeTypeName #> resultCode, Intent data)
+        /// <inheritdoc />
+        <#= viewGenerationOptions.LifecycleMethodAccessModifier #> override void OnActivityResult(int requestCode, <#= viewGenerationOptions.ResultCodeTypeName #> resultCode, Intent? data)
         {
             LifecycleDelegate.OnActivityResult(requestCode, (Android.App.Result)resultCode, data);
 
             base.OnActivityResult(requestCode, resultCode, data);
         }
 
+        /// <inheritdoc />
         <#= viewGenerationOptions.LifecycleMethodAccessModifier #> override void OnSaveInstanceState(Bundle outState)
         {
             LifecycleDelegate.OnSaveInstanceState(outState);
@@ -89,6 +135,7 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
         }
 <#      if (viewGenerationOptions.Kind == ViewKind.Fragment) { #>
 
+        /// <inheritdoc />
         public override void OnDestroyView()
         {
             LifecycleDelegate.OnDestroyView();
@@ -97,6 +144,7 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
         }
 <#      } #>
 
+        /// <inheritdoc />
         <#= viewGenerationOptions.LifecycleMethodAccessModifier #> override void OnDestroy()
         {
             LifecycleDelegate.OnDestroy();
@@ -105,89 +153,138 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
         }
     }
 
+    /// <summary>
+    /// Represents the <see cref="<#= viewGenerationOptions.BaseClassName #>"/> that is adapted for use with the FlexiMvvm
+    /// and has its own lifecycle-aware view model.
+    /// </summary>
+    /// <typeparam name="TViewModel">The type of the view model.</typeparam>
+    [SuppressMessage(
+        "Compiler",
+        "CS8618:Non-nullable field is uninitialized.",
+        Justification = "The view lifecycle delegate sets a value to the ViewModel property so it is not null starting from OnCreate method.")]
     public partial class <#= viewGenerationOptions.ClassName #><TViewModel> : <#= viewGenerationOptions.ClassName #>, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithoutParameters, IStateOwner
     {
-        private RequestCode _requestCode;
+        private RequestCode? _requestCode;
 
+        /// <inheritdoc />
+        public <#= viewGenerationOptions.ClassName #>()
+        {
+            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel>, TViewModel>(this);
+        }
+
+        /// <inheritdoc />
+        protected <#= viewGenerationOptions.ClassName #>(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel>, TViewModel>(this);
+        }
+
+        /// <inheritdoc />
+        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
+
+        /// <inheritdoc />
         public TViewModel ViewModel { get; private set; }
 
-        public RequestCode RequestCode => _requestCode ?? (_requestCode = new RequestCode());
-
-        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
-        {
-            return new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel>, TViewModel>(this);
-        }
+        /// <inheritdoc />
+        public RequestCode RequestCode => _requestCode ??= new RequestCode();
 <#      if (viewGenerationOptions.Kind == ViewKind.Fragment) { #>
 
-        public void SetResult(Android.App.Result resultCode)
+        /// <inheritdoc />
+        /// <exception cref="NotSupportedException">The fragment cannot set a result. Use the appropriate method of fragment's activity instead.</exception>
+        public void SetResult(Android.App.Result resultCode, Intent? data)
         {
-            throw new NotSupportedException();
+            throw new NotSupportedException("The fragment cannot set a result. Use the appropriate method of fragment's activity instead.");
         }
 
-        public void SetResult(Android.App.Result resultCode, Intent data)
-        {
-            throw new NotSupportedException();
-        }
-
+        /// <inheritdoc />
+        /// <exception cref="NotSupportedException">The fragment cannot finish an activity. Use the appropriate method of fragment's activity instead.</exception>
         public void Finish()
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException("The fragment cannot finish an activity. Use the appropriate method of fragment's activity instead.");
         }
 <#      } #>
 
+        /// <inheritdoc />
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        /// <inheritdoc />
+        async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync(bool recreated)
         {
-            await ViewModel.InitializeAsync();
+            await ViewModel.InitializeAsync(recreated);
         }
     }
 
+    /// <summary>
+    /// Represents the <see cref="<#= viewGenerationOptions.BaseClassName #>"/> that is adapted for use with the FlexiMvvm,
+    /// has its own lifecycle-aware view model and takes lifecycle-aware view model parameters.
+    /// </summary>
+    /// <typeparam name="TViewModel">The type of the view model.</typeparam>
+    /// <typeparam name="TParameters">The type of the view model parameters.</typeparam>
+    [SuppressMessage(
+        "Compiler",
+        "CS8618:Non-nullable field is uninitialized.",
+        Justification = "The view lifecycle delegate sets a value to the ViewModel property so it is not null starting from OnCreate method.")]
     public partial class <#= viewGenerationOptions.ClassName #><TViewModel, TParameters> : <#= viewGenerationOptions.ClassName #>, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>, IStateOwner
         where TParameters : Parameters
     {
-        private RequestCode _requestCode;
+        private RequestCode? _requestCode;
 
+        /// <inheritdoc />
+        public <#= viewGenerationOptions.ClassName #>()
+        {
+            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel, TParameters>, TViewModel>(this);
+        }
+
+        /// <inheritdoc />
+        protected <#= viewGenerationOptions.ClassName #>(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel, TParameters>, TViewModel>(this);
+        }
+
+        /// <inheritdoc />
+        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
+
+        /// <inheritdoc />
         public TViewModel ViewModel { get; private set; }
 
-        public RequestCode RequestCode => _requestCode ?? (_requestCode = new RequestCode());
-
-        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
-        {
-            return new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel, TParameters>, TViewModel>(this);
-        }
+        /// <inheritdoc />
+        public RequestCode RequestCode => _requestCode ??= new RequestCode();
 <#      if (viewGenerationOptions.Kind == ViewKind.Fragment) { #>
 
-        public void SetResult(Android.App.Result resultCode)
+        /// <inheritdoc />
+        /// <exception cref="NotSupportedException">The fragment cannot set a result. Use the appropriate method of fragment's activity instead.</exception>
+        public void SetResult(Android.App.Result resultCode, Intent? data)
         {
-            throw new NotSupportedException();
+            throw new NotSupportedException("The fragment cannot set a result. Use the appropriate method of fragment's activity instead.");
         }
 
-        public void SetResult(Android.App.Result resultCode, Intent data)
-        {
-            throw new NotSupportedException();
-        }
-
+        /// <inheritdoc />
+        /// <exception cref="NotSupportedException">The fragment cannot finish an activity. Use the appropriate method of fragment's activity instead.</exception>
         public void Finish()
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException("The fragment cannot finish an activity. Use the appropriate method of fragment's activity instead.");
         }
 <#      } #>
 
+        /// <inheritdoc />
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        /// <inheritdoc />
+        async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync(bool recreated)
         {
-            await ViewModel.InitializeAsync(<#= viewGenerationOptions.ParametersSourceName #>?.GetParameters<TParameters>());
+            await ViewModel.InitializeAsync(<#= viewGenerationOptions.ParametersSourceName #>?.GetParameters<TParameters>(), recreated);
         }
     }
 }
+
 <# } #>
+#nullable restore

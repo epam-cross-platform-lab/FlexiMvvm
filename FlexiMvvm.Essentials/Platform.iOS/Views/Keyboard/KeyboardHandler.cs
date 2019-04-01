@@ -17,161 +17,159 @@
 using System;
 using CoreGraphics;
 using Foundation;
-using JetBrains.Annotations;
 using UIKit;
 
 namespace FlexiMvvm.Views.Keyboard
 {
-    public class KeyboardHandler
+    /// <summary>
+    /// Default implementation of the <see cref="IKeyboardHandler"/>. Responsible for scrolling the view
+    /// to make the invisible or partially visible focused field fully visible when the keyboard appears.
+    /// </summary>
+    public sealed class KeyboardHandler : IKeyboardHandler
     {
-        [NotNull]
         private readonly UIView _rootView;
-        [CanBeNull]
-        private UIScrollView _scrollView;
-        [CanBeNull]
-        private NSObject _keyboardWillShowObserver;
-        [CanBeNull]
-        private NSObject _keyboardDidShowObserver;
-        [CanBeNull]
-        private NSObject _keyboardWillHideObserver;
-        [CanBeNull]
-        private NSObject _keyboardDidHideObserver;
+        private UIScrollView? _scrollView;
+        private NSObject? _keyboardWillShowObserver;
+        private NSObject? _keyboardDidShowObserver;
+        private NSObject? _keyboardWillHideObserver;
+        private NSObject? _keyboardDidHideObserver;
 
-        public KeyboardHandler([NotNull] UIView rootView)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="KeyboardHandler"/> class.
+        /// </summary>
+        /// <param name="rootView"><see cref="UIViewController"/>'s root view that contains focusable fields.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="rootView"/> is <c>null</c>.</exception>
+        public KeyboardHandler(UIView rootView)
         {
             _rootView = rootView ?? throw new ArgumentNullException(nameof(rootView));
         }
 
-        public event EventHandler<KeyboardSizeChangedEventArgs> KeyboardWillShow;
+        /// <inheritdoc />
+        public event EventHandler<KeyboardVisibilityChangedEventArgs> KeyboardWillShow;
 
-        public event EventHandler<KeyboardSizeChangedEventArgs> KeyboardDidShow;
+        /// <inheritdoc />
+        public event EventHandler<KeyboardVisibilityChangedEventArgs> KeyboardDidShow;
 
-        public event EventHandler<KeyboardSizeChangedEventArgs> KeyboardWillHide;
+        /// <inheritdoc />
+        public event EventHandler<KeyboardVisibilityChangedEventArgs> KeyboardWillHide;
 
-        public event EventHandler<KeyboardSizeChangedEventArgs> KeyboardDidHide;
+        /// <inheritdoc />
+        public event EventHandler<KeyboardVisibilityChangedEventArgs> KeyboardDidHide;
 
+        /// <summary>
+        /// Creates a new instance of the keyboard handler if <paramref name="rootView"/> is not <c>null</c>; otherwise, returns <c>null</c>.
+        /// </summary>
+        /// <param name="rootView"><see cref="UIViewController"/>'s root view that contains focusable fields.</param>
+        /// <returns>The keyboard handler instance.</returns>
+        public static KeyboardHandler? Create(UIView? rootView)
+        {
+            return rootView != null ? new KeyboardHandler(rootView) : null;
+        }
+
+        /// <inheritdoc />
         public void RegisterForKeyboardNotifications()
         {
             if (_keyboardWillShowObserver == null)
             {
-                _keyboardWillShowObserver = NSNotificationCenter.DefaultCenter.NotNull().AddObserver(
-                    UIKeyboard.WillShowNotification,
-                    KeyboardWillShowHandler);
+                _keyboardWillShowObserver = NSNotificationCenter.DefaultCenter.AddObserver(UIKeyboard.WillShowNotification, KeyboardWillShowHandler);
             }
 
             if (_keyboardDidShowObserver == null)
             {
-                _keyboardDidShowObserver = NSNotificationCenter.DefaultCenter.NotNull().AddObserver(
-                    UIKeyboard.DidShowNotification,
-                    KeyboardDidShowHandler);
+                _keyboardDidShowObserver = NSNotificationCenter.DefaultCenter.AddObserver(UIKeyboard.DidShowNotification, KeyboardDidShowHandler);
             }
 
             if (_keyboardWillHideObserver == null)
             {
-                _keyboardWillHideObserver = NSNotificationCenter.DefaultCenter.NotNull().AddObserver(
-                    UIKeyboard.WillHideNotification,
-                    KeyboardWillHideHandler);
+                _keyboardWillHideObserver = NSNotificationCenter.DefaultCenter.AddObserver(UIKeyboard.WillHideNotification, KeyboardWillHideHandler);
             }
 
             if (_keyboardDidHideObserver == null)
             {
-                _keyboardDidHideObserver = NSNotificationCenter.DefaultCenter.NotNull().AddObserver(
-                    UIKeyboard.DidHideNotification,
-                    KeyboardDidHideHandler);
+                _keyboardDidHideObserver = NSNotificationCenter.DefaultCenter.AddObserver(UIKeyboard.DidHideNotification, KeyboardDidHideHandler);
             }
         }
 
+        /// <inheritdoc />
         public void UnregisterFromKeyboardNotifications()
         {
             if (_keyboardWillShowObserver != null)
             {
-                NSNotificationCenter.DefaultCenter.NotNull().RemoveObserver(_keyboardWillShowObserver);
+                NSNotificationCenter.DefaultCenter.RemoveObserver(_keyboardWillShowObserver);
                 _keyboardWillShowObserver = null;
             }
 
             if (_keyboardDidShowObserver != null)
             {
-                NSNotificationCenter.DefaultCenter.NotNull().RemoveObserver(_keyboardDidShowObserver);
+                NSNotificationCenter.DefaultCenter.RemoveObserver(_keyboardDidShowObserver);
                 _keyboardDidShowObserver = null;
             }
 
             if (_keyboardWillHideObserver != null)
             {
-                NSNotificationCenter.DefaultCenter.NotNull().RemoveObserver(_keyboardWillHideObserver);
+                NSNotificationCenter.DefaultCenter.RemoveObserver(_keyboardWillHideObserver);
                 _keyboardWillHideObserver = null;
             }
 
             if (_keyboardDidHideObserver != null)
             {
-                NSNotificationCenter.DefaultCenter.NotNull().RemoveObserver(_keyboardDidHideObserver);
+                NSNotificationCenter.DefaultCenter.RemoveObserver(_keyboardDidHideObserver);
                 _keyboardDidHideObserver = null;
             }
         }
 
-        protected virtual void OnKeyboardWillShow([NotNull] KeyboardSizeChangedEventArgs e)
+        private void OnKeyboardWillShow(KeyboardVisibilityChangedEventArgs args)
         {
-            if (e == null)
-                throw new ArgumentNullException(nameof(e));
-
-            KeyboardWillShow?.Invoke(this, e);
+            KeyboardWillShow?.Invoke(this, args);
         }
 
-        protected virtual void OnKeyboardDidShow([NotNull] KeyboardSizeChangedEventArgs e)
+        private void OnKeyboardDidShow(KeyboardVisibilityChangedEventArgs args)
         {
-            if (e == null)
-                throw new ArgumentNullException(nameof(e));
-
-            KeyboardDidShow?.Invoke(this, e);
+            KeyboardDidShow?.Invoke(this, args);
         }
 
-        protected virtual void OnKeyboardWillHide([NotNull] KeyboardSizeChangedEventArgs e)
+        private void OnKeyboardWillHide(KeyboardVisibilityChangedEventArgs args)
         {
-            if (e == null)
-                throw new ArgumentNullException(nameof(e));
-
-            KeyboardWillHide?.Invoke(this, e);
+            KeyboardWillHide?.Invoke(this, args);
         }
 
-        protected virtual void OnKeyboardDidHide([NotNull] KeyboardSizeChangedEventArgs e)
+        private void OnKeyboardDidHide(KeyboardVisibilityChangedEventArgs args)
         {
-            if (e == null)
-                throw new ArgumentNullException(nameof(e));
-
-            KeyboardDidHide?.Invoke(this, e);
+            KeyboardDidHide?.Invoke(this, args);
         }
 
-        private void KeyboardWillShowHandler([NotNull] NSNotification notification)
+        private void KeyboardWillShowHandler(NSNotification notification)
         {
             var keyboardSize = GetKeyboardSize(notification);
-            OnKeyboardWillShow(new KeyboardSizeChangedEventArgs(keyboardSize));
+            OnKeyboardWillShow(new KeyboardVisibilityChangedEventArgs(keyboardSize));
         }
 
-        private void KeyboardDidShowHandler([NotNull] NSNotification notification)
+        private void KeyboardDidShowHandler(NSNotification notification)
         {
             var keyboardSize = GetKeyboardSize(notification);
-            OnKeyboardDidShow(new KeyboardSizeChangedEventArgs(keyboardSize));
+            OnKeyboardDidShow(new KeyboardVisibilityChangedEventArgs(keyboardSize));
 
             AdaptScrollView(keyboardSize);
         }
 
-        private void KeyboardWillHideHandler([NotNull] NSNotification notification)
+        private void KeyboardWillHideHandler(NSNotification notification)
         {
             var keyboardSize = GetKeyboardSize(notification);
-            OnKeyboardWillHide(new KeyboardSizeChangedEventArgs(keyboardSize));
+            OnKeyboardWillHide(new KeyboardVisibilityChangedEventArgs(keyboardSize));
 
             RevertScrollView();
         }
 
-        private void KeyboardDidHideHandler([NotNull] NSNotification notification)
+        private void KeyboardDidHideHandler(NSNotification notification)
         {
             var keyboardSize = GetKeyboardSize(notification);
-            OnKeyboardDidHide(new KeyboardSizeChangedEventArgs(keyboardSize));
+            OnKeyboardDidHide(new KeyboardVisibilityChangedEventArgs(keyboardSize));
         }
 
-        private CGSize GetKeyboardSize([NotNull] NSNotification notification)
+        private CGSize GetKeyboardSize(NSNotification notification)
         {
-            var info = notification.UserInfo.NotNull();
-            var keyboardRect = ((NSValue)info.ObjectForKey(UIKeyboard.FrameEndUserInfoKey).NotNull()).CGRectValue;
+            var info = notification.UserInfo;
+            var keyboardRect = ((NSValue)info.ObjectForKey(UIKeyboard.FrameEndUserInfoKey)).CGRectValue;
 
             return keyboardRect.Size;
         }
@@ -184,11 +182,11 @@ namespace FlexiMvvm.Views.Keyboard
             {
                 _scrollView = firstResponderInScrollView.Item2;
 
-                var scrollViewBottomInset = (nfloat)Math.Max(GetScrollViewBottomInset(_scrollView.NotNull()), 0);
+                var scrollViewBottomInset = (nfloat)Math.Max(GetScrollViewBottomInset(_scrollView), 0);
 
                 var contentInsets = new UIEdgeInsets(0, 0, keyboardSize.Height - scrollViewBottomInset, 0);
-                _scrollView.NotNull().ContentInset = contentInsets;
-                _scrollView.NotNull().ScrollIndicatorInsets = contentInsets;
+                _scrollView.ContentInset = contentInsets;
+                _scrollView.ScrollIndicatorInsets = contentInsets;
             }
         }
 
@@ -202,10 +200,10 @@ namespace FlexiMvvm.Views.Keyboard
             }
         }
 
-        private nfloat GetScrollViewBottomInset([NotNull] UIScrollView scrollView)
+        private nfloat GetScrollViewBottomInset(UIScrollView scrollView)
         {
-            var window = UIApplication.SharedApplication.NotNull().KeyWindow.NotNull();
-            var scrollViewContainer = scrollView.Superview.NotNull();
+            var window = UIApplication.SharedApplication.KeyWindow;
+            var scrollViewContainer = scrollView.Superview;
             var scrollViewFrameRelativeToWindow = scrollViewContainer.ConvertRectToView(scrollView.Frame, window);
             var scrollViewBottom = scrollViewFrameRelativeToWindow.Y + scrollViewFrameRelativeToWindow.Height;
 

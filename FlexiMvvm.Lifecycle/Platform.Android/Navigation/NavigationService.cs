@@ -20,18 +20,21 @@ using Android.OS;
 using FlexiMvvm.Formatters;
 using FlexiMvvm.ViewModels;
 using FlexiMvvm.Views;
-using Fragment = Android.Support.V4.App.Fragment;
-using FragmentActivity = Android.Support.V4.App.FragmentActivity;
 
 namespace FlexiMvvm.Navigation
 {
+    using Android.Support.V4.App;
+
+    /// <summary>
+    /// Base class for an application navigation implementation.
+    /// </summary>
     public abstract class NavigationService
     {
         /// <summary>
         /// Performs forward navigation from the <paramref name="sourceView"/> to the target one.
         /// </summary>
         /// <param name="sourceView">The source navigation view from which navigation is performed from.</param>
-        /// <param name="targetViewIntent">The description of the target view.</param>
+        /// <param name="targetViewIntent">The description of the target view for navigation.</param>
         /// <param name="navigationStrategy">
         /// The strategy used for performing navigation. Can be <c>null</c>.
         /// <para>The default is <see cref="ForwardNavigationStrategy.StartActivity(Bundle?)"/>.</para>
@@ -61,15 +64,15 @@ namespace FlexiMvvm.Navigation
         /// </param>
         /// <exception cref="ArgumentNullException"><paramref name="sourceView"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentException">
-        /// <paramref name="sourceView" /> is derived from a class other than the <see cref="FragmentActivity"/> or <see cref="Fragment"/>.
+        /// The <paramref name="sourceView" /> is derived from a class other than the <see cref="FragmentActivity"/> or <see cref="Fragment"/>.
         /// </exception>
         /// <exception cref="InvalidOperationException">
-        /// <see cref="NavigationViewExtensions.GetActivity(INavigationView{ILifecycleViewModel})"/> returned <c>null</c> value for the <paramref name="sourceView"/>.
+        /// <see cref="NavigationViewExtensions.GetActivity(INavigationView{ILifecycleViewModel})"/> returned <c>null</c> value for the provided <paramref name="sourceView"/>.
         /// </exception>
         public void Navigate<TTargetView>(
             INavigationView<ILifecycleViewModel> sourceView,
             ForwardNavigationDelegate? navigationStrategy = null)
-            where TTargetView : FragmentActivity, IView<ILifecycleViewModel>
+            where TTargetView : FragmentActivity
         {
             if (sourceView == null)
                 throw new ArgumentNullException(nameof(sourceView));
@@ -82,12 +85,12 @@ namespace FlexiMvvm.Navigation
                     $"'{TypeFormatter.FormatName(sourceView.GetType())}.{nameof(NavigationViewExtensions.GetActivity)}' returned 'null' value.");
             }
 
-            var intent = new Intent(context, typeof(TTargetView));
-            (navigationStrategy ?? NavigationStrategy.Forward.StartActivity()).Invoke(sourceView, intent, RequestCode.InvalidRequestCode);
+            var targetViewIntent = new Intent(context, typeof(TTargetView));
+            (navigationStrategy ?? NavigationStrategy.Forward.StartActivity()).Invoke(sourceView, targetViewIntent, RequestCode.InvalidRequestCode);
         }
 
         /// <summary>
-        /// Performs forward navigation from the <paramref name="sourceView"/> to the target one with provided <paramref name="parameters"/>.
+        /// Performs forward navigation from the <paramref name="sourceView"/> to the target one with the provided lifecycle-aware view model <paramref name="parameters"/>.
         /// </summary>
         /// <typeparam name="TTargetView">The type of the target view.</typeparam>
         /// <typeparam name="TParameters">The type of the target view model parameters.</typeparam>
@@ -99,16 +102,16 @@ namespace FlexiMvvm.Navigation
         /// </param>
         /// <exception cref="ArgumentNullException"><paramref name="sourceView"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentException">
-        /// <paramref name="sourceView" /> is derived from a class other than the <see cref="FragmentActivity"/> or <see cref="Fragment"/>.
+        /// The <paramref name="sourceView" /> is derived from a class other than the <see cref="FragmentActivity"/> or <see cref="Fragment"/>.
         /// </exception>
         /// <exception cref="InvalidOperationException">
-        /// <see cref="NavigationViewExtensions.GetActivity(INavigationView{ILifecycleViewModel})"/> returned <c>null</c> value for the <paramref name="sourceView"/>.
+        /// <see cref="NavigationViewExtensions.GetActivity(INavigationView{ILifecycleViewModel})"/> returned <c>null</c> value for the provided <paramref name="sourceView"/>.
         /// </exception>
         public void Navigate<TTargetView, TParameters>(
             INavigationView<ILifecycleViewModel> sourceView,
             TParameters? parameters,
             ForwardNavigationDelegate? navigationStrategy = null)
-            where TTargetView : FragmentActivity, IView<ILifecycleViewModelWithParameters<TParameters>>
+            where TTargetView : FragmentActivity, INavigationView<ILifecycleViewModelWithParameters<TParameters>>
             where TParameters : Parameters
         {
             if (sourceView == null)
@@ -122,17 +125,17 @@ namespace FlexiMvvm.Navigation
                     $"'{TypeFormatter.FormatName(sourceView.GetType())}.{nameof(NavigationViewExtensions.GetActivity)}' returned 'null' value.");
             }
 
-            var intent = new Intent(context, typeof(TTargetView));
-            intent.PutParameters(parameters);
-            (navigationStrategy ?? NavigationStrategy.Forward.StartActivity()).Invoke(sourceView, intent, RequestCode.InvalidRequestCode);
+            var targetViewIntent = new Intent(context, typeof(TTargetView));
+            targetViewIntent.PutParameters(parameters);
+            (navigationStrategy ?? NavigationStrategy.Forward.StartActivity()).Invoke(sourceView, targetViewIntent, RequestCode.InvalidRequestCode);
         }
 
         /// <summary>
-        /// Performs forward navigation from the <paramref name="sourceView"/> to the target one with handling a result when it finished.
+        /// Performs forward navigation from the <paramref name="sourceView"/> to the target one with handling a lifecycle-aware view model result when it finished.
         /// </summary>
         /// <typeparam name="TResultMapper">The type of the target view model result mapper.</typeparam>
         /// <param name="sourceView">The source navigation view from which navigation is performed from.</param>
-        /// <param name="targetViewIntent">The description of the target view.</param>
+        /// <param name="targetViewIntent">The description of the target view for navigation.</param>
         /// <param name="navigationStrategy">
         /// The strategy used for performing navigation. Can be <c>null</c>.
         /// <para>The default is <see cref="ForwardNavigationStrategy.StartActivityForResult(Bundle?)"/>.</para>
@@ -154,7 +157,7 @@ namespace FlexiMvvm.Navigation
         }
 
         /// <summary>
-        /// Performs forward navigation from the <paramref name="sourceView"/> to the target one with handling a result when it finished.
+        /// Performs forward navigation from the <paramref name="sourceView"/> to the target one with handling a lifecycle-aware view model result when it finished.
         /// </summary>
         /// <typeparam name="TTargetView">The type of the target view.</typeparam>
         /// <typeparam name="TResult">The type of the target view model result.</typeparam>
@@ -165,10 +168,10 @@ namespace FlexiMvvm.Navigation
         /// </param>
         /// <exception cref="ArgumentNullException"><paramref name="sourceView"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentException">
-        /// <paramref name="sourceView" /> is derived from a class other than the <see cref="FragmentActivity"/> or <see cref="Fragment"/>.
+        /// The <paramref name="sourceView" /> is derived from a class other than the <see cref="FragmentActivity"/> or <see cref="Fragment"/>.
         /// </exception>
         /// <exception cref="InvalidOperationException">
-        /// <see cref="NavigationViewExtensions.GetActivity(INavigationView{ILifecycleViewModel})"/> returned <c>null</c> value for the <paramref name="sourceView"/>.
+        /// <see cref="NavigationViewExtensions.GetActivity(INavigationView{ILifecycleViewModel})"/> returned <c>null</c> value for the provided <paramref name="sourceView"/>.
         /// </exception>
         public void NavigateForResult<TTargetView, TResult>(
             INavigationView<ILifecycleViewModelWithResultHandler> sourceView,
@@ -187,13 +190,14 @@ namespace FlexiMvvm.Navigation
                     $"'{TypeFormatter.FormatName(sourceView.GetType())}.{nameof(NavigationViewExtensions.GetActivity)}' returned 'null' value.");
             }
 
-            var intent = new Intent(context, typeof(TTargetView));
+            var targetViewIntent = new Intent(context, typeof(TTargetView));
             var requestCode = sourceView.RequestCode.GetFor<DefaultResultMapper<TResult>>();
-            (navigationStrategy ?? NavigationStrategy.Forward.StartActivityForResult()).Invoke(sourceView, intent, requestCode);
+            (navigationStrategy ?? NavigationStrategy.Forward.StartActivityForResult()).Invoke(sourceView, targetViewIntent, requestCode);
         }
 
         /// <summary>
-        /// Performs forward navigation from the <paramref name="sourceView"/> to the target one with provided <paramref name="parameters"/> and handling a result when it finished.
+        /// Performs forward navigation from the <paramref name="sourceView"/> to the target one with the provided lifecycle-aware view model <paramref name="parameters"/>
+        /// and handling a lifecycle-aware view model result when it finished.
         /// </summary>
         /// <typeparam name="TTargetView">The type of the target view.</typeparam>
         /// <typeparam name="TParameters">The type of the target view model parameters.</typeparam>
@@ -206,16 +210,16 @@ namespace FlexiMvvm.Navigation
         /// </param>
         /// <exception cref="ArgumentNullException"><paramref name="sourceView"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentException">
-        /// <paramref name="sourceView" /> is derived from a class other than the <see cref="FragmentActivity"/> or <see cref="Fragment"/>.
+        /// The <paramref name="sourceView" /> is derived from a class other than the <see cref="FragmentActivity"/> or <see cref="Fragment"/>.
         /// </exception>
         /// <exception cref="InvalidOperationException">
-        /// <see cref="NavigationViewExtensions.GetActivity(INavigationView{ILifecycleViewModel})"/> returned <c>null</c> value for the <paramref name="sourceView"/>.
+        /// <see cref="NavigationViewExtensions.GetActivity(INavigationView{ILifecycleViewModel})"/> returned <c>null</c> value for the provided <paramref name="sourceView"/>.
         /// </exception>
         public void NavigateForResult<TTargetView, TParameters, TResult>(
             INavigationView<ILifecycleViewModelWithResultHandler> sourceView,
             TParameters? parameters,
             ForwardNavigationDelegate? navigationStrategy = null)
-            where TTargetView : FragmentActivity, IView<ILifecycleViewModelWithParameters<TParameters>>, INavigationView<ILifecycleViewModelWithResult<TResult>>
+            where TTargetView : FragmentActivity, INavigationView<ILifecycleViewModelWithParameters<TParameters>>, INavigationView<ILifecycleViewModelWithResult<TResult>>
             where TParameters : Parameters
             where TResult : Result
         {
@@ -230,10 +234,10 @@ namespace FlexiMvvm.Navigation
                     $"'{TypeFormatter.FormatName(sourceView.GetType())}.{nameof(NavigationViewExtensions.GetActivity)}' returned 'null' value.");
             }
 
-            var intent = new Intent(context, typeof(TTargetView));
-            intent.PutParameters(parameters);
+            var targetViewIntent = new Intent(context, typeof(TTargetView));
+            targetViewIntent.PutParameters(parameters);
             var requestCode = sourceView.RequestCode.GetFor<DefaultResultMapper<TResult>>();
-            (navigationStrategy ?? NavigationStrategy.Forward.StartActivityForResult()).Invoke(sourceView, intent, requestCode);
+            (navigationStrategy ?? NavigationStrategy.Forward.StartActivityForResult()).Invoke(sourceView, targetViewIntent, requestCode);
         }
 
         /// <summary>
@@ -256,7 +260,7 @@ namespace FlexiMvvm.Navigation
         }
 
         /// <summary>
-        /// Performs backward navigation from the <paramref name="sourceView"/> with a result.
+        /// Performs backward navigation from the <paramref name="sourceView"/> with returning a lifecycle-aware view model result.
         /// </summary>
         /// <typeparam name="TResult">The type of the source view model result.</typeparam>
         /// <param name="sourceView">The source navigation view from which navigation is performed from.</param>

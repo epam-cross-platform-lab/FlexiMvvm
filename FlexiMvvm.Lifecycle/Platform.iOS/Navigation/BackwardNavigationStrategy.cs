@@ -35,7 +35,7 @@ namespace FlexiMvvm.Navigation
     public sealed class BackwardNavigationStrategy
     {
         /// <summary>
-        /// Backward navigation using <see cref="UINavigationController.PopViewController(bool)"/> method.
+        /// Backward navigation using the <see cref="UINavigationController.PopViewController(bool)"/> method.
         /// </summary>
         /// <returns>The backward navigation delegate.</returns>
         public BackwardNavigationDelegate PopViewController()
@@ -55,7 +55,7 @@ namespace FlexiMvvm.Navigation
         }
 
         /// <summary>
-        /// Backward navigation using <see cref="UINavigationController.PopToViewController(UIViewController, bool)"/> method.
+        /// Backward navigation using the <see cref="UINavigationController.PopToViewController(UIViewController, bool)"/> method.
         /// </summary>
         /// <param name="targetView">The target view for navigation.</param>
         /// <returns>The backward navigation delegate.</returns>
@@ -80,7 +80,7 @@ namespace FlexiMvvm.Navigation
         }
 
         /// <summary>
-        /// Backward navigation using <see cref="UINavigationController.PopToRootViewController(bool)"/> method.
+        /// Backward navigation using the <see cref="UINavigationController.PopToRootViewController(bool)"/> method.
         /// </summary>
         /// <returns>The backward navigation delegate.</returns>
         public BackwardNavigationDelegate PopToRootViewController()
@@ -100,7 +100,7 @@ namespace FlexiMvvm.Navigation
         }
 
         /// <summary>
-        /// Backward navigation using <see cref="INavigationView{TViewModel}.DismissViewController(bool, Action?)"/> method.
+        /// Backward navigation using the <see cref="INavigationView{TViewModel}.DismissViewController(bool, Action?)"/> method.
         /// </summary>
         /// <param name="completionHandler">The method to invoke when the animation completes. Can be <c>null</c>.</param>
         /// <returns>The backward navigation delegate.</returns>

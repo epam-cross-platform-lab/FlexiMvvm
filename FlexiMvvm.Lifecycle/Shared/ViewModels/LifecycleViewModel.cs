@@ -51,15 +51,15 @@ namespace FlexiMvvm.ViewModels
         }
 
         /// <inheritdoc />
-        public virtual Task InitializeAsync()
+        public virtual Task InitializeAsync(bool recreated)
         {
-            Initialize();
+            Initialize(recreated);
 
             return Task.CompletedTask;
         }
 
         /// <inheritdoc />
-        public virtual void Initialize()
+        public virtual void Initialize(bool recreated)
         {
         }
 
@@ -115,15 +115,15 @@ namespace FlexiMvvm.ViewModels
         }
 
         /// <inheritdoc />
-        public virtual Task InitializeAsync(TParameters? parameters)
+        public virtual Task InitializeAsync(TParameters? parameters, bool recreated)
         {
-            Initialize(parameters);
+            Initialize(parameters, recreated);
 
             return Task.CompletedTask;
         }
 
         /// <inheritdoc />
-        public virtual void Initialize(TParameters? parameters)
+        public virtual void Initialize(TParameters? parameters, bool recreated)
         {
         }
 

@@ -17,6 +17,7 @@
 #>
 <#@ template language="C#" #>
 using System;
+using Android.Runtime;
 using FlexiMvvm.Bindings;
 using FlexiMvvm.Persistence.Core;
 using FlexiMvvm.ViewModels;
@@ -28,12 +29,23 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
     public partial class <#= viewGenerationOptions.ClassName #><TViewModel> : <#= viewGenerationOptions.BaseClassName #><TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, ILifecycleViewModelWithoutParameters, IStateOwner
     {
-        public IDisposable BindingSet { get; private set; }
-
-        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        /// <inheritdoc />
+        public <#= viewGenerationOptions.ClassName #>()
         {
-            return new BindableViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel>, TViewModel>(this);
+            LifecycleDelegate = new BindableViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel>, TViewModel>(this);
         }
+
+        /// <inheritdoc />
+        protected <#= viewGenerationOptions.ClassName #>(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+            LifecycleDelegate = new BindableViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel>, TViewModel>(this);
+        }
+
+        /// <inheritdoc />
+        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
+
+        public IDisposable BindingSet { get; private set; }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
         {
@@ -49,12 +61,23 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
         where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>, IStateOwner
         where TParameters : Parameters
     {
-        public IDisposable BindingSet { get; private set; }
-
-        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        /// <inheritdoc />
+        public <#= viewGenerationOptions.ClassName #>()
         {
-            return new BindableViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel, TParameters>, TViewModel>(this);
+            LifecycleDelegate = new BindableViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel, TParameters>, TViewModel>(this);
         }
+
+        /// <inheritdoc />
+        protected <#= viewGenerationOptions.ClassName #>(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+            LifecycleDelegate = new BindableViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel, TParameters>, TViewModel>(this);
+        }
+
+        /// <inheritdoc />
+        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
+
+        public IDisposable BindingSet { get; private set; }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
         {

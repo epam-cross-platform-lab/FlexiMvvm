@@ -15,19 +15,32 @@
 // =========================================================================
 
 using System;
+using Android.Content;
 using FlexiMvvm.Persistence;
 using FlexiMvvm.ViewModels;
 
 namespace FlexiMvvm.Views
 {
+    /// <summary>
+    /// Generates a unique numeric request code that identifies a result mapper
+    /// used to create a lifecycle-aware view model result instance based on the <see cref="Intent"/> data.
+    /// </summary>
     public sealed class RequestCode
     {
+        /// <summary>
+        /// Gets a value indicating an invalid request code.
+        /// </summary>
         public const int InvalidRequestCode = -1;
 
         private IBundle? _state;
 
-        private IBundle State => _state ?? (_state = BundleFactory.Create());
+        private IBundle State => _state ??= BundleFactory.Create();
 
+        /// <summary>
+        /// Gets a unique numeric request code that is used to identify the <typeparamref name="TResultMapper"/> result mapper which creates a lifecycle-aware view model result instance.
+        /// </summary>
+        /// <typeparam name="TResultMapper">The type of the result mapper which creates a view model result instance.</typeparam>
+        /// <returns>A unique numeric request code.</returns>
         public int GetFor<TResultMapper>()
             where TResultMapper : IResultMapper<Result>, new()
         {

@@ -47,251 +47,433 @@ namespace FlexiMvvm.Views.Generation.Ios
             
             #line default
             #line hidden
-            this.Write("using System;\r\nusing System.Threading.Tasks;\r\nusing FlexiMvvm.ViewModels;\r\nusing " +
-                    "FlexiMvvm.Views.Core;\r\nusing FlexiMvvm.Views.Keyboard;\r\n");
+            this.Write("#nullable enable\r\n\r\n");
+            this.Write("using System;\r\nusing System.Diagnostics.CodeAnalysis;\r\nusing System.Threading.Tas" +
+                    "ks;\r\nusing FlexiMvvm.ViewModels;\r\nusing FlexiMvvm.Views.Core;\r\nusing FlexiMvvm.V" +
+                    "iews.Keyboard;\r\nusing Foundation;\r\nusing UIKit;\r\n");
             
-            #line 24 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 29 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
  foreach (var viewGenerationOptions in ViewsGenerationOptions) { 
             
             #line default
             #line hidden
             this.Write("\r\nnamespace ");
             
-            #line 26 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 31 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(GetNamespace(viewGenerationOptions)));
             
             #line default
             #line hidden
-            this.Write("\r\n{\r\n    public partial class ");
+            this.Write("\r\n{\r\n    /// <summary>\r\n    /// Represents the <see cref=\"");
             
-            #line 28 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 34 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.BaseClassName));
+            
+            #line default
+            #line hidden
+            this.Write("\"/> that is adapted for use with the FlexiMvvm.\r\n    /// </summary>\r\n    public p" +
+                    "artial class ");
+            
+            #line 36 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
             this.Write(" : ");
             
-            #line 28 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 36 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.BaseClassName));
             
             #line default
             #line hidden
-            this.Write(@", IIosView, IKeyboardHandlerOwner
-    {
-        private IViewLifecycleDelegate _lifecycleDelegate;
-        private KeyboardHandler _keyboardHandler;
-
-        protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ?? (_lifecycleDelegate = CreateLifecycleDelegate());
-
-        public virtual bool HandleKeyboard { get; } = ");
-            
-            #line 35 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.HandleKeyboard.ToString().ToLower()));
-            
-            #line default
-            #line hidden
-            this.Write(";\r\n\r\n        public KeyboardHandler KeyboardHandler => _keyboardHandler;\r\n\r\n     " +
-                    "   protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()\r\n        {" +
-                    "\r\n            return new ViewLifecycleDelegate<");
+            this.Write(", IIosView\r\n    {\r\n        private KeyboardHandler? _keyboardHandler;\r\n\r\n        " +
+                    "/// <inheritdoc />\r\n        public ");
             
             #line 41 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
-            this.Write(@">(this);
-        }
-
-        public override void ViewDidLoad()
-        {
-            base.ViewDidLoad();
-
-            LifecycleDelegate.ViewDidLoad();
-        }
-
-        public override void ViewWillAppear(bool animated)
-        {
-            base.ViewWillAppear(animated);
-
-            LifecycleDelegate.ViewWillAppear();
-        }
-
-        public override void ViewWillDisappear(bool animated)
-        {
-            base.ViewWillDisappear(animated);
-
-            LifecycleDelegate.ViewWillDisappear();
-        }
-
-        public override void ViewDidDisappear(bool animated)
-        {
-            base.ViewDidDisappear(animated);
-
-            LifecycleDelegate.ViewDidDisappear();
-        }
-
-        void IKeyboardHandlerOwner.SetKeyboardHandler(KeyboardHandler handler)
-        {
-            _keyboardHandler = handler;
-        }
-    }
-
+            this.Write("()\r\n        {\r\n            LifecycleDelegate = new ViewLifecycleDelegate<");
+            
+            #line 43 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write(">(this);\r\n        }\r\n\r\n        /// <inheritdoc />\r\n        public ");
+            
+            #line 47 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write("(NSCoder coder)\r\n            : base(coder)\r\n        {\r\n            LifecycleDeleg" +
+                    "ate = new ViewLifecycleDelegate<");
+            
+            #line 50 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write(">(this);\r\n        }\r\n\r\n        /// <inheritdoc />\r\n        public ");
+            
+            #line 54 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write("(string nibName, NSBundle bundle)\r\n            : base(nibName, bundle)\r\n        {" +
+                    "\r\n            LifecycleDelegate = new ViewLifecycleDelegate<");
+            
+            #line 57 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write(">(this);\r\n        }\r\n\r\n        /// <inheritdoc />\r\n        protected ");
+            
+            #line 61 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write("(NSObjectFlag t)\r\n            : base(t)\r\n        {\r\n            LifecycleDelegate" +
+                    " = new ViewLifecycleDelegate<");
+            
+            #line 64 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write(">(this);\r\n        }\r\n\r\n        /// <inheritdoc />\r\n        protected internal ");
+            
+            #line 68 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write("(IntPtr handle)\r\n            : base(handle)\r\n        {\r\n            LifecycleDele" +
+                    "gate = new ViewLifecycleDelegate<");
+            
+            #line 71 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write(">(this);\r\n        }\r\n\r\n        /// <summary>\r\n        /// Gets the view lifecycle" +
+                    " delegate. Intended for internal use by the FlexiMvvm.\r\n        /// </summary>\r\n" +
+                    "        protected virtual IViewLifecycleDelegate LifecycleDelegate { get; }\r\n\r\n");
+            
+            #line 79 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+      if (viewGenerationOptions.HandleKeyboard) { 
+            
+            #line default
+            #line hidden
+            this.Write("        /// <inheritdoc />\r\n        public virtual IKeyboardHandler? KeyboardHand" +
+                    "ler => _keyboardHandler ??= Keyboard.KeyboardHandler.Create(View);\r\n");
+            
+            #line 82 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+      } else { 
+            
+            #line default
+            #line hidden
+            this.Write("        /// <inheritdoc />\r\n        public virtual IKeyboardHandler? KeyboardHand" +
+                    "ler => _keyboardHandler;\r\n");
+            
+            #line 85 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+      } 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n        /// <inheritdoc />\r\n        public override void WillMoveToParentViewCo" +
+                    "ntroller(UIViewController? parent)\r\n        {\r\n            base.WillMoveToParent" +
+                    "ViewController(parent);\r\n\r\n            LifecycleDelegate.WillMoveToParentViewCon" +
+                    "troller(parent);\r\n        }\r\n\r\n        /// <inheritdoc />\r\n        public overri" +
+                    "de void ViewDidLoad()\r\n        {\r\n            base.ViewDidLoad();\r\n\r\n           " +
+                    " LifecycleDelegate.ViewDidLoad();\r\n        }\r\n\r\n        /// <inheritdoc />\r\n    " +
+                    "    public override void ViewWillAppear(bool animated)\r\n        {\r\n            b" +
+                    "ase.ViewWillAppear(animated);\r\n\r\n            LifecycleDelegate.ViewWillAppear();" +
+                    "\r\n        }\r\n\r\n        /// <inheritdoc />\r\n        public override void ViewDidA" +
+                    "ppear(bool animated)\r\n        {\r\n            base.ViewDidAppear(animated);\r\n\r\n  " +
+                    "          LifecycleDelegate.ViewDidAppear();\r\n        }\r\n\r\n        /// <inheritd" +
+                    "oc />\r\n        public override void ViewWillDisappear(bool animated)\r\n        {\r" +
+                    "\n            base.ViewWillDisappear(animated);\r\n\r\n            LifecycleDelegate." +
+                    "ViewWillDisappear();\r\n        }\r\n\r\n        /// <inheritdoc />\r\n        public ov" +
+                    "erride void ViewDidDisappear(bool animated)\r\n        {\r\n            base.ViewDid" +
+                    "Disappear(animated);\r\n\r\n            LifecycleDelegate.ViewDidDisappear();\r\n     " +
+                    "   }\r\n\r\n        /// <inheritdoc />\r\n        public override void DidMoveToParent" +
+                    "ViewController(UIViewController? parent)\r\n        {\r\n            base.DidMoveToP" +
+                    "arentViewController(parent);\r\n\r\n            LifecycleDelegate.DidMoveToParentVie" +
+                    "wController(parent);\r\n        }\r\n    }\r\n\r\n    /// <summary>\r\n    /// Represents " +
+                    "the <see cref=\"");
+            
+            #line 145 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.BaseClassName));
+            
+            #line default
+            #line hidden
+            this.Write(@"""/> that is adapted for use with the FlexiMvvm
+    /// and has its own lifecycle-aware view model.
+    /// </summary>
+    /// <typeparam name=""TViewModel"">The type of the view model.</typeparam>
+    [SuppressMessage(
+        ""Compiler"",
+        ""CS8618:Non-nullable field is uninitialized."",
+        Justification = ""The view lifecycle delegate sets a value to the ViewModel property so it is never null."")]
     public partial class ");
             
-            #line 78 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 153 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
             this.Write("<TViewModel> : ");
             
-            #line 78 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 153 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
-            this.Write(@", INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
-        where TViewModel : class, ILifecycleViewModelWithoutParameters
-    {
-        public event EventHandler<ResultSetEventArgs> ResultSet;
-
-        public TViewModel ViewModel { get; private set; }
-
-        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
-        {
-            return new ViewLifecycleDelegate<");
+            this.Write(", INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>\r\n        wher" +
+                    "e TViewModel : class, ILifecycleViewModelWithoutParameters\r\n    {\r\n        /// <" +
+                    "inheritdoc />\r\n        public ");
             
-            #line 87 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 157 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
-            this.Write(@"<TViewModel>, TViewModel>(this);
-        }
-
-        public void SetResult(ResultCode resultCode)
-        {
-            LifecycleDelegate.SetResult(resultCode);
-        }
-
-        public void SetResult(ResultCode resultCode, Result result)
-        {
-            LifecycleDelegate.SetResult(resultCode, result);
-        }
-
-        public void RaiseResultSet(ResultCode resultCode, Result? result)
-        {
-            ResultSet?.Invoke(this, new ResultSetEventArgs(resultCode, result));
-        }
-
-        public void HandleResult(object sender, ResultSetEventArgs args)
-        {
-            if (sender == null)
-                throw new ArgumentNullException(nameof(sender));
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
-            LifecycleDelegate.HandleResult(sender, args);
-        }
-
-        void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
-        {
-            ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
-        }
-
-        async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync()
-        {
-            await ViewModel.InitializeAsync();
-        }
-    }
-
+            this.Write("()\r\n        {\r\n            LifecycleDelegate = new ViewLifecycleDelegate<");
+            
+            #line 159 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write("<TViewModel>, TViewModel>(this);\r\n        }\r\n\r\n        /// <inheritdoc />\r\n      " +
+                    "  public ");
+            
+            #line 163 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write("(NSCoder coder)\r\n            : base(coder)\r\n        {\r\n            LifecycleDeleg" +
+                    "ate = new ViewLifecycleDelegate<");
+            
+            #line 166 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write("<TViewModel>, TViewModel>(this);\r\n        }\r\n\r\n        /// <inheritdoc />\r\n      " +
+                    "  public ");
+            
+            #line 170 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write("(string nibName, NSBundle bundle)\r\n            : base(nibName, bundle)\r\n        {" +
+                    "\r\n            LifecycleDelegate = new ViewLifecycleDelegate<");
+            
+            #line 173 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write("<TViewModel>, TViewModel>(this);\r\n        }\r\n\r\n        /// <inheritdoc />\r\n      " +
+                    "  protected ");
+            
+            #line 177 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write("(NSObjectFlag t)\r\n            : base(t)\r\n        {\r\n            LifecycleDelegate" +
+                    " = new ViewLifecycleDelegate<");
+            
+            #line 180 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write("<TViewModel>, TViewModel>(this);\r\n        }\r\n\r\n        /// <inheritdoc />\r\n      " +
+                    "  protected internal ");
+            
+            #line 184 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write("(IntPtr handle)\r\n            : base(handle)\r\n        {\r\n            LifecycleDele" +
+                    "gate = new ViewLifecycleDelegate<");
+            
+            #line 187 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write("<TViewModel>, TViewModel>(this);\r\n        }\r\n\r\n        /// <inheritdoc />\r\n      " +
+                    "  public event EventHandler<ResultSetEventArgs> ResultSet;\r\n\r\n        /// <inher" +
+                    "itdoc />\r\n        protected override IViewLifecycleDelegate LifecycleDelegate { " +
+                    "get; }\r\n\r\n        /// <inheritdoc />\r\n        public TViewModel ViewModel { get;" +
+                    " private set; }\r\n\r\n        /// <inheritdoc />\r\n        public void SetResult(Res" +
+                    "ultCode resultCode, Result? result)\r\n        {\r\n            LifecycleDelegate.Se" +
+                    "tResult(resultCode, result);\r\n        }\r\n\r\n        /// <inheritdoc />\r\n        p" +
+                    "ublic void RaiseResultSet(ResultCode resultCode, Result? result)\r\n        {\r\n   " +
+                    "         ResultSet?.Invoke(this, new ResultSetEventArgs(resultCode, result));\r\n " +
+                    "       }\r\n\r\n        /// <inheritdoc />\r\n        public void HandleResult(object " +
+                    "sender, ResultSetEventArgs args)\r\n        {\r\n            if (sender == null)\r\n  " +
+                    "              throw new ArgumentNullException(nameof(sender));\r\n            if (" +
+                    "args == null)\r\n                throw new ArgumentNullException(nameof(args));\r\n\r" +
+                    "\n            LifecycleDelegate.HandleResult(sender, args);\r\n        }\r\n\r\n       " +
+                    " /// <inheritdoc />\r\n        void ILifecycleViewModelOwner<TViewModel>.SetViewMo" +
+                    "del(TViewModel viewModel)\r\n        {\r\n            ViewModel = viewModel ?? throw" +
+                    " new ArgumentNullException(nameof(viewModel));\r\n        }\r\n\r\n        /// <inheri" +
+                    "tdoc />\r\n        async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewM" +
+                    "odelAsync(bool recreated)\r\n        {\r\n            await ViewModel.InitializeAsyn" +
+                    "c(recreated);\r\n        }\r\n    }\r\n\r\n    /// <summary>\r\n    /// Represents the <se" +
+                    "e cref=\"");
+            
+            #line 236 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.BaseClassName));
+            
+            #line default
+            #line hidden
+            this.Write(@"""/> that is adapted for use with the FlexiMvvm,
+    /// has its own lifecycle-aware view model and takes lifecycle-aware view model parameters.
+    /// </summary>
+    /// <typeparam name=""TViewModel"">The type of the view model.</typeparam>
+    /// <typeparam name=""TParameters"">The type of the view model parameters.</typeparam>
+    [SuppressMessage(
+        ""Compiler"",
+        ""CS8618:Non-nullable field is uninitialized."",
+        Justification = ""The view lifecycle delegate sets a value to the ViewModel property so it is never null."")]
     public partial class ");
             
-            #line 126 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 245 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
             this.Write("<TViewModel, TParameters> : ");
             
-            #line 126 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 245 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
-            this.Write(@", INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
+            this.Write(@", INavigationView<TViewModel, TParameters>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>
         where TParameters : Parameters
     {
-        private readonly TParameters _parameters;
+        private TParameters? _parameters;
 
+        /// <inheritdoc />
         public ");
             
-            #line 132 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 252 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
-            this.Write(@"(TParameters parameters)
-        {
-            _parameters = parameters;
-        }
-
-        public event EventHandler<ResultSetEventArgs> ResultSet;
-
-        public TViewModel ViewModel { get; private set; }
-
-        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
-        {
-            return new ViewLifecycleDelegate<");
+            this.Write("()\r\n        {\r\n            LifecycleDelegate = new ViewLifecycleDelegate<");
             
-            #line 143 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 254 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
-            this.Write(@"<TViewModel, TParameters>, TViewModel>(this);
-        }
-
-        public void SetResult(ResultCode resultCode)
-        {
-            LifecycleDelegate.SetResult(resultCode);
-        }
-
-        public void SetResult(ResultCode resultCode, Result result)
-        {
-            LifecycleDelegate.SetResult(resultCode, result);
-        }
-
-        public void RaiseResultSet(ResultCode resultCode, Result? result)
-        {
-            ResultSet?.Invoke(this, new ResultSetEventArgs(resultCode, result));
-        }
-
-        public void HandleResult(object sender, ResultSetEventArgs args)
-        {
-            if (sender == null)
-                throw new ArgumentNullException(nameof(sender));
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
-            LifecycleDelegate.HandleResult(sender, args);
-        }
-
-        void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
-        {
-            ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
-        }
-
-        async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync()
-        {
-            await ViewModel.InitializeAsync(_parameters);
-        }
-    }
-}
-");
+            this.Write("<TViewModel, TParameters>, TViewModel>(this);\r\n        }\r\n\r\n        /// <inheritd" +
+                    "oc />\r\n        public ");
             
-            #line 182 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            #line 258 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write("(NSCoder coder)\r\n            : base(coder)\r\n        {\r\n            LifecycleDeleg" +
+                    "ate = new ViewLifecycleDelegate<");
+            
+            #line 261 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write("<TViewModel, TParameters>, TViewModel>(this);\r\n        }\r\n\r\n        /// <inheritd" +
+                    "oc />\r\n        public ");
+            
+            #line 265 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write("(string nibName, NSBundle bundle)\r\n            : base(nibName, bundle)\r\n        {" +
+                    "\r\n            LifecycleDelegate = new ViewLifecycleDelegate<");
+            
+            #line 268 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write("<TViewModel, TParameters>, TViewModel>(this);\r\n        }\r\n\r\n        /// <inheritd" +
+                    "oc />\r\n        protected ");
+            
+            #line 272 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write("(NSObjectFlag t)\r\n            : base(t)\r\n        {\r\n            LifecycleDelegate" +
+                    " = new ViewLifecycleDelegate<");
+            
+            #line 275 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write("<TViewModel, TParameters>, TViewModel>(this);\r\n        }\r\n\r\n        /// <inheritd" +
+                    "oc />\r\n        protected internal ");
+            
+            #line 279 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write("(IntPtr handle)\r\n            : base(handle)\r\n        {\r\n            LifecycleDele" +
+                    "gate = new ViewLifecycleDelegate<");
+            
+            #line 282 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write("<TViewModel, TParameters>, TViewModel>(this);\r\n        }\r\n\r\n        /// <inheritd" +
+                    "oc />\r\n        public event EventHandler<ResultSetEventArgs> ResultSet;\r\n\r\n     " +
+                    "   /// <inheritdoc />\r\n        protected override IViewLifecycleDelegate Lifecyc" +
+                    "leDelegate { get; }\r\n\r\n        /// <inheritdoc />\r\n        public TViewModel Vie" +
+                    "wModel { get; private set; }\r\n\r\n        /// <inheritdoc />\r\n        public void " +
+                    "SetParameters(TParameters? parameters)\r\n        {\r\n            _parameters = par" +
+                    "ameters;\r\n        }\r\n\r\n        /// <inheritdoc />\r\n        public void SetResult" +
+                    "(ResultCode resultCode, Result? result)\r\n        {\r\n            LifecycleDelegat" +
+                    "e.SetResult(resultCode, result);\r\n        }\r\n\r\n        /// <inheritdoc />\r\n     " +
+                    "   public void RaiseResultSet(ResultCode resultCode, Result? result)\r\n        {\r" +
+                    "\n            ResultSet?.Invoke(this, new ResultSetEventArgs(resultCode, result))" +
+                    ";\r\n        }\r\n\r\n        /// <inheritdoc />\r\n        public void HandleResult(obj" +
+                    "ect sender, ResultSetEventArgs args)\r\n        {\r\n            if (sender == null)" +
+                    "\r\n                throw new ArgumentNullException(nameof(sender));\r\n            " +
+                    "if (args == null)\r\n                throw new ArgumentNullException(nameof(args))" +
+                    ";\r\n\r\n            LifecycleDelegate.HandleResult(sender, args);\r\n        }\r\n\r\n   " +
+                    "     /// <inheritdoc />\r\n        void ILifecycleViewModelOwner<TViewModel>.SetVi" +
+                    "ewModel(TViewModel viewModel)\r\n        {\r\n            ViewModel = viewModel ?? t" +
+                    "hrow new ArgumentNullException(nameof(viewModel));\r\n        }\r\n\r\n        /// <in" +
+                    "heritdoc />\r\n        async Task ILifecycleViewModelOwner<TViewModel>.InitializeV" +
+                    "iewModelAsync(bool recreated)\r\n        {\r\n            await ViewModel.Initialize" +
+                    "Async(_parameters, recreated);\r\n        }\r\n    }\r\n}\r\n");
+            
+            #line 336 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\ViewsGenerator.tt"
  } 
             
             #line default

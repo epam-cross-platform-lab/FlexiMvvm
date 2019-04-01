@@ -17,22 +17,23 @@
 using System;
 using System.Collections.Generic;
 using Android.OS;
-using Fragment = Android.Support.V4.App.Fragment;
 
 namespace FlexiMvvm.ViewModels.Core
 {
+    using Android.Support.V4.App;
+
     internal sealed class LifecycleViewModelStoreFragment : Fragment, ILifecycleViewModelStore
     {
         private Dictionary<string, ILifecycleViewModel>? _viewModels;
 
-        private Dictionary<string, ILifecycleViewModel> ViewModels => _viewModels ?? (_viewModels = new Dictionary<string, ILifecycleViewModel>());
+        private Dictionary<string, ILifecycleViewModel> ViewModels => _viewModels ??= new Dictionary<string, ILifecycleViewModel>();
 
         internal static LifecycleViewModelStoreFragment NewInstance()
         {
             return new LifecycleViewModelStoreFragment();
         }
 
-        public override void OnCreate(Bundle savedInstanceState)
+        public override void OnCreate(Bundle? savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 

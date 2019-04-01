@@ -7,10 +7,10 @@
         "FlexiMvvm.Views",
         new ExtensionsGenerationOptions(
             "FlexiMvvm.Views.Keyboard.KeyboardHandler",
-            new EventGenerationOptions("KeyboardDidHide", "FlexiMvvm.Views.Keyboard.KeyboardSizeChangedEventArgs"),
-            new EventGenerationOptions("KeyboardDidShow", "FlexiMvvm.Views.Keyboard.KeyboardSizeChangedEventArgs"),
-            new EventGenerationOptions("KeyboardWillHide", "FlexiMvvm.Views.Keyboard.KeyboardSizeChangedEventArgs"),
-            new EventGenerationOptions("KeyboardWillShow", "FlexiMvvm.Views.Keyboard.KeyboardSizeChangedEventArgs"))
+            new EventGenerationOptions("KeyboardDidHide", "FlexiMvvm.Views.Keyboard.KeyboardVisibilityChangedEventArgs"),
+            new EventGenerationOptions("KeyboardDidShow", "FlexiMvvm.Views.Keyboard.KeyboardVisibilityChangedEventArgs"),
+            new EventGenerationOptions("KeyboardWillHide", "FlexiMvvm.Views.Keyboard.KeyboardVisibilityChangedEventArgs"),
+            new EventGenerationOptions("KeyboardWillShow", "FlexiMvvm.Views.Keyboard.KeyboardVisibilityChangedEventArgs"))
         {
             TargetNamespace = "FlexiMvvm.Views.Keyboard"
         },

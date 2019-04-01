@@ -16,21 +16,33 @@
 
 using System;
 using FlexiMvvm.ViewModels;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Views
 {
+    /// <summary>
+    /// Provides data for the <see cref="INavigationView{TViewModel}.ResultSet"/> event.
+    /// </summary>
     public class ResultSetEventArgs : EventArgs
     {
-        public ResultSetEventArgs(ResultCode resultCode, [CanBeNull] Result result)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ResultSetEventArgs"/> class.
+        /// </summary>
+        /// <param name="resultCode">Determines whether the result should be set as successful or not due to cancellation by the user.</param>
+        /// <param name="result">The view model result. Can be <c>null</c>.</param>
+        public ResultSetEventArgs(ResultCode resultCode, Result? result)
         {
             ResultCode = resultCode;
             Result = result;
         }
 
+        /// <summary>
+        /// Gets the result code indicating whether the lifecycle-aware view model result is set successfully or not due to cancellation by the user.
+        /// </summary>
         public ResultCode ResultCode { get; }
 
-        [CanBeNull]
-        public Result Result { get; }
+        /// <summary>
+        /// Gets the lifecycle-aware view model result. Can be <c>null</c>.
+        /// </summary>
+        public Result? Result { get; }
     }
 }
