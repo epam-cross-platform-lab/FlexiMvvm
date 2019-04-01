@@ -17,25 +17,25 @@
 using System;
 using FlexiMvvm.ViewModels;
 using FlexiMvvm.Views;
-using Fragment = Android.Support.V4.App.Fragment;
-using FragmentActivity = Android.Support.V4.App.FragmentActivity;
 
 namespace FlexiMvvm.Navigation
 {
+    using Android.Support.V4.App;
+
     /// <summary>
-    /// Provides a set of static methods for accessing the <see cref="INavigationView{TViewModel}"/>.
+    /// Provides a set of static methods for the <see cref="INavigationView{TViewModel}"/>.
     /// </summary>
     public static class NavigationViewExtensions
     {
         /// <summary>
-        /// Gets self if <paramref name="view"/> is <see cref="FragmentActivity"/> or
+        /// Returns self if <paramref name="view"/> is <see cref="FragmentActivity"/> or
         /// <see cref="Fragment.Activity"/> property value if <paramref name="view"/> is <see cref="Fragment"/>.
         /// </summary>
         /// <param name="view">The navigation view.</param>
-        /// <returns>The <see cref="FragmentActivity"/> instance. Can be <c>null</c>.</returns>
+        /// <returns>The activity instance. Can be <c>null</c>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="view"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentException">
-        /// <paramref name="view" /> is derived from a class other than the <see cref="FragmentActivity"/> or <see cref="Fragment"/>.
+        /// The <paramref name="view" /> is derived from a class other than the <see cref="FragmentActivity"/> or <see cref="Fragment"/>.
         /// </exception>
         public static FragmentActivity? GetActivity(this INavigationView<ILifecycleViewModel> view)
         {

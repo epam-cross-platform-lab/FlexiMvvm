@@ -16,12 +16,17 @@
 
 using FlexiMvvm.Views.Keyboard;
 
-namespace FlexiMvvm.Views.Core
+namespace FlexiMvvm.Views
 {
+    /// <summary>
+    /// Defines the contract for a platform-specific view.
+    /// </summary>
     public interface IIosView
     {
-        bool HandleKeyboard { get; }
-
-        KeyboardHandler? KeyboardHandler { get; }
+        /// <summary>
+        /// Gets the keyboard handler that is responsible for scrolling the view to make the invisible or partially visible
+        /// focused field fully visible when the keyboard appears. Can be <c>null</c>.
+        /// </summary>
+        IKeyboardHandler? KeyboardHandler { get; }
     }
 }

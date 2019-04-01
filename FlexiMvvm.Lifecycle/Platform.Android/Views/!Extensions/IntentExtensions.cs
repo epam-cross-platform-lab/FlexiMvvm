@@ -22,12 +22,12 @@ using FlexiMvvm.ViewModels;
 namespace FlexiMvvm.Views
 {
     /// <summary>
-    /// Provides a set of static methods for getting and putting custom data from/to the <see cref="Intent"/>.
+    /// Provides a set of static methods for the <see cref="Intent"/>.
     /// </summary>
     public static class IntentExtensions
     {
         /// <summary>
-        /// Gets the view model parameters from the <paramref name="intent"/>.
+        /// Gets the lifecycle-aware view model parameters from the <paramref name="intent"/>.
         /// </summary>
         /// <typeparam name="TParameters">The type of the view model parameters.</typeparam>
         /// <param name="intent">The intent to extract the view model parameters from.</param>
@@ -43,7 +43,7 @@ namespace FlexiMvvm.Views
         }
 
         /// <summary>
-        /// Puts the view model parameters to the <paramref name="intent"/>.
+        /// Puts the lifecycle-aware view model parameters to the <paramref name="intent"/>.
         /// </summary>
         /// <typeparam name="TParameters">The type of the view model parameters.</typeparam>
         /// <param name="intent">The intent to put the view model parameters to.</param>
@@ -64,7 +64,7 @@ namespace FlexiMvvm.Views
         }
 
         /// <summary>
-        /// Gets the view model result from the <paramref name="intent"/>.
+        /// Gets the lifecycle-aware view model result from the <paramref name="intent"/>.
         /// </summary>
         /// <typeparam name="TResult">The type of the view model result.</typeparam>
         /// <param name="intent">The intent to extract the view model result from.</param>
@@ -80,7 +80,7 @@ namespace FlexiMvvm.Views
         }
 
         /// <summary>
-        /// Puts the view model result to the <paramref name="intent"/>.
+        /// Puts the lifecycle-aware view model result to the <paramref name="intent"/>.
         /// </summary>
         /// <typeparam name="TResult">The type of the view model result.</typeparam>
         /// <param name="intent">The intent to put the view model result to.</param>

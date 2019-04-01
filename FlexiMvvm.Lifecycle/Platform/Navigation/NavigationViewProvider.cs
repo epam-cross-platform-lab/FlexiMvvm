@@ -22,17 +22,17 @@ using FlexiMvvm.Views.Core;
 namespace FlexiMvvm.Navigation
 {
     /// <summary>
-    /// Allows to get existing navigation view by a view model.
+    /// Allows to get an existing navigation view by a lifecycle-aware view model.
     /// </summary>
     public static partial class NavigationViewProvider
     {
         /// <summary>
-        /// Gets the navigation view.
+        /// Returns the navigation view for the provided lifecycle-aware <paramref name="viewModel"/>.
         /// </summary>
-        /// <param name="viewModel">The view model used for getting a bound view.</param>
-        /// <returns>The navigation view.</returns>
+        /// <param name="viewModel">The view model that is used to get its view.</param>
+        /// <returns>The navigation view instance.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> is <c>null</c>.</exception>
-        /// <exception cref="InvalidOperationException">The view instance is missing for <paramref name="viewModel"/> instance.</exception>
+        /// <exception cref="InvalidOperationException">The view instance is missing for the provided <paramref name="viewModel"/>.</exception>
         public static INavigationView<ILifecycleViewModel> Get(ILifecycleViewModel viewModel)
         {
             if (viewModel == null)
@@ -42,12 +42,12 @@ namespace FlexiMvvm.Navigation
         }
 
         /// <summary>
-        /// Gets the navigation view which can handle passed result.
+        /// Returns the navigation view for the provided lifecycle-aware <paramref name="viewModel"/> that can handle a lifecycle-aware view model result.
         /// </summary>
-        /// <param name="viewModel">The view model used for getting a bound view.</param>
-        /// <returns>The navigation view.</returns>
+        /// <param name="viewModel">The view model that is used to get its view.</param>
+        /// <returns>The navigation view instance.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> is <c>null</c>.</exception>
-        /// <exception cref="InvalidOperationException">The view instance is missing for <paramref name="viewModel"/> instance.</exception>
+        /// <exception cref="InvalidOperationException">The view instance is missing for the provided <paramref name="viewModel"/>.</exception>
         public static INavigationView<ILifecycleViewModelWithResultHandler> Get(ILifecycleViewModelWithResultHandler viewModel)
         {
             if (viewModel == null)
@@ -57,13 +57,13 @@ namespace FlexiMvvm.Navigation
         }
 
         /// <summary>
-        /// Gets the navigation view which can return a result.
+        /// Returns the navigation view for the provided lifecycle-aware <paramref name="viewModel"/> that can return a lifecycle-aware view model result.
         /// </summary>
         /// <typeparam name="TResult">The type of the view model result.</typeparam>
-        /// <param name="viewModel">The view model used for getting a bound view.</param>
-        /// <returns>The navigation view.</returns>
+        /// <param name="viewModel">The view model that is used to get its view.</param>
+        /// <returns>The navigation view instance.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> is <c>null</c>.</exception>
-        /// <exception cref="InvalidOperationException">The view instance is missing for <paramref name="viewModel"/> instance.</exception>
+        /// <exception cref="InvalidOperationException">The view instance is missing for the provided <paramref name="viewModel"/>.</exception>
         public static INavigationView<ILifecycleViewModelWithResult<TResult>> Get<TResult>(ILifecycleViewModelWithResult<TResult> viewModel)
             where TResult : Result
         {

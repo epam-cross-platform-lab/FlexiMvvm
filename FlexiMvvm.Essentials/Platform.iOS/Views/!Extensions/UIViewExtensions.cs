@@ -15,15 +15,23 @@
 // =========================================================================
 
 using System;
-using JetBrains.Annotations;
 using UIKit;
 
 namespace FlexiMvvm.Views
 {
+    /// <summary>
+    /// Provides a set of static methods for the <see cref="UIViewExtensions"/>.
+    /// </summary>
     public static class UIViewExtensions
     {
-        [NotNull]
-        public static UIView AddLayoutSubview([NotNull] this UIView parentView, [NotNull] UIView childView)
+        /// <summary>
+        /// Adds the <paramref name="childView"/> to the <paramref name="parentView"/>.
+        /// </summary>
+        /// <param name="parentView">The parent view.</param>
+        /// <param name="childView">The child view.</param>
+        /// <returns>The parent view instance.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="parentView"/> or <paramref name="childView"/> is <c>null</c>.</exception>
+        public static UIView AddLayoutSubview(this UIView parentView, UIView childView)
         {
             if (parentView == null)
                 throw new ArgumentNullException(nameof(parentView));
@@ -33,6 +41,39 @@ namespace FlexiMvvm.Views
             parentView.AddSubview(childView);
 
             return parentView;
+        }
+
+        internal static Tuple<UIView, UIScrollView>? FindFirstResponderInScrollView(this UIView rootView)
+        {
+            return FindFirstResponderInScrollView(rootView, null);
+        }
+
+        private static Tuple<UIView, UIScrollView>? FindFirstResponderInScrollView(UIView view, UIScrollView? scrollView)
+        {
+            if (view is UIScrollView uiScrollView)
+            {
+                scrollView = uiScrollView;
+            }
+
+            if (view.IsFirstResponder)
+            {
+                return scrollView != null ? new Tuple<UIView, UIScrollView>(view, scrollView) : null;
+            }
+
+            if (view.Subviews != null)
+            {
+                foreach (var subview in view.Subviews)
+                {
+                    var firstResponderInScrollView = FindFirstResponderInScrollView(subview, scrollView);
+
+                    if (firstResponderInScrollView != null)
+                    {
+                        return firstResponderInScrollView;
+                    }
+                }
+            }
+
+            return null;
         }
     }
 }

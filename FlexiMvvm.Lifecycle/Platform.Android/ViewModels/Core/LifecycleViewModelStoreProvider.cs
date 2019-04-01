@@ -20,7 +20,7 @@ namespace FlexiMvvm.ViewModels.Core
 {
     internal static class LifecycleViewModelStoreProvider
     {
-        private const string ViewModelStoreTag = "FlexiMvvm_ViewModelStore";
+        private const string LifecycleViewModelStoreTag = "FlexiMvvm_LifecycleViewModelStore";
 
         internal static ILifecycleViewModelStore? Get(IView<ILifecycleViewModel> view)
         {
@@ -31,7 +31,7 @@ namespace FlexiMvvm.ViewModels.Core
 
             if (!fragmentManager.IsDestroyed)
             {
-                store = (LifecycleViewModelStoreFragment)fragmentManager.FindFragmentByTag(ViewModelStoreTag);
+                store = (LifecycleViewModelStoreFragment)fragmentManager.FindFragmentByTag(LifecycleViewModelStoreTag);
 
                 if (store == null)
                 {
@@ -39,7 +39,7 @@ namespace FlexiMvvm.ViewModels.Core
 
                     fragmentManager
                         .BeginTransaction()
-                        .Add(store, ViewModelStoreTag)
+                        .Add(store, LifecycleViewModelStoreTag)
                         .Commit();
                 }
             }

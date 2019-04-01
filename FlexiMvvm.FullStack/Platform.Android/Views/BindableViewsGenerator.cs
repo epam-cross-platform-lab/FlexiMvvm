@@ -16,6 +16,7 @@
 // =========================================================================
 
 using System;
+using Android.Runtime;
 using FlexiMvvm.Bindings;
 using FlexiMvvm.Persistence.Core;
 using FlexiMvvm.ViewModels;
@@ -26,12 +27,23 @@ namespace FlexiMvvm.Views
     public partial class BindableAppCompatActivity<TViewModel> : FlexiMvvm.Views.AppCompatActivity<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, ILifecycleViewModelWithoutParameters, IStateOwner
     {
-        public IDisposable BindingSet { get; private set; }
-
-        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        /// <inheritdoc />
+        public BindableAppCompatActivity()
         {
-            return new BindableViewLifecycleDelegate<BindableAppCompatActivity<TViewModel>, TViewModel>(this);
+            LifecycleDelegate = new BindableViewLifecycleDelegate<BindableAppCompatActivity<TViewModel>, TViewModel>(this);
         }
+
+        /// <inheritdoc />
+        protected BindableAppCompatActivity(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+            LifecycleDelegate = new BindableViewLifecycleDelegate<BindableAppCompatActivity<TViewModel>, TViewModel>(this);
+        }
+
+        /// <inheritdoc />
+        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
+
+        public IDisposable BindingSet { get; private set; }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
         {
@@ -47,12 +59,23 @@ namespace FlexiMvvm.Views
         where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>, IStateOwner
         where TParameters : Parameters
     {
-        public IDisposable BindingSet { get; private set; }
-
-        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        /// <inheritdoc />
+        public BindableAppCompatActivity()
         {
-            return new BindableViewLifecycleDelegate<BindableAppCompatActivity<TViewModel, TParameters>, TViewModel>(this);
+            LifecycleDelegate = new BindableViewLifecycleDelegate<BindableAppCompatActivity<TViewModel, TParameters>, TViewModel>(this);
         }
+
+        /// <inheritdoc />
+        protected BindableAppCompatActivity(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+            LifecycleDelegate = new BindableViewLifecycleDelegate<BindableAppCompatActivity<TViewModel, TParameters>, TViewModel>(this);
+        }
+
+        /// <inheritdoc />
+        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
+
+        public IDisposable BindingSet { get; private set; }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
         {
@@ -70,12 +93,23 @@ namespace FlexiMvvm.Views
     public partial class BindableDialogFragment<TViewModel> : FlexiMvvm.Views.DialogFragment<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, ILifecycleViewModelWithoutParameters, IStateOwner
     {
-        public IDisposable BindingSet { get; private set; }
-
-        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        /// <inheritdoc />
+        public BindableDialogFragment()
         {
-            return new BindableViewLifecycleDelegate<BindableDialogFragment<TViewModel>, TViewModel>(this);
+            LifecycleDelegate = new BindableViewLifecycleDelegate<BindableDialogFragment<TViewModel>, TViewModel>(this);
         }
+
+        /// <inheritdoc />
+        protected BindableDialogFragment(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+            LifecycleDelegate = new BindableViewLifecycleDelegate<BindableDialogFragment<TViewModel>, TViewModel>(this);
+        }
+
+        /// <inheritdoc />
+        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
+
+        public IDisposable BindingSet { get; private set; }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
         {
@@ -91,12 +125,23 @@ namespace FlexiMvvm.Views
         where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>, IStateOwner
         where TParameters : Parameters
     {
-        public IDisposable BindingSet { get; private set; }
-
-        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        /// <inheritdoc />
+        public BindableDialogFragment()
         {
-            return new BindableViewLifecycleDelegate<BindableDialogFragment<TViewModel, TParameters>, TViewModel>(this);
+            LifecycleDelegate = new BindableViewLifecycleDelegate<BindableDialogFragment<TViewModel, TParameters>, TViewModel>(this);
         }
+
+        /// <inheritdoc />
+        protected BindableDialogFragment(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+            LifecycleDelegate = new BindableViewLifecycleDelegate<BindableDialogFragment<TViewModel, TParameters>, TViewModel>(this);
+        }
+
+        /// <inheritdoc />
+        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
+
+        public IDisposable BindingSet { get; private set; }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
         {
@@ -114,12 +159,23 @@ namespace FlexiMvvm.Views
     public partial class BindableFragment<TViewModel> : FlexiMvvm.Views.Fragment<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, ILifecycleViewModelWithoutParameters, IStateOwner
     {
-        public IDisposable BindingSet { get; private set; }
-
-        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        /// <inheritdoc />
+        public BindableFragment()
         {
-            return new BindableViewLifecycleDelegate<BindableFragment<TViewModel>, TViewModel>(this);
+            LifecycleDelegate = new BindableViewLifecycleDelegate<BindableFragment<TViewModel>, TViewModel>(this);
         }
+
+        /// <inheritdoc />
+        protected BindableFragment(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+            LifecycleDelegate = new BindableViewLifecycleDelegate<BindableFragment<TViewModel>, TViewModel>(this);
+        }
+
+        /// <inheritdoc />
+        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
+
+        public IDisposable BindingSet { get; private set; }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
         {
@@ -135,12 +191,23 @@ namespace FlexiMvvm.Views
         where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>, IStateOwner
         where TParameters : Parameters
     {
-        public IDisposable BindingSet { get; private set; }
-
-        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        /// <inheritdoc />
+        public BindableFragment()
         {
-            return new BindableViewLifecycleDelegate<BindableFragment<TViewModel, TParameters>, TViewModel>(this);
+            LifecycleDelegate = new BindableViewLifecycleDelegate<BindableFragment<TViewModel, TParameters>, TViewModel>(this);
         }
+
+        /// <inheritdoc />
+        protected BindableFragment(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+            LifecycleDelegate = new BindableViewLifecycleDelegate<BindableFragment<TViewModel, TParameters>, TViewModel>(this);
+        }
+
+        /// <inheritdoc />
+        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
+
+        public IDisposable BindingSet { get; private set; }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
         {

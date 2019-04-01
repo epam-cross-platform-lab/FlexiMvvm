@@ -14,13 +14,18 @@
 // limitations under the License.
 // =========================================================================
 
-using FlexiMvvm.Views.Keyboard;
-using JetBrains.Annotations;
+using System;
 
-namespace FlexiMvvm.Views.Core
+namespace FlexiMvvm.Views
 {
-    public interface IKeyboardHandlerOwner
+    /// <summary>
+    /// Defines the contract for an options menu source.
+    /// </summary>
+    public interface IOptionsMenuSource
     {
-        void SetKeyboardHandler([CanBeNull] KeyboardHandler handler);
+        /// <summary>
+        /// Occurs when an item in the options menu is selected.
+        /// </summary>
+        event EventHandler<OptionsItemSelectedEventArgs> OnOptionsItemSelectedCalled;
     }
 }

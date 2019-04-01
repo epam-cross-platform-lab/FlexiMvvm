@@ -22,7 +22,7 @@ using UIKit;
 namespace FlexiMvvm.Views
 {
     /// <summary>
-    /// Provides a set of static methods for accessing the <see cref="IView{TViewModel}"/>.
+    /// Provides a set of static methods for the <see cref="IView{TViewModel}"/>.
     /// </summary>
     public static class ViewExtensions
     {
@@ -30,11 +30,11 @@ namespace FlexiMvvm.Views
         /// Executes appropriate handler based on actual type of the <paramref name="view"/>.
         /// </summary>
         /// <param name="view">The view that is represented by a navigation or view controller.</param>
-        /// <param name="navigationControllerHandler">The handler to execute if the <paramref name="view"/> is <see cref="UINavigationController"/>.</param>
-        /// <param name="viewControllerHandler">The handler to execute if the <paramref name="view"/> is <see cref="UIViewController"/>.</param>
+        /// <param name="navigationControllerHandler">The handler to execute if <paramref name="view"/> is <see cref="UINavigationController"/>.</param>
+        /// <param name="viewControllerHandler">The handler to execute if <paramref name="view"/> is <see cref="UIViewController"/>.</param>
         /// <exception cref="ArgumentNullException"><paramref name="view" /> or <paramref name="navigationControllerHandler" /> or <paramref name="viewControllerHandler" /> is <c>null</c>.</exception>
         /// <exception cref="ArgumentException">
-        /// <paramref name="view" /> is derived from a class other than the <see cref="UINavigationController"/> or <see cref="UIViewController"/>.
+        /// The <paramref name="view" /> is derived from a class other than the <see cref="UINavigationController"/> or <see cref="UIViewController"/>.
         /// </exception>
         public static void As(
             this IView<ILifecycleViewModel> view,
@@ -59,7 +59,7 @@ namespace FlexiMvvm.Views
             else
             {
                 throw new ArgumentException(
-                    $"Only views derived from '{TypeFormatter.FormatName<UINavigationController>()}' or " +
+                    $"Only views derived from the '{TypeFormatter.FormatName<UINavigationController>()}' or " +
                     $"'{TypeFormatter.FormatName<UIViewController>()}' are supported.", nameof(view));
             }
         }
@@ -69,12 +69,12 @@ namespace FlexiMvvm.Views
         /// </summary>
         /// <typeparam name="T">The type of the result.</typeparam>
         /// <param name="view">The view that is represented by a navigation or view controller.</param>
-        /// <param name="navigationControllerHandler">The handler to execute if the <paramref name="view"/> is <see cref="UINavigationController"/>.</param>
-        /// <param name="viewControllerHandler">The handler to execute if the <paramref name="view"/> is <see cref="UIViewController"/>.</param>
+        /// <param name="navigationControllerHandler">The handler to execute if <paramref name="view"/> is <see cref="UINavigationController"/>.</param>
+        /// <param name="viewControllerHandler">The handler to execute if <paramref name="view"/> is <see cref="UIViewController"/>.</param>
         /// <returns>A result returned by appropriate handler.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="view" /> or <paramref name="navigationControllerHandler" /> or <paramref name="viewControllerHandler" /> is <c>null</c>.</exception>
         /// <exception cref="ArgumentException">
-        /// <paramref name="view" /> is derived from a class other than the <see cref="UINavigationController"/> or <see cref="UIViewController"/>.
+        /// The <paramref name="view" /> is derived from a class other than the <see cref="UINavigationController"/> or <see cref="UIViewController"/>.
         /// </exception>
         public static T As<T>(
             this IView<ILifecycleViewModel> view,
@@ -101,7 +101,7 @@ namespace FlexiMvvm.Views
             else
             {
                 throw new ArgumentException(
-                    $"Only views derived from '{TypeFormatter.FormatName<UINavigationController>()}' or " +
+                    $"Only views derived from the '{TypeFormatter.FormatName<UINavigationController>()}' or " +
                     $"'{TypeFormatter.FormatName<UIViewController>()}' are supported.", nameof(view));
             }
 

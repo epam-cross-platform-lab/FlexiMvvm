@@ -16,20 +16,33 @@
 
 using System;
 using Android.Views;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Views
 {
+    /// <summary>
+    /// Provides data for the <see cref="IOptionsMenuSource.OnOptionsItemSelectedCalled"/> event.
+    /// </summary>
     public class OptionsItemSelectedEventArgs : EventArgs
     {
-        public OptionsItemSelectedEventArgs([NotNull] IMenuItem item)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OptionsItemSelectedEventArgs"/> class.
+        /// </summary>
+        /// <param name="item">The selected menu item.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="item"/> is <c>null</c>.</exception>
+        public OptionsItemSelectedEventArgs(IMenuItem item)
         {
             Item = item ?? throw new ArgumentNullException(nameof(item));
         }
 
-        [NotNull]
+        /// <summary>
+        /// Gets the selected menu item.
+        /// </summary>
         public IMenuItem Item { get; }
 
-        public bool Handled { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether the menu item selection is handled successfully or allow normal menu processing to proceed.
+        /// <para>The default value is <c>false</c>.</para>
+        /// </summary>
+        public bool IsHandled { get; set; }
     }
 }

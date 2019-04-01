@@ -22,19 +22,19 @@ using UIKit;
 namespace FlexiMvvm.Navigation
 {
     /// <summary>
-    /// Provides a set of static methods for accessing the <see cref="INavigationView{TViewModel}"/>.
+    /// Provides a set of static methods for the <see cref="INavigationView{TViewModel}"/>.
     /// </summary>
     public static class NavigationViewExtensions
     {
         /// <summary>
-        /// Gets self if <paramref name="view"/> is <see cref="UINavigationController"/> or
+        /// Returns self if <paramref name="view"/> is <see cref="UINavigationController"/> or
         /// <see cref="UIViewController.NavigationController"/> property value if <paramref name="view"/> is <see cref="UIViewController"/>.
         /// </summary>
         /// <param name="view">The navigation view.</param>
-        /// <returns>The <see cref="UINavigationController"/> instance. Can be <c>null</c>.</returns>
+        /// <returns>The view controller instance. Can be <c>null</c>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="view"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentException">
-        /// <paramref name="view" /> is derived from a class other than the <see cref="UINavigationController"/> or <see cref="UIViewController"/>.
+        /// The <paramref name="view" /> is derived from a class other than the <see cref="UINavigationController"/> or <see cref="UIViewController"/>.
         /// </exception>
         public static UINavigationController? GetNavigationController(this INavigationView<ILifecycleViewModel> view)
         {

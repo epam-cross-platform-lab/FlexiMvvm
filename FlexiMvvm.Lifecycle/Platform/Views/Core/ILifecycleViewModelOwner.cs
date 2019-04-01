@@ -21,14 +21,15 @@ using FlexiMvvm.ViewModels;
 namespace FlexiMvvm.Views.Core
 {
     /// <summary>
-    /// Defines the contract for a lifecycle-aware view model owner. This interface is intended for internal use by FlexiMvvm.
+    /// Defines the contract for a lifecycle-aware view model owner.
+    /// <para>This interface is intended for internal use by the FlexiMvvm.</para>
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
     public interface ILifecycleViewModelOwner<in TViewModel>
         where TViewModel : class, ILifecycleViewModel
     {
         /// <summary>
-        /// Sets the lifecycle-aware view model for this owner.
+        /// Sets the lifecycle-aware view model to its owner.
         /// </summary>
         /// <param name="viewModel">The view model to set.</param>
         /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> is <c>null</c>.</exception>
@@ -37,7 +38,8 @@ namespace FlexiMvvm.Views.Core
         /// <summary>
         /// Initializes the lifecycle-aware view model by calling its corresponding method.
         /// </summary>
+        /// <param name="recreated">Determines whether the view model has been destroyed to recover memory and recreated with a restored state if it was persisted.</param>
         /// <returns>A task that represents the asynchronous initialization operation.</returns>
-        Task InitializeViewModelAsync();
+        Task InitializeViewModelAsync(bool recreated);
     }
 }

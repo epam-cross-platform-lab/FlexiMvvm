@@ -24,15 +24,15 @@ using FlexiMvvm.ViewModels;
 namespace FlexiMvvm.Views
 {
     /// <summary>
-    /// Provides a set of static methods for getting and putting custom data from/to the <see cref="Bundle"/>.
+    /// Provides a set of static methods for the <see cref="Bundle"/>.
     /// </summary>
     public static class BundleExtensions
     {
-        private const string ParametersKey = "FlexiMvvm_ViewModel_Parameters";
-        private const string ResultKey = "FlexiMvvm_ViewModel_Result";
+        private const string ParametersKey = "FlexiMvvm_LifecycleViewModel_Parameters";
+        private const string ResultKey = "FlexiMvvm_LifecycleViewModel_Result";
 
         /// <summary>
-        /// Gets the view model parameters from the <paramref name="bundle"/>.
+        /// Gets the lifecycle-aware view model parameters from the <paramref name="bundle"/>.
         /// </summary>
         /// <typeparam name="TParameters">The type of the view model parameters.</typeparam>
         /// <param name="bundle">The bundle to extract the view model parameters from.</param>
@@ -57,7 +57,7 @@ namespace FlexiMvvm.Views
         }
 
         /// <summary>
-        /// Puts the view model parameters to the <paramref name="bundle"/>.
+        /// Puts the lifecycle-aware view model parameters to the <paramref name="bundle"/>.
         /// </summary>
         /// <typeparam name="TParameters">The type of the view model parameters.</typeparam>
         /// <param name="bundle">The bundle to put the view model parameters to.</param>
@@ -79,7 +79,7 @@ namespace FlexiMvvm.Views
         }
 
         /// <summary>
-        /// Gets the view model result from the <paramref name="bundle"/>.
+        /// Gets the lifecycle-aware view model result from the <paramref name="bundle"/>.
         /// </summary>
         /// <typeparam name="TResult">The type of the view model result.</typeparam>
         /// <param name="bundle">The bundle to extract the view model result from.</param>
@@ -104,7 +104,7 @@ namespace FlexiMvvm.Views
         }
 
         /// <summary>
-        /// Puts the view model result to the <paramref name="bundle"/>.
+        /// Puts the lifecycle-aware view model result to the <paramref name="bundle"/>.
         /// </summary>
         /// <typeparam name="TResult">The type of the view model result.</typeparam>
         /// <param name="bundle">The bundle to put the view model result to.</param>

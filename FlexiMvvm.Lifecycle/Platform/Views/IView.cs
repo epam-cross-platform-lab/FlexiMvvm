@@ -19,14 +19,14 @@ using FlexiMvvm.ViewModels;
 namespace FlexiMvvm.Views
 {
     /// <summary>
-    /// Defines the contract for a view which has a view model.
+    /// Defines the contract for a view that owns a lifecycle-aware view model.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
     public interface IView<out TViewModel>
         where TViewModel : class, ILifecycleViewModel
     {
         /// <summary>
-        /// Gets the view model.
+        /// Gets the lifecycle-aware view model.
         /// </summary>
         TViewModel ViewModel { get; }
     }

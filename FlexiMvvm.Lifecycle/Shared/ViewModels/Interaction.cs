@@ -24,12 +24,12 @@ namespace FlexiMvvm.ViewModels
     public class Interaction
     {
         /// <summary>
-        /// Raised when the view model requested the interaction.
+        /// Occurs when the view model requested the interaction.
         /// </summary>
         public event EventHandler Requested;
 
         /// <summary>
-        /// Raises <see cref="Requested"/> event.
+        /// Raises the <see cref="Requested"/> event.
         /// </summary>
         public void RaiseRequested()
         {
@@ -49,7 +49,7 @@ namespace FlexiMvvm.ViewModels
         public event EventHandler<InteractionRequestedEventArgs<T>> Requested;
 
         /// <summary>
-        /// Raises <see cref="Requested"/> event.
+        /// Raises the <see cref="Requested"/> event.
         /// </summary>
         /// <param name="request">The request to be passed in the event arguments.</param>
         public void RaiseRequested(T request)

@@ -15,32 +15,84 @@
 // limitations under the License.
 // =========================================================================
 #>
+#nullable enable
+
 <#@ template language="C#" #>
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using FlexiMvvm.ViewModels;
 using FlexiMvvm.Views.Core;
 using FlexiMvvm.Views.Keyboard;
+using Foundation;
+using UIKit;
 <# foreach (var viewGenerationOptions in ViewsGenerationOptions) { #>
 
 namespace <#= GetNamespace(viewGenerationOptions) #>
 {
-    public partial class <#= viewGenerationOptions.ClassName #> : <#= viewGenerationOptions.BaseClassName #>, IIosView, IKeyboardHandlerOwner
+    /// <summary>
+    /// Represents the <see cref="<#= viewGenerationOptions.BaseClassName #>"/> that is adapted for use with the FlexiMvvm.
+    /// </summary>
+    public partial class <#= viewGenerationOptions.ClassName #> : <#= viewGenerationOptions.BaseClassName #>, IIosView
     {
-        private IViewLifecycleDelegate _lifecycleDelegate;
-        private KeyboardHandler _keyboardHandler;
+        private KeyboardHandler? _keyboardHandler;
 
-        protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ?? (_lifecycleDelegate = CreateLifecycleDelegate());
-
-        public virtual bool HandleKeyboard { get; } = <#= viewGenerationOptions.HandleKeyboard.ToString().ToLower() #>;
-
-        public KeyboardHandler KeyboardHandler => _keyboardHandler;
-
-        protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
+        /// <inheritdoc />
+        public <#= viewGenerationOptions.ClassName #>()
         {
-            return new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #>>(this);
+            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #>>(this);
         }
 
+        /// <inheritdoc />
+        public <#= viewGenerationOptions.ClassName #>(NSCoder coder)
+            : base(coder)
+        {
+            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #>>(this);
+        }
+
+        /// <inheritdoc />
+        public <#= viewGenerationOptions.ClassName #>(string nibName, NSBundle bundle)
+            : base(nibName, bundle)
+        {
+            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #>>(this);
+        }
+
+        /// <inheritdoc />
+        protected <#= viewGenerationOptions.ClassName #>(NSObjectFlag t)
+            : base(t)
+        {
+            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #>>(this);
+        }
+
+        /// <inheritdoc />
+        protected internal <#= viewGenerationOptions.ClassName #>(IntPtr handle)
+            : base(handle)
+        {
+            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #>>(this);
+        }
+
+        /// <summary>
+        /// Gets the view lifecycle delegate. Intended for internal use by the FlexiMvvm.
+        /// </summary>
+        protected virtual IViewLifecycleDelegate LifecycleDelegate { get; }
+
+<#      if (viewGenerationOptions.HandleKeyboard) { #>
+        /// <inheritdoc />
+        public virtual IKeyboardHandler? KeyboardHandler => _keyboardHandler ??= Keyboard.KeyboardHandler.Create(View);
+<#      } else { #>
+        /// <inheritdoc />
+        public virtual IKeyboardHandler? KeyboardHandler => _keyboardHandler;
+<#      } #>
+
+        /// <inheritdoc />
+        public override void WillMoveToParentViewController(UIViewController? parent)
+        {
+            base.WillMoveToParentViewController(parent);
+
+            LifecycleDelegate.WillMoveToParentViewController(parent);
+        }
+
+        /// <inheritdoc />
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
@@ -48,6 +100,7 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
             LifecycleDelegate.ViewDidLoad();
         }
 
+        /// <inheritdoc />
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
@@ -55,6 +108,15 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
             LifecycleDelegate.ViewWillAppear();
         }
 
+        /// <inheritdoc />
+        public override void ViewDidAppear(bool animated)
+        {
+            base.ViewDidAppear(animated);
+
+            LifecycleDelegate.ViewDidAppear();
+        }
+
+        /// <inheritdoc />
         public override void ViewWillDisappear(bool animated)
         {
             base.ViewWillDisappear(animated);
@@ -62,6 +124,7 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
             LifecycleDelegate.ViewWillDisappear();
         }
 
+        /// <inheritdoc />
         public override void ViewDidDisappear(bool animated)
         {
             base.ViewDidDisappear(animated);
@@ -69,39 +132,83 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
             LifecycleDelegate.ViewDidDisappear();
         }
 
-        void IKeyboardHandlerOwner.SetKeyboardHandler(KeyboardHandler handler)
+        /// <inheritdoc />
+        public override void DidMoveToParentViewController(UIViewController? parent)
         {
-            _keyboardHandler = handler;
+            base.DidMoveToParentViewController(parent);
+
+            LifecycleDelegate.DidMoveToParentViewController(parent);
         }
     }
 
+    /// <summary>
+    /// Represents the <see cref="<#= viewGenerationOptions.BaseClassName #>"/> that is adapted for use with the FlexiMvvm
+    /// and has its own lifecycle-aware view model.
+    /// </summary>
+    /// <typeparam name="TViewModel">The type of the view model.</typeparam>
+    [SuppressMessage(
+        "Compiler",
+        "CS8618:Non-nullable field is uninitialized.",
+        Justification = "The view lifecycle delegate sets a value to the ViewModel property so it is never null.")]
     public partial class <#= viewGenerationOptions.ClassName #><TViewModel> : <#= viewGenerationOptions.ClassName #>, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithoutParameters
     {
+        /// <inheritdoc />
+        public <#= viewGenerationOptions.ClassName #>()
+        {
+            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel>, TViewModel>(this);
+        }
+
+        /// <inheritdoc />
+        public <#= viewGenerationOptions.ClassName #>(NSCoder coder)
+            : base(coder)
+        {
+            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel>, TViewModel>(this);
+        }
+
+        /// <inheritdoc />
+        public <#= viewGenerationOptions.ClassName #>(string nibName, NSBundle bundle)
+            : base(nibName, bundle)
+        {
+            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel>, TViewModel>(this);
+        }
+
+        /// <inheritdoc />
+        protected <#= viewGenerationOptions.ClassName #>(NSObjectFlag t)
+            : base(t)
+        {
+            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel>, TViewModel>(this);
+        }
+
+        /// <inheritdoc />
+        protected internal <#= viewGenerationOptions.ClassName #>(IntPtr handle)
+            : base(handle)
+        {
+            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel>, TViewModel>(this);
+        }
+
+        /// <inheritdoc />
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
+        /// <inheritdoc />
+        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
+
+        /// <inheritdoc />
         public TViewModel ViewModel { get; private set; }
 
-        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
-        {
-            return new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel>, TViewModel>(this);
-        }
-
-        public void SetResult(ResultCode resultCode)
-        {
-            LifecycleDelegate.SetResult(resultCode);
-        }
-
-        public void SetResult(ResultCode resultCode, Result result)
+        /// <inheritdoc />
+        public void SetResult(ResultCode resultCode, Result? result)
         {
             LifecycleDelegate.SetResult(resultCode, result);
         }
 
+        /// <inheritdoc />
         public void RaiseResultSet(ResultCode resultCode, Result? result)
         {
             ResultSet?.Invoke(this, new ResultSetEventArgs(resultCode, result));
         }
 
+        /// <inheritdoc />
         public void HandleResult(object sender, ResultSetEventArgs args)
         {
             if (sender == null)
@@ -112,52 +219,97 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
             LifecycleDelegate.HandleResult(sender, args);
         }
 
+        /// <inheritdoc />
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        /// <inheritdoc />
+        async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync(bool recreated)
         {
-            await ViewModel.InitializeAsync();
+            await ViewModel.InitializeAsync(recreated);
         }
     }
 
-    public partial class <#= viewGenerationOptions.ClassName #><TViewModel, TParameters> : <#= viewGenerationOptions.ClassName #>, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
+    /// <summary>
+    /// Represents the <see cref="<#= viewGenerationOptions.BaseClassName #>"/> that is adapted for use with the FlexiMvvm,
+    /// has its own lifecycle-aware view model and takes lifecycle-aware view model parameters.
+    /// </summary>
+    /// <typeparam name="TViewModel">The type of the view model.</typeparam>
+    /// <typeparam name="TParameters">The type of the view model parameters.</typeparam>
+    [SuppressMessage(
+        "Compiler",
+        "CS8618:Non-nullable field is uninitialized.",
+        Justification = "The view lifecycle delegate sets a value to the ViewModel property so it is never null.")]
+    public partial class <#= viewGenerationOptions.ClassName #><TViewModel, TParameters> : <#= viewGenerationOptions.ClassName #>, INavigationView<TViewModel, TParameters>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>
         where TParameters : Parameters
     {
-        private readonly TParameters _parameters;
+        private TParameters? _parameters;
 
-        public <#= viewGenerationOptions.ClassName #>(TParameters parameters)
+        /// <inheritdoc />
+        public <#= viewGenerationOptions.ClassName #>()
+        {
+            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel, TParameters>, TViewModel>(this);
+        }
+
+        /// <inheritdoc />
+        public <#= viewGenerationOptions.ClassName #>(NSCoder coder)
+            : base(coder)
+        {
+            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel, TParameters>, TViewModel>(this);
+        }
+
+        /// <inheritdoc />
+        public <#= viewGenerationOptions.ClassName #>(string nibName, NSBundle bundle)
+            : base(nibName, bundle)
+        {
+            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel, TParameters>, TViewModel>(this);
+        }
+
+        /// <inheritdoc />
+        protected <#= viewGenerationOptions.ClassName #>(NSObjectFlag t)
+            : base(t)
+        {
+            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel, TParameters>, TViewModel>(this);
+        }
+
+        /// <inheritdoc />
+        protected internal <#= viewGenerationOptions.ClassName #>(IntPtr handle)
+            : base(handle)
+        {
+            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel, TParameters>, TViewModel>(this);
+        }
+
+        /// <inheritdoc />
+        public event EventHandler<ResultSetEventArgs> ResultSet;
+
+        /// <inheritdoc />
+        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
+
+        /// <inheritdoc />
+        public TViewModel ViewModel { get; private set; }
+
+        /// <inheritdoc />
+        public void SetParameters(TParameters? parameters)
         {
             _parameters = parameters;
         }
 
-        public event EventHandler<ResultSetEventArgs> ResultSet;
-
-        public TViewModel ViewModel { get; private set; }
-
-        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
-        {
-            return new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel, TParameters>, TViewModel>(this);
-        }
-
-        public void SetResult(ResultCode resultCode)
-        {
-            LifecycleDelegate.SetResult(resultCode);
-        }
-
-        public void SetResult(ResultCode resultCode, Result result)
+        /// <inheritdoc />
+        public void SetResult(ResultCode resultCode, Result? result)
         {
             LifecycleDelegate.SetResult(resultCode, result);
         }
 
+        /// <inheritdoc />
         public void RaiseResultSet(ResultCode resultCode, Result? result)
         {
             ResultSet?.Invoke(this, new ResultSetEventArgs(resultCode, result));
         }
 
+        /// <inheritdoc />
         public void HandleResult(object sender, ResultSetEventArgs args)
         {
             if (sender == null)
@@ -168,14 +320,16 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
             LifecycleDelegate.HandleResult(sender, args);
         }
 
+        /// <inheritdoc />
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync()
+        /// <inheritdoc />
+        async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync(bool recreated)
         {
-            await ViewModel.InitializeAsync(_parameters);
+            await ViewModel.InitializeAsync(_parameters, recreated);
         }
     }
 }

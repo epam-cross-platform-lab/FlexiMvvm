@@ -20,6 +20,7 @@ using System;
 using FlexiMvvm.Bindings;
 using FlexiMvvm.ViewModels;
 using FlexiMvvm.Views.Core;
+using Foundation;
 <# foreach (var viewGenerationOptions in ViewsGenerationOptions) { #>
 
 namespace <#= GetNamespace(viewGenerationOptions) #>
@@ -27,12 +28,44 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
     public partial class <#= viewGenerationOptions.ClassName #><TViewModel> : <#= viewGenerationOptions.BaseClassName #><TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, ILifecycleViewModelWithoutParameters
     {
-        public IDisposable BindingSet { get; private set; }
-
-        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        /// <inheritdoc />
+        public <#= viewGenerationOptions.ClassName #>()
         {
-            return new BindableViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel>, TViewModel>(this);
+            LifecycleDelegate = new BindableViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel>, TViewModel>(this);
         }
+
+        /// <inheritdoc />
+        public <#= viewGenerationOptions.ClassName #>(NSCoder coder)
+            : base(coder)
+        {
+            LifecycleDelegate = new BindableViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel>, TViewModel>(this);
+        }
+
+        /// <inheritdoc />
+        public <#= viewGenerationOptions.ClassName #>(string nibName, NSBundle bundle)
+            : base(nibName, bundle)
+        {
+            LifecycleDelegate = new BindableViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel>, TViewModel>(this);
+        }
+
+        /// <inheritdoc />
+        protected <#= viewGenerationOptions.ClassName #>(NSObjectFlag t)
+            : base(t)
+        {
+            LifecycleDelegate = new BindableViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel>, TViewModel>(this);
+        }
+
+        /// <inheritdoc />
+        protected internal <#= viewGenerationOptions.ClassName #>(IntPtr handle)
+            : base(handle)
+        {
+            LifecycleDelegate = new BindableViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel>, TViewModel>(this);
+        }
+
+        /// <inheritdoc />
+        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
+
+        public IDisposable BindingSet { get; private set; }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
         {
@@ -48,17 +81,44 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
         where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>
         where TParameters : Parameters
     {
-        public <#= viewGenerationOptions.ClassName #>(TParameters parameters)
-            : base(parameters)
+        /// <inheritdoc />
+        public <#= viewGenerationOptions.ClassName #>()
         {
+            LifecycleDelegate = new BindableViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel, TParameters>, TViewModel>(this);
         }
+
+        /// <inheritdoc />
+        public <#= viewGenerationOptions.ClassName #>(NSCoder coder)
+            : base(coder)
+        {
+            LifecycleDelegate = new BindableViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel, TParameters>, TViewModel>(this);
+        }
+
+        /// <inheritdoc />
+        public <#= viewGenerationOptions.ClassName #>(string nibName, NSBundle bundle)
+            : base(nibName, bundle)
+        {
+            LifecycleDelegate = new BindableViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel, TParameters>, TViewModel>(this);
+        }
+
+        /// <inheritdoc />
+        protected <#= viewGenerationOptions.ClassName #>(NSObjectFlag t)
+            : base(t)
+        {
+            LifecycleDelegate = new BindableViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel, TParameters>, TViewModel>(this);
+        }
+
+        /// <inheritdoc />
+        protected internal <#= viewGenerationOptions.ClassName #>(IntPtr handle)
+            : base(handle)
+        {
+            LifecycleDelegate = new BindableViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel, TParameters>, TViewModel>(this);
+        }
+
+        /// <inheritdoc />
+        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
 
         public IDisposable BindingSet { get; private set; }
-
-        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
-        {
-            return new BindableViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel, TParameters>, TViewModel>(this);
-        }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
         {
