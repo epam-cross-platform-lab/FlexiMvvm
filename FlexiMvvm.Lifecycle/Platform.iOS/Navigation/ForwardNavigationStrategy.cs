@@ -36,7 +36,7 @@ namespace FlexiMvvm.Navigation
     public sealed class ForwardNavigationStrategy
     {
         /// <summary>
-        /// Forward navigation using <see cref="UINavigationController.PushViewController(UIViewController, bool)"/> method.
+        /// Forward navigation using the <see cref="UINavigationController.PushViewController(UIViewController, bool)"/> method.
         /// </summary>
         /// <returns>The forward navigation delegate.</returns>
         public ForwardNavigationDelegate PushViewController()
@@ -56,7 +56,7 @@ namespace FlexiMvvm.Navigation
         }
 
         /// <summary>
-        /// Forward navigation using <see cref="INavigationView{TViewModel}.PresentViewController(UIViewController, bool, Action?)"/> method.
+        /// Forward navigation using the <see cref="INavigationView{TViewModel}.PresentViewController(UIViewController, bool, Action?)"/> method.
         /// </summary>
         /// <param name="completionHandler">The method to invoke when the animation completes. Can be <c>null</c>.</param>
         /// <returns>The forward navigation delegate.</returns>
@@ -69,7 +69,7 @@ namespace FlexiMvvm.Navigation
         }
 
         /// <summary>
-        /// Forward navigation using <see cref="UINavigationController.SetViewControllers(UIViewController[], bool)"/> method. Target view delegate parameter is passed as a value.
+        /// Forward navigation using the <see cref="UINavigationController.SetViewControllers(UIViewController[], bool)"/> method. Target view delegate parameter is passed as a value.
         /// </summary>
         /// <returns>The forward navigation delegate.</returns>
         public ForwardNavigationDelegate SetViewControllers()
@@ -89,9 +89,9 @@ namespace FlexiMvvm.Navigation
         }
 
         /// <summary>
-        /// Forward navigation using <see cref="UINavigationController.SetViewControllers(UIViewController[], bool)"/> method.
+        /// Forward navigation using the <see cref="UINavigationController.SetViewControllers(UIViewController[], bool)"/> method.
         /// </summary>
-        /// <param name="viewControllers">The array of view controllers to be set. Target view delegate parameter will be ignored.</param>
+        /// <param name="viewControllers">The array of view controllers to be set. Target view delegate parameter is ignored.</param>
         /// <returns>The forward navigation delegate.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="viewControllers"/> is <c>null</c>.</exception>
         public ForwardNavigationDelegate SetViewControllers(UIViewController[] viewControllers)

@@ -30,14 +30,14 @@ namespace FlexiMvvm.Views.Keyboard
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable KeyboardDidHideWeakSubscribe(
             this FlexiMvvm.Views.Keyboard.KeyboardHandler eventSource,
-            EventHandler<FlexiMvvm.Views.Keyboard.KeyboardSizeChangedEventArgs> eventHandler)
+            EventHandler<FlexiMvvm.Views.Keyboard.KeyboardVisibilityChangedEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<FlexiMvvm.Views.Keyboard.KeyboardHandler, FlexiMvvm.Views.Keyboard.KeyboardSizeChangedEventArgs>(
+            return new EventHandlerWeakEventSubscription<FlexiMvvm.Views.Keyboard.KeyboardHandler, FlexiMvvm.Views.Keyboard.KeyboardVisibilityChangedEventArgs>(
                 eventSource,
                 (source, handler) => source.KeyboardDidHide += handler,
                 (source, handler) => source.KeyboardDidHide -= handler,
@@ -51,14 +51,14 @@ namespace FlexiMvvm.Views.Keyboard
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable KeyboardDidShowWeakSubscribe(
             this FlexiMvvm.Views.Keyboard.KeyboardHandler eventSource,
-            EventHandler<FlexiMvvm.Views.Keyboard.KeyboardSizeChangedEventArgs> eventHandler)
+            EventHandler<FlexiMvvm.Views.Keyboard.KeyboardVisibilityChangedEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<FlexiMvvm.Views.Keyboard.KeyboardHandler, FlexiMvvm.Views.Keyboard.KeyboardSizeChangedEventArgs>(
+            return new EventHandlerWeakEventSubscription<FlexiMvvm.Views.Keyboard.KeyboardHandler, FlexiMvvm.Views.Keyboard.KeyboardVisibilityChangedEventArgs>(
                 eventSource,
                 (source, handler) => source.KeyboardDidShow += handler,
                 (source, handler) => source.KeyboardDidShow -= handler,
@@ -72,14 +72,14 @@ namespace FlexiMvvm.Views.Keyboard
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable KeyboardWillHideWeakSubscribe(
             this FlexiMvvm.Views.Keyboard.KeyboardHandler eventSource,
-            EventHandler<FlexiMvvm.Views.Keyboard.KeyboardSizeChangedEventArgs> eventHandler)
+            EventHandler<FlexiMvvm.Views.Keyboard.KeyboardVisibilityChangedEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<FlexiMvvm.Views.Keyboard.KeyboardHandler, FlexiMvvm.Views.Keyboard.KeyboardSizeChangedEventArgs>(
+            return new EventHandlerWeakEventSubscription<FlexiMvvm.Views.Keyboard.KeyboardHandler, FlexiMvvm.Views.Keyboard.KeyboardVisibilityChangedEventArgs>(
                 eventSource,
                 (source, handler) => source.KeyboardWillHide += handler,
                 (source, handler) => source.KeyboardWillHide -= handler,
@@ -93,14 +93,14 @@ namespace FlexiMvvm.Views.Keyboard
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable KeyboardWillShowWeakSubscribe(
             this FlexiMvvm.Views.Keyboard.KeyboardHandler eventSource,
-            EventHandler<FlexiMvvm.Views.Keyboard.KeyboardSizeChangedEventArgs> eventHandler)
+            EventHandler<FlexiMvvm.Views.Keyboard.KeyboardVisibilityChangedEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<FlexiMvvm.Views.Keyboard.KeyboardHandler, FlexiMvvm.Views.Keyboard.KeyboardSizeChangedEventArgs>(
+            return new EventHandlerWeakEventSubscription<FlexiMvvm.Views.Keyboard.KeyboardHandler, FlexiMvvm.Views.Keyboard.KeyboardVisibilityChangedEventArgs>(
                 eventSource,
                 (source, handler) => source.KeyboardWillShow += handler,
                 (source, handler) => source.KeyboardWillShow -= handler,

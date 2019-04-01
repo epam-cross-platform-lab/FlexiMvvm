@@ -18,11 +18,19 @@ namespace FlexiMvvm.ViewModels
 {
     public partial struct ResultCode
     {
+        /// <summary>
+        /// Converts the <paramref name="resultCode"/> instance to the <see cref="ResultCode"/> type.
+        /// </summary>
+        /// <param name="resultCode">The result code to convert.</param>
         public static implicit operator ResultCode(Android.App.Result resultCode)
         {
             return resultCode == Android.App.Result.Ok ? Ok : Canceled;
         }
 
+        /// <summary>
+        /// Converts the <paramref name="resultCode"/> instance to the <see cref="Android.App.Result"/> type.
+        /// </summary>
+        /// <param name="resultCode">The result code to convert.</param>
         public static implicit operator Android.App.Result(ResultCode resultCode)
         {
             return resultCode == Ok ? Android.App.Result.Ok : Android.App.Result.Canceled;

@@ -31,7 +31,7 @@ namespace FlexiMvvm.Navigation
     public sealed class BackwardNavigationStrategy
     {
         /// <summary>
-        /// Backward navigation using <see cref="INavigationView{TViewModel}.Finish()"/> method.
+        /// Backward navigation using the <see cref="INavigationView{TViewModel}.Finish()"/> method.
         /// </summary>
         /// <returns>The backward navigation delegate.</returns>
         public BackwardNavigationDelegate Finish()

@@ -21,7 +21,7 @@ using FlexiMvvm.ViewModels;
 namespace FlexiMvvm.Views
 {
     /// <summary>
-    /// Provides a set of static methods for accessing the <see cref="IView{TViewModel}"/>.
+    /// Provides a set of static methods for the <see cref="IView{TViewModel}"/>.
     /// </summary>
     public static class ViewExtensions
     {
@@ -29,11 +29,11 @@ namespace FlexiMvvm.Views
         /// Executes appropriate handler based on actual type of the <paramref name="view"/>.
         /// </summary>
         /// <param name="view">The view that is represented by an activity or fragment.</param>
-        /// <param name="activityHandler">The handler to execute if the <paramref name="view"/> is <see cref="Android.Support.V4.App.FragmentActivity"/>.</param>
-        /// <param name="fragmentHandler">The handler to execute if the <paramref name="view"/> is <see cref="Android.Support.V4.App.Fragment"/>.</param>
+        /// <param name="activityHandler">The handler to execute if <paramref name="view"/> is <see cref="Android.Support.V4.App.FragmentActivity"/>.</param>
+        /// <param name="fragmentHandler">The handler to execute if <paramref name="view"/> is <see cref="Android.Support.V4.App.Fragment"/>.</param>
         /// <exception cref="ArgumentNullException"><paramref name="view" /> or <paramref name="activityHandler" /> or <paramref name="fragmentHandler" /> is <c>null</c>.</exception>
         /// <exception cref="ArgumentException">
-        /// <paramref name="view" /> is derived from a class other than the <see cref="Android.Support.V4.App.FragmentActivity"/> or <see cref="Android.Support.V4.App.Fragment"/>.
+        /// The <paramref name="view" /> is derived from a class other than the <see cref="Android.Support.V4.App.FragmentActivity"/> or <see cref="Android.Support.V4.App.Fragment"/>.
         /// </exception>
         public static void As(
             this IView<ILifecycleViewModel> view,
@@ -58,7 +58,7 @@ namespace FlexiMvvm.Views
             else
             {
                 throw new ArgumentException(
-                    $"Only views derived from '{TypeFormatter.FormatName<Android.Support.V4.App.FragmentActivity>()}' or " +
+                    $"Only views derived from the '{TypeFormatter.FormatName<Android.Support.V4.App.FragmentActivity>()}' or " +
                     $"'{TypeFormatter.FormatName<Android.Support.V4.App.Fragment>()}' are supported.", nameof(view));
             }
         }
@@ -68,12 +68,12 @@ namespace FlexiMvvm.Views
         /// </summary>
         /// <typeparam name="T">The type of the result.</typeparam>
         /// <param name="view">The view that is represented by an activity or fragment.</param>
-        /// <param name="activityHandler">The handler to execute if the <paramref name="view"/> is <see cref="Android.Support.V4.App.FragmentActivity"/>.</param>
-        /// <param name="fragmentHandler">The handler to execute if the <paramref name="view"/> is <see cref="Android.Support.V4.App.Fragment"/>.</param>
+        /// <param name="activityHandler">The handler to execute if <paramref name="view"/> is <see cref="Android.Support.V4.App.FragmentActivity"/>.</param>
+        /// <param name="fragmentHandler">The handler to execute if <paramref name="view"/> is <see cref="Android.Support.V4.App.Fragment"/>.</param>
         /// <returns>A result returned by appropriate handler.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="view" /> or <paramref name="activityHandler" /> or <paramref name="fragmentHandler" /> is <c>null</c>.</exception>
         /// <exception cref="ArgumentException">
-        /// <paramref name="view" /> is derived from a class other than the <see cref="Android.Support.V4.App.FragmentActivity"/> or <see cref="Android.Support.V4.App.Fragment"/>.
+        /// The <paramref name="view" /> is derived from a class other than the <see cref="Android.Support.V4.App.FragmentActivity"/> or <see cref="Android.Support.V4.App.Fragment"/>.
         /// </exception>
         public static T As<T>(
             this IView<ILifecycleViewModel> view,
@@ -100,7 +100,7 @@ namespace FlexiMvvm.Views
             else
             {
                 throw new ArgumentException(
-                    $"Only views derived from '{TypeFormatter.FormatName<Android.Support.V4.App.FragmentActivity>()}' or " +
+                    $"Only views derived from the '{TypeFormatter.FormatName<Android.Support.V4.App.FragmentActivity>()}' or " +
                     $"'{TypeFormatter.FormatName<Android.Support.V4.App.Fragment>()}' are supported.", nameof(view));
             }
 

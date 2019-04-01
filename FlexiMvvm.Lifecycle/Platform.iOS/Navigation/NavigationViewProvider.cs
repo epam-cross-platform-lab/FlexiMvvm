@@ -25,14 +25,14 @@ namespace FlexiMvvm.Navigation
     public static partial class NavigationViewProvider
     {
         /// <summary>
-        /// Gets the navigation view derived from the <see cref="UIViewController"/>.
+        /// Returns the navigation view derived from the <see cref="UIViewController"/> for the provided lifecycle-aware <paramref name="viewModel"/>.
         /// </summary>
         /// <typeparam name="TView">The type of the view.</typeparam>
         /// <typeparam name="TViewModel">The type of the view model.</typeparam>
-        /// <param name="viewModel">The view model used for getting a bound view.</param>
-        /// <returns>The navigation view.</returns>
+        /// <param name="viewModel">The view model that is used to get its view.</param>
+        /// <returns>The navigation view instance.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> is <c>null</c>.</exception>
-        /// <exception cref="InvalidOperationException">The view instance is missing for <paramref name="viewModel"/> instance.</exception>
+        /// <exception cref="InvalidOperationException">The view instance is missing for the provided <paramref name="viewModel"/>.</exception>
         public static TView GetViewController<TView, TViewModel>(TViewModel viewModel)
             where TView : UIViewController, INavigationView<TViewModel>
             where TViewModel : class, ILifecycleViewModel

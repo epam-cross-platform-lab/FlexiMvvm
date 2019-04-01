@@ -18,75 +18,106 @@ using System;
 using System.Threading.Tasks;
 using FlexiMvvm.Formatters;
 using FlexiMvvm.ViewModels;
-using FlexiMvvm.ViewModels.Core;
-using FlexiMvvm.Views.Keyboard;
-using JetBrains.Annotations;
 using UIKit;
 
 namespace FlexiMvvm.Views.Core
 {
+    /// <summary>
+    /// Base view lifecycle delegate. Responsible for keyboard handling.
+    /// <para>This class is intended for internal use by the FlexiMvvm.</para>
+    /// </summary>
+    /// <typeparam name="TView">The type of the view that forwards its lifecycle calls.</typeparam>
     public class ViewLifecycleDelegate<TView> : IViewLifecycleDelegate
-        where TView : class, IIosView, IKeyboardHandlerOwner
+        where TView : class, IIosView
     {
-        [NotNull]
         [Weak]
         private readonly TView _view;
 
-        public ViewLifecycleDelegate([NotNull] TView view)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ViewLifecycleDelegate{TView}"/> class.
+        /// </summary>
+        /// <param name="view">The view that forwards its lifecycle calls to the delegate.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="view"/> is <c>null</c>.</exception>
+        public ViewLifecycleDelegate(TView view)
         {
             _view = view ?? throw new ArgumentNullException(nameof(view));
         }
 
-        [NotNull]
+        /// <summary>
+        /// Gets the view that forwards its lifecycle calls.
+        /// </summary>
         protected TView View => _view;
 
-        public virtual void ViewDidLoad()
+        /// <inheritdoc />
+        public virtual void WillMoveToParentViewController(UIViewController? parent)
         {
-            if (View.HandleKeyboard && View is UIViewController viewController && viewController.View != null)
-            {
-                View.SetKeyboardHandler(new KeyboardHandler(viewController.View));
-            }
         }
 
+        /// <inheritdoc />
+        public virtual void ViewDidLoad()
+        {
+        }
+
+        /// <inheritdoc />
         public virtual void ViewWillAppear()
         {
             View.KeyboardHandler?.RegisterForKeyboardNotifications();
         }
 
+        /// <inheritdoc />
+        public virtual void ViewDidAppear()
+        {
+        }
+
+        /// <inheritdoc />
         public virtual void ViewWillDisappear()
         {
         }
 
+        /// <inheritdoc />
         public virtual void ViewDidDisappear()
         {
             View.KeyboardHandler?.UnregisterFromKeyboardNotifications();
         }
 
-        public virtual void SetResult(ResultCode resultCode)
+        /// <inheritdoc />
+        public virtual void DidMoveToParentViewController(UIViewController? parent)
         {
         }
 
-        public virtual void SetResult(ResultCode resultCode, [CanBeNull] Result result)
+        /// <inheritdoc />
+        public virtual void SetResult(ResultCode resultCode, Result? result)
         {
         }
 
-        public virtual void HandleResult([NotNull] object sender, [NotNull] ResultSetEventArgs args)
+        /// <inheritdoc />
+        public virtual void HandleResult(object sender, ResultSetEventArgs args)
         {
         }
     }
 
+    /// <summary>
+    /// A lifecycle delegate that is responsible for view model lifecycle.
+    /// <para>This class is intended for internal use by the FlexiMvvm.</para>
+    /// </summary>
+    /// <typeparam name="TView">The type of the view that forwards its lifecycle calls.</typeparam>
+    /// <typeparam name="TViewModel">The type of the view model.</typeparam>
     public class ViewLifecycleDelegate<TView, TViewModel> : ViewLifecycleDelegate<TView>
-        where TView : class, IIosView, INavigationView<TViewModel>, IKeyboardHandlerOwner, ILifecycleViewModelOwner<TViewModel>
+        where TView : class, IIosView, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModel
     {
         private ResultCode _resultCode = ResultCode.Canceled;
-        [CanBeNull]
-        private Result _result;
+        private Result? _result;
         private bool _isViewModelCreated;
-        [NotNull]
         private Task _viewModelAsyncInitialization = Task.CompletedTask;
 
-        public ViewLifecycleDelegate([NotNull] TView view)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ViewLifecycleDelegate{TView, TViewModel}"/> class.
+        /// </summary>
+        /// <param name="view">The view that forwards its lifecycle calls to the delegate.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="view"/> is <c>null</c>.</exception>
+        /// <exception cref="InvalidOperationException">The view model factory returned <c>null</c> value for the <typeparamref name="TViewModel"/>.</exception>
+        public ViewLifecycleDelegate(TView view)
             : base(view)
         {
             var viewModelFactory = LifecycleViewModelProvider.GetFactory();
@@ -102,20 +133,32 @@ namespace FlexiMvvm.Views.Core
             _isViewModelCreated = true;
 
             View.SetViewModel(viewModel);
-            ViewCache.Add(View);
         }
 
+        /// <inheritdoc />
+        public override void WillMoveToParentViewController(UIViewController? parent)
+        {
+            base.WillMoveToParentViewController(parent);
+
+            if (parent != null)
+            {
+                ViewCache.Add(View);
+            }
+        }
+
+        /// <inheritdoc />
         public override void ViewWillAppear()
         {
             base.ViewWillAppear();
 
             if (_isViewModelCreated)
             {
-                _viewModelAsyncInitialization = View.InitializeViewModelAsync();
+                _viewModelAsyncInitialization = View.InitializeViewModelAsync(false);
                 _isViewModelCreated = false;
             }
         }
 
+        /// <inheritdoc />
         public override void ViewWillDisappear()
         {
             base.ViewWillDisappear();
@@ -126,17 +169,25 @@ namespace FlexiMvvm.Views.Core
             }
         }
 
-        public override void SetResult(ResultCode resultCode)
+        /// <inheritdoc />
+        public override void DidMoveToParentViewController(UIViewController? parent)
         {
-            _resultCode = resultCode;
+            base.DidMoveToParentViewController(parent);
+
+            if (parent == null)
+            {
+                ViewCache.Remove(View);
+            }
         }
 
-        public override void SetResult(ResultCode resultCode, Result result)
+        /// <inheritdoc />
+        public override void SetResult(ResultCode resultCode, Result? result)
         {
             _resultCode = resultCode;
             _result = result;
         }
 
+        /// <inheritdoc />
         public override async void HandleResult(object sender, ResultSetEventArgs args)
         {
             if (sender == null)

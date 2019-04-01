@@ -33,13 +33,15 @@ namespace FlexiMvvm.ViewModels
         /// <summary>
         /// An asynchronous lifecycle method for the lifecycle-aware view model initialization.
         /// </summary>
+        /// <param name="recreated">Determines whether the view model has been destroyed to recover memory and recreated with a restored state if it was persisted.</param>
         /// <returns>A task that represents the asynchronous initialization operation.</returns>
-        Task InitializeAsync();
+        Task InitializeAsync(bool recreated);
 
         /// <summary>
         /// A lifecycle method for the lifecycle-aware view model initialization.
         /// </summary>
-        void Initialize();
+        /// <param name="recreated">Determines whether the view model has been destroyed to recover memory and recreated with a restored state if it was persisted.</param>
+        void Initialize(bool recreated);
     }
 
     /// <summary>
@@ -53,14 +55,16 @@ namespace FlexiMvvm.ViewModels
         /// An asynchronous lifecycle method for the lifecycle-aware view model initialization with <paramref name="parameters"/>.
         /// </summary>
         /// <param name="parameters">The view model parameters. Can be <c>null</c>.</param>
+        /// <param name="recreated">Determines whether the view model has been destroyed to recover memory and recreated with a restored state if it was persisted.</param>
         /// <returns>A task that represents the asynchronous initialization operation.</returns>
-        Task InitializeAsync(TParameters? parameters);
+        Task InitializeAsync(TParameters? parameters, bool recreated);
 
         /// <summary>
         /// A lifecycle method for the lifecycle-aware view model initialization with <paramref name="parameters"/>.
         /// </summary>
         /// <param name="parameters">The view model parameters. Can be <c>null</c>.</param>
-        void Initialize(TParameters? parameters);
+        /// <param name="recreated">Determines whether the view model has been destroyed to recover memory and recreated with a restored state if it was persisted.</param>
+        void Initialize(TParameters? parameters, bool recreated);
     }
 
     /// <summary>
