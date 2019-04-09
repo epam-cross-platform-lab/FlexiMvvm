@@ -20,8 +20,8 @@ using FlexiMvvm.ViewModels;
 namespace FlexiMvvm.Views
 {
     /// <summary>
-    /// Default implementation of the <see cref="IResultMapper{TResult}"/> interface.
-    /// Uses <see cref="IntentExtensions.GetResult{TResult}(Intent)"/> extension method to create a lifecycle-aware view model result instance.
+    /// Default implementation of the <see cref="IResultMapper{TResult}"/>.
+    /// Uses <see cref="IntentExtensions.GetResult{TResult}(Intent)"/> to create a lifecycle-aware view model result instance.
     /// </summary>
     /// <typeparam name="TResult">The type of the view model result to create.</typeparam>
     public sealed class DefaultResultMapper<TResult> : IResultMapper<TResult>

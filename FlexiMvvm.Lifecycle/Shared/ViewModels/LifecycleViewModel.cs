@@ -23,7 +23,7 @@ using FlexiMvvm.Persistence.Core;
 namespace FlexiMvvm.ViewModels
 {
     /// <summary>
-    /// Base class for a lifecycle-aware view model implementation.
+    /// Base class for a lifecycle-aware view model implementation that takes no parameters.
     /// </summary>
     public abstract class LifecycleViewModel : ViewModel, ILifecycleViewModelWithoutParameters, IStateOwner
     {
@@ -85,7 +85,7 @@ namespace FlexiMvvm.ViewModels
     }
 
     /// <summary>
-    /// Base class for a lifecycle-aware view model implementation with parameters.
+    /// Base class for a lifecycle-aware view model implementation that takes parameters.
     /// </summary>
     /// <typeparam name="TParameters">The type of the view model parameters.</typeparam>
     public abstract class LifecycleViewModel<TParameters> : ViewModel, ILifecycleViewModelWithParameters<TParameters>, IStateOwner

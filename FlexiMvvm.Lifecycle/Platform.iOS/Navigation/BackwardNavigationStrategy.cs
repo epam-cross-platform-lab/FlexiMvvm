@@ -59,7 +59,7 @@ namespace FlexiMvvm.Navigation
         /// </summary>
         /// <param name="targetView">The target view for navigation.</param>
         /// <returns>The backward navigation delegate.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="targetView"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="targetView"/> is <see langword="null"/>.</exception>
         public BackwardNavigationDelegate PopToViewController(UIViewController targetView)
         {
             if (targetView == null)
@@ -102,7 +102,7 @@ namespace FlexiMvvm.Navigation
         /// <summary>
         /// Backward navigation using the <see cref="INavigationView{TViewModel}.DismissViewController(bool, Action?)"/> method.
         /// </summary>
-        /// <param name="completionHandler">The method to invoke when the animation completes. Can be <c>null</c>.</param>
+        /// <param name="completionHandler">The method to invoke when the animation completes. Can be <see langword="null"/>.</param>
         /// <returns>The backward navigation delegate.</returns>
         public BackwardNavigationDelegate DismissViewController(Action? completionHandler = null)
         {

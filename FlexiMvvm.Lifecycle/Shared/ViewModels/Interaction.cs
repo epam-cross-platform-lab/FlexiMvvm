@@ -24,7 +24,7 @@ namespace FlexiMvvm.ViewModels
     public class Interaction
     {
         /// <summary>
-        /// Occurs when the view model requested the interaction.
+        /// Occurs when the view model requested interaction.
         /// </summary>
         public event EventHandler Requested;
 
@@ -38,18 +38,18 @@ namespace FlexiMvvm.ViewModels
     }
 
     /// <summary>
-    /// Defines the contract for a view model to view interaction.
+    /// Defines the contract for a view model to view interaction with passing a request.
     /// </summary>
     /// <typeparam name="T">The type of the request.</typeparam>
     public class Interaction<T>
     {
         /// <summary>
-        /// Raised when the view model requested the interaction.
+        /// Occurs when the view model requested interaction.
         /// </summary>
         public event EventHandler<InteractionRequestedEventArgs<T>> Requested;
 
         /// <summary>
-        /// Raises the <see cref="Requested"/> event.
+        /// Raises the <see cref="Requested"/> event with passing the <paramref name="request"/>.
         /// </summary>
         /// <param name="request">The request to be passed in the event arguments.</param>
         public void RaiseRequested(T request)

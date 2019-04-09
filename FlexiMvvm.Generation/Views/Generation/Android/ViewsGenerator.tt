@@ -29,7 +29,6 @@ using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
-using FlexiMvvm.Collections;
 using FlexiMvvm.Persistence.Core;
 using FlexiMvvm.ViewModels;
 using FlexiMvvm.Views.Core;
@@ -38,7 +37,7 @@ using FlexiMvvm.Views.Core;
 namespace <#= GetNamespace(viewGenerationOptions) #>
 {
     /// <summary>
-    /// Represents the <see cref="<#= viewGenerationOptions.BaseClassName #>"/> that is adapted for use with the FlexiMvvm.
+    /// Represents a/an <see cref="<#= viewGenerationOptions.BaseClassName #>"/> that is adapted for use with the FlexiMvvm.
     /// </summary>
     [Register("<#= TargetNamespace.ToLower() #>.<#= viewGenerationOptions.ClassName #>")]
     public partial class <#= viewGenerationOptions.ClassName #> : <#= viewGenerationOptions.BaseClassName #>, IAndroidView, IOptionsMenuSource
@@ -110,7 +109,7 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
             var optionsItemSelectedEventArgs = new OptionsItemSelectedEventArgs(item);
             OnOptionsItemSelectedCalled?.Invoke(this, optionsItemSelectedEventArgs);
 
-            if (optionsItemSelectedEventArgs.IsHandled)
+            if (optionsItemSelectedEventArgs.Handled)
             {
                 return true;
             }
@@ -154,7 +153,7 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
     }
 
     /// <summary>
-    /// Represents the <see cref="<#= viewGenerationOptions.BaseClassName #>"/> that is adapted for use with the FlexiMvvm
+    /// Represents a/an <see cref="<#= viewGenerationOptions.BaseClassName #>"/> that is adapted for use with the FlexiMvvm
     /// and has its own lifecycle-aware view model.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
@@ -205,13 +204,11 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
         }
 <#      } #>
 
-        /// <inheritdoc />
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        /// <inheritdoc />
         async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync(bool recreated)
         {
             await ViewModel.InitializeAsync(recreated);
@@ -219,7 +216,7 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
     }
 
     /// <summary>
-    /// Represents the <see cref="<#= viewGenerationOptions.BaseClassName #>"/> that is adapted for use with the FlexiMvvm,
+    /// Represents a/an <see cref="<#= viewGenerationOptions.BaseClassName #>"/> that is adapted for use with the FlexiMvvm,
     /// has its own lifecycle-aware view model and takes lifecycle-aware view model parameters.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
@@ -272,13 +269,11 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
         }
 <#      } #>
 
-        /// <inheritdoc />
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        /// <inheritdoc />
         async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync(bool recreated)
         {
             await ViewModel.InitializeAsync(<#= viewGenerationOptions.ParametersSourceName #>?.GetParameters<TParameters>(), recreated);

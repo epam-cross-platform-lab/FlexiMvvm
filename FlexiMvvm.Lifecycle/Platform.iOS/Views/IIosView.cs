@@ -25,7 +25,7 @@ namespace FlexiMvvm.Views
     {
         /// <summary>
         /// Gets the keyboard handler that is responsible for scrolling the view to make the invisible or partially visible
-        /// focused field fully visible when the keyboard appears. Can be <c>null</c>.
+        /// focused field fully visible when the keyboard appears. Can be <see langword="null"/>.
         /// </summary>
         IKeyboardHandler? KeyboardHandler { get; }
     }

@@ -29,7 +29,7 @@ using UIKit;
 namespace FlexiMvvm.Views
 {
     /// <summary>
-    /// Represents the <see cref="UIKit.UICollectionViewController"/> that is adapted for use with the FlexiMvvm.
+    /// Represents a/an <see cref="UIKit.UICollectionViewController"/> that is adapted for use with the FlexiMvvm.
     /// </summary>
     public partial class CollectionViewController : UIKit.UICollectionViewController, IIosView
     {
@@ -135,7 +135,7 @@ namespace FlexiMvvm.Views
     }
 
     /// <summary>
-    /// Represents the <see cref="UIKit.UICollectionViewController"/> that is adapted for use with the FlexiMvvm
+    /// Represents a/an <see cref="UIKit.UICollectionViewController"/> that is adapted for use with the FlexiMvvm
     /// and has its own lifecycle-aware view model.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
@@ -212,13 +212,11 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.HandleResult(sender, args);
         }
 
-        /// <inheritdoc />
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        /// <inheritdoc />
         async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync(bool recreated)
         {
             await ViewModel.InitializeAsync(recreated);
@@ -226,7 +224,7 @@ namespace FlexiMvvm.Views
     }
 
     /// <summary>
-    /// Represents the <see cref="UIKit.UICollectionViewController"/> that is adapted for use with the FlexiMvvm,
+    /// Represents a/an <see cref="UIKit.UICollectionViewController"/> that is adapted for use with the FlexiMvvm,
     /// has its own lifecycle-aware view model and takes lifecycle-aware view model parameters.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
@@ -313,13 +311,11 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.HandleResult(sender, args);
         }
 
-        /// <inheritdoc />
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        /// <inheritdoc />
         async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync(bool recreated)
         {
             await ViewModel.InitializeAsync(_parameters, recreated);
@@ -330,7 +326,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>
-    /// Represents the <see cref="UIKit.UINavigationController"/> that is adapted for use with the FlexiMvvm.
+    /// Represents a/an <see cref="UIKit.UINavigationController"/> that is adapted for use with the FlexiMvvm.
     /// </summary>
     public partial class NavigationController : UIKit.UINavigationController, IIosView
     {
@@ -436,7 +432,7 @@ namespace FlexiMvvm.Views
     }
 
     /// <summary>
-    /// Represents the <see cref="UIKit.UINavigationController"/> that is adapted for use with the FlexiMvvm
+    /// Represents a/an <see cref="UIKit.UINavigationController"/> that is adapted for use with the FlexiMvvm
     /// and has its own lifecycle-aware view model.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
@@ -513,13 +509,11 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.HandleResult(sender, args);
         }
 
-        /// <inheritdoc />
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        /// <inheritdoc />
         async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync(bool recreated)
         {
             await ViewModel.InitializeAsync(recreated);
@@ -527,7 +521,7 @@ namespace FlexiMvvm.Views
     }
 
     /// <summary>
-    /// Represents the <see cref="UIKit.UINavigationController"/> that is adapted for use with the FlexiMvvm,
+    /// Represents a/an <see cref="UIKit.UINavigationController"/> that is adapted for use with the FlexiMvvm,
     /// has its own lifecycle-aware view model and takes lifecycle-aware view model parameters.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
@@ -614,13 +608,11 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.HandleResult(sender, args);
         }
 
-        /// <inheritdoc />
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        /// <inheritdoc />
         async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync(bool recreated)
         {
             await ViewModel.InitializeAsync(_parameters, recreated);
@@ -631,7 +623,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>
-    /// Represents the <see cref="UIKit.UIPageViewController"/> that is adapted for use with the FlexiMvvm.
+    /// Represents a/an <see cref="UIKit.UIPageViewController"/> that is adapted for use with the FlexiMvvm.
     /// </summary>
     public partial class PageViewController : UIKit.UIPageViewController, IIosView
     {
@@ -737,7 +729,7 @@ namespace FlexiMvvm.Views
     }
 
     /// <summary>
-    /// Represents the <see cref="UIKit.UIPageViewController"/> that is adapted for use with the FlexiMvvm
+    /// Represents a/an <see cref="UIKit.UIPageViewController"/> that is adapted for use with the FlexiMvvm
     /// and has its own lifecycle-aware view model.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
@@ -814,13 +806,11 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.HandleResult(sender, args);
         }
 
-        /// <inheritdoc />
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        /// <inheritdoc />
         async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync(bool recreated)
         {
             await ViewModel.InitializeAsync(recreated);
@@ -828,7 +818,7 @@ namespace FlexiMvvm.Views
     }
 
     /// <summary>
-    /// Represents the <see cref="UIKit.UIPageViewController"/> that is adapted for use with the FlexiMvvm,
+    /// Represents a/an <see cref="UIKit.UIPageViewController"/> that is adapted for use with the FlexiMvvm,
     /// has its own lifecycle-aware view model and takes lifecycle-aware view model parameters.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
@@ -915,13 +905,11 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.HandleResult(sender, args);
         }
 
-        /// <inheritdoc />
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        /// <inheritdoc />
         async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync(bool recreated)
         {
             await ViewModel.InitializeAsync(_parameters, recreated);
@@ -932,7 +920,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>
-    /// Represents the <see cref="UIKit.UISplitViewController"/> that is adapted for use with the FlexiMvvm.
+    /// Represents a/an <see cref="UIKit.UISplitViewController"/> that is adapted for use with the FlexiMvvm.
     /// </summary>
     public partial class SplitViewController : UIKit.UISplitViewController, IIosView
     {
@@ -1038,7 +1026,7 @@ namespace FlexiMvvm.Views
     }
 
     /// <summary>
-    /// Represents the <see cref="UIKit.UISplitViewController"/> that is adapted for use with the FlexiMvvm
+    /// Represents a/an <see cref="UIKit.UISplitViewController"/> that is adapted for use with the FlexiMvvm
     /// and has its own lifecycle-aware view model.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
@@ -1115,13 +1103,11 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.HandleResult(sender, args);
         }
 
-        /// <inheritdoc />
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        /// <inheritdoc />
         async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync(bool recreated)
         {
             await ViewModel.InitializeAsync(recreated);
@@ -1129,7 +1115,7 @@ namespace FlexiMvvm.Views
     }
 
     /// <summary>
-    /// Represents the <see cref="UIKit.UISplitViewController"/> that is adapted for use with the FlexiMvvm,
+    /// Represents a/an <see cref="UIKit.UISplitViewController"/> that is adapted for use with the FlexiMvvm,
     /// has its own lifecycle-aware view model and takes lifecycle-aware view model parameters.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
@@ -1216,13 +1202,11 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.HandleResult(sender, args);
         }
 
-        /// <inheritdoc />
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        /// <inheritdoc />
         async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync(bool recreated)
         {
             await ViewModel.InitializeAsync(_parameters, recreated);
@@ -1233,7 +1217,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>
-    /// Represents the <see cref="UIKit.UITabBarController"/> that is adapted for use with the FlexiMvvm.
+    /// Represents a/an <see cref="UIKit.UITabBarController"/> that is adapted for use with the FlexiMvvm.
     /// </summary>
     public partial class TabBarController : UIKit.UITabBarController, IIosView
     {
@@ -1339,7 +1323,7 @@ namespace FlexiMvvm.Views
     }
 
     /// <summary>
-    /// Represents the <see cref="UIKit.UITabBarController"/> that is adapted for use with the FlexiMvvm
+    /// Represents a/an <see cref="UIKit.UITabBarController"/> that is adapted for use with the FlexiMvvm
     /// and has its own lifecycle-aware view model.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
@@ -1416,13 +1400,11 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.HandleResult(sender, args);
         }
 
-        /// <inheritdoc />
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        /// <inheritdoc />
         async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync(bool recreated)
         {
             await ViewModel.InitializeAsync(recreated);
@@ -1430,7 +1412,7 @@ namespace FlexiMvvm.Views
     }
 
     /// <summary>
-    /// Represents the <see cref="UIKit.UITabBarController"/> that is adapted for use with the FlexiMvvm,
+    /// Represents a/an <see cref="UIKit.UITabBarController"/> that is adapted for use with the FlexiMvvm,
     /// has its own lifecycle-aware view model and takes lifecycle-aware view model parameters.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
@@ -1517,13 +1499,11 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.HandleResult(sender, args);
         }
 
-        /// <inheritdoc />
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        /// <inheritdoc />
         async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync(bool recreated)
         {
             await ViewModel.InitializeAsync(_parameters, recreated);
@@ -1534,7 +1514,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>
-    /// Represents the <see cref="UIKit.UITableViewController"/> that is adapted for use with the FlexiMvvm.
+    /// Represents a/an <see cref="UIKit.UITableViewController"/> that is adapted for use with the FlexiMvvm.
     /// </summary>
     public partial class TableViewController : UIKit.UITableViewController, IIosView
     {
@@ -1640,7 +1620,7 @@ namespace FlexiMvvm.Views
     }
 
     /// <summary>
-    /// Represents the <see cref="UIKit.UITableViewController"/> that is adapted for use with the FlexiMvvm
+    /// Represents a/an <see cref="UIKit.UITableViewController"/> that is adapted for use with the FlexiMvvm
     /// and has its own lifecycle-aware view model.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
@@ -1717,13 +1697,11 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.HandleResult(sender, args);
         }
 
-        /// <inheritdoc />
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        /// <inheritdoc />
         async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync(bool recreated)
         {
             await ViewModel.InitializeAsync(recreated);
@@ -1731,7 +1709,7 @@ namespace FlexiMvvm.Views
     }
 
     /// <summary>
-    /// Represents the <see cref="UIKit.UITableViewController"/> that is adapted for use with the FlexiMvvm,
+    /// Represents a/an <see cref="UIKit.UITableViewController"/> that is adapted for use with the FlexiMvvm,
     /// has its own lifecycle-aware view model and takes lifecycle-aware view model parameters.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
@@ -1818,13 +1796,11 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.HandleResult(sender, args);
         }
 
-        /// <inheritdoc />
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        /// <inheritdoc />
         async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync(bool recreated)
         {
             await ViewModel.InitializeAsync(_parameters, recreated);
@@ -1835,7 +1811,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>
-    /// Represents the <see cref="UIKit.UIViewController"/> that is adapted for use with the FlexiMvvm.
+    /// Represents a/an <see cref="UIKit.UIViewController"/> that is adapted for use with the FlexiMvvm.
     /// </summary>
     public partial class ViewController : UIKit.UIViewController, IIosView
     {
@@ -1941,7 +1917,7 @@ namespace FlexiMvvm.Views
     }
 
     /// <summary>
-    /// Represents the <see cref="UIKit.UIViewController"/> that is adapted for use with the FlexiMvvm
+    /// Represents a/an <see cref="UIKit.UIViewController"/> that is adapted for use with the FlexiMvvm
     /// and has its own lifecycle-aware view model.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
@@ -2018,13 +1994,11 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.HandleResult(sender, args);
         }
 
-        /// <inheritdoc />
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        /// <inheritdoc />
         async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync(bool recreated)
         {
             await ViewModel.InitializeAsync(recreated);
@@ -2032,7 +2006,7 @@ namespace FlexiMvvm.Views
     }
 
     /// <summary>
-    /// Represents the <see cref="UIKit.UIViewController"/> that is adapted for use with the FlexiMvvm,
+    /// Represents a/an <see cref="UIKit.UIViewController"/> that is adapted for use with the FlexiMvvm,
     /// has its own lifecycle-aware view model and takes lifecycle-aware view model parameters.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
@@ -2119,13 +2093,11 @@ namespace FlexiMvvm.Views
             LifecycleDelegate.HandleResult(sender, args);
         }
 
-        /// <inheritdoc />
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        /// <inheritdoc />
         async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync(bool recreated)
         {
             await ViewModel.InitializeAsync(_parameters, recreated);

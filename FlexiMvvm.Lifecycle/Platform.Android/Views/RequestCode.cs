@@ -23,7 +23,7 @@ namespace FlexiMvvm.Views
 {
     /// <summary>
     /// Generates a unique numeric request code that identifies a result mapper
-    /// used to create a lifecycle-aware view model result instance based on the <see cref="Intent"/> data.
+    /// used to create a lifecycle-aware view model result instance based on the passed <see cref="Intent"/> data.
     /// </summary>
     public sealed class RequestCode
     {

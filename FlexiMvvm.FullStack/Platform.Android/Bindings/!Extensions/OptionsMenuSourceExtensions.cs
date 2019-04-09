@@ -49,7 +49,7 @@ namespace FlexiMvvm.Bindings
                 {
                     if (args.Item.ItemId == itemId)
                     {
-                        args.IsHandled = true;
+                        args.Handled = true;
 
                         return true;
                     }

@@ -17,6 +17,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace FlexiMvvm.Persistence.Core
 {
@@ -31,185 +32,207 @@ namespace FlexiMvvm.Persistence.Core
             _bundle = bundle;
         }
 
+        /// <inheritdoc />
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <inheritdoc />
         public int Count => _bundle.Count;
 
-        public bool IsEmpty => _bundle.Count == 0;
-
+        /// <inheritdoc />
         public bool ContainsKey(string key)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             return _bundle.ContainsKey(key);
         }
 
-        public bool GetBool(bool defaultValue = default, string? key = null)
+        /// <inheritdoc />
+        public bool GetBool(bool defaultValue = default, [CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             return (bool)_bundle.GetValueOrDefault(key, defaultValue);
         }
 
-        public bool[]? GetBoolArray(bool[]? defaultValue = default, string? key = null)
+        /// <inheritdoc />
+        public bool[]? GetBoolArray([CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
-            return (bool[]?)_bundle.GetValueOrDefault(key, defaultValue);
+            return (bool[]?)_bundle.GetValueOrDefault(key, null);
         }
 
-        public byte[]? GetByteArray(byte[]? defaultValue = default, string? key = null)
+        /// <inheritdoc />
+        public byte[]? GetByteArray([CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
-            return (byte[]?)_bundle.GetValueOrDefault(key, defaultValue);
+            return (byte[]?)_bundle.GetValueOrDefault(key, null);
         }
 
-        public char GetChar(char defaultValue = default, string? key = null)
+        /// <inheritdoc />
+        public char GetChar(char defaultValue = default, [CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             return (char)_bundle.GetValueOrDefault(key, defaultValue);
         }
 
-        public char[]? GetCharArray(char[]? defaultValue = default, string? key = null)
+        /// <inheritdoc />
+        public char[]? GetCharArray([CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
-            return (char[]?)_bundle.GetValueOrDefault(key, defaultValue);
+            return (char[]?)_bundle.GetValueOrDefault(key, null);
         }
 
-        public DateTime GetDateTime(DateTime defaultValue = default, string? key = null)
+        /// <inheritdoc />
+        public DateTime GetDateTime(DateTime defaultValue = default, [CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             return (DateTime)_bundle.GetValueOrDefault(key, defaultValue);
         }
 
-        public DateTimeOffset GetDateTimeOffset(DateTimeOffset defaultValue = default, string? key = null)
+        /// <inheritdoc />
+        public DateTimeOffset GetDateTimeOffset(DateTimeOffset defaultValue = default, [CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             return (DateTimeOffset)_bundle.GetValueOrDefault(key, defaultValue);
         }
 
-        public double GetDouble(double defaultValue = default, string? key = null)
+        /// <inheritdoc />
+        public double GetDouble(double defaultValue = default, [CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             return (double)_bundle.GetValueOrDefault(key, defaultValue);
         }
 
-        public double[]? GetDoubleArray(double[]? defaultValue = default, string? key = null)
+        /// <inheritdoc />
+        public double[]? GetDoubleArray([CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
-            return (double[]?)_bundle.GetValueOrDefault(key, defaultValue);
+            return (double[]?)_bundle.GetValueOrDefault(key, null);
         }
 
-        public T GetEnum<T>(T defaultValue = default, string? key = null)
+        /// <inheritdoc />
+        public T GetEnum<T>(T defaultValue = default, [CallerMemberName] string? key = null)
             where T : struct, Enum
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             return (T)_bundle.GetValueOrDefault(key, defaultValue);
         }
 
-        public float GetFloat(float defaultValue = default, string? key = null)
+        /// <inheritdoc />
+        public float GetFloat(float defaultValue = default, [CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             return (float)_bundle.GetValueOrDefault(key, defaultValue);
         }
 
-        public float[]? GetFloatArray(float[]? defaultValue = default, string? key = null)
+        /// <inheritdoc />
+        public float[]? GetFloatArray([CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
-            return (float[]?)_bundle.GetValueOrDefault(key, defaultValue);
+            return (float[]?)_bundle.GetValueOrDefault(key, null);
         }
 
-        public int GetInt(int defaultValue = default, string? key = null)
+        /// <inheritdoc />
+        public int GetInt(int defaultValue = default, [CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             return (int)_bundle.GetValueOrDefault(key, defaultValue);
         }
 
-        public int[]? GetIntArray(int[]? defaultValue = default, string? key = null)
+        /// <inheritdoc />
+        public int[]? GetIntArray([CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
-            return (int[]?)_bundle.GetValueOrDefault(key, defaultValue);
+            return (int[]?)_bundle.GetValueOrDefault(key, null);
         }
 
-        public long GetLong(long defaultValue = default, string? key = null)
+        /// <inheritdoc />
+        public long GetLong(long defaultValue = default, [CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             return (long)_bundle.GetValueOrDefault(key, defaultValue);
         }
 
-        public long[]? GetLongArray(long[]? defaultValue = default, string? key = null)
+        /// <inheritdoc />
+        public long[]? GetLongArray([CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
-            return (long[]?)_bundle.GetValueOrDefault(key, defaultValue);
+            return (long[]?)_bundle.GetValueOrDefault(key, null);
         }
 
-        public short GetShort(short defaultValue = default, string? key = null)
+        /// <inheritdoc />
+        public short GetShort(short defaultValue = default, [CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             return (short)_bundle.GetValueOrDefault(key, defaultValue);
         }
 
-        public short[]? GetShortArray(short[]? defaultValue = default, string? key = null)
+        /// <inheritdoc />
+        public short[]? GetShortArray([CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
-            return (short[]?)_bundle.GetValueOrDefault(key, defaultValue);
+            return (short[]?)_bundle.GetValueOrDefault(key, null);
         }
 
-        public string? GetString(string? defaultValue = default, string? key = null)
+        /// <inheritdoc />
+        public string? GetString(string? defaultValue = default, [CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             return (string?)_bundle.GetValueOrDefault(key, defaultValue);
         }
 
-        public string[]? GetStringArray(string[]? defaultValue = default, string? key = null)
+        /// <inheritdoc />
+        public string[]? GetStringArray([CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
-            return (string[]?)_bundle.GetValueOrDefault(key, defaultValue);
+            return (string[]?)_bundle.GetValueOrDefault(key, null);
         }
 
-        public bool SetBool(bool value, string? key = null)
+        /// <inheritdoc />
+        public bool SetBool(bool value, [CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             var existingValue = GetBool(key: key);
 
@@ -224,10 +247,11 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetBoolArray(bool[]? value, string? key = null)
+        /// <inheritdoc />
+        public bool SetBoolArray(bool[]? value, [CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             var existingValue = GetBoolArray(key: key);
 
@@ -242,10 +266,11 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetByteArray(byte[]? value, string? key = null)
+        /// <inheritdoc />
+        public bool SetByteArray(byte[]? value, [CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             var existingValue = GetByteArray(key: key);
 
@@ -260,10 +285,11 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetChar(char value, string? key = null)
+        /// <inheritdoc />
+        public bool SetChar(char value, [CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             var existingValue = GetChar(key: key);
 
@@ -278,10 +304,11 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetCharArray(char[]? value, string? key = null)
+        /// <inheritdoc />
+        public bool SetCharArray(char[]? value, [CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             var existingValue = GetCharArray(key: key);
 
@@ -296,10 +323,11 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetDateTime(DateTime value, string? key = null)
+        /// <inheritdoc />
+        public bool SetDateTime(DateTime value, [CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             var existingValue = GetDateTime(key: key);
 
@@ -314,10 +342,11 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetDateTimeOffset(DateTimeOffset value, string? key = null)
+        /// <inheritdoc />
+        public bool SetDateTimeOffset(DateTimeOffset value, [CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             var existingValue = GetDateTimeOffset(key: key);
 
@@ -332,10 +361,11 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetDouble(double value, string? key = null)
+        /// <inheritdoc />
+        public bool SetDouble(double value, [CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             var existingValue = GetDouble(key: key);
 
@@ -350,10 +380,11 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetDoubleArray(double[]? value, string? key = null)
+        /// <inheritdoc />
+        public bool SetDoubleArray(double[]? value, [CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             var existingValue = GetDoubleArray(key: key);
 
@@ -368,11 +399,12 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetEnum<T>(T value, string? key = null)
+        /// <inheritdoc />
+        public bool SetEnum<T>(T value, [CallerMemberName] string? key = null)
             where T : struct, Enum
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             var existingValue = GetEnum<T>(key: key);
 
@@ -387,10 +419,11 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetFloat(float value, string? key = null)
+        /// <inheritdoc />
+        public bool SetFloat(float value, [CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             var existingValue = GetFloat(key: key);
 
@@ -405,10 +438,11 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetFloatArray(float[]? value, string? key = null)
+        /// <inheritdoc />
+        public bool SetFloatArray(float[]? value, [CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             var existingValue = GetFloatArray(key: key);
 
@@ -423,10 +457,11 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetInt(int value, string? key = null)
+        /// <inheritdoc />
+        public bool SetInt(int value, [CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             var existingValue = GetInt(key: key);
 
@@ -441,10 +476,11 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetIntArray(int[]? value, string? key = null)
+        /// <inheritdoc />
+        public bool SetIntArray(int[]? value, [CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             var existingValue = GetIntArray(key: key);
 
@@ -459,10 +495,11 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetLong(long value, string? key = null)
+        /// <inheritdoc />
+        public bool SetLong(long value, [CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             var existingValue = GetLong(key: key);
 
@@ -477,10 +514,11 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetLongArray(long[]? value, string? key = null)
+        /// <inheritdoc />
+        public bool SetLongArray(long[]? value, [CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             var existingValue = GetLongArray(key: key);
 
@@ -495,10 +533,11 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetShort(short value, string? key = null)
+        /// <inheritdoc />
+        public bool SetShort(short value, [CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             var existingValue = GetShort(key: key);
 
@@ -513,10 +552,11 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetShortArray(short[]? value, string? key = null)
+        /// <inheritdoc />
+        public bool SetShortArray(short[]? value, [CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             var existingValue = GetShortArray(key: key);
 
@@ -531,10 +571,11 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetString(string? value, string? key = null)
+        /// <inheritdoc />
+        public bool SetString(string? value, [CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             var existingValue = GetString(key: key);
 
@@ -549,10 +590,11 @@ namespace FlexiMvvm.Persistence.Core
             return false;
         }
 
-        public bool SetStringArray(string[]? value, string? key = null)
+        /// <inheritdoc />
+        public bool SetStringArray(string[]? value, [CallerMemberName] string? key = null)
         {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
             var existingValue = GetStringArray(key: key);
 

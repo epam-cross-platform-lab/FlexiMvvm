@@ -15,25 +15,24 @@
 // =========================================================================
 
 using FlexiMvvm.Persistence.Core;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Persistence
 {
+    /// <summary>
+    /// Represents a factory that creates a new bundle instance.
+    /// </summary>
     public static class BundleFactory
     {
-        [NotNull]
+        /// <summary>
+        /// Creates a new <see cref="IBundle"/> instance.
+        /// </summary>
+        /// <returns>The bundle instance.</returns>
         public static IBundle Create()
         {
-#if NETSTANDARD2_0
-            return new InMemoryBundle(new System.Collections.Generic.Dictionary<string, object?>());
-#elif __ANDROID__
+#if __ANDROID__
             return new AndroidBundle(new Android.OS.Bundle());
-#elif __IOS__
-            return new InMemoryBundle(new System.Collections.Generic.Dictionary<string, object?>());
 #else
-            throw new System.NotImplementedException($"\"{nameof(IBundle)}\" is not implemented in the portable version of this assembly. " +
-                "You should reference the NuGet package from your main application project in order " +
-                "to reference the platform-specific implementation.");
+            return new InMemoryBundle(new System.Collections.Generic.Dictionary<string, object?>());
 #endif
         }
     }

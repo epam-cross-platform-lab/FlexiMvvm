@@ -29,7 +29,7 @@ namespace FlexiMvvm.Views.Core
         /// <summary>
         /// Can perform custom actions when <see cref="UIViewController.WillMoveToParentViewController(UIViewController?)"/> method is called.
         /// </summary>
-        /// <param name="parent">The parent view. Can be <c>null</c>.</param>
+        /// <param name="parent">The parent view. Can be <see langword="null"/>.</param>
         void WillMoveToParentViewController(UIViewController? parent);
 
         /// <summary>
@@ -60,23 +60,23 @@ namespace FlexiMvvm.Views.Core
         /// <summary>
         /// Can perform custom actions when <see cref="UIViewController.DidMoveToParentViewController(UIViewController?)"/> method is called.
         /// </summary>
-        /// <param name="parent">The parent view. Can be <c>null</c>.</param>
+        /// <param name="parent">The parent view. Can be <see langword="null"/>.</param>
         void DidMoveToParentViewController(UIViewController? parent);
 
         /// <summary>
         /// Sets the lifecycle-aware view model result to be returned to the calling view's model.
         /// </summary>
         /// <param name="resultCode">Determines whether the result should be set as successful or not due to cancellation by the user.</param>
-        /// <param name="result">The view model result. Can be <c>null</c>.</param>
+        /// <param name="result">The view model result. Can be <see langword="null"/>.</param>
         void SetResult(ResultCode resultCode, Result? result);
 
         /// <summary>
         /// The event handler which forwards the lifecycle-aware view model result processing to the lifecycle-aware view model
-        /// if it implements the <see cref="ILifecycleViewModelWithResultHandler"/> interface.
+        /// if it implements the <see cref="ILifecycleViewModelWithResultHandler"/>.
         /// </summary>
         /// <param name="sender">The event sender.</param>
         /// <param name="args">The event arguments containing the view model result.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="sender"/> or <paramref name="args"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="sender"/> or <paramref name="args"/> is <see langword="null"/>.</exception>
         void HandleResult(object sender, ResultSetEventArgs args);
     }
 }

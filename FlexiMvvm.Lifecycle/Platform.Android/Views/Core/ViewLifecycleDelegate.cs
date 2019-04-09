@@ -36,7 +36,7 @@ namespace FlexiMvvm.Views.Core
         /// Initializes a new instance of the <see cref="ViewLifecycleDelegate{TView}"/> class.
         /// </summary>
         /// <param name="view">The view that forwards its lifecycle calls to the delegate.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="view"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="view"/> is <see langword="null"/>.</exception>
         public ViewLifecycleDelegate(TView view)
         {
             View = view ?? throw new ArgumentNullException(nameof(view));
@@ -116,7 +116,7 @@ namespace FlexiMvvm.Views.Core
         /// Initializes a new instance of the <see cref="ViewLifecycleDelegate{TView, TViewModel}"/> class.
         /// </summary>
         /// <param name="view">The view that forwards its lifecycle calls to the delegate.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="view"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="view"/> is <see langword="null"/>.</exception>
         public ViewLifecycleDelegate(TView view)
             : base(view)
         {

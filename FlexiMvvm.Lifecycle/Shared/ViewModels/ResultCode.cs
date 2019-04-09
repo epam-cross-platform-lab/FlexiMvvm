@@ -45,7 +45,7 @@ namespace FlexiMvvm.ViewModels
         /// </summary>
         /// <param name="code1">First result code to compare.</param>
         /// <param name="code2">Second result code to compare.</param>
-        /// <returns><c>true</c> if result codes are equal; otherwise, <c>false</c>.</returns>
+        /// <returns><see langword="true"/> if result codes are equal; otherwise, <see langword="false"/>.</returns>
         public static bool operator ==(ResultCode code1, ResultCode code2)
         {
             return code1.Equals(code2);
@@ -56,7 +56,7 @@ namespace FlexiMvvm.ViewModels
         /// </summary>
         /// <param name="code1">First result code to compare.</param>
         /// <param name="code2">Second result code to compare.</param>
-        /// <returns><c>true</c> if result codes are not equal; otherwise, <c>false</c>.</returns>
+        /// <returns><see langword="true"/> if result codes are not equal; otherwise, <see langword="false"/>.</returns>
         public static bool operator !=(ResultCode code1, ResultCode code2)
         {
             return !(code1 == code2);
@@ -66,7 +66,7 @@ namespace FlexiMvvm.ViewModels
         /// Determines whether the current result code is equal to the <paramref name="obj"/> one.
         /// </summary>
         /// <param name="obj">The result code to compare.</param>
-        /// <returns><c>true</c> if the <paramref name="obj"/> is <see cref="ResultCode"/> and result codes are equal; otherwise, <c>false</c>.</returns>
+        /// <returns><see langword="true"/> if the <paramref name="obj"/> is <see cref="ResultCode"/> and result codes are equal; otherwise, <see langword="false"/>.</returns>
         public override bool Equals(object obj)
         {
             return obj is ResultCode code && Equals(code);
@@ -76,7 +76,7 @@ namespace FlexiMvvm.ViewModels
         /// Determines whether the current result code is equal to the <paramref name="other"/> one.
         /// </summary>
         /// <param name="other">The result code to compare.</param>
-        /// <returns><c>true</c> if result codes are equal; otherwise, <c>false</c>.</returns>
+        /// <returns><see langword="true"/> if result codes are equal; otherwise, <see langword="false"/>.</returns>
         public bool Equals(ResultCode other)
         {
             return _value == other._value;

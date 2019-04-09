@@ -34,11 +34,11 @@ namespace FlexiMvvm.Navigation
         /// <param name="targetView">The target view for navigation.</param>
         /// <param name="animated">Determines if the transition is to be animated.</param>
         /// <param name="navigationStrategy">
-        /// The strategy used for performing navigation. Can be <c>null</c>.
+        /// The strategy used for performing navigation. Can be <see langword="null"/>.
         /// <para>The default is <see cref="ForwardNavigationStrategy.PresentViewController(Action?)"/> if <paramref name="targetView"/> is <see cref="UINavigationController"/> or
         /// <see cref="ForwardNavigationStrategy.PushViewController()"/> if <paramref name="targetView"/> is <see cref="UIViewController"/>.</para>
         /// </param>
-        /// <exception cref="ArgumentNullException"><paramref name="sourceView"/> or <paramref name="targetView"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="sourceView"/> or <paramref name="targetView"/> is <see langword="null"/>.</exception>
         public void Navigate<TTargetView>(
             INavigationView<ILifecycleViewModel> sourceView,
             TTargetView targetView,
@@ -61,14 +61,14 @@ namespace FlexiMvvm.Navigation
         /// <typeparam name="TParameters">The type of the target view model parameters.</typeparam>
         /// <param name="sourceView">The source navigation view from which navigation is performed from.</param>
         /// <param name="targetView">The target view for navigation.</param>
-        /// <param name="parameters">The target view model parameters. Can be <c>null</c>.</param>
+        /// <param name="parameters">The target view model parameters. Can be <see langword="null"/>.</param>
         /// <param name="animated">Determines if the transition is to be animated.</param>
         /// <param name="navigationStrategy">
-        /// The strategy used for performing navigation. Can be <c>null</c>.
+        /// The strategy used for performing navigation. Can be <see langword="null"/>.
         /// <para>The default is <see cref="ForwardNavigationStrategy.PresentViewController(Action?)"/> if <paramref name="targetView"/> is <see cref="UINavigationController"/> or
         /// <see cref="ForwardNavigationStrategy.PushViewController()"/> if <paramref name="targetView"/> is <see cref="UIViewController"/>.</para>
         /// </param>
-        /// <exception cref="ArgumentNullException"><paramref name="sourceView"/> or <paramref name="targetView"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="sourceView"/> or <paramref name="targetView"/> is <see langword="null"/>.</exception>
         public void Navigate<TTargetView, TParameters>(
             INavigationView<ILifecycleViewModel> sourceView,
             TTargetView targetView,
@@ -96,11 +96,11 @@ namespace FlexiMvvm.Navigation
         /// <param name="targetView">The target view for navigation.</param>
         /// <param name="animated">Determines if the transition is to be animated.</param>
         /// <param name="navigationStrategy">
-        /// The strategy used for performing navigation. Can be <c>null</c>.
+        /// The strategy used for performing navigation. Can be <see langword="null"/>.
         /// <para>The default is <see cref="ForwardNavigationStrategy.PresentViewController(Action?)"/> if <paramref name="targetView"/> is <see cref="UINavigationController"/> or
         /// <see cref="ForwardNavigationStrategy.PushViewController()"/> if <paramref name="targetView"/> is <see cref="UIViewController"/>.</para>
         /// </param>
-        /// <exception cref="ArgumentNullException"><paramref name="sourceView"/> or <paramref name="targetView"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="sourceView"/> or <paramref name="targetView"/> is <see langword="null"/>.</exception>
         public void NavigateForResult<TTargetView, TResult>(
             INavigationView<ILifecycleViewModelWithResultHandler> sourceView,
             TTargetView targetView,
@@ -127,14 +127,14 @@ namespace FlexiMvvm.Navigation
         /// <typeparam name="TResult">The type of the target view model result.</typeparam>
         /// <param name="sourceView">The source navigation view from which navigation is performed from.</param>
         /// <param name="targetView">The target view for navigation.</param>
-        /// <param name="parameters">The target view model parameters. Can be <c>null</c>.</param>
+        /// <param name="parameters">The target view model parameters. Can be <see langword="null"/>.</param>
         /// <param name="animated">Determines if the transition is to be animated.</param>
         /// <param name="navigationStrategy">
-        /// The strategy used for performing navigation. Can be <c>null</c>.
+        /// The strategy used for performing navigation. Can be <see langword="null"/>.
         /// <para>The default is <see cref="ForwardNavigationStrategy.PresentViewController(Action?)"/> if <paramref name="targetView"/> is <see cref="UINavigationController"/> or
         /// <see cref="ForwardNavigationStrategy.PushViewController()"/> if <paramref name="targetView"/> is <see cref="UIViewController"/>.</para>
         /// </param>
-        /// <exception cref="ArgumentNullException"><paramref name="sourceView"/> or <paramref name="targetView"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="sourceView"/> or <paramref name="targetView"/> is <see langword="null"/>.</exception>
         public void NavigateForResult<TTargetView, TParameters, TResult>(
             INavigationView<ILifecycleViewModelWithResultHandler> sourceView,
             TTargetView targetView,
@@ -161,11 +161,11 @@ namespace FlexiMvvm.Navigation
         /// <param name="sourceView">The source navigation view from which navigation is performed from.</param>
         /// <param name="animated">Determines if the transition is to be animated.</param>
         /// <param name="navigationStrategy">
-        /// The strategy used for performing navigation. Can be <c>null</c>.
+        /// The strategy used for performing navigation. Can be <see langword="null"/>.
         /// <para>The default is <see cref="BackwardNavigationStrategy.DismissViewController(Action?)"/> if <paramref name="sourceView"/> is presented or
         /// <see cref="BackwardNavigationStrategy.PopViewController()"/> if <paramref name="sourceView"/> is pushed.</para>
         /// </param>
-        /// <exception cref="ArgumentNullException"><paramref name="sourceView"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="sourceView"/> is <see langword="null"/>.</exception>
         public void NavigateBack(
             INavigationView<ILifecycleViewModel> sourceView,
             bool animated,
@@ -183,14 +183,14 @@ namespace FlexiMvvm.Navigation
         /// <typeparam name="TResult">The type of the source view model result.</typeparam>
         /// <param name="sourceView">The source navigation view from which navigation is performed from.</param>
         /// <param name="resultCode">Determines whether the result should be set as successful or canceled.</param>
-        /// <param name="result">The source view model result. Can be <c>null</c>.</param>
+        /// <param name="result">The source view model result. Can be <see langword="null"/>.</param>
         /// <param name="animated">Determines if the transition is to be animated.</param>
         /// <param name="navigationStrategy">
-        /// The strategy used for performing navigation. Can be <c>null</c>.
+        /// The strategy used for performing navigation. Can be <see langword="null"/>.
         /// <para>The default is <see cref="BackwardNavigationStrategy.DismissViewController(Action?)"/> if <paramref name="sourceView"/> is presented or
         /// <see cref="BackwardNavigationStrategy.PopViewController()"/> if <paramref name="sourceView"/> is pushed.</para>
         /// </param>
-        /// <exception cref="ArgumentNullException"><paramref name="sourceView"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="sourceView"/> is <see langword="null"/>.</exception>
         public void NavigateBack<TResult>(
             INavigationView<ILifecycleViewModelWithResult<TResult>> sourceView,
             ResultCode resultCode,

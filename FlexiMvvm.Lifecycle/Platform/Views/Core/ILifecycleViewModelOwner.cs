@@ -32,7 +32,7 @@ namespace FlexiMvvm.Views.Core
         /// Sets the lifecycle-aware view model to its owner.
         /// </summary>
         /// <param name="viewModel">The view model to set.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> is <see langword="null"/>.</exception>
         void SetViewModel(TViewModel viewModel);
 
         /// <summary>

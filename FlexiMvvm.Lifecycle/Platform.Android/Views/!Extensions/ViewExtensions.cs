@@ -31,7 +31,7 @@ namespace FlexiMvvm.Views
         /// <param name="view">The view that is represented by an activity or fragment.</param>
         /// <param name="activityHandler">The handler to execute if <paramref name="view"/> is <see cref="Android.Support.V4.App.FragmentActivity"/>.</param>
         /// <param name="fragmentHandler">The handler to execute if <paramref name="view"/> is <see cref="Android.Support.V4.App.Fragment"/>.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="view" /> or <paramref name="activityHandler" /> or <paramref name="fragmentHandler" /> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="view" /> or <paramref name="activityHandler" /> or <paramref name="fragmentHandler" /> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException">
         /// The <paramref name="view" /> is derived from a class other than the <see cref="Android.Support.V4.App.FragmentActivity"/> or <see cref="Android.Support.V4.App.Fragment"/>.
         /// </exception>
@@ -71,7 +71,7 @@ namespace FlexiMvvm.Views
         /// <param name="activityHandler">The handler to execute if <paramref name="view"/> is <see cref="Android.Support.V4.App.FragmentActivity"/>.</param>
         /// <param name="fragmentHandler">The handler to execute if <paramref name="view"/> is <see cref="Android.Support.V4.App.Fragment"/>.</param>
         /// <returns>A result returned by appropriate handler.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="view" /> or <paramref name="activityHandler" /> or <paramref name="fragmentHandler" /> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="view" /> or <paramref name="activityHandler" /> or <paramref name="fragmentHandler" /> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException">
         /// The <paramref name="view" /> is derived from a class other than the <see cref="Android.Support.V4.App.FragmentActivity"/> or <see cref="Android.Support.V4.App.Fragment"/>.
         /// </exception>

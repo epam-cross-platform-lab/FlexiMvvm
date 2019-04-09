@@ -15,32 +15,31 @@
 // =========================================================================
 
 using System;
-using FlexiMvvm.Ioc;
 
 namespace FlexiMvvm.ViewModels
 {
     /// <summary>
-    /// Default implementation of the lifecycle-aware view model factory. <see cref="IDependencyProvider"/> is used to create a view model instance.
+    /// Represents an <see cref="ILifecycleViewModelFactory"/> that creates a new lifecycle-aware view model instance using the <see cref="IServiceProvider"/>.
     /// </summary>
     public sealed class DefaultLifecycleViewModelFactory : ILifecycleViewModelFactory
     {
-        private readonly IDependencyProvider _dependencyProvider;
+        private readonly IServiceProvider _serviceProvider;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultLifecycleViewModelFactory"/> class.
         /// </summary>
-        /// <param name="dependencyProvider">The dependency provider that is used to create a view model instance.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="dependencyProvider"/> is <c>null</c>.</exception>
-        public DefaultLifecycleViewModelFactory(IDependencyProvider dependencyProvider)
+        /// <param name="serviceProvider">The service provider that is used to create a view model instance.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="serviceProvider"/> is <see langword="null"/>.</exception>
+        public DefaultLifecycleViewModelFactory(IServiceProvider serviceProvider)
         {
-            _dependencyProvider = dependencyProvider ?? throw new ArgumentNullException(nameof(dependencyProvider));
+            _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
         }
 
         /// <inheritdoc />
         public TViewModel Create<TViewModel>()
             where TViewModel : class, ILifecycleViewModel
         {
-            return _dependencyProvider.Get<TViewModel>();
+            return (TViewModel)_serviceProvider.GetService(typeof(TViewModel));
         }
     }
 }

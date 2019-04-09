@@ -19,7 +19,7 @@ using JetBrains.Annotations;
 
 namespace FlexiMvvm.Ioc
 {
-    public interface ISimpleIoc : IDependencyProvider
+    public interface ISimpleIoc : IDependencyProvider, IServiceProvider
     {
         void Register<T>([NotNull] Func<T> factory, Reuse reuse = Reuse.Transient);
     }
