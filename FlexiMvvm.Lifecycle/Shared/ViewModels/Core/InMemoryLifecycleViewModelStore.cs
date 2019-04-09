@@ -23,7 +23,7 @@ namespace FlexiMvvm.ViewModels.Core
     {
         private Dictionary<string, ILifecycleViewModel>? _viewModels;
 
-        private Dictionary<string, ILifecycleViewModel> ViewModels => _viewModels ?? (_viewModels = new Dictionary<string, ILifecycleViewModel>());
+        private Dictionary<string, ILifecycleViewModel> ViewModels => _viewModels ??= new Dictionary<string, ILifecycleViewModel>();
 
         /// <inheritdoc />
         public TViewModel? Get<TViewModel>(string key)

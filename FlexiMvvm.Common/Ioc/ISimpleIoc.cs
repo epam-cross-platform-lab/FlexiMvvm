@@ -18,7 +18,7 @@ using System;
 
 namespace FlexiMvvm.Ioc
 {
-    public interface ISimpleIoc : IDependencyProvider
+    public interface ISimpleIoc : IDependencyProvider, IServiceProvider
     {
         void Register<T>(Func<T> factory, Reuse reuse = Reuse.Transient);
     }

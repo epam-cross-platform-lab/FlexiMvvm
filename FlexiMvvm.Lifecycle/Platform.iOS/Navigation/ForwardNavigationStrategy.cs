@@ -58,7 +58,7 @@ namespace FlexiMvvm.Navigation
         /// <summary>
         /// Forward navigation using the <see cref="INavigationView{TViewModel}.PresentViewController(UIViewController, bool, Action?)"/> method.
         /// </summary>
-        /// <param name="completionHandler">The method to invoke when the animation completes. Can be <c>null</c>.</param>
+        /// <param name="completionHandler">The method to invoke when the animation completes. Can be <see langword="null"/>.</param>
         /// <returns>The forward navigation delegate.</returns>
         public ForwardNavigationDelegate PresentViewController(Action? completionHandler = null)
         {
@@ -93,7 +93,7 @@ namespace FlexiMvvm.Navigation
         /// </summary>
         /// <param name="viewControllers">The array of view controllers to be set. Target view delegate parameter is ignored.</param>
         /// <returns>The forward navigation delegate.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="viewControllers"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="viewControllers"/> is <see langword="null"/>.</exception>
         public ForwardNavigationDelegate SetViewControllers(UIViewController[] viewControllers)
         {
             if (viewControllers == null)

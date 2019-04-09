@@ -31,8 +31,8 @@ namespace FlexiMvvm.Views
         /// </summary>
         /// <typeparam name="TParameters">The type of the view model parameters.</typeparam>
         /// <param name="intent">The intent to extract the view model parameters from.</param>
-        /// <returns>The view model parameters instance if the <paramref name="intent"/> contains the parameters; otherwise, <c>null</c>.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="intent"/> is <c>null</c>.</exception>
+        /// <returns>The view model parameters instance if the <paramref name="intent"/> contains the parameters; otherwise, <see langword="null"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="intent"/> is <see langword="null"/>.</exception>
         public static TParameters? GetParameters<TParameters>(this Intent intent)
             where TParameters : Parameters
         {
@@ -47,8 +47,8 @@ namespace FlexiMvvm.Views
         /// </summary>
         /// <typeparam name="TParameters">The type of the view model parameters.</typeparam>
         /// <param name="intent">The intent to put the view model parameters to.</param>
-        /// <param name="parameters">The view model parameters. Can be <c>null</c>.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="intent"/> is <c>null</c>.</exception>
+        /// <param name="parameters">The view model parameters. Can be <see langword="null"/>.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="intent"/> is <see langword="null"/>.</exception>
         public static void PutParameters<TParameters>(this Intent intent, TParameters? parameters)
             where TParameters : Parameters
         {
@@ -68,8 +68,8 @@ namespace FlexiMvvm.Views
         /// </summary>
         /// <typeparam name="TResult">The type of the view model result.</typeparam>
         /// <param name="intent">The intent to extract the view model result from.</param>
-        /// <returns>The view model result instance if the <paramref name="intent"/> contains the result; otherwise, <c>null</c>.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="intent"/> is <c>null</c>.</exception>
+        /// <returns>The view model result instance if the <paramref name="intent"/> contains the result; otherwise, <see langword="null"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="intent"/> is <see langword="null"/>.</exception>
         public static TResult? GetResult<TResult>(this Intent intent)
             where TResult : Result
         {
@@ -84,8 +84,8 @@ namespace FlexiMvvm.Views
         /// </summary>
         /// <typeparam name="TResult">The type of the view model result.</typeparam>
         /// <param name="intent">The intent to put the view model result to.</param>
-        /// <param name="result">The view model result. Can be <c>null</c>.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="intent"/> is <c>null</c>.</exception>
+        /// <param name="result">The view model result. Can be <see langword="null"/>.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="intent"/> is <see langword="null"/>.</exception>
         public static void PutResult<TResult>(this Intent intent, TResult? result)
             where TResult : Result
         {

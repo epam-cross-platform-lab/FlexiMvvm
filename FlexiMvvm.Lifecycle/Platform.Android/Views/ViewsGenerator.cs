@@ -24,7 +24,6 @@ using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
-using FlexiMvvm.Collections;
 using FlexiMvvm.Persistence.Core;
 using FlexiMvvm.ViewModels;
 using FlexiMvvm.Views.Core;
@@ -32,7 +31,7 @@ using FlexiMvvm.Views.Core;
 namespace FlexiMvvm.Views
 {
     /// <summary>
-    /// Represents the <see cref="Android.Support.V7.App.AppCompatActivity"/> that is adapted for use with the FlexiMvvm.
+    /// Represents a/an <see cref="Android.Support.V7.App.AppCompatActivity"/> that is adapted for use with the FlexiMvvm.
     /// </summary>
     [Register("fleximvvm.views.AppCompatActivity")]
     public partial class AppCompatActivity : Android.Support.V7.App.AppCompatActivity, IAndroidView, IOptionsMenuSource
@@ -104,7 +103,7 @@ namespace FlexiMvvm.Views
             var optionsItemSelectedEventArgs = new OptionsItemSelectedEventArgs(item);
             OnOptionsItemSelectedCalled?.Invoke(this, optionsItemSelectedEventArgs);
 
-            if (optionsItemSelectedEventArgs.IsHandled)
+            if (optionsItemSelectedEventArgs.Handled)
             {
                 return true;
             }
@@ -138,7 +137,7 @@ namespace FlexiMvvm.Views
     }
 
     /// <summary>
-    /// Represents the <see cref="Android.Support.V7.App.AppCompatActivity"/> that is adapted for use with the FlexiMvvm
+    /// Represents a/an <see cref="Android.Support.V7.App.AppCompatActivity"/> that is adapted for use with the FlexiMvvm
     /// and has its own lifecycle-aware view model.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
@@ -173,13 +172,11 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         public RequestCode RequestCode => _requestCode ??= new RequestCode();
 
-        /// <inheritdoc />
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        /// <inheritdoc />
         async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync(bool recreated)
         {
             await ViewModel.InitializeAsync(recreated);
@@ -187,7 +184,7 @@ namespace FlexiMvvm.Views
     }
 
     /// <summary>
-    /// Represents the <see cref="Android.Support.V7.App.AppCompatActivity"/> that is adapted for use with the FlexiMvvm,
+    /// Represents a/an <see cref="Android.Support.V7.App.AppCompatActivity"/> that is adapted for use with the FlexiMvvm,
     /// has its own lifecycle-aware view model and takes lifecycle-aware view model parameters.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
@@ -224,13 +221,11 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         public RequestCode RequestCode => _requestCode ??= new RequestCode();
 
-        /// <inheritdoc />
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        /// <inheritdoc />
         async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync(bool recreated)
         {
             await ViewModel.InitializeAsync(Intent?.GetParameters<TParameters>(), recreated);
@@ -242,7 +237,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>
-    /// Represents the <see cref="Android.Support.V4.App.DialogFragment"/> that is adapted for use with the FlexiMvvm.
+    /// Represents a/an <see cref="Android.Support.V4.App.DialogFragment"/> that is adapted for use with the FlexiMvvm.
     /// </summary>
     [Register("fleximvvm.views.DialogFragment")]
     public partial class DialogFragment : Android.Support.V4.App.DialogFragment, IAndroidView, IOptionsMenuSource
@@ -314,7 +309,7 @@ namespace FlexiMvvm.Views
             var optionsItemSelectedEventArgs = new OptionsItemSelectedEventArgs(item);
             OnOptionsItemSelectedCalled?.Invoke(this, optionsItemSelectedEventArgs);
 
-            if (optionsItemSelectedEventArgs.IsHandled)
+            if (optionsItemSelectedEventArgs.Handled)
             {
                 return true;
             }
@@ -356,7 +351,7 @@ namespace FlexiMvvm.Views
     }
 
     /// <summary>
-    /// Represents the <see cref="Android.Support.V4.App.DialogFragment"/> that is adapted for use with the FlexiMvvm
+    /// Represents a/an <see cref="Android.Support.V4.App.DialogFragment"/> that is adapted for use with the FlexiMvvm
     /// and has its own lifecycle-aware view model.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
@@ -405,13 +400,11 @@ namespace FlexiMvvm.Views
             throw new NotSupportedException("The fragment cannot finish an activity. Use the appropriate method of fragment's activity instead.");
         }
 
-        /// <inheritdoc />
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        /// <inheritdoc />
         async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync(bool recreated)
         {
             await ViewModel.InitializeAsync(recreated);
@@ -419,7 +412,7 @@ namespace FlexiMvvm.Views
     }
 
     /// <summary>
-    /// Represents the <see cref="Android.Support.V4.App.DialogFragment"/> that is adapted for use with the FlexiMvvm,
+    /// Represents a/an <see cref="Android.Support.V4.App.DialogFragment"/> that is adapted for use with the FlexiMvvm,
     /// has its own lifecycle-aware view model and takes lifecycle-aware view model parameters.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
@@ -470,13 +463,11 @@ namespace FlexiMvvm.Views
             throw new NotSupportedException("The fragment cannot finish an activity. Use the appropriate method of fragment's activity instead.");
         }
 
-        /// <inheritdoc />
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        /// <inheritdoc />
         async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync(bool recreated)
         {
             await ViewModel.InitializeAsync(Arguments?.GetParameters<TParameters>(), recreated);
@@ -488,7 +479,7 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>
-    /// Represents the <see cref="Android.Support.V4.App.Fragment"/> that is adapted for use with the FlexiMvvm.
+    /// Represents a/an <see cref="Android.Support.V4.App.Fragment"/> that is adapted for use with the FlexiMvvm.
     /// </summary>
     [Register("fleximvvm.views.Fragment")]
     public partial class Fragment : Android.Support.V4.App.Fragment, IAndroidView, IOptionsMenuSource
@@ -560,7 +551,7 @@ namespace FlexiMvvm.Views
             var optionsItemSelectedEventArgs = new OptionsItemSelectedEventArgs(item);
             OnOptionsItemSelectedCalled?.Invoke(this, optionsItemSelectedEventArgs);
 
-            if (optionsItemSelectedEventArgs.IsHandled)
+            if (optionsItemSelectedEventArgs.Handled)
             {
                 return true;
             }
@@ -602,7 +593,7 @@ namespace FlexiMvvm.Views
     }
 
     /// <summary>
-    /// Represents the <see cref="Android.Support.V4.App.Fragment"/> that is adapted for use with the FlexiMvvm
+    /// Represents a/an <see cref="Android.Support.V4.App.Fragment"/> that is adapted for use with the FlexiMvvm
     /// and has its own lifecycle-aware view model.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
@@ -651,13 +642,11 @@ namespace FlexiMvvm.Views
             throw new NotSupportedException("The fragment cannot finish an activity. Use the appropriate method of fragment's activity instead.");
         }
 
-        /// <inheritdoc />
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        /// <inheritdoc />
         async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync(bool recreated)
         {
             await ViewModel.InitializeAsync(recreated);
@@ -665,7 +654,7 @@ namespace FlexiMvvm.Views
     }
 
     /// <summary>
-    /// Represents the <see cref="Android.Support.V4.App.Fragment"/> that is adapted for use with the FlexiMvvm,
+    /// Represents a/an <see cref="Android.Support.V4.App.Fragment"/> that is adapted for use with the FlexiMvvm,
     /// has its own lifecycle-aware view model and takes lifecycle-aware view model parameters.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
@@ -716,13 +705,11 @@ namespace FlexiMvvm.Views
             throw new NotSupportedException("The fragment cannot finish an activity. Use the appropriate method of fragment's activity instead.");
         }
 
-        /// <inheritdoc />
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        /// <inheritdoc />
         async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync(bool recreated)
         {
             await ViewModel.InitializeAsync(Arguments?.GetParameters<TParameters>(), recreated);

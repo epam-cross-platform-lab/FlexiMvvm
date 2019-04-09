@@ -37,7 +37,7 @@ namespace FlexiMvvm.Navigation
         /// <summary>
         /// Forward navigation using the <see cref="INavigationView{TViewModel}.StartActivity(Intent, Bundle?)"/> method.
         /// </summary>
-        /// <param name="options">Additional options for how the target view should be started. Can be <c>null</c>.</param>
+        /// <param name="options">Additional options for how the target view should be started. Can be <see langword="null"/>.</param>
         /// <returns>The forward navigation delegate.</returns>
         public ForwardNavigationDelegate StartActivity(Bundle? options = null)
         {
@@ -50,7 +50,7 @@ namespace FlexiMvvm.Navigation
         /// <summary>
         /// Forward navigation using the <see cref="INavigationView{TViewModel}.StartActivityForResult(Intent, int, Bundle?)"/> method.
         /// </summary>
-        /// <param name="options">Additional options for how the target view should be started. Can be <c>null</c>.</param>
+        /// <param name="options">Additional options for how the target view should be started. Can be <see langword="null"/>.</param>
         /// <returns>The forward navigation delegate.</returns>
         public ForwardNavigationDelegate StartActivityForResult(Bundle? options = null)
         {

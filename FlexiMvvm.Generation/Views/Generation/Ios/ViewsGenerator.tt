@@ -31,7 +31,7 @@ using UIKit;
 namespace <#= GetNamespace(viewGenerationOptions) #>
 {
     /// <summary>
-    /// Represents the <see cref="<#= viewGenerationOptions.BaseClassName #>"/> that is adapted for use with the FlexiMvvm.
+    /// Represents a/an <see cref="<#= viewGenerationOptions.BaseClassName #>"/> that is adapted for use with the FlexiMvvm.
     /// </summary>
     public partial class <#= viewGenerationOptions.ClassName #> : <#= viewGenerationOptions.BaseClassName #>, IIosView
     {
@@ -142,7 +142,7 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
     }
 
     /// <summary>
-    /// Represents the <see cref="<#= viewGenerationOptions.BaseClassName #>"/> that is adapted for use with the FlexiMvvm
+    /// Represents a/an <see cref="<#= viewGenerationOptions.BaseClassName #>"/> that is adapted for use with the FlexiMvvm
     /// and has its own lifecycle-aware view model.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
@@ -219,13 +219,11 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
             LifecycleDelegate.HandleResult(sender, args);
         }
 
-        /// <inheritdoc />
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        /// <inheritdoc />
         async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync(bool recreated)
         {
             await ViewModel.InitializeAsync(recreated);
@@ -233,7 +231,7 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
     }
 
     /// <summary>
-    /// Represents the <see cref="<#= viewGenerationOptions.BaseClassName #>"/> that is adapted for use with the FlexiMvvm,
+    /// Represents a/an <see cref="<#= viewGenerationOptions.BaseClassName #>"/> that is adapted for use with the FlexiMvvm,
     /// has its own lifecycle-aware view model and takes lifecycle-aware view model parameters.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
@@ -320,13 +318,11 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
             LifecycleDelegate.HandleResult(sender, args);
         }
 
-        /// <inheritdoc />
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
         }
 
-        /// <inheritdoc />
         async Task ILifecycleViewModelOwner<TViewModel>.InitializeViewModelAsync(bool recreated)
         {
             await ViewModel.InitializeAsync(_parameters, recreated);

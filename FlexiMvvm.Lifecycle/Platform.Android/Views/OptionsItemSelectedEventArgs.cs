@@ -28,7 +28,7 @@ namespace FlexiMvvm.Views
         /// Initializes a new instance of the <see cref="OptionsItemSelectedEventArgs"/> class.
         /// </summary>
         /// <param name="item">The selected menu item.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="item"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="item"/> is <see langword="null"/>.</exception>
         public OptionsItemSelectedEventArgs(IMenuItem item)
         {
             Item = item ?? throw new ArgumentNullException(nameof(item));
@@ -41,8 +41,8 @@ namespace FlexiMvvm.Views
 
         /// <summary>
         /// Gets or sets a value indicating whether the menu item selection is handled successfully or allow normal menu processing to proceed.
-        /// <para>The default value is <c>false</c>.</para>
+        /// <para>The default value is <see langword="false"/>.</para>
         /// </summary>
-        public bool IsHandled { get; set; }
+        public bool Handled { get; set; }
     }
 }

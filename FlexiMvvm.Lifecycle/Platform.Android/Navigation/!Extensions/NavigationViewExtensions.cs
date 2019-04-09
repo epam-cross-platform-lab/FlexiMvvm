@@ -32,8 +32,8 @@ namespace FlexiMvvm.Navigation
         /// <see cref="Fragment.Activity"/> property value if <paramref name="view"/> is <see cref="Fragment"/>.
         /// </summary>
         /// <param name="view">The navigation view.</param>
-        /// <returns>The activity instance. Can be <c>null</c>.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="view"/> is <c>null</c>.</exception>
+        /// <returns>The activity instance. Can be <see langword="null"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="view"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException">
         /// The <paramref name="view" /> is derived from a class other than the <see cref="FragmentActivity"/> or <see cref="Fragment"/>.
         /// </exception>

@@ -21,17 +21,17 @@ namespace FlexiMvvm.Views
 {
     /// <summary>
     /// Defines the contract for a result mapper that knows how to create a lifecycle-aware view model result instance
-    /// based on a set of key/value pairs stored in the <see cref="Intent"/> data.
+    /// based on a set of key/value pairs stored in the passed <see cref="Intent"/> data.
     /// </summary>
     /// <typeparam name="TResult">The type of the view model result to create.</typeparam>
     public interface IResultMapper<out TResult>
         where TResult : Result
     {
         /// <summary>
-        /// Creates a lifecycle-aware view model result instance based on a set of key/value pairs stored in the <paramref name="data"/>.
+        /// Creates a new <typeparamref name="TResult"/> instance based on a set of key/value pairs stored in the <paramref name="data"/>.
         /// </summary>
-        /// <param name="data">Contains a set of key/value pairs that is used as source data for the view model result. Can be <c>null</c>.</param>
-        /// <returns>The view model result instance if the <paramref name="data"/> is not <c>null</c>; otherwise, <c>null</c>.</returns>
+        /// <param name="data">Contains a set of key/value pairs that is used as source data for the view model result. Can be <see langword="null"/>.</param>
+        /// <returns>The view model result instance if the <paramref name="data"/> is not <see langword="null"/>; otherwise, <see langword="null"/>.</returns>
         TResult? Map(Intent? data);
     }
 }

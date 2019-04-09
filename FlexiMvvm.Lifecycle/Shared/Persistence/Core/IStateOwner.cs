@@ -16,10 +16,22 @@
 
 namespace FlexiMvvm.Persistence.Core
 {
+    /// <summary>
+    /// Defines the contract for an object whose state needs to be persisted in view's persistent storage.
+    /// <para>This interface is intended for internal use by the FlexiMvvm.</para>
+    /// </summary>
     public interface IStateOwner
     {
+        /// <summary>
+        /// Imports the <paramref name="state"/> of the object from view's persistent storage.
+        /// </summary>
+        /// <param name="state">The state bundle. Can be <see langword="null"/>.</param>
         void ImportState(IBundle? state);
 
+        /// <summary>
+        /// Exports the state of the object to view's persistent storage.
+        /// </summary>
+        /// <returns>The state bundle instance if the object has a state; otherwise, <see langword="null"/>.</returns>
         IBundle? ExportState();
     }
 }

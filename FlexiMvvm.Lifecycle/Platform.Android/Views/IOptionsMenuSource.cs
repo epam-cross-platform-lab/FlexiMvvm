@@ -24,7 +24,7 @@ namespace FlexiMvvm.Views
     public interface IOptionsMenuSource
     {
         /// <summary>
-        /// Occurs when an item in the options menu is selected.
+        /// Occurs when an item in the options menu was selected.
         /// </summary>
         event EventHandler<OptionsItemSelectedEventArgs> OnOptionsItemSelectedCalled;
     }
