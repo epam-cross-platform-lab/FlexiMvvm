@@ -32,7 +32,7 @@ namespace FlexiMvvm.Views
         /// <param name="view">The view that is represented by a navigation or view controller.</param>
         /// <param name="navigationControllerHandler">The handler to execute if <paramref name="view"/> is <see cref="UINavigationController"/>.</param>
         /// <param name="viewControllerHandler">The handler to execute if <paramref name="view"/> is <see cref="UIViewController"/>.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="view" /> or <paramref name="navigationControllerHandler" /> or <paramref name="viewControllerHandler" /> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="view" /> or <paramref name="navigationControllerHandler" /> or <paramref name="viewControllerHandler" /> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException">
         /// The <paramref name="view" /> is derived from a class other than the <see cref="UINavigationController"/> or <see cref="UIViewController"/>.
         /// </exception>
@@ -72,7 +72,7 @@ namespace FlexiMvvm.Views
         /// <param name="navigationControllerHandler">The handler to execute if <paramref name="view"/> is <see cref="UINavigationController"/>.</param>
         /// <param name="viewControllerHandler">The handler to execute if <paramref name="view"/> is <see cref="UIViewController"/>.</param>
         /// <returns>A result returned by appropriate handler.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="view" /> or <paramref name="navigationControllerHandler" /> or <paramref name="viewControllerHandler" /> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="view" /> or <paramref name="navigationControllerHandler" /> or <paramref name="viewControllerHandler" /> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException">
         /// The <paramref name="view" /> is derived from a class other than the <see cref="UINavigationController"/> or <see cref="UIViewController"/>.
         /// </exception>

@@ -53,7 +53,7 @@ namespace FlexiMvvm.Views
         bool IsBeingDismissed { get; }
 
         /// <summary>
-        /// Gets the view that is presenting this view. Can be <c>null</c>.
+        /// Gets the view that is presenting this view. Can be <see langword="null"/>.
         /// </summary>
         UIViewController? PresentingViewController { get; }
 
@@ -62,37 +62,37 @@ namespace FlexiMvvm.Views
         /// </summary>
         /// <param name="viewControllerToPresent">The view that displays over the current view content.</param>
         /// <param name="animated">Boolean indicating whether to animate presentation or not.</param>
-        /// <param name="completionHandler">Completion action to execute after the presentation finishes. Can be <c>null</c>.</param>
+        /// <param name="completionHandler">Completion action to execute after the presentation finishes. Can be <see langword="null"/>.</param>
         void PresentViewController(UIViewController viewControllerToPresent, bool animated, Action? completionHandler);
 
         /// <summary>
         /// Dismisses the presented view.
         /// </summary>
         /// <param name="animated">Boolean that determines if the transition is to be animated.</param>
-        /// <param name="completionHandler">Completion action to execute when the animation completes. Can be <c>null</c>.</param>
+        /// <param name="completionHandler">Completion action to execute when the animation completes. Can be <see langword="null"/>.</param>
         void DismissViewController(bool animated, Action? completionHandler);
 
         /// <summary>
         /// Sets the lifecycle-aware view model result to be returned to the calling view's model.
         /// </summary>
         /// <param name="resultCode">Determines whether the result should be set as successful or not due to cancellation by the user.</param>
-        /// <param name="result">The view model result. Can be <c>null</c>.</param>
+        /// <param name="result">The view model result. Can be <see langword="null"/>.</param>
         void SetResult(ResultCode resultCode, Result? result);
 
         /// <summary>
         /// Raises the <see cref="ResultSet"/> event with <paramref name="resultCode"/> and <paramref name="result"/> arguments.
         /// </summary>
         /// <param name="resultCode">Determines whether the result should be set as successful or not due to cancellation by the user.</param>
-        /// <param name="result">The view model result. Can be <c>null</c>.</param>
+        /// <param name="result">The view model result. Can be <see langword="null"/>.</param>
         void RaiseResultSet(ResultCode resultCode, Result? result);
 
         /// <summary>
         /// The event handler which forwards the lifecycle-aware view model result processing to the lifecycle-aware view model
-        /// if it implements the <see cref="ILifecycleViewModelWithResultHandler"/> interface.
+        /// if it implements the <see cref="ILifecycleViewModelWithResultHandler"/>.
         /// </summary>
         /// <param name="sender">The event sender.</param>
         /// <param name="args">The event arguments containing the view model result.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="sender"/> or <paramref name="args"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="sender"/> or <paramref name="args"/> is <see langword="null"/>.</exception>
         void HandleResult(object sender, ResultSetEventArgs args);
     }
 
@@ -108,7 +108,7 @@ namespace FlexiMvvm.Views
         /// <summary>
         /// Sets the lifecycle-aware view model parameters to pass to the initialization method of the lifecycle-aware view model.
         /// </summary>
-        /// <param name="parameters">The view model parameters. Can be <c>null</c>.</param>
+        /// <param name="parameters">The view model parameters. Can be <see langword="null"/>.</param>
         void SetParameters(TParameters? parameters);
     }
 }

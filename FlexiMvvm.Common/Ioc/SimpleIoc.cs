@@ -39,22 +39,27 @@ namespace FlexiMvvm.Ioc
 
         public T Get<T>()
         {
-            if (_itemsProviders != null && _itemsProviders.TryGetValue(typeof(T), out var itemProvider))
+            return (T)GetService(typeof(T));
+        }
+
+        public object GetService(Type serviceType)
+        {
+            if (_itemsProviders != null && _itemsProviders.TryGetValue(serviceType, out var itemProvider))
             {
-                var instance = (T)itemProvider.Get();
+                var instance = itemProvider.Get();
 
                 if (instance == null)
                 {
                     throw new InvalidOperationException(
                         $"\"{TypeFormatter.FormatName<IDependencyProvider>()}.{nameof(IDependencyProvider.Get)}\" " +
-                        $"returned \"null\" for the \"{TypeFormatter.FormatName<T>()}>\" type instance.");
+                        $"returned \"null\" for the \"{TypeFormatter.FormatName(serviceType)}>\" type instance.");
                 }
 
                 return instance;
             }
 
             throw new InvalidOperationException(
-                $"Instance factory is not registered for the \"{TypeFormatter.FormatName<T>()}\" type. " +
+                $"Instance factory is not registered for the \"{TypeFormatter.FormatName(serviceType)}\" type. " +
                 $"Use \"{TypeFormatter.FormatName<ISimpleIoc>()}.{nameof(ISimpleIoc.Register)}\" method for the factory registration.");
         }
     }

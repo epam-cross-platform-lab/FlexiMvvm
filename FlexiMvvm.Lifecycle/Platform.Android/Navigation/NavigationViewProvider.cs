@@ -26,13 +26,13 @@ namespace FlexiMvvm.Navigation
     public static partial class NavigationViewProvider
     {
         /// <summary>
-        /// Returns the navigation view derived from the <see cref="FragmentActivity"/> for the provided lifecycle-aware <paramref name="viewModel"/>.
+        /// Returns an existing navigation <typeparamref name="TView"/> derived from the <see cref="FragmentActivity"/> by <paramref name="viewModel"/>.
         /// </summary>
         /// <typeparam name="TView">The type of the view.</typeparam>
         /// <typeparam name="TViewModel">The type of the view model.</typeparam>
         /// <param name="viewModel">The view model that is used to get its view.</param>
         /// <returns>The navigation view instance.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> is <see langword="null"/>.</exception>
         /// <exception cref="InvalidOperationException">The view instance is missing for the provided <paramref name="viewModel"/>.</exception>
         public static TView GetActivity<TView, TViewModel>(TViewModel viewModel)
             where TView : FragmentActivity, INavigationView<TViewModel>
@@ -45,13 +45,13 @@ namespace FlexiMvvm.Navigation
         }
 
         /// <summary>
-        /// Returns the navigation view derived from the <see cref="Fragment"/> for the provided lifecycle-aware <paramref name="viewModel"/>.
+        /// Returns an existing navigation <typeparamref name="TView"/> derived from the <see cref="Fragment"/> by <paramref name="viewModel"/>.
         /// </summary>
         /// <typeparam name="TView">The type of the view.</typeparam>
         /// <typeparam name="TViewModel">The type of the view model.</typeparam>
         /// <param name="viewModel">The view model that is used to get its view.</param>
         /// <returns>The navigation view instance.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> is <see langword="null"/>.</exception>
         /// <exception cref="InvalidOperationException">The view instance is missing for the provided <paramref name="viewModel"/>.</exception>
         public static TView GetFragment<TView, TViewModel>(TViewModel viewModel)
             where TView : Fragment, INavigationView<TViewModel>

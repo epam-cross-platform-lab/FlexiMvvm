@@ -28,7 +28,7 @@ namespace FlexiMvvm.Views
         /// Initializes a new instance of the <see cref="ResultSetEventArgs"/> class.
         /// </summary>
         /// <param name="resultCode">Determines whether the result should be set as successful or not due to cancellation by the user.</param>
-        /// <param name="result">The view model result. Can be <c>null</c>.</param>
+        /// <param name="result">The view model result. Can be <see langword="null"/>.</param>
         public ResultSetEventArgs(ResultCode resultCode, Result? result)
         {
             ResultCode = resultCode;
@@ -41,7 +41,7 @@ namespace FlexiMvvm.Views
         public ResultCode ResultCode { get; }
 
         /// <summary>
-        /// Gets the lifecycle-aware view model result. Can be <c>null</c>.
+        /// Gets the lifecycle-aware view model result. Can be <see langword="null"/>.
         /// </summary>
         public Result? Result { get; }
     }

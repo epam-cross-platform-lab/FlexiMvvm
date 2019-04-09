@@ -26,7 +26,7 @@ namespace FlexiMvvm.ViewModels
     }
 
     /// <summary>
-    /// Defines the contract for a lifecycle-aware view model without parameters.
+    /// Defines the contract for a lifecycle-aware view model that takes no parameters.
     /// </summary>
     public interface ILifecycleViewModelWithoutParameters : ILifecycleViewModel
     {
@@ -38,14 +38,14 @@ namespace FlexiMvvm.ViewModels
         Task InitializeAsync(bool recreated);
 
         /// <summary>
-        /// A lifecycle method for the lifecycle-aware view model initialization.
+        /// A synchronous lifecycle method for the lifecycle-aware view model initialization.
         /// </summary>
         /// <param name="recreated">Determines whether the view model has been destroyed to recover memory and recreated with a restored state if it was persisted.</param>
         void Initialize(bool recreated);
     }
 
     /// <summary>
-    /// Defines the contract for a lifecycle-aware view model with parameters.
+    /// Defines the contract for a lifecycle-aware view model that takes parameters.
     /// </summary>
     /// <typeparam name="TParameters">The type of the view model parameters.</typeparam>
     public interface ILifecycleViewModelWithParameters<TParameters> : ILifecycleViewModel
@@ -54,21 +54,21 @@ namespace FlexiMvvm.ViewModels
         /// <summary>
         /// An asynchronous lifecycle method for the lifecycle-aware view model initialization with <paramref name="parameters"/>.
         /// </summary>
-        /// <param name="parameters">The view model parameters. Can be <c>null</c>.</param>
+        /// <param name="parameters">The view model parameters. Can be <see langword="null"/>.</param>
         /// <param name="recreated">Determines whether the view model has been destroyed to recover memory and recreated with a restored state if it was persisted.</param>
         /// <returns>A task that represents the asynchronous initialization operation.</returns>
         Task InitializeAsync(TParameters? parameters, bool recreated);
 
         /// <summary>
-        /// A lifecycle method for the lifecycle-aware view model initialization with <paramref name="parameters"/>.
+        /// A synchronous lifecycle method for the lifecycle-aware view model initialization with <paramref name="parameters"/>.
         /// </summary>
-        /// <param name="parameters">The view model parameters. Can be <c>null</c>.</param>
+        /// <param name="parameters">The view model parameters. Can be <see langword="null"/>.</param>
         /// <param name="recreated">Determines whether the view model has been destroyed to recover memory and recreated with a restored state if it was persisted.</param>
         void Initialize(TParameters? parameters, bool recreated);
     }
 
     /// <summary>
-    /// Defines the contract for a lifecycle-aware view model with a result.
+    /// Defines the contract for a lifecycle-aware view model that returns a result.
     /// </summary>
     /// <typeparam name="TResult">The type of the view model result.</typeparam>
     public interface ILifecycleViewModelWithResult<in TResult> : ILifecycleViewModel
@@ -78,7 +78,7 @@ namespace FlexiMvvm.ViewModels
         /// Sets the lifecycle-aware view model result.
         /// </summary>
         /// <param name="resultCode">Determines whether the result should be set as successful or not due to cancellation by the user.</param>
-        /// <param name="result">The view model result. Can be <c>null</c>.</param>
+        /// <param name="result">The view model result. Can be <see langword="null"/>.</param>
         void SetResult(ResultCode resultCode, TResult? result);
     }
 
@@ -91,7 +91,7 @@ namespace FlexiMvvm.ViewModels
         /// Handles the lifecycle-aware view model result.
         /// </summary>
         /// <param name="resultCode">Determines whether the view model result is set successfully or not due to cancellation by the user.</param>
-        /// <param name="result">The view model result to handle. Can be <c>null</c>.</param>
+        /// <param name="result">The view model result to handle. Can be <see langword="null"/>.</param>
         void HandleResult(ResultCode resultCode, Result? result);
     }
 }

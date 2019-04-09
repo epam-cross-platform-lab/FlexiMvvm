@@ -19,12 +19,12 @@ using FlexiMvvm.ViewModels.Core;
 namespace FlexiMvvm.ViewModels
 {
     /// <summary>
-    /// Represents a lifecycle-aware view model store factory.
+    /// Represents a factory that creates a new lifecycle-aware view model store instance.
     /// </summary>
     public static class LifecycleViewModelStoreFactory
     {
         /// <summary>
-        /// Creates a new instance of the lifecycle-aware view model store.
+        /// Creates a new <see cref="ILifecycleViewModelStore"/> instance.
         /// </summary>
         /// <returns>The view model store instance.</returns>
         public static ILifecycleViewModelStore Create()

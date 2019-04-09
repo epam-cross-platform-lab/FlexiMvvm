@@ -17,16 +17,16 @@
 namespace FlexiMvvm.ViewModels
 {
     /// <summary>
-    /// Defines the contract for a lifecycle-aware view model factory.
+    /// Defines the contract for a factory that creates a new lifecycle-aware view model instance.
     /// </summary>
     public interface ILifecycleViewModelFactory
     {
         /// <summary>
-        /// Creates a new instance of the lifecycle-aware view model.
+        /// Creates a new lifecycle-aware <typeparamref name="TViewModel"/> instance.
         /// </summary>
         /// <typeparam name="TViewModel">The type of the view model to create.</typeparam>
         /// <returns>The view model instance.</returns>
-         TViewModel Create<TViewModel>()
+        TViewModel Create<TViewModel>()
             where TViewModel : class, ILifecycleViewModel;
     }
 }

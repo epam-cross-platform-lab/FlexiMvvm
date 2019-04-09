@@ -19,36 +19,36 @@ using System;
 namespace FlexiMvvm.ViewModels
 {
     /// <summary>
-    /// Defines the contract for a lifecycle-aware view model store.
+    /// Defines the contract for a store that keeps lifecycle-aware view models.
     /// </summary>
     public interface ILifecycleViewModelStore
     {
         /// <summary>
-        /// Returns an existing lifecycle-aware view model from the store.
+        /// Returns an existing lifecycle-aware <typeparamref name="TViewModel"/> instance from the store.
         /// </summary>
         /// <typeparam name="TViewModel">The type of the view model to get.</typeparam>
         /// <param name="key">The view model unique key.</param>
-        /// <returns>The view model instance if it exists; otherwise, <c>null</c>.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="key"/> is <c>null</c>.</exception>
+        /// <returns>The view model instance if it exists; otherwise, <see langword="null"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="key"/> is <see langword="null"/>.</exception>
         TViewModel? Get<TViewModel>(string key)
             where TViewModel : class, ILifecycleViewModel;
 
         /// <summary>
-        /// Adds a lifecycle-aware view model to the store by <paramref name="key"/>.
+        /// Adds a lifecycle-aware <typeparamref name="TViewModel"/> instance to the store by <paramref name="key"/>.
         /// </summary>
         /// <typeparam name="TViewModel">The type of the view model to add.</typeparam>
         /// <param name="key">The view model unique key.</param>
         /// <param name="viewModel">The view model to add.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="key"/> or <paramref name="viewModel"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="key"/> or <paramref name="viewModel"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException">The store already has a view model with the specified <paramref name="key"/>.</exception>
         void Add<TViewModel>(string key, TViewModel viewModel)
             where TViewModel : class, ILifecycleViewModel;
 
         /// <summary>
-        /// Removes a lifecycle-aware view model from the store by <paramref name="key"/>.
+        /// Removes an existing lifecycle-aware view model instance from the store by <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The view model unique key.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="key"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="key"/> is <see langword="null"/>.</exception>
         void Remove(string key);
     }
 }
