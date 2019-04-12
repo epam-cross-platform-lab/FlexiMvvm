@@ -81,14 +81,14 @@ namespace FlexiMvvm.Bindings.Custom.Core.Source
             return _itemValueAccessor.TryGetValue(item, out command);
         }
 
-        protected virtual void OnCanExecuteCommandChanged()
+        internal void RaiseCanExecuteChanged()
         {
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void Command_CanExecuteChanged(object sender, EventArgs e)
         {
-            OnCanExecuteCommandChanged();
+            RaiseCanExecuteChanged();
         }
     }
 }
