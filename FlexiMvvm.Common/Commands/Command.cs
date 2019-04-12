@@ -35,13 +35,6 @@ namespace FlexiMvvm.Commands
 
         bool ICommand.CanExecute(object parameter)
         {
-            if (parameter != null)
-            {
-                throw new ArgumentException(
-                    $"\"{_name.SelfOrDefaultIfNullOrWhiteSpace(TypeFormatter.FormatName(GetType()))}\" command expects \"null\" value.",
-                    nameof(parameter));
-            }
-
             return CanExecute();
         }
 
@@ -49,13 +42,6 @@ namespace FlexiMvvm.Commands
 
         void ICommand.Execute(object parameter)
         {
-            if (parameter != null)
-            {
-                throw new ArgumentException(
-                    $"\"{_name.SelfOrDefaultIfNullOrWhiteSpace(TypeFormatter.FormatName(GetType()))}\" command expects \"null\" value.",
-                    nameof(parameter));
-            }
-
             Execute();
         }
 
