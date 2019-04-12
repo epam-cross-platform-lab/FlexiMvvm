@@ -40,10 +40,6 @@ namespace FlexiMvvm.Bindings.Custom.Core.Composite
         internal new SourceItemCommandBinding<TSourceItem, TSourceItemValue> SourceItemBinding =>
             (SourceItemCommandBinding<TSourceItem, TSourceItemValue>)base.SourceItemBinding;
 
-        protected override void SetInitialValues(TTargetItem targetItem)
-        {
-        }
-
         protected override void SubscribeToSourceItemEvents()
         {
             if (SourceItemBinding.TryGetItem(out var sourceItem))
@@ -78,6 +74,11 @@ namespace FlexiMvvm.Bindings.Custom.Core.Composite
 
                 SourceItemBinding.CanExecuteChanged -= SourceItemCommandBinding_CanExecuteChanged;
             }
+        }
+
+        protected override void SetInitialValues(TTargetItem targetItem)
+        {
+            SourceItemBinding.RaiseCanExecuteChanged();
         }
 
         private void SourceItemCommandBinding_CanExecuteChanged([NotNull] object sender, [NotNull] EventArgs e)
