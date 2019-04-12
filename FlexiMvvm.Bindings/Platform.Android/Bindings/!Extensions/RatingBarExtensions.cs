@@ -31,7 +31,7 @@ namespace FlexiMvvm.Bindings
         /// </summary>
         /// <param name="ratingBarReference">The rating bar reference.</param>
         /// <returns>The binding instance.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name=ratingBarReference"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="ratingBarReference"/> is <c>null</c>.</exception>
         public static TargetItemBinding<RatingBar, bool> IsIndicatorBinding(
             this IItemReference<RatingBar> ratingBarReference)
         {
@@ -49,7 +49,7 @@ namespace FlexiMvvm.Bindings
         /// </summary>
         /// <param name="ratingBarReference">The rating bar reference.</param>
         /// <returns>The binding instance.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name=ratingBarReference"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="ratingBarReference"/> is <c>null</c>.</exception>
         public static TargetItemBinding<RatingBar, int> NumStarsBinding(
             this IItemReference<RatingBar> ratingBarReference)
         {
@@ -68,7 +68,7 @@ namespace FlexiMvvm.Bindings
         /// <param name="ratingBarReference">The rating bar reference.</param>
         /// <param name="trackCanExecuteCommandChanged">If set to <c>true</c> then <see cref="RatingBar.Enabled"/> value will be updated based on <see cref="ICommand.CanExecute(object)"/> result.</param>
         /// <returns>The binding instance.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name=ratingBarReference"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="ratingBarReference"/> is <c>null</c>.</exception>
         public static TargetItemBinding<RatingBar, float> RatingAndRatingBarChangeBinding(
             this IItemReference<RatingBar> ratingBarReference,
             bool trackCanExecuteCommandChanged = false)
@@ -98,7 +98,7 @@ namespace FlexiMvvm.Bindings
         /// <param name="ratingBarReference">The rating bar reference.</param>
         /// <param name="trackCanExecuteCommandChanged">If set to <c>true</c> then <see cref="RatingBar.Enabled"/> value will be updated based on <see cref="ICommand.CanExecute(object)"/> result.</param>
         /// <returns>The binding instance.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name=ratingBarReference"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="ratingBarReference"/> is <c>null</c>.</exception>
         public static TargetItemBinding<RatingBar, float> RatingBarChangeBinding(
             this IItemReference<RatingBar> ratingBarReference,
             bool trackCanExecuteCommandChanged = false)
@@ -126,14 +126,14 @@ namespace FlexiMvvm.Bindings
         /// </summary>
         /// <param name="ratingBarReference">The rating bar reference.</param>
         /// <returns>The binding instance.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name=ratingBarReference"/> is <c>null</c>.</exception>
-        public static TargetItemBinding<RatingBar, int> RatingBinding(
+        /// <exception cref="ArgumentNullException"><paramref name="ratingBarReference"/> is <c>null</c>.</exception>
+        public static TargetItemBinding<RatingBar, float> RatingBinding(
             this IItemReference<RatingBar> ratingBarReference)
         {
             if (ratingBarReference == null)
                 throw new ArgumentNullException(nameof(ratingBarReference));
 
-            return new TargetItemOneWayCustomBinding<RatingBar, int>(
+            return new TargetItemOneWayCustomBinding<RatingBar, float>(
                 ratingBarReference,
                 (ratingBar, rating) => ratingBar.Rating = rating,
                 () => $"{nameof(RatingBar.Rating)}");
@@ -144,7 +144,7 @@ namespace FlexiMvvm.Bindings
         /// </summary>
         /// <param name="ratingBarReference">The rating bar reference.</param>
         /// <returns>The binding instance.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name=ratingBarReference"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="ratingBarReference"/> is <c>null</c>.</exception>
         public static TargetItemBinding<RatingBar, float> StepSizeBinding(
             this IItemReference<RatingBar> ratingBarReference)
         {
