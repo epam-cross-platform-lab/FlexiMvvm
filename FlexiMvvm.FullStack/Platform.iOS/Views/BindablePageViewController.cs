@@ -15,7 +15,6 @@
 // =========================================================================
 
 using System.Diagnostics.CodeAnalysis;
-using FlexiMvvm.Views.Core;
 using Foundation;
 using UIKit;
 
@@ -33,7 +32,6 @@ namespace FlexiMvvm.Views
             UIPageViewControllerNavigationOrientation navigationOrientation)
             : base(style, navigationOrientation)
         {
-            LifecycleDelegate = new BindableViewLifecycleDelegate<BindablePageViewController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
@@ -43,7 +41,6 @@ namespace FlexiMvvm.Views
             UIPageViewControllerSpineLocation spineLocation)
             : base(style, navigationOrientation, spineLocation)
         {
-            LifecycleDelegate = new BindableViewLifecycleDelegate<BindablePageViewController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
@@ -53,7 +50,6 @@ namespace FlexiMvvm.Views
             NSDictionary options)
             : base(style, navigationOrientation, options)
         {
-            LifecycleDelegate = new BindableViewLifecycleDelegate<BindablePageViewController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
@@ -64,7 +60,6 @@ namespace FlexiMvvm.Views
             float interPageSpacing)
             : base(style, navigationOrientation, spineLocation, interPageSpacing)
         {
-            LifecycleDelegate = new BindableViewLifecycleDelegate<BindablePageViewController<TViewModel>, TViewModel>(this);
         }
     }
 
@@ -80,7 +75,6 @@ namespace FlexiMvvm.Views
             UIPageViewControllerNavigationOrientation navigationOrientation)
             : base(style, navigationOrientation)
         {
-            LifecycleDelegate = new BindableViewLifecycleDelegate<BindablePageViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
@@ -90,7 +84,6 @@ namespace FlexiMvvm.Views
             UIPageViewControllerSpineLocation spineLocation)
             : base(style, navigationOrientation, spineLocation)
         {
-            LifecycleDelegate = new BindableViewLifecycleDelegate<BindablePageViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
@@ -100,7 +93,6 @@ namespace FlexiMvvm.Views
             NSDictionary options)
             : base(style, navigationOrientation, options)
         {
-            LifecycleDelegate = new BindableViewLifecycleDelegate<BindablePageViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
@@ -111,7 +103,6 @@ namespace FlexiMvvm.Views
             float interPageSpacing)
             : base(style, navigationOrientation, spineLocation, interPageSpacing)
         {
-            LifecycleDelegate = new BindableViewLifecycleDelegate<BindablePageViewController<TViewModel, TParameters>, TViewModel>(this);
         }
     }
 }

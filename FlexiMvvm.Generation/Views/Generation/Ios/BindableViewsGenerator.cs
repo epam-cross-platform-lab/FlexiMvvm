@@ -85,85 +85,56 @@ namespace FlexiMvvm.Views.Generation.Ios
             
             #line default
             #line hidden
-            this.Write("()\r\n        {\r\n            LifecycleDelegate = new BindableViewLifecycleDelegate<" +
-                    "");
+            this.Write("()\r\n        {\r\n        }\r\n\r\n        /// <inheritdoc />\r\n        public ");
             
-            #line 34 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
+            #line 37 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
-            this.Write("<TViewModel>, TViewModel>(this);\r\n        }\r\n\r\n        /// <inheritdoc />\r\n      " +
-                    "  public ");
+            this.Write("(NSCoder coder)\r\n            : base(coder)\r\n        {\r\n        }\r\n\r\n        /// <" +
+                    "inheritdoc />\r\n        public ");
             
-            #line 38 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
-            
-            #line default
-            #line hidden
-            this.Write("(NSCoder coder)\r\n            : base(coder)\r\n        {\r\n            LifecycleDeleg" +
-                    "ate = new BindableViewLifecycleDelegate<");
-            
-            #line 41 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
-            
-            #line default
-            #line hidden
-            this.Write("<TViewModel>, TViewModel>(this);\r\n        }\r\n\r\n        /// <inheritdoc />\r\n      " +
-                    "  public ");
-            
-            #line 45 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
+            #line 43 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
             this.Write("(string nibName, NSBundle bundle)\r\n            : base(nibName, bundle)\r\n        {" +
-                    "\r\n            LifecycleDelegate = new BindableViewLifecycleDelegate<");
+                    "\r\n        }\r\n\r\n        /// <inheritdoc />\r\n        protected ");
             
-            #line 48 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
+            #line 49 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
-            this.Write("<TViewModel>, TViewModel>(this);\r\n        }\r\n\r\n        /// <inheritdoc />\r\n      " +
-                    "  protected ");
-            
-            #line 52 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
-            
-            #line default
-            #line hidden
-            this.Write("(NSObjectFlag t)\r\n            : base(t)\r\n        {\r\n            LifecycleDelegate" +
-                    " = new BindableViewLifecycleDelegate<");
+            this.Write("(NSObjectFlag t)\r\n            : base(t)\r\n        {\r\n        }\r\n\r\n        /// <inh" +
+                    "eritdoc />\r\n        protected internal ");
             
             #line 55 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
-            this.Write("<TViewModel>, TViewModel>(this);\r\n        }\r\n\r\n        /// <inheritdoc />\r\n      " +
-                    "  protected internal ");
+            this.Write(@"(IntPtr handle)
+            : base(handle)
+        {
+        }
+
+        public IDisposable BindingSet { get; private set; }
+
+        /// <inheritdoc />
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new BindableViewLifecycleDelegate<");
             
-            #line 59 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
-            
-            #line default
-            #line hidden
-            this.Write("(IntPtr handle)\r\n            : base(handle)\r\n        {\r\n            LifecycleDele" +
-                    "gate = new BindableViewLifecycleDelegate<");
-            
-            #line 62 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
+            #line 65 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
             this.Write(@"<TViewModel>, TViewModel>(this);
         }
-
-        /// <inheritdoc />
-        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
-
-        public IDisposable BindingSet { get; private set; }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
         {
@@ -177,14 +148,14 @@ namespace FlexiMvvm.Views.Generation.Ios
 
     public partial class ");
             
-            #line 80 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
+            #line 78 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
             this.Write("<TViewModel, TParameters> : ");
             
-            #line 80 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
+            #line 78 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.BaseClassName));
             
             #line default
@@ -194,90 +165,61 @@ namespace FlexiMvvm.Views.Generation.Ios
                     " where TParameters : Parameters\r\n    {\r\n        /// <inheritdoc />\r\n        publ" +
                     "ic ");
             
-            #line 85 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
+            #line 83 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
-            this.Write("()\r\n        {\r\n            LifecycleDelegate = new BindableViewLifecycleDelegate<" +
-                    "");
+            this.Write("()\r\n        {\r\n        }\r\n\r\n        /// <inheritdoc />\r\n        public ");
             
-            #line 87 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
+            #line 88 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
-            this.Write("<TViewModel, TParameters>, TViewModel>(this);\r\n        }\r\n\r\n        /// <inheritd" +
-                    "oc />\r\n        public ");
-            
-            #line 91 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
-            
-            #line default
-            #line hidden
-            this.Write("(NSCoder coder)\r\n            : base(coder)\r\n        {\r\n            LifecycleDeleg" +
-                    "ate = new BindableViewLifecycleDelegate<");
+            this.Write("(NSCoder coder)\r\n            : base(coder)\r\n        {\r\n        }\r\n\r\n        /// <" +
+                    "inheritdoc />\r\n        public ");
             
             #line 94 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
-            this.Write("<TViewModel, TParameters>, TViewModel>(this);\r\n        }\r\n\r\n        /// <inheritd" +
-                    "oc />\r\n        public ");
-            
-            #line 98 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
-            
-            #line default
-            #line hidden
             this.Write("(string nibName, NSBundle bundle)\r\n            : base(nibName, bundle)\r\n        {" +
-                    "\r\n            LifecycleDelegate = new BindableViewLifecycleDelegate<");
+                    "\r\n        }\r\n\r\n        /// <inheritdoc />\r\n        protected ");
             
-            #line 101 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
+            #line 100 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
-            this.Write("<TViewModel, TParameters>, TViewModel>(this);\r\n        }\r\n\r\n        /// <inheritd" +
-                    "oc />\r\n        protected ");
+            this.Write("(NSObjectFlag t)\r\n            : base(t)\r\n        {\r\n        }\r\n\r\n        /// <inh" +
+                    "eritdoc />\r\n        protected internal ");
             
-            #line 105 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
+            #line 106 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
-            this.Write("(NSObjectFlag t)\r\n            : base(t)\r\n        {\r\n            LifecycleDelegate" +
-                    " = new BindableViewLifecycleDelegate<");
+            this.Write(@"(IntPtr handle)
+            : base(handle)
+        {
+        }
+
+        public IDisposable BindingSet { get; private set; }
+
+        /// <inheritdoc />
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new BindableViewLifecycleDelegate<");
             
-            #line 108 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
-            
-            #line default
-            #line hidden
-            this.Write("<TViewModel, TParameters>, TViewModel>(this);\r\n        }\r\n\r\n        /// <inheritd" +
-                    "oc />\r\n        protected internal ");
-            
-            #line 112 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
-            
-            #line default
-            #line hidden
-            this.Write("(IntPtr handle)\r\n            : base(handle)\r\n        {\r\n            LifecycleDele" +
-                    "gate = new BindableViewLifecycleDelegate<");
-            
-            #line 115 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
+            #line 116 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
             this.Write(@"<TViewModel, TParameters>, TViewModel>(this);
         }
-
-        /// <inheritdoc />
-        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
-
-        public IDisposable BindingSet { get; private set; }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
         {
@@ -291,7 +233,7 @@ namespace FlexiMvvm.Views.Generation.Ios
 }
 ");
             
-            #line 133 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
+            #line 129 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Ios\BindableViewsGenerator.tt"
  } 
             
             #line default

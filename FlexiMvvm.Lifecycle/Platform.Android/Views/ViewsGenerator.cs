@@ -36,17 +36,17 @@ namespace FlexiMvvm.Views
     [Register("fleximvvm.views.AppCompatActivity")]
     public partial class AppCompatActivity : Android.Support.V7.App.AppCompatActivity, IAndroidView, IOptionsMenuSource
     {
+        private IViewLifecycleDelegate? _lifecycleDelegate;
+
         /// <inheritdoc />
         public AppCompatActivity()
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<AppCompatActivity>(this);
         }
 
         /// <inheritdoc />
         protected AppCompatActivity(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<AppCompatActivity>(this);
         }
 
         /// <inheritdoc />
@@ -55,7 +55,15 @@ namespace FlexiMvvm.Views
         /// <summary>
         /// Gets the view lifecycle delegate. Intended for internal use by the FlexiMvvm.
         /// </summary>
-        protected virtual IViewLifecycleDelegate LifecycleDelegate { get; }
+        protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ??= CreateLifecycleDelegate();
+
+        /// <summary>
+        /// Creates a new <see cref="IViewLifecycleDelegate"/> instance. Intended for internal use by the FlexiMvvm.
+        /// </summary>
+        protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<AppCompatActivity>(this);
+        }
 
         /// <inheritdoc />
         protected override void OnCreate(Bundle? savedInstanceState)
@@ -153,24 +161,25 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         public AppCompatActivity()
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<AppCompatActivity<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected AppCompatActivity(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<AppCompatActivity<TViewModel>, TViewModel>(this);
         }
-
-        /// <inheritdoc />
-        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
 
         /// <inheritdoc />
         public TViewModel ViewModel { get; private set; }
 
         /// <inheritdoc />
         public RequestCode RequestCode => _requestCode ??= new RequestCode();
+
+        /// <inheritdoc />
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<AppCompatActivity<TViewModel>, TViewModel>(this);
+        }
 
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
@@ -202,24 +211,25 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         public AppCompatActivity()
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<AppCompatActivity<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected AppCompatActivity(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<AppCompatActivity<TViewModel, TParameters>, TViewModel>(this);
         }
-
-        /// <inheritdoc />
-        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
 
         /// <inheritdoc />
         public TViewModel ViewModel { get; private set; }
 
         /// <inheritdoc />
         public RequestCode RequestCode => _requestCode ??= new RequestCode();
+
+        /// <inheritdoc />
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<AppCompatActivity<TViewModel, TParameters>, TViewModel>(this);
+        }
 
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
@@ -242,17 +252,17 @@ namespace FlexiMvvm.Views
     [Register("fleximvvm.views.DialogFragment")]
     public partial class DialogFragment : Android.Support.V4.App.DialogFragment, IAndroidView, IOptionsMenuSource
     {
+        private IViewLifecycleDelegate? _lifecycleDelegate;
+
         /// <inheritdoc />
         public DialogFragment()
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<DialogFragment>(this);
         }
 
         /// <inheritdoc />
         protected DialogFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<DialogFragment>(this);
         }
 
         /// <inheritdoc />
@@ -261,7 +271,15 @@ namespace FlexiMvvm.Views
         /// <summary>
         /// Gets the view lifecycle delegate. Intended for internal use by the FlexiMvvm.
         /// </summary>
-        protected virtual IViewLifecycleDelegate LifecycleDelegate { get; }
+        protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ??= CreateLifecycleDelegate();
+
+        /// <summary>
+        /// Creates a new <see cref="IViewLifecycleDelegate"/> instance. Intended for internal use by the FlexiMvvm.
+        /// </summary>
+        protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<DialogFragment>(this);
+        }
 
         /// <inheritdoc />
         public override void OnCreate(Bundle? savedInstanceState)
@@ -367,24 +385,25 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         public DialogFragment()
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<DialogFragment<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected DialogFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<DialogFragment<TViewModel>, TViewModel>(this);
         }
-
-        /// <inheritdoc />
-        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
 
         /// <inheritdoc />
         public TViewModel ViewModel { get; private set; }
 
         /// <inheritdoc />
         public RequestCode RequestCode => _requestCode ??= new RequestCode();
+
+        /// <inheritdoc />
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<DialogFragment<TViewModel>, TViewModel>(this);
+        }
 
         /// <inheritdoc />
         /// <exception cref="NotSupportedException">The fragment cannot set a result. Use the appropriate method of fragment's activity instead.</exception>
@@ -430,24 +449,25 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         public DialogFragment()
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<DialogFragment<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected DialogFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<DialogFragment<TViewModel, TParameters>, TViewModel>(this);
         }
-
-        /// <inheritdoc />
-        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
 
         /// <inheritdoc />
         public TViewModel ViewModel { get; private set; }
 
         /// <inheritdoc />
         public RequestCode RequestCode => _requestCode ??= new RequestCode();
+
+        /// <inheritdoc />
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<DialogFragment<TViewModel, TParameters>, TViewModel>(this);
+        }
 
         /// <inheritdoc />
         /// <exception cref="NotSupportedException">The fragment cannot set a result. Use the appropriate method of fragment's activity instead.</exception>
@@ -484,17 +504,17 @@ namespace FlexiMvvm.Views
     [Register("fleximvvm.views.Fragment")]
     public partial class Fragment : Android.Support.V4.App.Fragment, IAndroidView, IOptionsMenuSource
     {
+        private IViewLifecycleDelegate? _lifecycleDelegate;
+
         /// <inheritdoc />
         public Fragment()
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<Fragment>(this);
         }
 
         /// <inheritdoc />
         protected Fragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<Fragment>(this);
         }
 
         /// <inheritdoc />
@@ -503,7 +523,15 @@ namespace FlexiMvvm.Views
         /// <summary>
         /// Gets the view lifecycle delegate. Intended for internal use by the FlexiMvvm.
         /// </summary>
-        protected virtual IViewLifecycleDelegate LifecycleDelegate { get; }
+        protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ??= CreateLifecycleDelegate();
+
+        /// <summary>
+        /// Creates a new <see cref="IViewLifecycleDelegate"/> instance. Intended for internal use by the FlexiMvvm.
+        /// </summary>
+        protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<Fragment>(this);
+        }
 
         /// <inheritdoc />
         public override void OnCreate(Bundle? savedInstanceState)
@@ -609,24 +637,25 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         public Fragment()
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<Fragment<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected Fragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<Fragment<TViewModel>, TViewModel>(this);
         }
-
-        /// <inheritdoc />
-        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
 
         /// <inheritdoc />
         public TViewModel ViewModel { get; private set; }
 
         /// <inheritdoc />
         public RequestCode RequestCode => _requestCode ??= new RequestCode();
+
+        /// <inheritdoc />
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<Fragment<TViewModel>, TViewModel>(this);
+        }
 
         /// <inheritdoc />
         /// <exception cref="NotSupportedException">The fragment cannot set a result. Use the appropriate method of fragment's activity instead.</exception>
@@ -672,24 +701,25 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         public Fragment()
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<Fragment<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected Fragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<Fragment<TViewModel, TParameters>, TViewModel>(this);
         }
-
-        /// <inheritdoc />
-        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
 
         /// <inheritdoc />
         public TViewModel ViewModel { get; private set; }
 
         /// <inheritdoc />
         public RequestCode RequestCode => _requestCode ??= new RequestCode();
+
+        /// <inheritdoc />
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<Fragment<TViewModel, TParameters>, TViewModel>(this);
+        }
 
         /// <inheritdoc />
         /// <exception cref="NotSupportedException">The fragment cannot set a result. Use the appropriate method of fragment's activity instead.</exception>
