@@ -16,7 +16,6 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
-using FlexiMvvm.Views.Core;
 using UIKit;
 
 namespace FlexiMvvm.Views
@@ -31,14 +30,14 @@ namespace FlexiMvvm.Views
         public NavigationController(UIViewController rootViewController)
             : base(rootViewController)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<NavigationController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
         public NavigationController(Type navigationBarType, Type toolbarType)
             : base(navigationBarType, toolbarType)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<NavigationController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
     }
 
@@ -52,14 +51,12 @@ namespace FlexiMvvm.Views
         public NavigationController(UIViewController rootViewController)
             : base(rootViewController)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<NavigationController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public NavigationController(Type navigationBarType, Type toolbarType)
             : base(navigationBarType, toolbarType)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<NavigationController<TViewModel>, TViewModel>(this);
         }
     }
 
@@ -73,14 +70,12 @@ namespace FlexiMvvm.Views
         public NavigationController(UIViewController rootViewController)
             : base(rootViewController)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<NavigationController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public NavigationController(Type navigationBarType, Type toolbarType)
             : base(navigationBarType, toolbarType)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<NavigationController<TViewModel, TParameters>, TViewModel>(this);
         }
     }
 }

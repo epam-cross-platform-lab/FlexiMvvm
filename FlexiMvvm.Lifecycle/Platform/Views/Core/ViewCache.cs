@@ -33,16 +33,24 @@ namespace FlexiMvvm.Views.Core
         {
             TView? view = null;
 
-            if (_viewsWeakReferences != null)
+            for (var i = ViewsWeakReferences.Count - 1; i > -1;)
             {
-                foreach (var viewWeakReference in _viewsWeakReferences)
+                var viewWeakReference = ViewsWeakReferences[i];
+
+                if (viewWeakReference.TryGetTarget(out var cachedView))
                 {
-                    if (viewWeakReference.TryGetTarget(out var cachedView) && ReferenceEquals(cachedView.ViewModel, viewModel))
+                    if (ReferenceEquals(cachedView.ViewModel, viewModel))
                     {
                         view = (TView)cachedView;
 
                         break;
                     }
+
+                    i--;
+                }
+                else
+                {
+                    ViewsWeakReferences.Remove(viewWeakReference);
                 }
             }
 
@@ -62,8 +70,10 @@ namespace FlexiMvvm.Views.Core
 
         internal static void Remove(IView<ILifecycleViewModel> view)
         {
-            foreach (var viewWeakReference in ViewsWeakReferences)
+            for (var i = ViewsWeakReferences.Count - 1; i > -1; i--)
             {
+                var viewWeakReference = ViewsWeakReferences[i];
+
                 if (viewWeakReference.TryGetTarget(out var cachedView) && ReferenceEquals(cachedView, view))
                 {
                     ViewsWeakReferences.Remove(viewWeakReference);

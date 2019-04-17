@@ -133,17 +133,7 @@ namespace FlexiMvvm.Views.Core
             _isViewModelCreated = true;
 
             View.SetViewModel(viewModel);
-        }
-
-        /// <inheritdoc />
-        public override void WillMoveToParentViewController(UIViewController? parent)
-        {
-            base.WillMoveToParentViewController(parent);
-
-            if (parent != null)
-            {
-                ViewCache.Add(View);
-            }
+            ViewCache.Add(View);
         }
 
         /// <inheritdoc />
@@ -166,17 +156,6 @@ namespace FlexiMvvm.Views.Core
             if (View.IsMovingFromParentViewController || View.IsBeingDismissed)
             {
                 View.RaiseResultSet(_resultCode, _result);
-            }
-        }
-
-        /// <inheritdoc />
-        public override void DidMoveToParentViewController(UIViewController? parent)
-        {
-            base.DidMoveToParentViewController(parent);
-
-            if (parent == null)
-            {
-                ViewCache.Remove(View);
             }
         }
 

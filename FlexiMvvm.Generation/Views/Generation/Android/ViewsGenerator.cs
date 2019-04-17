@@ -111,38 +111,24 @@ using FlexiMvvm.Views.Core;
             
             #line default
             #line hidden
-            this.Write(", IAndroidView, IOptionsMenuSource\r\n    {\r\n        /// <inheritdoc />\r\n        pu" +
-                    "blic ");
-            
-            #line 46 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
-            
-            #line default
-            #line hidden
-            this.Write("()\r\n        {\r\n            LifecycleDelegate = new ViewLifecycleDelegate<");
+            this.Write(", IAndroidView, IOptionsMenuSource\r\n    {\r\n        private IViewLifecycleDelegate" +
+                    "? _lifecycleDelegate;\r\n\r\n        /// <inheritdoc />\r\n        public ");
             
             #line 48 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
-            this.Write(">(this);\r\n        }\r\n\r\n        /// <inheritdoc />\r\n        protected ");
+            this.Write("()\r\n        {\r\n        }\r\n\r\n        /// <inheritdoc />\r\n        protected ");
             
-            #line 52 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            #line 53 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
-            this.Write("(IntPtr javaReference, JniHandleOwnership transfer)\r\n            : base(javaRefer" +
-                    "ence, transfer)\r\n        {\r\n            LifecycleDelegate = new ViewLifecycleDel" +
-                    "egate<");
-            
-            #line 55 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
-            
-            #line default
-            #line hidden
-            this.Write(@">(this);
+            this.Write(@"(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
         }
 
         /// <inheritdoc />
@@ -151,12 +137,23 @@ using FlexiMvvm.Views.Core;
         /// <summary>
         /// Gets the view lifecycle delegate. Intended for internal use by the FlexiMvvm.
         /// </summary>
-        protected virtual IViewLifecycleDelegate LifecycleDelegate { get; }
+        protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ??= CreateLifecycleDelegate();
 
-        /// <inheritdoc />
-        ");
+        /// <summary>
+        /// Creates a new <see cref=""IViewLifecycleDelegate""/> instance. Intended for internal use by the FlexiMvvm.
+        /// </summary>
+        protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<");
             
-            #line 67 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            #line 71 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write(">(this);\r\n        }\r\n\r\n        /// <inheritdoc />\r\n        ");
+            
+            #line 75 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.LifecycleMethodAccessModifier));
             
             #line default
@@ -165,7 +162,7 @@ using FlexiMvvm.Views.Core;
                     "OnCreate(savedInstanceState);\r\n\r\n            LifecycleDelegate.OnCreate(savedIns" +
                     "tanceState);\r\n        }\r\n\r\n        /// <inheritdoc />\r\n        ");
             
-            #line 75 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            #line 83 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.LifecycleMethodAccessModifier));
             
             #line default
@@ -173,7 +170,7 @@ using FlexiMvvm.Views.Core;
             this.Write(" override void OnStart()\r\n        {\r\n            base.OnStart();\r\n\r\n            L" +
                     "ifecycleDelegate.OnStart();\r\n        }\r\n\r\n        /// <inheritdoc />\r\n        ");
             
-            #line 83 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            #line 91 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.LifecycleMethodAccessModifier));
             
             #line default
@@ -182,7 +179,7 @@ using FlexiMvvm.Views.Core;
                     " LifecycleDelegate.OnResume();\r\n        }\r\n\r\n        /// <inheritdoc />\r\n       " +
                     " ");
             
-            #line 91 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            #line 99 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.LifecycleMethodAccessModifier));
             
             #line default
@@ -190,7 +187,7 @@ using FlexiMvvm.Views.Core;
             this.Write(" override void OnPause()\r\n        {\r\n            base.OnPause();\r\n\r\n            L" +
                     "ifecycleDelegate.OnPause();\r\n        }\r\n\r\n        /// <inheritdoc />\r\n        ");
             
-            #line 99 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            #line 107 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.LifecycleMethodAccessModifier));
             
             #line default
@@ -219,14 +216,14 @@ using FlexiMvvm.Views.Core;
         /// <inheritdoc />
         ");
             
-            #line 121 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            #line 129 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.LifecycleMethodAccessModifier));
             
             #line default
             #line hidden
             this.Write(" override void OnActivityResult(int requestCode, ");
             
-            #line 121 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            #line 129 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ResultCodeTypeName));
             
             #line default
@@ -241,7 +238,7 @@ using FlexiMvvm.Views.Core;
         /// <inheritdoc />
         ");
             
-            #line 129 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            #line 137 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.LifecycleMethodAccessModifier));
             
             #line default
@@ -250,7 +247,7 @@ using FlexiMvvm.Views.Core;
                     "ycleDelegate.OnSaveInstanceState(outState);\r\n\r\n            base.OnSaveInstanceSt" +
                     "ate(outState);\r\n        }\r\n");
             
-            #line 135 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            #line 143 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
       if (viewGenerationOptions.Kind == ViewKind.Fragment) { 
             
             #line default
@@ -259,14 +256,14 @@ using FlexiMvvm.Views.Core;
                     "   {\r\n            LifecycleDelegate.OnDestroyView();\r\n\r\n            base.OnDestr" +
                     "oyView();\r\n        }\r\n");
             
-            #line 144 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            #line 152 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
       } 
             
             #line default
             #line hidden
             this.Write("\r\n        /// <inheritdoc />\r\n        ");
             
-            #line 147 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            #line 155 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.LifecycleMethodAccessModifier));
             
             #line default
@@ -275,7 +272,7 @@ using FlexiMvvm.Views.Core;
                     "\r\n\r\n            base.OnDestroy();\r\n        }\r\n    }\r\n\r\n    /// <summary>\r\n    //" +
                     "/ Represents a/an <see cref=\"");
             
-            #line 156 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            #line 164 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.BaseClassName));
             
             #line default
@@ -290,14 +287,14 @@ using FlexiMvvm.Views.Core;
         Justification = ""The view lifecycle delegate sets a value to the ViewModel property so it is not null starting from OnCreate method."")]
     public partial class ");
             
-            #line 164 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            #line 172 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
             this.Write("<TViewModel> : ");
             
-            #line 164 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            #line 172 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
@@ -307,49 +304,42 @@ using FlexiMvvm.Views.Core;
                     "        private RequestCode? _requestCode;\r\n\r\n        /// <inheritdoc />\r\n      " +
                     "  public ");
             
-            #line 170 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            #line 178 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
-            this.Write("()\r\n        {\r\n            LifecycleDelegate = new ViewLifecycleDelegate<");
+            this.Write("()\r\n        {\r\n        }\r\n\r\n        /// <inheritdoc />\r\n        protected ");
             
-            #line 172 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            #line 183 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
-            this.Write("<TViewModel>, TViewModel>(this);\r\n        }\r\n\r\n        /// <inheritdoc />\r\n      " +
-                    "  protected ");
-            
-            #line 176 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
-            
-            #line default
-            #line hidden
-            this.Write("(IntPtr javaReference, JniHandleOwnership transfer)\r\n            : base(javaRefer" +
-                    "ence, transfer)\r\n        {\r\n            LifecycleDelegate = new ViewLifecycleDel" +
-                    "egate<");
-            
-            #line 179 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
-            
-            #line default
-            #line hidden
-            this.Write(@"<TViewModel>, TViewModel>(this);
+            this.Write(@"(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
         }
-
-        /// <inheritdoc />
-        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
 
         /// <inheritdoc />
         public TViewModel ViewModel { get; private set; }
 
         /// <inheritdoc />
         public RequestCode RequestCode => _requestCode ??= new RequestCode();
-");
+
+        /// <inheritdoc />
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<");
             
-            #line 190 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            #line 197 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write("<TViewModel>, TViewModel>(this);\r\n        }\r\n");
+            
+            #line 199 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
       if (viewGenerationOptions.Kind == ViewKind.Fragment) { 
             
             #line default
@@ -370,7 +360,7 @@ using FlexiMvvm.Views.Core;
         }
 ");
             
-            #line 205 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            #line 214 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
       } 
             
             #line default
@@ -390,7 +380,7 @@ using FlexiMvvm.Views.Core;
     /// <summary>
     /// Represents a/an <see cref=""");
             
-            #line 219 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            #line 228 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.BaseClassName));
             
             #line default
@@ -406,14 +396,14 @@ using FlexiMvvm.Views.Core;
         Justification = ""The view lifecycle delegate sets a value to the ViewModel property so it is not null starting from OnCreate method."")]
     public partial class ");
             
-            #line 228 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            #line 237 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
             this.Write("<TViewModel, TParameters> : ");
             
-            #line 228 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            #line 237 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
@@ -427,49 +417,42 @@ using FlexiMvvm.Views.Core;
         /// <inheritdoc />
         public ");
             
-            #line 235 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
-            
-            #line default
-            #line hidden
-            this.Write("()\r\n        {\r\n            LifecycleDelegate = new ViewLifecycleDelegate<");
-            
-            #line 237 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
-            
-            #line default
-            #line hidden
-            this.Write("<TViewModel, TParameters>, TViewModel>(this);\r\n        }\r\n\r\n        /// <inheritd" +
-                    "oc />\r\n        protected ");
-            
-            #line 241 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
-            
-            #line default
-            #line hidden
-            this.Write("(IntPtr javaReference, JniHandleOwnership transfer)\r\n            : base(javaRefer" +
-                    "ence, transfer)\r\n        {\r\n            LifecycleDelegate = new ViewLifecycleDel" +
-                    "egate<");
-            
             #line 244 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
             
             #line default
             #line hidden
-            this.Write(@"<TViewModel, TParameters>, TViewModel>(this);
+            this.Write("()\r\n        {\r\n        }\r\n\r\n        /// <inheritdoc />\r\n        protected ");
+            
+            #line 249 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write(@"(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
         }
-
-        /// <inheritdoc />
-        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
 
         /// <inheritdoc />
         public TViewModel ViewModel { get; private set; }
 
         /// <inheritdoc />
         public RequestCode RequestCode => _requestCode ??= new RequestCode();
-");
+
+        /// <inheritdoc />
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<");
             
-            #line 255 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            #line 263 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ClassName));
+            
+            #line default
+            #line hidden
+            this.Write("<TViewModel, TParameters>, TViewModel>(this);\r\n        }\r\n");
+            
+            #line 265 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
       if (viewGenerationOptions.Kind == ViewKind.Fragment) { 
             
             #line default
@@ -490,7 +473,7 @@ using FlexiMvvm.Views.Core;
         }
 ");
             
-            #line 270 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            #line 280 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
       } 
             
             #line default
@@ -505,14 +488,14 @@ using FlexiMvvm.Views.Core;
         {
             await ViewModel.InitializeAsync(");
             
-            #line 279 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            #line 289 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(viewGenerationOptions.ParametersSourceName));
             
             #line default
             #line hidden
             this.Write("?.GetParameters<TParameters>(), recreated);\r\n        }\r\n    }\r\n}\r\n\r\n");
             
-            #line 284 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
+            #line 294 "C:\FlexiMvvm\FlexiMvvm.Generation\Views\Generation\Android\ViewsGenerator.tt"
  } 
             
             #line default
