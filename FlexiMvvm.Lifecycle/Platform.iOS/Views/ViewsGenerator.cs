@@ -33,49 +33,58 @@ namespace FlexiMvvm.Views
     /// </summary>
     public partial class CollectionViewController : UIKit.UICollectionViewController, IIosView
     {
+        private IViewLifecycleDelegate? _lifecycleDelegate;
         private KeyboardHandler? _keyboardHandler;
 
         /// <inheritdoc />
         public CollectionViewController()
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<CollectionViewController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
         public CollectionViewController(NSCoder coder)
             : base(coder)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<CollectionViewController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
         public CollectionViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<CollectionViewController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
         protected CollectionViewController(NSObjectFlag t)
             : base(t)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<CollectionViewController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
         protected internal CollectionViewController(IntPtr handle)
             : base(handle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<CollectionViewController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <summary>
         /// Gets the view lifecycle delegate. Intended for internal use by the FlexiMvvm.
         /// </summary>
-        protected virtual IViewLifecycleDelegate LifecycleDelegate { get; }
+        protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ??= CreateLifecycleDelegate();
 
         /// <inheritdoc />
         public virtual IKeyboardHandler? KeyboardHandler => _keyboardHandler;
+
+        /// <summary>
+        /// Creates a new <see cref="IViewLifecycleDelegate"/> instance. Intended for internal use by the FlexiMvvm.
+        /// </summary>
+        protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<CollectionViewController>(this);
+        }
 
         /// <inheritdoc />
         public override void WillMoveToParentViewController(UIViewController? parent)
@@ -149,45 +158,43 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         public CollectionViewController()
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<CollectionViewController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public CollectionViewController(NSCoder coder)
             : base(coder)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<CollectionViewController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public CollectionViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<CollectionViewController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected CollectionViewController(NSObjectFlag t)
             : base(t)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<CollectionViewController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected internal CollectionViewController(IntPtr handle)
             : base(handle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<CollectionViewController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
         /// <inheritdoc />
-        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
+        public TViewModel ViewModel { get; private set; }
 
         /// <inheritdoc />
-        public TViewModel ViewModel { get; private set; }
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<CollectionViewController<TViewModel>, TViewModel>(this);
+        }
 
         /// <inheritdoc />
         public void SetResult(ResultCode resultCode, Result? result)
@@ -242,45 +249,43 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         public CollectionViewController()
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<CollectionViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public CollectionViewController(NSCoder coder)
             : base(coder)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<CollectionViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public CollectionViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<CollectionViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected CollectionViewController(NSObjectFlag t)
             : base(t)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<CollectionViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected internal CollectionViewController(IntPtr handle)
             : base(handle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<CollectionViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
         /// <inheritdoc />
-        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
+        public TViewModel ViewModel { get; private set; }
 
         /// <inheritdoc />
-        public TViewModel ViewModel { get; private set; }
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<CollectionViewController<TViewModel, TParameters>, TViewModel>(this);
+        }
 
         /// <inheritdoc />
         public void SetParameters(TParameters? parameters)
@@ -330,49 +335,58 @@ namespace FlexiMvvm.Views
     /// </summary>
     public partial class NavigationController : UIKit.UINavigationController, IIosView
     {
+        private IViewLifecycleDelegate? _lifecycleDelegate;
         private KeyboardHandler? _keyboardHandler;
 
         /// <inheritdoc />
         public NavigationController()
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<NavigationController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
         public NavigationController(NSCoder coder)
             : base(coder)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<NavigationController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
         public NavigationController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<NavigationController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
         protected NavigationController(NSObjectFlag t)
             : base(t)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<NavigationController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
         protected internal NavigationController(IntPtr handle)
             : base(handle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<NavigationController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <summary>
         /// Gets the view lifecycle delegate. Intended for internal use by the FlexiMvvm.
         /// </summary>
-        protected virtual IViewLifecycleDelegate LifecycleDelegate { get; }
+        protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ??= CreateLifecycleDelegate();
 
         /// <inheritdoc />
         public virtual IKeyboardHandler? KeyboardHandler => _keyboardHandler;
+
+        /// <summary>
+        /// Creates a new <see cref="IViewLifecycleDelegate"/> instance. Intended for internal use by the FlexiMvvm.
+        /// </summary>
+        protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<NavigationController>(this);
+        }
 
         /// <inheritdoc />
         public override void WillMoveToParentViewController(UIViewController? parent)
@@ -446,45 +460,43 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         public NavigationController()
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<NavigationController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public NavigationController(NSCoder coder)
             : base(coder)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<NavigationController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public NavigationController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<NavigationController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected NavigationController(NSObjectFlag t)
             : base(t)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<NavigationController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected internal NavigationController(IntPtr handle)
             : base(handle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<NavigationController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
         /// <inheritdoc />
-        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
+        public TViewModel ViewModel { get; private set; }
 
         /// <inheritdoc />
-        public TViewModel ViewModel { get; private set; }
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<NavigationController<TViewModel>, TViewModel>(this);
+        }
 
         /// <inheritdoc />
         public void SetResult(ResultCode resultCode, Result? result)
@@ -539,45 +551,43 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         public NavigationController()
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<NavigationController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public NavigationController(NSCoder coder)
             : base(coder)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<NavigationController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public NavigationController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<NavigationController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected NavigationController(NSObjectFlag t)
             : base(t)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<NavigationController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected internal NavigationController(IntPtr handle)
             : base(handle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<NavigationController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
         /// <inheritdoc />
-        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
+        public TViewModel ViewModel { get; private set; }
 
         /// <inheritdoc />
-        public TViewModel ViewModel { get; private set; }
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<NavigationController<TViewModel, TParameters>, TViewModel>(this);
+        }
 
         /// <inheritdoc />
         public void SetParameters(TParameters? parameters)
@@ -627,49 +637,58 @@ namespace FlexiMvvm.Views
     /// </summary>
     public partial class PageViewController : UIKit.UIPageViewController, IIosView
     {
+        private IViewLifecycleDelegate? _lifecycleDelegate;
         private KeyboardHandler? _keyboardHandler;
 
         /// <inheritdoc />
         public PageViewController()
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<PageViewController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
         public PageViewController(NSCoder coder)
             : base(coder)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<PageViewController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
         public PageViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<PageViewController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
         protected PageViewController(NSObjectFlag t)
             : base(t)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<PageViewController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
         protected internal PageViewController(IntPtr handle)
             : base(handle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<PageViewController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <summary>
         /// Gets the view lifecycle delegate. Intended for internal use by the FlexiMvvm.
         /// </summary>
-        protected virtual IViewLifecycleDelegate LifecycleDelegate { get; }
+        protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ??= CreateLifecycleDelegate();
 
         /// <inheritdoc />
         public virtual IKeyboardHandler? KeyboardHandler => _keyboardHandler;
+
+        /// <summary>
+        /// Creates a new <see cref="IViewLifecycleDelegate"/> instance. Intended for internal use by the FlexiMvvm.
+        /// </summary>
+        protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<PageViewController>(this);
+        }
 
         /// <inheritdoc />
         public override void WillMoveToParentViewController(UIViewController? parent)
@@ -743,45 +762,43 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         public PageViewController()
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<PageViewController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public PageViewController(NSCoder coder)
             : base(coder)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<PageViewController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public PageViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<PageViewController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected PageViewController(NSObjectFlag t)
             : base(t)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<PageViewController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected internal PageViewController(IntPtr handle)
             : base(handle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<PageViewController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
         /// <inheritdoc />
-        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
+        public TViewModel ViewModel { get; private set; }
 
         /// <inheritdoc />
-        public TViewModel ViewModel { get; private set; }
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<PageViewController<TViewModel>, TViewModel>(this);
+        }
 
         /// <inheritdoc />
         public void SetResult(ResultCode resultCode, Result? result)
@@ -836,45 +853,43 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         public PageViewController()
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<PageViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public PageViewController(NSCoder coder)
             : base(coder)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<PageViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public PageViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<PageViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected PageViewController(NSObjectFlag t)
             : base(t)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<PageViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected internal PageViewController(IntPtr handle)
             : base(handle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<PageViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
         /// <inheritdoc />
-        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
+        public TViewModel ViewModel { get; private set; }
 
         /// <inheritdoc />
-        public TViewModel ViewModel { get; private set; }
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<PageViewController<TViewModel, TParameters>, TViewModel>(this);
+        }
 
         /// <inheritdoc />
         public void SetParameters(TParameters? parameters)
@@ -924,49 +939,58 @@ namespace FlexiMvvm.Views
     /// </summary>
     public partial class SplitViewController : UIKit.UISplitViewController, IIosView
     {
+        private IViewLifecycleDelegate? _lifecycleDelegate;
         private KeyboardHandler? _keyboardHandler;
 
         /// <inheritdoc />
         public SplitViewController()
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<SplitViewController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
         public SplitViewController(NSCoder coder)
             : base(coder)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<SplitViewController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
         public SplitViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<SplitViewController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
         protected SplitViewController(NSObjectFlag t)
             : base(t)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<SplitViewController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
         protected internal SplitViewController(IntPtr handle)
             : base(handle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<SplitViewController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <summary>
         /// Gets the view lifecycle delegate. Intended for internal use by the FlexiMvvm.
         /// </summary>
-        protected virtual IViewLifecycleDelegate LifecycleDelegate { get; }
+        protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ??= CreateLifecycleDelegate();
 
         /// <inheritdoc />
         public virtual IKeyboardHandler? KeyboardHandler => _keyboardHandler;
+
+        /// <summary>
+        /// Creates a new <see cref="IViewLifecycleDelegate"/> instance. Intended for internal use by the FlexiMvvm.
+        /// </summary>
+        protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<SplitViewController>(this);
+        }
 
         /// <inheritdoc />
         public override void WillMoveToParentViewController(UIViewController? parent)
@@ -1040,45 +1064,43 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         public SplitViewController()
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<SplitViewController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public SplitViewController(NSCoder coder)
             : base(coder)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<SplitViewController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public SplitViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<SplitViewController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected SplitViewController(NSObjectFlag t)
             : base(t)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<SplitViewController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected internal SplitViewController(IntPtr handle)
             : base(handle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<SplitViewController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
         /// <inheritdoc />
-        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
+        public TViewModel ViewModel { get; private set; }
 
         /// <inheritdoc />
-        public TViewModel ViewModel { get; private set; }
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<SplitViewController<TViewModel>, TViewModel>(this);
+        }
 
         /// <inheritdoc />
         public void SetResult(ResultCode resultCode, Result? result)
@@ -1133,45 +1155,43 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         public SplitViewController()
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<SplitViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public SplitViewController(NSCoder coder)
             : base(coder)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<SplitViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public SplitViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<SplitViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected SplitViewController(NSObjectFlag t)
             : base(t)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<SplitViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected internal SplitViewController(IntPtr handle)
             : base(handle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<SplitViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
         /// <inheritdoc />
-        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
+        public TViewModel ViewModel { get; private set; }
 
         /// <inheritdoc />
-        public TViewModel ViewModel { get; private set; }
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<SplitViewController<TViewModel, TParameters>, TViewModel>(this);
+        }
 
         /// <inheritdoc />
         public void SetParameters(TParameters? parameters)
@@ -1221,49 +1241,58 @@ namespace FlexiMvvm.Views
     /// </summary>
     public partial class TabBarController : UIKit.UITabBarController, IIosView
     {
+        private IViewLifecycleDelegate? _lifecycleDelegate;
         private KeyboardHandler? _keyboardHandler;
 
         /// <inheritdoc />
         public TabBarController()
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<TabBarController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
         public TabBarController(NSCoder coder)
             : base(coder)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<TabBarController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
         public TabBarController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<TabBarController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
         protected TabBarController(NSObjectFlag t)
             : base(t)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<TabBarController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
         protected internal TabBarController(IntPtr handle)
             : base(handle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<TabBarController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <summary>
         /// Gets the view lifecycle delegate. Intended for internal use by the FlexiMvvm.
         /// </summary>
-        protected virtual IViewLifecycleDelegate LifecycleDelegate { get; }
+        protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ??= CreateLifecycleDelegate();
 
         /// <inheritdoc />
         public virtual IKeyboardHandler? KeyboardHandler => _keyboardHandler;
+
+        /// <summary>
+        /// Creates a new <see cref="IViewLifecycleDelegate"/> instance. Intended for internal use by the FlexiMvvm.
+        /// </summary>
+        protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<TabBarController>(this);
+        }
 
         /// <inheritdoc />
         public override void WillMoveToParentViewController(UIViewController? parent)
@@ -1337,45 +1366,43 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         public TabBarController()
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<TabBarController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public TabBarController(NSCoder coder)
             : base(coder)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<TabBarController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public TabBarController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<TabBarController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected TabBarController(NSObjectFlag t)
             : base(t)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<TabBarController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected internal TabBarController(IntPtr handle)
             : base(handle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<TabBarController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
         /// <inheritdoc />
-        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
+        public TViewModel ViewModel { get; private set; }
 
         /// <inheritdoc />
-        public TViewModel ViewModel { get; private set; }
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<TabBarController<TViewModel>, TViewModel>(this);
+        }
 
         /// <inheritdoc />
         public void SetResult(ResultCode resultCode, Result? result)
@@ -1430,45 +1457,43 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         public TabBarController()
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<TabBarController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public TabBarController(NSCoder coder)
             : base(coder)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<TabBarController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public TabBarController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<TabBarController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected TabBarController(NSObjectFlag t)
             : base(t)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<TabBarController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected internal TabBarController(IntPtr handle)
             : base(handle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<TabBarController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
         /// <inheritdoc />
-        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
+        public TViewModel ViewModel { get; private set; }
 
         /// <inheritdoc />
-        public TViewModel ViewModel { get; private set; }
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<TabBarController<TViewModel, TParameters>, TViewModel>(this);
+        }
 
         /// <inheritdoc />
         public void SetParameters(TParameters? parameters)
@@ -1518,49 +1543,58 @@ namespace FlexiMvvm.Views
     /// </summary>
     public partial class TableViewController : UIKit.UITableViewController, IIosView
     {
+        private IViewLifecycleDelegate? _lifecycleDelegate;
         private KeyboardHandler? _keyboardHandler;
 
         /// <inheritdoc />
         public TableViewController()
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<TableViewController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
         public TableViewController(NSCoder coder)
             : base(coder)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<TableViewController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
         public TableViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<TableViewController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
         protected TableViewController(NSObjectFlag t)
             : base(t)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<TableViewController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
         protected internal TableViewController(IntPtr handle)
             : base(handle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<TableViewController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <summary>
         /// Gets the view lifecycle delegate. Intended for internal use by the FlexiMvvm.
         /// </summary>
-        protected virtual IViewLifecycleDelegate LifecycleDelegate { get; }
+        protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ??= CreateLifecycleDelegate();
 
         /// <inheritdoc />
         public virtual IKeyboardHandler? KeyboardHandler => _keyboardHandler;
+
+        /// <summary>
+        /// Creates a new <see cref="IViewLifecycleDelegate"/> instance. Intended for internal use by the FlexiMvvm.
+        /// </summary>
+        protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<TableViewController>(this);
+        }
 
         /// <inheritdoc />
         public override void WillMoveToParentViewController(UIViewController? parent)
@@ -1634,45 +1668,43 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         public TableViewController()
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<TableViewController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public TableViewController(NSCoder coder)
             : base(coder)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<TableViewController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public TableViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<TableViewController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected TableViewController(NSObjectFlag t)
             : base(t)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<TableViewController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected internal TableViewController(IntPtr handle)
             : base(handle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<TableViewController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
         /// <inheritdoc />
-        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
+        public TViewModel ViewModel { get; private set; }
 
         /// <inheritdoc />
-        public TViewModel ViewModel { get; private set; }
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<TableViewController<TViewModel>, TViewModel>(this);
+        }
 
         /// <inheritdoc />
         public void SetResult(ResultCode resultCode, Result? result)
@@ -1727,45 +1759,43 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         public TableViewController()
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<TableViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public TableViewController(NSCoder coder)
             : base(coder)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<TableViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public TableViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<TableViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected TableViewController(NSObjectFlag t)
             : base(t)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<TableViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected internal TableViewController(IntPtr handle)
             : base(handle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<TableViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
         /// <inheritdoc />
-        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
+        public TViewModel ViewModel { get; private set; }
 
         /// <inheritdoc />
-        public TViewModel ViewModel { get; private set; }
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<TableViewController<TViewModel, TParameters>, TViewModel>(this);
+        }
 
         /// <inheritdoc />
         public void SetParameters(TParameters? parameters)
@@ -1815,49 +1845,58 @@ namespace FlexiMvvm.Views
     /// </summary>
     public partial class ViewController : UIKit.UIViewController, IIosView
     {
+        private IViewLifecycleDelegate? _lifecycleDelegate;
         private KeyboardHandler? _keyboardHandler;
 
         /// <inheritdoc />
         public ViewController()
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<ViewController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
         public ViewController(NSCoder coder)
             : base(coder)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<ViewController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
         public ViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<ViewController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
         protected ViewController(NSObjectFlag t)
             : base(t)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<ViewController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
         protected internal ViewController(IntPtr handle)
             : base(handle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<ViewController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <summary>
         /// Gets the view lifecycle delegate. Intended for internal use by the FlexiMvvm.
         /// </summary>
-        protected virtual IViewLifecycleDelegate LifecycleDelegate { get; }
+        protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ??= CreateLifecycleDelegate();
 
         /// <inheritdoc />
         public virtual IKeyboardHandler? KeyboardHandler => _keyboardHandler ??= Keyboard.KeyboardHandler.Create(View);
+
+        /// <summary>
+        /// Creates a new <see cref="IViewLifecycleDelegate"/> instance. Intended for internal use by the FlexiMvvm.
+        /// </summary>
+        protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<ViewController>(this);
+        }
 
         /// <inheritdoc />
         public override void WillMoveToParentViewController(UIViewController? parent)
@@ -1931,45 +1970,43 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         public ViewController()
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<ViewController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public ViewController(NSCoder coder)
             : base(coder)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<ViewController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public ViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<ViewController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected ViewController(NSObjectFlag t)
             : base(t)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<ViewController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected internal ViewController(IntPtr handle)
             : base(handle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<ViewController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
         /// <inheritdoc />
-        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
+        public TViewModel ViewModel { get; private set; }
 
         /// <inheritdoc />
-        public TViewModel ViewModel { get; private set; }
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<ViewController<TViewModel>, TViewModel>(this);
+        }
 
         /// <inheritdoc />
         public void SetResult(ResultCode resultCode, Result? result)
@@ -2024,45 +2061,43 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         public ViewController()
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<ViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public ViewController(NSCoder coder)
             : base(coder)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<ViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public ViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<ViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected ViewController(NSObjectFlag t)
             : base(t)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<ViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected internal ViewController(IntPtr handle)
             : base(handle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<ViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
         /// <inheritdoc />
-        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
+        public TViewModel ViewModel { get; private set; }
 
         /// <inheritdoc />
-        public TViewModel ViewModel { get; private set; }
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<ViewController<TViewModel, TParameters>, TViewModel>(this);
+        }
 
         /// <inheritdoc />
         public void SetParameters(TParameters? parameters)

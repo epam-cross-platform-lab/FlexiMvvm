@@ -15,7 +15,6 @@
 // =========================================================================
 
 using System.Diagnostics.CodeAnalysis;
-using FlexiMvvm.Views.Core;
 using UIKit;
 
 namespace FlexiMvvm.Views
@@ -30,7 +29,7 @@ namespace FlexiMvvm.Views
         public CollectionViewController(UICollectionViewLayout layout)
             : base(layout)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<CollectionViewController>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
     }
 
@@ -44,7 +43,6 @@ namespace FlexiMvvm.Views
         public CollectionViewController(UICollectionViewLayout layout)
             : base(layout)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<CollectionViewController<TViewModel>, TViewModel>(this);
         }
     }
 
@@ -58,7 +56,6 @@ namespace FlexiMvvm.Views
         public CollectionViewController(UICollectionViewLayout layout)
             : base(layout)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<CollectionViewController<TViewModel, TParameters>, TViewModel>(this);
         }
     }
 }

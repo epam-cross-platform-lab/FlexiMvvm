@@ -35,46 +35,47 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
     /// </summary>
     public partial class <#= viewGenerationOptions.ClassName #> : <#= viewGenerationOptions.BaseClassName #>, IIosView
     {
+        private IViewLifecycleDelegate? _lifecycleDelegate;
         private KeyboardHandler? _keyboardHandler;
 
         /// <inheritdoc />
         public <#= viewGenerationOptions.ClassName #>()
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #>>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
         public <#= viewGenerationOptions.ClassName #>(NSCoder coder)
             : base(coder)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #>>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
         public <#= viewGenerationOptions.ClassName #>(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #>>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
         protected <#= viewGenerationOptions.ClassName #>(NSObjectFlag t)
             : base(t)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #>>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
         protected internal <#= viewGenerationOptions.ClassName #>(IntPtr handle)
             : base(handle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #>>(this);
+            LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <summary>
         /// Gets the view lifecycle delegate. Intended for internal use by the FlexiMvvm.
         /// </summary>
-        protected virtual IViewLifecycleDelegate LifecycleDelegate { get; }
+        protected IViewLifecycleDelegate LifecycleDelegate => _lifecycleDelegate ??= CreateLifecycleDelegate();
 
 <#      if (viewGenerationOptions.HandleKeyboard) { #>
         /// <inheritdoc />
@@ -83,6 +84,14 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
         /// <inheritdoc />
         public virtual IKeyboardHandler? KeyboardHandler => _keyboardHandler;
 <#      } #>
+
+        /// <summary>
+        /// Creates a new <see cref="IViewLifecycleDelegate"/> instance. Intended for internal use by the FlexiMvvm.
+        /// </summary>
+        protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #>>(this);
+        }
 
         /// <inheritdoc />
         public override void WillMoveToParentViewController(UIViewController? parent)
@@ -156,45 +165,43 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
         /// <inheritdoc />
         public <#= viewGenerationOptions.ClassName #>()
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public <#= viewGenerationOptions.ClassName #>(NSCoder coder)
             : base(coder)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public <#= viewGenerationOptions.ClassName #>(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected <#= viewGenerationOptions.ClassName #>(NSObjectFlag t)
             : base(t)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected internal <#= viewGenerationOptions.ClassName #>(IntPtr handle)
             : base(handle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
         /// <inheritdoc />
-        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
+        public TViewModel ViewModel { get; private set; }
 
         /// <inheritdoc />
-        public TViewModel ViewModel { get; private set; }
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel>, TViewModel>(this);
+        }
 
         /// <inheritdoc />
         public void SetResult(ResultCode resultCode, Result? result)
@@ -249,45 +256,43 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
         /// <inheritdoc />
         public <#= viewGenerationOptions.ClassName #>()
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public <#= viewGenerationOptions.ClassName #>(NSCoder coder)
             : base(coder)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public <#= viewGenerationOptions.ClassName #>(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected <#= viewGenerationOptions.ClassName #>(NSObjectFlag t)
             : base(t)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         protected internal <#= viewGenerationOptions.ClassName #>(IntPtr handle)
             : base(handle)
         {
-            LifecycleDelegate = new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
         public event EventHandler<ResultSetEventArgs> ResultSet;
 
         /// <inheritdoc />
-        protected override IViewLifecycleDelegate LifecycleDelegate { get; }
+        public TViewModel ViewModel { get; private set; }
 
         /// <inheritdoc />
-        public TViewModel ViewModel { get; private set; }
+        protected override IViewLifecycleDelegate CreateLifecycleDelegate()
+        {
+            return new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel, TParameters>, TViewModel>(this);
+        }
 
         /// <inheritdoc />
         public void SetParameters(TParameters? parameters)
