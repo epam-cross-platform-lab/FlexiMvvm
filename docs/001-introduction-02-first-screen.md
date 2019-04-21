@@ -2,6 +2,10 @@
 
 ---
 
+# Complete sample
+
+Whole sample code is [available in the repository](https://github.com/epam-xamarin-lab/FlexiMvvm/tree/master/samples/001-Intro-FirstScreen/).
+
 # First screen
 
 As a first tutorial, let's build a minimalistic single screen app like this:
@@ -13,8 +17,6 @@ Our sample app is going to show just a single screen on start, with a basic Prof
 - Last Name
 - Email
 
-Whole sample code is [available in the repository](https://github.com/epam-xamarin-lab/FlexiMvvm/tree/master/samples/010-Intro-FirstScreen/).
-
 ### New Visual Studio solution
 
 To get started, we prepare a Visual Studio solution for the app.
@@ -24,23 +26,24 @@ For simplicity, let's add just three projects within:
 
 > It's recommended to use **"Droid"** suffix for your Android project, instead of "Android" to make life a bit easier for IDE to distinguish our versus Xamarin SDK namespaces
 
-#### FirstScreen.Core
+#### Sample.Core
 
 It has to be compliant to ``.net standard 2.0`` multiplatform spec:
 
 ![.net standard 2.0](001-introduction-02-first-screen/040-netstandard.png)
 
-#### FirstScreen.Droid
+#### Sample.Droid
 
-1. The reference to the FirstScreen.Core project has to be added.
+Let's start with the standard Visual Studio Xamarin Android Single View project template.
+1. Add a project reference to Sample.Core.
 2. Appropriate target Android SDK is needed. Consider any starting **from Android 8.0 (Oreo)**:
 ![Target Android](001-introduction-02-first-screen/050-droid.png)
 3. Android versions range is needed to be set we're going to support. For our case, we have API Level 21+ support, though API **Level 19+ (Android 4.4, KitKat) may be supported**:
 ![Android versions](001-introduction-02-first-screen/060-droid-api.png)
 
-#### FirstScreen.iOS
+#### Sample.iOS
 
-1. The reference to the FirstScreen.Core project has to be added.
+1. The reference to the Sample.Core project has to be added.
 2. **Info.plist** file needs an appropriate Deployment Target. For instance, iOS 11+:
 ![iOS versions](001-introduction-02-first-screen/070-ios.png)
 
@@ -48,29 +51,33 @@ It has to be compliant to ``.net standard 2.0`` multiplatform spec:
 
 | Project | Package |
 | --- | --- |
-| *FirstScreen.Core* | **FlexiMvvm.Lifecycle**
-| *FirstScreen.Droid* | **FlexiMvvm.FullStack**
-| *FirstScreen.iOS* | **FlexiMvvm.FullStack**
+| *Sample.Core* | **FlexiMvvm.Lifecycle**
+| *Sample.Droid* | **FlexiMvvm.FullStack**
+| *Sample.iOS* | **FlexiMvvm.FullStack**
 
 > **Preview version**. On the time of documentation, FlexiMvvm was in the Preview mode, with **"PreRelease"** suffixes. Also showing Preview packages option was required to be enabled for NuGet Manager.
+
+### Build configuration
+
+TBD
 
 ### View Model
 
 Having all needed external dependencies added, we may try to build the solution and proceed to implementing some core stuff.
-Let's create a View Model class for our Profile form, FirstScreen.Core / Presentation / ViewModels:
+Let's create a View Model class for our Profile form, Sample.Core / Presentation / ViewModels:
 
 ```cs
-using System.Windows.Input;
+using FlexiMvvm.Commands;
 using FlexiMvvm.ViewModels;
 
-namespace FirstScreen.Core.Presentation.ViewModels
+namespace Sample.Core.Presentation.ViewModels
 {
-    public class UserProfileViewModel : ViewModel
+    public class UserProfileViewModel : LifecycleViewModel
     {
-        private string _firstName;
-        private string _lastName;
-        private string _email;
-        
+        private string _firstName = string.Empty;
+        private string _lastName = string.Empty;
+        private string _email = string.Empty;
+
         public string FirstName
         {
             get => _firstName;
@@ -89,54 +96,56 @@ namespace FirstScreen.Core.Presentation.ViewModels
             set => SetValue(ref _email, value);
         }
 
-        public ICommand SaveCommand => CommandProvider.Get(Save);
+        public Command SaveCommand => new RelayCommand(Save);
 
         private void Save()
         {
-            System.Diagnostics.Debug.WriteLine(
-                $"Saved: {FirstName} {LastName}, {Email}.");
+            System.Diagnostics.Debug.WriteLine($"Saving: {FirstName} {LastName}, {Email}...");
         }
     }
 }
+
 ```
 
-So, ``FirstName``, ``LastName``, ``Email`` string Data Properties are defined to observe values entered by user.
+``FirstName``, ``LastName`` and ``Email`` string Data Properties are defined to keep values entered by the user and observe their changes to update on the screen. If you review the FlexiMvvm's base classes, you see that the standard ``INotifyPropertyChanged`` interface is implemented for us. All we need is just call the ``SetValue()`` method in our Data Propery setters to engage this mechanism, and the ``PropertyChanged`` event will be invoked automatically bringing Data Bindings to life.
 
-We see here ``ViewModel`` used as the base class.
-This is the FlexiMvvm's cross-platform entry to the proper lifecycle and UI changes observation mechanisms. ``ViewModel`` must be used as a root of the hierarchy of our View Models.
+We see here ``LifecycleViewModel`` used as the base class.
+This is the FlexiMvvm's cross-platform entry to the proper lifecycle and UI changes support. **Use the ``LifecycleViewModel`` class for your UIViewControllers on iOS and Activities/Fragments on Android.** This base class will allow to conveniently integrate into platforms' screen initialization, closing, state management, etc. ``LifecycleViewModel`` must be used as a root of the per-screen hierarchy of View Models.
 
-To recap, when adopting MVVM we create View Models which implement standard ``INotifyPropertyChanged`` interface. In our sample above,
-base ``ViewModel`` type provided by FlexiMvvm is used, therefore child View Model inherits the appropriate ``INotifyPropertyChanged`` implementation. Just to engage it, we have added ``SetValue()`` methods in the Data Properties' setters - the ``PropertyChanged`` event will be invoked automatically when needed, bringing Data Bindings to life.
+> From 0.10.7, FlexiMvvm explicitly separates two kinds of View Models: those for screen events (provided as ``LifecycleViewModel`` used above) and others for supporting subviews, cells, controls whose state and lifecycle tracking is not needed (it's ``ViewModel`` hierarchy). 
 
-Also ``SaveCommand`` is added and used to call the ``Save()`` method when the user taps such button on the screen.
-As we will see later, such ``ICommand`` driven handlers is a widely used approach across .net apps development introducing some extra advantages along with Data Bindings. Use of Commands is considered as a **recommended** way of user events handling.
-To simplify the code, FlexiMvvm provides useful ``CommandProvider`` to setup Commands in different ways. Later we will review it in details.
+Also ``SaveCommand`` is added above and used to call the ``Save()`` method when the user taps such button on the screen.
+Such ``Command`` driven handlers is a widely used approach across .NET apps development introducing some extra advantages along with the Data Binding. Use of Commands is considered as a **recommended** way of user events handling.
+To simplify the code, FlexiMvvm provides useful ``RelayCommand`` to setup user action handlers. 
+
+As a summary, we've incorporated the most important pillars of MVVM in this first tutorial: Observable Data Properties for Data Binding, UI Lifecycle support, and Commanding.
 
 ### Views
 
 #### Android
 
-Starting with Android, let's scaffold a minimal app with a single Activity. The following points are quite regular for any Xamarin.Android app and just summarised. Complete solution is available as a sample: [First Screen sample](000-samples/010-Intro-FirstScreen)
+Starting with Android, let's scaffold a minimal app with a single Activity.
 
-1. FirstScreen.Droid / Resources / layout / [Main.axml](https://github.com/epam-xamarin-lab/FlexiMvvm/tree/master/samples/010-Intro-FirstScreen/Droid/Resources/layout/Main.axml): basic UI layout for the new Activity. Just ``TextViews``, ``EditText`` and ``Button`` controls within ``LinearLayout``s.
-2. FirstScreen.Droid / Resources / values / [styles.xml](https://github.com/epam-xamarin-lab/FlexiMvvm/tree/master/samples/010-Intro-FirstScreen/Droid/Resources/values/styles.xml): Theme setup
+In this tutorial, we may start with the standard "Single View" Visual Studio project template for Xamarin Android app and update its Sample.Droid / Resources / layout / [activity_main.axml](https://github.com/epam-xamarin-lab/FlexiMvvm/tree/master/samples/001-Intro-FirstScreen/Droid/Resources/layout/activity_main.axml) with basic UI layout for the new Activity. Just ``TextViews``, ``EditText`` and ``Button`` controls within ``LinearLayout``.
 
-Finally, we approached the Activity which needs FlexiMvvm specific customizations. FirstScreen.Droid / Views / ``UserProfileActivity``. Here is its full definition:
+Finally, we approached the Activity which needs FlexiMvvm specific customizations. Sample.Droid / ``MainActivity``. Here is its full definition:
 
 ```cs
 using Android.App;
 using Android.OS;
+using Android.Views;
 using Android.Widget;
-using FirstScreen.Core.Presentation.ViewModels;
+using FlexiMvvm;
 using FlexiMvvm.Bindings;
 using FlexiMvvm.Ioc;
 using FlexiMvvm.ViewModels;
 using FlexiMvvm.Views;
+using Sample.Core.Presentation.ViewModels;
 
-namespace FirstScreen.Droid.Views
+namespace Sample.Droid
 {
-    [Activity(MainLauncher = true, NoHistory = true, Theme = "@style/AppTheme")]
-    public class UserProfileActivity : BindableAppCompatActivity<UserProfileViewModel>
+    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true, NoHistory = true)]
+    public class MainActivity : BindableAppCompatActivity<UserProfileViewModel>
     {
         private EditText _firstName;
         private EditText _lastName;
@@ -147,14 +156,32 @@ namespace FirstScreen.Droid.Views
         {
             InitApp();
 
-            SetContentView(Resource.Layout.Main);
+            base.OnCreate(savedInstanceState);
+
+            SetContentView(Resource.Layout.activity_main);
+            SetSupportActionBar(FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar));
 
             _firstName = FindViewById<EditText>(Resource.Id.firstName);
             _lastName = FindViewById<EditText>(Resource.Id.lastName);
             _email = FindViewById<EditText>(Resource.Id.email);
             _save = FindViewById<Button>(Resource.Id.save);
+        }
 
-            base.OnCreate(savedInstanceState);
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Menu.menu_main, menu);
+            return true;
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            int id = item.ItemId;
+            if (id == Resource.Id.action_settings)
+            {
+                return true;
+            }
+
+            return base.OnOptionsItemSelected(item);
         }
 
         public override void Bind(BindingSet<UserProfileViewModel> bindingSet)
@@ -183,15 +210,16 @@ namespace FirstScreen.Droid.Views
             var container = new SimpleIoc();
             container.Register(() => new UserProfileViewModel());
 
-            ViewModelProvider.SetFactory(new DependencyProviderViewModelFactory(container));
+            LifecycleViewModelProvider.SetFactory(
+                new DefaultLifecycleViewModelFactory(container));
         }
     }
 }
+
 ```
 
-We see this ``UserProfileActivity`` has uncommon base class, FlexiMvvm's ``BindableAppCompatActivity`` which has got our View Model as the type parameter. Doing this, we indirectly link our View with its View Model. And by overriding ``Bind()`` method, we are able to define all required Data Bindings between the User Interface and the observable Data.
-
-> Later a better way will be demostrated with code-generated ``ViewHolder``s, without the need to inflate each user control and preserve in a private field.
+We see this ``MainActivity`` has the FlexiMvvm's ``BindableAppCompatActivity`` base class which has got our ``UserProfileViewModel`` as the type parameter. Doing this, we indirectly link our View with its View Model (so MVVM is engaged here).
+And by overriding the ``Bind()`` method, we are able to define all the required Data Bindings between the User Interface and the observable Data.
 
 FlexiMvvm provides a wide range of default Data Bindings to iOS and Android standard controls. Custom Data Binding is possible as well.
 
@@ -199,21 +227,21 @@ And another major part here is the ``InitApp()`` method which is placed in Activ
 
 > On mobile, performance and application start time specifically are pretty critial qualities. ``SimpleIoc`` is good on that. **No Reflection** is used by ``SimpleIoc`` to automate dependencies resolution but all the instantiation logic is provided by us explicitly via the ``Register()`` method. It's recommended though not mandatory - any container may be involved instead.
 
-Then we use ``ViewModelProvider`` which is central for View Model instance provisioning and leverage the existing factory passed in, ``DependencyProviderViewModelFactory``. The latter gets our container (and uses it internally) with the registered View Model.
+Then we use ``LifecycleViewModelProvider`` which is central for View Model instance provisioning and leverage the existing factory passed in, ``DefaultLifecycleViewModelFactory``. The latter gets our container (and uses it internally) with the registered View Model.
 
 #### iOS
 
-Same way, let's create a minimalistic iOS app with the single screen, starting with FirstScreen.iOS / AppDelegate.cs:
+Same way, let's create a minimalistic iOS app with the single screen, starting with Sample.iOS / AppDelegate.cs:
 
 ```cs
-using FirstScreen.Core.Presentation.ViewModels;
-using FirstScreen.iOS.Views;
 using FlexiMvvm.Ioc;
 using FlexiMvvm.ViewModels;
 using Foundation;
 using UIKit;
+using Sample.Core.Presentation.ViewModels;
+using Sample.iOS.Views;
 
-namespace FirstScreen.iOS
+namespace Sample.iOS
 {
     [Register("AppDelegate")]
     public class AppDelegate : UIApplicationDelegate
@@ -235,21 +263,22 @@ namespace FirstScreen.iOS
             var container = new SimpleIoc();
             container.Register(() => new UserProfileViewModel());
 
-            ViewModelProvider.SetFactory(new DependencyProviderViewModelFactory(container));
+            LifecycleViewModelProvider.SetFactory(
+                new DefaultLifecycleViewModelFactory(container));
         }
     }
 }
+
 ```
 
-It has the same ``InitApp()`` logic as the Android version. As a root View Controller, our new ``UserProfileViewController`` is used. Let's add this new class, FirstScreen.iOS / Views / UserProfileViewController.cs:
+It has the same ``InitApp()`` logic as the Android version. As a root View Controller, our new ``UserProfileViewController`` is used. Let's add this, Sample.iOS / Views / UserProfileViewController.cs:
 
 ```cs
-using System;
-using FirstScreen.Core.Presentation.ViewModels;
 using FlexiMvvm.Bindings;
 using FlexiMvvm.Views;
+using Sample.Core.Presentation.ViewModels;
 
-namespace FirstScreen.iOS.Views
+namespace Sample.iOS.Views
 {
     public class UserProfileViewController : BindableViewController<UserProfileViewModel>
     {
@@ -283,31 +312,35 @@ namespace FirstScreen.iOS.Views
         }
     }
 }
+
 ```
 
 Generic ``BindableViewController`` is provided by FlexiMvvm, the similar way as for the Android Activity. It allows to specify needed Data Bindings to the source View Model.
 
 Then ``UserProfileViewController`` incapsulates the View it's going to work with and use it in Data Bindings definitions, within the ``Bind()`` method.
 
-The last but not least is the View, FirstScreen.iOS / Views / UserProfileView.cs:
+The last but not least is the View, Sample.iOS / Views / UserProfileView.cs:
 
 ```cs
-using System;
 using Cirrious.FluentLayouts.Touch;
-using FirstScreen.iOS.Themes;
 using FlexiMvvm.Views;
+using Sample.iOS.Themes;
 using UIKit;
 
-namespace FirstScreen.iOS.Views
+namespace Sample.iOS.Views
 {
     public class UserProfileView : LayoutView
     {
         private UILabel FirstNameLabel { get; set; }
+
         private UILabel LastNameLabel { get; set; }
+
         private UILabel EmailLabel { get; set; }
 
         public UITextField FirstName { get; set; }
+
         public UITextField LastName { get; set; }
+
         public UITextField Email { get; set; }
 
         public UIButton SaveButton { get; private set; }
@@ -388,6 +421,7 @@ namespace FirstScreen.iOS.Views
         }
     }
 }
+
 ```
 
 As a first observation, we're facing the **code-driven UI approach** for iOS. It has several reasons based on the Xamarin development experience in a team:
@@ -400,36 +434,16 @@ By overriding the ``SetupSubviews()`` method, we instanciate all child Views and
 
 In ``SetupLayout()`` we're building the View's hierarchy; in our case, it's just a flat list of child controls.
 
-Finally, in ``SetupLayoutConstraints()`` we're engaging FluentLayout to build the layout, bringing some ``Theme`` values, from the new static class, FirstScreen.iOS / Themes / Theme.cs:
+Finally, in ``SetupLayoutConstraints()`` we're engaging FluentLayout to build the layout, bringing some ``Theme`` values, from the new static class, Sample.iOS / Themes / Theme.cs:
 
 ```cs
 using System;
 using UIKit;
 
-namespace FirstScreen.iOS.Themes
+namespace Sample.iOS.Themes
 {
     internal static class Theme
     {
-        public static class Colors
-        {
-            public readonly static UIColor BackgroundColor = UIColor.White;
-            public readonly static UIColor LabelBodyColor = UIColor.LightGray;
-            public readonly static UIColor TintColor = UIColor.DarkGray;
-            public readonly static UIColor ButtonColor = UIColor.Blue;
-        }
-
-        public static class Dimensions
-        {
-            public readonly static nfloat LabelBodyHeight = 18;
-            public readonly static nfloat TextFieldRegularHeight = 36;
-            public readonly static nfloat ButtonRegularHeight = 20;
-
-            public readonly static nfloat Inset1x = 8;
-            public readonly static nfloat Inset2x = 16;
-            public readonly static nfloat Inset3x = 24;
-            public readonly static nfloat Inset6x = 48;
-        }
-
         public static UILabel AsRegularBodyStyle(this UILabel label, string text = null)
         {
             label.TextColor = Colors.LabelBodyColor;
@@ -457,8 +471,29 @@ namespace FirstScreen.iOS.Themes
 
             return button;
         }
+
+        public static class Colors
+        {
+            public static readonly UIColor BackgroundColor = UIColor.White;
+            public static readonly UIColor LabelBodyColor = UIColor.LightGray;
+            public static readonly UIColor TintColor = UIColor.DarkGray;
+            public static readonly UIColor ButtonColor = UIColor.Blue;
+        }
+
+        public static class Dimensions
+        {
+            public static readonly nfloat LabelBodyHeight = 18;
+            public static readonly nfloat TextFieldRegularHeight = 36;
+            public static readonly nfloat ButtonRegularHeight = 20;
+
+            public static readonly nfloat Inset1x = 8;
+            public static readonly nfloat Inset2x = 16;
+            public static readonly nfloat Inset3x = 24;
+            public static readonly nfloat Inset6x = 48;
+        }
     }
 }
+
 ```
 
 It's radically simple, just for the demonstration.
@@ -471,23 +506,27 @@ For now we may build and run the app, though let's add a tiny update to the View
 
 For View Model initialization, either ``InitializeAsync()`` or ``Initialize()`` may be used.
 
-> ``InitializeAsync`` calls its ``Initialize()`` synchronous counterpart method. So don't forget to call the base ``InitializeAsync`` when overriding it.
+> Starting from 0.10.7, FlexiMvvm shows whether the screen was re-created by the platform. Typically on Android, this is caused by the device rotation - current Activity is being destroyed and instantiated by OS again. On iOS, ``recreated`` parameter for a View Model is going to be always **false** as there's no such specifics there.
+
+> ``InitializeAsync`` calls its ``Initialize()`` synchronous counterpart method. So don't forget to call ``await base.InitializeAsync(recreated)`` when overriding it.
 
 So going back to ``UserProfileViewModel``, let's add the method:
 
 ```cs
-public override async Task InitializeAsync()
-{
-    await base.InitializeAsync();
 
-    FirstName = "Jeremy";
-    LastName = "Simpson";
-}
+        public override void Initialize(bool recreated)
+        {
+            base.Initialize(recreated);
+
+            FirstName = "Jeremy";
+            LastName = "Simpson";
+        }
+
 ```
 
 As a result, 
-- On start "Jeremy Simpson" values will be propagated by Data Bindings from View Model to UI
-- When editing and Saving, our View Model's ``Save()`` method will show in the Output that changed values are pushed back from UI into Data Properties
+- On start "Jeremy" and "Simpson" values will be propagated by Data Bindings from View Model to UI onto the First Name and Last Name text input fields;
+- When editing and saving, our View Model's ``Save()`` method will show in the Output that changed values are pushed back from UI into source Data Properties
 
 ---
 
