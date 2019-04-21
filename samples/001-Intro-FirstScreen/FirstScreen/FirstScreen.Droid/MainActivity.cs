@@ -1,29 +1,37 @@
-﻿using System;
-using Android.App;
+﻿using Android.App;
 using Android.OS;
-using Android.Runtime;
-using Android.Support.Design.Widget;
-using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
+using FirstScreen.Core.Presentation.ViewModels;
 using FlexiMvvm;
+using FlexiMvvm.Bindings;
+using FlexiMvvm.Ioc;
+using FlexiMvvm.ViewModels;
+using FlexiMvvm.Views;
 
 namespace FirstScreen.Droid
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
-    public class MainActivity : AppCompatActivity
+    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true, NoHistory = true)]
+    public class MainActivity : BindableAppCompatActivity<UserProfileViewModel>
     {
+        private EditText _firstName;
+        private EditText _lastName;
+        private EditText _email;
+        private Button _save;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            InitApp();
+
             base.OnCreate(savedInstanceState);
-            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+
             SetContentView(Resource.Layout.activity_main);
+            SetSupportActionBar(FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar));
 
-            Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
-            SetSupportActionBar(toolbar);
-
-            FloatingActionButton fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
-            fab.Click += FabOnClick;
+            _firstName = FindViewById<EditText>(Resource.Id.firstName);
+            _lastName = FindViewById<EditText>(Resource.Id.lastName);
+            _email = FindViewById<EditText>(Resource.Id.email);
+            _save = FindViewById<Button>(Resource.Id.save);
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
@@ -43,18 +51,34 @@ namespace FirstScreen.Droid
             return base.OnOptionsItemSelected(item);
         }
 
-        private void FabOnClick(object sender, EventArgs eventArgs)
+        public override void Bind(BindingSet<UserProfileViewModel> bindingSet)
         {
-            View view = (View)sender;
-            Snackbar.Make(view, "Replace with your own action", Snackbar.LengthLong)
-                .SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();
+            base.Bind(bindingSet);
+
+            bindingSet.Bind(_firstName)
+                .For(v => v.TextAndTextChangedBinding())
+                .To(vm => vm.FirstName);
+
+            bindingSet.Bind(_lastName)
+                .For(v => v.TextAndTextChangedBinding())
+                .To(vm => vm.LastName);
+
+            bindingSet.Bind(_email)
+                .For(v => v.TextAndTextChangedBinding())
+                .To(vm => vm.Email);
+
+            bindingSet.Bind(_save)
+              .For(v => v.ClickBinding())
+              .To(vm => vm.SaveCommand);
         }
 
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+        private void InitApp()
         {
-            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            var container = new SimpleIoc();
+            container.Register(() => new UserProfileViewModel());
 
-            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            LifecycleViewModelProvider.SetFactory(
+                new DefaultLifecycleViewModelFactory(container));
         }
     }
 }
