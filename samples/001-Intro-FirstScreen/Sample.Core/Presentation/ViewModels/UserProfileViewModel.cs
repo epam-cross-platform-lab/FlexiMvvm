@@ -29,6 +29,14 @@ namespace Sample.Core.Presentation.ViewModels
 
         public Command SaveCommand => new RelayCommand(Save);
 
+        public override void Initialize(bool recreated)
+        {
+            base.Initialize(recreated);
+
+            FirstName = "Jeremy";
+            LastName = "Simpson";
+        }
+
         private void Save()
         {
             System.Diagnostics.Debug.WriteLine($"Saving: {FirstName} {LastName}, {Email}...");
