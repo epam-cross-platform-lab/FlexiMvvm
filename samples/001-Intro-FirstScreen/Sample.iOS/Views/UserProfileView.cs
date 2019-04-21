@@ -1,9 +1,9 @@
 ﻿using Cirrious.FluentLayouts.Touch;
-using FirstScreen.iOS.Themes;
 using FlexiMvvm.Views;
+using Sample.iOS.Themes;
 using UIKit;
 
-namespace FirstScreen.iOS.Views
+namespace Sample.iOS.Views
 {
     public class UserProfileView : LayoutView
     {

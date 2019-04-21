@@ -1,7 +1,7 @@
 ﻿using System;
 using UIKit;
 
-namespace FirstScreen.iOS.Themes
+namespace Sample.iOS.Themes
 {
     internal static class Theme
     {

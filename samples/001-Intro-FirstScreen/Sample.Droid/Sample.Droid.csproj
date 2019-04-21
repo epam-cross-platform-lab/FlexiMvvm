@@ -10,8 +10,8 @@
     <TemplateGuid>{84dd83c5-0fe3-4294-9419-09e7c8ba324f}</TemplateGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FirstScreen.Droid</RootNamespace>
-    <AssemblyName>FirstScreen.Droid</AssemblyName>
+    <RootNamespace>Sample.Droid</RootNamespace>
+    <AssemblyName>Sample.Droid</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
@@ -114,9 +114,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FirstScreen.Core\FirstScreen.Core.csproj">
+    <ProjectReference Include="..\Sample.Core\Sample.Core.csproj">
       <Project>{ae1341aa-ae65-43af-952d-9ebdb7f75edd}</Project>
-      <Name>FirstScreen.Core</Name>
+      <Name>Sample.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

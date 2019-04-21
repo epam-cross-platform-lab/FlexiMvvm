@@ -1,3 +1,0 @@
-﻿[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:Element must begin with upper-case letter", Justification = "No", Scope = "namespace", Target = "~N:FirstScreen.iOS.Views")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:Element must begin with upper-case letter", Justification = "No", Scope = "namespace", Target = "~N:FirstScreen.iOS")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:Element must begin with upper-case letter", Justification = "<Pending>", Scope = "namespace", Target = "~N:FirstScreen.iOS.Themes")]

@@ -7,8 +7,8 @@
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TemplateGuid>{edc1b0fa-90cd-4038-8fad-98fe74adb368}</TemplateGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>FirstScreen.iOS</RootNamespace>
-    <AssemblyName>FirstScreen.iOS</AssemblyName>
+    <RootNamespace>Sample.iOS</RootNamespace>
+    <AssemblyName>Sample.iOS</AssemblyName>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
@@ -134,17 +134,13 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Themes\Theme.cs" />
-    <Compile Include="ViewController.cs" />
-    <Compile Include="ViewController.designer.cs">
-      <DependentUpon>ViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\UserProfileView.cs" />
     <Compile Include="Views\UserProfileViewController.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FirstScreen.Core\FirstScreen.Core.csproj">
+    <ProjectReference Include="..\Sample.Core\Sample.Core.csproj">
       <Project>{ae1341aa-ae65-43af-952d-9ebdb7f75edd}</Project>
-      <Name>FirstScreen.Core</Name>
+      <Name>Sample.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

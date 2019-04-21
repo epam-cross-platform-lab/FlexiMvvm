@@ -1,6 +1,6 @@
 ﻿using UIKit;
 
-namespace FirstScreen.iOS
+namespace Sample.iOS
 {
     public class Application
     {

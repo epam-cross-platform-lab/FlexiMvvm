@@ -2,14 +2,14 @@
 using Android.OS;
 using Android.Views;
 using Android.Widget;
-using FirstScreen.Core.Presentation.ViewModels;
 using FlexiMvvm;
 using FlexiMvvm.Bindings;
 using FlexiMvvm.Ioc;
 using FlexiMvvm.ViewModels;
 using FlexiMvvm.Views;
+using Sample.Core.Presentation.ViewModels;
 
-namespace FirstScreen.Droid
+namespace Sample.Droid
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true, NoHistory = true)]
     public class MainActivity : BindableAppCompatActivity<UserProfileViewModel>

@@ -1,7 +1,7 @@
 ﻿using FlexiMvvm.Commands;
 using FlexiMvvm.ViewModels;
 
-namespace FirstScreen.Core.Presentation.ViewModels
+namespace Sample.Core.Presentation.ViewModels
 {
     public class UserProfileViewModel : LifecycleViewModel
     {

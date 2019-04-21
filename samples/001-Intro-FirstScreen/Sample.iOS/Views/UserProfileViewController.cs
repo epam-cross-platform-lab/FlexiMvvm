@@ -1,8 +1,8 @@
-﻿using FirstScreen.Core.Presentation.ViewModels;
-using FlexiMvvm.Bindings;
+﻿using FlexiMvvm.Bindings;
 using FlexiMvvm.Views;
+using Sample.Core.Presentation.ViewModels;
 
-namespace FirstScreen.iOS.Views
+namespace Sample.iOS.Views
 {
     public class UserProfileViewController : BindableViewController<UserProfileViewModel>
     {

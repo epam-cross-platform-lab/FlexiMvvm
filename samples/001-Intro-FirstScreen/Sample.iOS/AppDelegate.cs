@@ -1,11 +1,11 @@
-﻿using FirstScreen.Core.Presentation.ViewModels;
-using FirstScreen.iOS.Views;
-using FlexiMvvm.Ioc;
+﻿using FlexiMvvm.Ioc;
 using FlexiMvvm.ViewModels;
 using Foundation;
+using Sample.Core.Presentation.ViewModels;
+using Sample.iOS.Views;
 using UIKit;
 
-namespace FirstScreen.iOS
+namespace Sample.iOS
 {
     [Register("AppDelegate")]
     public class AppDelegate : UIApplicationDelegate
