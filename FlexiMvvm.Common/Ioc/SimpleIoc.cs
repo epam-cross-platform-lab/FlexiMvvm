@@ -52,7 +52,7 @@ namespace FlexiMvvm.Ioc
                         $"returned \"null\" for the \"{TypeFormatter.FormatName(serviceType)}>\" type instance.");
                 }
 
-                return (T)instance;
+                return instance;
             }
 
             throw new InvalidOperationException(
