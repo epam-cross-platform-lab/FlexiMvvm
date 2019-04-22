@@ -15,19 +15,18 @@
 // =========================================================================
 
 using FlexiMvvm.ViewModels;
+using JetBrains.Annotations;
 
 namespace FlexiMvvm.Views
 {
-    /// <summary>
-    /// Defines the contract for a view which has a view model.
-    /// </summary>
-    /// <typeparam name="TViewModel">The type of the view model.</typeparam>
-    public interface IView<out TViewModel>
+    public interface IView
+    {
+    }
+
+    public interface IView<out TViewModel> : IView
         where TViewModel : class, IViewModel
     {
-        /// <summary>
-        /// Gets the view model.
-        /// </summary>
+        [NotNull]
         TViewModel ViewModel { get; }
     }
 }

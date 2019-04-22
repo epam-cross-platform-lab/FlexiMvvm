@@ -17,6 +17,7 @@
 using System;
 using FlexiMvvm.ViewModels;
 using FlexiMvvm.Views;
+using JetBrains.Annotations;
 using UIKit;
 
 namespace FlexiMvvm.Navigation
@@ -25,9 +26,9 @@ namespace FlexiMvvm.Navigation
     /// Defines the contract for backward navigation.
     /// </summary>
     /// <param name="navigationController">The source view navigation controller.</param>
-    /// <param name="sourceView">The source navigation view from which navigation is performed from.</param>
+    /// <param name="sourceView">The source view from which navigation is performed from.</param>
     /// <param name="animated">Determines if the transition is to be animated.</param>
-    public delegate void BackwardNavigationDelegate(UINavigationController navigationController, INavigationView<IViewModel> sourceView, bool animated);
+    public delegate void BackwardNavigationDelegate([NotNull] UINavigationController navigationController, [NotNull] INavigationView<IViewModel> sourceView, bool animated);
 
     /// <summary>
     /// Provides a set of backward navigation strategies.
@@ -38,11 +39,12 @@ namespace FlexiMvvm.Navigation
         /// Backward navigation using <see cref="UINavigationController.PopViewController(bool)"/> method.
         /// </summary>
         /// <returns>The backward navigation delegate.</returns>
+        [NotNull]
         public BackwardNavigationDelegate PopViewController()
         {
             return (navigationController, sourceView, animated) =>
             {
-                navigationController.PopViewController(animated);
+                navigationController.NotNull().PopViewController(animated);
             };
         }
 
@@ -51,15 +53,15 @@ namespace FlexiMvvm.Navigation
         /// </summary>
         /// <param name="targetView">The target view for navigation.</param>
         /// <returns>The backward navigation delegate.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="targetView"/> is <c>null</c>.</exception>
-        public BackwardNavigationDelegate PopToViewController(UIViewController targetView)
+        [NotNull]
+        public BackwardNavigationDelegate PopToViewController([NotNull] UIViewController targetView)
         {
             if (targetView == null)
                 throw new ArgumentNullException(nameof(targetView));
 
             return (navigationController, sourceView, animated) =>
             {
-                navigationController.PopToViewController(targetView, animated);
+                navigationController.NotNull().PopToViewController(targetView, animated);
             };
         }
 
@@ -67,24 +69,26 @@ namespace FlexiMvvm.Navigation
         /// Backward navigation using <see cref="UINavigationController.PopToRootViewController(bool)"/> method.
         /// </summary>
         /// <returns>The backward navigation delegate.</returns>
+        [NotNull]
         public BackwardNavigationDelegate PopToRootViewController()
         {
             return (navigationController, sourceView, animated) =>
             {
-                navigationController.PopToRootViewController(animated);
+                navigationController.NotNull().PopToRootViewController(animated);
             };
         }
 
         /// <summary>
-        /// Backward navigation using <see cref="INavigationView{TViewModel}.DismissViewController(bool, Action?)"/> method.
+        /// Backward navigation using <see cref="INavigationView{TViewModel}.DismissViewController(bool, Action)"/> method.
         /// </summary>
-        /// <param name="completionHandler">The method to invoke when the animation completes. Can be <c>null</c>.</param>
+        /// <param name="completionHandler">The method to invoke when the animation completes.</param>
         /// <returns>The backward navigation delegate.</returns>
-        public BackwardNavigationDelegate DismissViewController(Action? completionHandler = null)
+        [NotNull]
+        public BackwardNavigationDelegate DismissViewController([CanBeNull] Action completionHandler = null)
         {
             return (navigationController, sourceView, animated) =>
             {
-                sourceView.DismissViewController(animated, completionHandler);
+                sourceView.NotNull().DismissViewController(animated, completionHandler);
             };
         }
     }

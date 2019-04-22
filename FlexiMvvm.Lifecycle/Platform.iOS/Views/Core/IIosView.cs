@@ -15,13 +15,15 @@
 // =========================================================================
 
 using FlexiMvvm.Views.Keyboard;
+using JetBrains.Annotations;
 
 namespace FlexiMvvm.Views.Core
 {
-    public interface IIosView
+    public interface IIosView : IView
     {
         bool HandleKeyboard { get; }
 
-        KeyboardHandler? KeyboardHandler { get; }
+        [CanBeNull]
+        KeyboardHandler KeyboardHandler { get; }
     }
 }

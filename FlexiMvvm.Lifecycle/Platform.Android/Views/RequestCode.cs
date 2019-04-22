@@ -22,7 +22,7 @@ namespace FlexiMvvm.Views
 {
     public sealed class RequestCode
     {
-        public const int InvalidRequestCode = -1;
+        private const int InvalidRequestCode = -1;
 
         private IBundle? _state;
 

@@ -16,23 +16,30 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FlexiMvvm.Formatters;
 using FlexiMvvm.ViewModels;
+using JetBrains.Annotations;
 
 namespace FlexiMvvm.Views.Core
 {
     internal static class ViewCache
     {
-        private static List<WeakReference<IView<IViewModel>>>? _viewsWeakReferences;
+        [CanBeNull]
+        [ItemNotNull]
+        private static List<WeakReference<IView<IViewModel>>> _viewsWeakReferences;
 
+        [NotNull]
+        [ItemNotNull]
         private static List<WeakReference<IView<IViewModel>>> ViewsWeakReferences =>
             _viewsWeakReferences ?? (_viewsWeakReferences = new List<WeakReference<IView<IViewModel>>>());
 
-        internal static TView Get<TView, TViewModel>(TViewModel viewModel)
+        [NotNull]
+        internal static TView Get<TView, TViewModel>([NotNull] TViewModel viewModel)
             where TView : class, IView<TViewModel>
             where TViewModel : class, IViewModel
         {
-            TView? view = null;
+            TView view = null;
 
             if (_viewsWeakReferences != null)
             {
@@ -49,18 +56,25 @@ namespace FlexiMvvm.Views.Core
 
             if (view == null)
             {
-                throw new ArgumentException($"View instance is missing for the provided '{TypeFormatter.FormatName(viewModel.GetType())}' view model.", nameof(viewModel));
+                throw new ArgumentException($"View instance is missing for provided \"{TypeFormatter.FormatName(viewModel.GetType())}\" view model.", nameof(viewModel));
             }
 
             return view;
         }
 
-        internal static void Add(IView<IViewModel> view)
+        [CanBeNull]
+        internal static TView GetLastOrDefault<TView>()
+            where TView : class, IView<IViewModel>
+        {
+            return (TView)_viewsWeakReferences?.LastOrDefault()?.GetTarget();
+        }
+
+        internal static void Add([NotNull] IView<IViewModel> view)
         {
             ViewsWeakReferences.Add(new WeakReference<IView<IViewModel>>(view));
         }
 
-        internal static void Remove(IView<IViewModel> view)
+        internal static void Remove([NotNull] IView<IViewModel> view)
         {
             foreach (var viewWeakReference in ViewsWeakReferences)
             {

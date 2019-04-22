@@ -14,34 +14,22 @@
 // limitations under the License.
 // =========================================================================
 
+using System;
 using FlexiMvvm.ViewModels;
-using FlexiMvvm.Views;
+using FlexiMvvm.Views.Core;
 using JetBrains.Annotations;
 
-namespace FlexiMvvm.Navigation
+namespace FlexiMvvm.Views
 {
-    /// <summary>
-    /// Defines the contract for backward navigation.
-    /// </summary>
-    /// <param name="sourceView">The source view from which navigation is performed from.</param>
-    public delegate void BackwardNavigationDelegate([NotNull] INavigationView<IViewModel> sourceView);
-
-    /// <summary>
-    /// Provides a set of backward navigation strategies.
-    /// </summary>
-    public sealed class BackwardNavigationStrategy
+    public static class ViewProvider
     {
-        /// <summary>
-        /// Backward navigation using <see cref="INavigationView{TViewModel}.Finish()"/> method.
-        /// </summary>
-        /// <returns>The backward navigation delegate.</returns>
         [NotNull]
-        public BackwardNavigationDelegate Finish()
+        public static IView<IViewModel> Get([NotNull] IViewModel viewModel)
         {
-            return sourceView =>
-            {
-                sourceView.NotNull().Finish();
-            };
+            if (viewModel == null)
+                throw new ArgumentNullException(nameof(viewModel));
+
+            return ViewCache.Get<IView<IViewModel>, IViewModel>(viewModel);
         }
     }
 }

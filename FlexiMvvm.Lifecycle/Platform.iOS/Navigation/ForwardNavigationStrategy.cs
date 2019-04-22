@@ -15,6 +15,7 @@
 // =========================================================================
 
 using System;
+using JetBrains.Annotations;
 using UIKit;
 
 namespace FlexiMvvm.Navigation
@@ -25,7 +26,7 @@ namespace FlexiMvvm.Navigation
     /// <param name="navigationController">The source view navigation controller.</param>
     /// <param name="targetView">The target view for navigation.</param>
     /// <param name="animated">Determines if the transition is to be animated.</param>
-    public delegate void ForwardNavigationDelegate(UINavigationController navigationController, UIViewController targetView, bool animated);
+    public delegate void ForwardNavigationDelegate([NotNull] UINavigationController navigationController, [NotNull] UIViewController targetView, bool animated);
 
     /// <summary>
     /// Provides a set of forward navigation strategies.
@@ -36,36 +37,39 @@ namespace FlexiMvvm.Navigation
         /// Forward navigation using <see cref="UINavigationController.PushViewController(UIViewController, bool)"/> method.
         /// </summary>
         /// <returns>The forward navigation delegate.</returns>
+        [NotNull]
         public ForwardNavigationDelegate PushViewController()
         {
             return (navigationController, targetView, animated) =>
             {
-                navigationController.PushViewController(targetView, animated);
+                navigationController.NotNull().PushViewController(targetView.NotNull(), animated);
             };
         }
 
         /// <summary>
-        /// Forward navigation using <see cref="UIViewController.PresentViewController(UIViewController, bool, Action?)"/> method.
+        /// Forward navigation using <see cref="UIViewController.PresentViewController(UIViewController, bool, Action)"/> method.
         /// </summary>
-        /// <param name="completionHandler">The method to invoke when the animation completes. Can be <c>null</c>.</param>
+        /// <param name="completionHandler">The method to invoke when the animation completes.</param>
         /// <returns>The forward navigation delegate.</returns>
-        public ForwardNavigationDelegate PresentViewController(Action? completionHandler = null)
+        [NotNull]
+        public ForwardNavigationDelegate PresentViewController([CanBeNull] Action completionHandler = null)
         {
             return (navigationController, targetView, animated) =>
             {
-                navigationController.PresentViewController(targetView, animated, completionHandler);
+                navigationController.NotNull().PresentViewController(targetView.NotNull(), animated, completionHandler);
             };
         }
 
         /// <summary>
-        /// Forward navigation using <see cref="UINavigationController.SetViewControllers(UIViewController[], bool)"/> method. Target view delegate parameter is passed as a value.
+        /// Forward navigation using <see cref="UINavigationController.SetViewControllers(UIViewController[], bool)"/> method.
         /// </summary>
         /// <returns>The forward navigation delegate.</returns>
+        [NotNull]
         public ForwardNavigationDelegate SetViewControllers()
         {
             return (navigationController, targetView, animated) =>
             {
-                navigationController.SetViewControllers(new UIViewController[] { targetView }, animated);
+                navigationController.NotNull().SetViewControllers(new UIViewController[] { targetView.NotNull() }, animated);
             };
         }
 
@@ -74,15 +78,12 @@ namespace FlexiMvvm.Navigation
         /// </summary>
         /// <param name="viewControllers">The array of view controllers to be set. Target view delegate parameter will be ignored.</param>
         /// <returns>The forward navigation delegate.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="viewControllers"/> is <c>null</c>.</exception>
-        public ForwardNavigationDelegate SetViewControllers(UIViewController[] viewControllers)
+        [NotNull]
+        public ForwardNavigationDelegate SetViewControllers([CanBeNull] UIViewController[] viewControllers)
         {
-            if (viewControllers == null)
-                throw new ArgumentNullException(nameof(viewControllers));
-
             return (navigationController, targetView, animated) =>
             {
-                navigationController.SetViewControllers(viewControllers, animated);
+                navigationController.NotNull().SetViewControllers(viewControllers, animated);
             };
         }
     }
