@@ -87,6 +87,10 @@ or even a better approach (which is more consistent with the Android one):
 
 - CanExecuteChanged event for a command not raised during the initial execution of bindings.
 
+### Samples
+
+Feel free to get familiar with this release based on [Xamarin Starter Kit](https://github.com/ypapou/Xamarin-Started-Kit). 
+
 ## v.0.10.6 (preview)
 
 ### New functionality
