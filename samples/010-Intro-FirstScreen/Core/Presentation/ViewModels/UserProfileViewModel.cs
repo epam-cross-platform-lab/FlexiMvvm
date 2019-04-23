@@ -1,21 +1,27 @@
 ﻿using System.Threading.Tasks;
-using System.Windows.Input;
 using FirstScreen.Core.Infrastructure.Data;
+using FirstScreen.Core.Presentation.Navigation;
+using FlexiMvvm.Commands;
 using FlexiMvvm.ViewModels;
 
 namespace FirstScreen.Core.Presentation.ViewModels
 {
-    public class UserProfileViewModel : ViewModel<UserProfileParameters>
+    public class UserProfileViewModel : ViewModel<UserProfileParameters>, IViewModelWithResultHandler
     {
         private readonly IUserProfileRepository _userProfileRepository;
+        private INavigationService _navigationService;
 
         private string _firstName;
         private string _lastName;
         private string _email;
+        private string _language;
 
-        public UserProfileViewModel(IUserProfileRepository userProfileRepository)
+        public UserProfileViewModel(
+            IUserProfileRepository userProfileRepository,
+            INavigationService navigationService)
         {
             _userProfileRepository = userProfileRepository;
+            _navigationService = navigationService;
         }
 
         ////
@@ -38,23 +44,51 @@ namespace FirstScreen.Core.Presentation.ViewModels
             set => SetValue(ref _email, value);
         }
 
-        ////
-
-        public ICommand SaveCommand => CommandProvider.Get(Save);
-
-        ////
-
-        public override async Task InitializeAsync()
+        public string Language
         {
-            await base.InitializeAsync();
+            get => _language;
+            set => SetValue(ref _language, value);
+        }
 
-            if (!string.IsNullOrEmpty(Parameters.Email))
+        ////
+
+        public Command SaveCommand => CommandProvider.Get(Save);
+
+        ////
+
+        public override async Task InitializeAsync(UserProfileParameters parameters)
+        {
+            await base.InitializeAsync(parameters);
+
+            if (!string.IsNullOrEmpty(parameters.Email))
             {
-                var profile = await _userProfileRepository.Get(Parameters.Email);
+                var profile = await _userProfileRepository.Get(parameters.Email);
 
                 Email = profile.Email;
                 FirstName = profile.FirstName;
                 LastName = profile.LastName;
+                Language = profile.Language;
+            }
+        }
+
+        ////
+
+        public async void HandleResult(ResultCode resultCode, Result result)
+        {
+            if (result is SelectedLanguageResult selectedLanguageResult)
+            {
+                if (resultCode == ResultCode.Ok && selectedLanguageResult.IsSelected)
+                {
+                    Language = selectedLanguageResult.SelectedLanguage;
+
+                    await _userProfileRepository.Update(new UserProfile
+                    {
+                        Email = Email,
+                        FirstName = FirstName,
+                        LastName = LastName,
+                        Language = Language
+                    });
+                }
             }
         }
 
@@ -66,8 +100,11 @@ namespace FirstScreen.Core.Presentation.ViewModels
             {
                 Email = Email,
                 FirstName = FirstName,
-                LastName = LastName
+                LastName = LastName,
+                Language = Language
             });
+
+            _navigationService.NavigateToLanguages(this);
         }
     }
 }

@@ -33,7 +33,7 @@ namespace FlexiMvvm.Views.Core
         {
             TView? view = null;
 
-            for (var i = ViewsWeakReferences.Count - 1; i > -1;)
+            for (var i = ViewsWeakReferences.Count - 1; i > -1; i--)
             {
                 var viewWeakReference = ViewsWeakReferences[i];
 
@@ -45,8 +45,6 @@ namespace FlexiMvvm.Views.Core
 
                         break;
                     }
-
-                    i--;
                 }
                 else
                 {

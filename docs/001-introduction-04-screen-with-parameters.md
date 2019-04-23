@@ -2,17 +2,17 @@
 
 ---
 
-# Screen with Parameters
+# Navigation with Parameters
 
-Usually while navigating to a screen, we need to pass some parameters visible by View Model to run appropriate initialization. iOS and Android have completely different native approaches how to do this.
-- On iOS we can simply instanciate new View Controller instance and store needed data in Properties
-- On Android things get complicated slightly as navigation from an Activity or settlement a Fragment, requires the use of the ``Bundle`` instance.
+Usually while navigating to a screen, we need to pass some parameters visible by target View Model to run appropriate initialization. iOS and Android have completely different native approaches to do this.
+- On iOS we can simply instantiate a new View Controller instance and store needed data in its custom Properties
+- On Android things get complicated slightly as navigation from an Activity or settlement a Fragment requires the use of the ``Bundle`` instance.
 
 Let's reuse the previous [Navigation](001-introduction-03-navigation.md) tutorial to pass some parameters onto the User Profile screen.
 
 ### Parameters type
 
-We add a new custom Parameters type, FirstScreen.Core / Presentation / ViewModels / UserProfileParameters.cs:
+We're adding a new custom Parameters type, FirstScreen.Core / Presentation / ViewModels / UserProfileParameters.cs:
 
 ```cs
 namespace FirstScreen.Core.Presentation.ViewModels
@@ -33,7 +33,7 @@ namespace FirstScreen.Core.Presentation.ViewModels
 }
 ```
 
-So it has a single ``Email`` property the target View Model will be interested in to retrieve while initializing. Base class is used to inherit the parameters propagation via native APIs - and we can see in ``Email``'s setter and getter the ``Bundle`` entry property from the base class is used. It provides the wide range of methods to get or set primitive types. Internally, the data preserved as a dictionary on iOS, or as a native Bundle on Android.
+So it has a single ``Email`` property the target View Model will be interested in to retrieve while initializing. FlexiMvvm's ``Parameters`` base class is used to inherit its capabilities to propagate parameters, as we can see in ``Email``'s setter and getter the ``Bundle`` entry property is used for that. It provides the wide range of methods to get or set values. Internally, the data preserved transparently as a dictionary on iOS, or as a native Bundle on Android.
 
 ![Bundle](001-introduction-04-screen-with-parameters/010-bundle.png)
 
@@ -41,7 +41,7 @@ So it has a single ``Email`` property the target View Model will be interested i
 
 Having ``UserProfileParameters``, we update ``UserProfileViewModel``:
 1. Making it generic
-2. Using base ``Parameters`` property which is strongly typed now and provides the ``Email`` passed in.
+2. Overriding ``InitializeAsync()`` which provides the needed parameters instance.
 
 ```cs
 
@@ -57,12 +57,12 @@ namespace FirstScreen.Core.Presentation.ViewModels
 
         //// ... some existing code is hidden for convenience
 
-        public override async Task InitializeAsync()
+        public override async Task InitializeAsync(UserProfileParameters parameters)
         {
-            await base.InitializeAsync();
+            await base.InitializeAsync(parameters);
 
             System.Diagnostics.Debug.WriteLine(
-                $"Using Parameters... Email = {Parameters.Email}");
+                $"Using Parameters... Email = {parameters.Email}");
         }        
 
         //// ... some existing code is hidden for convenience
@@ -89,7 +89,7 @@ namespace FirstScreen.Core.Presentation.Navigation
 
 #### Android
 
-There's a slight update on Android ``NavigationService`` to pass the Parameters object, FirstScreen.Droid / Navigation / NavigationService.cs:
+There's a slight update on Android ``NavigationService`` to allow a source View Model to pass the Parameters object, FirstScreen.Droid / Navigation / NavigationService.cs:
 
 ```cs
 using Android.Content;
@@ -105,9 +105,11 @@ namespace FirstScreen.Droid.Navigation
         public void NavigateToUserProfile(EntryViewModel from, UserProfileParameters parameters)
         {
             var splashScreenActivity = GetActivity<SplashScreenActivity, EntryViewModel>(from);
+
             var intent = new Intent(splashScreenActivity, typeof(UserProfileActivity));
             intent.AddFlags(ActivityFlags.ClearTask | ActivityFlags.ClearTop | ActivityFlags.NewTask);
             intent.PutParameters(parameters);
+
             splashScreenActivity.StartActivity(intent);
         }
     }
@@ -211,4 +213,4 @@ namespace FirstScreen.Core.Presentation.ViewModels
 ```
 ---
 
-[Next: ...](index.md)
+[Next: Navigation for a Result](001-introduction-05-result.md)
