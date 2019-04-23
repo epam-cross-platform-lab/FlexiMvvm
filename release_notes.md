@@ -1,5 +1,11 @@
 # FlexiMvvm Release Notes
 
+## v.0.10.8 (preview)
+
+### Bug fixes
+
+- Navigation crashes from time to time.
+
 ## v.0.10.7 (preview)
 
 ### New functionality
@@ -89,7 +95,7 @@ or even a better approach (which is more consistent with the Android one):
 
 ### Samples
 
-Feel free to get familiar with this release based on [Xamarin Starter Kit](https://github.com/ypapou/Xamarin-Started-Kit). 
+Feel free to get familiar with this release based on [Xamarin Starter Kit](https://github.com/ypapou/Xamarin-Starter-Kit). 
 
 ## v.0.10.6 (preview)
 

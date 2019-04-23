@@ -3,9 +3,9 @@
         <RootNamespace>FlexiMvvm</RootNamespace>
         <PackageTags>epam, xamarin, android, xamarin.android, monodroid, ios, xamarin.ios, monotouch, flexi, mvvm, fleximvvm, framework, kit</PackageTags>
         <Product>$(AssemblyName) ($(TargetFramework))</Product>
-        <AssemblyVersion>0.10.7.0</AssemblyVersion>
-        <AssemblyFileVersion>0.10.7.0</AssemblyFileVersion>
-        <Version>0.10.7-prerelease</Version>
+        <AssemblyVersion>0.10.8.0</AssemblyVersion>
+        <AssemblyFileVersion>0.10.8.0</AssemblyFileVersion>
+        <Version>0.10.8-prerelease</Version>
         <Authors>EPAM Systems</Authors>
         <Owners>EPAM Systems</Owners>
         <NeutralLanguage>en</NeutralLanguage>
