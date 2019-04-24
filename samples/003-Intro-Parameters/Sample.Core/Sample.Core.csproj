@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Sample.Core</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Presentation\Navigation\INavigationService.cs" />
+    <Compile Include="Presentation\ViewModels\EntryViewModel.cs" />
+    <Compile Include="Presentation\ViewModels\UserProfileParameters.cs" />
+    <Compile Include="Presentation\ViewModels\UserProfileViewModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FlexiMvvm.Lifecycle.PreRelease" Version="0.10.7-prerelease" />
+  </ItemGroup>
+
+</Project>

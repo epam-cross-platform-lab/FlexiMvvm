@@ -1,0 +1,4 @@
+<resources>
+  <dimen name="main_margin">16dp</dimen>
+  <dimen name="main_button_min_width">80dp</dimen>
+</resources>
