@@ -8,8 +8,11 @@
   <ItemGroup>
     <Compile Include="Presentation\Navigation\INavigationService.cs" />
     <Compile Include="Presentation\ViewModels\EntryViewModel.cs" />
-    <Compile Include="Presentation\ViewModels\UserProfileParameters.cs" />
     <Compile Include="Presentation\ViewModels\UserProfileViewModel.cs" />
+    <Compile Include="Presentation\ViewModels\UserProfileParameters.cs" />
+    <Compile Include="Presentation\Navigation\SelectedLanguageResult.cs" />
+    <Compile Include="Presentation\ViewModels\LanguagesViewModel.cs" />
+    <Compile Include="Presentation\ViewModels\Language.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -148,7 +148,7 @@ namespace Sample.Core.Presentation.Navigation
     {
         //// ... some existing code is hidden for convenience
 
-        void NavigateToLanguages(ILifecycleViewModelWithResultHandler from);
+        void NavigateToLanguages(ILifecycleViewModel from);
 
         void NavigateBack(LanguagesViewModel from, ResultCode code, SelectedLanguageResult result);
     }
@@ -156,8 +156,8 @@ namespace Sample.Core.Presentation.Navigation
 
 ```
 
-Proceeding to the Languages list screen with ``NavigateToLanguages()`` is basic and shown in the previous tutorials. The only note that we require a source View Model which is capable to handle the result, with the ``ILifecycleViewModelWithResultHandler`` parameter.
-Navigating back from Languages list to the User Profile will be possible with the ``NavigateBack()`` method, providing result code and instance.
+Proceeding to the Languages list screen with ``NavigateToLanguages()`` is basic and shown in the previous tutorials.
+Navigating back from Languages list to the User Profile back with the ``NavigateBack()`` method is the central point of our attention so far. 
 
 #### Android
 
@@ -178,15 +178,16 @@ namespace Sample.Droid.Navigation
     {
         //// ... some existing code is hidden for convenience 
 
-        public void NavigateToLanguages(ILifecycleViewModelWithResultHandler from)
+        public void NavigateToLanguages(ILifecycleViewModel from)
         {
             var view = NavigationViewProvider.Get(from);
-            NavigateForResult<LanguagesActivity, SelectedLanguageResult>(view);
+            Navigate<LanguagesActivity>(view);
 
             /* Here's what is approximately done by Navigate() above:
 
+            var requestCode = new RequestCode();
+            var code = requestCode.GetFor<DefaultResultMapper<SelectedLanguageResult>>();
             var source = view.GetActivity();
-            var code = view.RequestCode.GetFor<DefaultResultMapper<SelectedLanguageResult>>();
             var intent = new Intent(source, typeof(LanguagesActivity));
             source.StartActivityForResult(intent, code);
 
@@ -213,64 +214,58 @@ namespace Sample.Droid.Navigation
 
 ```
 
-Again we use shorthand navigation here with ``NavigateForResult()`` and ``NavigateBack()`` base methods, though the commented sections provide some insight how they're implemented by FlexiMvvm, using Android Intent.
-
-``LanguagesActivity`` is missing now. As it's out of this tutorial scope - this may be any Android screen which can provide the result. The [complete sample contains](https://github.com/epam-xamarin-lab/FlexiMvvm/blob/master/samples/004-Intro-Result/Sample.Droid/Views/LanguagesActivity.cs) a very basic ``RecyclerView`` driven list screen the User can choose the Language from. Basically this new screen executes a ``SelectLanguage`` command of the ``LanguagesViewModel``, which leads to the results back propagation we have implemented above. ``LanguagesActivity`` is reviewed in detail in the related [Data Bindings](001-introduction-06-data-bindings.md) tutorial.
+``LanguagesActivity`` is missing now. As it's out of this tutorial scope - this may be any Android screen which can provide the result. The [complete sample contains](https://github.com/epam-xamarin-lab/FlexiMvvm/blob/master/samples/004-Intro-Result/Droid/Views/LanguagesActivity.cs) a very basic ``RecyclerView`` driven list screen the User can choose the Language from. Basically this new screen executes a ``SelectLanguage`` command of the ``LanguagesViewModel``, which leads to the results back propagation we have implemented above. ``LanguagesActivity`` is reviewed in detail in the related [Data Bindings](index.md) tutorial.
 
 Regarding ``NavigateBack()``, we see that Android Intent is leveraged here to pass the ``SelectedLanguageResult`` result instance to make it available for our ``UserProfileViewModel`` View Model.
 
 #### iOS
 
-Sample.iOS / Navigation / NavigationService.cs:
+FirstScreen.iOS / Navigation / NavigationService.cs:
 
 ```cs
-using System;
+using Android.Content;
 using FlexiMvvm.Navigation;
 using FlexiMvvm.ViewModels;
+using FlexiMvvm.Views;
 using Sample.Core.Presentation.Navigation;
 using Sample.Core.Presentation.ViewModels;
-using Sample.iOS.Views;
+using Sample.Droid.Views;
 
-namespace Sample.iOS.Navigation
+namespace Sample.Droid.Navigation
 {
     public class AppNavigationService : NavigationService, INavigationService
     {
         //// ... some existing code is hidden for convenience
 
-        public void NavigateToLanguages(ILifecycleViewModelWithResultHandler from)
+        public void NavigateToLanguages(UserProfileViewModel from)
         {
-            var view = NavigationViewProvider.Get(from);
-            var target = new LanguagesViewController();
-            NavigateForResult<LanguagesViewController, SelectedLanguageResult>(view, target, true);
+            var controller = GetViewController<UserProfileViewController, UserProfileViewModel>(from);
 
-            /* Here's what is done by Navigate() above:
+            var targetController = new LanguagesViewController();
+            targetController.ResultSetWeakSubscribe(controller.HandleResult);
 
-            target.ResultSetWeakSubscribe(view.HandleResult);
-            view.GetNavigationController().PushViewController(target, true);
-
-            */
+            controller
+                .GetNavigationController()
+                .PushViewController(targetController, animated:true);
         }
 
         public void NavigateBack(LanguagesViewModel from, ResultCode code, SelectedLanguageResult result)
         {
-            var view = NavigationViewProvider.Get(from);
-            NavigateBack(view, code, result, true);
+            var controller = GetViewController<LanguagesViewController, LanguagesViewModel>(from);
+            
+            controller.SetResult(code, result);
 
-            /* Here's what is done by Navigate() above:
-
-            view.SetResult(code, result);
-            view.GetNavigationController().PopViewController(true);
-
-            */
+            controller
+                .GetNavigationController()
+                .PopViewController(animated:true);
         }
     }
 }
-
 ```
 
-The commented sections explain how the navigation is implemented on iOS. When moving forward, a weak reference subscription is created, to invoke the ``HandleResult()`` method on the Result *receiving* View Controller when ready. When moving back, this invocation is triggered via ``SetResult()`` on the *providing* View Controller.
+On iOS we see the usage of the native UINavigationController retrieved safely by ``GetNavigationController()`` FlexiMvvm extension method. The trick here is with the ``ResultSetWeakSubscribe()`` which subscribes via a weak reference to the Result and ``SetResult()`` which raises the Result propagation.
 
-Again, missing iOS Languages list view screen to select a Language for the result is out of scope of this tutorial, but is reviewed in detail in the related one: [Data Bindings](001-introduction-06-data-bindings.md). For now, the [complete sample](https://github.com/epam-xamarin-lab/FlexiMvvm/blob/master/samples/004-Intro-Result/Sample.iOS/Views/LanguagesViewController.cs) may be reviewed.
+> Again, iOS Languages list view screen to select a Language for the result is out of scope of this tutorial - this may be any iOS screen which raises the ``SelectLanguage`` command of the ``LanguagesViewModel`` we have built above. But this [sample shows](https://github.com/epam-xamarin-lab/FlexiMvvm/blob/master/samples/010-Intro-FirstScreen/iOS/Views/LanguagesViewController.cs) a trivial approach to bind the view's event with the ViewModel's ``SelectLanguage`` command.
 
 ---
 
