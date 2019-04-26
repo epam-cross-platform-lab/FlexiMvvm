@@ -109,7 +109,6 @@ namespace FlexiMvvm.Views.Core
         private ResultCode _resultCode = ResultCode.Canceled;
         private Result? _result;
         private bool _isViewModelCreated;
-        private Task _viewModelAsyncInitialization = Task.CompletedTask;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewLifecycleDelegate{TView, TViewModel}"/> class.
@@ -143,7 +142,7 @@ namespace FlexiMvvm.Views.Core
 
             if (_isViewModelCreated)
             {
-                _viewModelAsyncInitialization = View.InitializeViewModelAsync(false);
+                View.InitializeViewModelAsync(false);
                 _isViewModelCreated = false;
             }
         }
@@ -167,7 +166,7 @@ namespace FlexiMvvm.Views.Core
         }
 
         /// <inheritdoc />
-        public override async void HandleResult(object sender, ResultSetEventArgs args)
+        public override void HandleResult(object sender, ResultSetEventArgs args)
         {
             if (sender == null)
                 throw new ArgumentNullException(nameof(sender));
@@ -176,7 +175,6 @@ namespace FlexiMvvm.Views.Core
 
             if (View.ViewModel is ILifecycleViewModelWithResultHandler viewModelWithResultHandler)
             {
-                await _viewModelAsyncInitialization;
                 viewModelWithResultHandler.HandleResult(args.ResultCode, args.Result);
             }
         }

@@ -110,7 +110,6 @@ namespace FlexiMvvm.Views.Core
         private bool _isViewRecreated;
         private string? _viewModelKey;
         private bool _isViewModelCreated;
-        private Task _viewModelAsyncInitialization = Task.CompletedTask;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewLifecycleDelegate{TView, TViewModel}"/> class.
@@ -148,13 +147,13 @@ namespace FlexiMvvm.Views.Core
 
             if (_isViewModelCreated)
             {
-                _viewModelAsyncInitialization = View.InitializeViewModelAsync(_isViewRecreated);
+                View.InitializeViewModelAsync(_isViewRecreated);
                 _isViewModelCreated = false;
             }
         }
 
         /// <inheritdoc />
-        public override async void OnActivityResult(int requestCode, Android.App.Result resultCode, Intent? data)
+        public override void OnActivityResult(int requestCode, Android.App.Result resultCode, Intent? data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
 
@@ -164,7 +163,6 @@ namespace FlexiMvvm.Views.Core
 
                 if (resultMapper != null)
                 {
-                    await _viewModelAsyncInitialization;
                     viewModelWithResultHandler.HandleResult(resultCode, resultMapper.Map(data));
                 }
             }
