@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FlexiMvvm.Common.PreRelease" Version="0.10.8-prerelease" />
+    <PackageReference Include="FlexiMvvm.Essentials.PreRelease" Version="0.10.8-prerelease" />
+    <PackageReference Include="FlexiMvvm.Lifecycle.PreRelease" Version="0.10.8-prerelease" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.Build.Tasks.v4.0">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.1\Microsoft.Build.Tasks.v4.0.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
