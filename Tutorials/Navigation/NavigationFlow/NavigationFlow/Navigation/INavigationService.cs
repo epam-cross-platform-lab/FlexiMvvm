@@ -17,7 +17,8 @@ namespace NavigationFlow.Core.Navigation
         void NavigateBack<TResult>(
             ILifecycleViewModelWithResult<TResult> fromViewModel,
             ResultCode resultCode,
-            TResult result) where TResult : Result;
+            TResult result)
+            where TResult : Result;
 
         void NavigateBack(FirstViewModel fromViewModel, ResultCode resultCode, FlowResult result);
 

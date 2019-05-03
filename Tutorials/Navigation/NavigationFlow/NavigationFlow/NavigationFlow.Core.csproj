@@ -2,18 +2,26 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>default</LangVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Bootstrapper\BootstrapperConfigExtensions.cs" />
+    <Compile Include="Bootstrapper\CoreBootstrapper.cs" />
+    <Compile Include="Navigation\INavigationService.cs" />
+    <Compile Include="ViewModels\CustomFlow\CustomFlowNavigationViewModel.cs" />
+    <Compile Include="ViewModels\CustomFlow\FirstViewModel.cs" />
+    <Compile Include="ViewModels\CustomFlow\FlowResult.cs" />
+    <Compile Include="ViewModels\CustomFlow\SecondViewModel.cs" />
+    <Compile Include="ViewModels\CustomFlow\ThirdViewModel.cs" />
+    <Compile Include="ViewModels\EntryViewModel.cs" />
+    <Compile Include="ViewModels\HomeViewModel.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FlexiMvvm.Common.PreRelease" Version="0.10.8-prerelease" />
     <PackageReference Include="FlexiMvvm.Essentials.PreRelease" Version="0.10.8-prerelease" />
     <PackageReference Include="FlexiMvvm.Lifecycle.PreRelease" Version="0.10.8-prerelease" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Microsoft.Build.Tasks.v4.0">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.1\Microsoft.Build.Tasks.v4.0.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>

@@ -10,6 +10,11 @@ namespace NavigationFlow.Core.ViewModels
         private readonly INavigationService _navigationService;
         private string _result;
 
+        public HomeViewModel(INavigationService navigationService)
+        {
+            _navigationService = navigationService;
+        }
+
         public string Result
         {
             get => _result;
@@ -17,11 +22,6 @@ namespace NavigationFlow.Core.ViewModels
         }
 
         public ICommand StartSeparateFlowCommand => CommandProvider.Get(StartFlow);
-
-        public HomeViewModel(INavigationService navigationService)
-        {
-            _navigationService = navigationService;
-        }
 
         private void StartFlow()
         {
