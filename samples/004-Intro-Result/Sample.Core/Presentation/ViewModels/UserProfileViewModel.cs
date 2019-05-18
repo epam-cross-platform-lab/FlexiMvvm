@@ -6,10 +6,17 @@ namespace Sample.Core.Presentation.ViewModels
 {
     public class UserProfileViewModel : LifecycleViewModel<UserProfileParameters>, ILifecycleViewModelWithResultHandler
     {
+        private readonly INavigationService _navigationService;
+
         private string _firstName = string.Empty;
         private string _lastName = string.Empty;
         private string _email = string.Empty;
-        private string _language;
+        private string _language = string.Empty;
+
+        public UserProfileViewModel(INavigationService navigationService)
+        {
+            _navigationService = navigationService;
+        }
 
         public string FirstName
         {
@@ -35,9 +42,11 @@ namespace Sample.Core.Presentation.ViewModels
             set => SetValue(ref _language, value);
         }
 
-        public Command SaveCommand => new RelayCommand(Save);
+        public Command SaveCommand => new RelayCommand(SaveAction);
 
-        public void HandleResult(ResultCode resultCode, Result result)
+        public Command NavigateToLanguagesCommand => new RelayCommand(NavigateToLanguagesAction);
+
+        public void HandleResult(ResultCode resultCode, Result? result)
         {
             if (result is SelectedLanguageResult selectedLanguageResult)
             {
@@ -62,9 +71,14 @@ namespace Sample.Core.Presentation.ViewModels
             LastName = "Simpson";
         }
 
-        private void Save()
+        private void SaveAction()
         {
             System.Diagnostics.Debug.WriteLine($"Saving: {FirstName} {LastName}, {Email}...");
+        }
+
+        private void NavigateToLanguagesAction()
+        {
+            _navigationService.NavigateToLanguages(this);
         }
     }
 }

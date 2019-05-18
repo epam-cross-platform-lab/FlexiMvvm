@@ -15,6 +15,8 @@ namespace Sample.Droid.Views
         private EditText _firstName;
         private EditText _lastName;
         private EditText _email;
+        private TextView _language;
+        private Button _selectLanguage;
         private Button _save;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -27,6 +29,8 @@ namespace Sample.Droid.Views
             _firstName = FindViewById<EditText>(Resource.Id.firstName);
             _lastName = FindViewById<EditText>(Resource.Id.lastName);
             _email = FindViewById<EditText>(Resource.Id.email);
+            _language = FindViewById<TextView>(Resource.Id.language);
+            _selectLanguage = FindViewById<Button>(Resource.Id.selectLanguage);
             _save = FindViewById<Button>(Resource.Id.save);
         }
 
@@ -62,6 +66,14 @@ namespace Sample.Droid.Views
             bindingSet.Bind(_email)
                 .For(v => v.TextAndTextChangedBinding())
                 .To(vm => vm.Email);
+
+            bindingSet.Bind(_language)
+                .For(v => v.TextBinding())
+                .To(vm => vm.Language);
+
+            bindingSet.Bind(_selectLanguage)
+              .For(v => v.ClickBinding())
+              .To(vm => vm.NavigateToLanguagesCommand);
 
             bindingSet.Bind(_save)
               .For(v => v.ClickBinding())

@@ -5,6 +5,11 @@
     <RootNamespace>Sample.Core</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningsAsErrors></WarningsAsErrors>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Include="Presentation\Navigation\INavigationService.cs" />
     <Compile Include="Presentation\ViewModels\EntryViewModel.cs" />

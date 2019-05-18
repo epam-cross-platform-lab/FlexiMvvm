@@ -1,0 +1,6 @@
+<resources>
+  <dimen name="main_margin">16dp</dimen>
+  <dimen name="main_margin_2x">32dp</dimen>
+  <dimen name="main_margin_3x">48dp</dimen>
+  <dimen name="main_button_min_width">80dp</dimen>
+</resources>

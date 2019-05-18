@@ -4,4 +4,6 @@
   <string name="main_first_name">First Name</string>
   <string name="main_last_name">Last Name</string>
   <string name="main_email">Email</string>
+  <string name="main_lang">Language</string>
+  <string name="main_selectLanguage">Change</string>
 </resources>

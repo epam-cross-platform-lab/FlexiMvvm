@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+    </android.support.design.widget.AppBarLayout>
+    
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="@dimen/main_margin"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="@string/main_first_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/firstName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="@string/main_last_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/lastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="@string/main_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/main_margin">
+            <Button
+                android:id="@+id/selectLanguage"
+                android:text="@string/main_selectLanguage"
+                android:layout_alignParentRight="true"
+                android:layout_width="@dimen/main_button_min_width"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/main_margin" />
+            <TextView
+                android:text="@string/main_lang"
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/language"
+                android:layout_toLeftOf="@id/selectLanguage"
+                android:layout_alignBaseline="@id/selectLanguage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="textEnd"
+                android:layout_marginRight="@dimen/main_margin"
+                style="@style/AppTheme.TextView.Info"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/main_margin">
+            <Button
+                android:id="@+id/openDatePicker"
+                android:text="@string/main_date"
+                android:layout_alignParentRight="true"
+                android:layout_width="@dimen/main_button_min_width"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/main_margin" />
+            <TextView
+                android:text="@string/main_dob"
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/dateOfBirth"
+                android:layout_toLeftOf="@id/openDatePicker"
+                android:layout_alignBaseline="@id/openDatePicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="textEnd"
+                android:layout_marginRight="@dimen/main_margin"
+                style="@style/AppTheme.TextView.Info"/>
+        </RelativeLayout>
+        <Button
+            android:id="@+id/save"
+            android:minWidth="@dimen/main_button_min_width"
+            android:layout_width="@dimen/main_button_min_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="@dimen/main_margin"
+            android:text="@string/main_save"/>
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>
