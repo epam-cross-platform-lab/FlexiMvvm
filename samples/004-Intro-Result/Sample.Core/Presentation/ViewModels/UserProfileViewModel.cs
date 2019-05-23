@@ -73,7 +73,7 @@ namespace Sample.Core.Presentation.ViewModels
 
         private void SaveAction()
         {
-            System.Diagnostics.Debug.WriteLine($"Saving: {FirstName} {LastName}, {Email}...");
+            System.Diagnostics.Debug.WriteLine($"Saving: {FirstName} {LastName}, {Email}, {Language}...");
         }
 
         private void NavigateToLanguagesAction()

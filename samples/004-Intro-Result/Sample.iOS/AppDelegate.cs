@@ -29,7 +29,8 @@ namespace Sample.iOS
             var container = new SimpleIoc();
             container.Register<INavigationService>(() => new AppNavigationService());
             container.Register(() => new EntryViewModel(container.Get<INavigationService>()));
-            container.Register(() => new UserProfileViewModel());
+            container.Register(() => new UserProfileViewModel(container.Get<INavigationService>()));
+            container.Register(() => new LanguagesViewModel(container.Get<INavigationService>()));
 
             LifecycleViewModelProvider.SetFactory(
                 new DefaultLifecycleViewModelFactory(container));

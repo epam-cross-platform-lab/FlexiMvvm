@@ -30,6 +30,13 @@ namespace Sample.iOS.Views
             bindingSet.BindDefault(View.Email)
                 .To(vm => vm.Email);
 
+            bindingSet.BindDefault(View.LanguageSelected)
+                .To(vm => vm.Language);
+
+            bindingSet.Bind(View.SelectLanguageButton)
+                .For(v => v.TouchUpInsideBinding())
+                .To(vm => vm.NavigateToLanguagesCommand);
+
             bindingSet.Bind(View.SaveButton)
                 .For(v => v.TouchUpInsideBinding())
                 .To(vm => vm.SaveCommand);

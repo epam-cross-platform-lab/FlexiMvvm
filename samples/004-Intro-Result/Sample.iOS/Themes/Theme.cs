@@ -12,6 +12,19 @@ namespace Sample.iOS.Themes
             label.LineBreakMode = UILineBreakMode.Clip;
             label.TextAlignment = UITextAlignment.Natural;
             label.Text = text;
+            label.Font = UIFont.SystemFontOfSize(14);
+
+            return label;
+        }
+
+        public static UILabel AsEmphasizedBodyStyle(this UILabel label, string text = null)
+        {
+            label.TextColor = Colors.ForegroundColor;
+            label.Lines = 1;
+            label.LineBreakMode = UILineBreakMode.Clip;
+            label.TextAlignment = UITextAlignment.Natural;
+            label.Text = text;
+            label.Font = UIFont.SystemFontOfSize(16);
 
             return label;
         }
@@ -35,6 +48,7 @@ namespace Sample.iOS.Themes
 
         public static class Colors
         {
+            public static readonly UIColor ForegroundColor = UIColor.DarkTextColor;
             public static readonly UIColor BackgroundColor = UIColor.White;
             public static readonly UIColor LabelBodyColor = UIColor.LightGray;
             public static readonly UIColor TintColor = UIColor.DarkGray;

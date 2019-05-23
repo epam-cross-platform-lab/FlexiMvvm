@@ -22,7 +22,8 @@ namespace Sample.iOS.Views
 
         public override void LoadView()
         {
-            View = new LanguagesView(OnLanguageSelected);
+            View = new LanguagesView();
+            View.LanguageSelected += OnLanguageSelected;
         }
 
         public override void Bind(BindingSet<LanguagesViewModel> bindingSet)
@@ -34,9 +35,9 @@ namespace Sample.iOS.Views
                 .To(vm => vm.SelectLanguage);
         }
 
-        private void OnLanguageSelected(string languageSelected)
+        private void OnLanguageSelected(object sender, string @value)
         {
-            LanguageSelected?.Invoke(this, languageSelected);
+            LanguageSelected?.Invoke(this, @value);
         }
     }
 }
