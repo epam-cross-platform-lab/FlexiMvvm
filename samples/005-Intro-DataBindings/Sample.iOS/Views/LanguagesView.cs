@@ -9,14 +9,9 @@ namespace Sample.iOS.Views
 {
     public class LanguagesView : LayoutView
     {
-        private Action<string> _onLanguageSelected;
+        public event EventHandler<string> LanguageSelected;
 
-        public LanguagesView(Action<string> onLanguageSelected)
-        {
-            _onLanguageSelected = onLanguageSelected;
-        }
-
-        public UITableView Languages { get; private set; } 
+        public UITableView Languages { get; private set; }
 
         protected override void SetupSubviews()
         {
@@ -25,7 +20,7 @@ namespace Sample.iOS.Views
             BackgroundColor = Theme.Colors.BackgroundColor;
 
             Languages = new UITableView();
-            Languages.Source = new LanguagesTableViewSource(new string[] { "English", "Español" }, _onLanguageSelected);
+            Languages.Source = new LanguagesTableViewSource(new string[] { "English", "Español" }, OnLanguageSelected);
         }
 
         protected override void SetupLayout()
@@ -45,6 +40,11 @@ namespace Sample.iOS.Views
                 Languages.AtTopOfSafeArea(this, Theme.Dimensions.Inset2x),
                 Languages.AtRightOf(this, Theme.Dimensions.Inset2x),
                 Languages.AtBottomOfSafeArea(this, Theme.Dimensions.Inset2x));
+        }
+
+        private void OnLanguageSelected(string @value)
+        {
+            LanguageSelected?.Invoke(this, @value);
         }
     }
 

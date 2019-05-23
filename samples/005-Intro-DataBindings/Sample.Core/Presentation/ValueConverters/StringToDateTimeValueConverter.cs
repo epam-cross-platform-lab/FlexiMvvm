@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Globalization;
-using System.Runtime.CompilerServices;
 using FlexiMvvm.ValueConverters;
 
-namespace FlexiMvvm.Bindings.Converters
+namespace Sample.Core.Presentation.ValueConverters
 {
     public sealed class StringToDateTimeValueConverter : ValueConverter<string, DateTime>
     {
@@ -13,10 +12,10 @@ namespace FlexiMvvm.Bindings.Converters
         {
             if (DateTime.TryParse(value, out var dt))
             {
-                return ConversionResult<DateTime>.SetValue(dt);
+                return ConversionResult<DateTime>.SetValue(new DateTime(dt.Year, dt.Month, dt.Day, 0, 0, 0, DateTimeKind.Utc));
             }
 
-            return ConversionResult<DateTime>.SetValue(DateTime.MinValue);
+            return ConversionResult<DateTime>.SetValue(DateTime.UtcNow);
         }
 
         protected override ConversionResult<string> ConvertBack(DateTime value, Type targetType, object parameter, CultureInfo culture)

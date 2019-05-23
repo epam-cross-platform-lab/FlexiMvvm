@@ -58,7 +58,6 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bindings\Converters\StringToDateTimeValueConverter.cs" />
     <Compile Include="Bindings\UserProfileActivityBindings.cs" />
     <Compile Include="Navigation\AppNavigationService.cs" />
     <Compile Include="Resources\Resource.designer.cs" />

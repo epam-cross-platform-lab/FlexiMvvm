@@ -18,10 +18,18 @@
     <Compile Include="Presentation\Navigation\SelectedLanguageResult.cs" />
     <Compile Include="Presentation\ViewModels\LanguagesViewModel.cs" />
     <Compile Include="Presentation\ViewModels\Language.cs" />
+    <Compile Include="Presentation\ValueConverters\StringToDateTimeValueConverter.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FlexiMvvm.Lifecycle.PreRelease" Version="0.10.7-prerelease" />
+    <PackageReference Include="Microsoft.Net.Compilers" Version="3.2.0-beta1-final">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Presentation\ValueConverters\" />
+  </ItemGroup>
 </Project>

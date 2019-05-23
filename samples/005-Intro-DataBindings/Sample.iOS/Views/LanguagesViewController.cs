@@ -2,6 +2,7 @@
 using FlexiMvvm.Bindings;
 using FlexiMvvm.Views;
 using Sample.Core.Presentation.ViewModels;
+using Sample.iOS.Bindings;
 
 namespace Sample.iOS.Views
 {
@@ -12,8 +13,6 @@ namespace Sample.iOS.Views
             Title = "Languages";
         }
 
-        public event EventHandler<string> LanguageSelected;
-
         public new LanguagesView View
         {
             get => (LanguagesView)base.View;
@@ -22,21 +21,16 @@ namespace Sample.iOS.Views
 
         public override void LoadView()
         {
-            View = new LanguagesView(OnLanguageSelected);
+            View = new LanguagesView();
         }
 
         public override void Bind(BindingSet<LanguagesViewModel> bindingSet)
         {
             base.Bind(bindingSet);
 
-            bindingSet.Bind(this)
+            bindingSet.Bind(View)
                 .For(v => v.LanguageSelectedBinding())
                 .To(vm => vm.SelectLanguage);
-        }
-
-        private void OnLanguageSelected(string languageSelected)
-        {
-            LanguageSelected?.Invoke(this, languageSelected);
         }
     }
 }

@@ -5,8 +5,8 @@ using Android.Views;
 using Android.Widget;
 using FlexiMvvm;
 using FlexiMvvm.Bindings;
-using FlexiMvvm.Bindings.Converters;
 using FlexiMvvm.Views;
+using Sample.Core.Presentation.ValueConverters;
 using Sample.Core.Presentation.ViewModels;
 using Sample.Droid.Bindings;
 
@@ -111,7 +111,7 @@ namespace Sample.Droid.Views
 
         private void OpenPicker(object sender, EventArgs eventArgs)
         {
-            var fr = new DatePickerFragment(OnDatePicked, DateOfBirthday == DateTime.MinValue ? DateTime.Now : DateOfBirthday);
+            var fr = new DatePickerFragment(OnDatePicked, DateOfBirthday == DateTime.MinValue ? DateTime.UtcNow : DateOfBirthday);
             fr.ShowsDialog = true;
             fr.Show(SupportFragmentManager, "DatePicker");
         }
