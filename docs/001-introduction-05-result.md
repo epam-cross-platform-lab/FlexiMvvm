@@ -274,4 +274,4 @@ Again, missing iOS Languages list view screen to select a Language for the resul
 
 ---
 
-[Next: ...](index.md)
+[Next: Data Bindings - Overview](001-introduction-06-data-bindings.md)

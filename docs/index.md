@@ -2,10 +2,14 @@
 
 - [INTRODUCTION](index.md)
 	- [FlexiMvvm Structure](001-introduction-01-structure.md)
+- NAVIGATION BASICS
 	- [First screen](001-introduction-02-first-screen.md)
 	- [Basic Navigation](001-introduction-03-navigation.md)
 	- [Navigation with Parameters](001-introduction-04-screen-with-parameters.md)
 	- [Navigation for a Result](001-introduction-05-result.md)
+- DATA BINDINGS
+	- [Overview](001-introduction-06-data-bindings.md)
+	- [Custom](001-introduction-07-data-bindings-custom.md)
 
 ---
 

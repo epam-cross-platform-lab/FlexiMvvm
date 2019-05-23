@@ -2,271 +2,198 @@
 
 ---
 
-# Navigation for a Result
+# Data Bindings
 
-Another important navigation pattern is the result back propagation.
-On Android, such scenario is supported explicitly: [Getting a Result from an Activity](https://developer.android.com/training/basics/intents/result), usually for moving onto a picker screen, choosing some item and returning it back to the initial screen. On iOS, to accommodate recommended **code-driven UI approach**, things are a bit easier: we create a new target View Controller and subscribe for its results from the calling source View Controller.
+To recap, let's review the **Model-View-ViewModel** (MVVM) pattern. Why it became so important for Xamarin mobile apps?
 
-FlexiMvvm incorporates both platform specific patterns, exposing a common straighforward approach for us. Briefly, we do the following:
-1. Add new ``Result`` type representing the result data.
-2. On the source View Model, implement ``ILifecycleViewModelWithResultHandler`` interface to handle  a ``Result`` instance returned back (same source View Model may handle different ``Result`` types).
-3. On the target View Model, implement ``ILifecycleViewModelWithResult<TResult>`` generic interface with this ``Result`` type is going to be supported.
-4. Extend Navigation service to go to the target View Model and propagate the result back to the source View Model.
+Historically, this approach allowed to gracefully separate concerns for GUI application: presentation, view state management and domain data. Encouraged by Microsoft, its adoption became popular with XAML on WPF, Silverlight, Windows Phone, and now - on UWP and Xamarin.Forms stacks. Dedicated MVVM frameworks like MVVM Light Toolkit or Caliburn.Micro has been playing the crucial role.
 
-The complete sample is [available in the repository](https://github.com/epam-xamarin-lab/FlexiMvvm/tree/master/samples/004-Intro-Result/). For now, let's review this process step by step.
+![Data Binding in MVVM](001-introduction-06-data-bindings/010-data-binding.png)
 
-### Result
+**Data Bindings** are used to evade from writing boiler-plate code to synchronize Views and ViewModels. Assuming we're familiar with this technic, let's review how FlexiMvvm deals with Data Binding.
 
-This is a data transfer object which represents the result of an operation. Some examples are a selected Country, a chosen Shipping option, or whatever else picked from a list. Also this may be a result of a wizard if the target screen performs this way. For the tutorial purposes, we're reusing the previous sample. Let's imagine that from the User Profile we may go to pick a Language from a list. So our result would be Sample.Core / Presentation / Navigation / SelectedLanguageResult.cs:
+With FlexiMvvm, we can use either out-of-the-box Data Bindings provided for common iOS and Android controls like Labels, Text Entries, Buttons or **custom Data Binding** for our UI components with own events and custom data representation.
 
-```cs
-using FlexiMvvm.ViewModels;
-
-namespace Sample.Core.Presentation.Navigation
-{
-    public class SelectedLanguageResult : Result
-    {
-        public SelectedLanguageResult(bool isSelected, string selectedLanguage)
-        {
-            IsSelected = isSelected;
-            SelectedLanguage = selectedLanguage;
-        }
-
-        public bool IsSelected
-        {
-            get => Bundle.GetBool();
-            private set => Bundle.SetBool(value);
-        }
-
-        public string SelectedLanguage
-        {
-            get => Bundle.GetString();
-            private set => Bundle.SetString(value);
-        }
-    }
-}
-
-```
-
-The important point is that it inherits from ``Result`` base class which is capable to preserve the result during transitioning to the source screen. Our result holds two data properties which will be used on the source View Model. As you can see, base ``Bundle`` is used to safely preserve the values.
-
-### Source View Model
-
-We're updating a bit the View Model used in the previous tutorials: adding the new ``Language`` Data Property and the ``HandleResult()`` method required by the ``ILifecycleViewModelWithResultHandler`` contract.
-
-```cs
-using FlexiMvvm.Commands;
-using FlexiMvvm.ViewModels;
-using Sample.Core.Presentation.Navigation;
-
-namespace Sample.Core.Presentation.ViewModels
-{
-    public class UserProfileViewModel : LifecycleViewModel<UserProfileParameters>, ILifecycleViewModelWithResultHandler
-    {
-        //// ... some existing code is hidden for convenience
-
-        private string _language;
-
-        public string Language
-        {
-            get => _language;
-            set => SetValue(ref _language, value);
-        }        
-
-        public void HandleResult(ResultCode resultCode, Result result)
-        {
-            if (result is SelectedLanguageResult selectedLanguageResult)
-            {
-                if (resultCode == ResultCode.Ok && selectedLanguageResult.IsSelected)
-                {
-                    Language = selectedLanguageResult.SelectedLanguage;
-
-                    System.Diagnostics.Debug.WriteLine($"Result retrieved: {Language}...");
-                }
-            }
-        }
-
-        //// ... some existing code is hidden for convenience
-    }
-}
-
-```
-
-So we're adding ``ILifecycleViewModelWithResultHandler`` and implementing the ``HandleResult()`` method to properly use the result provided, checking the ``ResultCode`` which is also available (same standard way as on Android). Keep attention, that in a sophisticated situation a single source View Model may handle multiple ``Result`` types, from different picker or wizard screens, if needed. In the ``HandleResult()`` method all these results should be handled, checking the ``Result`` type as well as ``ResultCode``.
-
-### Target View Model
-
-So the target screen in this tutorial is a list of Languages the User is able to choose from. The new View Model is added, Sample.Core / Presentation / ViewModels / LanguagesViewModel.cs:
-
-```cs
-using FlexiMvvm.Commands;
-using FlexiMvvm.ViewModels;
-using Sample.Core.Presentation.Navigation;
-
-namespace Sample.Core.Presentation.ViewModels
-{
-    public class LanguagesViewModel : LifecycleViewModel, ILifecycleViewModelWithResult<SelectedLanguageResult>
-    {
-        private INavigationService _navigationService;
-
-        public LanguagesViewModel(INavigationService navigationService)
-        {
-            _navigationService = navigationService;
-        }
-
-        public Command<string> SelectLanguage => CommandProvider.Get<string>(OnSelectLanguage);
-
-        public void SetResult(ResultCode resultCode, SelectedLanguageResult result)
-        {
-            _navigationService.NavigateBack(this, resultCode, result);
-        }
-
-        private void OnSelectLanguage(string @value)
-        {
-            SetResult(ResultCode.Ok, new SelectedLanguageResult(true, @value));
-        }
-    }
-}
-
-```
-
-So, it's very simple View Model which handles User's item selection via the ``SelectLanguage`` command with the ``OnSelectLanguage()`` handler. The latter just calls the ``SetResult()`` method which is required by the ``ILifecycleViewModelWithResult<SelectedLanguageResult>`` interface specified.
-
-As you can see, the result back propagation is done via our Navigation service's ``NavigateBack()`` - let's review how it's implemented. 
-
-### Navigation service
-
-Firstly, it's the updated contract, Sample.Core / Presentation / Navigation / INavigationService.cs:
-
-```cs
-using FlexiMvvm.ViewModels;
-using Sample.Core.Presentation.ViewModels;
-
-namespace Sample.Core.Presentation.Navigation
-{
-    public interface INavigationService
-    {
-        //// ... some existing code is hidden for convenience
-
-        void NavigateToLanguages(ILifecycleViewModel from);
-
-        void NavigateBack(LanguagesViewModel from, ResultCode code, SelectedLanguageResult result);
-    }
-}
-
-```
-
-Proceeding to the Languages list screen with ``NavigateToLanguages()`` is basic and shown in the previous tutorials.
-Navigating back from Languages list to the User Profile back with the ``NavigateBack()`` method is the central point of our attention so far. 
-
-#### Android
-
-Sample.Droid / Navigation / AppNavigationService.cs:
-
-```cs
-using Android.Content;
-using FlexiMvvm.Navigation;
-using FlexiMvvm.ViewModels;
-using FlexiMvvm.Views;
-using Sample.Core.Presentation.Navigation;
-using Sample.Core.Presentation.ViewModels;
-using Sample.Droid.Views;
-
-namespace Sample.Droid.Navigation
-{
-    public class AppNavigationService : NavigationService, INavigationService
-    {
-        //// ... some existing code is hidden for convenience 
-
-        public void NavigateToLanguages(ILifecycleViewModel from)
-        {
-            var view = NavigationViewProvider.Get(from);
-            Navigate<LanguagesActivity>(view);
-
-            /* Here's what is approximately done by Navigate() above:
-
-            var requestCode = new RequestCode();
-            var code = requestCode.GetFor<DefaultResultMapper<SelectedLanguageResult>>();
-            var source = view.GetActivity();
-            var intent = new Intent(source, typeof(LanguagesActivity));
-            source.StartActivityForResult(intent, code);
-
-            */
-        }
-
-        public void NavigateBack(LanguagesViewModel from, ResultCode code, SelectedLanguageResult result)
-        {
-            var view = NavigationViewProvider.Get(from);
-            NavigateBack(view, code, result);
-
-            /* Here's what is approximately done by Navigate() above:
-
-            var source = view.GetActivity();
-            var intent = new Intent(source, typeof(UserProfileActivity));
-            intent.PutResult(result);
-            source.SetResult(code, intent);
-            source.Finish();
-
-            */
-        }
-    }
-}
-
-```
-
-``LanguagesActivity`` is missing now. As it's out of this tutorial scope - this may be any Android screen which can provide the result. The [complete sample contains](https://github.com/epam-xamarin-lab/FlexiMvvm/blob/master/samples/004-Intro-Result/Droid/Views/LanguagesActivity.cs) a very basic ``RecyclerView`` driven list screen the User can choose the Language from. Basically this new screen executes a ``SelectLanguage`` command of the ``LanguagesViewModel``, which leads to the results back propagation we have implemented above. ``LanguagesActivity`` is reviewed in detail in the related [Data Bindings](index.md) tutorial.
-
-Regarding ``NavigateBack()``, we see that Android Intent is leveraged here to pass the ``SelectedLanguageResult`` result instance to make it available for our ``UserProfileViewModel`` View Model.
+Lets review how concise and unified iOS and Android specific Data Bindings look like. Complete [sample is available in the repository](https://github.com/epam-xamarin-lab/FlexiMvvm/tree/master/samples/005-Intro-DataBindings/).
 
 #### iOS
 
-FirstScreen.iOS / Navigation / NavigationService.cs:
+Normally, on iOS View is managed by View Controller. For our sample, ``UserProfileViewController`` links target screen controls including Buttons with ``UserProfileViewModel`` ViewModel's Data Properties and Commands. This allows to concentrate on visual implementation of the View, and leave reusable behavior control to ViewModel.
 
 ```cs
-using Android.Content;
-using FlexiMvvm.Navigation;
-using FlexiMvvm.ViewModels;
-using FlexiMvvm.Views;
-using Sample.Core.Presentation.Navigation;
-using Sample.Core.Presentation.ViewModels;
-using Sample.Droid.Views;
+//// ... some existing code is hidden for convenience
 
-namespace Sample.Droid.Navigation
+namespace Sample.iOS.Views
 {
-    public class AppNavigationService : NavigationService, INavigationService
+    public class UserProfileViewController : BindableViewController<UserProfileViewModel, UserProfileParameters>
     {
         //// ... some existing code is hidden for convenience
 
-        public void NavigateToLanguages(UserProfileViewModel from)
+        public override void Bind(BindingSet<UserProfileViewModel> bindingSet)
         {
-            var controller = GetViewController<UserProfileViewController, UserProfileViewModel>(from);
+            base.Bind(bindingSet);
 
-            var targetController = new LanguagesViewController();
-            targetController.ResultSetWeakSubscribe(controller.HandleResult);
+            //// Two-way default bindings
 
-            controller
-                .GetNavigationController()
-                .PushViewController(targetController, animated:true);
+            bindingSet.Bind(View.FirstName)
+                .For(v => v.TextAndEditingDidEndBinding())
+                .To(vm => vm.FirstName);
+
+            bindingSet.Bind(View.LastName)
+                .For(v => v.TextAndEditingDidEndBinding())
+                .To(vm => vm.LastName);
+
+            bindingSet.Bind(View.Email)
+                .For(v => v.TextAndEditingDidEndBinding())
+                .To(vm => vm.Email);
+
+            //// One-way-to-source default binding
+
+            bindingSet.Bind(View.SelectLanguageButton)
+                .For(v => v.TouchUpInsideBinding())
+                .To(vm => vm.NavigateToLanguagesCommand);
+
+            bindingSet.Bind(View.SaveButton)
+                .For(v => v.TouchUpInsideBinding())
+                .To(vm => vm.SaveCommand);
+
+            //// One-way default binding
+
+            bindingSet.Bind(View.LanguageSelected)
+                .For(v => v.TextBinding())
+                .To(vm => vm.Language);
+
+            bindingSet.Bind(View.DateOfBirthSelected)
+                .For(v => v.TextBinding())
+                .To(vm => vm.DateOfBirthday);
+
+            //// Custom Two-way Data Binding with Value Converter
+
+            bindingSet.Bind(View)
+                .For(v => v.DateOfBirthdayChangedBinding())
+                .To(vm => vm.DateOfBirthday)
+                .WithConversion<StringToDateTimeValueConverter>();
+        }
+    }
+}
+
+```
+
+#### Android
+
+On Android, Activity (or Fragment) plays the primary role of inflating UI and controlling its state. Same way, it defines all needed Data Bindings wiring specific View properties and events up to the ViewModel via Data Bindings.
+
+```cs
+//// ... some existing code is hidden for convenience
+
+namespace Sample.Droid.Views
+{
+    [Activity(Theme = "@style/AppTheme.NoActionBar")]
+    public class UserProfileActivity : BindableAppCompatActivity<UserProfileViewModel, UserProfileParameters>
+    {
+        //// ... some existing code is hidden for convenience
+
+        public override void Bind(BindingSet<UserProfileViewModel> bindingSet)
+        {
+            base.Bind(bindingSet);
+
+            //// Two-way default bindings
+
+            bindingSet.Bind(_firstName)
+                .For(v => v.TextAndTextChangedBinding())
+                .To(vm => vm.FirstName);
+
+            bindingSet.Bind(_lastName)
+                .For(v => v.TextAndTextChangedBinding())
+                .To(vm => vm.LastName);
+
+            bindingSet.Bind(_email)
+                .For(v => v.TextAndTextChangedBinding())
+                .To(vm => vm.Email);
+
+            //// One-way-to-source default binding
+
+            bindingSet.Bind(_selectLanguage)
+                .For(v => v.ClickBinding())
+                .To(vm => vm.NavigateToLanguagesCommand);
+
+            bindingSet.Bind(_save)
+                .For(v => v.ClickBinding())
+                .To(vm => vm.SaveCommand);
+
+            //// One-way default binding
+
+            bindingSet.Bind(_language)
+                .For(v => v.TextBinding())
+                .To(vm => vm.Language);
+
+            bindingSet.Bind(_dateOfBirth)
+                .For(v => v.TextBinding())
+                .To(vm => vm.DateOfBirthday);
+
+            //// Custom Two-way Data Binding with Value Converter
+
+            bindingSet.Bind(this)
+                .For(v => v.DateOfBirthdayChangedBinding())
+                .To(vm => vm.DateOfBirthday)
+                .WithConversion<StringToDateTimeValueConverter>();
         }
 
-        public void NavigateBack(LanguagesViewModel from, ResultCode code, SelectedLanguageResult result)
-        {
-            var controller = GetViewController<LanguagesViewController, LanguagesViewModel>(from);
-            
-            controller.SetResult(code, result);
+        //// ... some existing code is hidden for convenience
+    }
+}
 
-            controller
-                .GetNavigationController()
-                .PopViewController(animated:true);
+```
+
+#### Basic approach
+
+This simple case demonstrates how well unified may be coding UI behavior for these so different platforms. To accomplish this, the following approach is used:
+
+1. ``BindingSet`` works as an entry to build Data Binding in a fluent style.
+2. ``.Bind()`` specifies target object. It may be UILabel, DateTimePicker, whole Activity or any arbitrary object you want to track state of.
+3. ``.For()`` defines Binding itself. For simplicity, extension methods are used for that. Example: ``ClickBinding()`` extension method which is capable to wire up a ``Click`` event.
+4. ``.To()`` links with a source. Typically, it's ViewModel's Data Property or Command.
+5. Optional ``WithConversion()`` allows to engage a Value Converter between Source and Target bound.
+6. Optional ``WithFallbackValue()`` to provide a "default" if Source is null or faulty.
+
+#### Diving into details
+
+Before learning how to create our own Data Bindings, let's have a look how standard are built.
+
+Actually everything is based just on 3 base classes:
+1. *TargetItemOneWayCustomBinding* - for **One Way**: from ViewModel to View. Example: propagating text to a UI Label.
+2. *TargetItemOneWayToSourceCustomBinding* - for **One Way to Source**: to ViewModel from View; like propagating a selected item chosen from a list.
+3. *TargetItemTwoWayCustomBinding* - for **Two Way**: both directions like a Text entry's value.
+
+This is one of the FlexiMvvm's standard One-way Data Bindings for iOS UILabel's Text value wiring which has been used above for binding ViewModel's DateOfBirthday Data Property.
+
+```cs
+//// ... some existing code is hidden for convenience
+
+namespace FlexiMvvm.Bindings
+{
+    public static class UILabelBindings
+    {
+        //// ... some existing code is hidden for convenience
+
+        public static TargetItemBinding<UILabel, string> TextBinding(this IItemReference<UILabel> labelReference)
+        {
+            if (labelReference == null)
+                throw new ArgumentNullException(nameof(labelReference));
+
+            return new TargetItemOneWayCustomBinding<UILabel, string>(
+                labelReference,
+                (label, text) => label.NotNull().Text = text,
+                () => "Text");
         }
     }
 }
 ```
 
-On iOS we see the usage of the native UINavigationController retrieved safely by ``GetNavigationController()`` FlexiMvvm extension method. The trick here is with the ``ResultSetWeakSubscribe()`` which subscribes via a weak reference to the Result and ``SetResult()`` which raises the Result propagation.
+As we can see, **TargetItemOneWayCustomBinding** play the role of a data transfer object, providing all the necessary information for FlexiMvvm: the View object type (UILabel), Target Property data type (string), the View instance to apply data on (labelReference), the expression which performs the actual data applying (``label.Text = text``), and even the functor which logs the diagnostics trace (``"Text"``).
 
-> Again, iOS Languages list view screen to select a Language for the result is out of scope of this tutorial - this may be any iOS screen which raises the ``SelectLanguage`` command of the ``LanguagesViewModel`` we have built above. But this [sample shows](https://github.com/epam-xamarin-lab/FlexiMvvm/blob/master/samples/010-Intro-FirstScreen/iOS/Views/LanguagesViewController.cs) a trivial approach to bind the view's event with the ViewModel's ``SelectLanguage`` command.
+> This first example's resume is that FlexiMvvm tries to avoid Reflection completely, when possible. For efficiency, tt's better to provide a string for logging rather than inferring with Reflection at runtime.
 
 ---
 
-[Next: ...](index.md)
+[Next: Data Bindings - Custom](001-introduction-07-data-bindings-custom.md)
