@@ -20,14 +20,14 @@ namespace FlexiMvvm.Collections.Core
 {
     internal class ItemMap
     {
-        private ItemMap(ItemType type, [CanBeNull] object group, [CanBeNull] object item)
+        private ItemMap(ItemViewType iteViewType, [CanBeNull] object group, [CanBeNull] object item)
         {
-            Type = type;
+            Type = iteViewType;
             Group = group;
             Item = item;
         }
 
-        internal ItemType Type { get; }
+        internal ItemViewType Type { get; }
 
         [CanBeNull]
         internal object Group { get; }
@@ -38,31 +38,31 @@ namespace FlexiMvvm.Collections.Core
         [NotNull]
         internal static ItemMap CreateForHeader()
         {
-            return new ItemMap(ItemType.Header, null, null);
+            return new ItemMap(ItemViewType.CreateForHeader(), null, null);
         }
 
         [NotNull]
         internal static ItemMap CreateForSectionHeader([CanBeNull] object group)
         {
-            return new ItemMap(ItemType.SectionHeader, group, null);
+            return new ItemMap(ItemViewType.CreateForSectionHeader(), group, null);
         }
 
         [NotNull]
         internal static ItemMap CreateForItem([CanBeNull] object item)
         {
-            return new ItemMap(ItemType.Item, null, item);
+            return new ItemMap(ItemViewType.CreateForItem(), null, item);
         }
 
         [NotNull]
         internal static ItemMap CreateForSectionFooter([CanBeNull] object group)
         {
-            return new ItemMap(ItemType.SectionFooter, group, null);
+            return new ItemMap(ItemViewType.CreateForSectionFooter(), group, null);
         }
 
         [NotNull]
         internal static ItemMap CreateForFooter()
         {
-            return new ItemMap(ItemType.Footer, null, null);
+            return new ItemMap(ItemViewType.CreateForFooter(), null, null);
         }
     }
 }

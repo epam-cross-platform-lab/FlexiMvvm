@@ -37,8 +37,6 @@ namespace FlexiMvvm.Collections.Core
 
         internal int Count => ItemsMap.Count;
 
-        internal int ItemsCount => ItemsMap.Count(item => item.Type == ItemType.Item);
-
         [NotNull]
         internal ItemMap ElementAt(int index)
         {
@@ -49,7 +47,7 @@ namespace FlexiMvvm.Collections.Core
 
         internal IndexPath GetItemIndexPath(int position)
         {
-            if (ItemsMap[position].Type != ItemType.Item)
+            if (ItemsMap[position].Type.ItemType != ItemViewType.Item)
             {
                 return new IndexPath(-1, -1);
             }
@@ -59,13 +57,13 @@ namespace FlexiMvvm.Collections.Core
 
             for (var i = 0; i < position; i++)
             {
-                if (ItemsMap[i].Type == ItemType.SectionHeader)
+                if (ItemsMap[i].Type.ItemType == ItemViewType.SectionHeader)
                 {
                     section++;
                     row = -1;
                 }
 
-                if (ItemsMap[i].Type == ItemType.Item)
+                if (ItemsMap[i].Type.ItemType == ItemViewType.Item)
                 {
                     row++;
                 }
@@ -137,7 +135,7 @@ namespace FlexiMvvm.Collections.Core
 
             while (i < section)
             {
-                if (ItemsMap[++offset].Type == ItemType.SectionFooter)
+                if (ItemsMap[++offset].Type.ItemType == ItemViewType.SectionFooter)
                 {
                     i++;
                 }

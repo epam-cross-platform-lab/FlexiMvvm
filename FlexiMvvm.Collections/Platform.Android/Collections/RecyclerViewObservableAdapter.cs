@@ -51,16 +51,9 @@ namespace FlexiMvvm.Collections
 
         public override int ItemCount => GetItemsMapping().Count;
 
-        public int ItemsCount => GetItemsMapping().ItemsCount;
-
         public abstract int GetSectionsCount();
 
         public abstract int GetSectionItemsCount(int section);
-
-        public ItemType GetItemType(int position)
-        {
-            return GetItemMap(position).Type;
-        }
 
         public IndexPath GetItemIndexPath(int position)
         {
@@ -71,16 +64,22 @@ namespace FlexiMvvm.Collections
         {
             var itemMap = GetItemMap(position);
 
-            switch (itemMap.Type)
+            var itemViewType = itemMap.Type;
+
+            if (itemViewType.IsItem)
             {
-                case ItemType.Header:
-                case ItemType.Footer:
-                    return ViewType.GetTarget(itemMap.Type, DefaultViewType);
-                case ItemType.Item:
-                    return ViewType.GetTarget(itemMap.Type, OnGetItemViewType(itemMap.Item));
-                default:
-                    throw new ArgumentException($"Unable to get item view type for \"{position}\" position.", nameof(position));
+                itemViewType.ViewType = OnGetItemViewType(itemMap.Item);
             }
+            else if (itemViewType.IsFooter || itemViewType.IsHeader)
+            {
+                itemViewType.ViewType = DefaultViewType;
+            }
+            else
+            {
+                throw new ArgumentException($"Unable to get item view type for \"{position}\" position.", nameof(position));
+            }
+
+            return itemViewType.Combined;
         }
 
         protected virtual int OnGetItemViewType([CanBeNull] object item)
@@ -91,21 +90,21 @@ namespace FlexiMvvm.Collections
         [NotNull]
         public override RecyclerView.ViewHolder OnCreateViewHolder([NotNull] ViewGroup parent, int viewType)
         {
-            var itemType = ViewType.ToItemType(viewType);
+            var itemViewType = (ItemViewType)viewType;
 
-            switch (itemType)
+            switch (itemViewType.ItemType)
             {
-                case ItemType.Header:
+                case ItemViewType.Header:
                     return OnCreateHeaderViewHolder(parent);
-                case ItemType.SectionHeader:
-                    return OnCreateSectionHeaderViewHolder(parent, ViewType.GetRequested(viewType));
-                case ItemType.Item:
-                    var viewHolder = OnCreateItemViewHolder(parent, ViewType.GetRequested(viewType));
+                case ItemViewType.SectionHeader:
+                    return OnCreateSectionHeaderViewHolder(parent, itemViewType.ViewType);
+                case ItemViewType.Item:
+                    var viewHolder = OnCreateItemViewHolder(parent, itemViewType.ViewType);
                     viewHolder.ItemView.NotNull().ClickWeakSubscribe(ItemView_Click);
                     return viewHolder;
-                case ItemType.SectionFooter:
-                    return OnCreateSectionFooterViewHolder(parent, ViewType.GetRequested(viewType));
-                case ItemType.Footer:
+                case ItemViewType.SectionFooter:
+                    return OnCreateSectionFooterViewHolder(parent, itemViewType.ViewType);
+                case ItemViewType.Footer:
                     return OnCreateFooterViewHolder(parent);
                 default:
                     throw new ArgumentException($"Unable to create a view holder for \"{viewType}\" view type.", nameof(viewType));
@@ -156,17 +155,17 @@ namespace FlexiMvvm.Collections
             var itemMap = GetItemMap(position);
             var observableViewHolder = (RecyclerViewObservableViewHolder)holder;
 
-            switch (itemMap.Type)
+            switch (itemMap.Type.ItemType)
             {
-                case ItemType.Header:
-                case ItemType.Footer:
+                case ItemViewType.Header:
+                case ItemViewType.Footer:
                     observableViewHolder.Bind(ItemsContext, null);
                     break;
-                case ItemType.SectionHeader:
-                case ItemType.SectionFooter:
+                case ItemViewType.SectionHeader:
+                case ItemViewType.SectionFooter:
                     observableViewHolder.Bind(ItemsContext, itemMap.Group);
                     break;
-                case ItemType.Item:
+                case ItemViewType.Item:
                     observableViewHolder.Bind(ItemsContext, itemMap.Item);
                     break;
                 default:
