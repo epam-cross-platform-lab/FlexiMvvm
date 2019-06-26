@@ -68,12 +68,12 @@ namespace FlexiMvvm.Collections
         {
             var itemMap = GetItemMap(position);
 
-            switch (itemMap.Type)
+            switch (itemMap.ItemKind)
             {
-                case ItemType.SectionHeader:
-                    return ViewType.GetTarget(ItemType.SectionHeader, OnGetSectionHeaderViewType(itemMap.Group));
-                case ItemType.SectionFooter:
-                    return ViewType.GetTarget(ItemType.SectionFooter, OnGetSectionFooterViewType(itemMap.Group));
+                case ItemKind.SectionHeader:
+                    return ItemViewType.Combine(ItemKind.SectionHeader, OnGetSectionHeaderViewType(itemMap.Group));
+                case ItemKind.SectionFooter:
+                    return ItemViewType.Combine(ItemKind.SectionFooter, OnGetSectionFooterViewType(itemMap.Group));
                 default:
                     return base.GetItemViewType(position);
             }
