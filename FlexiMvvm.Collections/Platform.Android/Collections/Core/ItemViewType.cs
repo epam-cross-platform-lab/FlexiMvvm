@@ -45,19 +45,19 @@ namespace FlexiMvvm.Collections.Core
             return GetItemKind(itemViewType) == ItemKind.Footer;
         }
 
-        internal static int Combine(ItemKind itemKind, int requestedItemViewType)
+        internal static int GetAdjustedViewType(ItemKind itemKind, int userViewType)
         {
-            return ((int)itemKind * MaxViewType) + requestedItemViewType;
+            return ((int)itemKind * MaxViewType) + userViewType;
         }
 
-        internal static int GetViewType(int targetItemViewType)
+        internal static int GetUserViewType(int adjustedViewType)
         {
-            return targetItemViewType % MaxViewType;
+            return adjustedViewType % MaxViewType;
         }
 
-        internal static ItemKind GetItemKind(int targetItemViewType)
+        internal static ItemKind GetItemKind(int adjustedViewType)
         {
-            return (ItemKind)(targetItemViewType / MaxViewType);
+            return (ItemKind)(adjustedViewType / MaxViewType);
         }
     }
 }

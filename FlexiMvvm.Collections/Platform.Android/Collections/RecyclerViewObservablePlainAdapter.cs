@@ -74,9 +74,9 @@ namespace FlexiMvvm.Collections
             switch (itemMap.ItemKind)
             {
                 case ItemKind.SectionHeader:
-                    return ItemViewType.Combine(ItemKind.SectionHeader, DefaultViewType);
+                    return ItemViewType.GetAdjustedViewType(ItemKind.SectionHeader, DefaultViewType);
                 case ItemKind.SectionFooter:
-                    return ItemViewType.Combine(ItemKind.SectionFooter, DefaultViewType);
+                    return ItemViewType.GetAdjustedViewType(ItemKind.SectionFooter, DefaultViewType);
                 default:
                     return base.GetItemViewType(position);
             }

@@ -63,9 +63,9 @@ namespace FlexiMvvm.Collections
             {
                 case ItemKind.Header:
                 case ItemKind.Footer:
-                    return ItemViewType.Combine(itemMap.ItemKind, DefaultViewType);
+                    return ItemViewType.GetAdjustedViewType(itemMap.ItemKind, DefaultViewType);
                 case ItemKind.Item:
-                    return ItemViewType.Combine(itemMap.ItemKind, OnGetItemViewType(itemMap.Item));
+                    return ItemViewType.GetAdjustedViewType(itemMap.ItemKind, OnGetItemViewType(itemMap.Item));
                 default:
                     throw new ArgumentException($"Unable to get item view type for \"{position}\" position.", nameof(position));
             }
@@ -86,13 +86,13 @@ namespace FlexiMvvm.Collections
                 case ItemKind.Header:
                     return OnCreateHeaderViewHolder(parent);
                 case ItemKind.SectionHeader:
-                    return OnCreateSectionHeaderViewHolder(parent, ItemViewType.GetViewType(viewType));
+                    return OnCreateSectionHeaderViewHolder(parent, ItemViewType.GetUserViewType(viewType));
                 case ItemKind.Item:
-                    var viewHolder = OnCreateItemViewHolder(parent, ItemViewType.GetViewType(viewType));
+                    var viewHolder = OnCreateItemViewHolder(parent, ItemViewType.GetUserViewType(viewType));
                     viewHolder.ItemView.NotNull().ClickWeakSubscribe(ItemView_Click);
                     return viewHolder;
                 case ItemKind.SectionFooter:
-                    return OnCreateSectionFooterViewHolder(parent, ItemViewType.GetViewType(viewType));
+                    return OnCreateSectionFooterViewHolder(parent, ItemViewType.GetUserViewType(viewType));
                 case ItemKind.Footer:
                     return OnCreateFooterViewHolder(parent);
                 default:
