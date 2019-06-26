@@ -16,6 +16,7 @@
 
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Linq;
 using Android.Support.V7.Widget;
 using JetBrains.Annotations;
 
@@ -36,6 +37,8 @@ namespace FlexiMvvm.Collections.Core
 
         internal int Count => ItemsMap.Count;
 
+        internal int ItemsCount => ItemsMap.Count(item => item.Type == ItemType.Item);
+
         [NotNull]
         internal ItemMap ElementAt(int index)
         {
@@ -43,6 +46,33 @@ namespace FlexiMvvm.Collections.Core
         }
 
         internal abstract void Reload([NotNull] RecyclerViewObservableAdapter adapter);
+
+        internal IndexPath GetItemIndexPath(int position)
+        {
+            if (ItemsMap[position].Type != ItemType.Item)
+            {
+                return new IndexPath(-1, -1);
+            }
+
+            var row = -1;
+            var section = -1;
+
+            for (var i = 0; i < position; i++)
+            {
+                if (ItemsMap[i].Type == ItemType.SectionHeader)
+                {
+                    section++;
+                    row = -1;
+                }
+
+                if (ItemsMap[i].Type == ItemType.Item)
+                {
+                    row++;
+                }
+            }
+
+            return new IndexPath(row, section);
+        }
 
         internal void AddItems(int section, [NotNull] NotifyCollectionChangedEventArgs args, [NotNull] RecyclerView.Adapter adapter)
         {

@@ -14,18 +14,18 @@
 // limitations under the License.
 // =========================================================================
 
-namespace FlexiMvvm.Collections.Core
+namespace FlexiMvvm.Collections
 {
-    public enum ItemType
+    public class IndexPath
     {
-        Header = 1,
+        public IndexPath(int row, int section)
+        {
+            Row = row;
+            Section = section;
+        }
 
-        SectionHeader = 2,
+        public int Row { get; }
 
-        Item = 3,
-
-        SectionFooter = 4,
-
-        Footer = 5
+        public int Section { get; }
     }
 }

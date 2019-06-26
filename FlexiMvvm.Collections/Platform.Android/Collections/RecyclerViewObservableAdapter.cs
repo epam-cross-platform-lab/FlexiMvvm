@@ -51,9 +51,21 @@ namespace FlexiMvvm.Collections
 
         public override int ItemCount => GetItemsMapping().Count;
 
+        public int ItemsCount => GetItemsMapping().ItemsCount;
+
         public abstract int GetSectionsCount();
 
         public abstract int GetSectionItemsCount(int section);
+
+        public ItemType GetItemType(int position)
+        {
+            return GetItemMap(position).Type;
+        }
+
+        public IndexPath GetItemIndexPath(int position)
+        {
+            return GetItemsMapping().GetItemIndexPath(position);
+        }
 
         public override int GetItemViewType(int position)
         {
