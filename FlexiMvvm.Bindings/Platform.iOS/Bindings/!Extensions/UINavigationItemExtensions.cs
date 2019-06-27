@@ -16,68 +16,62 @@
 
 using System;
 using FlexiMvvm.Bindings.Custom;
-using JetBrains.Annotations;
 using UIKit;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class UINavigationItemBindings
+    public static class UINavigationItemExtensions
     {
-        [NotNull]
         public static TargetItemBinding<UINavigationItem, bool> HidesBackButtonBinding(
-            [NotNull] this IItemReference<UINavigationItem> navigationItemReference)
+            this IItemReference<UINavigationItem> navigationItemReference)
         {
             if (navigationItemReference == null)
                 throw new ArgumentNullException(nameof(navigationItemReference));
 
             return new TargetItemOneWayCustomBinding<UINavigationItem, bool>(
                 navigationItemReference,
-                (navigationItem, hidesBackButton) => navigationItem.NotNull().HidesBackButton = hidesBackButton,
-                () => "HidesBackButton");
+                (navigationItem, hidesBackButton) => navigationItem.HidesBackButton = hidesBackButton,
+                () => $"{nameof(UINavigationItem.HidesBackButton)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UINavigationItem, bool> HidesSearchBarWhenScrollingBinding(
-            [NotNull] this IItemReference<UINavigationItem> navigationItemReference)
+            this IItemReference<UINavigationItem> navigationItemReference)
         {
             if (navigationItemReference == null)
                 throw new ArgumentNullException(nameof(navigationItemReference));
 
             return new TargetItemOneWayCustomBinding<UINavigationItem, bool>(
                 navigationItemReference,
-                (navigationItem, hidesSearchBarWhenScrolling) => navigationItem.NotNull().HidesSearchBarWhenScrolling = hidesSearchBarWhenScrolling,
-                () => "HidesSearchBarWhenScrolling");
+                (navigationItem, hidesSearchBarWhenScrolling) => navigationItem.HidesSearchBarWhenScrolling = hidesSearchBarWhenScrolling,
+                () => $"{nameof(UINavigationItem.HidesSearchBarWhenScrolling)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UINavigationItem, bool> LeftItemsSupplementBackButtonBinding(
-            [NotNull] this IItemReference<UINavigationItem> navigationItemReference)
+            this IItemReference<UINavigationItem> navigationItemReference)
         {
             if (navigationItemReference == null)
                 throw new ArgumentNullException(nameof(navigationItemReference));
 
             return new TargetItemOneWayCustomBinding<UINavigationItem, bool>(
                 navigationItemReference,
-                (navigationItem, leftItemsSupplementBackButton) => navigationItem.NotNull().LeftItemsSupplementBackButton = leftItemsSupplementBackButton,
-                () => "LeftItemsSupplementBackButton");
+                (navigationItem, leftItemsSupplementBackButton) => navigationItem.LeftItemsSupplementBackButton = leftItemsSupplementBackButton,
+                () => $"{nameof(UINavigationItem.LeftItemsSupplementBackButton)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UINavigationItem, string> PromptBinding(
-            [NotNull] this IItemReference<UINavigationItem> navigationItemReference)
+            this IItemReference<UINavigationItem> navigationItemReference)
         {
             if (navigationItemReference == null)
                 throw new ArgumentNullException(nameof(navigationItemReference));
 
             return new TargetItemOneWayCustomBinding<UINavigationItem, string>(
                 navigationItemReference,
-                (navigationItem, prompt) => navigationItem.NotNull().Prompt = prompt,
-                () => "Prompt");
+                (navigationItem, prompt) => navigationItem.Prompt = prompt,
+                () => $"{nameof(UINavigationItem.Prompt)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UINavigationItem, bool> SetHidesBackButtonBinding(
-            [NotNull] this IItemReference<UINavigationItem> navigationItemReference,
+            this IItemReference<UINavigationItem> navigationItemReference,
             bool animated = true)
         {
             if (navigationItemReference == null)
@@ -85,21 +79,20 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemOneWayCustomBinding<UINavigationItem, bool>(
                 navigationItemReference,
-                (navigationItem, hides) => navigationItem.NotNull().SetHidesBackButton(hides, animated),
-                () => "SetHidesBackButton");
+                (navigationItem, hides) => navigationItem.SetHidesBackButton(hides, animated),
+                () => $"{nameof(UINavigationItem.SetHidesBackButton)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UINavigationItem, string> TitleBinding(
-            [NotNull] this IItemReference<UINavigationItem> navigationItemReference)
+            this IItemReference<UINavigationItem> navigationItemReference)
         {
             if (navigationItemReference == null)
                 throw new ArgumentNullException(nameof(navigationItemReference));
 
             return new TargetItemOneWayCustomBinding<UINavigationItem, string>(
                 navigationItemReference,
-                (navigationItem, title) => navigationItem.NotNull().Title = title,
-                () => "Title");
+                (navigationItem, title) => navigationItem.Title = title,
+                () => $"{nameof(UINavigationItem.Title)}");
         }
     }
 }

@@ -17,15 +17,13 @@
 using System;
 using Android.Widget;
 using FlexiMvvm.Bindings.Custom;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Bindings
 {
     public static class CompoundButtonExtensions
     {
-        [NotNull]
         public static TargetItemBinding<CompoundButton, bool> CheckedAndCheckedChangeBinding(
-            [NotNull] this IItemReference<CompoundButton> compoundButtonReference,
+            this IItemReference<CompoundButton> compoundButtonReference,
             bool trackCanExecuteCommandChanged = false)
         {
             if (compoundButtonReference == null)
@@ -33,36 +31,34 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemTwoWayCustomBinding<CompoundButton, bool, CompoundButton.CheckedChangeEventArgs>(
                 compoundButtonReference,
-                (compoundButton, eventHandler) => compoundButton.NotNull().CheckedChange += eventHandler,
-                (compoundButton, eventHandler) => compoundButton.NotNull().CheckedChange -= eventHandler,
+                (compoundButton, handler) => compoundButton.CheckedChange += handler,
+                (compoundButton, handler) => compoundButton.CheckedChange -= handler,
                 (compoundButton, canExecuteCommand) =>
                 {
                     if (trackCanExecuteCommandChanged)
                     {
-                        compoundButton.NotNull().Enabled = canExecuteCommand;
+                        compoundButton.Enabled = canExecuteCommand;
                     }
                 },
-                (compoundButton, eventArgs) => eventArgs?.IsChecked ?? compoundButton.NotNull().Checked,
-                (compoundButton, @checked) => compoundButton.NotNull().Checked = @checked,
+                (compoundButton, args) => args?.IsChecked ?? compoundButton.Checked,
+                (compoundButton, @checked) => compoundButton.Checked = @checked,
                 () => $"{nameof(CompoundButton.Checked)}And{nameof(CompoundButton.CheckedChange)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<CompoundButton, bool> CheckedBinding(
-            [NotNull] this IItemReference<CompoundButton> compoundButtonReference)
+            this IItemReference<CompoundButton> compoundButtonReference)
         {
             if (compoundButtonReference == null)
                 throw new ArgumentNullException(nameof(compoundButtonReference));
 
             return new TargetItemOneWayCustomBinding<CompoundButton, bool>(
                 compoundButtonReference,
-                (compoundButton, @checked) => compoundButton.NotNull().Checked = @checked,
+                (compoundButton, @checked) => compoundButton.Checked = @checked,
                 () => $"{nameof(CompoundButton.Checked)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<CompoundButton, bool> CheckedChangeBinding(
-            [NotNull] this IItemReference<CompoundButton> compoundButtonReference,
+            this IItemReference<CompoundButton> compoundButtonReference,
             bool trackCanExecuteCommandChanged = false)
         {
             if (compoundButtonReference == null)
@@ -70,16 +66,16 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemOneWayToSourceCustomBinding<CompoundButton, bool, CompoundButton.CheckedChangeEventArgs>(
                 compoundButtonReference,
-                (compoundButton, eventHandler) => compoundButton.NotNull().CheckedChange += eventHandler,
-                (compoundButton, eventHandler) => compoundButton.NotNull().CheckedChange -= eventHandler,
+                (compoundButton, handler) => compoundButton.CheckedChange += handler,
+                (compoundButton, handler) => compoundButton.CheckedChange -= handler,
                 (compoundButton, canExecuteCommand) =>
                 {
                     if (trackCanExecuteCommandChanged)
                     {
-                        compoundButton.NotNull().Enabled = canExecuteCommand;
+                        compoundButton.Enabled = canExecuteCommand;
                     }
                 },
-                (compoundButton, eventArgs) => eventArgs.NotNull().IsChecked,
+                (compoundButton, args) => args.IsChecked,
                 () => $"{nameof(CompoundButton.CheckedChange)}");
         }
     }

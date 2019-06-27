@@ -16,16 +16,14 @@
 
 using System;
 using FlexiMvvm.Bindings.Custom;
-using JetBrains.Annotations;
 using UIKit;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class UIPageControlBindings
+    public static class UIPageControlExtensions
     {
-        [NotNull]
         public static TargetItemBinding<UIPageControl, nint> CurrentPageAndValueChangedBinding(
-            [NotNull] this IItemReference<UIPageControl> pageControlReference,
+            this IItemReference<UIPageControl> pageControlReference,
             bool trackCanExecuteCommandChanged = false)
         {
             if (pageControlReference == null)
@@ -33,75 +31,70 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemTwoWayCustomBinding<UIPageControl, nint>(
                 pageControlReference,
-                (pageControl, eventHandler) => pageControl.NotNull().ValueChanged += eventHandler,
-                (pageControl, eventHandler) => pageControl.NotNull().ValueChanged -= eventHandler,
+                (pageControl, handler) => pageControl.ValueChanged += handler,
+                (pageControl, handler) => pageControl.ValueChanged -= handler,
                 (pageControl, canExecuteCommand) =>
                 {
                     if (trackCanExecuteCommandChanged)
                     {
-                        pageControl.NotNull().Enabled = canExecuteCommand;
+                        pageControl.Enabled = canExecuteCommand;
                     }
                 },
-                pageControl => pageControl.NotNull().CurrentPage,
-                (pageControl, currentPage) => pageControl.NotNull().CurrentPage = currentPage,
-                () => "CurrentPageAndValueChanged");
+                pageControl => pageControl.CurrentPage,
+                (pageControl, currentPage) => pageControl.CurrentPage = currentPage,
+                () => $"{nameof(UIPageControl.CurrentPage)}And{nameof(UIPageControl.ValueChanged)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UIPageControl, nint> CurrentPageBinding(
-            [NotNull] this IItemReference<UIPageControl> pageControlReference)
+            this IItemReference<UIPageControl> pageControlReference)
         {
             if (pageControlReference == null)
                 throw new ArgumentNullException(nameof(pageControlReference));
 
             return new TargetItemOneWayCustomBinding<UIPageControl, nint>(
                 pageControlReference,
-                (pageControl, currentPage) => pageControl.NotNull().CurrentPage = currentPage,
-                () => "CurrentPage");
+                (pageControl, currentPage) => pageControl.CurrentPage = currentPage,
+                () => $"{nameof(UIPageControl.CurrentPage)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UIPageControl, bool> DefersCurrentPageDisplayBinding(
-            [NotNull] this IItemReference<UIPageControl> pageControlReference)
+            this IItemReference<UIPageControl> pageControlReference)
         {
             if (pageControlReference == null)
                 throw new ArgumentNullException(nameof(pageControlReference));
 
             return new TargetItemOneWayCustomBinding<UIPageControl, bool>(
                 pageControlReference,
-                (pageControl, defersCurrentPageDisplay) => pageControl.NotNull().DefersCurrentPageDisplay = defersCurrentPageDisplay,
-                () => "DefersCurrentPageDisplay");
+                (pageControl, defersCurrentPageDisplay) => pageControl.DefersCurrentPageDisplay = defersCurrentPageDisplay,
+                () => $"{nameof(UIPageControl.DefersCurrentPageDisplay)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UIPageControl, bool> HidesForSinglePageBinding(
-            [NotNull] this IItemReference<UIPageControl> pageControlReference)
+            this IItemReference<UIPageControl> pageControlReference)
         {
             if (pageControlReference == null)
                 throw new ArgumentNullException(nameof(pageControlReference));
 
             return new TargetItemOneWayCustomBinding<UIPageControl, bool>(
                 pageControlReference,
-                (pageControl, hidesForSinglePage) => pageControl.NotNull().HidesForSinglePage = hidesForSinglePage,
-                () => "HidesForSinglePage");
+                (pageControl, hidesForSinglePage) => pageControl.HidesForSinglePage = hidesForSinglePage,
+                () => $"{nameof(UIPageControl.HidesForSinglePage)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UIPageControl, nint> PagesBinding(
-            [NotNull] this IItemReference<UIPageControl> pageControlReference)
+            this IItemReference<UIPageControl> pageControlReference)
         {
             if (pageControlReference == null)
                 throw new ArgumentNullException(nameof(pageControlReference));
 
             return new TargetItemOneWayCustomBinding<UIPageControl, nint>(
                 pageControlReference,
-                (pageControl, pages) => pageControl.NotNull().Pages = pages,
-                () => "Pages");
+                (pageControl, pages) => pageControl.Pages = pages,
+                () => $"{nameof(UIPageControl.Pages)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UIPageControl, nint> ValueChangedBinding(
-            [NotNull] this IItemReference<UIPageControl> pageControlReference,
+            this IItemReference<UIPageControl> pageControlReference,
             bool trackCanExecuteCommandChanged = false)
         {
             if (pageControlReference == null)
@@ -109,17 +102,17 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemOneWayToSourceCustomBinding<UIPageControl, nint>(
                 pageControlReference,
-                (pageControl, eventHandler) => pageControl.NotNull().ValueChanged += eventHandler,
-                (pageControl, eventHandler) => pageControl.NotNull().ValueChanged -= eventHandler,
+                (pageControl, handler) => pageControl.ValueChanged += handler,
+                (pageControl, handler) => pageControl.ValueChanged -= handler,
                 (pageControl, canExecuteCommand) =>
                 {
                     if (trackCanExecuteCommandChanged)
                     {
-                        pageControl.NotNull().Enabled = canExecuteCommand;
+                        pageControl.Enabled = canExecuteCommand;
                     }
                 },
-                pageControl => pageControl.NotNull().CurrentPage,
-                () => "ValueChanged");
+                pageControl => pageControl.CurrentPage,
+                () => $"{nameof(UIPageControl.ValueChanged)}");
         }
     }
 }

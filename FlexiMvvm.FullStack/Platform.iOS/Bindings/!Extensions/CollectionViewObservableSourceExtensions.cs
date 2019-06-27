@@ -17,42 +17,39 @@
 using System;
 using FlexiMvvm.Bindings.Custom;
 using FlexiMvvm.Collections;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class CollectionViewObservableSourceBindings
+    public static class CollectionViewObservableSourceExtensions
     {
-        [NotNull]
         public static TargetItemBinding<CollectionViewObservableSource, object> ItemDeselectedBinding(
-            [NotNull] this IItemReference<CollectionViewObservableSource> collectionViewSourceReference)
+            this IItemReference<CollectionViewObservableSource> collectionViewSourceReference)
         {
             if (collectionViewSourceReference == null)
                 throw new ArgumentNullException(nameof(collectionViewSourceReference));
 
             return new TargetItemOneWayToSourceCustomBinding<CollectionViewObservableSource, object, SelectionChangedEventArgs>(
                 collectionViewSourceReference,
-                (collectionViewSource, eventHandler) => collectionViewSource.NotNull().ItemDeselectedCalled += eventHandler,
-                (collectionViewSource, eventHandler) => collectionViewSource.NotNull().ItemDeselectedCalled -= eventHandler,
+                (collectionViewSource, handler) => collectionViewSource.ItemDeselectedCalled += handler,
+                (collectionViewSource, handler) => collectionViewSource.ItemDeselectedCalled -= handler,
                 (collectionViewSource, canExecuteCommand) => { },
-                (collectionViewSource, eventArgs) => eventArgs?.Item,
-                () => "ItemDeselected");
+                (collectionViewSource, args) => args?.Item,
+                () => $"{nameof(CollectionViewObservableSource.ItemDeselected)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<CollectionViewObservableSource, object> ItemSelectedBinding(
-            [NotNull] this IItemReference<CollectionViewObservableSource> collectionViewSourceReference)
+            this IItemReference<CollectionViewObservableSource> collectionViewSourceReference)
         {
             if (collectionViewSourceReference == null)
                 throw new ArgumentNullException(nameof(collectionViewSourceReference));
 
             return new TargetItemOneWayToSourceCustomBinding<CollectionViewObservableSource, object, SelectionChangedEventArgs>(
                 collectionViewSourceReference,
-                (collectionViewSource, eventHandler) => collectionViewSource.NotNull().ItemSelectedCalled += eventHandler,
-                (collectionViewSource, eventHandler) => collectionViewSource.NotNull().ItemSelectedCalled -= eventHandler,
+                (collectionViewSource, handler) => collectionViewSource.ItemSelectedCalled += handler,
+                (collectionViewSource, handler) => collectionViewSource.ItemSelectedCalled -= handler,
                 (collectionViewSource, canExecuteCommand) => { },
-                (collectionViewSource, eventArgs) => eventArgs?.Item,
-                () => "ItemSelected");
+                (collectionViewSource, args) => args?.Item,
+                () => $"{nameof(CollectionViewObservableSource.ItemSelected)}");
         }
     }
 }

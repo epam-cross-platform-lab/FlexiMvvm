@@ -19,23 +19,21 @@ using System.Collections.Generic;
 using System.Linq;
 using FlexiMvvm.Bindings.Custom;
 using FlexiMvvm.Collections;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class CollectionViewObservableGroupedSourceBindings
+    public static class TableViewObservableGroupedSourceExtensions
     {
-        [NotNull]
-        public static TargetItemBinding<CollectionViewObservableGroupedSource, IEnumerable<IGrouping<object, object>>> GroupedItemsBinding(
-            [NotNull] this IItemReference<CollectionViewObservableGroupedSource> collectionViewSourceReference)
+        public static TargetItemBinding<TableViewObservableGroupedSource, IEnumerable<IGrouping<object, object>>> GroupedItemsBinding(
+            this IItemReference<TableViewObservableGroupedSource> tableViewSourceReference)
         {
-            if (collectionViewSourceReference == null)
-                throw new ArgumentNullException(nameof(collectionViewSourceReference));
+            if (tableViewSourceReference == null)
+                throw new ArgumentNullException(nameof(tableViewSourceReference));
 
-            return new TargetItemOneWayCustomBinding<CollectionViewObservableGroupedSource, IEnumerable<IGrouping<object, object>>>(
-                collectionViewSourceReference,
-                (collectionViewSource, groupedItems) => collectionViewSource.NotNull().GroupedItems = groupedItems,
-                () => "GroupedItems");
+            return new TargetItemOneWayCustomBinding<TableViewObservableGroupedSource, IEnumerable<IGrouping<object, object>>>(
+                tableViewSourceReference,
+                (tableViewSource, groupedItems) => tableViewSource.GroupedItems = groupedItems,
+                () => $"{nameof(TableViewObservableGroupedSource.GroupedItems)}");
         }
     }
 }

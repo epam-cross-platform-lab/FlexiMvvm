@@ -14,16 +14,24 @@
 // limitations under the License.
 // =========================================================================
 
-using UIKit;
+using System;
+using Android.Widget;
+using FlexiMvvm.Bindings.Custom;
 
 namespace FlexiMvvm.Bindings
 {
-    public partial class BindingSet<TSourceItem>
+    public static class ProgressBarExtensions
     {
-        public ITargetItemBindingBuilder<TSourceItem, UINavigationItem> Bind(
-            UINavigationItem navigationItem)
+        public static TargetItemBinding<ProgressBar, int> ProgressBinding(
+            this IItemReference<ProgressBar> progressBarReference)
         {
-            return Bind(navigationItem, ItemReferenceType.Strong);
+            if (progressBarReference == null)
+                throw new ArgumentNullException(nameof(progressBarReference));
+
+            return new TargetItemOneWayCustomBinding<ProgressBar, int>(
+                progressBarReference,
+                (progressBar, progress) => progressBar.Progress = progress,
+                () => $"{nameof(ProgressBar.Progress)}");
         }
     }
 }

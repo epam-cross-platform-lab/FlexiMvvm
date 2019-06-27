@@ -17,29 +17,26 @@
 using System;
 using FlexiMvvm.Bindings.Custom;
 using Foundation;
-using JetBrains.Annotations;
 using UIKit;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class UIDatePickerBindings
+    public static class UIDatePickerExtensions
     {
-        [NotNull]
         public static TargetItemBinding<UIDatePicker, double> CountDownDurationBinding(
-            [NotNull] this IItemReference<UIDatePicker> datePickerReference)
+            this IItemReference<UIDatePicker> datePickerReference)
         {
             if (datePickerReference == null)
                 throw new ArgumentNullException(nameof(datePickerReference));
 
             return new TargetItemOneWayCustomBinding<UIDatePicker, double>(
                 datePickerReference,
-                (datePicker, countDownDuration) => datePicker.NotNull().CountDownDuration = countDownDuration,
-                () => "CountDownDuration");
+                (datePicker, countDownDuration) => datePicker.CountDownDuration = countDownDuration,
+                () => $"{nameof(UIDatePicker.CountDownDuration)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UIDatePicker, NSDate> DateAndValueChangedBinding(
-            [NotNull] this IItemReference<UIDatePicker> datePickerReference,
+            this IItemReference<UIDatePicker> datePickerReference,
             bool animated = true,
             bool trackCanExecuteCommandChanged = false)
         {
@@ -48,76 +45,72 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemTwoWayCustomBinding<UIDatePicker, NSDate>(
                 datePickerReference,
-                (datePicker, eventHandler) => datePicker.NotNull().ValueChanged += eventHandler,
-                (datePicker, eventHandler) => datePicker.NotNull().ValueChanged -= eventHandler,
+                (datePicker, handler) => datePicker.ValueChanged += handler,
+                (datePicker, handler) => datePicker.ValueChanged -= handler,
                 (datePicker, canExecuteCommand) =>
                 {
                     if (trackCanExecuteCommandChanged)
                     {
-                        datePicker.NotNull().Enabled = canExecuteCommand;
+                        datePicker.Enabled = canExecuteCommand;
                     }
                 },
-                datePicker => datePicker.NotNull().Date,
+                datePicker => datePicker.Date,
                 (datePicker, date) =>
                 {
                     if (date != null)
                     {
-                        datePicker.NotNull().SetDate(date, animated);
+                        datePicker.SetDate(date, animated);
                     }
                 },
-                () => "DateAndValueChanged");
+                () => $"{nameof(UIDatePicker.Date)}And{nameof(UIDatePicker.ValueChanged)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UIDatePicker, NSDate> DateBinding(
-            [NotNull] this IItemReference<UIDatePicker> datePickerReference)
+            this IItemReference<UIDatePicker> datePickerReference)
         {
             if (datePickerReference == null)
                 throw new ArgumentNullException(nameof(datePickerReference));
 
             return new TargetItemOneWayCustomBinding<UIDatePicker, NSDate>(
                 datePickerReference,
-                (datePicker, date) => datePicker.NotNull().Date = date,
-                () => "Date");
+                (datePicker, date) => datePicker.Date = date,
+                () => $"{nameof(UIDatePicker.Date)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UIDatePicker, NSDate> MaximumDateBinding(
-            [NotNull] this IItemReference<UIDatePicker> datePickerReference)
+            this IItemReference<UIDatePicker> datePickerReference)
         {
             if (datePickerReference == null)
                 throw new ArgumentNullException(nameof(datePickerReference));
 
             return new TargetItemOneWayCustomBinding<UIDatePicker, NSDate>(
                 datePickerReference,
-                (datePicker, maximumDate) => datePicker.NotNull().MaximumDate = maximumDate,
-                () => "MaximumDate");
+                (datePicker, maximumDate) => datePicker.MaximumDate = maximumDate,
+                () => $"{nameof(UIDatePicker.MaximumDate)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UIDatePicker, NSDate> MinimumDateBinding(
-            [NotNull] this IItemReference<UIDatePicker> datePickerReference)
+            this IItemReference<UIDatePicker> datePickerReference)
         {
             if (datePickerReference == null)
                 throw new ArgumentNullException(nameof(datePickerReference));
 
             return new TargetItemOneWayCustomBinding<UIDatePicker, NSDate>(
                 datePickerReference,
-                (datePicker, minimumDate) => datePicker.NotNull().MinimumDate = minimumDate,
-                () => "MinimumDate");
+                (datePicker, minimumDate) => datePicker.MinimumDate = minimumDate,
+                () => $"{nameof(UIDatePicker.MinimumDate)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UIDatePicker, nint> MinuteIntervalBinding(
-            [NotNull] this IItemReference<UIDatePicker> datePickerReference)
+            this IItemReference<UIDatePicker> datePickerReference)
         {
             if (datePickerReference == null)
                 throw new ArgumentNullException(nameof(datePickerReference));
 
             return new TargetItemOneWayCustomBinding<UIDatePicker, nint>(
                 datePickerReference,
-                (datePicker, minuteInterval) => datePicker.NotNull().MinuteInterval = minuteInterval,
-                () => "MinuteInterval");
+                (datePicker, minuteInterval) => datePicker.MinuteInterval = minuteInterval,
+                () => $"{nameof(UIDatePicker.MinuteInterval)}");
         }
     }
 }

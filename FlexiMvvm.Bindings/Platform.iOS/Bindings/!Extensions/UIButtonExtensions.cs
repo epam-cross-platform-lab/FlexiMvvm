@@ -16,16 +16,14 @@
 
 using System;
 using FlexiMvvm.Bindings.Custom;
-using JetBrains.Annotations;
 using UIKit;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class UIButtonBindings
+    public static class UIButtonExtensions
     {
-        [NotNull]
         public static TargetItemBinding<UIButton, string> SetTitleBinding(
-            [NotNull] this IItemReference<UIButton> buttonReference,
+            this IItemReference<UIButton> buttonReference,
             UIControlState forState = UIControlState.Normal)
         {
             if (buttonReference == null)
@@ -33,34 +31,32 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemOneWayCustomBinding<UIButton, string>(
                 buttonReference,
-                (button, title) => button.NotNull().SetTitle(title, forState),
-                () => "SetTitle");
+                (button, title) => button.SetTitle(title, forState),
+                () => $"{nameof(UIButton.SetTitle)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UIButton, bool> ReverseTitleShadowWhenHighlightedBinding(
-            [NotNull] this IItemReference<UIButton> buttonReference)
+            this IItemReference<UIButton> buttonReference)
         {
             if (buttonReference == null)
                 throw new ArgumentNullException(nameof(buttonReference));
 
             return new TargetItemOneWayCustomBinding<UIButton, bool>(
                 buttonReference,
-                (button, reverseTitleShadowWhenHighlighted) => button.NotNull().ReverseTitleShadowWhenHighlighted = reverseTitleShadowWhenHighlighted,
-                () => "ReverseTitleShadowWhenHighlighted");
+                (button, reverseTitleShadowWhenHighlighted) => button.ReverseTitleShadowWhenHighlighted = reverseTitleShadowWhenHighlighted,
+                () => $"{nameof(UIButton.ReverseTitleShadowWhenHighlighted)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UIButton, bool> ShowsTouchWhenHighlightedBinding(
-            [NotNull] this IItemReference<UIButton> buttonReference)
+            this IItemReference<UIButton> buttonReference)
         {
             if (buttonReference == null)
                 throw new ArgumentNullException(nameof(buttonReference));
 
             return new TargetItemOneWayCustomBinding<UIButton, bool>(
                 buttonReference,
-                (button, showsTouchWhenHighlighted) => button.NotNull().ShowsTouchWhenHighlighted = showsTouchWhenHighlighted,
-                () => "ShowsTouchWhenHighlighted");
+                (button, showsTouchWhenHighlighted) => button.ShowsTouchWhenHighlighted = showsTouchWhenHighlighted,
+                () => $"{nameof(UIButton.ShowsTouchWhenHighlighted)}");
         }
     }
 }

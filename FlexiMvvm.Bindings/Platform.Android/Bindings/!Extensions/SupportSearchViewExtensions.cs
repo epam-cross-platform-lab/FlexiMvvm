@@ -15,13 +15,12 @@
 // =========================================================================
 
 using System;
-using Android.Views;
-using Android.Widget;
+using Android.Support.V7.Widget;
 using FlexiMvvm.Bindings.Custom;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class SearchViewExtensions
+    public static class SupportSearchViewExtensions
     {
         public static TargetItemBinding<SearchView, object> CloseBinding(
             this IItemReference<SearchView> searchViewReference,
@@ -43,6 +42,18 @@ namespace FlexiMvvm.Bindings
                 },
                 (searchView, args) => null,
                 () => $"{nameof(SearchView.Close)}");
+        }
+
+        public static TargetItemBinding<SearchView, string> QueryHintBinding(
+            this IItemReference<SearchView> searchViewReference)
+        {
+            if (searchViewReference == null)
+                throw new ArgumentNullException(nameof(searchViewReference));
+
+            return new TargetItemOneWayCustomBinding<SearchView, string>(
+                searchViewReference,
+                (searchView, hint) => searchView.QueryHint = hint,
+                () => $"{nameof(SearchView.QueryHint)}");
         }
 
         public static TargetItemBinding<SearchView, string> QueryTextChangeBinding(
@@ -67,43 +78,6 @@ namespace FlexiMvvm.Bindings
                 () => $"{nameof(SearchView.QueryTextChange)}");
         }
 
-        public static TargetItemBinding<SearchView, object> QueryTextFocusChangeBinding(
-            this IItemReference<SearchView> searchViewReference,
-            FocusDirection focusDirection = FocusDirection.InOut,
-            bool trackCanExecuteCommandChanged = false)
-        {
-            if (searchViewReference == null)
-                throw new ArgumentNullException(nameof(searchViewReference));
-
-            return new TargetItemOneWayToSourceCustomBinding<SearchView, object, View.FocusChangeEventArgs>(
-                searchViewReference,
-                (searchView, handler) => searchView.QueryTextFocusChange += handler,
-                (searchView, handler) => searchView.QueryTextFocusChange -= handler,
-                (searchView, canExecuteCommand) =>
-                {
-                    if (trackCanExecuteCommandChanged)
-                    {
-                        searchView.Enabled = canExecuteCommand;
-                    }
-                },
-                (searchView, args) => null,
-                (searchView, args) =>
-                {
-                    switch (focusDirection)
-                    {
-                        case FocusDirection.InOut:
-                            return true;
-                        case FocusDirection.In:
-                            return args.HasFocus;
-                        case FocusDirection.Out:
-                            return !args.HasFocus;
-                        default:
-                            return false;
-                    }
-                },
-                () => $"{nameof(SearchView.QueryTextFocusChange)}");
-        }
-
         public static TargetItemBinding<SearchView, string> QueryTextSubmitBinding(
             this IItemReference<SearchView> searchViewReference,
             bool trackCanExecuteCommandChanged = false)
@@ -122,30 +96,12 @@ namespace FlexiMvvm.Bindings
                         searchView.Enabled = canExecuteCommand;
                     }
                 },
+#if __ANDROID_28__
+                (searchView, args) => args.NewText,
+#else
                 (searchView, args) => args.Query,
+#endif
                 () => $"{nameof(SearchView.QueryTextSubmit)}");
-        }
-
-        public static TargetItemBinding<SearchView, object> SearchClickBinding(
-            this IItemReference<SearchView> searchViewReference,
-            bool trackCanExecuteCommandChanged = false)
-        {
-            if (searchViewReference == null)
-                throw new ArgumentNullException(nameof(searchViewReference));
-
-            return new TargetItemOneWayToSourceCustomBinding<SearchView, object>(
-                searchViewReference,
-                (searchView, handler) => searchView.SearchClick += handler,
-                (searchView, handler) => searchView.SearchClick -= handler,
-                (searchView, canExecuteCommand) =>
-                {
-                    if (trackCanExecuteCommandChanged)
-                    {
-                        searchView.Enabled = canExecuteCommand;
-                    }
-                },
-                searchView => null,
-                () => $"{nameof(SearchView.SearchClick)}");
         }
 
         public static TargetItemBinding<SearchView, string> SetQueryAndQueryTextChangeBinding(
@@ -183,18 +139,6 @@ namespace FlexiMvvm.Bindings
                 searchViewReference,
                 (searchView, query) => searchView.SetQuery(query, submit),
                 () => $"{nameof(SearchView.SetQuery)}");
-        }
-
-        public static TargetItemBinding<SearchView, string> SetQueryHintBinding(
-            this IItemReference<SearchView> searchViewReference)
-        {
-            if (searchViewReference == null)
-                throw new ArgumentNullException(nameof(searchViewReference));
-
-            return new TargetItemOneWayCustomBinding<SearchView, string>(
-                searchViewReference,
-                (searchView, hint) => searchView.SetQueryHint(hint),
-                () => $"{nameof(SearchView.SetQueryHint)}");
         }
 
         public static TargetItemBinding<SearchView, bool> SubmitButtonEnabledBinding(

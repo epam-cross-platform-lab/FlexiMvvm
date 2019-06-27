@@ -87,7 +87,7 @@ namespace FlexiMvvm.Bindings
                         ratingBar.Enabled = canExecuteCommand;
                     }
                 },
-                (ratingBar, args) => args != null ? args.Rating : ratingBar.Rating,
+                (ratingBar, args) => args?.Rating ?? ratingBar.Rating,
                 (ratingBar, rating) => ratingBar.Rating = rating,
                 () => $"{nameof(RatingBar.Rating)}And{nameof(RatingBar.RatingBarChange)}");
         }

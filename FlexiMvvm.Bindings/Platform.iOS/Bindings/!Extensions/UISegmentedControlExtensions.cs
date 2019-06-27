@@ -16,16 +16,14 @@
 
 using System;
 using FlexiMvvm.Bindings.Custom;
-using JetBrains.Annotations;
 using UIKit;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class UISegmentedControlBindings
+    public static class UISegmentedControlExtensions
     {
-        [NotNull]
         public static TargetItemBinding<UISegmentedControl, nint> SelectedSegmentAndValueChangedBinding(
-            [NotNull] this IItemReference<UISegmentedControl> segmentedControlReference,
+            this IItemReference<UISegmentedControl> segmentedControlReference,
             bool trackCanExecuteCommandChanged = false)
         {
             if (segmentedControlReference == null)
@@ -33,19 +31,19 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemTwoWayCustomBinding<UISegmentedControl, nint>(
                 segmentedControlReference,
-                (segmentedControl, eventHandler) => segmentedControl.NotNull().ValueChanged += eventHandler,
-                (segmentedControl, eventHandler) => segmentedControl.NotNull().ValueChanged -= eventHandler,
+                (segmentedControl, handler) => segmentedControl.ValueChanged += handler,
+                (segmentedControl, handler) => segmentedControl.ValueChanged -= handler,
                 (segmentedControl, canExecuteCommand) =>
                 {
                     if (trackCanExecuteCommandChanged)
                     {
-                        segmentedControl.NotNull().Enabled = canExecuteCommand;
+                        segmentedControl.Enabled = canExecuteCommand;
                     }
                 },
-                segmentedControl => segmentedControl.NotNull().SelectedSegment,
+                segmentedControl => segmentedControl.SelectedSegment,
                 (segmentedControl, selectedSegment) =>
                 {
-                    var selectedSegmentOldValue = segmentedControl.NotNull().SelectedSegment;
+                    var selectedSegmentOldValue = segmentedControl.SelectedSegment;
                     segmentedControl.SelectedSegment = selectedSegment;
                     var selectedSegmentChanged = selectedSegmentOldValue != segmentedControl.SelectedSegment;
 
@@ -54,12 +52,11 @@ namespace FlexiMvvm.Bindings
                         segmentedControl.SendActionForControlEvents(UIControlEvent.ValueChanged);
                     }
                 },
-                () => "SelectedSegmentAndValueChanged");
+                () => $"{nameof(UISegmentedControl.SelectedSegment)}And{nameof(UISegmentedControl.ValueChanged)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UISegmentedControl, nint> SelectedSegmentBinding(
-            [NotNull] this IItemReference<UISegmentedControl> segmentedControlReference)
+            this IItemReference<UISegmentedControl> segmentedControlReference)
         {
             if (segmentedControlReference == null)
                 throw new ArgumentNullException(nameof(segmentedControlReference));
@@ -68,7 +65,7 @@ namespace FlexiMvvm.Bindings
                 segmentedControlReference,
                 (segmentedControl, selectedSegment) =>
                 {
-                    var selectedSegmentOldValue = segmentedControl.NotNull().SelectedSegment;
+                    var selectedSegmentOldValue = segmentedControl.SelectedSegment;
                     segmentedControl.SelectedSegment = selectedSegment;
                     var selectedSegmentChanged = selectedSegmentOldValue != segmentedControl.SelectedSegment;
 
@@ -77,12 +74,11 @@ namespace FlexiMvvm.Bindings
                         segmentedControl.SendActionForControlEvents(UIControlEvent.ValueChanged);
                     }
                 },
-                () => "SelectedSegment");
+                () => $"{nameof(UISegmentedControl.SelectedSegment)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UISegmentedControl, nint> ValueChangedBinding(
-            [NotNull] this IItemReference<UISegmentedControl> segmentedControlReference,
+            this IItemReference<UISegmentedControl> segmentedControlReference,
             bool trackCanExecuteCommandChanged = false)
         {
             if (segmentedControlReference == null)
@@ -90,17 +86,17 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemOneWayToSourceCustomBinding<UISegmentedControl, nint>(
                 segmentedControlReference,
-                (segmentedControl, eventHandler) => segmentedControl.NotNull().ValueChanged += eventHandler,
-                (segmentedControl, eventHandler) => segmentedControl.NotNull().ValueChanged -= eventHandler,
+                (segmentedControl, handler) => segmentedControl.ValueChanged += handler,
+                (segmentedControl, handler) => segmentedControl.ValueChanged -= handler,
                 (segmentedControl, canExecuteCommand) =>
                 {
                     if (trackCanExecuteCommandChanged)
                     {
-                        segmentedControl.NotNull().Enabled = canExecuteCommand;
+                        segmentedControl.Enabled = canExecuteCommand;
                     }
                 },
-                segmentedControl => segmentedControl.NotNull().SelectedSegment,
-                () => "ValueChanged");
+                segmentedControl => segmentedControl.SelectedSegment,
+                () => $"{nameof(UISegmentedControl.ValueChanged)}");
         }
     }
 }

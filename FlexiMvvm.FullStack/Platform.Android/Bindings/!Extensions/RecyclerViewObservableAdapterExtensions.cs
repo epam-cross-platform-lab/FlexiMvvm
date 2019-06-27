@@ -17,25 +17,23 @@
 using System;
 using FlexiMvvm.Bindings.Custom;
 using FlexiMvvm.Collections;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Bindings
 {
     public static class RecyclerViewObservableAdapterExtensions
     {
-        [NotNull]
         public static TargetItemBinding<RecyclerViewObservableAdapter, object> ItemClickedBinding(
-            [NotNull] this IItemReference<RecyclerViewObservableAdapter> recyclerViewAdapterReference)
+            this IItemReference<RecyclerViewObservableAdapter> recyclerViewAdapterReference)
         {
             if (recyclerViewAdapterReference == null)
                 throw new ArgumentNullException(nameof(recyclerViewAdapterReference));
 
             return new TargetItemOneWayToSourceCustomBinding<RecyclerViewObservableAdapter, object, SelectionChangedEventArgs>(
                 recyclerViewAdapterReference,
-                (recyclerViewAdapter, eventHandler) => recyclerViewAdapter.NotNull().ItemClicked += eventHandler,
-                (recyclerViewAdapter, eventHandler) => recyclerViewAdapter.NotNull().ItemClicked -= eventHandler,
+                (recyclerViewAdapter, handler) => recyclerViewAdapter.ItemClicked += handler,
+                (recyclerViewAdapter, handler) => recyclerViewAdapter.ItemClicked -= handler,
                 (recyclerViewAdapter, canExecuteCommand) => { },
-                (recyclerViewAdapter, eventArgs) => eventArgs.NotNull().Item,
+                (recyclerViewAdapter, args) => args.Item,
                 () => $"{nameof(RecyclerViewObservableAdapter.ItemClicked)}");
         }
     }

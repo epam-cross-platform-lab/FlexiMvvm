@@ -15,25 +15,23 @@
 // =========================================================================
 
 using System;
+using Android.Widget;
 using FlexiMvvm.Bindings.Custom;
-using JetBrains.Annotations;
-using UIKit;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class UIViewControllerBindings
+    public static class ImageViewExtensions
     {
-        [NotNull]
-        public static TargetItemBinding<UIViewController, string> TitleBinding(
-            [NotNull] this IItemReference<UIViewController> viewControllerReference)
+        public static TargetItemBinding<ImageView, int> SetImageResourceBinding(
+            this IItemReference<ImageView> imageViewReference)
         {
-            if (viewControllerReference == null)
-                throw new ArgumentNullException(nameof(viewControllerReference));
+            if (imageViewReference == null)
+                throw new ArgumentNullException(nameof(imageViewReference));
 
-            return new TargetItemOneWayCustomBinding<UIViewController, string>(
-                viewControllerReference,
-                (viewController, title) => viewController.NotNull().Title = title,
-                () => "Title");
+            return new TargetItemOneWayCustomBinding<ImageView, int>(
+                imageViewReference,
+                (imageView, resId) => imageView.SetImageResource(resId),
+                () => $"{nameof(ImageView.SetImageResource)}");
         }
     }
 }

@@ -17,167 +17,154 @@
 using System;
 using FlexiMvvm.Bindings.Custom;
 using Foundation;
-using JetBrains.Annotations;
 using UIKit;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class UILabelBindings
+    public static class UILabelExtensions
     {
-        [NotNull]
         public static TargetItemBinding<UILabel, bool> AdjustsFontForContentSizeCategoryBinding(
-            [NotNull] this IItemReference<UILabel> labelReference)
+            this IItemReference<UILabel> labelReference)
         {
             if (labelReference == null)
                 throw new ArgumentNullException(nameof(labelReference));
 
             return new TargetItemOneWayCustomBinding<UILabel, bool>(
                 labelReference,
-                (label, adjustFontForContentSizeCategory) => label.NotNull().AdjustsFontForContentSizeCategory = adjustFontForContentSizeCategory,
-                () => "AdjustsFontForContentSizeCategory");
+                (label, adjustFontForContentSizeCategory) => label.AdjustsFontForContentSizeCategory = adjustFontForContentSizeCategory,
+                () => $"{nameof(UILabel.AdjustsFontForContentSizeCategory)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UILabel, bool> AdjustsFontSizeToFitWidthBinding(
-            [NotNull] this IItemReference<UILabel> labelReference)
+            this IItemReference<UILabel> labelReference)
         {
             if (labelReference == null)
                 throw new ArgumentNullException(nameof(labelReference));
 
             return new TargetItemOneWayCustomBinding<UILabel, bool>(
                 labelReference,
-                (label, adjustFontSizeToFitWidth) => label.NotNull().AdjustsFontSizeToFitWidth = adjustFontSizeToFitWidth,
-                () => "AdjustsFontSizeToFitWidth");
+                (label, adjustFontSizeToFitWidth) => label.AdjustsFontSizeToFitWidth = adjustFontSizeToFitWidth,
+                () => $"{nameof(UILabel.AdjustsFontSizeToFitWidth)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UILabel, bool> AdjustsLetterSpacingToFitWidthBinding(
-            [NotNull] this IItemReference<UILabel> labelReference)
+            this IItemReference<UILabel> labelReference)
         {
             if (labelReference == null)
                 throw new ArgumentNullException(nameof(labelReference));
 
             return new TargetItemOneWayCustomBinding<UILabel, bool>(
                 labelReference,
-                (label, adjustsLetterSpacingToFitWidth) => label.NotNull().AdjustsLetterSpacingToFitWidth = adjustsLetterSpacingToFitWidth,
-                () => "AdjustsLetterSpacingToFitWidth");
+                (label, adjustsLetterSpacingToFitWidth) => label.AdjustsLetterSpacingToFitWidth = adjustsLetterSpacingToFitWidth,
+                () => $"{nameof(UILabel.AdjustsLetterSpacingToFitWidth)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UILabel, bool> AllowsDefaultTighteningForTruncationBinding(
-            [NotNull] this IItemReference<UILabel> labelReference)
+            this IItemReference<UILabel> labelReference)
         {
             if (labelReference == null)
                 throw new ArgumentNullException(nameof(labelReference));
 
             return new TargetItemOneWayCustomBinding<UILabel, bool>(
                 labelReference,
-                (label, allowDefaultTighteningForTruncation) => label.NotNull().AllowsDefaultTighteningForTruncation = allowDefaultTighteningForTruncation,
-                () => "AllowsDefaultTighteningForTruncation");
+                (label, allowDefaultTighteningForTruncation) => label.AllowsDefaultTighteningForTruncation = allowDefaultTighteningForTruncation,
+                () => $"{nameof(UILabel.AllowsDefaultTighteningForTruncation)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UILabel, NSAttributedString> AttributedTextBinding(
-            [NotNull] this IItemReference<UILabel> labelReference)
+            this IItemReference<UILabel> labelReference)
         {
             if (labelReference == null)
                 throw new ArgumentNullException(nameof(labelReference));
 
             return new TargetItemOneWayCustomBinding<UILabel, NSAttributedString>(
                 labelReference,
-                (label, attributedText) => label.NotNull().AttributedText = attributedText,
-                () => "AttributedText");
+                (label, attributedText) => label.AttributedText = attributedText,
+                () => $"{nameof(UILabel.AttributedText)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UILabel, bool> EnabledBinding(
-            [NotNull] this IItemReference<UILabel> labelReference)
+            this IItemReference<UILabel> labelReference)
         {
             if (labelReference == null)
                 throw new ArgumentNullException(nameof(labelReference));
 
             return new TargetItemOneWayCustomBinding<UILabel, bool>(
                 labelReference,
-                (label, enabled) => label.NotNull().Enabled = enabled,
-                () => "Enabled");
+                (label, enabled) => label.Enabled = enabled,
+                () => $"{nameof(UILabel.Enabled)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UILabel, bool> HighlightedBinding(
-            [NotNull] this IItemReference<UILabel> labelReference)
+            this IItemReference<UILabel> labelReference)
         {
             if (labelReference == null)
                 throw new ArgumentNullException(nameof(labelReference));
 
             return new TargetItemOneWayCustomBinding<UILabel, bool>(
                 labelReference,
-                (label, highlighted) => label.NotNull().Highlighted = highlighted,
-                () => "Highlighted");
+                (label, highlighted) => label.Highlighted = highlighted,
+                () => $"{nameof(UILabel.Highlighted)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UILabel, nint> LinesBinding(
-            [NotNull] this IItemReference<UILabel> labelReference)
+            this IItemReference<UILabel> labelReference)
         {
             if (labelReference == null)
                 throw new ArgumentNullException(nameof(labelReference));
 
             return new TargetItemOneWayCustomBinding<UILabel, nint>(
                 labelReference,
-                (label, lines) => label.NotNull().Lines = lines,
-                () => "Lines");
+                (label, lines) => label.Lines = lines,
+                () => $"{nameof(UILabel.Lines)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UILabel, nfloat> MinimumFontSizeBinding(
-            [NotNull] this IItemReference<UILabel> labelReference)
+            this IItemReference<UILabel> labelReference)
         {
             if (labelReference == null)
                 throw new ArgumentNullException(nameof(labelReference));
 
             return new TargetItemOneWayCustomBinding<UILabel, nfloat>(
                 labelReference,
-                (label, minimumFontSize) => label.NotNull().MinimumFontSize = minimumFontSize,
-                () => "MinimumFontSize");
+                (label, minimumFontSize) => label.MinimumFontSize = minimumFontSize,
+                () => $"{nameof(UILabel.MinimumFontSize)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UILabel, nfloat> MinimumScaleFactorBinding(
-            [NotNull] this IItemReference<UILabel> labelReference)
+            this IItemReference<UILabel> labelReference)
         {
             if (labelReference == null)
                 throw new ArgumentNullException(nameof(labelReference));
 
             return new TargetItemOneWayCustomBinding<UILabel, nfloat>(
                 labelReference,
-                (label, minimumScaleFactor) => label.NotNull().MinimumScaleFactor = minimumScaleFactor,
-                () => "MinimumScaleFactor");
+                (label, minimumScaleFactor) => label.MinimumScaleFactor = minimumScaleFactor,
+                () => $"{nameof(UILabel.MinimumScaleFactor)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UILabel, nfloat> PreferredMaxLayoutWidthBinding(
-            [NotNull] this IItemReference<UILabel> labelReference)
+            this IItemReference<UILabel> labelReference)
         {
             if (labelReference == null)
                 throw new ArgumentNullException(nameof(labelReference));
 
             return new TargetItemOneWayCustomBinding<UILabel, nfloat>(
                 labelReference,
-                (label, preferredMaxLayoutWidth) => label.NotNull().PreferredMaxLayoutWidth = preferredMaxLayoutWidth,
-                () => "PreferredMaxLayoutWidth");
+                (label, preferredMaxLayoutWidth) => label.PreferredMaxLayoutWidth = preferredMaxLayoutWidth,
+                () => $"{nameof(UILabel.PreferredMaxLayoutWidth)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UILabel, string> TextBinding(
-            [NotNull] this IItemReference<UILabel> labelReference)
+            this IItemReference<UILabel> labelReference)
         {
             if (labelReference == null)
                 throw new ArgumentNullException(nameof(labelReference));
 
             return new TargetItemOneWayCustomBinding<UILabel, string>(
                 labelReference,
-                (label, text) => label.NotNull().Text = text,
-                () => "Text");
+                (label, text) => label.Text = text,
+                () => $"{nameof(UILabel.Text)}");
         }
     }
 }

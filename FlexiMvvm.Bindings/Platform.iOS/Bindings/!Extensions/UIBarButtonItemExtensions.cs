@@ -16,16 +16,14 @@
 
 using System;
 using FlexiMvvm.Bindings.Custom;
-using JetBrains.Annotations;
 using UIKit;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class UIBarButtonItemBindings
+    public static class UIBarButtonItemExtensions
     {
-        [NotNull]
         public static TargetItemBinding<UIBarButtonItem, object> ClickedBinding(
-            [NotNull] this IItemReference<UIBarButtonItem> barButtonItemReference,
+            this IItemReference<UIBarButtonItem> barButtonItemReference,
             bool trackCanExecuteCommandChanged = false)
         {
             if (barButtonItemReference == null)
@@ -33,56 +31,53 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemOneWayToSourceCustomBinding<UIBarButtonItem, object>(
                 barButtonItemReference,
-                (barButtonItem, eventHandler) => barButtonItem.NotNull().Clicked += eventHandler,
-                (barButtonItem, eventHandler) => barButtonItem.NotNull().Clicked -= eventHandler,
+                (barButtonItem, handler) => barButtonItem.Clicked += handler,
+                (barButtonItem, handler) => barButtonItem.Clicked -= handler,
                 (barButtonItem, canExecuteCommand) =>
                 {
                     if (trackCanExecuteCommandChanged)
                     {
-                        barButtonItem.NotNull().Enabled = canExecuteCommand;
+                        barButtonItem.Enabled = canExecuteCommand;
                     }
                 },
                 barButtonItem => null,
-                () => "Clicked");
+                () => $"{nameof(UIBarButtonItem.Clicked)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UIBarButtonItem, bool> EnabledBinding(
-            [NotNull] this IItemReference<UIBarButtonItem> barButtonItemReference)
+            this IItemReference<UIBarButtonItem> barButtonItemReference)
         {
             if (barButtonItemReference == null)
                 throw new ArgumentNullException(nameof(barButtonItemReference));
 
             return new TargetItemOneWayCustomBinding<UIBarButtonItem, bool>(
                 barButtonItemReference,
-                (barButtonItem, enabled) => barButtonItem.NotNull().Enabled = enabled,
-                () => "Enabled");
+                (barButtonItem, enabled) => barButtonItem.Enabled = enabled,
+                () => $"{nameof(UIBarButtonItem.Enabled)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UIBarButtonItem, string> TitleBinding(
-            [NotNull] this IItemReference<UIBarButtonItem> barButtonItemReference)
+            this IItemReference<UIBarButtonItem> barButtonItemReference)
         {
             if (barButtonItemReference == null)
                 throw new ArgumentNullException(nameof(barButtonItemReference));
 
             return new TargetItemOneWayCustomBinding<UIBarButtonItem, string>(
                 barButtonItemReference,
-                (barButtonItem, title) => barButtonItem.NotNull().Title = title,
-                () => "Title");
+                (barButtonItem, title) => barButtonItem.Title = title,
+                () => $"{nameof(UIBarButtonItem.Title)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UIBarButtonItem, nfloat> WidthBinding(
-            [NotNull] this IItemReference<UIBarButtonItem> barButtonItemReference)
+            this IItemReference<UIBarButtonItem> barButtonItemReference)
         {
             if (barButtonItemReference == null)
                 throw new ArgumentNullException(nameof(barButtonItemReference));
 
             return new TargetItemOneWayCustomBinding<UIBarButtonItem, nfloat>(
                 barButtonItemReference,
-                (barButtonItem, width) => barButtonItem.NotNull().Width = width,
-                () => "Width");
+                (barButtonItem, width) => barButtonItem.Width = width,
+                () => $"{nameof(UIBarButtonItem.Width)}");
         }
     }
 }

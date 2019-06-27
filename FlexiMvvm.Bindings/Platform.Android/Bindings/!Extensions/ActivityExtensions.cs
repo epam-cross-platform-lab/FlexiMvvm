@@ -15,25 +15,23 @@
 // =========================================================================
 
 using System;
+using Android.App;
 using FlexiMvvm.Bindings.Custom;
-using JetBrains.Annotations;
-using UIKit;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class UITabBarControllerBindings
+    public static class ActivityExtensions
     {
-        [NotNull]
-        public static TargetItemBinding<UITabBarController, nint> SelectedIndexBinding(
-            [NotNull] this IItemReference<UITabBarController> tabBarControllerReference)
+        public static TargetItemBinding<Activity, string> TitleBinding(
+            this IItemReference<Activity> activityReference)
         {
-            if (tabBarControllerReference == null)
-                throw new ArgumentNullException(nameof(tabBarControllerReference));
+            if (activityReference == null)
+                throw new ArgumentNullException(nameof(activityReference));
 
-            return new TargetItemOneWayCustomBinding<UITabBarController, nint>(
-                tabBarControllerReference,
-                (tabBarController, selectedIndex) => tabBarController.NotNull().SelectedIndex = selectedIndex,
-                () => "SelectedIndex");
+            return new TargetItemOneWayCustomBinding<Activity, string>(
+                activityReference,
+                (activity, title) => activity.Title = title,
+                () => $"{nameof(Activity.Title)}");
         }
     }
 }

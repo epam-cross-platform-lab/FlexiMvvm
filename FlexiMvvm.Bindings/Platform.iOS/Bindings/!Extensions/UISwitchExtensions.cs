@@ -16,29 +16,26 @@
 
 using System;
 using FlexiMvvm.Bindings.Custom;
-using JetBrains.Annotations;
 using UIKit;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class UISwitchBindings
+    public static class UISwitchExtensions
     {
-        [NotNull]
         public static TargetItemBinding<UISwitch, bool> OnBinding(
-            [NotNull] this IItemReference<UISwitch> switchReference)
+            this IItemReference<UISwitch> switchReference)
         {
             if (switchReference == null)
                 throw new ArgumentNullException(nameof(switchReference));
 
             return new TargetItemOneWayCustomBinding<UISwitch, bool>(
                 switchReference,
-                (@switch, on) => @switch.NotNull().On = on,
-                () => "On");
+                (@switch, on) => @switch.On = on,
+                () => $"{nameof(UISwitch.On)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UISwitch, bool> SetStateBinding(
-            [NotNull] this IItemReference<UISwitch> switchReference,
+            this IItemReference<UISwitch> switchReference,
             bool animated = true)
         {
             if (switchReference == null)
@@ -46,13 +43,12 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemOneWayCustomBinding<UISwitch, bool>(
                 switchReference,
-                (@switch, newState) => @switch.NotNull().SetState(newState, animated),
-                () => "SetState");
+                (@switch, newState) => @switch.SetState(newState, animated),
+                () => $"{nameof(UISwitch.SetState)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UISwitch, bool> SetStateAndValueChangedBinding(
-            [NotNull] this IItemReference<UISwitch> switchReference,
+            this IItemReference<UISwitch> switchReference,
             bool animated = true,
             bool trackCanExecuteCommandChanged = false)
         {
@@ -61,23 +57,22 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemTwoWayCustomBinding<UISwitch, bool>(
                 switchReference,
-                (@switch, eventHandler) => @switch.NotNull().ValueChanged += eventHandler,
-                (@switch, eventHandler) => @switch.NotNull().ValueChanged -= eventHandler,
+                (@switch, handler) => @switch.ValueChanged += handler,
+                (@switch, handler) => @switch.ValueChanged -= handler,
                 (@switch, canExecuteCommand) =>
                 {
                     if (trackCanExecuteCommandChanged)
                     {
-                        @switch.NotNull().Enabled = canExecuteCommand;
+                        @switch.Enabled = canExecuteCommand;
                     }
                 },
-                @switch => @switch.NotNull().On,
-                (@switch, newState) => @switch.NotNull().SetState(newState, animated),
-                () => "SetStateAndValueChanged");
+                @switch => @switch.On,
+                (@switch, newState) => @switch.SetState(newState, animated),
+                () => $"{nameof(UISwitch.SetState)}And{nameof(UISwitch.ValueChanged)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UISwitch, bool> ValueChangedBinding(
-            [NotNull] this IItemReference<UISwitch> switchReference,
+            this IItemReference<UISwitch> switchReference,
             bool trackCanExecuteCommandChanged = false)
         {
             if (switchReference == null)
@@ -85,17 +80,17 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemOneWayToSourceCustomBinding<UISwitch, bool>(
                 switchReference,
-                (@switch, eventHandler) => @switch.NotNull().ValueChanged += eventHandler,
-                (@switch, eventHandler) => @switch.NotNull().ValueChanged -= eventHandler,
+                (@switch, handler) => @switch.ValueChanged += handler,
+                (@switch, handler) => @switch.ValueChanged -= handler,
                 (@switch, canExecuteCommand) =>
                 {
                     if (trackCanExecuteCommandChanged)
                     {
-                        @switch.NotNull().Enabled = canExecuteCommand;
+                        @switch.Enabled = canExecuteCommand;
                     }
                 },
-                @switch => @switch.NotNull().On,
-                () => "ValueChanged");
+                @switch => @switch.On,
+                () => $"{nameof(UISwitch.ValueChanged)}");
         }
     }
 }

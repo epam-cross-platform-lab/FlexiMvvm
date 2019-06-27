@@ -17,15 +17,13 @@
 using System;
 using Android.Support.Design.Widget;
 using FlexiMvvm.Bindings.Custom;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class BottomNavigationExtensions
+    public static class SupportBottomNavigationViewExtensions
     {
-        [NotNull]
         public static TargetItemBinding<BottomNavigationView, int> NavigationItemReselectedBinding(
-            [NotNull] this IItemReference<BottomNavigationView> bottomNavigationViewReference,
+            this IItemReference<BottomNavigationView> bottomNavigationViewReference,
             bool trackCanExecuteCommandChanged = false)
         {
             if (bottomNavigationViewReference == null)
@@ -33,22 +31,21 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemOneWayToSourceCustomBinding<BottomNavigationView, int, BottomNavigationView.NavigationItemReselectedEventArgs>(
                 bottomNavigationViewReference,
-                (bottomNavigationView, eventHandler) => bottomNavigationView.NotNull().NavigationItemReselected += eventHandler,
-                (bottomNavigationView, eventHandler) => bottomNavigationView.NotNull().NavigationItemReselected -= eventHandler,
+                (bottomNavigationView, handler) => bottomNavigationView.NavigationItemReselected += handler,
+                (bottomNavigationView, handler) => bottomNavigationView.NavigationItemReselected -= handler,
                 (bottomNavigationView, canExecuteCommand) =>
                 {
                     if (trackCanExecuteCommandChanged)
                     {
-                        bottomNavigationView.NotNull().Enabled = canExecuteCommand;
+                        bottomNavigationView.Enabled = canExecuteCommand;
                     }
                 },
-                (bottomNavigationView, eventArgs) => eventArgs.NotNull().Item.NotNull().ItemId,
+                (bottomNavigationView, args) => args.Item.ItemId,
                 () => $"{nameof(BottomNavigationView.NavigationItemReselected)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<BottomNavigationView, int> NavigationItemSelectedBinding(
-            [NotNull] this IItemReference<BottomNavigationView> bottomNavigationViewReference,
+            this IItemReference<BottomNavigationView> bottomNavigationViewReference,
             bool trackCanExecuteCommandChanged = false)
         {
             if (bottomNavigationViewReference == null)
@@ -56,22 +53,21 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemOneWayToSourceCustomBinding<BottomNavigationView, int, BottomNavigationView.NavigationItemSelectedEventArgs>(
                 bottomNavigationViewReference,
-                (bottomNavigationView, eventHandler) => bottomNavigationView.NotNull().NavigationItemSelected += eventHandler,
-                (bottomNavigationView, eventHandler) => bottomNavigationView.NotNull().NavigationItemSelected -= eventHandler,
+                (bottomNavigationView, handler) => bottomNavigationView.NavigationItemSelected += handler,
+                (bottomNavigationView, handler) => bottomNavigationView.NavigationItemSelected -= handler,
                 (bottomNavigationView, canExecuteCommand) =>
                 {
                     if (trackCanExecuteCommandChanged)
                     {
-                        bottomNavigationView.NotNull().Enabled = canExecuteCommand;
+                        bottomNavigationView.Enabled = canExecuteCommand;
                     }
                 },
-                (bottomNavigationView, eventArgs) => eventArgs.NotNull().Item.NotNull().ItemId,
+                (bottomNavigationView, args) => args.Item.ItemId,
                 () => $"{nameof(BottomNavigationView.NavigationItemSelected)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<BottomNavigationView, int> SelectedItemIdAndNavigationItemSelectedBinding(
-            [NotNull] this IItemReference<BottomNavigationView> bottomNavigationViewReference,
+            this IItemReference<BottomNavigationView> bottomNavigationViewReference,
             bool trackCanExecuteCommandChanged = false)
         {
             if (bottomNavigationViewReference == null)
@@ -79,30 +75,29 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemTwoWayCustomBinding<BottomNavigationView, int, BottomNavigationView.NavigationItemSelectedEventArgs>(
                 bottomNavigationViewReference,
-                (bottomNavigationView, eventHandler) => bottomNavigationView.NotNull().NavigationItemSelected += eventHandler,
-                (bottomNavigationView, eventHandler) => bottomNavigationView.NotNull().NavigationItemSelected -= eventHandler,
+                (bottomNavigationView, handler) => bottomNavigationView.NavigationItemSelected += handler,
+                (bottomNavigationView, handler) => bottomNavigationView.NavigationItemSelected -= handler,
                 (bottomNavigationView, canExecuteCommand) =>
                 {
                     if (trackCanExecuteCommandChanged)
                     {
-                        bottomNavigationView.NotNull().Enabled = canExecuteCommand;
+                        bottomNavigationView.Enabled = canExecuteCommand;
                     }
                 },
-                (bottomNavigationView, eventArgs) => eventArgs?.Item.NotNull().ItemId ?? bottomNavigationView.NotNull().SelectedItemId,
-                (bottomNavigationView, selectedItemId) => bottomNavigationView.NotNull().SelectedItemId = selectedItemId,
+                (bottomNavigationView, args) => args?.Item.ItemId ?? bottomNavigationView.SelectedItemId,
+                (bottomNavigationView, selectedItemId) => bottomNavigationView.SelectedItemId = selectedItemId,
                 () => $"{nameof(BottomNavigationView.SelectedItemId)}And{nameof(BottomNavigationView.NavigationItemSelected)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<BottomNavigationView, int> SelectedItemIdBinding(
-            [NotNull] this IItemReference<BottomNavigationView> bottomNavigationViewReference)
+            this IItemReference<BottomNavigationView> bottomNavigationViewReference)
         {
             if (bottomNavigationViewReference == null)
                 throw new ArgumentNullException(nameof(bottomNavigationViewReference));
 
             return new TargetItemOneWayCustomBinding<BottomNavigationView, int>(
                 bottomNavigationViewReference,
-                (bottomNavigationView, selectedItemId) => bottomNavigationView.NotNull().SelectedItemId = selectedItemId,
+                (bottomNavigationView, selectedItemId) => bottomNavigationView.SelectedItemId = selectedItemId,
                 () => $"{nameof(BottomNavigationView.SelectedItemId)}");
         }
     }

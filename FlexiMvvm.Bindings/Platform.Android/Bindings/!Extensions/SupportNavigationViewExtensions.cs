@@ -17,18 +17,16 @@
 using System;
 using Android.Support.Design.Widget;
 using FlexiMvvm.Bindings.Custom;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class NavigationViewExtensions
+    public static class SupportNavigationViewExtensions
     {
         private const int DefaultCheckedItemId = 0;
 
 #if __ANDROID_28__
-        [NotNull]
         public static TargetItemBinding<NavigationView, int> SetCheckedItemAndNavigationItemSelectedBinding(
-            [NotNull] this IItemReference<NavigationView> navigationViewReference,
+            this IItemReference<NavigationView> navigationViewReference,
             bool trackCanExecuteCommandChanged = false)
         {
             if (navigationViewReference == null)
@@ -36,8 +34,8 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemTwoWayCustomBinding<NavigationView, int, NavigationView.NavigationItemSelectedEventArgs>(
                 navigationViewReference,
-                (navigationView, eventHandler) => navigationView.NavigationItemSelected += eventHandler,
-                (navigationView, eventHandler) => navigationView.NavigationItemSelected -= eventHandler,
+                (navigationView, handler) => navigationView.NavigationItemSelected += handler,
+                (navigationView, handler) => navigationView.NavigationItemSelected -= handler,
                 (navigationView, canExecuteCommand) =>
                 {
                     if (trackCanExecuteCommandChanged)
@@ -45,28 +43,26 @@ namespace FlexiMvvm.Bindings
                         navigationView.Enabled = canExecuteCommand;
                     }
                 },
-                (navigationView, eventArgs) => eventArgs?.MenuItem.NotNull().ItemId ?? navigationView.NotNull().CheckedItem?.ItemId ?? DefaultCheckedItemId,
-                (navigationView, id) => navigationView.NotNull().SetCheckedItem(id),
+                (navigationView, args) => args?.MenuItem.ItemId ?? navigationView.CheckedItem?.ItemId ?? DefaultCheckedItemId,
+                (navigationView, id) => navigationView.SetCheckedItem(id),
                 () => $"{nameof(NavigationView.NavigationItemSelected)}");
         }
 #endif
 
-        [NotNull]
         public static TargetItemBinding<NavigationView, int> SetCheckedItemBinding(
-            [NotNull] this IItemReference<NavigationView> navigationViewReference)
+            this IItemReference<NavigationView> navigationViewReference)
         {
             if (navigationViewReference == null)
                 throw new ArgumentNullException(nameof(navigationViewReference));
 
             return new TargetItemOneWayCustomBinding<NavigationView, int>(
                 navigationViewReference,
-                (navigationView, id) => navigationView.NotNull().SetCheckedItem(id),
+                (navigationView, id) => navigationView.SetCheckedItem(id),
                 () => $"{nameof(NavigationView.SetCheckedItem)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<NavigationView, int> NavigationItemSelectedBinding(
-            [NotNull] this IItemReference<NavigationView> navigationViewReference,
+            this IItemReference<NavigationView> navigationViewReference,
             bool trackCanExecuteCommandChanged = false)
         {
             if (navigationViewReference == null)
@@ -74,8 +70,8 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemOneWayToSourceCustomBinding<NavigationView, int, NavigationView.NavigationItemSelectedEventArgs>(
                 navigationViewReference,
-                (navigationView, eventHandler) => navigationView.NavigationItemSelected += eventHandler,
-                (navigationView, eventHandler) => navigationView.NavigationItemSelected -= eventHandler,
+                (navigationView, handler) => navigationView.NavigationItemSelected += handler,
+                (navigationView, handler) => navigationView.NavigationItemSelected -= handler,
                 (navigationView, canExecuteCommand) =>
                 {
                     if (trackCanExecuteCommandChanged)
@@ -83,7 +79,7 @@ namespace FlexiMvvm.Bindings
                         navigationView.Enabled = canExecuteCommand;
                     }
                 },
-                (navigationView, eventArgs) => eventArgs.NotNull().MenuItem.NotNull().ItemId,
+                (navigationView, args) => args.MenuItem.ItemId,
                 () => $"{nameof(NavigationView.NavigationItemSelected)}");
         }
     }

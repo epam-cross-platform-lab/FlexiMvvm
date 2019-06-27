@@ -127,7 +127,7 @@ namespace FlexiMvvm.Bindings
                         adapterView.Enabled = canExecuteCommand;
                     }
                 },
-                (adapterView, args) => args != null ? args.Position : adapterView.SelectedItemPosition,
+                (adapterView, args) => args?.Position ?? adapterView.SelectedItemPosition,
                 (adapterView, position) => adapterView.SetSelection(position),
                 () => $"{nameof(AdapterView.SetSelection)}And{nameof(AdapterView.ItemSelected)}");
         }

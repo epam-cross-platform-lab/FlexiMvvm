@@ -17,42 +17,39 @@
 using System;
 using FlexiMvvm.Bindings.Custom;
 using FlexiMvvm.Collections;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class TableViewObservableSourceBindings
+    public static class TableViewObservableSourceExtensions
     {
-        [NotNull]
         public static TargetItemBinding<TableViewObservableSource, object> RowDeselectedBinding(
-            [NotNull] this IItemReference<TableViewObservableSource> tableViewSourceReference)
+            this IItemReference<TableViewObservableSource> tableViewSourceReference)
         {
             if (tableViewSourceReference == null)
                 throw new ArgumentNullException(nameof(tableViewSourceReference));
 
             return new TargetItemOneWayToSourceCustomBinding<TableViewObservableSource, object, SelectionChangedEventArgs>(
                 tableViewSourceReference,
-                (tableViewSource, eventHandler) => tableViewSource.NotNull().RowDeselectedCalled += eventHandler,
-                (tableViewSource, eventHandler) => tableViewSource.NotNull().RowDeselectedCalled -= eventHandler,
+                (tableViewSource, handler) => tableViewSource.RowDeselectedCalled += handler,
+                (tableViewSource, handler) => tableViewSource.RowDeselectedCalled -= handler,
                 (tableViewSource, canExecuteCommand) => { },
-                (tableViewSource, eventArgs) => eventArgs?.Item,
-                () => "RowDeselected");
+                (tableViewSource, args) => args?.Item,
+                () => $"{nameof(TableViewObservableSource.RowDeselected)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<TableViewObservableSource, object> RowSelectedBinding(
-            [NotNull] this IItemReference<TableViewObservableSource> tableViewSourceReference)
+            this IItemReference<TableViewObservableSource> tableViewSourceReference)
         {
             if (tableViewSourceReference == null)
                 throw new ArgumentNullException(nameof(tableViewSourceReference));
 
             return new TargetItemOneWayToSourceCustomBinding<TableViewObservableSource, object, SelectionChangedEventArgs>(
                 tableViewSourceReference,
-                (tableViewSource, eventHandler) => tableViewSource.NotNull().RowSelectedCalled += eventHandler,
-                (tableViewSource, eventHandler) => tableViewSource.NotNull().RowSelectedCalled -= eventHandler,
+                (tableViewSource, handler) => tableViewSource.RowSelectedCalled += handler,
+                (tableViewSource, handler) => tableViewSource.RowSelectedCalled -= handler,
                 (tableViewSource, canExecuteCommand) => { },
-                (tableViewSource, eventArgs) => eventArgs?.Item,
-                () => "RowSelected");
+                (tableViewSource, args) => args?.Item,
+                () => $"{nameof(TableViewObservableSource.RowSelected)}");
         }
     }
 }

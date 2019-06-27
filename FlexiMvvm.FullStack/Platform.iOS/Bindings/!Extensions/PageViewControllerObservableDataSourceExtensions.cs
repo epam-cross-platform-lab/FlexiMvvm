@@ -18,69 +18,64 @@ using System;
 using System.Collections.Generic;
 using FlexiMvvm.Bindings.Custom;
 using FlexiMvvm.Collections;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class PageViewControllerObservableDataSourceBindings
+    public static class PageViewControllerObservableDataSourceExtensions
     {
-        [NotNull]
         public static TargetItemBinding<PageViewControllerObservableDataSource, int> CurrentItemIndexAndCurrentItemIndexChangedBinding(
-            [NotNull] this IItemReference<PageViewControllerObservableDataSource> pageViewControllerDataSourceReference)
+            this IItemReference<PageViewControllerObservableDataSource> pageViewControllerDataSourceReference)
         {
             if (pageViewControllerDataSourceReference == null)
                 throw new ArgumentNullException(nameof(pageViewControllerDataSourceReference));
 
             return new TargetItemTwoWayCustomBinding<PageViewControllerObservableDataSource, int, IndexChangedEventArgs>(
                 pageViewControllerDataSourceReference,
-                (pageViewControllerDataSource, eventHandler) => pageViewControllerDataSource.NotNull().CurrentItemIndexChanged += eventHandler,
-                (pageViewControllerDataSource, eventHandler) => pageViewControllerDataSource.NotNull().CurrentItemIndexChanged -= eventHandler,
+                (pageViewControllerDataSource, handler) => pageViewControllerDataSource.CurrentItemIndexChanged += handler,
+                (pageViewControllerDataSource, handler) => pageViewControllerDataSource.CurrentItemIndexChanged -= handler,
                 (pageViewControllerDataSource, canExecuteCommand) => { },
-                (pageViewControllerDataSource, eventArgs) => eventArgs?.Index ?? pageViewControllerDataSource.NotNull().CurrentItemIndex,
-                (pageViewControllerDataSource, currentItemIndex) => pageViewControllerDataSource.NotNull().CurrentItemIndex = currentItemIndex,
-                () => "CurrentItemIndexAndCurrentItemIndexChanged");
+                (pageViewControllerDataSource, args) => args?.Index ?? pageViewControllerDataSource.CurrentItemIndex,
+                (pageViewControllerDataSource, currentItemIndex) => pageViewControllerDataSource.CurrentItemIndex = currentItemIndex,
+                () => $"{nameof(PageViewControllerObservableDataSource.CurrentItemIndex)}And{nameof(PageViewControllerObservableDataSource.CurrentItemIndexChanged)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<PageViewControllerObservableDataSource, int> CurrentItemIndexBinding(
-            [NotNull] this IItemReference<PageViewControllerObservableDataSource> pageViewControllerDataSourceReference)
+            this IItemReference<PageViewControllerObservableDataSource> pageViewControllerDataSourceReference)
         {
             if (pageViewControllerDataSourceReference == null)
                 throw new ArgumentNullException(nameof(pageViewControllerDataSourceReference));
 
             return new TargetItemOneWayCustomBinding<PageViewControllerObservableDataSource, int>(
                 pageViewControllerDataSourceReference,
-                (pageViewControllerDataSource, currentItemIndex) => pageViewControllerDataSource.NotNull().CurrentItemIndex = currentItemIndex,
-                () => "CurrentItemIndex");
+                (pageViewControllerDataSource, currentItemIndex) => pageViewControllerDataSource.CurrentItemIndex = currentItemIndex,
+                () => $"{nameof(PageViewControllerObservableDataSource.CurrentItemIndex)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<PageViewControllerObservableDataSource, int> CurrentItemIndexChangedBinding(
-            [NotNull] this IItemReference<PageViewControllerObservableDataSource> pageViewControllerDataSourceReference)
+            this IItemReference<PageViewControllerObservableDataSource> pageViewControllerDataSourceReference)
         {
             if (pageViewControllerDataSourceReference == null)
                 throw new ArgumentNullException(nameof(pageViewControllerDataSourceReference));
 
             return new TargetItemOneWayToSourceCustomBinding<PageViewControllerObservableDataSource, int, IndexChangedEventArgs>(
                 pageViewControllerDataSourceReference,
-                (pageViewControllerDataSource, eventHandler) => pageViewControllerDataSource.NotNull().CurrentItemIndexChanged += eventHandler,
-                (pageViewControllerDataSource, eventHandler) => pageViewControllerDataSource.NotNull().CurrentItemIndexChanged -= eventHandler,
+                (pageViewControllerDataSource, handler) => pageViewControllerDataSource.CurrentItemIndexChanged += handler,
+                (pageViewControllerDataSource, handler) => pageViewControllerDataSource.CurrentItemIndexChanged -= handler,
                 (pageViewControllerDataSource, canExecuteCommand) => { },
-                (pageViewControllerDataSource, eventArgs) => eventArgs?.Index ?? pageViewControllerDataSource.NotNull().CurrentItemIndex,
-                () => "CurrentItemIndexChanged");
+                (pageViewControllerDataSource, args) => args?.Index ?? pageViewControllerDataSource.CurrentItemIndex,
+                () => $"{nameof(PageViewControllerObservableDataSource.CurrentItemIndexChanged)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<PageViewControllerObservableDataSource, IEnumerable<object>> ItemsBinding(
-            [NotNull] this IItemReference<PageViewControllerObservableDataSource> pageViewControllerDataSourceReference)
+            this IItemReference<PageViewControllerObservableDataSource> pageViewControllerDataSourceReference)
         {
             if (pageViewControllerDataSourceReference == null)
                 throw new ArgumentNullException(nameof(pageViewControllerDataSourceReference));
 
             return new TargetItemOneWayCustomBinding<PageViewControllerObservableDataSource, IEnumerable<object>>(
                 pageViewControllerDataSourceReference,
-                (pageViewControllerDataSource, items) => pageViewControllerDataSource.NotNull().Items = items,
-                () => "Items");
+                (pageViewControllerDataSource, items) => pageViewControllerDataSource.Items = items,
+                () => $"{nameof(PageViewControllerObservableDataSource.Items)}");
         }
     }
 }

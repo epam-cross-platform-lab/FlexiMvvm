@@ -17,29 +17,26 @@
 using System;
 using FlexiMvvm.Bindings.Custom;
 using Foundation;
-using JetBrains.Annotations;
 using UIKit;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class UITextFieldBindings
+    public static class UITextFieldExtensions
     {
-        [NotNull]
         public static TargetItemBinding<UITextField, NSAttributedString> AttributedTextBinding(
-            [NotNull] this IItemReference<UITextField> textFieldReference)
+            this IItemReference<UITextField> textFieldReference)
         {
             if (textFieldReference == null)
                 throw new ArgumentNullException(nameof(textFieldReference));
 
             return new TargetItemOneWayCustomBinding<UITextField, NSAttributedString>(
                 textFieldReference,
-                (textField, attributedText) => textField.NotNull().AttributedText = attributedText,
-                () => "AttributedText");
+                (textField, attributedText) => textField.AttributedText = attributedText,
+                () => $"{nameof(UITextField.AttributedText)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UITextField, NSAttributedString> AttributedTextAndEditingChangedBinding(
-            [NotNull] this IItemReference<UITextField> textFieldReference,
+            this IItemReference<UITextField> textFieldReference,
             bool trackCanExecuteCommandChanged = false)
         {
             if (textFieldReference == null)
@@ -47,23 +44,22 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemTwoWayCustomBinding<UITextField, NSAttributedString>(
                 textFieldReference,
-                (textField, eventHandler) => textField.NotNull().EditingChanged += eventHandler,
-                (textField, eventHandler) => textField.NotNull().EditingChanged -= eventHandler,
+                (textField, handler) => textField.EditingChanged += handler,
+                (textField, handler) => textField.EditingChanged -= handler,
                 (textField, canExecuteCommand) =>
                 {
                     if (trackCanExecuteCommandChanged)
                     {
-                        textField.NotNull().Enabled = canExecuteCommand;
+                        textField.Enabled = canExecuteCommand;
                     }
                 },
-                textField => textField.NotNull().AttributedText,
-                (textField, attributedText) => textField.NotNull().AttributedText = attributedText,
-                () => "AttributedTextAndEditingChanged");
+                textField => textField.AttributedText,
+                (textField, attributedText) => textField.AttributedText = attributedText,
+                () => $"{nameof(UITextField.AttributedText)}And{nameof(UITextField.EditingChanged)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UITextField, NSAttributedString> AttributedTextAndEditingDidEndBinding(
-            [NotNull] this IItemReference<UITextField> textFieldReference,
+            this IItemReference<UITextField> textFieldReference,
             bool trackCanExecuteCommandChanged = false)
         {
             if (textFieldReference == null)
@@ -71,88 +67,82 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemTwoWayCustomBinding<UITextField, NSAttributedString>(
                 textFieldReference,
-                (textField, eventHandler) => textField.NotNull().EditingDidEnd += eventHandler,
-                (textField, eventHandler) => textField.NotNull().EditingDidEnd -= eventHandler,
+                (textField, handler) => textField.EditingDidEnd += handler,
+                (textField, handler) => textField.EditingDidEnd -= handler,
                 (textField, canExecuteCommand) =>
                 {
                     if (trackCanExecuteCommandChanged)
                     {
-                        textField.NotNull().Enabled = canExecuteCommand;
+                        textField.Enabled = canExecuteCommand;
                     }
                 },
-                textField => textField.NotNull().AttributedText,
-                (textField, attributedText) => textField.NotNull().AttributedText = attributedText,
-                () => "AttributedTextAndEditingDidEnd");
+                textField => textField.AttributedText,
+                (textField, attributedText) => textField.AttributedText = attributedText,
+                () => $"{nameof(UITextField.AttributedText)}And{nameof(UITextField.EditingDidEnd)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UITextField, bool> EnablesReturnKeyAutomaticallyBinding(
-            [NotNull] this IItemReference<UITextField> textFieldReference)
+            this IItemReference<UITextField> textFieldReference)
         {
             if (textFieldReference == null)
                 throw new ArgumentNullException(nameof(textFieldReference));
 
             return new TargetItemOneWayCustomBinding<UITextField, bool>(
                 textFieldReference,
-                (textField, enablesReturnKeyAutomatically) => textField.NotNull().EnablesReturnKeyAutomatically = enablesReturnKeyAutomatically,
-                () => "EnablesReturnKeyAutomatically");
+                (textField, enablesReturnKeyAutomatically) => textField.EnablesReturnKeyAutomatically = enablesReturnKeyAutomatically,
+                () => $"{nameof(UITextField.EnablesReturnKeyAutomatically)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UITextField, string> InsertTextBinding(
-            [NotNull] this IItemReference<UITextField> textFieldReference)
+            this IItemReference<UITextField> textFieldReference)
         {
             if (textFieldReference == null)
                 throw new ArgumentNullException(nameof(textFieldReference));
 
             return new TargetItemOneWayCustomBinding<UITextField, string>(
                 textFieldReference,
-                (textField, text) => textField.NotNull().InsertText(text),
-                () => "InsertText");
+                (textField, text) => textField.InsertText(text),
+                () => $"{nameof(UITextField.InsertText)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UITextField, string> PlaceholderBinding(
-            [NotNull] this IItemReference<UITextField> textFieldReference)
+            this IItemReference<UITextField> textFieldReference)
         {
             if (textFieldReference == null)
                 throw new ArgumentNullException(nameof(textFieldReference));
 
             return new TargetItemOneWayCustomBinding<UITextField, string>(
                 textFieldReference,
-                (textField, placeholder) => textField.NotNull().Placeholder = placeholder,
-                () => "Placeholder");
+                (textField, placeholder) => textField.Placeholder = placeholder,
+                () => $"{nameof(UITextField.Placeholder)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UITextField, bool> SecureTextEntryBinding(
-            [NotNull] this IItemReference<UITextField> textFieldReference)
+            this IItemReference<UITextField> textFieldReference)
         {
             if (textFieldReference == null)
                 throw new ArgumentNullException(nameof(textFieldReference));
 
             return new TargetItemOneWayCustomBinding<UITextField, bool>(
                 textFieldReference,
-                (textField, secureTextEntry) => textField.NotNull().SecureTextEntry = secureTextEntry,
-                () => "SecureTextEntry");
+                (textField, secureTextEntry) => textField.SecureTextEntry = secureTextEntry,
+                () => $"{nameof(UITextField.SecureTextEntry)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UITextField, string> TextBinding(
-            [NotNull] this IItemReference<UITextField> textFieldReference)
+            this IItemReference<UITextField> textFieldReference)
         {
             if (textFieldReference == null)
                 throw new ArgumentNullException(nameof(textFieldReference));
 
             return new TargetItemOneWayCustomBinding<UITextField, string>(
                 textFieldReference,
-                (textField, text) => textField.NotNull().Text = text,
-                () => "Text");
+                (textField, text) => textField.Text = text,
+                () => $"{nameof(UITextField.Text)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UITextField, string> TextAndEditingChangedBinding(
-            [NotNull] this IItemReference<UITextField> textFieldReference,
+            this IItemReference<UITextField> textFieldReference,
             bool trackCanExecuteCommandChanged = false)
         {
             if (textFieldReference == null)
@@ -160,23 +150,22 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemTwoWayCustomBinding<UITextField, string>(
                 textFieldReference,
-                (textField, eventHandler) => textField.NotNull().EditingChanged += eventHandler,
-                (textField, eventHandler) => textField.NotNull().EditingChanged -= eventHandler,
+                (textField, handler) => textField.EditingChanged += handler,
+                (textField, handler) => textField.EditingChanged -= handler,
                 (textField, canExecuteCommand) =>
                 {
                     if (trackCanExecuteCommandChanged)
                     {
-                        textField.NotNull().Enabled = canExecuteCommand;
+                        textField.Enabled = canExecuteCommand;
                     }
                 },
-                textField => textField.NotNull().Text,
-                (textField, text) => textField.NotNull().Text = text,
-                () => "TextAndEditingChanged");
+                textField => textField.Text,
+                (textField, text) => textField.Text = text,
+                () => $"{nameof(UITextField.Text)}And{nameof(UITextField.EditingChanged)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UITextField, string> TextAndEditingDidEndBinding(
-            [NotNull] this IItemReference<UITextField> textFieldReference,
+            this IItemReference<UITextField> textFieldReference,
             bool trackCanExecuteCommandChanged = false)
         {
             if (textFieldReference == null)
@@ -184,18 +173,18 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemTwoWayCustomBinding<UITextField, string>(
                 textFieldReference,
-                (textField, eventHandler) => textField.NotNull().EditingDidEnd += eventHandler,
-                (textField, eventHandler) => textField.NotNull().EditingDidEnd -= eventHandler,
+                (textField, handler) => textField.EditingDidEnd += handler,
+                (textField, handler) => textField.EditingDidEnd -= handler,
                 (textField, canExecuteCommand) =>
                 {
                     if (trackCanExecuteCommandChanged)
                     {
-                        textField.NotNull().Enabled = canExecuteCommand;
+                        textField.Enabled = canExecuteCommand;
                     }
                 },
-                textField => textField.NotNull().Text,
-                (textField, text) => textField.NotNull().Text = text,
-                () => "TextAndEditingDidEnd");
+                textField => textField.Text,
+                (textField, text) => textField.Text = text,
+                () => $"{nameof(UITextField.Text)}And{nameof(UITextField.EditingDidEnd)}");
         }
     }
 }
