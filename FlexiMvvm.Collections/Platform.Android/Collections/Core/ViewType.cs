@@ -16,7 +16,7 @@
 
 namespace FlexiMvvm.Collections.Core
 {
-    public static class ItemViewType
+    public static class ViewType
     {
         private const int MaxViewType = 1024;
 

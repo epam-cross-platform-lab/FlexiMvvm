@@ -63,9 +63,9 @@ namespace FlexiMvvm.Collections
             {
                 case ItemKind.Header:
                 case ItemKind.Footer:
-                    return ItemViewType.GetAdjustedViewType(itemMap.ItemKind, DefaultViewType);
+                    return ViewType.GetAdjustedViewType(itemMap.ItemKind, DefaultViewType);
                 case ItemKind.Item:
-                    return ItemViewType.GetAdjustedViewType(itemMap.ItemKind, OnGetItemViewType(itemMap.Item));
+                    return ViewType.GetAdjustedViewType(itemMap.ItemKind, OnGetItemViewType(itemMap.Item));
                 default:
                     throw new ArgumentException($"Unable to get item view type for \"{position}\" position.", nameof(position));
             }
@@ -79,20 +79,20 @@ namespace FlexiMvvm.Collections
         [NotNull]
         public override RecyclerView.ViewHolder OnCreateViewHolder([NotNull] ViewGroup parent, int viewType)
         {
-            var itemKind = ItemViewType.GetItemKind(viewType);
+            var itemKind = ViewType.GetItemKind(viewType);
 
             switch (itemKind)
             {
                 case ItemKind.Header:
                     return OnCreateHeaderViewHolder(parent);
                 case ItemKind.SectionHeader:
-                    return OnCreateSectionHeaderViewHolder(parent, ItemViewType.GetUserViewType(viewType));
+                    return OnCreateSectionHeaderViewHolder(parent, ViewType.GetUserViewType(viewType));
                 case ItemKind.Item:
-                    var viewHolder = OnCreateItemViewHolder(parent, ItemViewType.GetUserViewType(viewType));
+                    var viewHolder = OnCreateItemViewHolder(parent, ViewType.GetUserViewType(viewType));
                     viewHolder.ItemView.NotNull().ClickWeakSubscribe(ItemView_Click);
                     return viewHolder;
                 case ItemKind.SectionFooter:
-                    return OnCreateSectionFooterViewHolder(parent, ItemViewType.GetUserViewType(viewType));
+                    return OnCreateSectionFooterViewHolder(parent, ViewType.GetUserViewType(viewType));
                 case ItemKind.Footer:
                     return OnCreateFooterViewHolder(parent);
                 default:
