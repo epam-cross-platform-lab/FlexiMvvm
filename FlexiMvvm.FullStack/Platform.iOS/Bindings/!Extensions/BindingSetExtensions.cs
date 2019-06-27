@@ -18,75 +18,74 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FlexiMvvm.Collections;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Bindings
 {
     public static class BindingSetExtensions
     {
-        [NotNull]
+        [Obsolete("BindDefault will be removed soon. Use Bind(view).For(v => v.ItemsBinding()) construction instead.")]
         public static ISourceItemBindingBuilder<TSourceItem, IEnumerable<object>> BindDefault<TSourceItem>(
-            [NotNull] this BindingSet<TSourceItem> bindingSet,
-            [CanBeNull] PageViewControllerObservableDataSource pageViewControllerDataSource)
+            this BindingSet<TSourceItem> bindingSet,
+            PageViewControllerObservableDataSource pageViewControllerDataSource)
             where TSourceItem : class
         {
             if (bindingSet == null)
                 throw new ArgumentNullException(nameof(bindingSet));
 
             return bindingSet.Bind(pageViewControllerDataSource)
-                .For(v => v.NotNull().ItemsBinding());
+                .For(v => v.ItemsBinding());
         }
 
-        [NotNull]
+        [Obsolete("BindDefault will be removed soon. Use Bind(view).For(v => v.GroupedItemsBinding()) construction instead.")]
         public static ISourceItemBindingBuilder<TSourceItem, IEnumerable<IGrouping<object, object>>> BindDefault<TSourceItem>(
-            [NotNull] this BindingSet<TSourceItem> bindingSet,
-            [CanBeNull] CollectionViewObservableGroupedSource collectionViewSource)
+            this BindingSet<TSourceItem> bindingSet,
+            CollectionViewObservableGroupedSource collectionViewSource)
             where TSourceItem : class
         {
             if (bindingSet == null)
                 throw new ArgumentNullException(nameof(bindingSet));
 
             return bindingSet.Bind(collectionViewSource)
-                .For(v => v.NotNull().GroupedItemsBinding());
+                .For(v => v.GroupedItemsBinding());
         }
 
-        [NotNull]
+        [Obsolete("BindDefault will be removed soon. Use Bind(view).For(v => v.ItemsBinding()) construction instead.")]
         public static ISourceItemBindingBuilder<TSourceItem, IEnumerable<object>> BindDefault<TSourceItem>(
-            [NotNull] this BindingSet<TSourceItem> bindingSet,
-            [CanBeNull] CollectionViewObservablePlainSource collectionViewSource)
+            this BindingSet<TSourceItem> bindingSet,
+            CollectionViewObservablePlainSource collectionViewSource)
             where TSourceItem : class
         {
             if (bindingSet == null)
                 throw new ArgumentNullException(nameof(bindingSet));
 
             return bindingSet.Bind(collectionViewSource)
-                .For(v => v.NotNull().ItemsBinding());
+                .For(v => v.ItemsBinding());
         }
 
-        [NotNull]
+        [Obsolete("BindDefault will be removed soon. Use Bind(view).For(v => v.GroupedItemsBinding()) construction instead.")]
         public static ISourceItemBindingBuilder<TSourceItem, IEnumerable<IGrouping<object, object>>> BindDefault<TSourceItem>(
-            [NotNull] this BindingSet<TSourceItem> bindingSet,
-            [CanBeNull] TableViewObservableGroupedSource tableViewSource)
+            this BindingSet<TSourceItem> bindingSet,
+            TableViewObservableGroupedSource tableViewSource)
             where TSourceItem : class
         {
             if (bindingSet == null)
                 throw new ArgumentNullException(nameof(bindingSet));
 
             return bindingSet.Bind(tableViewSource)
-                .For(v => v.NotNull().GroupedItemsBinding());
+                .For(v => v.GroupedItemsBinding());
         }
 
-        [NotNull]
+        [Obsolete("BindDefault will be removed soon. Use Bind(view).For(v => v.ItemsBinding()) construction instead.")]
         public static ISourceItemBindingBuilder<TSourceItem, IEnumerable<object>> BindDefault<TSourceItem>(
-            [NotNull] this BindingSet<TSourceItem> bindingSet,
-            [CanBeNull] TableViewObservablePlainSource tableViewSource)
+            this BindingSet<TSourceItem> bindingSet,
+            TableViewObservablePlainSource tableViewSource)
             where TSourceItem : class
         {
             if (bindingSet == null)
                 throw new ArgumentNullException(nameof(bindingSet));
 
             return bindingSet.Bind(tableViewSource)
-                .For(v => v.NotNull().ItemsBinding());
+                .For(v => v.ItemsBinding());
         }
     }
 }
