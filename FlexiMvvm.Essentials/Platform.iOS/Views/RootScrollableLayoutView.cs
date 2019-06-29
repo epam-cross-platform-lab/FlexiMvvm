@@ -14,7 +14,6 @@
 // limitations under the License.
 // =========================================================================
 
-using System;
 using System.Collections.Generic;
 using Cirrious.FluentLayouts.Touch;
 using CoreGraphics;
@@ -22,26 +21,25 @@ using UIKit;
 
 namespace FlexiMvvm.Views
 {
-    [Obsolete("ScrollableLayoutView will be removed soon. Use RootScrollableLayoutView class instead.")]
-    public class ScrollableLayoutView : LayoutView
+    public class RootScrollableLayoutView : RootLayoutView
     {
         private UIScrollView? _scrollView;
 
-        public ScrollableLayoutView()
+        public RootScrollableLayoutView()
         {
         }
 
-        public ScrollableLayoutView(IDictionary<string, object?> layoutConfig)
+        public RootScrollableLayoutView(IDictionary<string, object?> layoutConfig)
             : base(layoutConfig)
         {
         }
 
-        public ScrollableLayoutView(CGRect frame)
+        public RootScrollableLayoutView(CGRect frame)
             : base(frame)
         {
         }
 
-        public ScrollableLayoutView(CGRect frame, IDictionary<string, object?> layoutConfig)
+        public RootScrollableLayoutView(CGRect frame, IDictionary<string, object?> layoutConfig)
             : base(frame, layoutConfig)
         {
         }
@@ -50,19 +48,22 @@ namespace FlexiMvvm.Views
 
         protected override void SetupLayout()
         {
-            base.SetupLayout();
-
             this
                 .AddLayoutSubview(ScrollView
-                    .AddLayoutSubview(ContentView));
+                    .AddLayoutSubview(ContentView
+                        .AddLayoutSubview(SafeAreaContentView)))
+                .AddLayoutSubview(ContentOverlayView
+                    .AddLayoutSubview(SafeAreaContentOverlayView));
         }
 
         protected override void SetupLayoutConstraints()
         {
-            base.SetupLayoutConstraints();
-
             this.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
             ScrollView.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
+            ContentView.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
+            SafeAreaContentView.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
+            ContentOverlayView.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
+            SafeAreaContentOverlayView.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
 
             this.AddConstraints(
                 ScrollView.FullSizeOf(this));
@@ -72,7 +73,22 @@ namespace FlexiMvvm.Views
 
             this.AddConstraints(
                 ContentView.WithSameWidth(this),
-                ContentView.WithSameHeight(this).NotNull().SetPriority(UILayoutPriority.DefaultLow));
+                ContentView.WithSameHeight(this).SetPriority(UILayoutPriority.DefaultLow));
+
+            ContentView.AddConstraints(
+                SafeAreaContentViewLeftConstraint,
+                SafeAreaContentViewTopConstraint,
+                SafeAreaContentViewRightConstraint,
+                SafeAreaContentViewBottomConstraint);
+
+            this.AddConstraints(
+                ContentOverlayView.FullSizeOf(this));
+
+            ContentOverlayView.AddConstraints(
+                SafeAreaContentOverlayViewLeftConstraint,
+                SafeAreaContentOverlayViewTopConstraint,
+                SafeAreaContentOverlayViewRightConstraint,
+                SafeAreaContentOverlayViewBottomConstraint);
         }
     }
 }

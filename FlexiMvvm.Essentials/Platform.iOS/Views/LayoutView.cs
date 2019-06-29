@@ -14,6 +14,9 @@
 // limitations under the License.
 // =========================================================================
 
+using System;
+using System.Collections.Generic;
+using Cirrious.FluentLayouts.Touch;
 using CoreGraphics;
 using UIKit;
 
@@ -21,19 +24,44 @@ namespace FlexiMvvm.Views
 {
     public class LayoutView : UIView
     {
+        private UIView? _contentView;
+
         public LayoutView()
         {
-            Initialize();
+            Initialize(null);
+        }
+
+        public LayoutView(IDictionary<string, object?> layoutConfig)
+        {
+            if (layoutConfig == null)
+                throw new ArgumentNullException(nameof(layoutConfig));
+
+            Initialize(layoutConfig);
         }
 
         public LayoutView(CGRect frame)
             : base(frame)
         {
-            Initialize();
+            Initialize(null);
         }
 
-        private void Initialize()
+        public LayoutView(CGRect frame, IDictionary<string, object?> layoutConfig)
+            : base(frame)
         {
+            if (layoutConfig == null)
+                throw new ArgumentNullException(nameof(layoutConfig));
+
+            Initialize(layoutConfig);
+        }
+
+        protected IDictionary<string, object?>? LayoutConfig { get; private set; }
+
+        public UIView ContentView => _contentView ??= new LayoutSubview { EventCapturing = LayoutSubviewEventCapturing.Always };
+
+        private void Initialize(IDictionary<string, object?>? layoutConfig)
+        {
+            LayoutConfig = layoutConfig;
+
             SetupSubviews();
             SetupSubviewsConstraints();
             SetupLayout();
@@ -50,10 +78,17 @@ namespace FlexiMvvm.Views
 
         protected virtual void SetupLayout()
         {
+            this
+                .AddLayoutSubview(ContentView);
         }
 
         protected virtual void SetupLayoutConstraints()
         {
+            this.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
+            ContentView.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
+
+            this.AddConstraints(
+                ContentView.FullSizeOf(this));
         }
     }
 }
