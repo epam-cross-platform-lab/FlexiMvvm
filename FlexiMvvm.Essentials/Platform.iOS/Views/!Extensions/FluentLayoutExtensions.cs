@@ -27,6 +27,7 @@ namespace FlexiMvvm.Views
     {
         private const float DefaultMargin = 0;
 
+        [Obsolete("FullSizeOf(UIView, UILayoutGuide, nfloat?) will be removed soon. Use FullSizeOfSafeArea(UIView, UIView, nfloat?) method instead.")]
         [NotNull]
         public static IEnumerable<FluentLayout> FullSizeOf(
             [NotNull] this UIView view,
@@ -41,6 +42,20 @@ namespace FlexiMvvm.Views
             return FullSizeOf(view, safeAreaLayoutGuide, new Margins((float)margin.GetValueOrDefault(DefaultMargin)));
         }
 
+        public static IEnumerable<FluentLayout> FullSizeOfSafeArea(
+            this UIView view,
+            UIView parentView,
+            nfloat? margin = null)
+        {
+            if (view == null)
+                throw new ArgumentNullException(nameof(view));
+            if (parentView == null)
+                throw new ArgumentNullException(nameof(parentView));
+
+            return FullSizeOfSafeArea(view, parentView, new Margins((float)margin.GetValueOrDefault(DefaultMargin)));
+        }
+
+        [Obsolete("FullSizeOf(UIView, UILayoutGuide, Margins) will be removed soon. Use FullSizeOfSafeArea(UIView, UIView, Margins) method instead.")]
         [NotNull]
         public static IEnumerable<FluentLayout> FullSizeOf(
             [NotNull] this UIView view,
@@ -60,6 +75,27 @@ namespace FlexiMvvm.Views
                 view.Bottom().NotNull().EqualTo(margins.Bottom).NotNull().BottomOf(safeAreaLayoutGuide).NotNull().WithIdentifier("Bottom"),
                 view.Left().NotNull().EqualTo(margins.Left).NotNull().LeftOf(safeAreaLayoutGuide).NotNull().WithIdentifier("Left"),
                 view.Right().NotNull().EqualTo(margins.Right).NotNull().RightOf(safeAreaLayoutGuide).NotNull().WithIdentifier("Right")
+            };
+        }
+
+        public static IEnumerable<FluentLayout> FullSizeOfSafeArea(
+            this UIView view,
+            UIView parentView,
+            Margins margins)
+        {
+            if (view == null)
+                throw new ArgumentNullException(nameof(view));
+            if (parentView == null)
+                throw new ArgumentNullException(nameof(parentView));
+            if (margins == null)
+                throw new ArgumentNullException(nameof(margins));
+
+            return new[]
+            {
+                view.AtLeftOfSafeArea(parentView, margins.Left),
+                view.AtTopOfSafeArea(parentView, margins.Top),
+                view.AtRightOfSafeArea(parentView, margins.Right),
+                view.AtBottomOfSafeArea(parentView, margins.Bottom)
             };
         }
 
