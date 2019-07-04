@@ -51,5 +51,13 @@ namespace FlexiMvvm.Views.Core
             View.BindingSet?.Dispose();
             View.SetBindingSet(null);
         }
+
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
+
+            View.BindingSet?.Dispose();
+            View.SetBindingSet(null);
+        }
     }
 }
