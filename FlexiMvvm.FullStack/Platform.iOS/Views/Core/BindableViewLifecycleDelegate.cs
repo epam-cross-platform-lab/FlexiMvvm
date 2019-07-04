@@ -16,6 +16,7 @@
 
 using FlexiMvvm.Bindings;
 using FlexiMvvm.ViewModels;
+using UIKit;
 
 namespace FlexiMvvm.Views.Core
 {
@@ -39,6 +40,17 @@ namespace FlexiMvvm.Views.Core
                 View.Bind(bindingSet);
                 View.SetBindingSet(bindingSet);
                 bindingSet.Apply();
+            }
+        }
+
+        public override void DidMoveToParentViewController(UIViewController? parent)
+        {
+            base.DidMoveToParentViewController(parent);
+
+            if (parent == null)
+            {
+                View.BindingSet?.Dispose();
+                View.SetBindingSet(null);
             }
         }
     }
