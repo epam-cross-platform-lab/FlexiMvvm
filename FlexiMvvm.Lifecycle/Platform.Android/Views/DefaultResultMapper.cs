@@ -15,6 +15,7 @@
 // =========================================================================
 
 using Android.Content;
+using Android.Support.V4.App;
 using FlexiMvvm.ViewModels;
 
 namespace FlexiMvvm.Views
@@ -28,7 +29,7 @@ namespace FlexiMvvm.Views
         where TResult : Result
     {
         /// <inheritdoc />
-        public TResult? Map(Intent? data)
+        public TResult? Map(FragmentActivity activity, Android.App.Result resultCode, Intent? data)
         {
             return data?.GetResult<TResult>();
         }

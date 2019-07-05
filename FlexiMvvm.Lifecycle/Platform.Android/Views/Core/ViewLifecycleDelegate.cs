@@ -15,7 +15,6 @@
 // =========================================================================
 
 using System;
-using System.Threading.Tasks;
 using Android.Content;
 using Android.OS;
 using FlexiMvvm.Persistence.Core;
@@ -163,7 +162,9 @@ namespace FlexiMvvm.Views.Core
 
                 if (resultMapper != null)
                 {
-                    viewModelWithResultHandler.HandleResult(resultCode, resultMapper.Map(data));
+                    View.As(
+                        activity => viewModelWithResultHandler.HandleResult(resultCode, resultMapper.Map(activity, resultCode, data)),
+                        fragment => viewModelWithResultHandler.HandleResult(resultCode, resultMapper.Map(fragment.Activity, resultCode, data)));
                 }
             }
         }

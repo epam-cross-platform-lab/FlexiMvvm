@@ -15,6 +15,7 @@
 // =========================================================================
 
 using Android.Content;
+using Android.Support.V4.App;
 using FlexiMvvm.ViewModels;
 
 namespace FlexiMvvm.Views
@@ -30,8 +31,10 @@ namespace FlexiMvvm.Views
         /// <summary>
         /// Creates a new <typeparamref name="TResult"/> instance based on a set of key/value pairs stored in the <paramref name="data"/>.
         /// </summary>
+        /// <param name="activity">The activity that handles the result.</param>
+        /// <param name="resultCode">Determines whether the result is set successfully or not due to cancellation by the user.</param>
         /// <param name="data">Contains a set of key/value pairs that is used as source data for the view model result. Can be <see langword="null"/>.</param>
         /// <returns>The view model result instance if the <paramref name="data"/> is not <see langword="null"/>; otherwise, <see langword="null"/>.</returns>
-        TResult? Map(Intent? data);
+        TResult? Map(FragmentActivity activity, Android.App.Result resultCode, Intent? data);
     }
 }
