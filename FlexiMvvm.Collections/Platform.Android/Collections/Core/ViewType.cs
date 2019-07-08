@@ -16,23 +16,48 @@
 
 namespace FlexiMvvm.Collections.Core
 {
-    internal static class ViewType
+    public static class ViewType
     {
-        private const int MaxViewType = 1000;
+        private const int MaxViewType = 1024;
 
-        internal static int GetTarget(ItemType itemType, int requestedItemViewType)
+        public static bool IsHeader(int viewType)
         {
-            return ((int)itemType * MaxViewType) + requestedItemViewType;
+            return GetItemKind(viewType) == ItemKind.Header;
         }
 
-        internal static int GetRequested(int targetItemViewType)
+        public static bool IsSectionHeader(int viewType)
         {
-            return targetItemViewType % MaxViewType;
+            return GetItemKind(viewType) == ItemKind.SectionHeader;
         }
 
-        internal static ItemType ToItemType(int targetItemViewType)
+        public static bool IsItem(int viewType)
         {
-            return (ItemType)(targetItemViewType / MaxViewType);
+            return GetItemKind(viewType) == ItemKind.Item;
+        }
+
+        public static bool IsSectionFooter(int viewType)
+        {
+            return GetItemKind(viewType) == ItemKind.SectionFooter;
+        }
+
+        public static bool IsFooter(int viewType)
+        {
+            return GetItemKind(viewType) == ItemKind.Footer;
+        }
+
+        internal static int GetAdjustedViewType(ItemKind itemKind, int userViewType)
+        {
+            return ((int)itemKind * MaxViewType) + userViewType;
+        }
+
+        internal static int GetUserViewType(int adjustedViewType)
+        {
+            return adjustedViewType % MaxViewType;
+        }
+
+        internal static ItemKind GetItemKind(int adjustedViewType)
+        {
+            return (ItemKind)(adjustedViewType / MaxViewType);
         }
     }
 }
