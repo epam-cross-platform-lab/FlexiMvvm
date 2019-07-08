@@ -106,7 +106,7 @@ namespace FlexiMvvm.Collections
             if (parent == null)
                 throw new ArgumentNullException(nameof(parent));
 
-            return new RecyclerViewObservableViewHolder(new View(parent.Context));
+            return new RecyclerViewObservableEmptyViewHolder(new View(parent.Context));
         }
 
         [NotNull]
@@ -115,7 +115,7 @@ namespace FlexiMvvm.Collections
             if (parent == null)
                 throw new ArgumentNullException(nameof(parent));
 
-            return new RecyclerViewObservableViewHolder(new View(parent.Context));
+            return new RecyclerViewObservableEmptyViewHolder(new View(parent.Context));
         }
 
         [NotNull]
@@ -127,7 +127,7 @@ namespace FlexiMvvm.Collections
             if (parent == null)
                 throw new ArgumentNullException(nameof(parent));
 
-            return new RecyclerViewObservableViewHolder(new View(parent.Context));
+            return new RecyclerViewObservableEmptyViewHolder(new View(parent.Context));
         }
 
         [NotNull]
@@ -136,7 +136,7 @@ namespace FlexiMvvm.Collections
             if (parent == null)
                 throw new ArgumentNullException(nameof(parent));
 
-            return new RecyclerViewObservableViewHolder(new View(parent.Context));
+            return new RecyclerViewObservableEmptyViewHolder(new View(parent.Context));
         }
 
         public override void OnBindViewHolder([NotNull] RecyclerView.ViewHolder holder, int position)
