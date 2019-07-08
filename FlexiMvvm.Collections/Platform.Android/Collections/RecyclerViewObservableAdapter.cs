@@ -106,7 +106,7 @@ namespace FlexiMvvm.Collections
             if (parent == null)
                 throw new ArgumentNullException(nameof(parent));
 
-            return new RecyclerViewObservableEmptyViewHolder(new View(parent.Context));
+            return new RecyclerViewObservableEmptyViewHolder(new View(parent.Context) { Visibility = ViewStates.Gone });
         }
 
         [NotNull]
@@ -115,7 +115,7 @@ namespace FlexiMvvm.Collections
             if (parent == null)
                 throw new ArgumentNullException(nameof(parent));
 
-            return new RecyclerViewObservableEmptyViewHolder(new View(parent.Context));
+            return new RecyclerViewObservableEmptyViewHolder(new View(parent.Context) { Visibility = ViewStates.Gone });
         }
 
         [NotNull]
@@ -127,7 +127,7 @@ namespace FlexiMvvm.Collections
             if (parent == null)
                 throw new ArgumentNullException(nameof(parent));
 
-            return new RecyclerViewObservableEmptyViewHolder(new View(parent.Context));
+            return new RecyclerViewObservableEmptyViewHolder(new View(parent.Context) { Visibility = ViewStates.Gone });
         }
 
         [NotNull]
@@ -136,7 +136,7 @@ namespace FlexiMvvm.Collections
             if (parent == null)
                 throw new ArgumentNullException(nameof(parent));
 
-            return new RecyclerViewObservableEmptyViewHolder(new View(parent.Context));
+            return new RecyclerViewObservableEmptyViewHolder(new View(parent.Context) { Visibility = ViewStates.Gone });
         }
 
         public override void OnBindViewHolder([NotNull] RecyclerView.ViewHolder holder, int position)
