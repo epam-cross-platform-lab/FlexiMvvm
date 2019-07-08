@@ -15,6 +15,7 @@
 // =========================================================================
 
 using System;
+using System.Linq;
 using Android.Graphics.Drawables;
 using Android.Text;
 using Android.Widget;
@@ -91,6 +92,18 @@ namespace FlexiMvvm.Bindings
                 textViewReference,
                 (textView, hint) => textView.Hint = hint,
                 () => $"{nameof(TextView.Hint)}");
+        }
+
+        public static TargetItemBinding<TextView, int[]> SetCompoundDrawablesWithIntrinsicBoundsBinding(
+            this IItemReference<TextView> textViewReference)
+        {
+            if (textViewReference == null)
+                throw new ArgumentNullException(nameof(textViewReference));
+
+            return new TargetItemOneWayCustomBinding<TextView, int[]>(
+                textViewReference,
+                (textView, drawables) => textView.SetCompoundDrawablesWithIntrinsicBounds(drawables.ElementAtOrDefault(0), drawables.ElementAtOrDefault(1), drawables.ElementAtOrDefault(2), drawables.ElementAtOrDefault(3)),
+                () => $"{nameof(TextView.SetCompoundDrawablesWithIntrinsicBounds)}");
         }
 
         public static TargetItemBinding<TextView, string> SetErrorBinding(
