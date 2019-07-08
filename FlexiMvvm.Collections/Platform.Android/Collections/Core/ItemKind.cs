@@ -16,7 +16,7 @@
 
 namespace FlexiMvvm.Collections.Core
 {
-    internal enum ItemType
+    internal enum ItemKind
     {
         Header = 1,
 
