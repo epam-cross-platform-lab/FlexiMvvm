@@ -14,7 +14,9 @@
 // limitations under the License.
 // =========================================================================
 
-namespace FlexiMvvm.Collections.Core
+using FlexiMvvm.Collections.Core;
+
+namespace FlexiMvvm.Collections
 {
     public static class ViewType
     {
