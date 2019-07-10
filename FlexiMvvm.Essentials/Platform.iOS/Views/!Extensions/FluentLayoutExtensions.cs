@@ -149,5 +149,61 @@ namespace FlexiMvvm.Views
                 view.AtRightOf(parent, margins.Right).NotNull().WithIdentifier("Right")
             };
         }
+
+        public static void AddConstraintsIf(this UIView view, bool condition, IEnumerable<FluentLayout> fluentLayouts)
+        {
+            if (view == null)
+                throw new ArgumentNullException(nameof(view));
+
+            if (condition)
+            {
+                if (fluentLayouts == null)
+                    throw new ArgumentNullException(nameof(fluentLayouts));
+
+                view.AddConstraints(fluentLayouts);
+            }
+        }
+
+        public static void AddConstraintsIf(this UIView view, bool condition, params FluentLayout[] fluentLayouts)
+        {
+            if (view == null)
+                throw new ArgumentNullException(nameof(view));
+
+            if (condition)
+            {
+                if (fluentLayouts == null)
+                    throw new ArgumentNullException(nameof(fluentLayouts));
+
+                view.AddConstraints(fluentLayouts);
+            }
+        }
+
+        public static void RemoveConstraintsIf(this UIView view, bool condition, IEnumerable<FluentLayout> fluentLayouts)
+        {
+            if (view == null)
+                throw new ArgumentNullException(nameof(view));
+
+            if (condition)
+            {
+                if (fluentLayouts == null)
+                    throw new ArgumentNullException(nameof(fluentLayouts));
+
+                view.RemoveConstraints(fluentLayouts);
+            }
+        }
+
+        public static void RemoveConstraintsIf(this UIView view, bool condition, params FluentLayout[] fluentLayouts)
+        {
+            if (view == null)
+                throw new ArgumentNullException(nameof(view));
+
+            if (condition)
+            {
+                if (fluentLayouts == null)
+                    throw new ArgumentNullException(nameof(fluentLayouts));
+
+                view.RemoveConstraints(fluentLayouts);
+            }
+        }
     }
 }

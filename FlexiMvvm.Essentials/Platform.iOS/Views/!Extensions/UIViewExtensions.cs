@@ -43,6 +43,22 @@ namespace FlexiMvvm.Views
             return parentView;
         }
 
+        public static UIView AddLayoutSubviewIf(this UIView parentView, bool condition, UIView childView)
+        {
+            if (parentView == null)
+                throw new ArgumentNullException(nameof(parentView));
+
+            if (condition)
+            {
+                if (childView == null)
+                    throw new ArgumentNullException(nameof(childView));
+
+                parentView.AddSubview(childView);
+            }
+
+            return parentView;
+        }
+
         internal static Tuple<UIView, UIScrollView>? FindFirstResponderInScrollView(this UIView rootView)
         {
             return FindFirstResponderInScrollView(rootView, null);
