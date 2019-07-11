@@ -48,6 +48,11 @@ namespace FlexiMvvm.Views.Core
         void OnResume();
 
         /// <summary>
+        /// Can perform custom actions when <see cref="DialogFragment.OnDismiss(IDialogInterface)"/> method is called.
+        /// </summary>
+        void OnDismiss();
+
+        /// <summary>
         /// Can perform custom actions when <see cref="Activity.OnPause"/> or <see cref="Fragment.OnPause"/> method is called.
         /// </summary>
         void OnPause();
@@ -56,6 +61,13 @@ namespace FlexiMvvm.Views.Core
         /// Can perform custom actions when <see cref="Activity.OnStop"/> or <see cref="Fragment.OnStop"/> method is called.
         /// </summary>
         void OnStop();
+
+        /// <summary>
+        /// Can perform custom actions when <see cref="INavigationView{TViewModel}.SetResult(Result, Intent)"/> method is called.
+        /// </summary>
+        /// <param name="resultCode">Determines whether the result should be set as successful or not due to cancellation by the user.</param>
+        /// <param name="data">Contains a set of key/value pairs that is used as source data for the view model result. Can be <see langword="null"/>.</param>
+        void SetResult(Result resultCode, Intent? data);
 
         /// <summary>
         /// Can perform custom actions when <see cref="Activity.OnActivityResult(int, Result, Intent?)"/> or <see cref="Fragment.OnActivityResult(int, int, Intent?)"/> method is called.

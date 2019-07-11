@@ -14,14 +14,18 @@
 // limitations under the License.
 // =========================================================================
 
-namespace FlexiMvvm.Views.Generation.Android
+namespace FlexiMvvm.Navigation
 {
-    public enum ViewKind
+    using Android.Support.V4.App;
+
+    /// <summary>
+    /// Provides strategies for the <see cref="DialogFragment"/> forward and backward navigation.
+    /// </summary>
+    public static class DialogFragmentNavigationStrategy
     {
-        Activity,
-
-        Fragment,
-
-        DialogFragment
+        /// <summary>
+        /// Gets the backward navigation strategy.
+        /// </summary>
+        public static DialogFragmentBackwardNavigationStrategy Backward { get; } = new DialogFragmentBackwardNavigationStrategy();
     }
 }

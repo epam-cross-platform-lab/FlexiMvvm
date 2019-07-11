@@ -181,6 +181,12 @@ namespace FlexiMvvm.Views
             return new ViewLifecycleDelegate<AppCompatActivity<TViewModel>, TViewModel>(this);
         }
 
+        /// <inheritdoc />
+        void INavigationView<TViewModel>.OnActivityResult(int requestCode, Android.App.Result resultCode, Intent? data)
+        {
+            OnActivityResult(requestCode, (Android.App.Result)resultCode, data);
+        }
+
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
@@ -231,6 +237,12 @@ namespace FlexiMvvm.Views
             return new ViewLifecycleDelegate<AppCompatActivity<TViewModel, TParameters>, TViewModel>(this);
         }
 
+        /// <inheritdoc />
+        void INavigationView<TViewModel>.OnActivityResult(int requestCode, Android.App.Result resultCode, Intent? data)
+        {
+            OnActivityResult(requestCode, (Android.App.Result)resultCode, data);
+        }
+
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
             ViewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
@@ -257,6 +269,7 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         public DialogFragment()
         {
+            SetTargetFragment(null, RequestCode.InvalidRequestCode);
         }
 
         /// <inheritdoc />
@@ -303,6 +316,14 @@ namespace FlexiMvvm.Views
             base.OnResume();
 
             LifecycleDelegate.OnResume();
+        }
+
+        /// <inheritdoc />
+        public override void OnDismiss(IDialogInterface dialog)
+        {
+            base.OnDismiss(dialog);
+
+            LifecycleDelegate.OnDismiss();
         }
 
         /// <inheritdoc />
@@ -406,17 +427,15 @@ namespace FlexiMvvm.Views
         }
 
         /// <inheritdoc />
-        /// <exception cref="NotSupportedException">The fragment cannot set a result. Use the appropriate method of fragment's activity instead.</exception>
         public void SetResult(Android.App.Result resultCode, Intent? data)
         {
-            throw new NotSupportedException("The fragment cannot set a result. Use the appropriate method of fragment's activity instead.");
+            LifecycleDelegate.SetResult(resultCode, data);
         }
 
         /// <inheritdoc />
-        /// <exception cref="NotSupportedException">The fragment cannot finish an activity. Use the appropriate method of fragment's activity instead.</exception>
-        public void Finish()
+        void INavigationView<TViewModel>.OnActivityResult(int requestCode, Android.App.Result resultCode, Intent? data)
         {
-            throw new NotSupportedException("The fragment cannot finish an activity. Use the appropriate method of fragment's activity instead.");
+            OnActivityResult(requestCode, (int)resultCode, data);
         }
 
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
@@ -470,17 +489,15 @@ namespace FlexiMvvm.Views
         }
 
         /// <inheritdoc />
-        /// <exception cref="NotSupportedException">The fragment cannot set a result. Use the appropriate method of fragment's activity instead.</exception>
         public void SetResult(Android.App.Result resultCode, Intent? data)
         {
-            throw new NotSupportedException("The fragment cannot set a result. Use the appropriate method of fragment's activity instead.");
+            LifecycleDelegate.SetResult(resultCode, data);
         }
 
         /// <inheritdoc />
-        /// <exception cref="NotSupportedException">The fragment cannot finish an activity. Use the appropriate method of fragment's activity instead.</exception>
-        public void Finish()
+        void INavigationView<TViewModel>.OnActivityResult(int requestCode, Android.App.Result resultCode, Intent? data)
         {
-            throw new NotSupportedException("The fragment cannot finish an activity. Use the appropriate method of fragment's activity instead.");
+            OnActivityResult(requestCode, (int)resultCode, data);
         }
 
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
@@ -509,6 +526,7 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         public Fragment()
         {
+            SetTargetFragment(null, RequestCode.InvalidRequestCode);
         }
 
         /// <inheritdoc />
@@ -658,17 +676,15 @@ namespace FlexiMvvm.Views
         }
 
         /// <inheritdoc />
-        /// <exception cref="NotSupportedException">The fragment cannot set a result. Use the appropriate method of fragment's activity instead.</exception>
         public void SetResult(Android.App.Result resultCode, Intent? data)
         {
-            throw new NotSupportedException("The fragment cannot set a result. Use the appropriate method of fragment's activity instead.");
+            LifecycleDelegate.SetResult(resultCode, data);
         }
 
         /// <inheritdoc />
-        /// <exception cref="NotSupportedException">The fragment cannot finish an activity. Use the appropriate method of fragment's activity instead.</exception>
-        public void Finish()
+        void INavigationView<TViewModel>.OnActivityResult(int requestCode, Android.App.Result resultCode, Intent? data)
         {
-            throw new NotSupportedException("The fragment cannot finish an activity. Use the appropriate method of fragment's activity instead.");
+            OnActivityResult(requestCode, (int)resultCode, data);
         }
 
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
@@ -722,17 +738,15 @@ namespace FlexiMvvm.Views
         }
 
         /// <inheritdoc />
-        /// <exception cref="NotSupportedException">The fragment cannot set a result. Use the appropriate method of fragment's activity instead.</exception>
         public void SetResult(Android.App.Result resultCode, Intent? data)
         {
-            throw new NotSupportedException("The fragment cannot set a result. Use the appropriate method of fragment's activity instead.");
+            LifecycleDelegate.SetResult(resultCode, data);
         }
 
         /// <inheritdoc />
-        /// <exception cref="NotSupportedException">The fragment cannot finish an activity. Use the appropriate method of fragment's activity instead.</exception>
-        public void Finish()
+        void INavigationView<TViewModel>.OnActivityResult(int requestCode, Android.App.Result resultCode, Intent? data)
         {
-            throw new NotSupportedException("The fragment cannot finish an activity. Use the appropriate method of fragment's activity instead.");
+            OnActivityResult(requestCode, (int)resultCode, data);
         }
 
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)

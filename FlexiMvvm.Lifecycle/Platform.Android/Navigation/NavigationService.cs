@@ -243,39 +243,62 @@ namespace FlexiMvvm.Navigation
         /// <summary>
         /// Performs backward navigation from the <paramref name="sourceView"/>.
         /// </summary>
-        /// <param name="sourceView">The source navigation view from which navigation is performed from.</param>
-        /// <param name="navigationStrategy">
-        /// The strategy used for performing navigation. Can be <see langword="null"/>.
-        /// <para>The default is <see cref="BackwardNavigationStrategy.Finish()"/>.</para>
+        /// <param name="sourceView">The <see cref="INavigationView{TViewModel}"/> from which navigation is performed from.</param>
+        /// <param name="activityNavigationStrategy">
+        /// The strategy used for performing navigation when the <paramref name="sourceView"/> is <see cref="FragmentActivity"/>. Can be <see langword="null"/>.
+        /// <para>The default is <see cref="ActivityBackwardNavigationStrategy.Finish()"/>.</para>
+        /// </param>
+        /// <param name="fragmentNavigationStrategy">
+        /// The strategy used for performing navigation when the <paramref name="sourceView"/> is <see cref="Fragment"/>. Can be <see langword="null"/>.
+        /// <para>The default is <see cref="FragmentBackwardNavigationStrategy.PopBackStack()"/>.</para>
+        /// </param>
+        /// <param name="dialogFragmentNavigationStrategy">
+        /// The strategy used for performing navigation when the <paramref name="sourceView"/> is <see cref="DialogFragment"/>. Can be <see langword="null"/>.
+        /// <para>The default is <see cref="DialogFragmentBackwardNavigationStrategy.Dismiss()"/>.</para>
         /// </param>
         /// <exception cref="ArgumentNullException"><paramref name="sourceView"/> is <see langword="null"/>.</exception>
         public void NavigateBack(
             INavigationView<ILifecycleViewModel> sourceView,
-            BackwardNavigationDelegate? navigationStrategy = null)
+            ActivityBackwardNavigationDelegate? activityNavigationStrategy = null,
+            FragmentBackwardNavigationDelegate? fragmentNavigationStrategy = null,
+            DialogFragmentBackwardNavigationDelegate? dialogFragmentNavigationStrategy = null)
         {
             if (sourceView == null)
                 throw new ArgumentNullException(nameof(sourceView));
 
-            (navigationStrategy ?? NavigationStrategy.Backward.Finish()).Invoke(sourceView);
+            sourceView.As(
+                activity => (activityNavigationStrategy ?? ActivityNavigationStrategy.Backward.Finish()).Invoke(activity),
+                fragment => (fragmentNavigationStrategy ?? FragmentNavigationStrategy.Backward.PopBackStack()).Invoke(fragment),
+                dialogFragment => (dialogFragmentNavigationStrategy ?? DialogFragmentNavigationStrategy.Backward.Dismiss()).Invoke(dialogFragment));
         }
 
         /// <summary>
         /// Performs backward navigation from the <paramref name="sourceView"/> with returning a lifecycle-aware view model result.
         /// </summary>
         /// <typeparam name="TResult">The type of the source view model result.</typeparam>
-        /// <param name="sourceView">The source navigation view from which navigation is performed from.</param>
+        /// <param name="sourceView">The <see cref="INavigationView{TViewModel}"/> from which navigation is performed from.</param>
         /// <param name="resultCode">Determines whether the result should be set as successful or canceled.</param>
         /// <param name="result">The source view model result. Can be <see langword="null"/>.</param>
-        /// <param name="navigationStrategy">
-        /// The strategy used for performing navigation. Can be <see langword="null"/>.
-        /// <para>The default is <see cref="BackwardNavigationStrategy.Finish()"/>.</para>
+        /// <param name="activityNavigationStrategy">
+        /// The strategy used for performing navigation when the <paramref name="sourceView"/> is <see cref="FragmentActivity"/>. Can be <see langword="null"/>.
+        /// <para>The default is <see cref="ActivityBackwardNavigationStrategy.Finish()"/>.</para>
+        /// </param>
+        /// <param name="fragmentNavigationStrategy">
+        /// The strategy used for performing navigation when the <paramref name="sourceView"/> is <see cref="Fragment"/>. Can be <see langword="null"/>.
+        /// <para>The default is <see cref="FragmentBackwardNavigationStrategy.PopBackStack()"/>.</para>
+        /// </param>
+        /// <param name="dialogFragmentNavigationStrategy">
+        /// The strategy used for performing navigation when the <paramref name="sourceView"/> is <see cref="DialogFragment"/>. Can be <see langword="null"/>.
+        /// <para>The default is <see cref="DialogFragmentBackwardNavigationStrategy.Dismiss()"/>.</para>
         /// </param>
         /// <exception cref="ArgumentNullException"><paramref name="sourceView"/> is <see langword="null"/>.</exception>
         public void NavigateBack<TResult>(
             INavigationView<ILifecycleViewModelWithResult<TResult>> sourceView,
             ResultCode resultCode,
             TResult? result,
-            BackwardNavigationDelegate? navigationStrategy = null)
+            ActivityBackwardNavigationDelegate? activityNavigationStrategy = null,
+            FragmentBackwardNavigationDelegate? fragmentNavigationStrategy = null,
+            DialogFragmentBackwardNavigationDelegate? dialogFragmentNavigationStrategy = null)
             where TResult : Result
         {
             if (sourceView == null)
@@ -284,7 +307,10 @@ namespace FlexiMvvm.Navigation
             var resultIntent = new Intent();
             resultIntent.PutResult(result);
             sourceView.SetResult(resultCode, resultIntent);
-            (navigationStrategy ?? NavigationStrategy.Backward.Finish()).Invoke(sourceView);
+            sourceView.As(
+                activity => (activityNavigationStrategy ?? ActivityNavigationStrategy.Backward.Finish()).Invoke(activity),
+                fragment => (fragmentNavigationStrategy ?? FragmentNavigationStrategy.Backward.PopBackStack()).Invoke(fragment),
+                dialogFragment => (dialogFragmentNavigationStrategy ?? DialogFragmentNavigationStrategy.Backward.Dismiss()).Invoke(dialogFragment));
         }
     }
 }

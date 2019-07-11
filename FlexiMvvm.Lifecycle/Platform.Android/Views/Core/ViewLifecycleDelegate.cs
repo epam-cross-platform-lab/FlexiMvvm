@@ -62,12 +62,22 @@ namespace FlexiMvvm.Views.Core
         }
 
         /// <inheritdoc />
+        public virtual void OnDismiss()
+        {
+        }
+
+        /// <inheritdoc />
         public virtual void OnPause()
         {
         }
 
         /// <inheritdoc />
         public virtual void OnStop()
+        {
+        }
+
+        /// <inheritdoc />
+        public virtual void SetResult(Android.App.Result resultCode, Intent? data)
         {
         }
 
@@ -106,6 +116,8 @@ namespace FlexiMvvm.Views.Core
         private const string LifecycleViewModelStateKey = "FlexiMvvm_LifecycleViewModel_State";
         private const string ViewRequestCodeStateKey = "FlexiMvvm_View_RequestCode_State";
 
+        private ResultCode _resultCode = ResultCode.Canceled;
+        private Intent? _result;
         private bool _isViewRecreated;
         private string? _viewModelKey;
         private bool _isViewModelCreated;
@@ -149,6 +161,57 @@ namespace FlexiMvvm.Views.Core
                 View.InitializeViewModelAsync(_isViewRecreated);
                 _isViewModelCreated = false;
             }
+        }
+
+        /// <inheritdoc />
+        public override void OnDismiss()
+        {
+            base.OnDismiss();
+
+            View.As(
+                activity => { /* An activity has built in mechanism of setting a result */ },
+                fragment => { /* A fragment sets a result in OnStop lifecycle method */ },
+                dialogFragment =>
+                {
+                    if (RequestCode.IsValid(dialogFragment.TargetRequestCode))
+                    {
+                        var target = (Java.Lang.Object)dialogFragment.TargetFragment ?? dialogFragment.Activity;
+
+                        if (target is INavigationView<ILifecycleViewModelWithResultHandler> callingView)
+                        {
+                            callingView.OnActivityResult(dialogFragment.TargetRequestCode, _resultCode, _result);
+                        }
+                    }
+                });
+        }
+
+        /// <inheritdoc />
+        public override void OnStop()
+        {
+            base.OnStop();
+
+            View.As(
+                activity => { /* An activity has built in mechanism of setting a result */ },
+                fragment =>
+                {
+                    if (fragment.IsRemoving && RequestCode.IsValid(fragment.TargetRequestCode))
+                    {
+                        var target = (Java.Lang.Object)fragment.TargetFragment ?? fragment.Activity;
+
+                        if (target is INavigationView<ILifecycleViewModelWithResultHandler> callingView)
+                        {
+                            callingView.OnActivityResult(fragment.TargetRequestCode, _resultCode, _result);
+                        }
+                    }
+                },
+                dialogFragment => { /* A dialog fragment sets a result in OnDismiss lifecycle method */ });
+        }
+
+        /// <inheritdoc />
+        public override void SetResult(Android.App.Result resultCode, Intent? data)
+        {
+            _resultCode = resultCode;
+            _result = data;
         }
 
         /// <inheritdoc />

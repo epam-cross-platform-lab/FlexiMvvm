@@ -37,6 +37,20 @@ namespace FlexiMvvm.Views
         private IBundle State => _state ??= BundleFactory.Create();
 
         /// <summary>
+        /// Determines whether the <paramref name="requestCode"/> is valid.
+        /// <para>
+        /// <see cref="Android.App.Activity.OnActivityResult(int, Android.App.Result, Intent?)"/> or <see cref="Android.Support.V4.App.Fragment.OnActivityResult(int, int, Intent?)"/>
+        /// won't be called for invalid request codes."
+        /// </para>
+        /// </summary>
+        /// <param name="requestCode">A numeric request code.</param>
+        /// <returns><see langword="true"/> if the request code >= 0; otherwise, <see langword="false"/>.</returns>
+        public static bool IsValid(int requestCode)
+        {
+            return requestCode > InvalidRequestCode;
+        }
+
+        /// <summary>
         /// Gets a unique numeric request code that is used to identify the <typeparamref name="TResultMapper"/> result mapper which creates a lifecycle-aware view model result instance.
         /// </summary>
         /// <typeparam name="TResultMapper">The type of the result mapper which creates a view model result instance.</typeparam>
