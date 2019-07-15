@@ -35,7 +35,7 @@ namespace FlexiMvvm.Navigation
         /// <returns>The activity instance. Can be <see langword="null"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="view"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException">
-        /// The <paramref name="view" /> is derived from a class other than the <see cref="FragmentActivity"/> or <see cref="Fragment"/>.
+        /// The <paramref name="view" /> is derived from a class other than the <see cref="FragmentActivity"/>, <see cref="Fragment"/> or <see cref="DialogFragment"/>.
         /// </exception>
         public static FragmentActivity? GetActivity(this INavigationView<ILifecycleViewModel> view)
         {
@@ -45,6 +45,26 @@ namespace FlexiMvvm.Navigation
             return view.As(
                 activity => activity,
                 fragment => fragment.Activity);
+        }
+
+        /// <summary>
+        /// Returns <see cref="FragmentActivity.SupportFragmentManager"/> if <paramref name="view"/> is <see cref="FragmentActivity"/> or
+        /// <see cref="Fragment.FragmentManager"/> property value if <paramref name="view"/> is <see cref="Fragment"/>.
+        /// </summary>
+        /// <param name="view">The navigation view.</param>
+        /// <returns>The fragment manager instance. Can be <see langword="null"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="view"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentException">
+        /// The <paramref name="view" /> is derived from a class other than the <see cref="FragmentActivity"/>, <see cref="Fragment"/> or <see cref="DialogFragment"/>.
+        /// </exception>
+        public static FragmentManager? GetFragmentManager(this INavigationView<ILifecycleViewModel> view)
+        {
+            if (view == null)
+                throw new ArgumentNullException(nameof(view));
+
+            return view.As(
+                activity => activity.SupportFragmentManager,
+                fragment => fragment.FragmentManager);
         }
     }
 }

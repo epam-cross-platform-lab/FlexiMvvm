@@ -24,6 +24,11 @@ namespace FlexiMvvm.Navigation
     public static class DialogFragmentNavigationStrategy
     {
         /// <summary>
+        /// Gets the forward navigation strategy.
+        /// </summary>
+        public static DialogFragmentForwardNavigationStrategy Forward { get; } = new DialogFragmentForwardNavigationStrategy();
+
+        /// <summary>
         /// Gets the backward navigation strategy.
         /// </summary>
         public static DialogFragmentBackwardNavigationStrategy Backward { get; } = new DialogFragmentBackwardNavigationStrategy();

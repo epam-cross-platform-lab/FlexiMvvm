@@ -24,6 +24,11 @@ namespace FlexiMvvm.Navigation
     public static class ActivityNavigationStrategy
     {
         /// <summary>
+        /// Gets the forward navigation strategy.
+        /// </summary>
+        public static ActivityForwardNavigationStrategy Forward { get; } = new ActivityForwardNavigationStrategy();
+
+        /// <summary>
         /// Gets the backward navigation strategy.
         /// </summary>
         public static ActivityBackwardNavigationStrategy Backward { get; } = new ActivityBackwardNavigationStrategy();

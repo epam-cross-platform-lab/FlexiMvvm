@@ -14,11 +14,14 @@
 // limitations under the License.
 // =========================================================================
 
+using System;
+
 namespace FlexiMvvm.Navigation
 {
     /// <summary>
     /// Provides strategies for forward and backward navigation.
     /// </summary>
+    [Obsolete("NavigationStrategy will be removed soon. Use ActivityNavigationStrategy class instead.")]
     public static class NavigationStrategy
     {
         /// <summary>
