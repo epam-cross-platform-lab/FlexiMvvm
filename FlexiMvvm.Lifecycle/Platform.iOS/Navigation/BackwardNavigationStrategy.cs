@@ -27,11 +27,13 @@ namespace FlexiMvvm.Navigation
     /// </summary>
     /// <param name="sourceView">The source navigation view from which navigation is performed from.</param>
     /// <param name="animated">Determines if the transition is to be animated.</param>
+    [Obsolete("BackwardNavigationDelegate will be removed soon. Use ViewControllerBackwardNavigationDelegate delegate instead.", true)]
     public delegate void BackwardNavigationDelegate(INavigationView<ILifecycleViewModel> sourceView, bool animated);
 
     /// <summary>
     /// Provides a set of backward navigation strategies.
     /// </summary>
+    [Obsolete("BackwardNavigationStrategy will be removed soon. Use ViewControllerBackwardNavigationStrategy class instead.", true)]
     public sealed class BackwardNavigationStrategy
     {
         /// <summary>

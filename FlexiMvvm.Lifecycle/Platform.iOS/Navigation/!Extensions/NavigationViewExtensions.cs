@@ -34,7 +34,7 @@ namespace FlexiMvvm.Navigation
         /// <returns>The view controller instance. Can be <see langword="null"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="view"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException">
-        /// The <paramref name="view" /> is derived from a class other than the <see cref="UINavigationController"/> or <see cref="UIViewController"/>.
+        /// The <paramref name="view" /> is derived from a class other than the <see cref="UIViewController"/> or <see cref="UINavigationController"/>.
         /// </exception>
         public static UINavigationController? GetNavigationController(this INavigationView<ILifecycleViewModel> view)
         {
@@ -42,8 +42,8 @@ namespace FlexiMvvm.Navigation
                 throw new ArgumentNullException(nameof(view));
 
             return view.As(
-                navigationController => navigationController,
-                viewController => viewController.NavigationController);
+                viewController => viewController.NavigationController,
+                navigationController => navigationController);
         }
     }
 }

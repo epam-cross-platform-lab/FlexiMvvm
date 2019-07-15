@@ -158,37 +158,39 @@ namespace FlexiMvvm.Navigation
         /// <summary>
         /// Performs backward navigation from the <paramref name="sourceView"/>.
         /// </summary>
-        /// <param name="sourceView">The source navigation view from which navigation is performed from.</param>
+        /// <param name="sourceView">The <see cref="INavigationView{TViewModel}"/> from which navigation is performed from.</param>
         /// <param name="animated">Determines if the transition is to be animated.</param>
-        /// <param name="navigationStrategy">
+        /// <param name="viewControllerNavigationStrategy">
         /// The strategy used for performing navigation. Can be <see langword="null"/>.
-        /// <para>The default is <see cref="BackwardNavigationStrategy.DismissViewController(Action?)"/> if <paramref name="sourceView"/> is presented or
-        /// <see cref="BackwardNavigationStrategy.PopViewController()"/> if <paramref name="sourceView"/> is pushed.</para>
+        /// <para>The default is <see cref="ViewControllerBackwardNavigationStrategy.DismissViewController(Action?)"/> if <paramref name="sourceView"/> is presented or
+        /// <see cref="ViewControllerBackwardNavigationStrategy.PopViewController()"/> if <paramref name="sourceView"/> is pushed.</para>
         /// </param>
         /// <exception cref="ArgumentNullException"><paramref name="sourceView"/> is <see langword="null"/>.</exception>
         public void NavigateBack(
             INavigationView<ILifecycleViewModel> sourceView,
             bool animated,
-            BackwardNavigationDelegate? navigationStrategy = null)
+            ViewControllerBackwardNavigationDelegate? viewControllerNavigationStrategy = null)
         {
             if (sourceView == null)
                 throw new ArgumentNullException(nameof(sourceView));
 
-            (navigationStrategy ?? GetBackwardNavigationStrategy(sourceView)).Invoke(sourceView, animated);
+            var navigationController = sourceView.GetNavigationController();
+            sourceView.As(
+                viewController => (viewControllerNavigationStrategy ?? GetViewControllerBackwardNavigationStrategy(viewController)).Invoke(viewController, navigationController, animated));
         }
 
         /// <summary>
         /// Performs backward navigation from the <paramref name="sourceView"/> with returning a lifecycle-aware view model result.
         /// </summary>
         /// <typeparam name="TResult">The type of the source view model result.</typeparam>
-        /// <param name="sourceView">The source navigation view from which navigation is performed from.</param>
+        /// <param name="sourceView">The <see cref="INavigationView{TViewModel}"/> from which navigation is performed from.</param>
         /// <param name="resultCode">Determines whether the result should be set as successful or canceled.</param>
         /// <param name="result">The source view model result. Can be <see langword="null"/>.</param>
         /// <param name="animated">Determines if the transition is to be animated.</param>
-        /// <param name="navigationStrategy">
+        /// <param name="viewControllerNavigationStrategy">
         /// The strategy used for performing navigation. Can be <see langword="null"/>.
-        /// <para>The default is <see cref="BackwardNavigationStrategy.DismissViewController(Action?)"/> if <paramref name="sourceView"/> is presented or
-        /// <see cref="BackwardNavigationStrategy.PopViewController()"/> if <paramref name="sourceView"/> is pushed.</para>
+        /// <para>The default is <see cref="ViewControllerBackwardNavigationStrategy.DismissViewController(Action?)"/> if <paramref name="sourceView"/> is presented or
+        /// <see cref="ViewControllerBackwardNavigationStrategy.PopViewController()"/> if <paramref name="sourceView"/> is pushed.</para>
         /// </param>
         /// <exception cref="ArgumentNullException"><paramref name="sourceView"/> is <see langword="null"/>.</exception>
         public void NavigateBack<TResult>(
@@ -196,14 +198,16 @@ namespace FlexiMvvm.Navigation
             ResultCode resultCode,
             TResult? result,
             bool animated,
-            BackwardNavigationDelegate? navigationStrategy = null)
+            ViewControllerBackwardNavigationDelegate? viewControllerNavigationStrategy = null)
             where TResult : Result
         {
             if (sourceView == null)
                 throw new ArgumentNullException(nameof(sourceView));
 
+            var navigationController = sourceView.GetNavigationController();
             sourceView.SetResult(resultCode, result);
-            (navigationStrategy ?? GetBackwardNavigationStrategy(sourceView)).Invoke(sourceView, animated);
+            sourceView.As(
+                viewController => (viewControllerNavigationStrategy ?? GetViewControllerBackwardNavigationStrategy(viewController)).Invoke(viewController, navigationController, animated));
         }
 
         private ForwardNavigationDelegate GetForwardNavigationStrategy(UIViewController targetView)
@@ -211,11 +215,11 @@ namespace FlexiMvvm.Navigation
             return targetView is UINavigationController ? NavigationStrategy.Forward.PresentViewController() : NavigationStrategy.Forward.PushViewController();
         }
 
-        private BackwardNavigationDelegate GetBackwardNavigationStrategy(INavigationView<ILifecycleViewModel> sourceView)
+        private ViewControllerBackwardNavigationDelegate GetViewControllerBackwardNavigationStrategy(UIViewController sourceView)
         {
             var isPresented = sourceView.PresentingViewController?.PresentedViewController == sourceView;
 
-            return isPresented ? NavigationStrategy.Backward.DismissViewController() : NavigationStrategy.Backward.PopViewController();
+            return isPresented ? ViewControllerNavigationStrategy.Backward.DismissViewController() : ViewControllerNavigationStrategy.Backward.PopViewController();
         }
     }
 }

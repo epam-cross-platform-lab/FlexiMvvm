@@ -14,24 +14,18 @@
 // limitations under the License.
 // =========================================================================
 
-using System;
+using UIKit;
 
 namespace FlexiMvvm.Navigation
 {
     /// <summary>
-    /// Provides strategies for forward and backward navigation.
+    /// Provides strategies for the <see cref="UIViewController"/> forward and backward navigation.
     /// </summary>
-    public static class NavigationStrategy
+    public static class ViewControllerNavigationStrategy
     {
-        /// <summary>
-        /// Gets the forward navigation strategy.
-        /// </summary>
-        public static ForwardNavigationStrategy Forward { get; } = new ForwardNavigationStrategy();
-
         /// <summary>
         /// Gets the backward navigation strategy.
         /// </summary>
-        [Obsolete("NavigationStrategy.Backward will be removed soon. Use ViewControllerNavigationStrategy.Backward property instead.", true)]
-        public static BackwardNavigationStrategy Backward { get; } = new BackwardNavigationStrategy();
+        public static ViewControllerBackwardNavigationStrategy Backward { get; } = new ViewControllerBackwardNavigationStrategy();
     }
 }

@@ -33,31 +33,6 @@ namespace FlexiMvvm.Views
         event EventHandler<ResultSetEventArgs> ResultSet;
 
         /// <summary>
-        /// Gets a value indicating whether the current view is in the process of being added to a parent view.
-        /// </summary>
-        bool IsMovingToParentViewController { get; }
-
-        /// <summary>
-        /// Gets a value indicating whether the current view is in the process of being removed from its parent view.
-        /// </summary>
-        bool IsMovingFromParentViewController { get; }
-
-        /// <summary>
-        /// Gets a value indicating whether the current view is in the process of being presented.
-        /// </summary>
-        bool IsBeingPresented { get; }
-
-        /// <summary>
-        /// Gets a value indicating whether the current view is in the process of being dismissed.
-        /// </summary>
-        bool IsBeingDismissed { get; }
-
-        /// <summary>
-        /// Gets the view that is presenting this view. Can be <see langword="null"/>.
-        /// </summary>
-        UIViewController? PresentingViewController { get; }
-
-        /// <summary>
         /// Modally presents a view.
         /// </summary>
         /// <param name="viewControllerToPresent">The view that displays over the current view content.</param>

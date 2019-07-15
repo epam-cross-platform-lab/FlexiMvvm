@@ -152,10 +152,14 @@ namespace FlexiMvvm.Views.Core
         {
             base.ViewWillDisappear();
 
-            if (View.IsMovingFromParentViewController || View.IsBeingDismissed)
-            {
-                View.RaiseResultSet(_resultCode, _result);
-            }
+            View.As(
+                viewController =>
+                {
+                    if (viewController.IsMovingFromParentViewController || viewController.IsBeingDismissed)
+                    {
+                        View.RaiseResultSet(_resultCode, _result);
+                    }
+                });
         }
 
         /// <inheritdoc />
