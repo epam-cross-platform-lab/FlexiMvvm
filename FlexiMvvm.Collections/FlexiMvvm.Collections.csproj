@@ -22,4 +22,20 @@
         <PackageReference Include="Xamarin.Android.Support.Fragment" Version="28.0.0.1" />
         <PackageReference Include="Xamarin.Android.Support.v7.RecyclerView" Version="28.0.0.1" />
     </ItemGroup>
+    <ItemGroup>
+        <None Update="Platform.iOS\Collections\!Extensions\WeakEventSubscriptionExtensionsGenerator.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>WeakEventSubscriptionExtensionsGenerator.cs</LastGenOutput>
+        </None>
+    </ItemGroup>
+    <ItemGroup>
+        <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+    </ItemGroup>
+    <ItemGroup>
+        <None Update="Platform.iOS\Collections\!Extensions\WeakEventSubscriptionExtensionsGenerator.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>WeakEventSubscriptionExtensionsGenerator.tt</DependentUpon>
+        </None>
+    </ItemGroup>
 </Project>
