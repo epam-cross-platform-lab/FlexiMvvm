@@ -34,6 +34,18 @@ namespace FlexiMvvm.Bindings
                 () => $"{nameof(UIView.Alpha)}");
         }
 
+        public static TargetItemBinding<UIView, UIColor> BackgroundColorBinding(
+            this IItemReference<UIView> viewReference)
+        {
+            if (viewReference == null)
+                throw new ArgumentNullException(nameof(viewReference));
+
+            return new TargetItemOneWayCustomBinding<UIView, UIColor>(
+                viewReference,
+                (view, backgroundColor) => view.BackgroundColor = backgroundColor,
+                () => $"{nameof(UIView.BackgroundColor)}");
+        }
+
         public static TargetItemBinding<UIView, bool> EndEditingBinding(
             this IItemReference<UIView> viewReference)
         {

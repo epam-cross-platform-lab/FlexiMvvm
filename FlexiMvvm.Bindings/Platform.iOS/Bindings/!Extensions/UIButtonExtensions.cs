@@ -22,6 +22,31 @@ namespace FlexiMvvm.Bindings
 {
     public static class UIButtonExtensions
     {
+        public static TargetItemBinding<UIButton, bool> ReverseTitleShadowWhenHighlightedBinding(
+            this IItemReference<UIButton> buttonReference)
+        {
+            if (buttonReference == null)
+                throw new ArgumentNullException(nameof(buttonReference));
+
+            return new TargetItemOneWayCustomBinding<UIButton, bool>(
+                buttonReference,
+                (button, reverseTitleShadowWhenHighlighted) => button.ReverseTitleShadowWhenHighlighted = reverseTitleShadowWhenHighlighted,
+                () => $"{nameof(UIButton.ReverseTitleShadowWhenHighlighted)}");
+        }
+
+        public static TargetItemBinding<UIButton, UIImage> SetImageBinding(
+            this IItemReference<UIButton> buttonReference,
+            UIControlState forState = UIControlState.Normal)
+        {
+            if (buttonReference == null)
+                throw new ArgumentNullException(nameof(buttonReference));
+
+            return new TargetItemOneWayCustomBinding<UIButton, UIImage>(
+                buttonReference,
+                (button, image) => button.SetImage(image, forState),
+                () => $"{nameof(UIButton.SetImage)}");
+        }
+
         public static TargetItemBinding<UIButton, string> SetTitleBinding(
             this IItemReference<UIButton> buttonReference,
             UIControlState forState = UIControlState.Normal)
@@ -33,18 +58,6 @@ namespace FlexiMvvm.Bindings
                 buttonReference,
                 (button, title) => button.SetTitle(title, forState),
                 () => $"{nameof(UIButton.SetTitle)}");
-        }
-
-        public static TargetItemBinding<UIButton, bool> ReverseTitleShadowWhenHighlightedBinding(
-            this IItemReference<UIButton> buttonReference)
-        {
-            if (buttonReference == null)
-                throw new ArgumentNullException(nameof(buttonReference));
-
-            return new TargetItemOneWayCustomBinding<UIButton, bool>(
-                buttonReference,
-                (button, reverseTitleShadowWhenHighlighted) => button.ReverseTitleShadowWhenHighlighted = reverseTitleShadowWhenHighlighted,
-                () => $"{nameof(UIButton.ReverseTitleShadowWhenHighlighted)}");
         }
 
         public static TargetItemBinding<UIButton, bool> ShowsTouchWhenHighlightedBinding(
