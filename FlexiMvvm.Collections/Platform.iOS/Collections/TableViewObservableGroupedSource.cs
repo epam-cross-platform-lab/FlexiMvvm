@@ -90,10 +90,15 @@ namespace FlexiMvvm.Collections
                 var sectionHeaderCellReuseId = _sectionHeaderCellReuseIdFactory(group);
                 sectionHeaderCell = (TableViewObservableSectionHeaderFooterCell)tableView.DequeueReusableHeaderFooterView(sectionHeaderCellReuseId).NotNull();
 
+                PrepareViewForHeader(tableView, sectionHeaderCell, section);
                 sectionHeaderCell.Bind(ItemsContext, group);
             }
 
             return sectionHeaderCell;
+        }
+
+        public virtual void PrepareViewForHeader([NotNull] UITableView tableView, [NotNull] UIView headerView, nint section)
+        {
         }
 
         public override nfloat GetHeightForFooter([NotNull] UITableView tableView, nint section)
@@ -113,10 +118,15 @@ namespace FlexiMvvm.Collections
                 var sectionFooterCellReuseId = _sectionFooterCellReuseIdFactory(group);
                 sectionFooterCell = (TableViewObservableSectionHeaderFooterCell)tableView.DequeueReusableHeaderFooterView(sectionFooterCellReuseId).NotNull();
 
+                PrepareViewForFooter(tableView, sectionFooterCell, section);
                 sectionFooterCell.Bind(ItemsContext, group);
             }
 
             return sectionFooterCell;
+        }
+
+        public virtual void PrepareViewForFooter([NotNull] UITableView tableView, [NotNull] UIView footerView, nint section)
+        {
         }
 
         [CanBeNull]

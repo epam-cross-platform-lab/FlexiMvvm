@@ -90,9 +90,18 @@ namespace FlexiMvvm.Collections
                 sectionHeaderFooterCellReuseId,
                 indexPath).NotNull();
 
+            PrepareViewForSupplementaryElement(collectionView, sectionHeaderFooterCell, elementKind, indexPath);
             sectionHeaderFooterCell.Bind(ItemsContext, group);
 
             return sectionHeaderFooterCell;
+        }
+
+        public virtual void PrepareViewForSupplementaryElement(
+            [NotNull] UICollectionView collectionView,
+            [NotNull] UICollectionReusableView view,
+            [NotNull] NSString elementKind,
+            [NotNull] NSIndexPath indexPath)
+        {
         }
 
         [CanBeNull]

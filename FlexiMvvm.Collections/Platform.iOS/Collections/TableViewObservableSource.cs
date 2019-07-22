@@ -67,9 +67,14 @@ namespace FlexiMvvm.Collections
             var itemCellReuseId = _itemCellReuseIdFactory(item);
             var itemCell = (TableViewObservableItemCell)tableView.DequeueReusableCell(itemCellReuseId, indexPath).NotNull();
 
+            PrepareCell(tableView, itemCell, indexPath);
             itemCell.Bind(ItemsContext, item);
 
             return itemCell;
+        }
+
+        public virtual void PrepareCell([NotNull] UITableView tableView, [NotNull] UITableViewCell cell, [NotNull] NSIndexPath indexPath)
+        {
         }
 
         public override void RowSelected([NotNull] UITableView tableView, [NotNull] NSIndexPath indexPath)
