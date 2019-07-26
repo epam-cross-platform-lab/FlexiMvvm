@@ -59,10 +59,7 @@ namespace FlexiMvvm.Views
 
         protected override void SetupLayoutConstraints()
         {
-            base.SetupLayoutConstraints();
-
-            this.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
-            ScrollView.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
+            AllSubviewsDoNotTranslateAutoresizingMaskIntoConstraints(this, false);
 
             this.AddConstraints(
                 ScrollView.FullSizeOf(this));

@@ -87,11 +87,7 @@ namespace FlexiMvvm.Views
 
         protected override void SetupLayoutConstraints()
         {
-            this.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
-            ContentView.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
-            SafeAreaContentView.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
-            ContentOverlayView.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
-            SafeAreaContentOverlayView.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
+            AllSubviewsDoNotTranslateAutoresizingMaskIntoConstraints(this, false);
 
             this.AddConstraints(
                 ContentView.FullSizeOf(this));

@@ -84,11 +84,23 @@ namespace FlexiMvvm.Views
 
         protected virtual void SetupLayoutConstraints()
         {
-            this.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
-            ContentView.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
+            AllSubviewsDoNotTranslateAutoresizingMaskIntoConstraints(this, false);
 
             this.AddConstraints(
                 ContentView.FullSizeOf(this));
+        }
+
+        protected virtual void AllSubviewsDoNotTranslateAutoresizingMaskIntoConstraints(UIView view, bool includePassedView = true)
+        {
+            if (includePassedView && view.AutoresizingMask == UIViewAutoresizing.None)
+            {
+                view.TranslatesAutoresizingMaskIntoConstraints = false;
+            }
+
+            foreach (var subview in view.Subviews)
+            {
+                AllSubviewsDoNotTranslateAutoresizingMaskIntoConstraints(subview);
+            }
         }
     }
 }
