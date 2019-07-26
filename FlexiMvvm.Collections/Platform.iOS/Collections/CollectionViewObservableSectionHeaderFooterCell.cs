@@ -53,14 +53,31 @@ namespace FlexiMvvm.Collections
             Initialize();
         }
 
+        public virtual UIView View { get; set; }
+
         private void Initialize()
         {
             LoadView();
+
+            if (View != null && View.Superview == null)
+            {
+                AddSubview(View);
+                View.TranslatesAutoresizingMaskIntoConstraints = false;
+                NSLayoutConstraint.ActivateConstraints(new[]
+                {
+                    View.LeadingAnchor.ConstraintEqualTo(LeadingAnchor),
+                    View.TopAnchor.ConstraintEqualTo(TopAnchor),
+                    View.TrailingAnchor.ConstraintEqualTo(TrailingAnchor),
+                    View.BottomAnchor.ConstraintEqualTo(BottomAnchor)
+                });
+            }
+
             ViewDidLoad();
         }
 
         public virtual void LoadView()
         {
+            View = new UIView();
         }
 
         public virtual void ViewDidLoad()
