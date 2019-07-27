@@ -16,7 +16,6 @@
 
 using System;
 using System.Collections.Generic;
-using Cirrious.FluentLayouts.Touch;
 using CoreGraphics;
 using UIKit;
 
@@ -61,15 +60,18 @@ namespace FlexiMvvm.Views
         {
             AllSubviewsDoNotTranslateAutoresizingMaskIntoConstraints(this, false);
 
-            this.AddConstraints(
-                ScrollView.FullSizeOf(this));
+            ScrollView.LeadingAnchor.ConstraintEqualTo(LeadingAnchor).SetActive(true);
+            ScrollView.TopAnchor.ConstraintEqualTo(TopAnchor).SetActive(true);
+            ScrollView.TrailingAnchor.ConstraintEqualTo(TrailingAnchor).SetActive(true);
+            ScrollView.BottomAnchor.ConstraintEqualTo(BottomAnchor).SetActive(true);
 
-            ScrollView.AddConstraints(
-                ContentView.FullSizeOf(ScrollView));
+            ContentView.LeadingAnchor.ConstraintEqualTo(ScrollView.LeadingAnchor).SetActive(true);
+            ContentView.TopAnchor.ConstraintEqualTo(ScrollView.TopAnchor).SetActive(true);
+            ContentView.TrailingAnchor.ConstraintEqualTo(ScrollView.TrailingAnchor).SetActive(true);
+            ContentView.BottomAnchor.ConstraintEqualTo(ScrollView.BottomAnchor).SetActive(true);
 
-            this.AddConstraints(
-                ContentView.WithSameWidth(this),
-                ContentView.WithSameHeight(this).NotNull().SetPriority(UILayoutPriority.DefaultLow));
+            ContentView.WidthAnchor.ConstraintEqualTo(WidthAnchor).SetActive(true);
+            ContentView.HeightAnchor.ConstraintEqualTo(HeightAnchor).SetPriority(UILayoutPriority.DefaultLow).SetActive(true);
         }
     }
 }

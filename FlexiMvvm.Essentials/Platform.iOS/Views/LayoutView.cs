@@ -16,7 +16,8 @@
 
 using System;
 using System.Collections.Generic;
-using Cirrious.FluentLayouts.Touch;
+using System.Collections.ObjectModel;
+using System.Linq;
 using CoreGraphics;
 using UIKit;
 
@@ -25,6 +26,10 @@ namespace FlexiMvvm.Views
     public class LayoutView : UIView
     {
         private UIView? _contentView;
+        private ICollection<NSLayoutConstraint>? _regularWidthConstraints;
+        private ICollection<NSLayoutConstraint>? _regularHeightConstraints;
+        private ICollection<NSLayoutConstraint>? _compatWidthConstraints;
+        private ICollection<NSLayoutConstraint>? _compatHeightConstraints;
 
         public LayoutView()
         {
@@ -58,6 +63,14 @@ namespace FlexiMvvm.Views
 
         public UIView ContentView => _contentView ??= new LayoutSubview { EventCapturing = LayoutSubviewEventCapturing.Always };
 
+        public ICollection<NSLayoutConstraint> RegularWidthConstraints => _regularWidthConstraints ??= new Collection<NSLayoutConstraint>();
+
+        public ICollection<NSLayoutConstraint> RegularHeightConstraints => _regularHeightConstraints ??= new Collection<NSLayoutConstraint>();
+
+        public ICollection<NSLayoutConstraint> CompatWidthConstraints => _compatWidthConstraints ??= new Collection<NSLayoutConstraint>();
+
+        public ICollection<NSLayoutConstraint> CompatHeightConstraints => _compatHeightConstraints ??= new Collection<NSLayoutConstraint>();
+
         private void Initialize(IDictionary<string, object?>? layoutConfig)
         {
             LayoutConfig = layoutConfig;
@@ -86,8 +99,64 @@ namespace FlexiMvvm.Views
         {
             AllSubviewsDoNotTranslateAutoresizingMaskIntoConstraints(this, false);
 
-            this.AddConstraints(
-                ContentView.FullSizeOf(this));
+            ContentView.LeadingAnchor.ConstraintEqualTo(LeadingAnchor).SetActive(true);
+            ContentView.TopAnchor.ConstraintEqualTo(TopAnchor).SetActive(true);
+            ContentView.TrailingAnchor.ConstraintEqualTo(TrailingAnchor).SetActive(true);
+            ContentView.BottomAnchor.ConstraintEqualTo(BottomAnchor).SetActive(true);
+        }
+
+        public override void TraitCollectionDidChange(UITraitCollection previousTraitCollection)
+        {
+            base.TraitCollectionDidChange(previousTraitCollection);
+
+            if (TraitCollection.HorizontalSizeClass == UIUserInterfaceSizeClass.Regular)
+            {
+                if (_compatWidthConstraints != null)
+                {
+                    NSLayoutConstraint.DeactivateConstraints(_compatWidthConstraints.ToArray());
+                }
+
+                if (_regularWidthConstraints != null)
+                {
+                    NSLayoutConstraint.ActivateConstraints(_regularWidthConstraints.ToArray());
+                }
+            }
+            else if (TraitCollection.HorizontalSizeClass == UIUserInterfaceSizeClass.Compact)
+            {
+                if (_regularWidthConstraints != null)
+                {
+                    NSLayoutConstraint.DeactivateConstraints(_regularWidthConstraints.ToArray());
+                }
+
+                if (_compatWidthConstraints != null)
+                {
+                    NSLayoutConstraint.ActivateConstraints(_compatWidthConstraints.ToArray());
+                }
+            }
+            else if (TraitCollection.VerticalSizeClass == UIUserInterfaceSizeClass.Regular)
+            {
+                if (_compatHeightConstraints != null)
+                {
+                    NSLayoutConstraint.DeactivateConstraints(_compatHeightConstraints.ToArray());
+                }
+
+                if (_regularHeightConstraints != null)
+                {
+                    NSLayoutConstraint.ActivateConstraints(_regularHeightConstraints.ToArray());
+                }
+            }
+            else if (TraitCollection.VerticalSizeClass == UIUserInterfaceSizeClass.Compact)
+            {
+                if (_regularHeightConstraints != null)
+                {
+                    NSLayoutConstraint.DeactivateConstraints(_regularHeightConstraints.ToArray());
+                }
+
+                if (_compatHeightConstraints != null)
+                {
+                    NSLayoutConstraint.ActivateConstraints(_compatHeightConstraints.ToArray());
+                }
+            }
         }
 
         protected virtual void AllSubviewsDoNotTranslateAutoresizingMaskIntoConstraints(UIView view, bool includePassedView = true)

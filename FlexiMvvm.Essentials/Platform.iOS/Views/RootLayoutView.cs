@@ -15,7 +15,6 @@
 // =========================================================================
 
 using System.Collections.Generic;
-using Cirrious.FluentLayouts.Touch;
 using CoreGraphics;
 using UIKit;
 
@@ -26,14 +25,10 @@ namespace FlexiMvvm.Views
         private UIView? _safeAreaContentView;
         private UIView? _contentOverlayView;
         private UIView? _safeAreaContentOverlayView;
-        private FluentLayout? _safeAreaContentViewLeftConstraint;
-        private FluentLayout? _safeAreaContentViewTopConstraint;
-        private FluentLayout? _safeAreaContentViewRightConstraint;
-        private FluentLayout? _safeAreaContentViewBottomConstraint;
-        private FluentLayout? _safeAreaContentOverlayViewLeftConstraint;
-        private FluentLayout? _safeAreaContentOverlayViewTopConstraint;
-        private FluentLayout? _safeAreaContentOverlayViewRightConstraint;
-        private FluentLayout? _safeAreaContentOverlayViewBottomConstraint;
+        private NSLayoutConstraint? _safeAreaContentViewTopConstraint;
+        private NSLayoutConstraint? _safeAreaContentViewBottomConstraint;
+        private NSLayoutConstraint? _safeAreaContentOverlayViewTopConstraint;
+        private NSLayoutConstraint? _safeAreaContentOverlayViewBottomConstraint;
 
         public RootLayoutView()
         {
@@ -60,21 +55,17 @@ namespace FlexiMvvm.Views
 
         public UIView SafeAreaContentOverlayView => _safeAreaContentOverlayView ??= new LayoutSubview { EventCapturing = LayoutSubviewEventCapturing.Newer };
 
-        public FluentLayout SafeAreaContentViewLeftConstraint => _safeAreaContentViewLeftConstraint ??= SafeAreaContentView.AtLeftOfSafeArea(ContentView);
+        public NSLayoutConstraint SafeAreaContentViewTopConstraint =>
+            _safeAreaContentViewTopConstraint ??= SafeAreaContentView.TopAnchor.ConstraintEqualTo(ContentView.SafeAreaLayoutGuide.TopAnchor);
 
-        public FluentLayout SafeAreaContentViewTopConstraint => _safeAreaContentViewTopConstraint ??= SafeAreaContentView.AtTopOfSafeArea(ContentView);
+        public NSLayoutConstraint SafeAreaContentViewBottomConstraint =>
+            _safeAreaContentViewBottomConstraint ??= SafeAreaContentView.BottomAnchor.ConstraintEqualTo(ContentView.SafeAreaLayoutGuide.BottomAnchor);
 
-        public FluentLayout SafeAreaContentViewRightConstraint => _safeAreaContentViewRightConstraint ??= SafeAreaContentView.AtRightOfSafeArea(ContentView);
+        public NSLayoutConstraint SafeAreaContentOverlayViewTopConstraint =>
+            _safeAreaContentOverlayViewTopConstraint ??= SafeAreaContentOverlayView.TopAnchor.ConstraintEqualTo(ContentOverlayView.SafeAreaLayoutGuide.TopAnchor);
 
-        public FluentLayout SafeAreaContentViewBottomConstraint => _safeAreaContentViewBottomConstraint ??= SafeAreaContentView.AtBottomOfSafeArea(ContentView);
-
-        public FluentLayout SafeAreaContentOverlayViewLeftConstraint => _safeAreaContentOverlayViewLeftConstraint ??= SafeAreaContentOverlayView.AtLeftOfSafeArea(ContentOverlayView);
-
-        public FluentLayout SafeAreaContentOverlayViewTopConstraint => _safeAreaContentOverlayViewTopConstraint ??= SafeAreaContentOverlayView.AtTopOfSafeArea(ContentOverlayView);
-
-        public FluentLayout SafeAreaContentOverlayViewRightConstraint => _safeAreaContentOverlayViewRightConstraint ??= SafeAreaContentOverlayView.AtRightOfSafeArea(ContentOverlayView);
-
-        public FluentLayout SafeAreaContentOverlayViewBottomConstraint => _safeAreaContentOverlayViewBottomConstraint ??= SafeAreaContentOverlayView.AtBottomOfSafeArea(ContentOverlayView);
+        public NSLayoutConstraint SafeAreaContentOverlayViewBottomConstraint =>
+            _safeAreaContentOverlayViewBottomConstraint ??= SafeAreaContentOverlayView.BottomAnchor.ConstraintEqualTo(ContentOverlayView.SafeAreaLayoutGuide.BottomAnchor);
 
         protected override void SetupLayout()
         {
@@ -89,23 +80,25 @@ namespace FlexiMvvm.Views
         {
             AllSubviewsDoNotTranslateAutoresizingMaskIntoConstraints(this, false);
 
-            this.AddConstraints(
-                ContentView.FullSizeOf(this));
+            ContentView.LeadingAnchor.ConstraintEqualTo(LeadingAnchor).SetActive(true);
+            ContentView.TopAnchor.ConstraintEqualTo(TopAnchor).SetActive(true);
+            ContentView.TrailingAnchor.ConstraintEqualTo(TrailingAnchor).SetActive(true);
+            ContentView.BottomAnchor.ConstraintEqualTo(BottomAnchor).SetActive(true);
 
-            ContentView.AddConstraints(
-                SafeAreaContentViewLeftConstraint,
-                SafeAreaContentViewTopConstraint,
-                SafeAreaContentViewRightConstraint,
-                SafeAreaContentViewBottomConstraint);
+            SafeAreaContentView.LeadingAnchor.ConstraintEqualTo(ContentView.SafeAreaLayoutGuide.LeadingAnchor).SetActive(true);
+            SafeAreaContentViewTopConstraint.SetActive(true);
+            SafeAreaContentView.TrailingAnchor.ConstraintEqualTo(ContentView.SafeAreaLayoutGuide.TrailingAnchor).SetActive(true);
+            SafeAreaContentViewBottomConstraint.SetActive(true);
 
-            this.AddConstraints(
-                ContentOverlayView.FullSizeOf(this));
+            ContentOverlayView.LeadingAnchor.ConstraintEqualTo(LeadingAnchor).SetActive(true);
+            ContentOverlayView.TopAnchor.ConstraintEqualTo(TopAnchor).SetActive(true);
+            ContentOverlayView.TrailingAnchor.ConstraintEqualTo(TrailingAnchor).SetActive(true);
+            ContentOverlayView.BottomAnchor.ConstraintEqualTo(BottomAnchor).SetActive(true);
 
-            ContentOverlayView.AddConstraints(
-                SafeAreaContentOverlayViewLeftConstraint,
-                SafeAreaContentOverlayViewTopConstraint,
-                SafeAreaContentOverlayViewRightConstraint,
-                SafeAreaContentOverlayViewBottomConstraint);
+            SafeAreaContentOverlayView.LeadingAnchor.ConstraintEqualTo(ContentOverlayView.SafeAreaLayoutGuide.LeadingAnchor).SetActive(true);
+            SafeAreaContentOverlayViewTopConstraint.SetActive(true);
+            SafeAreaContentOverlayView.TrailingAnchor.ConstraintEqualTo(ContentOverlayView.SafeAreaLayoutGuide.TrailingAnchor).SetActive(true);
+            SafeAreaContentOverlayViewBottomConstraint.SetActive(true);
         }
     }
 }
