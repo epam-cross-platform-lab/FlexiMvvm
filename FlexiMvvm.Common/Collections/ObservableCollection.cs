@@ -137,6 +137,31 @@ namespace FlexiMvvm.Collections
                 OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, newItems, replacedItems, startIndex));
             }
         }
+
+        public void ReplaceWith(IEnumerable<TItem> items)
+        {
+            if (items == null)
+                throw new ArgumentNullException(nameof(items));
+
+            CheckReentrancy();
+
+            var newItems = items.ToList().NotNull();
+            var existingItems = Items.NotNull();
+
+            if (newItems.Any() || existingItems.Any())
+            {
+                existingItems.Clear();
+
+                foreach (var newItem in newItems)
+                {
+                    existingItems.Add(newItem);
+                }
+
+                OnPropertyChanged(new PropertyChangedEventArgs(CountString));
+                OnPropertyChanged(new PropertyChangedEventArgs(IndexerName));
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            }
+        }
     }
 
     public class ObservableCollection<TGroup, TItem> : ObservableCollection<TItem>, IGrouping<TGroup, TItem>
