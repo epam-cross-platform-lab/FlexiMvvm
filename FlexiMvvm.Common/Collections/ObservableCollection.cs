@@ -115,10 +115,22 @@ namespace FlexiMvvm.Collections
 
                 foreach (var newItem in newItems)
                 {
-                    replacedItems.Add(existingItems[currentIndex]);
-                    existingItems[currentIndex] = newItem;
+                    if (currentIndex < existingItems.Count)
+                    {
+                        replacedItems.Add(existingItems[currentIndex]);
+                        existingItems[currentIndex] = newItem;
+                    }
+                    else
+                    {
+                        existingItems.Insert(currentIndex, newItem);
+                    }
 
                     currentIndex++;
+                }
+
+                if (newItems.Count != replacedItems.Count)
+                {
+                    OnPropertyChanged(new PropertyChangedEventArgs(CountString));
                 }
 
                 OnPropertyChanged(new PropertyChangedEventArgs(IndexerName));
