@@ -14,17 +14,17 @@
 // limitations under the License.
 // =========================================================================
 
-using System;
 using System.Collections.Generic;
 using CoreGraphics;
 using UIKit;
 
 namespace FlexiMvvm.Views
 {
-    [Obsolete("ScrollableLayoutView will be removed soon. Use RootScrollableLayoutView class instead.")]
     public class ScrollableLayoutView : LayoutView
     {
         private UIScrollView? _scrollView;
+        private NSLayoutConstraint? _contentViewWidthConstraint;
+        private NSLayoutConstraint? _contentViewHeightConstraint;
 
         public ScrollableLayoutView()
         {
@@ -45,15 +45,34 @@ namespace FlexiMvvm.Views
         {
         }
 
-        public UIScrollView ScrollView => _scrollView ??= new UIScrollView();
+        public virtual UIScrollView ScrollView => _scrollView ??= new UIScrollView();
+
+        public virtual NSLayoutConstraint ContentViewWidthConstraint
+        {
+            get
+            {
+                return _contentViewWidthConstraint ??= UIDevice.CurrentDevice.CheckSystemVersion(11, 0)
+                    ? ContentView.WidthAnchor.ConstraintEqualTo(SafeAreaLayoutGuide.WidthAnchor)
+                    : ContentView.WidthAnchor.ConstraintEqualTo(WidthAnchor);
+            }
+        }
+
+        public virtual NSLayoutConstraint ContentViewHeightConstraint
+        {
+            get
+            {
+                return _contentViewHeightConstraint ??= UIDevice.CurrentDevice.CheckSystemVersion(11, 0)
+                    ? ContentView.HeightAnchor.ConstraintEqualTo(SafeAreaLayoutGuide.HeightAnchor).SetPriority(UILayoutPriority.DefaultLow)
+                    : ContentView.HeightAnchor.ConstraintEqualTo(HeightAnchor).SetPriority(UILayoutPriority.DefaultLow);
+            }
+        }
 
         protected override void SetupLayout()
         {
-            base.SetupLayout();
-
             this
                 .AddLayoutSubview(ScrollView
-                    .AddLayoutSubview(ContentView));
+                    .AddLayoutSubview(ContentView))
+                .AddLayoutSubview(ContentOverlayView);
         }
 
         protected override void SetupLayoutConstraints()
@@ -70,8 +89,13 @@ namespace FlexiMvvm.Views
             ContentView.TrailingAnchor.ConstraintEqualTo(ScrollView.TrailingAnchor).SetActive(true);
             ContentView.BottomAnchor.ConstraintEqualTo(ScrollView.BottomAnchor).SetActive(true);
 
-            ContentView.WidthAnchor.ConstraintEqualTo(WidthAnchor).SetActive(true);
-            ContentView.HeightAnchor.ConstraintEqualTo(HeightAnchor).SetPriority(UILayoutPriority.DefaultLow).SetActive(true);
+            ContentViewWidthConstraint.SetActive(true);
+            ContentViewHeightConstraint.SetActive(true);
+
+            ContentOverlayView.LeadingAnchor.ConstraintEqualTo(LeadingAnchor).SetActive(true);
+            ContentOverlayView.TopAnchor.ConstraintEqualTo(TopAnchor).SetActive(true);
+            ContentOverlayView.TrailingAnchor.ConstraintEqualTo(TrailingAnchor).SetActive(true);
+            ContentOverlayView.BottomAnchor.ConstraintEqualTo(BottomAnchor).SetActive(true);
         }
     }
 }

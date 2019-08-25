@@ -26,6 +26,7 @@ namespace FlexiMvvm.Views
     public class LayoutView : UIView
     {
         private UIView? _contentView;
+        private UIView? _contentOverlayView;
         private ICollection<NSLayoutConstraint>? _regularWidthConstraints;
         private ICollection<NSLayoutConstraint>? _regularHeightConstraints;
         private ICollection<NSLayoutConstraint>? _compatWidthConstraints;
@@ -61,7 +62,9 @@ namespace FlexiMvvm.Views
 
         protected IDictionary<string, object?>? LayoutConfig { get; private set; }
 
-        public UIView ContentView => _contentView ??= new LayoutSubview { EventCapturing = LayoutSubviewEventCapturing.Always };
+        public virtual UIView ContentView => _contentView ??= new LayoutSubview { EventCapturing = LayoutSubviewEventCapturing.Always };
+
+        public virtual UIView ContentOverlayView => _contentOverlayView ??= new LayoutSubview { EventCapturing = LayoutSubviewEventCapturing.Newer };
 
         public ICollection<NSLayoutConstraint> RegularWidthConstraints => _regularWidthConstraints ??= new Collection<NSLayoutConstraint>();
 
@@ -92,7 +95,8 @@ namespace FlexiMvvm.Views
         protected virtual void SetupLayout()
         {
             this
-                .AddLayoutSubview(ContentView);
+                .AddLayoutSubview(ContentView)
+                .AddLayoutSubview(ContentOverlayView);
         }
 
         protected virtual void SetupLayoutConstraints()
@@ -103,6 +107,11 @@ namespace FlexiMvvm.Views
             ContentView.TopAnchor.ConstraintEqualTo(TopAnchor).SetActive(true);
             ContentView.TrailingAnchor.ConstraintEqualTo(TrailingAnchor).SetActive(true);
             ContentView.BottomAnchor.ConstraintEqualTo(BottomAnchor).SetActive(true);
+
+            ContentOverlayView.LeadingAnchor.ConstraintEqualTo(LeadingAnchor).SetActive(true);
+            ContentOverlayView.TopAnchor.ConstraintEqualTo(TopAnchor).SetActive(true);
+            ContentOverlayView.TrailingAnchor.ConstraintEqualTo(TrailingAnchor).SetActive(true);
+            ContentOverlayView.BottomAnchor.ConstraintEqualTo(BottomAnchor).SetActive(true);
         }
 
         public override void TraitCollectionDidChange(UITraitCollection previousTraitCollection)

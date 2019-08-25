@@ -29,8 +29,6 @@ namespace FlexiMvvm.Views
 
             switch (EventCapturing)
             {
-                case LayoutSubviewEventCapturing.WhenHasSubviews:
-                    return Equals(result) && Subviews.Length == 0 ? null : result;
                 case LayoutSubviewEventCapturing.Newer:
                     return Equals(result) ? null : result;
                 default:

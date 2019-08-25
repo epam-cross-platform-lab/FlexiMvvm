@@ -20,8 +20,6 @@ namespace FlexiMvvm.Views
     {
         Always,
 
-        WhenHasSubviews,
-
         Newer
     }
 }
