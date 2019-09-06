@@ -142,7 +142,8 @@ namespace FlexiMvvm.Views
                     NSLayoutConstraint.ActivateConstraints(_compatWidthConstraints.ToArray());
                 }
             }
-            else if (TraitCollection.VerticalSizeClass == UIUserInterfaceSizeClass.Regular)
+
+            if (TraitCollection.VerticalSizeClass == UIUserInterfaceSizeClass.Regular)
             {
                 if (_compatHeightConstraints != null)
                 {

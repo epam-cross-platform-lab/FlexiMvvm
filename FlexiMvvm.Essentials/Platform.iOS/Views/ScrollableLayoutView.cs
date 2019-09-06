@@ -51,9 +51,7 @@ namespace FlexiMvvm.Views
         {
             get
             {
-                return _contentViewWidthConstraint ??= UIDevice.CurrentDevice.CheckSystemVersion(11, 0)
-                    ? ContentView.WidthAnchor.ConstraintEqualTo(SafeAreaLayoutGuide.WidthAnchor)
-                    : ContentView.WidthAnchor.ConstraintEqualTo(WidthAnchor);
+                return _contentViewWidthConstraint ??= ContentView.WidthAnchor.ConstraintEqualTo(WidthAnchor);
             }
         }
 
