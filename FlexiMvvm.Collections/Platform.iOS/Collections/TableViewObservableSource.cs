@@ -60,6 +60,16 @@ namespace FlexiMvvm.Collections
         [ItemNotNull]
         private protected DisposableCollection ItemsSubscriptions => _itemsSubscriptions ?? (_itemsSubscriptions = new DisposableCollection());
 
+        public override nfloat GetHeightForRow([NotNull] UITableView tableView, [NotNull] NSIndexPath indexPath)
+        {
+            return UITableView.AutomaticDimension;
+        }
+
+        public override nfloat EstimatedHeight([NotNull] UITableView tableView, [NotNull] NSIndexPath indexPath)
+        {
+            return UITableView.AutomaticDimension;
+        }
+
         [NotNull]
         public override UITableViewCell GetCell([NotNull] UITableView tableView, [NotNull] NSIndexPath indexPath)
         {
