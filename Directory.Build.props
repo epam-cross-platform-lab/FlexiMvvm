@@ -15,6 +15,9 @@
         <Nullable>enable</Nullable>
         <Configurations>Debug;Release</Configurations>
     </PropertyGroup>
+    <PropertyGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
+        <AndroidUseIntermediateDesignerFile>false</AndroidUseIntermediateDesignerFile>
+    </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)'=='Release' ">
         <DebugType>portable</DebugType>
         <IncludeSymbols>true</IncludeSymbols>
