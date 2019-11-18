@@ -14,7 +14,6 @@
 // limitations under the License.
 // =========================================================================
 
-using System.Collections.Generic;
 using CoreGraphics;
 using UIKit;
 
@@ -30,8 +29,8 @@ namespace FlexiMvvm.Views
         {
         }
 
-        public ScrollableLayoutView(IDictionary<string, object?> layoutConfig)
-            : base(layoutConfig)
+        public ScrollableLayoutView(LayoutViewConfig config)
+            : base(config)
         {
         }
 
@@ -40,8 +39,8 @@ namespace FlexiMvvm.Views
         {
         }
 
-        public ScrollableLayoutView(CGRect frame, IDictionary<string, object?> layoutConfig)
-            : base(frame, layoutConfig)
+        public ScrollableLayoutView(CGRect frame, LayoutViewConfig config)
+            : base(frame, config)
         {
         }
 
@@ -95,5 +94,20 @@ namespace FlexiMvvm.Views
             ContentOverlayView.TrailingAnchor.ConstraintEqualTo(TrailingAnchor).SetActive(true);
             ContentOverlayView.BottomAnchor.ConstraintEqualTo(BottomAnchor).SetActive(true);
         }
+    }
+
+    public class ScrollableLayoutView<TTheme> : ScrollableLayoutView
+    {
+        public ScrollableLayoutView(LayoutViewConfig<TTheme> config)
+            : base(config)
+        {
+        }
+
+        public ScrollableLayoutView(CGRect frame, LayoutViewConfig<TTheme> config)
+            : base(frame, config)
+        {
+        }
+
+        public TTheme Theme => Config.GetTheme<TTheme>();
     }
 }

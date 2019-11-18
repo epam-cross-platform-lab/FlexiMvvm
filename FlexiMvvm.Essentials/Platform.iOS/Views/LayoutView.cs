@@ -34,33 +34,35 @@ namespace FlexiMvvm.Views
 
         public LayoutView()
         {
-            Initialize(null);
+            Config = LayoutViewConfig.Empty;
+
+            Initialize();
         }
 
-        public LayoutView(IDictionary<string, object?> layoutConfig)
+        public LayoutView(LayoutViewConfig config)
         {
-            if (layoutConfig == null)
-                throw new ArgumentNullException(nameof(layoutConfig));
+            Config = config ?? throw new ArgumentNullException(nameof(config));
 
-            Initialize(layoutConfig);
+            Initialize();
         }
 
         public LayoutView(CGRect frame)
             : base(frame)
         {
-            Initialize(null);
+            Config = LayoutViewConfig.Empty;
+
+            Initialize();
         }
 
-        public LayoutView(CGRect frame, IDictionary<string, object?> layoutConfig)
+        public LayoutView(CGRect frame, LayoutViewConfig config)
             : base(frame)
         {
-            if (layoutConfig == null)
-                throw new ArgumentNullException(nameof(layoutConfig));
+            Config = config ?? throw new ArgumentNullException(nameof(config));
 
-            Initialize(layoutConfig);
+            Initialize();
         }
 
-        protected IDictionary<string, object?>? LayoutConfig { get; private set; }
+        protected LayoutViewConfig Config { get; }
 
         public virtual UIView ContentView => _contentView ??= new LayoutSubview { EventCapturing = LayoutSubviewEventCapturing.Always };
 
@@ -74,10 +76,8 @@ namespace FlexiMvvm.Views
 
         public ICollection<NSLayoutConstraint> CompatHeightConstraints => _compatHeightConstraints ??= new Collection<NSLayoutConstraint>();
 
-        private void Initialize(IDictionary<string, object?>? layoutConfig)
+        private void Initialize()
         {
-            LayoutConfig = layoutConfig;
-
             SetupSubviews();
             SetupSubviewsConstraints();
             SetupLayout();
@@ -181,5 +181,20 @@ namespace FlexiMvvm.Views
                 AllSubviewsDoNotTranslateAutoresizingMaskIntoConstraints(subview);
             }
         }
+    }
+
+    public class LayoutView<TTheme> : LayoutView
+    {
+        public LayoutView(LayoutViewConfig<TTheme> config)
+            : base(config)
+        {
+        }
+
+        public LayoutView(CGRect frame, LayoutViewConfig<TTheme> config)
+            : base(frame, config)
+        {
+        }
+
+        public TTheme Theme => Config.GetTheme<TTheme>();
     }
 }
