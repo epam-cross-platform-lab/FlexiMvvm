@@ -107,7 +107,7 @@ namespace FlexiMvvm.Collections.Core
 
             while (i < section)
             {
-                if (ItemsMap[++offset].ItemKind == ItemKind.SectionFooter)
+                if (ItemsMap[offset++].ItemKind == ItemKind.SectionFooter)
                 {
                     i++;
                 }
