@@ -15,13 +15,13 @@
 // =========================================================================
 
 using System;
-using FlexiMvvm.Collections;
+using System.Collections.Generic;
 
 namespace FlexiMvvm
 {
     public static class DisposableExtensions
     {
-        public static void DisposeWith(this IDisposable disposable, DisposableCollection collection)
+        public static void DisposeWith(this IDisposable disposable, ICollection<IDisposable> collection)
         {
             if (disposable == null)
                 throw new ArgumentNullException(nameof(disposable));
