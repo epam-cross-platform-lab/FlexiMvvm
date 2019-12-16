@@ -22,6 +22,7 @@ namespace FlexiMvvm.Bindings
 {
     public static class RecyclerViewObservableAdapterExtensions
     {
+        [Obsolete("Use ItemSelectedBinding and ItemDeselectedBinding methods instead.")]
         public static TargetItemBinding<RecyclerViewObservableAdapter, object> ItemClickedBinding(
             this IItemReference<RecyclerViewObservableAdapter> recyclerViewAdapterReference)
         {
@@ -35,6 +36,36 @@ namespace FlexiMvvm.Bindings
                 (recyclerViewAdapter, canExecuteCommand) => { },
                 (recyclerViewAdapter, args) => args.Item,
                 () => $"{nameof(RecyclerViewObservableAdapter.ItemClicked)}");
+        }
+
+        public static TargetItemBinding<RecyclerViewObservableAdapter, object> ItemSelectedBinding(
+            this IItemReference<RecyclerViewObservableAdapter> recyclerViewAdapterReference)
+        {
+            if (recyclerViewAdapterReference == null)
+                throw new ArgumentNullException(nameof(recyclerViewAdapterReference));
+
+            return new TargetItemOneWayToSourceCustomBinding<RecyclerViewObservableAdapter, object, SelectionChangedEventArgs>(
+                recyclerViewAdapterReference,
+                (recyclerViewAdapter, handler) => recyclerViewAdapter.ItemSelected += handler,
+                (recyclerViewAdapter, handler) => recyclerViewAdapter.ItemSelected -= handler,
+                (recyclerViewAdapter, canExecuteCommand) => { },
+                (recyclerViewAdapter, args) => args.Item,
+                () => $"{nameof(RecyclerViewObservableAdapter.ItemSelected)}");
+        }
+
+        public static TargetItemBinding<RecyclerViewObservableAdapter, object> ItemDeselectedBinding(
+            this IItemReference<RecyclerViewObservableAdapter> recyclerViewAdapterReference)
+        {
+            if (recyclerViewAdapterReference == null)
+                throw new ArgumentNullException(nameof(recyclerViewAdapterReference));
+
+            return new TargetItemOneWayToSourceCustomBinding<RecyclerViewObservableAdapter, object, SelectionChangedEventArgs>(
+                recyclerViewAdapterReference,
+                (recyclerViewAdapter, handler) => recyclerViewAdapter.ItemDeselected += handler,
+                (recyclerViewAdapter, handler) => recyclerViewAdapter.ItemDeselected -= handler,
+                (recyclerViewAdapter, canExecuteCommand) => { },
+                (recyclerViewAdapter, args) => args.Item,
+                () => $"{nameof(RecyclerViewObservableAdapter.ItemDeselected)}");
         }
     }
 }

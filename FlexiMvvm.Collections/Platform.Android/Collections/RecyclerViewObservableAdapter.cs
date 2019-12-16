@@ -37,7 +37,12 @@ namespace FlexiMvvm.Collections
             RecyclerView = recyclerView ?? throw new ArgumentNullException(nameof(recyclerView));
         }
 
+        [Obsolete("Use ItemSelected and ItemDeselected events instead.")]
         public event EventHandler<SelectionChangedEventArgs> ItemClicked;
+
+        public event EventHandler<SelectionChangedEventArgs> ItemSelected;
+
+        public event EventHandler<SelectionChangedEventArgs> ItemDeselected;
 
         [CanBeNull]
         public object ItemsContext { get; set; }
@@ -209,11 +214,24 @@ namespace FlexiMvvm.Collections
             }
         }
 
-        private void ItemView_Click([NotNull] object sender, [NotNull] EventArgs e)
+        private void ItemView_Click(object sender, EventArgs e)
         {
-            var position = RecyclerView.GetChildAdapterPosition((View)sender);
+            var itemView = (View)sender;
+            var itemPosition = RecyclerView.GetChildAdapterPosition(itemView);
+            var args = new SelectionChangedEventArgs(GetItemMap(itemPosition).Item);
 
-            ItemClicked?.Invoke(this, new SelectionChangedEventArgs(GetItemMap(position).Item));
+            itemView.Selected = !itemView.Selected;
+
+            ItemClicked?.Invoke(this, args);
+
+            if (itemView.Selected)
+            {
+                ItemSelected?.Invoke(this, args);
+            }
+            else
+            {
+                ItemDeselected?.Invoke(this, args);
+            }
         }
     }
 }
