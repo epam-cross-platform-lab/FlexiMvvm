@@ -111,7 +111,7 @@ namespace FlexiMvvm.Collections.Core
 
             foreach (IGrouping<object, object> itemsGroup in groupedItems)
             {
-                length += SectionHeaderCount + itemsGroup?.Count() ?? 0 + SectionFooterCount;
+                length += SectionHeaderCount + (itemsGroup?.Count() ?? 0) + SectionFooterCount;
             }
 
             return length;
