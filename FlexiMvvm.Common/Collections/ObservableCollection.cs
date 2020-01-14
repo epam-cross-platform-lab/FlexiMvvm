@@ -41,7 +41,7 @@ namespace FlexiMvvm.Collections
             if (items == null)
                 throw new ArgumentNullException(nameof(items));
 
-            var startIndex = Items.NotNull().Count;
+            var startIndex = Items.Count;
 
             InsertRange(startIndex, items);
         }
@@ -53,13 +53,13 @@ namespace FlexiMvvm.Collections
 
             CheckReentrancy();
 
-            var newItems = items.ToList().NotNull();
+            var newItems = items.ToList();
 
             if (newItems.Any())
             {
                 var startIndex = index;
                 var currentIndex = startIndex;
-                var existingItems = Items.NotNull();
+                var existingItems = Items;
 
                 foreach (var newItem in newItems)
                 {
@@ -81,7 +81,7 @@ namespace FlexiMvvm.Collections
             var startIndex = index;
             var currentIndex = startIndex;
             var endIndex = startIndex + count;
-            var existingItems = Items.NotNull();
+            var existingItems = Items;
             var removedItems = new List<TItem>();
 
             while (currentIndex < endIndex)
@@ -104,13 +104,13 @@ namespace FlexiMvvm.Collections
 
             CheckReentrancy();
 
-            var newItems = items.ToList().NotNull();
+            var newItems = items.ToList();
 
             if (newItems.Any())
             {
                 var startIndex = index;
                 var currentIndex = startIndex;
-                var existingItems = Items.NotNull();
+                var existingItems = Items;
                 var replacedItems = new List<TItem>();
 
                 foreach (var newItem in newItems)
@@ -145,8 +145,8 @@ namespace FlexiMvvm.Collections
 
             CheckReentrancy();
 
-            var newItems = items.ToList().NotNull();
-            var existingItems = Items.NotNull();
+            var newItems = items.ToList();
+            var existingItems = Items;
 
             if (newItems.Any() || existingItems.Any())
             {
@@ -164,6 +164,19 @@ namespace FlexiMvvm.Collections
         }
     }
 
+    public class ObservableCollection : ObservableCollection<object?>
+    {
+        public ObservableCollection()
+        {
+        }
+
+        public ObservableCollection(IEnumerable<object?> items)
+            : base(items)
+        {
+        }
+    }
+
+    [Obsolete("ObservableCollection<TGroup, TItem> will be removed soon. Use GroupingObservableCollection<TKey, TItem> instead.")]
     public class ObservableCollection<TGroup, TItem> : ObservableCollection<TItem>, IGrouping<TGroup, TItem>
     {
         public ObservableCollection(TGroup key)
