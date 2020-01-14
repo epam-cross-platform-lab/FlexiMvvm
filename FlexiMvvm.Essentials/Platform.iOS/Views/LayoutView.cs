@@ -195,6 +195,8 @@ namespace FlexiMvvm.Views
         {
         }
 
+        protected new LayoutViewConfig<TTheme> Config => (LayoutViewConfig<TTheme>)base.Config;
+
         public TTheme Theme => Config.GetTheme<TTheme>();
     }
 }
