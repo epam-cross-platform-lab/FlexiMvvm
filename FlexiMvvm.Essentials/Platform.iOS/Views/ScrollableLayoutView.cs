@@ -17,7 +17,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Cirrious.FluentLayouts.Touch;
 using CoreGraphics;
-using JetBrains.Annotations;
 using UIKit;
 
 namespace FlexiMvvm.Views
@@ -34,10 +33,10 @@ namespace FlexiMvvm.Views
         {
         }
 
-        [NotNull]
+        [JetBrains.Annotations.NotNull]
         public UIScrollView ScrollView { get; private set; }
 
-        [NotNull]
+        [JetBrains.Annotations.NotNull]
         public UIView ContentView { get; private set; }
 
         protected override void SetupSubviews()

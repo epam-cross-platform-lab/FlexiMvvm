@@ -12,8 +12,11 @@
         <Copyright>EPAM Systems, Inc.</Copyright>
         <LangVersion>8.0</LangVersion>
         <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
-        <NullableContextOptions>enable</NullableContextOptions>
+        <Nullable>enable</Nullable>
         <Configurations>Debug;Release</Configurations>
+    </PropertyGroup>
+    <PropertyGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
+        <AndroidUseIntermediateDesignerFile>false</AndroidUseIntermediateDesignerFile>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)'=='Release' ">
         <DebugType>portable</DebugType>
