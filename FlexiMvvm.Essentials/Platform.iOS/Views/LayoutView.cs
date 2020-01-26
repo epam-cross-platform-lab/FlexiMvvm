@@ -15,11 +15,10 @@
 // =========================================================================
 
 using CoreGraphics;
-using UIKit;
 
 namespace FlexiMvvm.Views
 {
-    public class LayoutView : UIView
+    public class LayoutView : LayoutViewBase
     {
         public LayoutView()
         {
@@ -32,28 +31,43 @@ namespace FlexiMvvm.Views
             Initialize();
         }
 
-        private void Initialize()
+        protected override void SetupLayout()
         {
-            SetupSubviews();
-            SetupSubviewsConstraints();
-            SetupLayout();
-            SetupLayoutConstraints();
+            LayoutViewSetup.SetupNonScrollableLayout(this, ContentView, ContentOverlayView);
         }
 
-        protected virtual void SetupSubviews()
+        protected override void SetupLayoutConstraints()
         {
+            AllSubviewsDoNotTranslateAutoresizingMaskIntoConstraints(this);
+
+            LayoutViewSetup.SetupNonScrollableLayoutConstraints(this, ContentView, ContentOverlayView);
+        }
+    }
+
+    public class LayoutView<TConfig> : LayoutViewBase<TConfig>
+    {
+        public LayoutView(TConfig config)
+            : base(config)
+        {
+            Initialize();
         }
 
-        protected virtual void SetupSubviewsConstraints()
+        public LayoutView(TConfig config, CGRect frame)
+            : base(config, frame)
         {
+            Initialize();
         }
 
-        protected virtual void SetupLayout()
+        protected override void SetupLayout()
         {
+            LayoutViewSetup.SetupNonScrollableLayout(this, ContentView, ContentOverlayView);
         }
 
-        protected virtual void SetupLayoutConstraints()
+        protected override void SetupLayoutConstraints()
         {
+            AllSubviewsDoNotTranslateAutoresizingMaskIntoConstraints(this);
+
+            LayoutViewSetup.SetupNonScrollableLayoutConstraints(this, ContentView, ContentOverlayView);
         }
     }
 }

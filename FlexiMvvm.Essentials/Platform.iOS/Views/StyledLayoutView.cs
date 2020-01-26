@@ -14,69 +14,73 @@
 // limitations under the License.
 // =========================================================================
 
+using System;
 using CoreGraphics;
-using UIKit;
 
 namespace FlexiMvvm.Views
 {
-    public class ScrollableLayoutView : LayoutViewBase
+    public class StyledLayoutView<TTheme> : LayoutViewBase
     {
-        private UIScrollView? _scrollView;
-
-        public ScrollableLayoutView()
+        public StyledLayoutView(TTheme theme)
         {
+            Theme = theme ?? throw new ArgumentNullException(nameof(theme));
+
             Initialize();
         }
 
-        public ScrollableLayoutView(CGRect frame)
+        public StyledLayoutView(TTheme theme, CGRect frame)
             : base(frame)
         {
+            Theme = theme ?? throw new ArgumentNullException(nameof(theme));
+
             Initialize();
         }
 
-        public virtual UIScrollView ScrollView => _scrollView ??= new UIScrollView();
+        public TTheme Theme { get; }
 
         protected override void SetupLayout()
         {
-            LayoutViewSetup.SetupScrollableLayout(this, ScrollView, ContentView, ContentOverlayView);
+            LayoutViewSetup.SetupNonScrollableLayout(this, ContentView, ContentOverlayView);
         }
 
         protected override void SetupLayoutConstraints()
         {
             AllSubviewsDoNotTranslateAutoresizingMaskIntoConstraints(this);
 
-            LayoutViewSetup.SetupScrollableLayoutConstraints(this, ScrollView, ContentView, ContentOverlayView);
+            LayoutViewSetup.SetupNonScrollableLayoutConstraints(this, ContentView, ContentOverlayView);
         }
     }
 
-    public class ScrollableLayoutView<TConfig> : LayoutViewBase<TConfig>
+    public class StyledLayoutView<TTheme, TConfig> : LayoutViewBase<TConfig>
     {
-        private UIScrollView? _scrollView;
-
-        public ScrollableLayoutView(TConfig config)
+        public StyledLayoutView(TTheme theme, TConfig config)
             : base(config)
         {
+            Theme = theme ?? throw new ArgumentNullException(nameof(theme));
+
             Initialize();
         }
 
-        public ScrollableLayoutView(TConfig config, CGRect frame)
+        public StyledLayoutView(TTheme theme, TConfig config, CGRect frame)
             : base(config, frame)
         {
+            Theme = theme ?? throw new ArgumentNullException(nameof(theme));
+
             Initialize();
         }
 
-        public virtual UIScrollView ScrollView => _scrollView ??= new UIScrollView();
+        public TTheme Theme { get; }
 
         protected override void SetupLayout()
         {
-            LayoutViewSetup.SetupScrollableLayout(this, ScrollView, ContentView, ContentOverlayView);
+            LayoutViewSetup.SetupNonScrollableLayout(this, ContentView, ContentOverlayView);
         }
 
         protected override void SetupLayoutConstraints()
         {
             AllSubviewsDoNotTranslateAutoresizingMaskIntoConstraints(this);
 
-            LayoutViewSetup.SetupScrollableLayoutConstraints(this, ScrollView, ContentView, ContentOverlayView);
+            LayoutViewSetup.SetupNonScrollableLayoutConstraints(this, ContentView, ContentOverlayView);
         }
     }
 }

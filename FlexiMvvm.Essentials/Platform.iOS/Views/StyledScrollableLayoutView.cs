@@ -14,25 +14,32 @@
 // limitations under the License.
 // =========================================================================
 
+using System;
 using CoreGraphics;
 using UIKit;
 
 namespace FlexiMvvm.Views
 {
-    public class ScrollableLayoutView : LayoutViewBase
+    public class StyledScrollableLayoutView<TTheme> : LayoutViewBase
     {
         private UIScrollView? _scrollView;
 
-        public ScrollableLayoutView()
+        public StyledScrollableLayoutView(TTheme theme)
         {
+            Theme = theme ?? throw new ArgumentNullException(nameof(theme));
+
             Initialize();
         }
 
-        public ScrollableLayoutView(CGRect frame)
+        public StyledScrollableLayoutView(TTheme theme, CGRect frame)
             : base(frame)
         {
+            Theme = theme ?? throw new ArgumentNullException(nameof(theme));
+
             Initialize();
         }
+
+        public TTheme Theme { get; }
 
         public virtual UIScrollView ScrollView => _scrollView ??= new UIScrollView();
 
@@ -49,21 +56,27 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public class ScrollableLayoutView<TConfig> : LayoutViewBase<TConfig>
+    public class StyledScrollableLayoutView<TTheme, TConfig> : LayoutViewBase<TConfig>
     {
         private UIScrollView? _scrollView;
 
-        public ScrollableLayoutView(TConfig config)
+        public StyledScrollableLayoutView(TTheme theme, TConfig config)
             : base(config)
         {
+            Theme = theme ?? throw new ArgumentNullException(nameof(theme));
+
             Initialize();
         }
 
-        public ScrollableLayoutView(TConfig config, CGRect frame)
+        public StyledScrollableLayoutView(TTheme theme, TConfig config, CGRect frame)
             : base(config, frame)
         {
+            Theme = theme ?? throw new ArgumentNullException(nameof(theme));
+
             Initialize();
         }
+
+        public TTheme Theme { get; }
 
         public virtual UIScrollView ScrollView => _scrollView ??= new UIScrollView();
 

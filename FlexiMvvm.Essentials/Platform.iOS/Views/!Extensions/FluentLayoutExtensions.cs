@@ -23,6 +23,7 @@ using UIKit;
 
 namespace FlexiMvvm.Views
 {
+    [Obsolete("FlexiMvvm won't rely on the Cirrious.FluentLayout library to build constraints. Use iOS Layout Anchors instead.")]
     public static class FluentLayoutExtensions
     {
         private const float DefaultMargin = 0;
