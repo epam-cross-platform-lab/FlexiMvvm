@@ -15,16 +15,17 @@
 // =========================================================================
 
 using System;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm
 {
     public static class WeakReferenceExtensions
     {
-        [CanBeNull]
-        public static T GetTarget<T>([NotNull] this WeakReference<T> weakReference)
+        public static T? GetTarget<T>(this WeakReference<T> weakReference)
             where T : class
         {
+            if (weakReference == null)
+                throw new ArgumentNullException(nameof(weakReference));
+
             return weakReference.TryGetTarget(out var target) ? target : null;
         }
     }

@@ -14,31 +14,37 @@
 // limitations under the License.
 // =========================================================================
 
-using System;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace FlexiMvvm
+namespace FlexiMvvm.Collections
 {
-    public static class StringExtensions
+    public class GroupingObservableCollection<TKey, TItem> : ObservableCollection<TItem>, IGrouping<TKey, TItem>
     {
-        public static string SelfOrEmpty(this string? value)
+        public GroupingObservableCollection(TKey key)
         {
-            return value ?? string.Empty;
+            Key = key;
         }
 
-        public static string SelfOrDefaultIfNullOrEmpty(this string? value, string defaultValue)
+        public GroupingObservableCollection(TKey key, IEnumerable<TItem> items)
+            : base(items)
         {
-            if (defaultValue == null)
-                throw new ArgumentNullException(nameof(defaultValue));
-
-            return string.IsNullOrEmpty(value) ? defaultValue : value;
+            Key = key;
         }
 
-        public static string SelfOrDefaultIfNullOrWhiteSpace(this string? value, string defaultValue)
-        {
-            if (defaultValue == null)
-                throw new ArgumentNullException(nameof(defaultValue));
+        public TKey Key { get; }
+    }
 
-            return string.IsNullOrWhiteSpace(value) ? defaultValue : value;
+    public class GroupingObservableCollection : GroupingObservableCollection<object?, object?>
+    {
+        public GroupingObservableCollection(object? key)
+            : base(key)
+        {
+        }
+
+        public GroupingObservableCollection(object? key, IEnumerable<object?> items)
+            : base(key, items)
+        {
         }
     }
 }

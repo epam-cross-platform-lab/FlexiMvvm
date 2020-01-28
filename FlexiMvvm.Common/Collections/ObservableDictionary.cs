@@ -20,7 +20,6 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Collections
 {
@@ -31,7 +30,6 @@ namespace FlexiMvvm.Collections
         private const string KeysName = "Keys";
         private const string ValuesName = "Values";
 
-        [NotNull]
         private IDictionary<TKey, TValue> _dictionary;
 
         public ObservableDictionary()
@@ -39,7 +37,7 @@ namespace FlexiMvvm.Collections
             _dictionary = new Dictionary<TKey, TValue>();
         }
 
-        public ObservableDictionary([NotNull] IDictionary<TKey, TValue> dictionary)
+        public ObservableDictionary(IDictionary<TKey, TValue> dictionary)
         {
             if (dictionary == null)
                 throw new ArgumentNullException(nameof(dictionary));
@@ -47,7 +45,7 @@ namespace FlexiMvvm.Collections
             _dictionary = new Dictionary<TKey, TValue>(dictionary);
         }
 
-        public ObservableDictionary([NotNull] IEqualityComparer<TKey> comparer)
+        public ObservableDictionary(IEqualityComparer<TKey> comparer)
         {
             if (comparer == null)
                 throw new ArgumentNullException(nameof(comparer));
@@ -60,7 +58,7 @@ namespace FlexiMvvm.Collections
             _dictionary = new Dictionary<TKey, TValue>(capacity);
         }
 
-        public ObservableDictionary([NotNull] IDictionary<TKey, TValue> dictionary, [NotNull] IEqualityComparer<TKey> comparer)
+        public ObservableDictionary(IDictionary<TKey, TValue> dictionary, IEqualityComparer<TKey> comparer)
         {
             if (dictionary == null)
                 throw new ArgumentNullException(nameof(dictionary));
@@ -70,7 +68,7 @@ namespace FlexiMvvm.Collections
             _dictionary = new Dictionary<TKey, TValue>(dictionary, comparer);
         }
 
-        public ObservableDictionary(int capacity, [NotNull] IEqualityComparer<TKey> comparer)
+        public ObservableDictionary(int capacity, IEqualityComparer<TKey> comparer)
         {
             if (comparer == null)
                 throw new ArgumentNullException(nameof(comparer));
@@ -82,7 +80,6 @@ namespace FlexiMvvm.Collections
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        [NotNull]
         protected IDictionary<TKey, TValue> Dictionary => _dictionary;
 
         public ICollection<TKey> Keys => Dictionary.Keys;
@@ -136,7 +133,7 @@ namespace FlexiMvvm.Collections
             Add(item.Key, item.Value);
         }
 
-        public void AddRange([NotNull] IDictionary<TKey, TValue> items)
+        public void AddRange(IDictionary<TKey, TValue> items)
         {
             if (items == null)
                 throw new ArgumentNullException(nameof(items));
@@ -160,11 +157,11 @@ namespace FlexiMvvm.Collections
                     _dictionary = new Dictionary<TKey, TValue>(items);
                 }
 
-                OnCollectionChanged(NotifyCollectionChangedAction.Add, items.ToArray().NotNull());
+                OnCollectionChanged(NotifyCollectionChangedAction.Add, items.ToArray());
             }
         }
 
-        private void Insert([NotNull] TKey key, TValue value, bool add)
+        private void Insert(TKey key, TValue value, bool add)
         {
             if (Dictionary.TryGetValue(key, out var item))
             {
@@ -229,12 +226,12 @@ namespace FlexiMvvm.Collections
 
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
         {
-            return Dictionary.GetEnumerator().NotNull();
+            return Dictionary.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return ((IEnumerable)Dictionary).GetEnumerator().NotNull();
+            return ((IEnumerable)Dictionary).GetEnumerator();
         }
 
         private void OnPropertyChanged()
@@ -245,7 +242,7 @@ namespace FlexiMvvm.Collections
             OnPropertyChanged(ValuesName);
         }
 
-        protected virtual void OnPropertyChanged([NotNull] string propertyName)
+        protected virtual void OnPropertyChanged(string propertyName)
         {
             if (propertyName == null)
                 throw new ArgumentNullException(nameof(propertyName));
@@ -273,7 +270,7 @@ namespace FlexiMvvm.Collections
             CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(action, newItem, oldItem));
         }
 
-        private void OnCollectionChanged(NotifyCollectionChangedAction action, [NotNull] IList newItems)
+        private void OnCollectionChanged(NotifyCollectionChangedAction action, IList newItems)
         {
             OnPropertyChanged();
             CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(action, newItems));
