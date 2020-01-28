@@ -15,47 +15,46 @@
 // =========================================================================
 
 using System;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Weak.Delegates
 {
     public sealed class WeakEventHandler : WeakDelegate
     {
-        public WeakEventHandler([NotNull] EventHandler eventHandler)
+        public WeakEventHandler(EventHandler eventHandler)
             : base(eventHandler)
         {
         }
 
-        public void Invoke([NotNull] object target, [NotNull] object sender, [NotNull] EventArgs e)
+        public void Invoke(object target, object sender, EventArgs args)
         {
             if (target == null)
                 throw new ArgumentNullException(nameof(target));
             if (sender == null)
                 throw new ArgumentNullException(nameof(sender));
-            if (e == null)
-                throw new ArgumentNullException(nameof(e));
+            if (args == null)
+                throw new ArgumentNullException(nameof(args));
 
-            base.Invoke(target, sender, e);
+            base.Invoke(target, sender, args);
         }
     }
 
     public sealed class WeakEventHandler<TEventArgs> : WeakDelegate
     {
-        public WeakEventHandler([NotNull] EventHandler<TEventArgs> eventHandler)
+        public WeakEventHandler(EventHandler<TEventArgs> eventHandler)
             : base(eventHandler)
         {
         }
 
-        public void Invoke([NotNull] object target, [NotNull] object sender, [NotNull] TEventArgs e)
+        public void Invoke(object target, object sender, TEventArgs args)
         {
             if (target == null)
                 throw new ArgumentNullException(nameof(target));
             if (sender == null)
                 throw new ArgumentNullException(nameof(sender));
-            if (e == null)
-                throw new ArgumentNullException(nameof(e));
+            if (args == null)
+                throw new ArgumentNullException(nameof(args));
 
-            base.Invoke(target, sender, e);
+            base.Invoke(target, sender, args);
         }
     }
 }
