@@ -19,8 +19,8 @@
         <PackageReference Include="Xamarin.Android.Support.v7.RecyclerView" Version="27.0.2.1" />
     </ItemGroup>
     <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid90')) ">
-        <PackageReference Include="Xamarin.Android.Support.Fragment" Version="28.0.0.1" />
-        <PackageReference Include="Xamarin.Android.Support.v7.RecyclerView" Version="28.0.0.1" />
+        <PackageReference Include="Xamarin.Android.Support.Fragment" Version="28.0.0.3" />
+        <PackageReference Include="Xamarin.Android.Support.v7.RecyclerView" Version="28.0.0.3" />
     </ItemGroup>
     <ItemGroup>
         <None Update="Platform.iOS\Collections\!Extensions\WeakEventSubscriptionExtensionsGenerator.tt">
