@@ -26,6 +26,7 @@ namespace FlexiMvvm.Navigation
         /// <summary>
         /// Gets the forward navigation strategy.
         /// </summary>
+        [Obsolete("NavigationStrategy.Forward will be removed soon. Use ViewControllerNavigationStrategy.Forward property instead.", true)]
         public static ForwardNavigationStrategy Forward { get; } = new ForwardNavigationStrategy();
 
         /// <summary>

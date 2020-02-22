@@ -24,6 +24,11 @@ namespace FlexiMvvm.Navigation
     public static class ViewControllerNavigationStrategy
     {
         /// <summary>
+        /// Gets the forward navigation strategy.
+        /// </summary>
+        public static ViewControllerForwardNavigationStrategy Forward { get; } = new ViewControllerForwardNavigationStrategy();
+
+        /// <summary>
         /// Gets the backward navigation strategy.
         /// </summary>
         public static ViewControllerBackwardNavigationStrategy Backward { get; } = new ViewControllerBackwardNavigationStrategy();

@@ -23,25 +23,43 @@ using UIKit;
 namespace FlexiMvvm.Navigation
 {
     /// <summary>
-    /// Defines the contract for forward navigation.
+    /// Defines the contract for forward navigation to the <see cref="UIViewController"/>.
     /// </summary>
-    /// <param name="sourceView">The source navigation view from which navigation is performed from.</param>
-    /// <param name="targetView">The target view for navigation.</param>
+    /// <param name="sourceView">The <see cref="INavigationView{TViewModel}"/> from which navigation is performed from.</param>
+    /// <param name="targetView">The target <see cref="UIViewController"/> for navigation.</param>
     /// <param name="animated">Determines if the transition is to be animated.</param>
-    [Obsolete("ForwardNavigationDelegate will be removed soon. Use ViewControllerForwardNavigationDelegate delegate instead.")]
-    public delegate void ForwardNavigationDelegate(INavigationView<ILifecycleViewModel> sourceView, UIViewController targetView, bool animated);
+    public delegate void ViewControllerForwardNavigationDelegate(INavigationView<ILifecycleViewModel> sourceView, UIViewController targetView, bool animated);
 
     /// <summary>
-    /// Provides a set of forward navigation strategies.
+    /// Provides a set of forward navigation strategies for the <see cref="UIViewController"/>.
     /// </summary>
-    [Obsolete("ForwardNavigationStrategy will be removed soon. Use ViewControllerForwardNavigationDelegate class instead.", true)]
-    public sealed class ForwardNavigationStrategy
+    public sealed class ViewControllerForwardNavigationStrategy
     {
+        /// <summary>
+        /// Forward navigation using the provided <paramref name="strategies"/>. Strategies are executed in the order in which they are passed.
+        /// </summary>
+        /// <param name="strategies">The strategies to execute during the forward navigation.</param>
+        /// <returns>The forward navigation delegate.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="strategies"/> is <see langword="null"/>.</exception>
+        public ViewControllerForwardNavigationDelegate Composite(params ViewControllerForwardNavigationDelegate[] strategies)
+        {
+            if (strategies == null)
+                throw new ArgumentNullException(nameof(strategies));
+
+            return (sourceView, targetViewIntent, requestCode) =>
+            {
+                foreach (var strategy in strategies)
+                {
+                    strategy(sourceView, targetViewIntent, requestCode);
+                }
+            };
+        }
+
         /// <summary>
         /// Forward navigation using the <see cref="UINavigationController.PushViewController(UIViewController, bool)"/> method.
         /// </summary>
         /// <returns>The forward navigation delegate.</returns>
-        public ForwardNavigationDelegate PushViewController()
+        public ViewControllerForwardNavigationDelegate PushViewController()
         {
             return (sourceView, targetView, animated) =>
             {
@@ -62,7 +80,7 @@ namespace FlexiMvvm.Navigation
         /// </summary>
         /// <param name="completionHandler">The method to invoke when the animation completes. Can be <see langword="null"/>.</param>
         /// <returns>The forward navigation delegate.</returns>
-        public ForwardNavigationDelegate PresentViewController(Action? completionHandler = null)
+        public ViewControllerForwardNavigationDelegate PresentViewController(Action? completionHandler = null)
         {
             return (sourceView, targetView, animated) =>
             {
@@ -74,7 +92,7 @@ namespace FlexiMvvm.Navigation
         /// Forward navigation using the <see cref="UINavigationController.SetViewControllers(UIViewController[], bool)"/> method. Target view delegate parameter is passed as a value.
         /// </summary>
         /// <returns>The forward navigation delegate.</returns>
-        public ForwardNavigationDelegate SetViewControllers()
+        public ViewControllerForwardNavigationDelegate SetViewControllers()
         {
             return (sourceView, targetView, animated) =>
             {
@@ -93,10 +111,10 @@ namespace FlexiMvvm.Navigation
         /// <summary>
         /// Forward navigation using the <see cref="UINavigationController.SetViewControllers(UIViewController[], bool)"/> method.
         /// </summary>
-        /// <param name="viewControllers">The array of view controllers to be set. Target view delegate parameter is ignored.</param>
+        /// <param name="viewControllers">The array of <see cref="UIViewController"/> to be set. Target view delegate parameter is ignored.</param>
         /// <returns>The forward navigation delegate.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="viewControllers"/> is <see langword="null"/>.</exception>
-        public ForwardNavigationDelegate SetViewControllers(UIViewController[] viewControllers)
+        public ViewControllerForwardNavigationDelegate SetViewControllers(UIViewController[] viewControllers)
         {
             if (viewControllers == null)
                 throw new ArgumentNullException(nameof(viewControllers));

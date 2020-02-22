@@ -23,9 +23,8 @@ namespace FlexiMvvm.Navigation
     /// Defines the contract for backward navigation from the <see cref="UIViewController"/>.
     /// </summary>
     /// <param name="sourceView">The <see cref="UIViewController"/> from which navigation is performed from.</param>
-    /// <param name="navigationController">The <see cref="UINavigationController"/> used for performing navigation. Can be <see langword="null"/>.</param>
     /// <param name="animated">Determines if the transition is to be animated.</param>
-    public delegate void ViewControllerBackwardNavigationDelegate(UIViewController sourceView, UINavigationController? navigationController, bool animated);
+    public delegate void ViewControllerBackwardNavigationDelegate(UIViewController sourceView, bool animated);
 
     /// <summary>
     /// Provides a set of backward navigation strategies for the <see cref="UIViewController"/>.
@@ -43,11 +42,11 @@ namespace FlexiMvvm.Navigation
             if (strategies == null)
                 throw new ArgumentNullException(nameof(strategies));
 
-            return (sourceView, navigationController, animated) =>
+            return (sourceView, animated) =>
             {
                 foreach (var strategy in strategies)
                 {
-                    strategy(sourceView, navigationController, animated);
+                    strategy(sourceView, animated);
                 }
             };
         }
@@ -58,14 +57,9 @@ namespace FlexiMvvm.Navigation
         /// <returns>The backward navigation delegate.</returns>
         public ViewControllerBackwardNavigationDelegate PopViewController()
         {
-            return (sourceView, navigationController, animated) =>
+            return (sourceView, animated) =>
             {
-                if (navigationController == null)
-                {
-                    throw new ArgumentNullException(nameof(navigationController));
-                }
-
-                navigationController.PopViewController(animated);
+                sourceView.NavigationController.PopViewController(animated);
             };
         }
 
@@ -80,14 +74,9 @@ namespace FlexiMvvm.Navigation
             if (targetView == null)
                 throw new ArgumentNullException(nameof(targetView));
 
-            return (sourceView, navigationController, animated) =>
+            return (sourceView, animated) =>
             {
-                if (navigationController == null)
-                {
-                    throw new ArgumentNullException(nameof(navigationController));
-                }
-
-                navigationController.PopToViewController(targetView, animated);
+                sourceView.NavigationController.PopToViewController(targetView, animated);
             };
         }
 
@@ -97,14 +86,9 @@ namespace FlexiMvvm.Navigation
         /// <returns>The backward navigation delegate.</returns>
         public ViewControllerBackwardNavigationDelegate PopToRootViewController()
         {
-            return (sourceView, navigationController, animated) =>
+            return (sourceView, animated) =>
             {
-                if (navigationController == null)
-                {
-                    throw new ArgumentNullException(nameof(navigationController));
-                }
-
-                navigationController.PopToRootViewController(animated);
+                sourceView.NavigationController.PopToRootViewController(animated);
             };
         }
 
@@ -115,7 +99,7 @@ namespace FlexiMvvm.Navigation
         /// <returns>The backward navigation delegate.</returns>
         public ViewControllerBackwardNavigationDelegate DismissViewController(Action? completionHandler = null)
         {
-            return (sourceView, navigationController, animated) =>
+            return (sourceView, animated) =>
             {
                 sourceView.DismissViewController(animated, completionHandler);
             };

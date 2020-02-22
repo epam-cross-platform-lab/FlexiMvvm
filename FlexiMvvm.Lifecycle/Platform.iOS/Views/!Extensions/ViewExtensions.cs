@@ -37,7 +37,7 @@ namespace FlexiMvvm.Views
         /// </param>
         /// <exception cref="ArgumentNullException"><paramref name="view" /> or <paramref name="viewControllerHandler" /> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException">
-        /// The <paramref name="view" /> is derived from a class other than the <see cref="UIViewController"/> or <see cref="UINavigationController"/>.
+        /// The <paramref name="view" /> is derived from a class other than the <see cref="UIViewController"/>.
         /// </exception>
         public static void As(
             this IView<ILifecycleViewModel> view,
@@ -59,9 +59,7 @@ namespace FlexiMvvm.Views
             }
             else
             {
-                throw new ArgumentException(
-                    $"Only views derived from the '{TypeFormatter.FormatName<UIViewController>()}' or " +
-                    $"'{TypeFormatter.FormatName<UINavigationController>()}' are supported.", nameof(view));
+                throw new ArgumentException($"Only views derived from the '{TypeFormatter.FormatName<UIViewController>()}' are supported.", nameof(view));
             }
         }
 
@@ -78,7 +76,7 @@ namespace FlexiMvvm.Views
         /// <returns>A result returned by appropriate handler.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="view" /> or <paramref name="viewControllerHandler" /> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException">
-        /// The <paramref name="view" /> is derived from a class other than the <see cref="UIViewController"/> or <see cref="UINavigationController"/>.
+        /// The <paramref name="view" /> is derived from a class other than the <see cref="UIViewController"/>.
         /// </exception>
         public static T As<T>(
             this IView<ILifecycleViewModel> view,
@@ -102,9 +100,7 @@ namespace FlexiMvvm.Views
             }
             else
             {
-                throw new ArgumentException(
-                    $"Only views derived from the '{TypeFormatter.FormatName<UIViewController>()}' or " +
-                    $"'{TypeFormatter.FormatName<UINavigationController>()}' are supported.", nameof(view));
+                throw new ArgumentException($"Only views derived from the '{TypeFormatter.FormatName<UIViewController>()}' are supported.", nameof(view));
             }
 
             return result;

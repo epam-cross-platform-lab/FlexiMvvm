@@ -558,6 +558,9 @@ namespace FlexiMvvm.Navigation
         /// <para>The default is <see cref="DialogFragmentBackwardNavigationStrategy.Dismiss()"/>.</para>
         /// </param>
         /// <exception cref="ArgumentNullException"><paramref name="sourceView"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentException">
+        /// The <paramref name="sourceView" /> is derived from a class other than the <see cref="FragmentActivity"/>, <see cref="Fragment"/> or <see cref="DialogFragment"/>.
+        /// </exception>
         public void NavigateBack(
             INavigationView<ILifecycleViewModel> sourceView,
             ActivityBackwardNavigationDelegate? activityNavigationStrategy = null,
@@ -593,6 +596,9 @@ namespace FlexiMvvm.Navigation
         /// <para>The default is <see cref="DialogFragmentBackwardNavigationStrategy.Dismiss()"/>.</para>
         /// </param>
         /// <exception cref="ArgumentNullException"><paramref name="sourceView"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentException">
+        /// The <paramref name="sourceView" /> is derived from a class other than the <see cref="FragmentActivity"/>, <see cref="Fragment"/> or <see cref="DialogFragment"/>.
+        /// </exception>
         public void NavigateBack<TResult>(
             INavigationView<ILifecycleViewModelWithResult<TResult>> sourceView,
             ResultCode resultCode,
