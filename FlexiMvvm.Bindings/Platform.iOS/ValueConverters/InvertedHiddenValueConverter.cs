@@ -18,45 +18,44 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Android.Views;
 
 namespace FlexiMvvm.ValueConverters
 {
-    public class VisibleInvisibleValueConverter : ValueConverter<object, ViewStates>
+    public class InvertedHiddenValueConverter : ValueConverter<object, bool>
     {
-        protected override ConversionResult<ViewStates> Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override ConversionResult<bool> Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             switch (value)
             {
                 case bool boolValue:
-                    return ConversionResult<ViewStates>.SetValue(boolValue ? ViewStates.Visible : ViewStates.Invisible);
+                    return ConversionResult<bool>.SetValue(!boolValue);
                 case int intValue:
-                    return ConversionResult<ViewStates>.SetValue(intValue > 0 ? ViewStates.Visible : ViewStates.Invisible);
+                    return ConversionResult<bool>.SetValue(!(intValue > 0));
                 case float floatValue:
-                    return ConversionResult<ViewStates>.SetValue(floatValue > 0 ? ViewStates.Visible : ViewStates.Invisible);
+                    return ConversionResult<bool>.SetValue(!(floatValue > 0));
                 case double doubleValue:
-                    return ConversionResult<ViewStates>.SetValue(doubleValue > 0 ? ViewStates.Visible : ViewStates.Invisible);
+                    return ConversionResult<bool>.SetValue(!(doubleValue > 0));
                 case string stringValue:
-                    return ConversionResult<ViewStates>.SetValue(!string.IsNullOrEmpty(stringValue) ? ViewStates.Visible : ViewStates.Invisible);
+                    return ConversionResult<bool>.SetValue(string.IsNullOrEmpty(stringValue));
                 case IEnumerable<object> enumerableValue:
-                    return ConversionResult<ViewStates>.SetValue(enumerableValue?.Any() ?? false ? ViewStates.Visible : ViewStates.Invisible);
+                    return ConversionResult<bool>.SetValue(!(enumerableValue?.Any() ?? false));
                 default:
-                    return ConversionResult<ViewStates>.SetValue(value != null ? ViewStates.Visible : ViewStates.Invisible);
+                    return ConversionResult<bool>.SetValue(value == null);
             }
         }
 
-        protected override ConversionResult<object> ConvertBack(ViewStates value, Type targetType, object parameter, CultureInfo culture)
+        protected override ConversionResult<object> ConvertBack(bool value, Type targetType, object parameter, CultureInfo culture)
         {
             switch (targetType)
             {
                 case Type boolType when boolType == typeof(bool):
-                    return ConversionResult<object>.SetValue(value == ViewStates.Visible);
+                    return ConversionResult<object>.SetValue(!value);
                 case Type intType when intType == typeof(int):
-                    return ConversionResult<object>.SetValue(value == ViewStates.Visible ? 1 : 0);
+                    return ConversionResult<object>.SetValue(value ? 0 : 1);
                 case Type floatType when floatType == typeof(float):
-                    return ConversionResult<object>.SetValue(value == ViewStates.Visible ? 1 : 0);
+                    return ConversionResult<object>.SetValue(value ? 0 : 1);
                 case Type doubleType when doubleType == typeof(double):
-                    return ConversionResult<object>.SetValue(value == ViewStates.Visible ? 1 : 0);
+                    return ConversionResult<object>.SetValue(value ? 0 : 1);
                 default:
                     return ConversionResult<object>.UnsetValue();
             }

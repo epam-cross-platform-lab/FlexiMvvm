@@ -15,21 +15,51 @@
 // =========================================================================
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using Android.Views;
 
 namespace FlexiMvvm.ValueConverters
 {
-    public class VisibleGoneValueConverter : ValueConverter<bool, ViewStates>
+    public class VisibleGoneValueConverter : ValueConverter<object, ViewStates>
     {
-        protected override ConversionResult<ViewStates> Convert(bool value, Type targetType, object parameter, CultureInfo culture)
+        protected override ConversionResult<ViewStates> Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return ConversionResult<ViewStates>.SetValue(value ? ViewStates.Visible : ViewStates.Gone);
+            switch (value)
+            {
+                case bool boolValue:
+                    return ConversionResult<ViewStates>.SetValue(boolValue ? ViewStates.Visible : ViewStates.Gone);
+                case int intValue:
+                    return ConversionResult<ViewStates>.SetValue(intValue > 0 ? ViewStates.Visible : ViewStates.Gone);
+                case float floatValue:
+                    return ConversionResult<ViewStates>.SetValue(floatValue > 0 ? ViewStates.Visible : ViewStates.Gone);
+                case double doubleValue:
+                    return ConversionResult<ViewStates>.SetValue(doubleValue > 0 ? ViewStates.Visible : ViewStates.Gone);
+                case string stringValue:
+                    return ConversionResult<ViewStates>.SetValue(!string.IsNullOrEmpty(stringValue) ? ViewStates.Visible : ViewStates.Gone);
+                case IEnumerable<object> enumerableValue:
+                    return ConversionResult<ViewStates>.SetValue(enumerableValue?.Any() ?? false ? ViewStates.Visible : ViewStates.Gone);
+                default:
+                    return ConversionResult<ViewStates>.SetValue(value != null ? ViewStates.Visible : ViewStates.Gone);
+            }
         }
 
-        protected override ConversionResult<bool> ConvertBack(ViewStates value, Type targetType, object parameter, CultureInfo culture)
+        protected override ConversionResult<object> ConvertBack(ViewStates value, Type targetType, object parameter, CultureInfo culture)
         {
-            return ConversionResult<bool>.SetValue(value == ViewStates.Visible);
+            switch (targetType)
+            {
+                case Type boolType when boolType == typeof(bool):
+                    return ConversionResult<object>.SetValue(value == ViewStates.Visible);
+                case Type intType when intType == typeof(int):
+                    return ConversionResult<object>.SetValue(value == ViewStates.Visible ? 1 : 0);
+                case Type floatType when floatType == typeof(float):
+                    return ConversionResult<object>.SetValue(value == ViewStates.Visible ? 1 : 0);
+                case Type doubleType when doubleType == typeof(double):
+                    return ConversionResult<object>.SetValue(value == ViewStates.Visible ? 1 : 0);
+                default:
+                    return ConversionResult<object>.UnsetValue();
+            }
         }
     }
 }
