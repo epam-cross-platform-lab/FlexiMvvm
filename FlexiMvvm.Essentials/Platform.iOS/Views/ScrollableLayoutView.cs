@@ -14,7 +14,6 @@
 // limitations under the License.
 // =========================================================================
 
-using System.Diagnostics.CodeAnalysis;
 using Cirrious.FluentLayouts.Touch;
 using CoreGraphics;
 using JetBrains.Annotations;
@@ -22,7 +21,7 @@ using UIKit;
 
 namespace FlexiMvvm.Views
 {
-    [SuppressMessage("ReSharper", "NotNullMemberIsNotInitialized", Justification = "SetupSubviews is called within constuctor.")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "NotNullMemberIsNotInitialized", Justification = "SetupSubviews is called within constuctor.")]
     public class ScrollableLayoutView : LayoutView
     {
         public ScrollableLayoutView()
