@@ -19,7 +19,6 @@ using System.Windows.Input;
 using Android.Support.Design.Widget;
 using Android.Support.V4.View;
 using Android.Widget;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Bindings
 {
@@ -34,10 +33,10 @@ namespace FlexiMvvm.Bindings
         /// <param name="trackCanExecuteCommandChanged">If set to <c>true</c> then <see cref="BottomNavigationView.Enabled"/> value will be updated based on <see cref="ICommand.CanExecute(object)"/> result.</param>
         /// <returns>The binding builder instance.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="bindingSet"/> is <c>null</c>.</exception>
-        [NotNull]
+        [Obsolete("BindDefault will be removed soon. Use Bind(view).For(v => v.SelectedItemIdAndNavigationItemSelectedBinding()) construction instead.")]
         public static ISourceItemBindingBuilder<TSourceItem, int> BindDefault<TSourceItem>(
-            [NotNull] this BindingSet<TSourceItem> bindingSet,
-            [CanBeNull] BottomNavigationView bottomNavigationView,
+            this BindingSet<TSourceItem> bindingSet,
+            BottomNavigationView? bottomNavigationView,
             bool trackCanExecuteCommandChanged = false)
             where TSourceItem : class
         {
@@ -45,7 +44,7 @@ namespace FlexiMvvm.Bindings
                 throw new ArgumentNullException(nameof(bindingSet));
 
             return bindingSet.Bind(bottomNavigationView)
-                .For(v => v.NotNull().SelectedItemIdAndNavigationItemSelectedBinding(trackCanExecuteCommandChanged));
+                .For(v => v.SelectedItemIdAndNavigationItemSelectedBinding(trackCanExecuteCommandChanged));
         }
 
         /// <summary>
@@ -57,10 +56,10 @@ namespace FlexiMvvm.Bindings
         /// <param name="trackCanExecuteCommandChanged">If set to <c>true</c> then <see cref="Button.Enabled"/> value will be updated based on <see cref="ICommand.CanExecute(object)"/> result.</param>
         /// <returns>The binding builder instance.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="bindingSet"/> is <c>null</c>.</exception>
-        [NotNull]
+        [Obsolete("BindDefault will be removed soon. Use Bind(view).For(v => v.ClickBinding()) construction instead.")]
         public static ISourceItemBindingBuilder<TSourceItem, object> BindDefault<TSourceItem>(
-            [NotNull] this BindingSet<TSourceItem> bindingSet,
-            [CanBeNull] Button button,
+            this BindingSet<TSourceItem> bindingSet,
+            Button? button,
             bool trackCanExecuteCommandChanged = false)
             where TSourceItem : class
         {
@@ -68,7 +67,7 @@ namespace FlexiMvvm.Bindings
                 throw new ArgumentNullException(nameof(bindingSet));
 
             return bindingSet.Bind(button)
-                .For(v => v.NotNull().ClickBinding(trackCanExecuteCommandChanged));
+                .For(v => v.ClickBinding(trackCanExecuteCommandChanged));
         }
 
         /// <summary>
@@ -80,10 +79,10 @@ namespace FlexiMvvm.Bindings
         /// <param name="trackCanExecuteCommandChanged">If set to <c>true</c> then <see cref="CheckBox.Enabled"/> value will be updated based on <see cref="ICommand.CanExecute(object)"/> result.</param>
         /// <returns>The binding builder instance.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="bindingSet"/> is <c>null</c>.</exception>
-        [NotNull]
+        [Obsolete("BindDefault will be removed soon. Use Bind(view).For(v => v.CheckedAndCheckedChangeBinding()) construction instead.")]
         public static ISourceItemBindingBuilder<TSourceItem, bool> BindDefault<TSourceItem>(
-            [NotNull] this BindingSet<TSourceItem> bindingSet,
-            [CanBeNull] CheckBox checkBox,
+            this BindingSet<TSourceItem> bindingSet,
+            CheckBox? checkBox,
             bool trackCanExecuteCommandChanged = false)
             where TSourceItem : class
         {
@@ -91,7 +90,7 @@ namespace FlexiMvvm.Bindings
                 throw new ArgumentNullException(nameof(bindingSet));
 
             return bindingSet.Bind(checkBox)
-                .For(v => v.NotNull().CheckedAndCheckedChangeBinding(trackCanExecuteCommandChanged));
+                .For(v => v.CheckedAndCheckedChangeBinding(trackCanExecuteCommandChanged));
         }
 
         /// <summary>
@@ -103,10 +102,10 @@ namespace FlexiMvvm.Bindings
         /// <param name="trackCanExecuteCommandChanged">If set to <c>true</c> then <see cref="EditText.Enabled"/> value will be updated based on <see cref="ICommand.CanExecute(object)"/> result.</param>
         /// <returns>The binding builder instance.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="bindingSet"/> is <c>null</c>.</exception>
-        [NotNull]
+        [Obsolete("BindDefault will be removed soon. Use Bind(view).For(v => v.TextAndTextChangedBinding()) construction instead.")]
         public static ISourceItemBindingBuilder<TSourceItem, string> BindDefaultValue<TSourceItem>(
-            [NotNull] this BindingSet<TSourceItem> bindingSet,
-            [CanBeNull] EditText editText,
+            this BindingSet<TSourceItem> bindingSet,
+            EditText? editText,
             bool trackCanExecuteCommandChanged = false)
             where TSourceItem : class
         {
@@ -114,7 +113,7 @@ namespace FlexiMvvm.Bindings
                 throw new ArgumentNullException(nameof(bindingSet));
 
             return bindingSet.Bind(editText)
-                .For(v => v.NotNull().TextAndTextChangedBinding());
+                .For(v => v.TextAndTextChangedBinding());
         }
 
 #if __ANDROID_28__
@@ -127,10 +126,10 @@ namespace FlexiMvvm.Bindings
         /// <param name="trackCanExecuteCommandChanged">If set to <c>true</c> then <see cref="NavigationView.Enabled"/> value will be updated based on <see cref="ICommand.CanExecute(object)"/> result.</param>
         /// <returns>The binding builder instance.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="bindingSet"/> is <c>null</c>.</exception>
-        [NotNull]
+        [Obsolete("BindDefault will be removed soon. Use Bind(view).For(v => v.SetCheckedItemAndNavigationItemSelectedBinding()) construction instead.")]
         public static ISourceItemBindingBuilder<TSourceItem, int> BindDefault<TSourceItem>(
-            [NotNull] this BindingSet<TSourceItem> bindingSet,
-            [CanBeNull] NavigationView navigationView,
+            this BindingSet<TSourceItem> bindingSet,
+            NavigationView? navigationView,
             bool trackCanExecuteCommandChanged = false)
             where TSourceItem : class
         {
@@ -138,7 +137,7 @@ namespace FlexiMvvm.Bindings
                 throw new ArgumentNullException(nameof(bindingSet));
 
             return bindingSet.Bind(navigationView)
-                .For(v => v.NotNull().SetCheckedItemAndNavigationItemSelectedBinding(trackCanExecuteCommandChanged));
+                .For(v => v.SetCheckedItemAndNavigationItemSelectedBinding(trackCanExecuteCommandChanged));
         }
 #endif
 
@@ -151,10 +150,10 @@ namespace FlexiMvvm.Bindings
         /// <param name="trackCanExecuteCommandChanged">If set to <c>true</c> then <see cref="RadioGroup.Enabled"/> value will be updated based on <see cref="ICommand.CanExecute(object)"/> result.</param>
         /// <returns>The binding builder instance.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="bindingSet"/> is <c>null</c>.</exception>
-        [NotNull]
+        [Obsolete("BindDefault will be removed soon. Use Bind(view).For(v => v.CheckAndCheckedChangeBinding()) construction instead.")]
         public static ISourceItemBindingBuilder<TSourceItem, int> BindDefault<TSourceItem>(
-            [NotNull] this BindingSet<TSourceItem> bindingSet,
-            [CanBeNull] RadioGroup radioGroup,
+            this BindingSet<TSourceItem> bindingSet,
+            RadioGroup? radioGroup,
             bool trackCanExecuteCommandChanged = false)
             where TSourceItem : class
         {
@@ -162,7 +161,7 @@ namespace FlexiMvvm.Bindings
                 throw new ArgumentNullException(nameof(bindingSet));
 
             return bindingSet.Bind(radioGroup)
-                .For(v => v.NotNull().CheckAndCheckedChangeBinding(trackCanExecuteCommandChanged));
+                .For(v => v.CheckAndCheckedChangeBinding(trackCanExecuteCommandChanged));
         }
 
         /// <summary>
@@ -175,10 +174,10 @@ namespace FlexiMvvm.Bindings
         /// <param name="trackCanExecuteCommandChanged">If set to <c>true</c> then <see cref="SearchView.Enabled"/> value will be updated based on <see cref="ICommand.CanExecute(object)"/> result.</param>
         /// <returns>The binding builder instance.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="bindingSet"/> is <c>null</c>.</exception>
-        [NotNull]
+        [Obsolete("BindDefault will be removed soon. Use Bind(view).For(v => v.SetQueryAndQueryTextChangeBinding()) construction instead.")]
         public static ISourceItemBindingBuilder<TSourceItem, string> BindDefault<TSourceItem>(
-            [NotNull] this BindingSet<TSourceItem> bindingSet,
-            [CanBeNull] SearchView searchView,
+            this BindingSet<TSourceItem> bindingSet,
+            SearchView? searchView,
             bool submit = true,
             bool trackCanExecuteCommandChanged = false)
             where TSourceItem : class
@@ -187,7 +186,7 @@ namespace FlexiMvvm.Bindings
                 throw new ArgumentNullException(nameof(bindingSet));
 
             return bindingSet.Bind(searchView)
-                .For(v => v.NotNull().SetQueryAndQueryTextChangeBinding(submit, trackCanExecuteCommandChanged));
+                .For(v => v.SetQueryAndQueryTextChangeBinding(submit, trackCanExecuteCommandChanged));
         }
 
         /// <summary>
@@ -199,6 +198,7 @@ namespace FlexiMvvm.Bindings
         /// <param name="trackCanExecuteCommandChanged">If set to <c>true</c> then <see cref="AdapterView.Enabled"/> value will be updated based on <see cref="ICommand.CanExecute(object)"/> result.</param>
         /// <returns>The binding builder instance.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="bindingSet"/> is <c>null</c>.</exception>
+        [Obsolete("BindDefault will be removed soon. Use Bind(view).For(v => v.SetSelectionAndItemSelectedBinding()) construction instead.")]
         public static ISourceItemBindingBuilder<TSourceItem, int> BindDefault<TSourceItem>(
             this BindingSet<TSourceItem> bindingSet,
             Spinner? spinner,
@@ -220,17 +220,17 @@ namespace FlexiMvvm.Bindings
         /// <param name="textView">The text view reference.</param>
         /// <returns>The binding builder instance.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="bindingSet"/> is <c>null</c>.</exception>
-        [NotNull]
+        [Obsolete("BindDefault will be removed soon. Use Bind(view).For(v => v.TextBinding()) construction instead.")]
         public static ISourceItemBindingBuilder<TSourceItem, string> BindDefault<TSourceItem>(
-            [NotNull] this BindingSet<TSourceItem> bindingSet,
-            [CanBeNull] TextView textView)
+            this BindingSet<TSourceItem> bindingSet,
+            TextView? textView)
             where TSourceItem : class
         {
             if (bindingSet == null)
                 throw new ArgumentNullException(nameof(bindingSet));
 
             return bindingSet.Bind(textView)
-                .For(v => v.NotNull().TextBinding());
+                .For(v => v.TextBinding());
         }
 
         /// <summary>
@@ -243,10 +243,10 @@ namespace FlexiMvvm.Bindings
         /// <param name="trackCanExecuteCommandChanged">If set to <c>true</c> then <see cref="ViewPager.Enabled"/> value will be updated based on <see cref="ICommand.CanExecute(object)"/> result.</param>
         /// <returns>The binding builder instance.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="bindingSet"/> is <c>null</c>.</exception>
-        [NotNull]
+        [Obsolete("BindDefault will be removed soon. Use Bind(view).For(v => v.SetCurrentItemAndPageSelectedBinding()) construction instead.")]
         public static ISourceItemBindingBuilder<TSourceItem, int> BindDefault<TSourceItem>(
-            [NotNull] this BindingSet<TSourceItem> bindingSet,
-            [CanBeNull] ViewPager viewPager,
+            this BindingSet<TSourceItem> bindingSet,
+            ViewPager? viewPager,
             bool smoothScroll = true,
             bool trackCanExecuteCommandChanged = false)
             where TSourceItem : class
@@ -255,7 +255,7 @@ namespace FlexiMvvm.Bindings
                 throw new ArgumentNullException(nameof(bindingSet));
 
             return bindingSet.Bind(viewPager)
-                .For(v => v.NotNull().SetCurrentItemAndPageSelectedBinding(smoothScroll, trackCanExecuteCommandChanged));
+                .For(v => v.SetCurrentItemAndPageSelectedBinding(smoothScroll, trackCanExecuteCommandChanged));
         }
     }
 }

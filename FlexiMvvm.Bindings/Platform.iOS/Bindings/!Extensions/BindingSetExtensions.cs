@@ -16,17 +16,16 @@
 
 using System;
 using Foundation;
-using JetBrains.Annotations;
 using UIKit;
 
 namespace FlexiMvvm.Bindings
 {
     public static class BindingSetExtensions
     {
-        [NotNull]
+        [Obsolete("BindDefault will be removed soon. Use Bind(view).For(v => v.TouchUpInsideBinding()) construction instead.")]
         public static ISourceItemBindingBuilder<TSourceItem, object> BindDefault<TSourceItem>(
-            [NotNull] this BindingSet<TSourceItem> bindingSet,
-            [CanBeNull] UIButton button,
+            this BindingSet<TSourceItem> bindingSet,
+            UIButton? button,
             bool trackCanExecuteCommandChanged = false)
             where TSourceItem : class
         {
@@ -34,13 +33,13 @@ namespace FlexiMvvm.Bindings
                 throw new ArgumentNullException(nameof(bindingSet));
 
             return bindingSet.Bind(button)
-                .For(v => v.NotNull().TouchUpInsideBinding(trackCanExecuteCommandChanged));
+                .For(v => v.TouchUpInsideBinding(trackCanExecuteCommandChanged));
         }
 
-        [NotNull]
+        [Obsolete("BindDefault will be removed soon. Use Bind(view).For(v => v.DateAndValueChangedBinding()) construction instead.")]
         public static ISourceItemBindingBuilder<TSourceItem, NSDate> BindDefault<TSourceItem>(
-            [NotNull] this BindingSet<TSourceItem> bindingSet,
-            [CanBeNull] UIDatePicker datePicker,
+            this BindingSet<TSourceItem> bindingSet,
+            UIDatePicker? datePicker,
             bool animated = true,
             bool trackCanExecuteCommandChanged = false)
             where TSourceItem : class
@@ -49,52 +48,52 @@ namespace FlexiMvvm.Bindings
                 throw new ArgumentNullException(nameof(bindingSet));
 
             return bindingSet.Bind(datePicker)
-                .For(v => v.NotNull().DateAndValueChangedBinding(animated, trackCanExecuteCommandChanged));
+                .For(v => v.DateAndValueChangedBinding(animated, trackCanExecuteCommandChanged));
         }
 
-        [NotNull]
+        [Obsolete("BindDefault will be removed soon. Use Bind(view).For(v => v.TextBinding()) construction instead.")]
         public static ISourceItemBindingBuilder<TSourceItem, string> BindDefault<TSourceItem>(
-            [NotNull] this BindingSet<TSourceItem> bindingSet,
-            [CanBeNull] UILabel label)
+            this BindingSet<TSourceItem> bindingSet,
+            UILabel? label)
             where TSourceItem : class
         {
             if (bindingSet == null)
                 throw new ArgumentNullException(nameof(bindingSet));
 
             return bindingSet.Bind(label)
-                .For(v => v.NotNull().TextBinding());
+                .For(v => v.TextBinding());
         }
 
-        [NotNull]
+        [Obsolete("BindDefault will be removed soon. Use Bind(view).For(v => v.TitleBinding()) construction instead.")]
         public static ISourceItemBindingBuilder<TSourceItem, string> BindDefault<TSourceItem>(
-            [NotNull] this BindingSet<TSourceItem> bindingSet,
-            [CanBeNull] UINavigationItem navigationItem)
+            this BindingSet<TSourceItem> bindingSet,
+            UINavigationItem? navigationItem)
             where TSourceItem : class
         {
             if (bindingSet == null)
                 throw new ArgumentNullException(nameof(bindingSet));
 
             return bindingSet.Bind(navigationItem)
-                .For(v => v.NotNull().TitleBinding());
+                .For(v => v.TitleBinding());
         }
 
-        [NotNull]
+        [Obsolete("BindDefault will be removed soon. Use Bind(view).For(v => v.TextAndTextChangedBinding()) construction instead.")]
         public static ISourceItemBindingBuilder<TSourceItem, string> BindDefault<TSourceItem>(
-            [NotNull] this BindingSet<TSourceItem> bindingSet,
-            [CanBeNull] UISearchBar searchBar)
+            this BindingSet<TSourceItem> bindingSet,
+            UISearchBar? searchBar)
             where TSourceItem : class
         {
             if (bindingSet == null)
                 throw new ArgumentNullException(nameof(bindingSet));
 
             return bindingSet.Bind(searchBar)
-                .For(v => v.NotNull().TextAndTextChangedBinding());
+                .For(v => v.TextAndTextChangedBinding());
         }
 
-        [NotNull]
+        [Obsolete("BindDefault will be removed soon. Use Bind(view).For(v => v.SelectedSegmentAndValueChangedBinding()) construction instead.")]
         public static ISourceItemBindingBuilder<TSourceItem, nint> BindDefault<TSourceItem>(
-            [NotNull] this BindingSet<TSourceItem> bindingSet,
-            [CanBeNull] UISegmentedControl segmentedControl,
+            this BindingSet<TSourceItem> bindingSet,
+            UISegmentedControl? segmentedControl,
             bool trackCanExecuteCommandChanged = false)
             where TSourceItem : class
         {
@@ -102,13 +101,13 @@ namespace FlexiMvvm.Bindings
                 throw new ArgumentNullException(nameof(bindingSet));
 
             return bindingSet.Bind(segmentedControl)
-                .For(v => v.NotNull().SelectedSegmentAndValueChangedBinding(trackCanExecuteCommandChanged));
+                .For(v => v.SelectedSegmentAndValueChangedBinding(trackCanExecuteCommandChanged));
         }
 
-        [NotNull]
+        [Obsolete("BindDefault will be removed soon. Use Bind(view).For(v => v.TextAndEditingChangedBinding()) construction instead.")]
         public static ISourceItemBindingBuilder<TSourceItem, string> BindDefault<TSourceItem>(
-            [NotNull] this BindingSet<TSourceItem> bindingSet,
-            [CanBeNull] UITextField textField,
+            this BindingSet<TSourceItem> bindingSet,
+            UITextField? textField,
             bool trackCanExecuteCommandChanged = false)
             where TSourceItem : class
         {
@@ -116,13 +115,13 @@ namespace FlexiMvvm.Bindings
                 throw new ArgumentNullException(nameof(bindingSet));
 
             return bindingSet.Bind(textField)
-                .For(v => v.NotNull().TextAndEditingChangedBinding(trackCanExecuteCommandChanged));
+                .For(v => v.TextAndEditingChangedBinding(trackCanExecuteCommandChanged));
         }
 
-        [NotNull]
+        [Obsolete("BindDefault will be removed soon. Use Bind(view).For(v => v.ClickedBinding()) construction instead.")]
         public static ISourceItemBindingBuilder<TSourceItem, object> BindDefault<TSourceItem>(
-            [NotNull] this BindingSet<TSourceItem> bindingSet,
-            [CanBeNull] UIBarButtonItem barButtonItem,
+            this BindingSet<TSourceItem> bindingSet,
+            UIBarButtonItem? barButtonItem,
             bool trackCanExecuteCommandChanged = false)
             where TSourceItem : class
         {
@@ -130,13 +129,13 @@ namespace FlexiMvvm.Bindings
                 throw new ArgumentNullException(nameof(bindingSet));
 
             return bindingSet.Bind(barButtonItem)
-                .For(v => v.NotNull().ClickedBinding(trackCanExecuteCommandChanged));
+                .For(v => v.ClickedBinding(trackCanExecuteCommandChanged));
         }
 
-        [NotNull]
+        [Obsolete("BindDefault will be removed soon. Use Bind(view).For(v => v.SetStateAndValueChangedBinding()) construction instead.")]
         public static ISourceItemBindingBuilder<TSourceItem, bool> BindDefault<TSourceItem>(
-            [NotNull] this BindingSet<TSourceItem> bindingSet,
-            [CanBeNull] UISwitch @switch,
+            this BindingSet<TSourceItem> bindingSet,
+            UISwitch? @switch,
             bool animated = true,
             bool trackCanExecuteCommandChanged = false)
             where TSourceItem : class
@@ -145,13 +144,13 @@ namespace FlexiMvvm.Bindings
                 throw new ArgumentNullException(nameof(bindingSet));
 
             return bindingSet.Bind(@switch)
-                .For(v => v.NotNull().SetStateAndValueChangedBinding(animated, trackCanExecuteCommandChanged));
+                .For(v => v.SetStateAndValueChangedBinding(animated, trackCanExecuteCommandChanged));
         }
 
-        [NotNull]
+        [Obsolete("BindDefault will be removed soon. Use Bind(view).For(v => v.CurrentPageAndValueChangedBinding()) construction instead.")]
         public static ISourceItemBindingBuilder<TSourceItem, nint> BindDefault<TSourceItem>(
-            [NotNull] this BindingSet<TSourceItem> bindingSet,
-            [CanBeNull] UIPageControl pageControl,
+            this BindingSet<TSourceItem> bindingSet,
+            UIPageControl? pageControl,
             bool trackCanExecuteCommandChanged = false)
             where TSourceItem : class
         {
@@ -159,13 +158,13 @@ namespace FlexiMvvm.Bindings
                 throw new ArgumentNullException(nameof(bindingSet));
 
             return bindingSet.Bind(pageControl)
-                .For(v => v.NotNull().CurrentPageAndValueChangedBinding(trackCanExecuteCommandChanged));
+                .For(v => v.CurrentPageAndValueChangedBinding(trackCanExecuteCommandChanged));
         }
 
-        [NotNull]
+        [Obsolete("BindDefault will be removed soon. Use Bind(view).For(v => v.SetProgressBinding()) construction instead.")]
         public static ISourceItemBindingBuilder<TSourceItem, float> BindDefault<TSourceItem>(
-            [NotNull] this BindingSet<TSourceItem> bindingSet,
-            [CanBeNull] UIProgressView progressView,
+            this BindingSet<TSourceItem> bindingSet,
+            UIProgressView? progressView,
             bool animated = true)
             where TSourceItem : class
         {
@@ -173,7 +172,7 @@ namespace FlexiMvvm.Bindings
                 throw new ArgumentNullException(nameof(bindingSet));
 
             return bindingSet.Bind(progressView)
-                .For(v => v.NotNull().SetProgressBinding(animated));
+                .For(v => v.SetProgressBinding(animated));
         }
     }
 }
