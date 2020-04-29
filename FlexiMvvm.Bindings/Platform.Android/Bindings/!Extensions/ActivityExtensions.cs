@@ -15,25 +15,23 @@
 // =========================================================================
 
 using System;
+using Android.App;
 using FlexiMvvm.Bindings.Custom;
-using JetBrains.Annotations;
-using UIKit;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class UIViewControllerBindings
+    public static class ActivityExtensions
     {
-        [NotNull]
-        public static TargetItemBinding<UIViewController, string> TitleBinding(
-            [NotNull] this IItemReference<UIViewController> viewControllerReference)
+        public static TargetItemBinding<Activity, string> TitleBinding(
+            this IItemReference<Activity> activityReference)
         {
-            if (viewControllerReference == null)
-                throw new ArgumentNullException(nameof(viewControllerReference));
+            if (activityReference == null)
+                throw new ArgumentNullException(nameof(activityReference));
 
-            return new TargetItemOneWayCustomBinding<UIViewController, string>(
-                viewControllerReference,
-                (viewController, title) => viewController.NotNull().Title = title,
-                () => "Title");
+            return new TargetItemOneWayCustomBinding<Activity, string>(
+                activityReference,
+                (activity, title) => activity.Title = title,
+                () => $"{nameof(Activity.Title)}");
         }
     }
 }

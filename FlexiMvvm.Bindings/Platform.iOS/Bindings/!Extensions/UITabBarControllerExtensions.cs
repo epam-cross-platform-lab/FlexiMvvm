@@ -14,16 +14,24 @@
 // limitations under the License.
 // =========================================================================
 
+using System;
+using FlexiMvvm.Bindings.Custom;
 using UIKit;
 
 namespace FlexiMvvm.Bindings
 {
-    public partial class BindingSet<TSourceItem>
+    public static class UITabBarControllerExtensions
     {
-        public ITargetItemBindingBuilder<TSourceItem, UINavigationItem> Bind(
-            UINavigationItem? navigationItem)
+        public static TargetItemBinding<UITabBarController, nint> SelectedIndexBinding(
+            this IItemReference<UITabBarController> tabBarControllerReference)
         {
-            return Bind(navigationItem, ItemReferenceType.Strong);
+            if (tabBarControllerReference == null)
+                throw new ArgumentNullException(nameof(tabBarControllerReference));
+
+            return new TargetItemOneWayCustomBinding<UITabBarController, nint>(
+                tabBarControllerReference,
+                (tabBarController, selectedIndex) => tabBarController.SelectedIndex = selectedIndex,
+                () => $"{nameof(UITabBarController.SelectedIndex)}");
         }
     }
 }

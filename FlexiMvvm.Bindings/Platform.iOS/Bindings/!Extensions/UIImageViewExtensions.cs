@@ -14,16 +14,24 @@
 // limitations under the License.
 // =========================================================================
 
+using System;
+using FlexiMvvm.Bindings.Custom;
 using UIKit;
 
 namespace FlexiMvvm.Bindings
 {
-    public partial class BindingSet<TSourceItem>
+    public static class UIImageViewExtensions
     {
-        public ITargetItemBindingBuilder<TSourceItem, UINavigationItem> Bind(
-            UINavigationItem? navigationItem)
+        public static TargetItemBinding<UIImageView, UIImage> ImageBinding(
+            this IItemReference<UIImageView> imageViewReference)
         {
-            return Bind(navigationItem, ItemReferenceType.Strong);
+            if (imageViewReference == null)
+                throw new ArgumentNullException(nameof(imageViewReference));
+
+            return new TargetItemOneWayCustomBinding<UIImageView, UIImage>(
+                imageViewReference,
+                (imageView, image) => imageView.Image = image,
+                () => $"{nameof(UIImageView.Image)}");
         }
     }
 }

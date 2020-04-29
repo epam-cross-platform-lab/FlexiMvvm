@@ -23,7 +23,7 @@ namespace FlexiMvvm.Bindings
         where TSourceItem : class
         where TTargetItem : class
     {
-         [NotNull]
+        [NotNull]
         ISourceItemBindingBuilder<TSourceItem, TTargetItemValue> For<TBaseTargetItem, TTargetItemValue>(
             [NotNull] Func<IItemReference<TTargetItem>, TargetItemBinding<TBaseTargetItem, TTargetItemValue>> targetItemBindingSelector)
             where TBaseTargetItem : class;

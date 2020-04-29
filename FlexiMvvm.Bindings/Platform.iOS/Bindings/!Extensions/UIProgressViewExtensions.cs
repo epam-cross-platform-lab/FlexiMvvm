@@ -16,29 +16,26 @@
 
 using System;
 using FlexiMvvm.Bindings.Custom;
-using JetBrains.Annotations;
 using UIKit;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class UIProgressViewBindings
+    public static class UIProgressViewExtensions
     {
-        [NotNull]
         public static TargetItemBinding<UIProgressView, float> ProgressBinding(
-            [NotNull] this IItemReference<UIProgressView> progressViewReference)
+            this IItemReference<UIProgressView> progressViewReference)
         {
             if (progressViewReference == null)
                 throw new ArgumentNullException(nameof(progressViewReference));
 
             return new TargetItemOneWayCustomBinding<UIProgressView, float>(
                 progressViewReference,
-                (progressView, progress) => progressView.NotNull().Progress = progress,
-                () => "Progress");
+                (progressView, progress) => progressView.Progress = progress,
+                () => $"{nameof(UIProgressView.Progress)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UIProgressView, float> SetProgressBinding(
-            [NotNull] this IItemReference<UIProgressView> progressViewReference,
+            this IItemReference<UIProgressView> progressViewReference,
             bool animated = true)
         {
             if (progressViewReference == null)
@@ -46,8 +43,8 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemOneWayCustomBinding<UIProgressView, float>(
                 progressViewReference,
-                (progressView, progress) => progressView.NotNull().SetProgress(progress, animated),
-                () => "SetProgress");
+                (progressView, progress) => progressView.SetProgress(progress, animated),
+                () => $"{nameof(UIProgressView.SetProgress)}");
         }
     }
 }

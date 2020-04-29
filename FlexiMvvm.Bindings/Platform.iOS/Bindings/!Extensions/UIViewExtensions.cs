@@ -16,94 +16,98 @@
 
 using System;
 using FlexiMvvm.Bindings.Custom;
-using JetBrains.Annotations;
 using UIKit;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class UIViewBindings
+    public static class UIViewExtensions
     {
-        [NotNull]
         public static TargetItemBinding<UIView, float> AlphaBinding(
-            [NotNull] this IItemReference<UIView> viewReference)
+            this IItemReference<UIView> viewReference)
         {
             if (viewReference == null)
                 throw new ArgumentNullException(nameof(viewReference));
 
             return new TargetItemOneWayCustomBinding<UIView, float>(
                 viewReference,
-                (view, alpha) => view.NotNull().Alpha = alpha,
-                () => "Alpha");
+                (view, alpha) => view.Alpha = alpha,
+                () => $"{nameof(UIView.Alpha)}");
         }
 
-        [NotNull]
+        public static TargetItemBinding<UIView, UIColor> BackgroundColorBinding(
+            this IItemReference<UIView> viewReference)
+        {
+            if (viewReference == null)
+                throw new ArgumentNullException(nameof(viewReference));
+
+            return new TargetItemOneWayCustomBinding<UIView, UIColor>(
+                viewReference,
+                (view, backgroundColor) => view.BackgroundColor = backgroundColor,
+                () => $"{nameof(UIView.BackgroundColor)}");
+        }
+
         public static TargetItemBinding<UIView, bool> EndEditingBinding(
-            [NotNull] this IItemReference<UIView> viewReference)
+            this IItemReference<UIView> viewReference)
         {
             if (viewReference == null)
                 throw new ArgumentNullException(nameof(viewReference));
 
             return new TargetItemOneWayCustomBinding<UIView, bool>(
                 viewReference,
-                (view, force) => view.NotNull().EndEditing(force),
-                () => "EndEditing");
+                (view, force) => view.EndEditing(force),
+                () => $"{nameof(UIView_UITextField.EndEditing)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UIView, bool> HiddenBinding(
-            [NotNull] this IItemReference<UIView> viewReference)
+            this IItemReference<UIView> viewReference)
         {
             if (viewReference == null)
                 throw new ArgumentNullException(nameof(viewReference));
 
             return new TargetItemOneWayCustomBinding<UIView, bool>(
                 viewReference,
-                (view, hidden) => view.NotNull().Hidden = hidden,
-                () => "Hidden");
+                (view, hidden) => view.Hidden = hidden,
+                () => $"{nameof(UIView.Hidden)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UIView, bool> IsAccessibilityElementBinding(
-            [NotNull] this IItemReference<UIView> viewReference)
+            this IItemReference<UIView> viewReference)
         {
             if (viewReference == null)
                 throw new ArgumentNullException(nameof(viewReference));
 
             return new TargetItemOneWayCustomBinding<UIView, bool>(
                 viewReference,
-                (view, isAccessibilityElement) => view.NotNull().IsAccessibilityElement = isAccessibilityElement,
-                () => "IsAccessibilityElement");
+                (view, isAccessibilityElement) => view.IsAccessibilityElement = isAccessibilityElement,
+                () => $"{nameof(UIView.IsAccessibilityElement)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UIView, bool> MultipleTouchEnabledBinding(
-            [NotNull] this IItemReference<UIView> viewReference)
+            this IItemReference<UIView> viewReference)
         {
             if (viewReference == null)
                 throw new ArgumentNullException(nameof(viewReference));
 
             return new TargetItemOneWayCustomBinding<UIView, bool>(
                 viewReference,
-                (view, multipleTouchEnabled) => view.NotNull().MultipleTouchEnabled = multipleTouchEnabled,
-                () => "MultipleTouchEnabled");
+                (view, multipleTouchEnabled) => view.MultipleTouchEnabled = multipleTouchEnabled,
+                () => $"{nameof(UIView.MultipleTouchEnabled)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UIView, bool> OpaqueBinding(
-            [NotNull] this IItemReference<UIView> viewReference)
+            this IItemReference<UIView> viewReference)
         {
             if (viewReference == null)
                 throw new ArgumentNullException(nameof(viewReference));
 
             return new TargetItemOneWayCustomBinding<UIView, bool>(
                 viewReference,
-                (view, opaque) => view.NotNull().Opaque = opaque,
-                () => "Opaque");
+                (view, opaque) => view.Opaque = opaque,
+                () => $"{nameof(UIView.Opaque)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UIView, object> TapBinding(
-            [NotNull] this IItemReference<UIView> viewReference)
+            this IItemReference<UIView> viewReference)
         {
             if (viewReference == null)
                 throw new ArgumentNullException(nameof(viewReference));
@@ -113,17 +117,16 @@ namespace FlexiMvvm.Bindings
                 (view, canExecuteCommand) => { });
         }
 
-        [NotNull]
         public static TargetItemBinding<UIView, bool> UserInteractionEnabledBinding(
-            [NotNull] this IItemReference<UIView> viewReference)
+            this IItemReference<UIView> viewReference)
         {
             if (viewReference == null)
                 throw new ArgumentNullException(nameof(viewReference));
 
             return new TargetItemOneWayCustomBinding<UIView, bool>(
                 viewReference,
-                (view, userInteractionEnabled) => view.NotNull().UserInteractionEnabled = userInteractionEnabled,
-                () => "UserInteractionEnabled");
+                (view, userInteractionEnabled) => view.UserInteractionEnabled = userInteractionEnabled,
+                () => $"{nameof(UIView.UserInteractionEnabled)}");
         }
     }
 }

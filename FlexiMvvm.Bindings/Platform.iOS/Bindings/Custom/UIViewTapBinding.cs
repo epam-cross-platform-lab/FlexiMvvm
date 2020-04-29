@@ -16,23 +16,20 @@
 
 using System;
 using FlexiMvvm.Bindings.Custom.Core;
-using JetBrains.Annotations;
 using UIKit;
 
 namespace FlexiMvvm.Bindings.Custom
 {
     public class UIViewTapBinding : TargetItemBinding<UIView, object>, ITargetItemCommandListener<UIView>
     {
-        [NotNull]
         private readonly Action<UIView, bool> _handleCanExecuteCommandChanged;
         private readonly int _numberOfTapsRequired;
         private readonly int _numberOfTouchesRequired;
-        [CanBeNull]
-        private WeakReference<UITapGestureRecognizer> _tapGestureRecognizerWeakReference;
+        private WeakReference<UITapGestureRecognizer>? _tapGestureRecognizerWeakReference;
 
         public UIViewTapBinding(
-            [NotNull] IItemReference<UIView> itemReference,
-            [NotNull] Action<UIView, bool> handleCanExecuteCommandChanged,
+            IItemReference<UIView> itemReference,
+            Action<UIView, bool> handleCanExecuteCommandChanged,
             int numberOfTapsRequired = 1,
             int numberOfTouchesRequired = 1)
             : base(itemReference, () => "Tap")

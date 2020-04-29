@@ -14,16 +14,24 @@
 // limitations under the License.
 // =========================================================================
 
+using System;
+using FlexiMvvm.Bindings.Custom;
 using UIKit;
 
 namespace FlexiMvvm.Bindings
 {
-    public partial class BindingSet<TSourceItem>
+    public static class UINavigationControllerExtensions
     {
-        public ITargetItemBindingBuilder<TSourceItem, UINavigationItem> Bind(
-            UINavigationItem? navigationItem)
+        public static TargetItemBinding<UINavigationController, bool> NavigationBarHiddenBinding(
+            this IItemReference<UINavigationController> navigationControllerReference)
         {
-            return Bind(navigationItem, ItemReferenceType.Strong);
+            if (navigationControllerReference == null)
+                throw new ArgumentNullException(nameof(navigationControllerReference));
+
+            return new TargetItemOneWayCustomBinding<UINavigationController, bool>(
+                navigationControllerReference,
+                (navigationController, navigationBarHidden) => navigationController.NavigationBarHidden = navigationBarHidden,
+                () => $"{nameof(UINavigationController.NavigationBarHidden)}");
         }
     }
 }

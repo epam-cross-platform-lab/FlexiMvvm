@@ -14,16 +14,24 @@
 // limitations under the License.
 // =========================================================================
 
+using System;
+using FlexiMvvm.Bindings.Custom;
 using UIKit;
 
 namespace FlexiMvvm.Bindings
 {
-    public partial class BindingSet<TSourceItem>
+    public static class UIViewControllerExtensions
     {
-        public ITargetItemBindingBuilder<TSourceItem, UINavigationItem> Bind(
-            UINavigationItem? navigationItem)
+        public static TargetItemBinding<UIViewController, string> TitleBinding(
+            this IItemReference<UIViewController> viewControllerReference)
         {
-            return Bind(navigationItem, ItemReferenceType.Strong);
+            if (viewControllerReference == null)
+                throw new ArgumentNullException(nameof(viewControllerReference));
+
+            return new TargetItemOneWayCustomBinding<UIViewController, string>(
+                viewControllerReference,
+                (viewController, title) => viewController.Title = title,
+                () => $"{nameof(UIViewController.Title)}");
         }
     }
 }

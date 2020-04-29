@@ -15,20 +15,19 @@
 // =========================================================================
 
 using System;
+using System.Linq;
 using Android.Graphics.Drawables;
 using Android.Text;
 using Android.Widget;
 using FlexiMvvm.Bindings.Custom;
 using Java.Lang;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Bindings
 {
     public static class TextViewExtensions
     {
-        [NotNull]
         public static TargetItemBinding<TextView, string> AfterTextChangedBinding(
-            [NotNull] this IItemReference<TextView> textViewReference,
+            this IItemReference<TextView> textViewReference,
             bool trackCanExecuteCommandChanged = false)
         {
             if (textViewReference == null)
@@ -36,22 +35,21 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemOneWayToSourceCustomBinding<TextView, string, AfterTextChangedEventArgs>(
                 textViewReference,
-                (textView, eventHandler) => textView.NotNull().AfterTextChanged += eventHandler,
-                (textView, eventHandler) => textView.NotNull().AfterTextChanged -= eventHandler,
+                (textView, handler) => textView.AfterTextChanged += handler,
+                (textView, handler) => textView.AfterTextChanged -= handler,
                 (textView, canExecuteCommand) =>
                 {
                     if (trackCanExecuteCommandChanged)
                     {
-                        textView.NotNull().Enabled = canExecuteCommand;
+                        textView.Enabled = canExecuteCommand;
                     }
                 },
-                (textView, eventArgs) => textView.NotNull().Text,
+                (textView, args) => textView.Text,
                 () => $"{nameof(TextView.AfterTextChanged)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<TextView, string> BeforeTextChangedBinding(
-            [NotNull] this IItemReference<TextView> textViewReference,
+            this IItemReference<TextView> textViewReference,
             bool trackCanExecuteCommandChanged = false)
         {
             if (textViewReference == null)
@@ -59,49 +57,58 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemOneWayToSourceCustomBinding<TextView, string, TextChangedEventArgs>(
                 textViewReference,
-                (textView, eventHandler) => textView.NotNull().BeforeTextChanged += eventHandler,
-                (textView, eventHandler) => textView.NotNull().BeforeTextChanged -= eventHandler,
+                (textView, handler) => textView.BeforeTextChanged += handler,
+                (textView, handler) => textView.BeforeTextChanged -= handler,
                 (textView, canExecuteCommand) =>
                 {
                     if (trackCanExecuteCommandChanged)
                     {
-                        textView.NotNull().Enabled = canExecuteCommand;
+                        textView.Enabled = canExecuteCommand;
                     }
                 },
-                (textView, eventArgs) => textView.NotNull().Text,
+                (textView, args) => textView.Text,
                 () => $"{nameof(TextView.BeforeTextChanged)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<TextView, string> ErrorBinding(
-            [NotNull] this IItemReference<TextView> textViewReference)
+            this IItemReference<TextView> textViewReference)
         {
             if (textViewReference == null)
                 throw new ArgumentNullException(nameof(textViewReference));
 
             return new TargetItemOneWayCustomBinding<TextView, string>(
                 textViewReference,
-                (textView, error) => textView.NotNull().Error = error,
+                (textView, error) => textView.Error = error,
                 () => $"{nameof(TextView.Error)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<TextView, string> HintBinding(
-            [NotNull] this IItemReference<TextView> textViewReference)
+            this IItemReference<TextView> textViewReference)
         {
             if (textViewReference == null)
                 throw new ArgumentNullException(nameof(textViewReference));
 
             return new TargetItemOneWayCustomBinding<TextView, string>(
                 textViewReference,
-                (textView, hint) => textView.NotNull().Hint = hint,
+                (textView, hint) => textView.Hint = hint,
                 () => $"{nameof(TextView.Hint)}");
         }
 
-        [NotNull]
+        public static TargetItemBinding<TextView, int[]> SetCompoundDrawablesWithIntrinsicBoundsBinding(
+            this IItemReference<TextView> textViewReference)
+        {
+            if (textViewReference == null)
+                throw new ArgumentNullException(nameof(textViewReference));
+
+            return new TargetItemOneWayCustomBinding<TextView, int[]>(
+                textViewReference,
+                (textView, drawables) => textView.SetCompoundDrawablesWithIntrinsicBounds(drawables.ElementAtOrDefault(0), drawables.ElementAtOrDefault(1), drawables.ElementAtOrDefault(2), drawables.ElementAtOrDefault(3)),
+                () => $"{nameof(TextView.SetCompoundDrawablesWithIntrinsicBounds)}");
+        }
+
         public static TargetItemBinding<TextView, string> SetErrorBinding(
-            [NotNull] this IItemReference<TextView> textViewReference,
-            [NotNull] Drawable icon)
+            this IItemReference<TextView> textViewReference,
+            Drawable icon)
         {
             if (textViewReference == null)
                 throw new ArgumentNullException(nameof(textViewReference));
@@ -110,27 +117,25 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemOneWayCustomBinding<TextView, string>(
                 textViewReference,
-                (textView, error) => textView.NotNull().SetError(error, icon),
+                (textView, error) => textView.SetError(error, icon),
                 () => $"{nameof(TextView.SetError)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<TextView, int> SetHintBinding(
-            [NotNull] this IItemReference<TextView> textViewReference)
+            this IItemReference<TextView> textViewReference)
         {
             if (textViewReference == null)
                 throw new ArgumentNullException(nameof(textViewReference));
 
             return new TargetItemOneWayCustomBinding<TextView, int>(
                 textViewReference,
-                (textView, resId) => textView.NotNull().SetHint(resId),
+                (textView, resId) => textView.SetHint(resId),
                 () => $"{nameof(TextView.SetHint)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<TextView, string> SetTextBinding(
-            [NotNull] this IItemReference<TextView> textViewReference,
-            [NotNull] TextView.BufferType bufferType)
+            this IItemReference<TextView> textViewReference,
+            TextView.BufferType bufferType)
         {
             if (textViewReference == null)
                 throw new ArgumentNullException(nameof(textViewReference));
@@ -139,13 +144,12 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemOneWayCustomBinding<TextView, string>(
                 textViewReference,
-                (textView, text) => textView.NotNull().SetText(text, bufferType),
+                (textView, text) => textView.SetText(text, bufferType),
                 () => $"{nameof(TextView.SetText)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<TextView, string> TextAndTextChangedBinding(
-            [NotNull] this IItemReference<TextView> textViewReference,
+            this IItemReference<TextView> textViewReference,
             bool trackCanExecuteCommandChanged = false)
         {
             if (textViewReference == null)
@@ -153,36 +157,34 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemTwoWayCustomBinding<TextView, string, TextChangedEventArgs>(
                 textViewReference,
-                (textView, eventHandler) => textView.NotNull().TextChanged += eventHandler,
-                (textView, eventHandler) => textView.NotNull().TextChanged -= eventHandler,
+                (textView, handler) => textView.TextChanged += handler,
+                (textView, handler) => textView.TextChanged -= handler,
                 (textView, canExecuteCommand) =>
                 {
                     if (trackCanExecuteCommandChanged)
                     {
-                        textView.NotNull().Enabled = canExecuteCommand;
+                        textView.Enabled = canExecuteCommand;
                     }
                 },
-                (textView, eventArgs) => textView.NotNull().Text,
-                (textView, text) => textView.NotNull().Text = text,
+                (textView, args) => textView.Text,
+                (textView, text) => textView.Text = text,
                 () => $"{nameof(TextView.Text)}And{nameof(TextView.TextChanged)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<TextView, string> TextBinding(
-            [NotNull] this IItemReference<TextView> textViewReference)
+            this IItemReference<TextView> textViewReference)
         {
             if (textViewReference == null)
                 throw new ArgumentNullException(nameof(textViewReference));
 
             return new TargetItemOneWayCustomBinding<TextView, string>(
                 textViewReference,
-                (textView, text) => textView.NotNull().Text = text,
+                (textView, text) => textView.Text = text,
                 () => $"{nameof(TextView.Text)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<TextView, string> TextChangedBinding(
-            [NotNull] this IItemReference<TextView> textViewReference,
+            this IItemReference<TextView> textViewReference,
             bool trackCanExecuteCommandChanged = false)
         {
             if (textViewReference == null)
@@ -190,29 +192,28 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemOneWayToSourceCustomBinding<TextView, string, TextChangedEventArgs>(
                 textViewReference,
-                (textView, eventHandler) => textView.NotNull().TextChanged += eventHandler,
-                (textView, eventHandler) => textView.NotNull().TextChanged -= eventHandler,
+                (textView, handler) => textView.TextChanged += handler,
+                (textView, handler) => textView.TextChanged -= handler,
                 (textView, canExecuteCommand) =>
                 {
                     if (trackCanExecuteCommandChanged)
                     {
-                        textView.NotNull().Enabled = canExecuteCommand;
+                        textView.Enabled = canExecuteCommand;
                     }
                 },
-                (textView, eventArgs) => textView.NotNull().Text,
+                (textView, args) => textView.Text,
                 () => $"{nameof(TextView.TextChanged)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<TextView, ICharSequence> TextFormattedBinding(
-            [NotNull] this IItemReference<TextView> textViewReference)
+            this IItemReference<TextView> textViewReference)
         {
             if (textViewReference == null)
                 throw new ArgumentNullException(nameof(textViewReference));
 
             return new TargetItemOneWayCustomBinding<TextView, ICharSequence>(
                 textViewReference,
-                (textView, textFormatted) => textView.NotNull().TextFormatted = textFormatted,
+                (textView, textFormatted) => textView.TextFormatted = textFormatted,
                 () => $"{nameof(TextView.TextFormatted)}");
         }
     }

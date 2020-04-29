@@ -16,24 +16,22 @@
 
 using System;
 using FlexiMvvm.Bindings.Custom;
-using JetBrains.Annotations;
 using UIKit;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class UITabBarControllerBindings
+    public static class UICollectionViewCellExtensions
     {
-        [NotNull]
-        public static TargetItemBinding<UITabBarController, nint> SelectedIndexBinding(
-            [NotNull] this IItemReference<UITabBarController> tabBarControllerReference)
+        public static TargetItemBinding<UICollectionViewCell, bool> SelectedBinding(
+            this IItemReference<UICollectionViewCell> collectionViewCellReference)
         {
-            if (tabBarControllerReference == null)
-                throw new ArgumentNullException(nameof(tabBarControllerReference));
+            if (collectionViewCellReference == null)
+                throw new ArgumentNullException(nameof(collectionViewCellReference));
 
-            return new TargetItemOneWayCustomBinding<UITabBarController, nint>(
-                tabBarControllerReference,
-                (tabBarController, selectedIndex) => tabBarController.NotNull().SelectedIndex = selectedIndex,
-                () => "SelectedIndex");
+            return new TargetItemOneWayCustomBinding<UICollectionViewCell, bool>(
+                collectionViewCellReference,
+                (collectionViewCell, selected) => collectionViewCell.Selected = selected,
+                () => nameof(UICollectionViewCell.Selected));
         }
     }
 }

@@ -17,28 +17,25 @@
 using System;
 using Android.Support.V4.View;
 using FlexiMvvm.Bindings.Custom;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class ViewPagerExtensions
+    public static class SupportViewPagerExtensions
     {
-        [NotNull]
         public static TargetItemBinding<ViewPager, int> CurrentItemBinding(
-            [NotNull] this IItemReference<ViewPager> viewPagerReference)
+            this IItemReference<ViewPager> viewPagerReference)
         {
             if (viewPagerReference == null)
                 throw new ArgumentNullException(nameof(viewPagerReference));
 
             return new TargetItemOneWayCustomBinding<ViewPager, int>(
                 viewPagerReference,
-                (viewPager, currentItem) => viewPager.NotNull().CurrentItem = currentItem,
+                (viewPager, currentItem) => viewPager.CurrentItem = currentItem,
                 () => $"{nameof(ViewPager.CurrentItem)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<ViewPager, int> PageSelectedBinding(
-            [NotNull] this IItemReference<ViewPager> viewPagerReference,
+            this IItemReference<ViewPager> viewPagerReference,
             bool trackCanExecuteCommandChanged = false)
         {
             if (viewPagerReference == null)
@@ -46,22 +43,21 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemOneWayToSourceCustomBinding<ViewPager, int, ViewPager.PageSelectedEventArgs>(
                 viewPagerReference,
-                (viewPager, eventHandler) => viewPager.NotNull().PageSelected += eventHandler,
-                (viewPager, eventHandler) => viewPager.NotNull().PageSelected -= eventHandler,
+                (viewPager, handler) => viewPager.PageSelected += handler,
+                (viewPager, handler) => viewPager.PageSelected -= handler,
                 (viewPager, canExecuteCommand) =>
                 {
                     if (trackCanExecuteCommandChanged)
                     {
-                        viewPager.NotNull().Enabled = canExecuteCommand;
+                        viewPager.Enabled = canExecuteCommand;
                     }
                 },
-                (viewPager, eventArgs) => eventArgs.NotNull().Position,
+                (viewPager, args) => args.Position,
                 () => $"{nameof(ViewPager.PageSelected)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<ViewPager, int> SetCurrentItemAndPageSelectedBinding(
-            [NotNull] this IItemReference<ViewPager> viewPagerReference,
+            this IItemReference<ViewPager> viewPagerReference,
             bool smoothScroll = true,
             bool trackCanExecuteCommandChanged = false)
         {
@@ -70,23 +66,22 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemTwoWayCustomBinding<ViewPager, int, ViewPager.PageSelectedEventArgs>(
                 viewPagerReference,
-                (viewPager, eventHandler) => viewPager.NotNull().PageSelected += eventHandler,
-                (viewPager, eventHandler) => viewPager.NotNull().PageSelected -= eventHandler,
+                (viewPager, handler) => viewPager.PageSelected += handler,
+                (viewPager, handler) => viewPager.PageSelected -= handler,
                 (viewPager, canExecuteCommand) =>
                 {
                     if (trackCanExecuteCommandChanged)
                     {
-                        viewPager.NotNull().Enabled = canExecuteCommand;
+                        viewPager.Enabled = canExecuteCommand;
                     }
                 },
-                (viewPager, eventArgs) => eventArgs?.Position ?? viewPager.NotNull().CurrentItem,
-                (viewPager, item) => viewPager.NotNull().SetCurrentItem(item, smoothScroll),
+                (viewPager, args) => args != null ? args.Position : viewPager.CurrentItem,
+                (viewPager, item) => viewPager.SetCurrentItem(item, smoothScroll),
                 () => $"{nameof(ViewPager.SetCurrentItem)}And{nameof(ViewPager.PageSelected)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<ViewPager, int> SetCurrentItemBinding(
-            [NotNull] this IItemReference<ViewPager> viewPagerReference,
+            this IItemReference<ViewPager> viewPagerReference,
             bool smoothScroll = true)
         {
             if (viewPagerReference == null)
@@ -94,7 +89,7 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemOneWayCustomBinding<ViewPager, int>(
                 viewPagerReference,
-                (viewPager, item) => viewPager.NotNull().SetCurrentItem(item, smoothScroll),
+                (viewPager, item) => viewPager.SetCurrentItem(item, smoothScroll),
                 () => $"{nameof(ViewPager.SetCurrentItem)}");
         }
     }

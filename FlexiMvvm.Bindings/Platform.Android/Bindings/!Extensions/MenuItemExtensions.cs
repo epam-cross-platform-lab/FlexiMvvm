@@ -14,16 +14,24 @@
 // limitations under the License.
 // =========================================================================
 
-using UIKit;
+using System;
+using Android.Views;
+using FlexiMvvm.Bindings.Custom;
 
 namespace FlexiMvvm.Bindings
 {
-    public partial class BindingSet<TSourceItem>
+    public static class MenuItemExtensions
     {
-        public ITargetItemBindingBuilder<TSourceItem, UINavigationItem> Bind(
-            UINavigationItem? navigationItem)
+        public static TargetItemBinding<IMenuItem, int> SetIconBinding(
+            this IItemReference<IMenuItem> menuItemReference)
         {
-            return Bind(navigationItem, ItemReferenceType.Strong);
+            if (menuItemReference == null)
+                throw new ArgumentNullException(nameof(menuItemReference));
+
+            return new TargetItemOneWayCustomBinding<IMenuItem, int>(
+                menuItemReference,
+                (menuItem, iconRes) => menuItem.SetIcon(iconRes),
+                () => $"{nameof(IMenuItem.SetIcon)}");
         }
     }
 }

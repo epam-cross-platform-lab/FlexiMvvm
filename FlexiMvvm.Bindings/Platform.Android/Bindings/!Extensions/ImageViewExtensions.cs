@@ -14,16 +14,24 @@
 // limitations under the License.
 // =========================================================================
 
-using UIKit;
+using System;
+using Android.Widget;
+using FlexiMvvm.Bindings.Custom;
 
 namespace FlexiMvvm.Bindings
 {
-    public partial class BindingSet<TSourceItem>
+    public static class ImageViewExtensions
     {
-        public ITargetItemBindingBuilder<TSourceItem, UINavigationItem> Bind(
-            UINavigationItem? navigationItem)
+        public static TargetItemBinding<ImageView, int> SetImageResourceBinding(
+            this IItemReference<ImageView> imageViewReference)
         {
-            return Bind(navigationItem, ItemReferenceType.Strong);
+            if (imageViewReference == null)
+                throw new ArgumentNullException(nameof(imageViewReference));
+
+            return new TargetItemOneWayCustomBinding<ImageView, int>(
+                imageViewReference,
+                (imageView, resId) => imageView.SetImageResource(resId),
+                () => $"{nameof(ImageView.SetImageResource)}");
         }
     }
 }

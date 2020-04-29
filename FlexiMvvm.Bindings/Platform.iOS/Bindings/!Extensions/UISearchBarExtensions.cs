@@ -16,164 +16,152 @@
 
 using System;
 using FlexiMvvm.Bindings.Custom;
-using JetBrains.Annotations;
 using UIKit;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class UISearchBarBindings
+    public static class UISearchBarExtensions
     {
-        [NotNull]
         public static TargetItemBinding<UISearchBar, object> BookmarkButtonClickedBinding(
-            [NotNull] this IItemReference<UISearchBar> searchBarReference)
+            this IItemReference<UISearchBar> searchBarReference)
         {
             if (searchBarReference == null)
                 throw new ArgumentNullException(nameof(searchBarReference));
 
             return new TargetItemOneWayToSourceCustomBinding<UISearchBar, object>(
                 searchBarReference,
-                (searchBar, eventHandler) => searchBar.NotNull().BookmarkButtonClicked += eventHandler,
-                (searchBar, eventHandler) => searchBar.NotNull().BookmarkButtonClicked -= eventHandler,
+                (searchBar, handler) => searchBar.BookmarkButtonClicked += handler,
+                (searchBar, handler) => searchBar.BookmarkButtonClicked -= handler,
                 (searchBar, canExecuteCommand) => { },
                 searchBar => null,
-                () => "BookmarkButtonClicked");
+                () => $"{nameof(UISearchBar.BookmarkButtonClicked)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UISearchBar, object> CancelButtonClickedBinding(
-            [NotNull] this IItemReference<UISearchBar> searchBarReference)
+            this IItemReference<UISearchBar> searchBarReference)
         {
             if (searchBarReference == null)
                 throw new ArgumentNullException(nameof(searchBarReference));
 
             return new TargetItemOneWayToSourceCustomBinding<UISearchBar, object>(
                 searchBarReference,
-                (searchBar, eventHandler) => searchBar.NotNull().CancelButtonClicked += eventHandler,
-                (searchBar, eventHandler) => searchBar.NotNull().CancelButtonClicked -= eventHandler,
+                (searchBar, handler) => searchBar.CancelButtonClicked += handler,
+                (searchBar, handler) => searchBar.CancelButtonClicked -= handler,
                 (searchBar, canExecuteCommand) => { },
                 searchBar => null,
-                () => "CancelButtonClicked");
+                () => $"{nameof(UISearchBar.CancelButtonClicked)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UISearchBar, object> ListButtonClickedBinding(
-            [NotNull] this IItemReference<UISearchBar> searchBarReference)
+            this IItemReference<UISearchBar> searchBarReference)
         {
             if (searchBarReference == null)
                 throw new ArgumentNullException(nameof(searchBarReference));
 
             return new TargetItemOneWayToSourceCustomBinding<UISearchBar, object>(
                 searchBarReference,
-                (searchBar, eventHandler) => searchBar.NotNull().ListButtonClicked += eventHandler,
-                (searchBar, eventHandler) => searchBar.NotNull().ListButtonClicked -= eventHandler,
+                (searchBar, handler) => searchBar.ListButtonClicked += handler,
+                (searchBar, handler) => searchBar.ListButtonClicked -= handler,
                 (searchBar, canExecuteCommand) => { },
                 searchBar => null,
-                () => "ListButtonClicked");
+                () => $"{nameof(UISearchBar.ListButtonClicked)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UISearchBar, object> OnEditingStartedBinding(
-            [NotNull] this IItemReference<UISearchBar> searchBarReference)
+            this IItemReference<UISearchBar> searchBarReference)
         {
             if (searchBarReference == null)
                 throw new ArgumentNullException(nameof(searchBarReference));
 
             return new TargetItemOneWayToSourceCustomBinding<UISearchBar, object>(
                 searchBarReference,
-                (searchBar, eventHandler) => searchBar.NotNull().OnEditingStarted += eventHandler,
-                (searchBar, eventHandler) => searchBar.NotNull().OnEditingStarted -= eventHandler,
+                (searchBar, handler) => searchBar.OnEditingStarted += handler,
+                (searchBar, handler) => searchBar.OnEditingStarted -= handler,
                 (searchBar, canExecuteCommand) => { },
                 searchBar => null,
-                () => "OnEditingStarted");
+                () => $"{nameof(UISearchBar.OnEditingStarted)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UISearchBar, object> OnEditingStoppedBinding(
-            [NotNull] this IItemReference<UISearchBar> searchBarReference)
+            this IItemReference<UISearchBar> searchBarReference)
         {
             if (searchBarReference == null)
                 throw new ArgumentNullException(nameof(searchBarReference));
 
             return new TargetItemOneWayToSourceCustomBinding<UISearchBar, object>(
                 searchBarReference,
-                (searchBar, eventHandler) => searchBar.NotNull().OnEditingStopped += eventHandler,
-                (searchBar, eventHandler) => searchBar.NotNull().OnEditingStopped -= eventHandler,
+                (searchBar, handler) => searchBar.OnEditingStopped += handler,
+                (searchBar, handler) => searchBar.OnEditingStopped -= handler,
                 (searchBar, canExecuteCommand) => { },
                 searchBar => null,
-                () => "OnEditingStopped");
+                () => $"{nameof(UISearchBar.OnEditingStopped)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UISearchBar, string> PlaceholderBinding(
-            [NotNull] this IItemReference<UISearchBar> searchBarReference)
+            this IItemReference<UISearchBar> searchBarReference)
         {
             if (searchBarReference == null)
                 throw new ArgumentNullException(nameof(searchBarReference));
 
             return new TargetItemOneWayCustomBinding<UISearchBar, string>(
                 searchBarReference,
-                (searchBar, placeholder) => searchBar.NotNull().Placeholder = placeholder,
-                () => "Placeholder");
+                (searchBar, placeholder) => searchBar.Placeholder = placeholder,
+                () => $"{nameof(UISearchBar.Placeholder)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UISearchBar, string> PromptBinding(
-            [NotNull] this IItemReference<UISearchBar> searchBarReference)
+            this IItemReference<UISearchBar> searchBarReference)
         {
             if (searchBarReference == null)
                 throw new ArgumentNullException(nameof(searchBarReference));
 
             return new TargetItemOneWayCustomBinding<UISearchBar, string>(
                 searchBarReference,
-                (searchBar, prompt) => searchBar.NotNull().Prompt = prompt,
-                () => "Prompt");
+                (searchBar, prompt) => searchBar.Prompt = prompt,
+                () => $"{nameof(UISearchBar.Prompt)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UISearchBar, object> SearchButtonClickedBinding(
-            [NotNull] this IItemReference<UISearchBar> searchBarReference)
+            this IItemReference<UISearchBar> searchBarReference)
         {
             if (searchBarReference == null)
                 throw new ArgumentNullException(nameof(searchBarReference));
 
             return new TargetItemOneWayToSourceCustomBinding<UISearchBar, object>(
                 searchBarReference,
-                (searchBar, eventHandler) => searchBar.NotNull().SearchButtonClicked += eventHandler,
-                (searchBar, eventHandler) => searchBar.NotNull().SearchButtonClicked -= eventHandler,
+                (searchBar, handler) => searchBar.SearchButtonClicked += handler,
+                (searchBar, handler) => searchBar.SearchButtonClicked -= handler,
                 (searchBar, canExecuteCommand) => { },
                 searchBar => null,
-                () => "SearchButtonClicked");
+                () => $"{nameof(UISearchBar.SearchButtonClicked)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UISearchBar, bool> SearchResultsButtonSelectedBinding(
-            [NotNull] this IItemReference<UISearchBar> searchBarReference)
+            this IItemReference<UISearchBar> searchBarReference)
         {
             if (searchBarReference == null)
                 throw new ArgumentNullException(nameof(searchBarReference));
 
             return new TargetItemOneWayCustomBinding<UISearchBar, bool>(
                 searchBarReference,
-                (searchBar, searchResultsButtonSelected) => searchBar.NotNull().SearchResultsButtonSelected = searchResultsButtonSelected,
-                () => "SearchResultsButtonSelected");
+                (searchBar, searchResultsButtonSelected) => searchBar.SearchResultsButtonSelected = searchResultsButtonSelected,
+                () => $"{nameof(UISearchBar.SearchResultsButtonSelected)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UISearchBar, bool> SecureTextEntryBinding(
-            [NotNull] this IItemReference<UISearchBar> searchBarReference)
+            this IItemReference<UISearchBar> searchBarReference)
         {
             if (searchBarReference == null)
                 throw new ArgumentNullException(nameof(searchBarReference));
 
             return new TargetItemOneWayCustomBinding<UISearchBar, bool>(
                 searchBarReference,
-                (searchBar, secureTextEntry) => searchBar.NotNull().SecureTextEntry = secureTextEntry,
-                () => "SecureTextEntry");
+                (searchBar, secureTextEntry) => searchBar.SecureTextEntry = secureTextEntry,
+                () => $"{nameof(UISearchBar.SecureTextEntry)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UISearchBar, bool> SetShowsCancelButtonBinding(
-            [NotNull] this IItemReference<UISearchBar> searchBarReference,
+            this IItemReference<UISearchBar> searchBarReference,
             bool animated = true)
         {
             if (searchBarReference == null)
@@ -181,103 +169,111 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemOneWayCustomBinding<UISearchBar, bool>(
                 searchBarReference,
-                (searchBar, showsCancelButton) => searchBar.NotNull().SetShowsCancelButton(showsCancelButton, animated),
-                () => "SetShowsCancelButton");
+                (searchBar, showsCancelButton) => searchBar.SetShowsCancelButton(showsCancelButton, animated),
+                () => $"{nameof(UISearchBar.SetShowsCancelButton)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UISearchBar, bool> ShowsBookmarkButtonBinding(
-            [NotNull] this IItemReference<UISearchBar> searchBarReference)
+            this IItemReference<UISearchBar> searchBarReference)
         {
             if (searchBarReference == null)
                 throw new ArgumentNullException(nameof(searchBarReference));
 
             return new TargetItemOneWayCustomBinding<UISearchBar, bool>(
                 searchBarReference,
-                (searchBar, showsBookmarkButton) => searchBar.NotNull().ShowsBookmarkButton = showsBookmarkButton,
-                () => "ShowsBookmarkButton");
+                (searchBar, showsBookmarkButton) => searchBar.ShowsBookmarkButton = showsBookmarkButton,
+                () => $"{nameof(UISearchBar.ShowsBookmarkButton)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UISearchBar, bool> ShowsCancelButtonBinding(
-            [NotNull] this IItemReference<UISearchBar> searchBarReference)
+            this IItemReference<UISearchBar> searchBarReference)
         {
             if (searchBarReference == null)
                 throw new ArgumentNullException(nameof(searchBarReference));
 
             return new TargetItemOneWayCustomBinding<UISearchBar, bool>(
                 searchBarReference,
-                (searchBar, showsCancelButton) => searchBar.NotNull().ShowsCancelButton = showsCancelButton,
-                () => "ShowsCancelButton");
+                (searchBar, showsCancelButton) => searchBar.ShowsCancelButton = showsCancelButton,
+                () => $"{nameof(UISearchBar.ShowsCancelButton)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UISearchBar, bool> ShowsScopeBarBinding(
-            [NotNull] this IItemReference<UISearchBar> searchBarReference)
+            this IItemReference<UISearchBar> searchBarReference)
         {
             if (searchBarReference == null)
                 throw new ArgumentNullException(nameof(searchBarReference));
 
             return new TargetItemOneWayCustomBinding<UISearchBar, bool>(
                 searchBarReference,
-                (searchBar, showsScopeBar) => searchBar.NotNull().ShowsScopeBar = showsScopeBar,
-                () => "ShowsScopeBar");
+                (searchBar, showsScopeBar) => searchBar.ShowsScopeBar = showsScopeBar,
+                () => $"{nameof(UISearchBar.ShowsScopeBar)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UISearchBar, bool> ShowsSearchResultsButtonBinding(
-            [NotNull] this IItemReference<UISearchBar> searchBarReference)
+            this IItemReference<UISearchBar> searchBarReference)
         {
             if (searchBarReference == null)
                 throw new ArgumentNullException(nameof(searchBarReference));
 
             return new TargetItemOneWayCustomBinding<UISearchBar, bool>(
                 searchBarReference,
-                (searchBar, showsSearchResultsButton) => searchBar.NotNull().ShowsSearchResultsButton = showsSearchResultsButton,
-                () => "ShowsSearchResultsButton");
+                (searchBar, showsSearchResultsButton) => searchBar.ShowsSearchResultsButton = showsSearchResultsButton,
+                () => $"{nameof(UISearchBar.ShowsSearchResultsButton)}");
         }
 
-        [NotNull]
-        public static TargetItemBinding<UISearchBar, string> TextBinding(
-            [NotNull] this IItemReference<UISearchBar> searchBarReference)
-        {
-            if (searchBarReference == null)
-                throw new ArgumentNullException(nameof(searchBarReference));
-
-            return new TargetItemOneWayCustomBinding<UISearchBar, string>(
-                searchBarReference,
-                (searchBar, text) => searchBar.NotNull().Text = text,
-                () => "Text");
-        }
-
-        [NotNull]
         public static TargetItemBinding<UISearchBar, string> TextAndTextChangedBinding(
-            [NotNull] this IItemReference<UISearchBar> searchBarReference)
+            this IItemReference<UISearchBar> searchBarReference)
         {
             if (searchBarReference == null)
                 throw new ArgumentNullException(nameof(searchBarReference));
 
             return new TargetItemTwoWayCustomBinding<UISearchBar, string, UISearchBarTextChangedEventArgs>(
                 searchBarReference,
-                (searchBar, eventHandler) => searchBar.NotNull().TextChanged += eventHandler,
-                (searchBar, eventHandler) => searchBar.NotNull().TextChanged -= eventHandler,
+                (searchBar, handler) => searchBar.TextChanged += handler,
+                (searchBar, handler) => searchBar.TextChanged -= handler,
                 (searchBar, canExecuteCommand) => { },
-                (searchBar, eventArgs) => eventArgs?.SearchText ?? searchBar.NotNull().Text,
-                (searchBar, text) => searchBar.NotNull().Text = text,
-                () => "TextAndTextChanged");
+                (searchBar, args) => args != null ? args.SearchText : searchBar.Text,
+                (searchBar, text) => searchBar.Text = text,
+                () => $"{nameof(UISearchBar.Text)}And{nameof(UISearchBar.TextChanged)}");
         }
 
-        [NotNull]
+        public static TargetItemBinding<UISearchBar, string> TextBinding(
+            this IItemReference<UISearchBar> searchBarReference)
+        {
+            if (searchBarReference == null)
+                throw new ArgumentNullException(nameof(searchBarReference));
+
+            return new TargetItemOneWayCustomBinding<UISearchBar, string>(
+                searchBarReference,
+                (searchBar, text) => searchBar.Text = text,
+                () => $"{nameof(UISearchBar.Text)}");
+        }
+
+        public static TargetItemBinding<UISearchBar, string> TextChangedBinding(
+            this IItemReference<UISearchBar> searchBarReference)
+        {
+            if (searchBarReference == null)
+                throw new ArgumentNullException(nameof(searchBarReference));
+
+            return new TargetItemOneWayToSourceCustomBinding<UISearchBar, string, UISearchBarTextChangedEventArgs>(
+                searchBarReference,
+                (searchBar, handler) => searchBar.TextChanged += handler,
+                (searchBar, handler) => searchBar.TextChanged -= handler,
+                (searchBar, canExecuteCommand) => { },
+                (searchBar, args) => args.SearchText,
+                () => $"{nameof(UISearchBar.TextChanged)}");
+        }
+
         public static TargetItemBinding<UISearchBar, bool> TranslucentBinding(
-            [NotNull] this IItemReference<UISearchBar> searchBarReference)
+            this IItemReference<UISearchBar> searchBarReference)
         {
             if (searchBarReference == null)
                 throw new ArgumentNullException(nameof(searchBarReference));
 
             return new TargetItemOneWayCustomBinding<UISearchBar, bool>(
                 searchBarReference,
-                (searchBar, translucent) => searchBar.NotNull().Translucent = translucent,
-                () => "Translucent");
+                (searchBar, translucent) => searchBar.Translucent = translucent,
+                () => $"{nameof(UISearchBar.Translucent)}");
         }
     }
 }

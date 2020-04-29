@@ -16,16 +16,14 @@
 
 using System;
 using FlexiMvvm.Bindings.Custom;
-using JetBrains.Annotations;
 using UIKit;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class UIRefreshControlBindings
+    public static class UIRefreshControlExtensions
     {
-        [NotNull]
         public static TargetItemBinding<UIRefreshControl, bool> BeginRefreshingBinding(
-            [NotNull] this IItemReference<UIRefreshControl> refreshControlReference)
+            this IItemReference<UIRefreshControl> refreshControlReference)
         {
             if (refreshControlReference == null)
                 throw new ArgumentNullException(nameof(refreshControlReference));
@@ -34,17 +32,16 @@ namespace FlexiMvvm.Bindings
                 refreshControlReference,
                 (refreshControl, refreshing) =>
                 {
-                    if (refreshing && !refreshControl.NotNull().Refreshing)
+                    if (refreshing && !refreshControl.Refreshing)
                     {
                         refreshControl.BeginRefreshing();
                     }
                 },
-                () => "BeginRefreshing");
+                () => $"{nameof(UIRefreshControl.BeginRefreshing)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<UIRefreshControl, bool> EndRefreshingBinding(
-            [NotNull] this IItemReference<UIRefreshControl> refreshControlReference)
+            this IItemReference<UIRefreshControl> refreshControlReference)
         {
             if (refreshControlReference == null)
                 throw new ArgumentNullException(nameof(refreshControlReference));
@@ -53,12 +50,12 @@ namespace FlexiMvvm.Bindings
                 refreshControlReference,
                 (refreshControl, refreshing) =>
                 {
-                    if (!refreshing && refreshControl.NotNull().Refreshing)
+                    if (!refreshing && refreshControl.Refreshing)
                     {
                         refreshControl.EndRefreshing();
                     }
                 },
-                () => "EndRefreshing");
+                () => $"{nameof(UIRefreshControl.EndRefreshing)}");
         }
     }
 }

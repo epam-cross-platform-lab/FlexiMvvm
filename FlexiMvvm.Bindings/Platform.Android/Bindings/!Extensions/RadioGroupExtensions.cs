@@ -17,15 +17,13 @@
 using System;
 using Android.Widget;
 using FlexiMvvm.Bindings.Custom;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Bindings
 {
     public static class RadioGroupExtensions
     {
-        [NotNull]
         public static TargetItemBinding<RadioGroup, int> CheckAndCheckedChangeBinding(
-            [NotNull] this IItemReference<RadioGroup> radioGroupReference,
+            this IItemReference<RadioGroup> radioGroupReference,
             bool trackCanExecuteCommandChanged = false)
         {
             if (radioGroupReference == null)
@@ -33,36 +31,34 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemTwoWayCustomBinding<RadioGroup, int, RadioGroup.CheckedChangeEventArgs>(
                 radioGroupReference,
-                (radioGroup, eventHandler) => radioGroup.NotNull().CheckedChange += eventHandler,
-                (radioGroup, eventHandler) => radioGroup.NotNull().CheckedChange -= eventHandler,
+                (radioGroup, handler) => radioGroup.CheckedChange += handler,
+                (radioGroup, handler) => radioGroup.CheckedChange -= handler,
                 (radioGroup, canExecuteCommand) =>
                 {
                     if (trackCanExecuteCommandChanged)
                     {
-                        radioGroup.NotNull().Enabled = canExecuteCommand;
+                        radioGroup.Enabled = canExecuteCommand;
                     }
                 },
-                (radioGroup, eventArgs) => eventArgs?.CheckedId ?? radioGroup.NotNull().CheckedRadioButtonId,
-                (radioGroup, id) => radioGroup.NotNull().Check(id),
+                (radioGroup, args) => args != null ? args.CheckedId : radioGroup.CheckedRadioButtonId,
+                (radioGroup, id) => radioGroup.Check(id),
                 () => $"{nameof(RadioGroup.Check)}And{nameof(RadioGroup.CheckedChange)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<RadioGroup, int> CheckBinding(
-            [NotNull] this IItemReference<RadioGroup> radioGroupReference)
+            this IItemReference<RadioGroup> radioGroupReference)
         {
             if (radioGroupReference == null)
                 throw new ArgumentNullException(nameof(radioGroupReference));
 
             return new TargetItemOneWayCustomBinding<RadioGroup, int>(
                 radioGroupReference,
-                (radioGroup, id) => radioGroup.NotNull().Check(id),
+                (radioGroup, id) => radioGroup.Check(id),
                 () => $"{nameof(RadioGroup.Check)}");
         }
 
-        [NotNull]
         public static TargetItemBinding<RadioGroup, int> CheckedChangeBinding(
-            [NotNull] this IItemReference<RadioGroup> radioGroupReference,
+            this IItemReference<RadioGroup> radioGroupReference,
             bool trackCanExecuteCommandChanged = false)
         {
             if (radioGroupReference == null)
@@ -70,16 +66,16 @@ namespace FlexiMvvm.Bindings
 
             return new TargetItemOneWayToSourceCustomBinding<RadioGroup, int, RadioGroup.CheckedChangeEventArgs>(
                 radioGroupReference,
-                (radioGroup, eventHandler) => radioGroup.NotNull().CheckedChange += eventHandler,
-                (radioGroup, eventHandler) => radioGroup.NotNull().CheckedChange -= eventHandler,
+                (radioGroup, handler) => radioGroup.CheckedChange += handler,
+                (radioGroup, handler) => radioGroup.CheckedChange -= handler,
                 (radioGroup, canExecuteCommand) =>
                 {
                     if (trackCanExecuteCommandChanged)
                     {
-                        radioGroup.NotNull().Enabled = canExecuteCommand;
+                        radioGroup.Enabled = canExecuteCommand;
                     }
                 },
-                (radioGroup, eventArgs) => eventArgs.NotNull().CheckedId,
+                (radioGroup, args) => args.CheckedId,
                 () => $"{nameof(RadioGroup.CheckedChange)}");
         }
     }
