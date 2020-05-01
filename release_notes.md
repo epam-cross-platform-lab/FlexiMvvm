@@ -1,5 +1,11 @@
 # FlexiMvvm Release Notes
 
+Starting from 0.12 version, FlexiMvvm packages will be maintained and updated separately. You can install packages in your project independently.
+
+You can track list of changes for each package using the links below:
+
+ - [FlexiMvvm.Bindings](https://github.com/epam-cross-platform-lab/FlexiMvvm/blob/master/bindings_release_notes.md)
+
 ## v.0.10.8 (preview)
 
 ### Bug fixes
