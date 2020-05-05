@@ -5,6 +5,9 @@
         <PackageId>FlexiMvvm.Essentials.PreRelease</PackageId>
         <Title>FlexiMvvm.Essentials</Title>
         <Description>MVVM framework for Xamarin.Native.</Description>
+        <AssemblyVersion>0.12.0.0</AssemblyVersion>
+        <AssemblyFileVersion>0.12.0.0</AssemblyFileVersion>
+        <Version>0.12.0-prerelease</Version>
     </PropertyGroup>
     <ItemGroup>
         <ProjectReference Include="..\FlexiMvvm.Common\FlexiMvvm.Common.csproj" />
