@@ -5,6 +5,10 @@ Starting from 0.12 version, FlexiMvvm packages will be maintained and updated se
 You can track list of changes for each package using the links below:
 
  - [FlexiMvvm.Bindings](https://github.com/epam-cross-platform-lab/FlexiMvvm/blob/master/bindings_release_notes.md)
+ - [FlexiMvvm.Collections](https://github.com/epam-cross-platform-lab/FlexiMvvm/blob/master/collections_release_notes.md)
+ - [FlexiMvvm.Essentials](https://github.com/epam-cross-platform-lab/FlexiMvvm/blob/master/essentials_release_notes.md)
+ - [FlexiMvvm.Lifecycle](https://github.com/epam-cross-platform-lab/FlexiMvvm/blob/master/lifecycle_release_notes.md)
+ - [FlexiMvvm.FullStack](https://github.com/epam-cross-platform-lab/FlexiMvvm/blob/master/fullstack_release_notes.md)
 
 ## v.0.10.8 (preview)
 
