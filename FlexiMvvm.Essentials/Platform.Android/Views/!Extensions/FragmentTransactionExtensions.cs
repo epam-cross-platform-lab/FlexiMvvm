@@ -15,7 +15,11 @@
 // =========================================================================
 
 using System;
+#if __ANDROID_29__
+using AndroidX.Fragment.App;
+#else
 using Android.Support.V4.App;
+#endif
 using JetBrains.Annotations;
 
 namespace FlexiMvvm.Views

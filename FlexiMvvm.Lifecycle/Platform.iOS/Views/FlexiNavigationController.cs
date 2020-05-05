@@ -24,17 +24,17 @@ namespace FlexiMvvm.Views
         "StyleCop.CSharp.DocumentationRules",
         "SA1648:InheritDocMustBeUsedWithInheritingClass",
         Justification = "This rule doesn't work properly with a partial class.")]
-    public partial class NavigationController
+    public partial class FlexiNavigationController
     {
         /// <inheritdoc />
-        public NavigationController(UIViewController rootViewController)
+        public FlexiNavigationController(UIViewController rootViewController)
             : base(rootViewController)
         {
             LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
-        public NavigationController(Type navigationBarType, Type toolbarType)
+        public FlexiNavigationController(Type navigationBarType, Type toolbarType)
             : base(navigationBarType, toolbarType)
         {
             LifecycleDelegate.ForceInstanceCreation();
@@ -45,16 +45,16 @@ namespace FlexiMvvm.Views
         "StyleCop.CSharp.DocumentationRules",
         "SA1648:InheritDocMustBeUsedWithInheritingClass",
         Justification = "This rule doesn't work properly with a partial class.")]
-    public partial class NavigationController<TViewModel>
+    public partial class FlexiNavigationController<TViewModel>
     {
         /// <inheritdoc />
-        public NavigationController(UIViewController rootViewController)
+        public FlexiNavigationController(UIViewController rootViewController)
             : base(rootViewController)
         {
         }
 
         /// <inheritdoc />
-        public NavigationController(Type navigationBarType, Type toolbarType)
+        public FlexiNavigationController(Type navigationBarType, Type toolbarType)
             : base(navigationBarType, toolbarType)
         {
         }
@@ -64,16 +64,16 @@ namespace FlexiMvvm.Views
         "StyleCop.CSharp.DocumentationRules",
         "SA1648:InheritDocMustBeUsedWithInheritingClass",
         Justification = "This rule doesn't work properly with a partial class.")]
-    public partial class NavigationController<TViewModel, TParameters>
+    public partial class FlexiNavigationController<TViewModel, TParameters>
     {
         /// <inheritdoc />
-        public NavigationController(UIViewController rootViewController)
+        public FlexiNavigationController(UIViewController rootViewController)
             : base(rootViewController)
         {
         }
 
         /// <inheritdoc />
-        public NavigationController(Type navigationBarType, Type toolbarType)
+        public FlexiNavigationController(Type navigationBarType, Type toolbarType)
             : base(navigationBarType, toolbarType)
         {
         }

@@ -15,12 +15,16 @@
 // =========================================================================
 
 using System;
+#if __ANDROID_29__
+using Google.Android.Material.Navigation;
+#else
 using Android.Support.Design.Widget;
+#endif
 using FlexiMvvm.Bindings.Custom;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class SupportNavigationViewExtensions
+    public static class NavigationViewExtensions
     {
         private const int DefaultCheckedItemId = 0;
 

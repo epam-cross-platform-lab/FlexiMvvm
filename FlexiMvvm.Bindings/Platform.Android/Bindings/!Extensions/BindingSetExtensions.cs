@@ -16,8 +16,14 @@
 
 using System;
 using System.Windows.Input;
+#if __ANDROID_29__
+using AndroidX.ViewPager.Widget;
+using Google.Android.Material.BottomNavigation;
+using Google.Android.Material.Navigation;
+#else
 using Android.Support.Design.Widget;
 using Android.Support.V4.View;
+#endif
 using Android.Widget;
 
 namespace FlexiMvvm.Bindings

@@ -18,8 +18,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+#if __ANDROID_29__
+using AndroidX.Fragment.App;
+#else
 using Android.Support.V4.App;
 using Android.Support.V4.View;
+#endif
 
 namespace FlexiMvvm.Collections
 {

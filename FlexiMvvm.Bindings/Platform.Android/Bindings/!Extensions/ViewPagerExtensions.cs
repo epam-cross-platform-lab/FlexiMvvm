@@ -15,12 +15,16 @@
 // =========================================================================
 
 using System;
+#if __ANDROID_29__
+using AndroidX.ViewPager.Widget;
+#else
 using Android.Support.V4.View;
+#endif
 using FlexiMvvm.Bindings.Custom;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class SupportViewPagerExtensions
+    public static class ViewPagerExtensions
     {
         public static TargetItemBinding<ViewPager, int> CurrentItemBinding(
             this IItemReference<ViewPager> viewPagerReference)

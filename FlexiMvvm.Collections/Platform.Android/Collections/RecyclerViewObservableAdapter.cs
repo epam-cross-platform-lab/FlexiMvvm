@@ -16,7 +16,11 @@
 
 using System;
 using System.Collections.Specialized;
+#if __ANDROID_29__
+using AndroidX.RecyclerView.Widget;
+#else
 using Android.Support.V7.Widget;
+#endif
 using Android.Views;
 using FlexiMvvm.Collections.Core;
 using FlexiMvvm.Views;

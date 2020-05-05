@@ -31,40 +31,40 @@ namespace FlexiMvvm.Views
     /// <summary>
     /// Represents a/an <see cref="UIKit.UICollectionViewController"/> that is adapted for use with the FlexiMvvm.
     /// </summary>
-    public partial class CollectionViewController : UIKit.UICollectionViewController, IIosView
+    public partial class FlexiCollectionViewController : UIKit.UICollectionViewController, IIosView
     {
         private IViewLifecycleDelegate? _lifecycleDelegate;
         private KeyboardHandler? _keyboardHandler;
 
         /// <inheritdoc />
-        public CollectionViewController()
+        public FlexiCollectionViewController()
         {
             LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
-        public CollectionViewController(NSCoder coder)
+        public FlexiCollectionViewController(NSCoder coder)
             : base(coder)
         {
             LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
-        public CollectionViewController(string nibName, NSBundle bundle)
+        public FlexiCollectionViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
             LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
-        protected CollectionViewController(NSObjectFlag t)
+        protected FlexiCollectionViewController(NSObjectFlag t)
             : base(t)
         {
             LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
-        protected internal CollectionViewController(IntPtr handle)
+        protected internal FlexiCollectionViewController(IntPtr handle)
             : base(handle)
         {
             LifecycleDelegate.ForceInstanceCreation();
@@ -83,7 +83,7 @@ namespace FlexiMvvm.Views
         /// </summary>
         protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<CollectionViewController>(this);
+            return new ViewLifecycleDelegate<FlexiCollectionViewController>(this);
         }
 
         /// <inheritdoc />
@@ -152,34 +152,34 @@ namespace FlexiMvvm.Views
         "Compiler",
         "CS8618:Non-nullable field is uninitialized.",
         Justification = "The view lifecycle delegate sets a value to the ViewModel property so it is never null.")]
-    public partial class CollectionViewController<TViewModel> : CollectionViewController, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
+    public partial class FlexiCollectionViewController<TViewModel> : FlexiCollectionViewController, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithoutParameters
     {
         /// <inheritdoc />
-        public CollectionViewController()
+        public FlexiCollectionViewController()
         {
         }
 
         /// <inheritdoc />
-        public CollectionViewController(NSCoder coder)
+        public FlexiCollectionViewController(NSCoder coder)
             : base(coder)
         {
         }
 
         /// <inheritdoc />
-        public CollectionViewController(string nibName, NSBundle bundle)
+        public FlexiCollectionViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
         }
 
         /// <inheritdoc />
-        protected CollectionViewController(NSObjectFlag t)
+        protected FlexiCollectionViewController(NSObjectFlag t)
             : base(t)
         {
         }
 
         /// <inheritdoc />
-        protected internal CollectionViewController(IntPtr handle)
+        protected internal FlexiCollectionViewController(IntPtr handle)
             : base(handle)
         {
         }
@@ -193,7 +193,7 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<CollectionViewController<TViewModel>, TViewModel>(this);
+            return new ViewLifecycleDelegate<FlexiCollectionViewController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
@@ -240,37 +240,37 @@ namespace FlexiMvvm.Views
         "Compiler",
         "CS8618:Non-nullable field is uninitialized.",
         Justification = "The view lifecycle delegate sets a value to the ViewModel property so it is never null.")]
-    public partial class CollectionViewController<TViewModel, TParameters> : CollectionViewController, INavigationView<TViewModel, TParameters>, ILifecycleViewModelOwner<TViewModel>
+    public partial class FlexiCollectionViewController<TViewModel, TParameters> : FlexiCollectionViewController, INavigationView<TViewModel, TParameters>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>
         where TParameters : Parameters
     {
         private TParameters? _parameters;
 
         /// <inheritdoc />
-        public CollectionViewController()
+        public FlexiCollectionViewController()
         {
         }
 
         /// <inheritdoc />
-        public CollectionViewController(NSCoder coder)
+        public FlexiCollectionViewController(NSCoder coder)
             : base(coder)
         {
         }
 
         /// <inheritdoc />
-        public CollectionViewController(string nibName, NSBundle bundle)
+        public FlexiCollectionViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
         }
 
         /// <inheritdoc />
-        protected CollectionViewController(NSObjectFlag t)
+        protected FlexiCollectionViewController(NSObjectFlag t)
             : base(t)
         {
         }
 
         /// <inheritdoc />
-        protected internal CollectionViewController(IntPtr handle)
+        protected internal FlexiCollectionViewController(IntPtr handle)
             : base(handle)
         {
         }
@@ -284,7 +284,7 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<CollectionViewController<TViewModel, TParameters>, TViewModel>(this);
+            return new ViewLifecycleDelegate<FlexiCollectionViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
@@ -333,40 +333,40 @@ namespace FlexiMvvm.Views
     /// <summary>
     /// Represents a/an <see cref="UIKit.UINavigationController"/> that is adapted for use with the FlexiMvvm.
     /// </summary>
-    public partial class NavigationController : UIKit.UINavigationController, IIosView
+    public partial class FlexiNavigationController : UIKit.UINavigationController, IIosView
     {
         private IViewLifecycleDelegate? _lifecycleDelegate;
         private KeyboardHandler? _keyboardHandler;
 
         /// <inheritdoc />
-        public NavigationController()
+        public FlexiNavigationController()
         {
             LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
-        public NavigationController(NSCoder coder)
+        public FlexiNavigationController(NSCoder coder)
             : base(coder)
         {
             LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
-        public NavigationController(string nibName, NSBundle bundle)
+        public FlexiNavigationController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
             LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
-        protected NavigationController(NSObjectFlag t)
+        protected FlexiNavigationController(NSObjectFlag t)
             : base(t)
         {
             LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
-        protected internal NavigationController(IntPtr handle)
+        protected internal FlexiNavigationController(IntPtr handle)
             : base(handle)
         {
             LifecycleDelegate.ForceInstanceCreation();
@@ -385,7 +385,7 @@ namespace FlexiMvvm.Views
         /// </summary>
         protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<NavigationController>(this);
+            return new ViewLifecycleDelegate<FlexiNavigationController>(this);
         }
 
         /// <inheritdoc />
@@ -454,34 +454,34 @@ namespace FlexiMvvm.Views
         "Compiler",
         "CS8618:Non-nullable field is uninitialized.",
         Justification = "The view lifecycle delegate sets a value to the ViewModel property so it is never null.")]
-    public partial class NavigationController<TViewModel> : NavigationController, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
+    public partial class FlexiNavigationController<TViewModel> : FlexiNavigationController, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithoutParameters
     {
         /// <inheritdoc />
-        public NavigationController()
+        public FlexiNavigationController()
         {
         }
 
         /// <inheritdoc />
-        public NavigationController(NSCoder coder)
+        public FlexiNavigationController(NSCoder coder)
             : base(coder)
         {
         }
 
         /// <inheritdoc />
-        public NavigationController(string nibName, NSBundle bundle)
+        public FlexiNavigationController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
         }
 
         /// <inheritdoc />
-        protected NavigationController(NSObjectFlag t)
+        protected FlexiNavigationController(NSObjectFlag t)
             : base(t)
         {
         }
 
         /// <inheritdoc />
-        protected internal NavigationController(IntPtr handle)
+        protected internal FlexiNavigationController(IntPtr handle)
             : base(handle)
         {
         }
@@ -495,7 +495,7 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<NavigationController<TViewModel>, TViewModel>(this);
+            return new ViewLifecycleDelegate<FlexiNavigationController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
@@ -542,37 +542,37 @@ namespace FlexiMvvm.Views
         "Compiler",
         "CS8618:Non-nullable field is uninitialized.",
         Justification = "The view lifecycle delegate sets a value to the ViewModel property so it is never null.")]
-    public partial class NavigationController<TViewModel, TParameters> : NavigationController, INavigationView<TViewModel, TParameters>, ILifecycleViewModelOwner<TViewModel>
+    public partial class FlexiNavigationController<TViewModel, TParameters> : FlexiNavigationController, INavigationView<TViewModel, TParameters>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>
         where TParameters : Parameters
     {
         private TParameters? _parameters;
 
         /// <inheritdoc />
-        public NavigationController()
+        public FlexiNavigationController()
         {
         }
 
         /// <inheritdoc />
-        public NavigationController(NSCoder coder)
+        public FlexiNavigationController(NSCoder coder)
             : base(coder)
         {
         }
 
         /// <inheritdoc />
-        public NavigationController(string nibName, NSBundle bundle)
+        public FlexiNavigationController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
         }
 
         /// <inheritdoc />
-        protected NavigationController(NSObjectFlag t)
+        protected FlexiNavigationController(NSObjectFlag t)
             : base(t)
         {
         }
 
         /// <inheritdoc />
-        protected internal NavigationController(IntPtr handle)
+        protected internal FlexiNavigationController(IntPtr handle)
             : base(handle)
         {
         }
@@ -586,7 +586,7 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<NavigationController<TViewModel, TParameters>, TViewModel>(this);
+            return new ViewLifecycleDelegate<FlexiNavigationController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
@@ -635,40 +635,40 @@ namespace FlexiMvvm.Views
     /// <summary>
     /// Represents a/an <see cref="UIKit.UIPageViewController"/> that is adapted for use with the FlexiMvvm.
     /// </summary>
-    public partial class PageViewController : UIKit.UIPageViewController, IIosView
+    public partial class FlexiPageViewController : UIKit.UIPageViewController, IIosView
     {
         private IViewLifecycleDelegate? _lifecycleDelegate;
         private KeyboardHandler? _keyboardHandler;
 
         /// <inheritdoc />
-        public PageViewController()
+        public FlexiPageViewController()
         {
             LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
-        public PageViewController(NSCoder coder)
+        public FlexiPageViewController(NSCoder coder)
             : base(coder)
         {
             LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
-        public PageViewController(string nibName, NSBundle bundle)
+        public FlexiPageViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
             LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
-        protected PageViewController(NSObjectFlag t)
+        protected FlexiPageViewController(NSObjectFlag t)
             : base(t)
         {
             LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
-        protected internal PageViewController(IntPtr handle)
+        protected internal FlexiPageViewController(IntPtr handle)
             : base(handle)
         {
             LifecycleDelegate.ForceInstanceCreation();
@@ -687,7 +687,7 @@ namespace FlexiMvvm.Views
         /// </summary>
         protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<PageViewController>(this);
+            return new ViewLifecycleDelegate<FlexiPageViewController>(this);
         }
 
         /// <inheritdoc />
@@ -756,34 +756,34 @@ namespace FlexiMvvm.Views
         "Compiler",
         "CS8618:Non-nullable field is uninitialized.",
         Justification = "The view lifecycle delegate sets a value to the ViewModel property so it is never null.")]
-    public partial class PageViewController<TViewModel> : PageViewController, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
+    public partial class FlexiPageViewController<TViewModel> : FlexiPageViewController, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithoutParameters
     {
         /// <inheritdoc />
-        public PageViewController()
+        public FlexiPageViewController()
         {
         }
 
         /// <inheritdoc />
-        public PageViewController(NSCoder coder)
+        public FlexiPageViewController(NSCoder coder)
             : base(coder)
         {
         }
 
         /// <inheritdoc />
-        public PageViewController(string nibName, NSBundle bundle)
+        public FlexiPageViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
         }
 
         /// <inheritdoc />
-        protected PageViewController(NSObjectFlag t)
+        protected FlexiPageViewController(NSObjectFlag t)
             : base(t)
         {
         }
 
         /// <inheritdoc />
-        protected internal PageViewController(IntPtr handle)
+        protected internal FlexiPageViewController(IntPtr handle)
             : base(handle)
         {
         }
@@ -797,7 +797,7 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<PageViewController<TViewModel>, TViewModel>(this);
+            return new ViewLifecycleDelegate<FlexiPageViewController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
@@ -844,37 +844,37 @@ namespace FlexiMvvm.Views
         "Compiler",
         "CS8618:Non-nullable field is uninitialized.",
         Justification = "The view lifecycle delegate sets a value to the ViewModel property so it is never null.")]
-    public partial class PageViewController<TViewModel, TParameters> : PageViewController, INavigationView<TViewModel, TParameters>, ILifecycleViewModelOwner<TViewModel>
+    public partial class FlexiPageViewController<TViewModel, TParameters> : FlexiPageViewController, INavigationView<TViewModel, TParameters>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>
         where TParameters : Parameters
     {
         private TParameters? _parameters;
 
         /// <inheritdoc />
-        public PageViewController()
+        public FlexiPageViewController()
         {
         }
 
         /// <inheritdoc />
-        public PageViewController(NSCoder coder)
+        public FlexiPageViewController(NSCoder coder)
             : base(coder)
         {
         }
 
         /// <inheritdoc />
-        public PageViewController(string nibName, NSBundle bundle)
+        public FlexiPageViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
         }
 
         /// <inheritdoc />
-        protected PageViewController(NSObjectFlag t)
+        protected FlexiPageViewController(NSObjectFlag t)
             : base(t)
         {
         }
 
         /// <inheritdoc />
-        protected internal PageViewController(IntPtr handle)
+        protected internal FlexiPageViewController(IntPtr handle)
             : base(handle)
         {
         }
@@ -888,7 +888,7 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<PageViewController<TViewModel, TParameters>, TViewModel>(this);
+            return new ViewLifecycleDelegate<FlexiPageViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
@@ -937,40 +937,40 @@ namespace FlexiMvvm.Views
     /// <summary>
     /// Represents a/an <see cref="UIKit.UISplitViewController"/> that is adapted for use with the FlexiMvvm.
     /// </summary>
-    public partial class SplitViewController : UIKit.UISplitViewController, IIosView
+    public partial class FlexiSplitViewController : UIKit.UISplitViewController, IIosView
     {
         private IViewLifecycleDelegate? _lifecycleDelegate;
         private KeyboardHandler? _keyboardHandler;
 
         /// <inheritdoc />
-        public SplitViewController()
+        public FlexiSplitViewController()
         {
             LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
-        public SplitViewController(NSCoder coder)
+        public FlexiSplitViewController(NSCoder coder)
             : base(coder)
         {
             LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
-        public SplitViewController(string nibName, NSBundle bundle)
+        public FlexiSplitViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
             LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
-        protected SplitViewController(NSObjectFlag t)
+        protected FlexiSplitViewController(NSObjectFlag t)
             : base(t)
         {
             LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
-        protected internal SplitViewController(IntPtr handle)
+        protected internal FlexiSplitViewController(IntPtr handle)
             : base(handle)
         {
             LifecycleDelegate.ForceInstanceCreation();
@@ -989,7 +989,7 @@ namespace FlexiMvvm.Views
         /// </summary>
         protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<SplitViewController>(this);
+            return new ViewLifecycleDelegate<FlexiSplitViewController>(this);
         }
 
         /// <inheritdoc />
@@ -1058,34 +1058,34 @@ namespace FlexiMvvm.Views
         "Compiler",
         "CS8618:Non-nullable field is uninitialized.",
         Justification = "The view lifecycle delegate sets a value to the ViewModel property so it is never null.")]
-    public partial class SplitViewController<TViewModel> : SplitViewController, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
+    public partial class FlexiSplitViewController<TViewModel> : FlexiSplitViewController, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithoutParameters
     {
         /// <inheritdoc />
-        public SplitViewController()
+        public FlexiSplitViewController()
         {
         }
 
         /// <inheritdoc />
-        public SplitViewController(NSCoder coder)
+        public FlexiSplitViewController(NSCoder coder)
             : base(coder)
         {
         }
 
         /// <inheritdoc />
-        public SplitViewController(string nibName, NSBundle bundle)
+        public FlexiSplitViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
         }
 
         /// <inheritdoc />
-        protected SplitViewController(NSObjectFlag t)
+        protected FlexiSplitViewController(NSObjectFlag t)
             : base(t)
         {
         }
 
         /// <inheritdoc />
-        protected internal SplitViewController(IntPtr handle)
+        protected internal FlexiSplitViewController(IntPtr handle)
             : base(handle)
         {
         }
@@ -1099,7 +1099,7 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<SplitViewController<TViewModel>, TViewModel>(this);
+            return new ViewLifecycleDelegate<FlexiSplitViewController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
@@ -1146,37 +1146,37 @@ namespace FlexiMvvm.Views
         "Compiler",
         "CS8618:Non-nullable field is uninitialized.",
         Justification = "The view lifecycle delegate sets a value to the ViewModel property so it is never null.")]
-    public partial class SplitViewController<TViewModel, TParameters> : SplitViewController, INavigationView<TViewModel, TParameters>, ILifecycleViewModelOwner<TViewModel>
+    public partial class FlexiSplitViewController<TViewModel, TParameters> : FlexiSplitViewController, INavigationView<TViewModel, TParameters>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>
         where TParameters : Parameters
     {
         private TParameters? _parameters;
 
         /// <inheritdoc />
-        public SplitViewController()
+        public FlexiSplitViewController()
         {
         }
 
         /// <inheritdoc />
-        public SplitViewController(NSCoder coder)
+        public FlexiSplitViewController(NSCoder coder)
             : base(coder)
         {
         }
 
         /// <inheritdoc />
-        public SplitViewController(string nibName, NSBundle bundle)
+        public FlexiSplitViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
         }
 
         /// <inheritdoc />
-        protected SplitViewController(NSObjectFlag t)
+        protected FlexiSplitViewController(NSObjectFlag t)
             : base(t)
         {
         }
 
         /// <inheritdoc />
-        protected internal SplitViewController(IntPtr handle)
+        protected internal FlexiSplitViewController(IntPtr handle)
             : base(handle)
         {
         }
@@ -1190,7 +1190,7 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<SplitViewController<TViewModel, TParameters>, TViewModel>(this);
+            return new ViewLifecycleDelegate<FlexiSplitViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
@@ -1239,40 +1239,40 @@ namespace FlexiMvvm.Views
     /// <summary>
     /// Represents a/an <see cref="UIKit.UITabBarController"/> that is adapted for use with the FlexiMvvm.
     /// </summary>
-    public partial class TabBarController : UIKit.UITabBarController, IIosView
+    public partial class FlexiTabBarController : UIKit.UITabBarController, IIosView
     {
         private IViewLifecycleDelegate? _lifecycleDelegate;
         private KeyboardHandler? _keyboardHandler;
 
         /// <inheritdoc />
-        public TabBarController()
+        public FlexiTabBarController()
         {
             LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
-        public TabBarController(NSCoder coder)
+        public FlexiTabBarController(NSCoder coder)
             : base(coder)
         {
             LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
-        public TabBarController(string nibName, NSBundle bundle)
+        public FlexiTabBarController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
             LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
-        protected TabBarController(NSObjectFlag t)
+        protected FlexiTabBarController(NSObjectFlag t)
             : base(t)
         {
             LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
-        protected internal TabBarController(IntPtr handle)
+        protected internal FlexiTabBarController(IntPtr handle)
             : base(handle)
         {
             LifecycleDelegate.ForceInstanceCreation();
@@ -1291,7 +1291,7 @@ namespace FlexiMvvm.Views
         /// </summary>
         protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<TabBarController>(this);
+            return new ViewLifecycleDelegate<FlexiTabBarController>(this);
         }
 
         /// <inheritdoc />
@@ -1360,34 +1360,34 @@ namespace FlexiMvvm.Views
         "Compiler",
         "CS8618:Non-nullable field is uninitialized.",
         Justification = "The view lifecycle delegate sets a value to the ViewModel property so it is never null.")]
-    public partial class TabBarController<TViewModel> : TabBarController, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
+    public partial class FlexiTabBarController<TViewModel> : FlexiTabBarController, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithoutParameters
     {
         /// <inheritdoc />
-        public TabBarController()
+        public FlexiTabBarController()
         {
         }
 
         /// <inheritdoc />
-        public TabBarController(NSCoder coder)
+        public FlexiTabBarController(NSCoder coder)
             : base(coder)
         {
         }
 
         /// <inheritdoc />
-        public TabBarController(string nibName, NSBundle bundle)
+        public FlexiTabBarController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
         }
 
         /// <inheritdoc />
-        protected TabBarController(NSObjectFlag t)
+        protected FlexiTabBarController(NSObjectFlag t)
             : base(t)
         {
         }
 
         /// <inheritdoc />
-        protected internal TabBarController(IntPtr handle)
+        protected internal FlexiTabBarController(IntPtr handle)
             : base(handle)
         {
         }
@@ -1401,7 +1401,7 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<TabBarController<TViewModel>, TViewModel>(this);
+            return new ViewLifecycleDelegate<FlexiTabBarController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
@@ -1448,37 +1448,37 @@ namespace FlexiMvvm.Views
         "Compiler",
         "CS8618:Non-nullable field is uninitialized.",
         Justification = "The view lifecycle delegate sets a value to the ViewModel property so it is never null.")]
-    public partial class TabBarController<TViewModel, TParameters> : TabBarController, INavigationView<TViewModel, TParameters>, ILifecycleViewModelOwner<TViewModel>
+    public partial class FlexiTabBarController<TViewModel, TParameters> : FlexiTabBarController, INavigationView<TViewModel, TParameters>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>
         where TParameters : Parameters
     {
         private TParameters? _parameters;
 
         /// <inheritdoc />
-        public TabBarController()
+        public FlexiTabBarController()
         {
         }
 
         /// <inheritdoc />
-        public TabBarController(NSCoder coder)
+        public FlexiTabBarController(NSCoder coder)
             : base(coder)
         {
         }
 
         /// <inheritdoc />
-        public TabBarController(string nibName, NSBundle bundle)
+        public FlexiTabBarController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
         }
 
         /// <inheritdoc />
-        protected TabBarController(NSObjectFlag t)
+        protected FlexiTabBarController(NSObjectFlag t)
             : base(t)
         {
         }
 
         /// <inheritdoc />
-        protected internal TabBarController(IntPtr handle)
+        protected internal FlexiTabBarController(IntPtr handle)
             : base(handle)
         {
         }
@@ -1492,7 +1492,7 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<TabBarController<TViewModel, TParameters>, TViewModel>(this);
+            return new ViewLifecycleDelegate<FlexiTabBarController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
@@ -1541,40 +1541,40 @@ namespace FlexiMvvm.Views
     /// <summary>
     /// Represents a/an <see cref="UIKit.UITableViewController"/> that is adapted for use with the FlexiMvvm.
     /// </summary>
-    public partial class TableViewController : UIKit.UITableViewController, IIosView
+    public partial class FlexiTableViewController : UIKit.UITableViewController, IIosView
     {
         private IViewLifecycleDelegate? _lifecycleDelegate;
         private KeyboardHandler? _keyboardHandler;
 
         /// <inheritdoc />
-        public TableViewController()
+        public FlexiTableViewController()
         {
             LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
-        public TableViewController(NSCoder coder)
+        public FlexiTableViewController(NSCoder coder)
             : base(coder)
         {
             LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
-        public TableViewController(string nibName, NSBundle bundle)
+        public FlexiTableViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
             LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
-        protected TableViewController(NSObjectFlag t)
+        protected FlexiTableViewController(NSObjectFlag t)
             : base(t)
         {
             LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
-        protected internal TableViewController(IntPtr handle)
+        protected internal FlexiTableViewController(IntPtr handle)
             : base(handle)
         {
             LifecycleDelegate.ForceInstanceCreation();
@@ -1593,7 +1593,7 @@ namespace FlexiMvvm.Views
         /// </summary>
         protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<TableViewController>(this);
+            return new ViewLifecycleDelegate<FlexiTableViewController>(this);
         }
 
         /// <inheritdoc />
@@ -1662,34 +1662,34 @@ namespace FlexiMvvm.Views
         "Compiler",
         "CS8618:Non-nullable field is uninitialized.",
         Justification = "The view lifecycle delegate sets a value to the ViewModel property so it is never null.")]
-    public partial class TableViewController<TViewModel> : TableViewController, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
+    public partial class FlexiTableViewController<TViewModel> : FlexiTableViewController, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithoutParameters
     {
         /// <inheritdoc />
-        public TableViewController()
+        public FlexiTableViewController()
         {
         }
 
         /// <inheritdoc />
-        public TableViewController(NSCoder coder)
+        public FlexiTableViewController(NSCoder coder)
             : base(coder)
         {
         }
 
         /// <inheritdoc />
-        public TableViewController(string nibName, NSBundle bundle)
+        public FlexiTableViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
         }
 
         /// <inheritdoc />
-        protected TableViewController(NSObjectFlag t)
+        protected FlexiTableViewController(NSObjectFlag t)
             : base(t)
         {
         }
 
         /// <inheritdoc />
-        protected internal TableViewController(IntPtr handle)
+        protected internal FlexiTableViewController(IntPtr handle)
             : base(handle)
         {
         }
@@ -1703,7 +1703,7 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<TableViewController<TViewModel>, TViewModel>(this);
+            return new ViewLifecycleDelegate<FlexiTableViewController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
@@ -1750,37 +1750,37 @@ namespace FlexiMvvm.Views
         "Compiler",
         "CS8618:Non-nullable field is uninitialized.",
         Justification = "The view lifecycle delegate sets a value to the ViewModel property so it is never null.")]
-    public partial class TableViewController<TViewModel, TParameters> : TableViewController, INavigationView<TViewModel, TParameters>, ILifecycleViewModelOwner<TViewModel>
+    public partial class FlexiTableViewController<TViewModel, TParameters> : FlexiTableViewController, INavigationView<TViewModel, TParameters>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>
         where TParameters : Parameters
     {
         private TParameters? _parameters;
 
         /// <inheritdoc />
-        public TableViewController()
+        public FlexiTableViewController()
         {
         }
 
         /// <inheritdoc />
-        public TableViewController(NSCoder coder)
+        public FlexiTableViewController(NSCoder coder)
             : base(coder)
         {
         }
 
         /// <inheritdoc />
-        public TableViewController(string nibName, NSBundle bundle)
+        public FlexiTableViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
         }
 
         /// <inheritdoc />
-        protected TableViewController(NSObjectFlag t)
+        protected FlexiTableViewController(NSObjectFlag t)
             : base(t)
         {
         }
 
         /// <inheritdoc />
-        protected internal TableViewController(IntPtr handle)
+        protected internal FlexiTableViewController(IntPtr handle)
             : base(handle)
         {
         }
@@ -1794,7 +1794,7 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<TableViewController<TViewModel, TParameters>, TViewModel>(this);
+            return new ViewLifecycleDelegate<FlexiTableViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
@@ -1843,40 +1843,40 @@ namespace FlexiMvvm.Views
     /// <summary>
     /// Represents a/an <see cref="UIKit.UIViewController"/> that is adapted for use with the FlexiMvvm.
     /// </summary>
-    public partial class ViewController : UIKit.UIViewController, IIosView
+    public partial class FlexiViewController : UIKit.UIViewController, IIosView
     {
         private IViewLifecycleDelegate? _lifecycleDelegate;
         private KeyboardHandler? _keyboardHandler;
 
         /// <inheritdoc />
-        public ViewController()
+        public FlexiViewController()
         {
             LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
-        public ViewController(NSCoder coder)
+        public FlexiViewController(NSCoder coder)
             : base(coder)
         {
             LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
-        public ViewController(string nibName, NSBundle bundle)
+        public FlexiViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
             LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
-        protected ViewController(NSObjectFlag t)
+        protected FlexiViewController(NSObjectFlag t)
             : base(t)
         {
             LifecycleDelegate.ForceInstanceCreation();
         }
 
         /// <inheritdoc />
-        protected internal ViewController(IntPtr handle)
+        protected internal FlexiViewController(IntPtr handle)
             : base(handle)
         {
             LifecycleDelegate.ForceInstanceCreation();
@@ -1895,7 +1895,7 @@ namespace FlexiMvvm.Views
         /// </summary>
         protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<ViewController>(this);
+            return new ViewLifecycleDelegate<FlexiViewController>(this);
         }
 
         /// <inheritdoc />
@@ -1964,34 +1964,34 @@ namespace FlexiMvvm.Views
         "Compiler",
         "CS8618:Non-nullable field is uninitialized.",
         Justification = "The view lifecycle delegate sets a value to the ViewModel property so it is never null.")]
-    public partial class ViewController<TViewModel> : ViewController, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
+    public partial class FlexiViewController<TViewModel> : FlexiViewController, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithoutParameters
     {
         /// <inheritdoc />
-        public ViewController()
+        public FlexiViewController()
         {
         }
 
         /// <inheritdoc />
-        public ViewController(NSCoder coder)
+        public FlexiViewController(NSCoder coder)
             : base(coder)
         {
         }
 
         /// <inheritdoc />
-        public ViewController(string nibName, NSBundle bundle)
+        public FlexiViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
         }
 
         /// <inheritdoc />
-        protected ViewController(NSObjectFlag t)
+        protected FlexiViewController(NSObjectFlag t)
             : base(t)
         {
         }
 
         /// <inheritdoc />
-        protected internal ViewController(IntPtr handle)
+        protected internal FlexiViewController(IntPtr handle)
             : base(handle)
         {
         }
@@ -2005,7 +2005,7 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<ViewController<TViewModel>, TViewModel>(this);
+            return new ViewLifecycleDelegate<FlexiViewController<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
@@ -2052,37 +2052,37 @@ namespace FlexiMvvm.Views
         "Compiler",
         "CS8618:Non-nullable field is uninitialized.",
         Justification = "The view lifecycle delegate sets a value to the ViewModel property so it is never null.")]
-    public partial class ViewController<TViewModel, TParameters> : ViewController, INavigationView<TViewModel, TParameters>, ILifecycleViewModelOwner<TViewModel>
+    public partial class FlexiViewController<TViewModel, TParameters> : FlexiViewController, INavigationView<TViewModel, TParameters>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>
         where TParameters : Parameters
     {
         private TParameters? _parameters;
 
         /// <inheritdoc />
-        public ViewController()
+        public FlexiViewController()
         {
         }
 
         /// <inheritdoc />
-        public ViewController(NSCoder coder)
+        public FlexiViewController(NSCoder coder)
             : base(coder)
         {
         }
 
         /// <inheritdoc />
-        public ViewController(string nibName, NSBundle bundle)
+        public FlexiViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
         }
 
         /// <inheritdoc />
-        protected ViewController(NSObjectFlag t)
+        protected FlexiViewController(NSObjectFlag t)
             : base(t)
         {
         }
 
         /// <inheritdoc />
-        protected internal ViewController(IntPtr handle)
+        protected internal FlexiViewController(IntPtr handle)
             : base(handle)
         {
         }
@@ -2096,7 +2096,7 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<ViewController<TViewModel, TParameters>, TViewModel>(this);
+            return new ViewLifecycleDelegate<FlexiViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />

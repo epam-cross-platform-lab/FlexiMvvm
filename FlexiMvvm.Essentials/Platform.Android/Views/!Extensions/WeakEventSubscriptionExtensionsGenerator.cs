@@ -15,6 +15,31 @@
 // limitations under the License.
 // =========================================================================
 
+#if __ANDROID_29__
+using AndroidX.AppCompat.App;
+using AndroidX.AppCompat.Widget;
+using AndroidX.Core.OS;
+using AndroidX.Core.View;
+using AndroidX.Core.Widget;
+using AndroidX.DrawerLayout.Widget;
+using AndroidX.Fragment.App;
+using AndroidX.RecyclerView.Widget;
+using AndroidX.SlidingPaneLayout.Widget;
+using AndroidX.SwipeRefreshLayout.Widget;
+using AndroidX.ViewPager.Widget;
+using Google.Android.Material.AppBar;
+using Google.Android.Material.BottomNavigation;
+using Google.Android.Material.Navigation;
+using Google.Android.Material.Tabs;
+#else
+using Android.Support.Design.Widget;
+using Android.Support.V4.App;
+using Android.Support.V4.OS;
+using Android.Support.V4.View;
+using Android.Support.V4.Widget;
+using Android.Support.V7.App;
+using Android.Support.V7.Widget;
+#endif
 using System;
 using FlexiMvvm.Weak.Subscriptions;
 
@@ -2649,24 +2674,24 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Support.Design.Widget.AppBarLayout"/> class events.</summary>
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="AppBarLayout"/> class events.</summary>
     public static class AppBarLayoutWeakEventSubscriptionExtensions
     {
-        /// <summary>Weak subscription on <see cref="Android.Support.Design.Widget.AppBarLayout.OffsetChanged"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="AppBarLayout.OffsetChanged"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.Design.Widget.AppBarLayout.OffsetChanged"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="AppBarLayout.OffsetChanged"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable OffsetChangedWeakSubscribe(
-            this Android.Support.Design.Widget.AppBarLayout eventSource,
-            EventHandler<Android.Support.Design.Widget.AppBarLayout.OffsetChangedEventArgs> eventHandler)
+            this AppBarLayout eventSource,
+            EventHandler<AppBarLayout.OffsetChangedEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.Design.Widget.AppBarLayout, Android.Support.Design.Widget.AppBarLayout.OffsetChangedEventArgs>(
+            return new EventHandlerWeakEventSubscription<AppBarLayout, AppBarLayout.OffsetChangedEventArgs>(
                 eventSource,
                 (source, handler) => source.OffsetChanged += handler,
                 (source, handler) => source.OffsetChanged -= handler,
@@ -2678,45 +2703,45 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Support.Design.Widget.BottomNavigationView"/> class events.</summary>
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="BottomNavigationView"/> class events.</summary>
     public static class BottomNavigationViewWeakEventSubscriptionExtensions
     {
-        /// <summary>Weak subscription on <see cref="Android.Support.Design.Widget.BottomNavigationView.NavigationItemReselected"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="BottomNavigationView.NavigationItemReselected"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.Design.Widget.BottomNavigationView.NavigationItemReselected"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="BottomNavigationView.NavigationItemReselected"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable NavigationItemReselectedWeakSubscribe(
-            this Android.Support.Design.Widget.BottomNavigationView eventSource,
-            EventHandler<Android.Support.Design.Widget.BottomNavigationView.NavigationItemReselectedEventArgs> eventHandler)
+            this BottomNavigationView eventSource,
+            EventHandler<BottomNavigationView.NavigationItemReselectedEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.Design.Widget.BottomNavigationView, Android.Support.Design.Widget.BottomNavigationView.NavigationItemReselectedEventArgs>(
+            return new EventHandlerWeakEventSubscription<BottomNavigationView, BottomNavigationView.NavigationItemReselectedEventArgs>(
                 eventSource,
                 (source, handler) => source.NavigationItemReselected += handler,
                 (source, handler) => source.NavigationItemReselected -= handler,
                 eventHandler);
         }
 
-        /// <summary>Weak subscription on <see cref="Android.Support.Design.Widget.BottomNavigationView.NavigationItemSelected"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="BottomNavigationView.NavigationItemSelected"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.Design.Widget.BottomNavigationView.NavigationItemSelected"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="BottomNavigationView.NavigationItemSelected"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable NavigationItemSelectedWeakSubscribe(
-            this Android.Support.Design.Widget.BottomNavigationView eventSource,
-            EventHandler<Android.Support.Design.Widget.BottomNavigationView.NavigationItemSelectedEventArgs> eventHandler)
+            this BottomNavigationView eventSource,
+            EventHandler<BottomNavigationView.NavigationItemSelectedEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.Design.Widget.BottomNavigationView, Android.Support.Design.Widget.BottomNavigationView.NavigationItemSelectedEventArgs>(
+            return new EventHandlerWeakEventSubscription<BottomNavigationView, BottomNavigationView.NavigationItemSelectedEventArgs>(
                 eventSource,
                 (source, handler) => source.NavigationItemSelected += handler,
                 (source, handler) => source.NavigationItemSelected -= handler,
@@ -2728,24 +2753,24 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Support.Design.Widget.NavigationView"/> class events.</summary>
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="NavigationView"/> class events.</summary>
     public static class NavigationViewWeakEventSubscriptionExtensions
     {
-        /// <summary>Weak subscription on <see cref="Android.Support.Design.Widget.NavigationView.NavigationItemSelected"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="NavigationView.NavigationItemSelected"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.Design.Widget.NavigationView.NavigationItemSelected"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="NavigationView.NavigationItemSelected"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable NavigationItemSelectedWeakSubscribe(
-            this Android.Support.Design.Widget.NavigationView eventSource,
-            EventHandler<Android.Support.Design.Widget.NavigationView.NavigationItemSelectedEventArgs> eventHandler)
+            this NavigationView eventSource,
+            EventHandler<NavigationView.NavigationItemSelectedEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.Design.Widget.NavigationView, Android.Support.Design.Widget.NavigationView.NavigationItemSelectedEventArgs>(
+            return new EventHandlerWeakEventSubscription<NavigationView, NavigationView.NavigationItemSelectedEventArgs>(
                 eventSource,
                 (source, handler) => source.NavigationItemSelected += handler,
                 (source, handler) => source.NavigationItemSelected -= handler,
@@ -2757,66 +2782,66 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Support.Design.Widget.TabLayout"/> class events.</summary>
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="TabLayout"/> class events.</summary>
     public static class TabLayoutWeakEventSubscriptionExtensions
     {
-        /// <summary>Weak subscription on <see cref="Android.Support.Design.Widget.TabLayout.TabReselected"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="TabLayout.TabReselected"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.Design.Widget.TabLayout.TabReselected"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="TabLayout.TabReselected"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable TabReselectedWeakSubscribe(
-            this Android.Support.Design.Widget.TabLayout eventSource,
-            EventHandler<Android.Support.Design.Widget.TabLayout.TabReselectedEventArgs> eventHandler)
+            this TabLayout eventSource,
+            EventHandler<TabLayout.TabReselectedEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.Design.Widget.TabLayout, Android.Support.Design.Widget.TabLayout.TabReselectedEventArgs>(
+            return new EventHandlerWeakEventSubscription<TabLayout, TabLayout.TabReselectedEventArgs>(
                 eventSource,
                 (source, handler) => source.TabReselected += handler,
                 (source, handler) => source.TabReselected -= handler,
                 eventHandler);
         }
 
-        /// <summary>Weak subscription on <see cref="Android.Support.Design.Widget.TabLayout.TabSelected"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="TabLayout.TabSelected"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.Design.Widget.TabLayout.TabSelected"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="TabLayout.TabSelected"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable TabSelectedWeakSubscribe(
-            this Android.Support.Design.Widget.TabLayout eventSource,
-            EventHandler<Android.Support.Design.Widget.TabLayout.TabSelectedEventArgs> eventHandler)
+            this TabLayout eventSource,
+            EventHandler<TabLayout.TabSelectedEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.Design.Widget.TabLayout, Android.Support.Design.Widget.TabLayout.TabSelectedEventArgs>(
+            return new EventHandlerWeakEventSubscription<TabLayout, TabLayout.TabSelectedEventArgs>(
                 eventSource,
                 (source, handler) => source.TabSelected += handler,
                 (source, handler) => source.TabSelected -= handler,
                 eventHandler);
         }
 
-        /// <summary>Weak subscription on <see cref="Android.Support.Design.Widget.TabLayout.TabUnselected"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="TabLayout.TabUnselected"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.Design.Widget.TabLayout.TabUnselected"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="TabLayout.TabUnselected"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable TabUnselectedWeakSubscribe(
-            this Android.Support.Design.Widget.TabLayout eventSource,
-            EventHandler<Android.Support.Design.Widget.TabLayout.TabUnselectedEventArgs> eventHandler)
+            this TabLayout eventSource,
+            EventHandler<TabLayout.TabUnselectedEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.Design.Widget.TabLayout, Android.Support.Design.Widget.TabLayout.TabUnselectedEventArgs>(
+            return new EventHandlerWeakEventSubscription<TabLayout, TabLayout.TabUnselectedEventArgs>(
                 eventSource,
                 (source, handler) => source.TabUnselected += handler,
                 (source, handler) => source.TabUnselected -= handler,
@@ -2828,16 +2853,16 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Support.V4.App.FragmentManager"/> class events.</summary>
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="FragmentManager"/> class events.</summary>
     public static class SupportFragmentManagerWeakEventSubscriptionExtensions
     {
-        /// <summary>Weak subscription on <see cref="Android.Support.V4.App.FragmentManager.BackStackChanged"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="FragmentManager.BackStackChanged"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V4.App.FragmentManager.BackStackChanged"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="FragmentManager.BackStackChanged"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable BackStackChangedWeakSubscribe(
-            this Android.Support.V4.App.FragmentManager eventSource,
+            this FragmentManager eventSource,
             EventHandler eventHandler)
         {
             if (eventSource == null)
@@ -2845,7 +2870,7 @@ namespace FlexiMvvm.Views
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V4.App.FragmentManager>(
+            return new EventHandlerWeakEventSubscription<FragmentManager>(
                 eventSource,
                 (source, handler) => source.BackStackChanged += handler,
                 (source, handler) => source.BackStackChanged -= handler,
@@ -2857,16 +2882,16 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Support.V4.OS.CancellationSignal"/> class events.</summary>
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="CancellationSignal"/> class events.</summary>
     public static class SupportCancellationSignalWeakEventSubscriptionExtensions
     {
-        /// <summary>Weak subscription on <see cref="Android.Support.V4.OS.CancellationSignal.CancelEvent"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="CancellationSignal.CancelEvent"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V4.OS.CancellationSignal.CancelEvent"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="CancellationSignal.CancelEvent"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable CancelEventWeakSubscribe(
-            this Android.Support.V4.OS.CancellationSignal eventSource,
+            this CancellationSignal eventSource,
             EventHandler eventHandler)
         {
             if (eventSource == null)
@@ -2874,7 +2899,7 @@ namespace FlexiMvvm.Views
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V4.OS.CancellationSignal>(
+            return new EventHandlerWeakEventSubscription<CancellationSignal>(
                 eventSource,
                 (source, handler) => source.CancelEvent += handler,
                 (source, handler) => source.CancelEvent -= handler,
@@ -2886,45 +2911,45 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Support.V4.View.ActionProvider"/> class events.</summary>
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="ActionProvider"/> class events.</summary>
     public static class SupportActionProviderWeakEventSubscriptionExtensions
     {
-        /// <summary>Weak subscription on <see cref="Android.Support.V4.View.ActionProvider.SubUiVisibility"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="ActionProvider.SubUiVisibility"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V4.View.ActionProvider.SubUiVisibility"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="ActionProvider.SubUiVisibility"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable SubUiVisibilityWeakSubscribe(
-            this Android.Support.V4.View.ActionProvider eventSource,
-            EventHandler<Android.Support.V4.View.ActionProvider.SubUiVisibilityEventArgs> eventHandler)
+            this ActionProvider eventSource,
+            EventHandler<ActionProvider.SubUiVisibilityEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V4.View.ActionProvider, Android.Support.V4.View.ActionProvider.SubUiVisibilityEventArgs>(
+            return new EventHandlerWeakEventSubscription<ActionProvider, ActionProvider.SubUiVisibilityEventArgs>(
                 eventSource,
                 (source, handler) => source.SubUiVisibility += handler,
                 (source, handler) => source.SubUiVisibility -= handler,
                 eventHandler);
         }
 
-        /// <summary>Weak subscription on <see cref="Android.Support.V4.View.ActionProvider.Visibility"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="ActionProvider.Visibility"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V4.View.ActionProvider.Visibility"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="ActionProvider.Visibility"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable VisibilityWeakSubscribe(
-            this Android.Support.V4.View.ActionProvider eventSource,
-            EventHandler<Android.Support.V4.View.ActionProvider.VisibilityEventArgs> eventHandler)
+            this ActionProvider eventSource,
+            EventHandler<ActionProvider.VisibilityEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V4.View.ActionProvider, Android.Support.V4.View.ActionProvider.VisibilityEventArgs>(
+            return new EventHandlerWeakEventSubscription<ActionProvider, ActionProvider.VisibilityEventArgs>(
                 eventSource,
                 (source, handler) => source.Visibility += handler,
                 (source, handler) => source.Visibility -= handler,
@@ -2936,87 +2961,87 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Support.V4.View.ViewPager"/> class events.</summary>
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="ViewPager"/> class events.</summary>
     public static class ViewPagerWeakEventSubscriptionExtensions
     {
-        /// <summary>Weak subscription on <see cref="Android.Support.V4.View.ViewPager.AdapterChange"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="ViewPager.AdapterChange"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V4.View.ViewPager.AdapterChange"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="ViewPager.AdapterChange"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable AdapterChangeWeakSubscribe(
-            this Android.Support.V4.View.ViewPager eventSource,
-            EventHandler<Android.Support.V4.View.ViewPager.AdapterChangeEventArgs> eventHandler)
+            this ViewPager eventSource,
+            EventHandler<ViewPager.AdapterChangeEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V4.View.ViewPager, Android.Support.V4.View.ViewPager.AdapterChangeEventArgs>(
+            return new EventHandlerWeakEventSubscription<ViewPager, ViewPager.AdapterChangeEventArgs>(
                 eventSource,
                 (source, handler) => source.AdapterChange += handler,
                 (source, handler) => source.AdapterChange -= handler,
                 eventHandler);
         }
 
-        /// <summary>Weak subscription on <see cref="Android.Support.V4.View.ViewPager.PageScrolled"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="ViewPager.PageScrolled"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V4.View.ViewPager.PageScrolled"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="ViewPager.PageScrolled"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable PageScrolledWeakSubscribe(
-            this Android.Support.V4.View.ViewPager eventSource,
-            EventHandler<Android.Support.V4.View.ViewPager.PageScrolledEventArgs> eventHandler)
+            this ViewPager eventSource,
+            EventHandler<ViewPager.PageScrolledEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V4.View.ViewPager, Android.Support.V4.View.ViewPager.PageScrolledEventArgs>(
+            return new EventHandlerWeakEventSubscription<ViewPager, ViewPager.PageScrolledEventArgs>(
                 eventSource,
                 (source, handler) => source.PageScrolled += handler,
                 (source, handler) => source.PageScrolled -= handler,
                 eventHandler);
         }
 
-        /// <summary>Weak subscription on <see cref="Android.Support.V4.View.ViewPager.PageScrollStateChanged"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="ViewPager.PageScrollStateChanged"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V4.View.ViewPager.PageScrollStateChanged"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="ViewPager.PageScrollStateChanged"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable PageScrollStateChangedWeakSubscribe(
-            this Android.Support.V4.View.ViewPager eventSource,
-            EventHandler<Android.Support.V4.View.ViewPager.PageScrollStateChangedEventArgs> eventHandler)
+            this ViewPager eventSource,
+            EventHandler<ViewPager.PageScrollStateChangedEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V4.View.ViewPager, Android.Support.V4.View.ViewPager.PageScrollStateChangedEventArgs>(
+            return new EventHandlerWeakEventSubscription<ViewPager, ViewPager.PageScrollStateChangedEventArgs>(
                 eventSource,
                 (source, handler) => source.PageScrollStateChanged += handler,
                 (source, handler) => source.PageScrollStateChanged -= handler,
                 eventHandler);
         }
 
-        /// <summary>Weak subscription on <see cref="Android.Support.V4.View.ViewPager.PageSelected"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="ViewPager.PageSelected"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V4.View.ViewPager.PageSelected"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="ViewPager.PageSelected"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable PageSelectedWeakSubscribe(
-            this Android.Support.V4.View.ViewPager eventSource,
-            EventHandler<Android.Support.V4.View.ViewPager.PageSelectedEventArgs> eventHandler)
+            this ViewPager eventSource,
+            EventHandler<ViewPager.PageSelectedEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V4.View.ViewPager, Android.Support.V4.View.ViewPager.PageSelectedEventArgs>(
+            return new EventHandlerWeakEventSubscription<ViewPager, ViewPager.PageSelectedEventArgs>(
                 eventSource,
                 (source, handler) => source.PageSelected += handler,
                 (source, handler) => source.PageSelected -= handler,
@@ -3028,87 +3053,87 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Support.V4.Widget.DrawerLayout"/> class events.</summary>
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="DrawerLayout"/> class events.</summary>
     public static class DrawerLayoutWeakEventSubscriptionExtensions
     {
-        /// <summary>Weak subscription on <see cref="Android.Support.V4.Widget.DrawerLayout.DrawerClosed"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="DrawerLayout.DrawerClosed"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V4.Widget.DrawerLayout.DrawerClosed"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="DrawerLayout.DrawerClosed"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable DrawerClosedWeakSubscribe(
-            this Android.Support.V4.Widget.DrawerLayout eventSource,
-            EventHandler<Android.Support.V4.Widget.DrawerLayout.DrawerClosedEventArgs> eventHandler)
+            this DrawerLayout eventSource,
+            EventHandler<DrawerLayout.DrawerClosedEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V4.Widget.DrawerLayout, Android.Support.V4.Widget.DrawerLayout.DrawerClosedEventArgs>(
+            return new EventHandlerWeakEventSubscription<DrawerLayout, DrawerLayout.DrawerClosedEventArgs>(
                 eventSource,
                 (source, handler) => source.DrawerClosed += handler,
                 (source, handler) => source.DrawerClosed -= handler,
                 eventHandler);
         }
 
-        /// <summary>Weak subscription on <see cref="Android.Support.V4.Widget.DrawerLayout.DrawerOpened"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="DrawerLayout.DrawerOpened"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V4.Widget.DrawerLayout.DrawerOpened"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="DrawerLayout.DrawerOpened"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable DrawerOpenedWeakSubscribe(
-            this Android.Support.V4.Widget.DrawerLayout eventSource,
-            EventHandler<Android.Support.V4.Widget.DrawerLayout.DrawerOpenedEventArgs> eventHandler)
+            this DrawerLayout eventSource,
+            EventHandler<DrawerLayout.DrawerOpenedEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V4.Widget.DrawerLayout, Android.Support.V4.Widget.DrawerLayout.DrawerOpenedEventArgs>(
+            return new EventHandlerWeakEventSubscription<DrawerLayout, DrawerLayout.DrawerOpenedEventArgs>(
                 eventSource,
                 (source, handler) => source.DrawerOpened += handler,
                 (source, handler) => source.DrawerOpened -= handler,
                 eventHandler);
         }
 
-        /// <summary>Weak subscription on <see cref="Android.Support.V4.Widget.DrawerLayout.DrawerSlide"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="DrawerLayout.DrawerSlide"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V4.Widget.DrawerLayout.DrawerSlide"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="DrawerLayout.DrawerSlide"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable DrawerSlideWeakSubscribe(
-            this Android.Support.V4.Widget.DrawerLayout eventSource,
-            EventHandler<Android.Support.V4.Widget.DrawerLayout.DrawerSlideEventArgs> eventHandler)
+            this DrawerLayout eventSource,
+            EventHandler<DrawerLayout.DrawerSlideEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V4.Widget.DrawerLayout, Android.Support.V4.Widget.DrawerLayout.DrawerSlideEventArgs>(
+            return new EventHandlerWeakEventSubscription<DrawerLayout, DrawerLayout.DrawerSlideEventArgs>(
                 eventSource,
                 (source, handler) => source.DrawerSlide += handler,
                 (source, handler) => source.DrawerSlide -= handler,
                 eventHandler);
         }
 
-        /// <summary>Weak subscription on <see cref="Android.Support.V4.Widget.DrawerLayout.DrawerStateChanged"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="DrawerLayout.DrawerStateChanged"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V4.Widget.DrawerLayout.DrawerStateChanged"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="DrawerLayout.DrawerStateChanged"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable DrawerStateChangedWeakSubscribe(
-            this Android.Support.V4.Widget.DrawerLayout eventSource,
-            EventHandler<Android.Support.V4.Widget.DrawerLayout.DrawerStateChangedEventArgs> eventHandler)
+            this DrawerLayout eventSource,
+            EventHandler<DrawerLayout.DrawerStateChangedEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V4.Widget.DrawerLayout, Android.Support.V4.Widget.DrawerLayout.DrawerStateChangedEventArgs>(
+            return new EventHandlerWeakEventSubscription<DrawerLayout, DrawerLayout.DrawerStateChangedEventArgs>(
                 eventSource,
                 (source, handler) => source.DrawerStateChanged += handler,
                 (source, handler) => source.DrawerStateChanged -= handler,
@@ -3120,24 +3145,24 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Support.V4.Widget.NestedScrollView"/> class events.</summary>
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="NestedScrollView"/> class events.</summary>
     public static class NestedScrollViewWeakEventSubscriptionExtensions
     {
-        /// <summary>Weak subscription on <see cref="Android.Support.V4.Widget.NestedScrollView.ScrollChange"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="NestedScrollView.ScrollChange"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V4.Widget.NestedScrollView.ScrollChange"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="NestedScrollView.ScrollChange"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable ScrollChangeWeakSubscribe(
-            this Android.Support.V4.Widget.NestedScrollView eventSource,
-            EventHandler<Android.Support.V4.Widget.NestedScrollView.ScrollChangeEventArgs> eventHandler)
+            this NestedScrollView eventSource,
+            EventHandler<NestedScrollView.ScrollChangeEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V4.Widget.NestedScrollView, Android.Support.V4.Widget.NestedScrollView.ScrollChangeEventArgs>(
+            return new EventHandlerWeakEventSubscription<NestedScrollView, NestedScrollView.ScrollChangeEventArgs>(
                 eventSource,
                 (source, handler) => source.ScrollChange += handler,
                 (source, handler) => source.ScrollChange -= handler,
@@ -3149,66 +3174,66 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Support.V4.Widget.SlidingPaneLayout"/> class events.</summary>
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="SlidingPaneLayout"/> class events.</summary>
     public static class SlidingPaneLayoutWeakEventSubscriptionExtensions
     {
-        /// <summary>Weak subscription on <see cref="Android.Support.V4.Widget.SlidingPaneLayout.PanelClosed"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="SlidingPaneLayout.PanelClosed"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V4.Widget.SlidingPaneLayout.PanelClosed"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="SlidingPaneLayout.PanelClosed"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable PanelClosedWeakSubscribe(
-            this Android.Support.V4.Widget.SlidingPaneLayout eventSource,
-            EventHandler<Android.Support.V4.Widget.SlidingPaneLayout.PanelClosedEventArgs> eventHandler)
+            this SlidingPaneLayout eventSource,
+            EventHandler<SlidingPaneLayout.PanelClosedEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V4.Widget.SlidingPaneLayout, Android.Support.V4.Widget.SlidingPaneLayout.PanelClosedEventArgs>(
+            return new EventHandlerWeakEventSubscription<SlidingPaneLayout, SlidingPaneLayout.PanelClosedEventArgs>(
                 eventSource,
                 (source, handler) => source.PanelClosed += handler,
                 (source, handler) => source.PanelClosed -= handler,
                 eventHandler);
         }
 
-        /// <summary>Weak subscription on <see cref="Android.Support.V4.Widget.SlidingPaneLayout.PanelOpened"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="SlidingPaneLayout.PanelOpened"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V4.Widget.SlidingPaneLayout.PanelOpened"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="SlidingPaneLayout.PanelOpened"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable PanelOpenedWeakSubscribe(
-            this Android.Support.V4.Widget.SlidingPaneLayout eventSource,
-            EventHandler<Android.Support.V4.Widget.SlidingPaneLayout.PanelOpenedEventArgs> eventHandler)
+            this SlidingPaneLayout eventSource,
+            EventHandler<SlidingPaneLayout.PanelOpenedEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V4.Widget.SlidingPaneLayout, Android.Support.V4.Widget.SlidingPaneLayout.PanelOpenedEventArgs>(
+            return new EventHandlerWeakEventSubscription<SlidingPaneLayout, SlidingPaneLayout.PanelOpenedEventArgs>(
                 eventSource,
                 (source, handler) => source.PanelOpened += handler,
                 (source, handler) => source.PanelOpened -= handler,
                 eventHandler);
         }
 
-        /// <summary>Weak subscription on <see cref="Android.Support.V4.Widget.SlidingPaneLayout.PanelSlide"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="SlidingPaneLayout.PanelSlide"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V4.Widget.SlidingPaneLayout.PanelSlide"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="SlidingPaneLayout.PanelSlide"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable PanelSlideWeakSubscribe(
-            this Android.Support.V4.Widget.SlidingPaneLayout eventSource,
-            EventHandler<Android.Support.V4.Widget.SlidingPaneLayout.PanelSlideEventArgs> eventHandler)
+            this SlidingPaneLayout eventSource,
+            EventHandler<SlidingPaneLayout.PanelSlideEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V4.Widget.SlidingPaneLayout, Android.Support.V4.Widget.SlidingPaneLayout.PanelSlideEventArgs>(
+            return new EventHandlerWeakEventSubscription<SlidingPaneLayout, SlidingPaneLayout.PanelSlideEventArgs>(
                 eventSource,
                 (source, handler) => source.PanelSlide += handler,
                 (source, handler) => source.PanelSlide -= handler,
@@ -3220,16 +3245,16 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Support.V4.Widget.SwipeRefreshLayout"/> class events.</summary>
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="SwipeRefreshLayout"/> class events.</summary>
     public static class SwipeRefreshLayoutWeakEventSubscriptionExtensions
     {
-        /// <summary>Weak subscription on <see cref="Android.Support.V4.Widget.SwipeRefreshLayout.Refresh"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="SwipeRefreshLayout.Refresh"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V4.Widget.SwipeRefreshLayout.Refresh"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="SwipeRefreshLayout.Refresh"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable RefreshWeakSubscribe(
-            this Android.Support.V4.Widget.SwipeRefreshLayout eventSource,
+            this SwipeRefreshLayout eventSource,
             EventHandler eventHandler)
         {
             if (eventSource == null)
@@ -3237,7 +3262,7 @@ namespace FlexiMvvm.Views
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V4.Widget.SwipeRefreshLayout>(
+            return new EventHandlerWeakEventSubscription<SwipeRefreshLayout>(
                 eventSource,
                 (source, handler) => source.Refresh += handler,
                 (source, handler) => source.Refresh -= handler,
@@ -3249,24 +3274,24 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Support.V7.App.ActionBar"/> class events.</summary>
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="ActionBar"/> class events.</summary>
     public static class SupportActionBarWeakEventSubscriptionExtensions
     {
-        /// <summary>Weak subscription on <see cref="Android.Support.V7.App.ActionBar.MenuVisibility"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="ActionBar.MenuVisibility"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V7.App.ActionBar.MenuVisibility"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="ActionBar.MenuVisibility"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable MenuVisibilityWeakSubscribe(
-            this Android.Support.V7.App.ActionBar eventSource,
-            EventHandler<Android.Support.V7.App.ActionBar.MenuVisibilityEventArgs> eventHandler)
+            this ActionBar eventSource,
+            EventHandler<ActionBar.MenuVisibilityEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V7.App.ActionBar, Android.Support.V7.App.ActionBar.MenuVisibilityEventArgs>(
+            return new EventHandlerWeakEventSubscription<ActionBar, ActionBar.MenuVisibilityEventArgs>(
                 eventSource,
                 (source, handler) => source.MenuVisibility += handler,
                 (source, handler) => source.MenuVisibility -= handler,
@@ -3278,24 +3303,24 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Support.V7.App.WindowDecorActionBar"/> class events.</summary>
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="WindowDecorActionBar"/> class events.</summary>
     public static class WindowDecorActionBarWeakEventSubscriptionExtensions
     {
-        /// <summary>Weak subscription on <see cref="Android.Support.V7.App.WindowDecorActionBar.MenuVisibility"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="WindowDecorActionBar.MenuVisibility"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V7.App.WindowDecorActionBar.MenuVisibility"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="WindowDecorActionBar.MenuVisibility"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable MenuVisibilityWeakSubscribe(
-            this Android.Support.V7.App.WindowDecorActionBar eventSource,
-            EventHandler<Android.Support.V7.App.ActionBar.MenuVisibilityEventArgs> eventHandler)
+            this WindowDecorActionBar eventSource,
+            EventHandler<ActionBar.MenuVisibilityEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V7.App.WindowDecorActionBar, Android.Support.V7.App.ActionBar.MenuVisibilityEventArgs>(
+            return new EventHandlerWeakEventSubscription<WindowDecorActionBar, ActionBar.MenuVisibilityEventArgs>(
                 eventSource,
                 (source, handler) => source.MenuVisibility += handler,
                 (source, handler) => source.MenuVisibility -= handler,
@@ -3307,24 +3332,24 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Support.V7.Widget.ActionMenuView"/> class events.</summary>
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="ActionMenuView"/> class events.</summary>
     public static class SupportActionMenuViewWeakEventSubscriptionExtensions
     {
-        /// <summary>Weak subscription on <see cref="Android.Support.V7.Widget.ActionMenuView.MenuItemClick"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="ActionMenuView.MenuItemClick"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V7.Widget.ActionMenuView.MenuItemClick"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="ActionMenuView.MenuItemClick"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable MenuItemClickWeakSubscribe(
-            this Android.Support.V7.Widget.ActionMenuView eventSource,
-            EventHandler<Android.Support.V7.Widget.ActionMenuView.MenuItemClickEventArgs> eventHandler)
+            this ActionMenuView eventSource,
+            EventHandler<ActionMenuView.MenuItemClickEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V7.Widget.ActionMenuView, Android.Support.V7.Widget.ActionMenuView.MenuItemClickEventArgs>(
+            return new EventHandlerWeakEventSubscription<ActionMenuView, ActionMenuView.MenuItemClickEventArgs>(
                 eventSource,
                 (source, handler) => source.MenuItemClick += handler,
                 (source, handler) => source.MenuItemClick -= handler,
@@ -3336,16 +3361,16 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Support.V7.Widget.ContentFrameLayout"/> class events.</summary>
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="ContentFrameLayout"/> class events.</summary>
     public static class ContentFrameLayoutWeakEventSubscriptionExtensions
     {
-        /// <summary>Weak subscription on <see cref="Android.Support.V7.Widget.ContentFrameLayout.AttachedFromWindow"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="ContentFrameLayout.AttachedFromWindow"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V7.Widget.ContentFrameLayout.AttachedFromWindow"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="ContentFrameLayout.AttachedFromWindow"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable AttachedFromWindowWeakSubscribe(
-            this Android.Support.V7.Widget.ContentFrameLayout eventSource,
+            this ContentFrameLayout eventSource,
             EventHandler eventHandler)
         {
             if (eventSource == null)
@@ -3353,20 +3378,20 @@ namespace FlexiMvvm.Views
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V7.Widget.ContentFrameLayout>(
+            return new EventHandlerWeakEventSubscription<ContentFrameLayout>(
                 eventSource,
                 (source, handler) => source.AttachedFromWindow += handler,
                 (source, handler) => source.AttachedFromWindow -= handler,
                 eventHandler);
         }
 
-        /// <summary>Weak subscription on <see cref="Android.Support.V7.Widget.ContentFrameLayout.DetachedFromWindow"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="ContentFrameLayout.DetachedFromWindow"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V7.Widget.ContentFrameLayout.DetachedFromWindow"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="ContentFrameLayout.DetachedFromWindow"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable DetachedFromWindowWeakSubscribe(
-            this Android.Support.V7.Widget.ContentFrameLayout eventSource,
+            this ContentFrameLayout eventSource,
             EventHandler eventHandler)
         {
             if (eventSource == null)
@@ -3374,7 +3399,7 @@ namespace FlexiMvvm.Views
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V7.Widget.ContentFrameLayout>(
+            return new EventHandlerWeakEventSubscription<ContentFrameLayout>(
                 eventSource,
                 (source, handler) => source.DetachedFromWindow += handler,
                 (source, handler) => source.DetachedFromWindow -= handler,
@@ -3386,24 +3411,24 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Support.V7.Widget.FitWindowsFrameLayout"/> class events.</summary>
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="FitWindowsFrameLayout"/> class events.</summary>
     public static class FitWindowsFrameLayoutWeakEventSubscriptionExtensions
     {
-        /// <summary>Weak subscription on <see cref="Android.Support.V7.Widget.FitWindowsFrameLayout.FitSystemWindows"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="FitWindowsFrameLayout.FitSystemWindows"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V7.Widget.FitWindowsFrameLayout.FitSystemWindows"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="FitWindowsFrameLayout.FitSystemWindows"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable FitSystemWindowsWeakSubscribe(
-            this Android.Support.V7.Widget.FitWindowsFrameLayout eventSource,
-            EventHandler<Android.Support.V7.Widget.FitWindowsViewGroupOnFitSystemWindowsEventArgs> eventHandler)
+            this FitWindowsFrameLayout eventSource,
+            EventHandler<FitWindowsViewGroupOnFitSystemWindowsEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V7.Widget.FitWindowsFrameLayout, Android.Support.V7.Widget.FitWindowsViewGroupOnFitSystemWindowsEventArgs>(
+            return new EventHandlerWeakEventSubscription<FitWindowsFrameLayout, FitWindowsViewGroupOnFitSystemWindowsEventArgs>(
                 eventSource,
                 (source, handler) => source.FitSystemWindows += handler,
                 (source, handler) => source.FitSystemWindows -= handler,
@@ -3415,24 +3440,24 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Support.V7.Widget.FitWindowsLinearLayout"/> class events.</summary>
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="FitWindowsLinearLayout"/> class events.</summary>
     public static class FitWindowsLinearLayoutWeakEventSubscriptionExtensions
     {
-        /// <summary>Weak subscription on <see cref="Android.Support.V7.Widget.FitWindowsLinearLayout.FitSystemWindows"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="FitWindowsLinearLayout.FitSystemWindows"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V7.Widget.FitWindowsLinearLayout.FitSystemWindows"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="FitWindowsLinearLayout.FitSystemWindows"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable FitSystemWindowsWeakSubscribe(
-            this Android.Support.V7.Widget.FitWindowsLinearLayout eventSource,
-            EventHandler<Android.Support.V7.Widget.FitWindowsViewGroupOnFitSystemWindowsEventArgs> eventHandler)
+            this FitWindowsLinearLayout eventSource,
+            EventHandler<FitWindowsViewGroupOnFitSystemWindowsEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V7.Widget.FitWindowsLinearLayout, Android.Support.V7.Widget.FitWindowsViewGroupOnFitSystemWindowsEventArgs>(
+            return new EventHandlerWeakEventSubscription<FitWindowsLinearLayout, FitWindowsViewGroupOnFitSystemWindowsEventArgs>(
                 eventSource,
                 (source, handler) => source.FitSystemWindows += handler,
                 (source, handler) => source.FitSystemWindows -= handler,
@@ -3444,45 +3469,45 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Support.V7.Widget.MenuPopupWindow"/> class events.</summary>
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="MenuPopupWindow"/> class events.</summary>
     public static class MenuPopupWindowWeakEventSubscriptionExtensions
     {
-        /// <summary>Weak subscription on <see cref="Android.Support.V7.Widget.MenuPopupWindow.ItemHoverEnter"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="MenuPopupWindow.ItemHoverEnter"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V7.Widget.MenuPopupWindow.ItemHoverEnter"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="MenuPopupWindow.ItemHoverEnter"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable ItemHoverEnterWeakSubscribe(
-            this Android.Support.V7.Widget.MenuPopupWindow eventSource,
-            EventHandler<Android.Support.V7.Widget.ItemHoverEnterEventArgs> eventHandler)
+            this MenuPopupWindow eventSource,
+            EventHandler<ItemHoverEnterEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V7.Widget.MenuPopupWindow, Android.Support.V7.Widget.ItemHoverEnterEventArgs>(
+            return new EventHandlerWeakEventSubscription<MenuPopupWindow, ItemHoverEnterEventArgs>(
                 eventSource,
                 (source, handler) => source.ItemHoverEnter += handler,
                 (source, handler) => source.ItemHoverEnter -= handler,
                 eventHandler);
         }
 
-        /// <summary>Weak subscription on <see cref="Android.Support.V7.Widget.MenuPopupWindow.ItemHoverExit"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="MenuPopupWindow.ItemHoverExit"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V7.Widget.MenuPopupWindow.ItemHoverExit"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="MenuPopupWindow.ItemHoverExit"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable ItemHoverExitWeakSubscribe(
-            this Android.Support.V7.Widget.MenuPopupWindow eventSource,
-            EventHandler<Android.Support.V7.Widget.ItemHoverExitEventArgs> eventHandler)
+            this MenuPopupWindow eventSource,
+            EventHandler<ItemHoverExitEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V7.Widget.MenuPopupWindow, Android.Support.V7.Widget.ItemHoverExitEventArgs>(
+            return new EventHandlerWeakEventSubscription<MenuPopupWindow, ItemHoverExitEventArgs>(
                 eventSource,
                 (source, handler) => source.ItemHoverExit += handler,
                 (source, handler) => source.ItemHoverExit -= handler,
@@ -3494,45 +3519,45 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Support.V7.Widget.MenuPopupWindow.MenuDropDownListView"/> class events.</summary>
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="MenuPopupWindow.MenuDropDownListView"/> class events.</summary>
     public static class MenuDropDownListViewWeakEventSubscriptionExtensions
     {
-        /// <summary>Weak subscription on <see cref="Android.Support.V7.Widget.MenuPopupWindow.MenuDropDownListView.ItemHoverEnter"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="MenuPopupWindow.MenuDropDownListView.ItemHoverEnter"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V7.Widget.MenuPopupWindow.MenuDropDownListView.ItemHoverEnter"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="MenuPopupWindow.MenuDropDownListView.ItemHoverEnter"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable ItemHoverEnterWeakSubscribe(
-            this Android.Support.V7.Widget.MenuPopupWindow.MenuDropDownListView eventSource,
-            EventHandler<Android.Support.V7.Widget.ItemHoverEnterEventArgs> eventHandler)
+            this MenuPopupWindow.MenuDropDownListView eventSource,
+            EventHandler<ItemHoverEnterEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V7.Widget.MenuPopupWindow.MenuDropDownListView, Android.Support.V7.Widget.ItemHoverEnterEventArgs>(
+            return new EventHandlerWeakEventSubscription<MenuPopupWindow.MenuDropDownListView, ItemHoverEnterEventArgs>(
                 eventSource,
                 (source, handler) => source.ItemHoverEnter += handler,
                 (source, handler) => source.ItemHoverEnter -= handler,
                 eventHandler);
         }
 
-        /// <summary>Weak subscription on <see cref="Android.Support.V7.Widget.MenuPopupWindow.MenuDropDownListView.ItemHoverExit"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="MenuPopupWindow.MenuDropDownListView.ItemHoverExit"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V7.Widget.MenuPopupWindow.MenuDropDownListView.ItemHoverExit"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="MenuPopupWindow.MenuDropDownListView.ItemHoverExit"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable ItemHoverExitWeakSubscribe(
-            this Android.Support.V7.Widget.MenuPopupWindow.MenuDropDownListView eventSource,
-            EventHandler<Android.Support.V7.Widget.ItemHoverExitEventArgs> eventHandler)
+            this MenuPopupWindow.MenuDropDownListView eventSource,
+            EventHandler<ItemHoverExitEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V7.Widget.MenuPopupWindow.MenuDropDownListView, Android.Support.V7.Widget.ItemHoverExitEventArgs>(
+            return new EventHandlerWeakEventSubscription<MenuPopupWindow.MenuDropDownListView, ItemHoverExitEventArgs>(
                 eventSource,
                 (source, handler) => source.ItemHoverExit += handler,
                 (source, handler) => source.ItemHoverExit -= handler,
@@ -3544,45 +3569,45 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Support.V7.Widget.PopupMenu"/> class events.</summary>
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="PopupMenu"/> class events.</summary>
     public static class SupportPopupMenuWeakEventSubscriptionExtensions
     {
-        /// <summary>Weak subscription on <see cref="Android.Support.V7.Widget.PopupMenu.DismissEvent"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="PopupMenu.DismissEvent"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V7.Widget.PopupMenu.DismissEvent"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="PopupMenu.DismissEvent"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable DismissEventWeakSubscribe(
-            this Android.Support.V7.Widget.PopupMenu eventSource,
-            EventHandler<Android.Support.V7.Widget.PopupMenu.DismissEventArgs> eventHandler)
+            this PopupMenu eventSource,
+            EventHandler<PopupMenu.DismissEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V7.Widget.PopupMenu, Android.Support.V7.Widget.PopupMenu.DismissEventArgs>(
+            return new EventHandlerWeakEventSubscription<PopupMenu, PopupMenu.DismissEventArgs>(
                 eventSource,
                 (source, handler) => source.DismissEvent += handler,
                 (source, handler) => source.DismissEvent -= handler,
                 eventHandler);
         }
 
-        /// <summary>Weak subscription on <see cref="Android.Support.V7.Widget.PopupMenu.MenuItemClick"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="PopupMenu.MenuItemClick"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V7.Widget.PopupMenu.MenuItemClick"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="PopupMenu.MenuItemClick"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable MenuItemClickWeakSubscribe(
-            this Android.Support.V7.Widget.PopupMenu eventSource,
-            EventHandler<Android.Support.V7.Widget.PopupMenu.MenuItemClickEventArgs> eventHandler)
+            this PopupMenu eventSource,
+            EventHandler<PopupMenu.MenuItemClickEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V7.Widget.PopupMenu, Android.Support.V7.Widget.PopupMenu.MenuItemClickEventArgs>(
+            return new EventHandlerWeakEventSubscription<PopupMenu, PopupMenu.MenuItemClickEventArgs>(
                 eventSource,
                 (source, handler) => source.MenuItemClick += handler,
                 (source, handler) => source.MenuItemClick -= handler,
@@ -3594,129 +3619,129 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Support.V7.Widget.RecyclerView"/> class events.</summary>
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="RecyclerView"/> class events.</summary>
     public static class RecyclerViewWeakEventSubscriptionExtensions
     {
-        /// <summary>Weak subscription on <see cref="Android.Support.V7.Widget.RecyclerView.ChildViewAttachedToWindow"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="RecyclerView.ChildViewAttachedToWindow"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V7.Widget.RecyclerView.ChildViewAttachedToWindow"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="RecyclerView.ChildViewAttachedToWindow"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable ChildViewAttachedToWindowWeakSubscribe(
-            this Android.Support.V7.Widget.RecyclerView eventSource,
-            EventHandler<Android.Support.V7.Widget.RecyclerView.ChildViewAttachedToWindowEventArgs> eventHandler)
+            this RecyclerView eventSource,
+            EventHandler<RecyclerView.ChildViewAttachedToWindowEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V7.Widget.RecyclerView, Android.Support.V7.Widget.RecyclerView.ChildViewAttachedToWindowEventArgs>(
+            return new EventHandlerWeakEventSubscription<RecyclerView, RecyclerView.ChildViewAttachedToWindowEventArgs>(
                 eventSource,
                 (source, handler) => source.ChildViewAttachedToWindow += handler,
                 (source, handler) => source.ChildViewAttachedToWindow -= handler,
                 eventHandler);
         }
 
-        /// <summary>Weak subscription on <see cref="Android.Support.V7.Widget.RecyclerView.ChildViewDetachedFromWindow"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="RecyclerView.ChildViewDetachedFromWindow"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V7.Widget.RecyclerView.ChildViewDetachedFromWindow"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="RecyclerView.ChildViewDetachedFromWindow"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable ChildViewDetachedFromWindowWeakSubscribe(
-            this Android.Support.V7.Widget.RecyclerView eventSource,
-            EventHandler<Android.Support.V7.Widget.RecyclerView.ChildViewDetachedFromWindowEventArgs> eventHandler)
+            this RecyclerView eventSource,
+            EventHandler<RecyclerView.ChildViewDetachedFromWindowEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V7.Widget.RecyclerView, Android.Support.V7.Widget.RecyclerView.ChildViewDetachedFromWindowEventArgs>(
+            return new EventHandlerWeakEventSubscription<RecyclerView, RecyclerView.ChildViewDetachedFromWindowEventArgs>(
                 eventSource,
                 (source, handler) => source.ChildViewDetachedFromWindow += handler,
                 (source, handler) => source.ChildViewDetachedFromWindow -= handler,
                 eventHandler);
         }
 
-        /// <summary>Weak subscription on <see cref="Android.Support.V7.Widget.RecyclerView.InterceptTouchEvent"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="RecyclerView.InterceptTouchEvent"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V7.Widget.RecyclerView.InterceptTouchEvent"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="RecyclerView.InterceptTouchEvent"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable InterceptTouchEventWeakSubscribe(
-            this Android.Support.V7.Widget.RecyclerView eventSource,
-            EventHandler<Android.Support.V7.Widget.RecyclerView.InterceptTouchEventEventArgs> eventHandler)
+            this RecyclerView eventSource,
+            EventHandler<RecyclerView.InterceptTouchEventEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V7.Widget.RecyclerView, Android.Support.V7.Widget.RecyclerView.InterceptTouchEventEventArgs>(
+            return new EventHandlerWeakEventSubscription<RecyclerView, RecyclerView.InterceptTouchEventEventArgs>(
                 eventSource,
                 (source, handler) => source.InterceptTouchEvent += handler,
                 (source, handler) => source.InterceptTouchEvent -= handler,
                 eventHandler);
         }
 
-        /// <summary>Weak subscription on <see cref="Android.Support.V7.Widget.RecyclerView.RecyclerEvent"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="RecyclerView.RecyclerEvent"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V7.Widget.RecyclerView.RecyclerEvent"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="RecyclerView.RecyclerEvent"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable RecyclerEventWeakSubscribe(
-            this Android.Support.V7.Widget.RecyclerView eventSource,
-            EventHandler<Android.Support.V7.Widget.RecyclerView.RecyclerEventArgs> eventHandler)
+            this RecyclerView eventSource,
+            EventHandler<RecyclerView.RecyclerEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V7.Widget.RecyclerView, Android.Support.V7.Widget.RecyclerView.RecyclerEventArgs>(
+            return new EventHandlerWeakEventSubscription<RecyclerView, RecyclerView.RecyclerEventArgs>(
                 eventSource,
                 (source, handler) => source.RecyclerEvent += handler,
                 (source, handler) => source.RecyclerEvent -= handler,
                 eventHandler);
         }
 
-        /// <summary>Weak subscription on <see cref="Android.Support.V7.Widget.RecyclerView.RequestDisallowInterceptTouchEvent"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="RecyclerView.RequestDisallowInterceptTouchEvent"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V7.Widget.RecyclerView.RequestDisallowInterceptTouchEvent"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="RecyclerView.RequestDisallowInterceptTouchEvent"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable RequestDisallowInterceptTouchEventWeakSubscribe(
-            this Android.Support.V7.Widget.RecyclerView eventSource,
-            EventHandler<Android.Support.V7.Widget.RecyclerView.RequestDisallowInterceptTouchEventEventArgs> eventHandler)
+            this RecyclerView eventSource,
+            EventHandler<RecyclerView.RequestDisallowInterceptTouchEventEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V7.Widget.RecyclerView, Android.Support.V7.Widget.RecyclerView.RequestDisallowInterceptTouchEventEventArgs>(
+            return new EventHandlerWeakEventSubscription<RecyclerView, RecyclerView.RequestDisallowInterceptTouchEventEventArgs>(
                 eventSource,
                 (source, handler) => source.RequestDisallowInterceptTouchEvent += handler,
                 (source, handler) => source.RequestDisallowInterceptTouchEvent -= handler,
                 eventHandler);
         }
 
-        /// <summary>Weak subscription on <see cref="Android.Support.V7.Widget.RecyclerView.TouchEvent"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="RecyclerView.TouchEvent"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V7.Widget.RecyclerView.TouchEvent"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="RecyclerView.TouchEvent"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable TouchEventWeakSubscribe(
-            this Android.Support.V7.Widget.RecyclerView eventSource,
-            EventHandler<Android.Support.V7.Widget.RecyclerView.TouchEventEventArgs> eventHandler)
+            this RecyclerView eventSource,
+            EventHandler<RecyclerView.TouchEventEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V7.Widget.RecyclerView, Android.Support.V7.Widget.RecyclerView.TouchEventEventArgs>(
+            return new EventHandlerWeakEventSubscription<RecyclerView, RecyclerView.TouchEventEventArgs>(
                 eventSource,
                 (source, handler) => source.TouchEvent += handler,
                 (source, handler) => source.TouchEvent -= handler,
@@ -3728,108 +3753,108 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Support.V7.Widget.SearchView"/> class events.</summary>
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="SearchView"/> class events.</summary>
     public static class SupportSearchViewWeakEventSubscriptionExtensions
     {
-        /// <summary>Weak subscription on <see cref="Android.Support.V7.Widget.SearchView.Close"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="SearchView.Close"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V7.Widget.SearchView.Close"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="SearchView.Close"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable CloseWeakSubscribe(
-            this Android.Support.V7.Widget.SearchView eventSource,
-            EventHandler<Android.Support.V7.Widget.SearchView.CloseEventArgs> eventHandler)
+            this SearchView eventSource,
+            EventHandler<SearchView.CloseEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V7.Widget.SearchView, Android.Support.V7.Widget.SearchView.CloseEventArgs>(
+            return new EventHandlerWeakEventSubscription<SearchView, SearchView.CloseEventArgs>(
                 eventSource,
                 (source, handler) => source.Close += handler,
                 (source, handler) => source.Close -= handler,
                 eventHandler);
         }
 
-        /// <summary>Weak subscription on <see cref="Android.Support.V7.Widget.SearchView.QueryTextChange"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="SearchView.QueryTextChange"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V7.Widget.SearchView.QueryTextChange"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="SearchView.QueryTextChange"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable QueryTextChangeWeakSubscribe(
-            this Android.Support.V7.Widget.SearchView eventSource,
-            EventHandler<Android.Support.V7.Widget.SearchView.QueryTextChangeEventArgs> eventHandler)
+            this SearchView eventSource,
+            EventHandler<SearchView.QueryTextChangeEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V7.Widget.SearchView, Android.Support.V7.Widget.SearchView.QueryTextChangeEventArgs>(
+            return new EventHandlerWeakEventSubscription<SearchView, SearchView.QueryTextChangeEventArgs>(
                 eventSource,
                 (source, handler) => source.QueryTextChange += handler,
                 (source, handler) => source.QueryTextChange -= handler,
                 eventHandler);
         }
 
-        /// <summary>Weak subscription on <see cref="Android.Support.V7.Widget.SearchView.QueryTextSubmit"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="SearchView.QueryTextSubmit"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V7.Widget.SearchView.QueryTextSubmit"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="SearchView.QueryTextSubmit"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable QueryTextSubmitWeakSubscribe(
-            this Android.Support.V7.Widget.SearchView eventSource,
-            EventHandler<Android.Support.V7.Widget.SearchView.QueryTextSubmitEventArgs> eventHandler)
+            this SearchView eventSource,
+            EventHandler<SearchView.QueryTextSubmitEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V7.Widget.SearchView, Android.Support.V7.Widget.SearchView.QueryTextSubmitEventArgs>(
+            return new EventHandlerWeakEventSubscription<SearchView, SearchView.QueryTextSubmitEventArgs>(
                 eventSource,
                 (source, handler) => source.QueryTextSubmit += handler,
                 (source, handler) => source.QueryTextSubmit -= handler,
                 eventHandler);
         }
 
-        /// <summary>Weak subscription on <see cref="Android.Support.V7.Widget.SearchView.SuggestionClick"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="SearchView.SuggestionClick"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V7.Widget.SearchView.SuggestionClick"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="SearchView.SuggestionClick"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable SuggestionClickWeakSubscribe(
-            this Android.Support.V7.Widget.SearchView eventSource,
-            EventHandler<Android.Support.V7.Widget.SearchView.SuggestionClickEventArgs> eventHandler)
+            this SearchView eventSource,
+            EventHandler<SearchView.SuggestionClickEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V7.Widget.SearchView, Android.Support.V7.Widget.SearchView.SuggestionClickEventArgs>(
+            return new EventHandlerWeakEventSubscription<SearchView, SearchView.SuggestionClickEventArgs>(
                 eventSource,
                 (source, handler) => source.SuggestionClick += handler,
                 (source, handler) => source.SuggestionClick -= handler,
                 eventHandler);
         }
 
-        /// <summary>Weak subscription on <see cref="Android.Support.V7.Widget.SearchView.SuggestionSelect"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="SearchView.SuggestionSelect"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V7.Widget.SearchView.SuggestionSelect"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="SearchView.SuggestionSelect"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable SuggestionSelectWeakSubscribe(
-            this Android.Support.V7.Widget.SearchView eventSource,
-            EventHandler<Android.Support.V7.Widget.SearchView.SuggestionSelectEventArgs> eventHandler)
+            this SearchView eventSource,
+            EventHandler<SearchView.SuggestionSelectEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V7.Widget.SearchView, Android.Support.V7.Widget.SearchView.SuggestionSelectEventArgs>(
+            return new EventHandlerWeakEventSubscription<SearchView, SearchView.SuggestionSelectEventArgs>(
                 eventSource,
                 (source, handler) => source.SuggestionSelect += handler,
                 (source, handler) => source.SuggestionSelect -= handler,
@@ -3841,24 +3866,24 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Support.V7.Widget.ShareActionProvider"/> class events.</summary>
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="ShareActionProvider"/> class events.</summary>
     public static class SupportShareActionProviderWeakEventSubscriptionExtensions
     {
-        /// <summary>Weak subscription on <see cref="Android.Support.V7.Widget.ShareActionProvider.ShareTargetSelected"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="ShareActionProvider.ShareTargetSelected"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V7.Widget.ShareActionProvider.ShareTargetSelected"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="ShareActionProvider.ShareTargetSelected"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable ShareTargetSelectedWeakSubscribe(
-            this Android.Support.V7.Widget.ShareActionProvider eventSource,
-            EventHandler<Android.Support.V7.Widget.ShareActionProvider.ShareTargetSelectedEventArgs> eventHandler)
+            this ShareActionProvider eventSource,
+            EventHandler<ShareActionProvider.ShareTargetSelectedEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V7.Widget.ShareActionProvider, Android.Support.V7.Widget.ShareActionProvider.ShareTargetSelectedEventArgs>(
+            return new EventHandlerWeakEventSubscription<ShareActionProvider, ShareActionProvider.ShareTargetSelectedEventArgs>(
                 eventSource,
                 (source, handler) => source.ShareTargetSelected += handler,
                 (source, handler) => source.ShareTargetSelected -= handler,
@@ -3870,45 +3895,45 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Support.V7.Widget.Toolbar"/> class events.</summary>
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Toolbar"/> class events.</summary>
     public static class SupportToolbarWeakEventSubscriptionExtensions
     {
-        /// <summary>Weak subscription on <see cref="Android.Support.V7.Widget.Toolbar.MenuItemClick"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="Toolbar.MenuItemClick"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V7.Widget.Toolbar.MenuItemClick"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="Toolbar.MenuItemClick"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable MenuItemClickWeakSubscribe(
-            this Android.Support.V7.Widget.Toolbar eventSource,
-            EventHandler<Android.Support.V7.Widget.Toolbar.MenuItemClickEventArgs> eventHandler)
+            this Toolbar eventSource,
+            EventHandler<Toolbar.MenuItemClickEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V7.Widget.Toolbar, Android.Support.V7.Widget.Toolbar.MenuItemClickEventArgs>(
+            return new EventHandlerWeakEventSubscription<Toolbar, Toolbar.MenuItemClickEventArgs>(
                 eventSource,
                 (source, handler) => source.MenuItemClick += handler,
                 (source, handler) => source.MenuItemClick -= handler,
                 eventHandler);
         }
 
-        /// <summary>Weak subscription on <see cref="Android.Support.V7.Widget.Toolbar.NavigationClick"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="Toolbar.NavigationClick"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V7.Widget.Toolbar.NavigationClick"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="Toolbar.NavigationClick"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable NavigationClickWeakSubscribe(
-            this Android.Support.V7.Widget.Toolbar eventSource,
-            EventHandler<Android.Support.V7.Widget.Toolbar.NavigationClickEventArgs> eventHandler)
+            this Toolbar eventSource,
+            EventHandler<Toolbar.NavigationClickEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V7.Widget.Toolbar, Android.Support.V7.Widget.Toolbar.NavigationClickEventArgs>(
+            return new EventHandlerWeakEventSubscription<Toolbar, Toolbar.NavigationClickEventArgs>(
                 eventSource,
                 (source, handler) => source.NavigationClick += handler,
                 (source, handler) => source.NavigationClick -= handler,
@@ -3920,24 +3945,24 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="Android.Support.V7.Widget.ViewStubCompat"/> class events.</summary>
+    /// <summary>Provides a set of static methods for weak subscriptions on <see cref="ViewStubCompat"/> class events.</summary>
     public static class ViewStubCompatWeakEventSubscriptionExtensions
     {
-        /// <summary>Weak subscription on <see cref="Android.Support.V7.Widget.ViewStubCompat.InflateEvent"/> event.</summary>
+        /// <summary>Weak subscription on <see cref="ViewStubCompat.InflateEvent"/> event.</summary>
         /// <returns>Weak event subscription instance.</returns>
         /// <param name="eventSource">The source of the event.</param>
-        /// <param name="eventHandler">Represents the method that will handle the <see cref="Android.Support.V7.Widget.ViewStubCompat.InflateEvent"/> event.</param>
+        /// <param name="eventHandler">Represents the method that will handle the <see cref="ViewStubCompat.InflateEvent"/> event.</param>
         /// <exception cref="ArgumentNullException"><paramref name="eventSource" /> is null.-or-<paramref name="eventHandler" /> is null.</exception>
         public static IDisposable InflateEventWeakSubscribe(
-            this Android.Support.V7.Widget.ViewStubCompat eventSource,
-            EventHandler<Android.Support.V7.Widget.ViewStubCompat.InflateEventArgs> eventHandler)
+            this ViewStubCompat eventSource,
+            EventHandler<ViewStubCompat.InflateEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
-            return new EventHandlerWeakEventSubscription<Android.Support.V7.Widget.ViewStubCompat, Android.Support.V7.Widget.ViewStubCompat.InflateEventArgs>(
+            return new EventHandlerWeakEventSubscription<ViewStubCompat, ViewStubCompat.InflateEventArgs>(
                 eventSource,
                 (source, handler) => source.InflateEvent += handler,
                 (source, handler) => source.InflateEvent -= handler,

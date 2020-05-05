@@ -1,6 +1,6 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras/2.0.54">
     <PropertyGroup>
-        <TargetFrameworks>netstandard2.0;MonoAndroid80;MonoAndroid81;MonoAndroid90;Xamarin.iOS10</TargetFrameworks>
+        <TargetFrameworks>MonoAndroid80;MonoAndroid81;MonoAndroid90;MonoAndroid10.0;Xamarin.iOS10</TargetFrameworks>
         <AssemblyName>FlexiMvvm.Bindings</AssemblyName>
         <PackageId>FlexiMvvm.Bindings.PreRelease</PackageId>
         <Title>FlexiMvvm.Bindings</Title>
@@ -20,5 +20,8 @@
     </ItemGroup>
     <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid90')) ">
         <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.3" />
+    </ItemGroup>
+    <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid10.0')) ">
+        <PackageReference Include="Xamarin.Google.Android.Material" Version="1.0.0" />
     </ItemGroup>
 </Project>

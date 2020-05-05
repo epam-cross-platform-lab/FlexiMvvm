@@ -15,12 +15,16 @@
 // =========================================================================
 
 using System;
+#if __ANDROID_29__
+using Google.Android.Material.BottomNavigation;
+#else
 using Android.Support.Design.Widget;
+#endif
 using FlexiMvvm.Bindings.Custom;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class SupportBottomNavigationViewExtensions
+    public static class BottomNavigationViewExtensions
     {
         public static TargetItemBinding<BottomNavigationView, int> NavigationItemReselectedBinding(
             this IItemReference<BottomNavigationView> bottomNavigationViewReference,

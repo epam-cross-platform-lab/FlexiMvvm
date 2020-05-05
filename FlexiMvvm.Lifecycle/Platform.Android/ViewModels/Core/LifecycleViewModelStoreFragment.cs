@@ -17,11 +17,14 @@
 using System;
 using System.Collections.Generic;
 using Android.OS;
+#if __ANDROID_29__
+using AndroidX.Fragment.App;
+#else
+using Android.Support.V4.App;
+#endif
 
 namespace FlexiMvvm.ViewModels.Core
 {
-    using Android.Support.V4.App;
-
     internal sealed class LifecycleViewModelStoreFragment : Fragment, ILifecycleViewModelStore
     {
         private Dictionary<string, ILifecycleViewModel>? _viewModels;

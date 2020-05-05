@@ -23,10 +23,10 @@ namespace FlexiMvvm.Views
         "StyleCop.CSharp.DocumentationRules",
         "SA1648:InheritDocMustBeUsedWithInheritingClass",
         Justification = "This rule doesn't work properly with a partial class.")]
-    public partial class TableViewController
+    public partial class FlexiTableViewController
     {
         /// <inheritdoc />
-        public TableViewController(UITableViewStyle withStyle)
+        public FlexiTableViewController(UITableViewStyle withStyle)
             : base(withStyle)
         {
             LifecycleDelegate.ForceInstanceCreation();
@@ -37,10 +37,10 @@ namespace FlexiMvvm.Views
         "StyleCop.CSharp.DocumentationRules",
         "SA1648:InheritDocMustBeUsedWithInheritingClass",
         Justification = "This rule doesn't work properly with a partial class.")]
-    public partial class TableViewController<TViewModel>
+    public partial class FlexiTableViewController<TViewModel>
     {
         /// <inheritdoc />
-        public TableViewController(UITableViewStyle withStyle)
+        public FlexiTableViewController(UITableViewStyle withStyle)
             : base(withStyle)
         {
         }
@@ -50,10 +50,10 @@ namespace FlexiMvvm.Views
         "StyleCop.CSharp.DocumentationRules",
         "SA1648:InheritDocMustBeUsedWithInheritingClass",
         Justification = "This rule doesn't work properly with a partial class.")]
-    public partial class TableViewController<TViewModel, TParameters>
+    public partial class FlexiTableViewController<TViewModel, TParameters>
     {
         /// <inheritdoc />
-        public TableViewController(UITableViewStyle withStyle)
+        public FlexiTableViewController(UITableViewStyle withStyle)
             : base(withStyle)
         {
         }

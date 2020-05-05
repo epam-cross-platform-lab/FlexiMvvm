@@ -15,14 +15,17 @@
 // =========================================================================
 
 using System;
+#if __ANDROID_29__
+using AndroidX.Fragment.App;
+#else
+using Android.Support.V4.App;
+#endif
 using FlexiMvvm.ViewModels;
 using FlexiMvvm.Views;
 using FlexiMvvm.Views.Core;
 
 namespace FlexiMvvm.Navigation
 {
-    using Android.Support.V4.App;
-
     public static partial class NavigationViewProvider
     {
         /// <summary>

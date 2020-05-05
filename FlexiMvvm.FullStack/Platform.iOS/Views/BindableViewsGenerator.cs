@@ -23,34 +23,34 @@ using Foundation;
 
 namespace FlexiMvvm.Views
 {
-    public partial class BindablePageViewController<TViewModel> : FlexiMvvm.Views.PageViewController<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
+    public partial class FlexiBindablePageViewController<TViewModel> : FlexiMvvm.Views.FlexiPageViewController<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, ILifecycleViewModelWithoutParameters
     {
         /// <inheritdoc />
-        public BindablePageViewController()
+        public FlexiBindablePageViewController()
         {
         }
 
         /// <inheritdoc />
-        public BindablePageViewController(NSCoder coder)
+        public FlexiBindablePageViewController(NSCoder coder)
             : base(coder)
         {
         }
 
         /// <inheritdoc />
-        public BindablePageViewController(string nibName, NSBundle bundle)
+        public FlexiBindablePageViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
         }
 
         /// <inheritdoc />
-        protected BindablePageViewController(NSObjectFlag t)
+        protected FlexiBindablePageViewController(NSObjectFlag t)
             : base(t)
         {
         }
 
         /// <inheritdoc />
-        protected internal BindablePageViewController(IntPtr handle)
+        protected internal FlexiBindablePageViewController(IntPtr handle)
             : base(handle)
         {
         }
@@ -60,7 +60,7 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new BindableViewLifecycleDelegate<BindablePageViewController<TViewModel>, TViewModel>(this);
+            return new BindableViewLifecycleDelegate<FlexiBindablePageViewController<TViewModel>, TViewModel>(this);
         }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
@@ -73,35 +73,35 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class BindablePageViewController<TViewModel, TParameters> : FlexiMvvm.Views.PageViewController<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
+    public partial class FlexiBindablePageViewController<TViewModel, TParameters> : FlexiMvvm.Views.FlexiPageViewController<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>
         where TParameters : Parameters
     {
         /// <inheritdoc />
-        public BindablePageViewController()
+        public FlexiBindablePageViewController()
         {
         }
 
         /// <inheritdoc />
-        public BindablePageViewController(NSCoder coder)
+        public FlexiBindablePageViewController(NSCoder coder)
             : base(coder)
         {
         }
 
         /// <inheritdoc />
-        public BindablePageViewController(string nibName, NSBundle bundle)
+        public FlexiBindablePageViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
         }
 
         /// <inheritdoc />
-        protected BindablePageViewController(NSObjectFlag t)
+        protected FlexiBindablePageViewController(NSObjectFlag t)
             : base(t)
         {
         }
 
         /// <inheritdoc />
-        protected internal BindablePageViewController(IntPtr handle)
+        protected internal FlexiBindablePageViewController(IntPtr handle)
             : base(handle)
         {
         }
@@ -111,7 +111,7 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new BindableViewLifecycleDelegate<BindablePageViewController<TViewModel, TParameters>, TViewModel>(this);
+            return new BindableViewLifecycleDelegate<FlexiBindablePageViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
@@ -127,34 +127,34 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class BindableTabBarController<TViewModel> : FlexiMvvm.Views.TabBarController<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
+    public partial class FlexiBindableTabBarController<TViewModel> : FlexiMvvm.Views.FlexiTabBarController<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, ILifecycleViewModelWithoutParameters
     {
         /// <inheritdoc />
-        public BindableTabBarController()
+        public FlexiBindableTabBarController()
         {
         }
 
         /// <inheritdoc />
-        public BindableTabBarController(NSCoder coder)
+        public FlexiBindableTabBarController(NSCoder coder)
             : base(coder)
         {
         }
 
         /// <inheritdoc />
-        public BindableTabBarController(string nibName, NSBundle bundle)
+        public FlexiBindableTabBarController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
         }
 
         /// <inheritdoc />
-        protected BindableTabBarController(NSObjectFlag t)
+        protected FlexiBindableTabBarController(NSObjectFlag t)
             : base(t)
         {
         }
 
         /// <inheritdoc />
-        protected internal BindableTabBarController(IntPtr handle)
+        protected internal FlexiBindableTabBarController(IntPtr handle)
             : base(handle)
         {
         }
@@ -164,7 +164,7 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new BindableViewLifecycleDelegate<BindableTabBarController<TViewModel>, TViewModel>(this);
+            return new BindableViewLifecycleDelegate<FlexiBindableTabBarController<TViewModel>, TViewModel>(this);
         }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
@@ -177,35 +177,35 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class BindableTabBarController<TViewModel, TParameters> : FlexiMvvm.Views.TabBarController<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
+    public partial class FlexiBindableTabBarController<TViewModel, TParameters> : FlexiMvvm.Views.FlexiTabBarController<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>
         where TParameters : Parameters
     {
         /// <inheritdoc />
-        public BindableTabBarController()
+        public FlexiBindableTabBarController()
         {
         }
 
         /// <inheritdoc />
-        public BindableTabBarController(NSCoder coder)
+        public FlexiBindableTabBarController(NSCoder coder)
             : base(coder)
         {
         }
 
         /// <inheritdoc />
-        public BindableTabBarController(string nibName, NSBundle bundle)
+        public FlexiBindableTabBarController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
         }
 
         /// <inheritdoc />
-        protected BindableTabBarController(NSObjectFlag t)
+        protected FlexiBindableTabBarController(NSObjectFlag t)
             : base(t)
         {
         }
 
         /// <inheritdoc />
-        protected internal BindableTabBarController(IntPtr handle)
+        protected internal FlexiBindableTabBarController(IntPtr handle)
             : base(handle)
         {
         }
@@ -215,7 +215,7 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new BindableViewLifecycleDelegate<BindableTabBarController<TViewModel, TParameters>, TViewModel>(this);
+            return new BindableViewLifecycleDelegate<FlexiBindableTabBarController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
@@ -231,34 +231,34 @@ namespace FlexiMvvm.Views
 
 namespace FlexiMvvm.Views
 {
-    public partial class BindableViewController<TViewModel> : FlexiMvvm.Views.ViewController<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
+    public partial class FlexiBindableViewController<TViewModel> : FlexiMvvm.Views.FlexiViewController<TViewModel>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, ILifecycleViewModelWithoutParameters
     {
         /// <inheritdoc />
-        public BindableViewController()
+        public FlexiBindableViewController()
         {
         }
 
         /// <inheritdoc />
-        public BindableViewController(NSCoder coder)
+        public FlexiBindableViewController(NSCoder coder)
             : base(coder)
         {
         }
 
         /// <inheritdoc />
-        public BindableViewController(string nibName, NSBundle bundle)
+        public FlexiBindableViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
         }
 
         /// <inheritdoc />
-        protected BindableViewController(NSObjectFlag t)
+        protected FlexiBindableViewController(NSObjectFlag t)
             : base(t)
         {
         }
 
         /// <inheritdoc />
-        protected internal BindableViewController(IntPtr handle)
+        protected internal FlexiBindableViewController(IntPtr handle)
             : base(handle)
         {
         }
@@ -268,7 +268,7 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new BindableViewLifecycleDelegate<BindableViewController<TViewModel>, TViewModel>(this);
+            return new BindableViewLifecycleDelegate<FlexiBindableViewController<TViewModel>, TViewModel>(this);
         }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)
@@ -281,35 +281,35 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public partial class BindableViewController<TViewModel, TParameters> : FlexiMvvm.Views.ViewController<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
+    public partial class FlexiBindableViewController<TViewModel, TParameters> : FlexiMvvm.Views.FlexiViewController<TViewModel, TParameters>, IBindableView<TViewModel>, IBindingSetOwner
         where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>
         where TParameters : Parameters
     {
         /// <inheritdoc />
-        public BindableViewController()
+        public FlexiBindableViewController()
         {
         }
 
         /// <inheritdoc />
-        public BindableViewController(NSCoder coder)
+        public FlexiBindableViewController(NSCoder coder)
             : base(coder)
         {
         }
 
         /// <inheritdoc />
-        public BindableViewController(string nibName, NSBundle bundle)
+        public FlexiBindableViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
         }
 
         /// <inheritdoc />
-        protected BindableViewController(NSObjectFlag t)
+        protected FlexiBindableViewController(NSObjectFlag t)
             : base(t)
         {
         }
 
         /// <inheritdoc />
-        protected internal BindableViewController(IntPtr handle)
+        protected internal FlexiBindableViewController(IntPtr handle)
             : base(handle)
         {
         }
@@ -319,7 +319,7 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new BindableViewLifecycleDelegate<BindableViewController<TViewModel, TParameters>, TViewModel>(this);
+            return new BindableViewLifecycleDelegate<FlexiBindableViewController<TViewModel, TParameters>, TViewModel>(this);
         }
 
         public virtual void Bind(BindingSet<TViewModel> bindingSet)

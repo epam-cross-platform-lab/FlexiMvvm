@@ -15,12 +15,16 @@
 // =========================================================================
 
 using System;
+#if __ANDROID_29__
+using AndroidX.SwipeRefreshLayout.Widget;
+#else
 using Android.Support.V4.Widget;
+#endif
 using FlexiMvvm.Bindings.Custom;
 
 namespace FlexiMvvm.Bindings
 {
-    public static class SupportSwipeRefreshLayoutExtensions
+    public static class SwipeRefreshLayoutExtensions
     {
         public static TargetItemBinding<SwipeRefreshLayout, object> RefreshBinding(
             this IItemReference<SwipeRefreshLayout> swipeRefreshLayoutReference,

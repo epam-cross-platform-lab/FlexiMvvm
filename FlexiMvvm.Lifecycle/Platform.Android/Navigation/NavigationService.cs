@@ -17,14 +17,17 @@
 using System;
 using Android.Content;
 using Android.OS;
+#if __ANDROID_29__
+using AndroidX.Fragment.App;
+#else
+using Android.Support.V4.App;
+#endif
 using FlexiMvvm.Formatters;
 using FlexiMvvm.ViewModels;
 using FlexiMvvm.Views;
 
 namespace FlexiMvvm.Navigation
 {
-    using Android.Support.V4.App;
-
     /// <summary>
     /// Base class for an application navigation implementation.
     /// </summary>

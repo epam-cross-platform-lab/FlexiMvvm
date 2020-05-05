@@ -23,10 +23,10 @@ namespace FlexiMvvm.Views
         "StyleCop.CSharp.DocumentationRules",
         "SA1648:InheritDocMustBeUsedWithInheritingClass",
         Justification = "This rule doesn't work properly with a partial class.")]
-    public partial class CollectionViewController
+    public partial class FlexiCollectionViewController
     {
         /// <inheritdoc />
-        public CollectionViewController(UICollectionViewLayout layout)
+        public FlexiCollectionViewController(UICollectionViewLayout layout)
             : base(layout)
         {
             LifecycleDelegate.ForceInstanceCreation();
@@ -37,10 +37,10 @@ namespace FlexiMvvm.Views
         "StyleCop.CSharp.DocumentationRules",
         "SA1648:InheritDocMustBeUsedWithInheritingClass",
         Justification = "This rule doesn't work properly with a partial class.")]
-    public partial class CollectionViewController<TViewModel>
+    public partial class FlexiCollectionViewController<TViewModel>
     {
         /// <inheritdoc />
-        public CollectionViewController(UICollectionViewLayout layout)
+        public FlexiCollectionViewController(UICollectionViewLayout layout)
             : base(layout)
         {
         }
@@ -50,10 +50,10 @@ namespace FlexiMvvm.Views
         "StyleCop.CSharp.DocumentationRules",
         "SA1648:InheritDocMustBeUsedWithInheritingClass",
         Justification = "This rule doesn't work properly with a partial class.")]
-    public partial class CollectionViewController<TViewModel, TParameters>
+    public partial class FlexiCollectionViewController<TViewModel, TParameters>
     {
         /// <inheritdoc />
-        public CollectionViewController(UICollectionViewLayout layout)
+        public FlexiCollectionViewController(UICollectionViewLayout layout)
             : base(layout)
         {
         }

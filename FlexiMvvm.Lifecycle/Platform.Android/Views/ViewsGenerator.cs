@@ -15,6 +15,13 @@
 // limitations under the License.
 // =========================================================================
 
+#if __ANDROID_29__
+using AndroidX.AppCompat.App;
+using AndroidX.Fragment.App;
+#else
+using Android.Support.V4.App;
+using Android.Support.V7.App;
+#endif
 #nullable enable
 
 using System;
@@ -31,20 +38,20 @@ using FlexiMvvm.Views.Core;
 namespace FlexiMvvm.Views
 {
     /// <summary>
-    /// Represents a/an <see cref="Android.Support.V7.App.AppCompatActivity"/> that is adapted for use with the FlexiMvvm.
+    /// Represents a/an <see cref="AppCompatActivity"/> that is adapted for use with the FlexiMvvm.
     /// </summary>
-    [Register("fleximvvm.views.AppCompatActivity")]
-    public partial class AppCompatActivity : Android.Support.V7.App.AppCompatActivity, IAndroidView, IOptionsMenuSource
+    [Register("fleximvvm.views.FlexiAppCompatActivity")]
+    public partial class FlexiAppCompatActivity : AppCompatActivity, IAndroidView, IOptionsMenuSource
     {
         private IViewLifecycleDelegate? _lifecycleDelegate;
 
         /// <inheritdoc />
-        public AppCompatActivity()
+        public FlexiAppCompatActivity()
         {
         }
 
         /// <inheritdoc />
-        protected AppCompatActivity(IntPtr javaReference, JniHandleOwnership transfer)
+        protected FlexiAppCompatActivity(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
         }
@@ -62,7 +69,7 @@ namespace FlexiMvvm.Views
         /// </summary>
         protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<AppCompatActivity>(this);
+            return new ViewLifecycleDelegate<FlexiAppCompatActivity>(this);
         }
 
         /// <inheritdoc />
@@ -145,7 +152,7 @@ namespace FlexiMvvm.Views
     }
 
     /// <summary>
-    /// Represents a/an <see cref="Android.Support.V7.App.AppCompatActivity"/> that is adapted for use with the FlexiMvvm
+    /// Represents a/an <see cref="AppCompatActivity"/> that is adapted for use with the FlexiMvvm
     /// and has its own lifecycle-aware view model.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
@@ -153,18 +160,18 @@ namespace FlexiMvvm.Views
         "Compiler",
         "CS8618:Non-nullable field is uninitialized.",
         Justification = "The view lifecycle delegate sets a value to the ViewModel property so it is not null starting from OnCreate method.")]
-    public partial class AppCompatActivity<TViewModel> : AppCompatActivity, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
+    public partial class FlexiAppCompatActivity<TViewModel> : FlexiAppCompatActivity, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithoutParameters, IStateOwner
     {
         private RequestCode? _requestCode;
 
         /// <inheritdoc />
-        public AppCompatActivity()
+        public FlexiAppCompatActivity()
         {
         }
 
         /// <inheritdoc />
-        protected AppCompatActivity(IntPtr javaReference, JniHandleOwnership transfer)
+        protected FlexiAppCompatActivity(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
         }
@@ -178,7 +185,7 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<AppCompatActivity<TViewModel>, TViewModel>(this);
+            return new ViewLifecycleDelegate<FlexiAppCompatActivity<TViewModel>, TViewModel>(this);
         }
 
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
@@ -193,7 +200,7 @@ namespace FlexiMvvm.Views
     }
 
     /// <summary>
-    /// Represents a/an <see cref="Android.Support.V7.App.AppCompatActivity"/> that is adapted for use with the FlexiMvvm,
+    /// Represents a/an <see cref="AppCompatActivity"/> that is adapted for use with the FlexiMvvm,
     /// has its own lifecycle-aware view model and takes lifecycle-aware view model parameters.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
@@ -202,19 +209,19 @@ namespace FlexiMvvm.Views
         "Compiler",
         "CS8618:Non-nullable field is uninitialized.",
         Justification = "The view lifecycle delegate sets a value to the ViewModel property so it is not null starting from OnCreate method.")]
-    public partial class AppCompatActivity<TViewModel, TParameters> : AppCompatActivity, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
+    public partial class FlexiAppCompatActivity<TViewModel, TParameters> : FlexiAppCompatActivity, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>, IStateOwner
         where TParameters : Parameters
     {
         private RequestCode? _requestCode;
 
         /// <inheritdoc />
-        public AppCompatActivity()
+        public FlexiAppCompatActivity()
         {
         }
 
         /// <inheritdoc />
-        protected AppCompatActivity(IntPtr javaReference, JniHandleOwnership transfer)
+        protected FlexiAppCompatActivity(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
         }
@@ -228,7 +235,7 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<AppCompatActivity<TViewModel, TParameters>, TViewModel>(this);
+            return new ViewLifecycleDelegate<FlexiAppCompatActivity<TViewModel, TParameters>, TViewModel>(this);
         }
 
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
@@ -247,20 +254,20 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>
-    /// Represents a/an <see cref="Android.Support.V4.App.DialogFragment"/> that is adapted for use with the FlexiMvvm.
+    /// Represents a/an <see cref="DialogFragment"/> that is adapted for use with the FlexiMvvm.
     /// </summary>
-    [Register("fleximvvm.views.DialogFragment")]
-    public partial class DialogFragment : Android.Support.V4.App.DialogFragment, IAndroidView, IOptionsMenuSource
+    [Register("fleximvvm.views.FlexiDialogFragment")]
+    public partial class FlexiDialogFragment : DialogFragment, IAndroidView, IOptionsMenuSource
     {
         private IViewLifecycleDelegate? _lifecycleDelegate;
 
         /// <inheritdoc />
-        public DialogFragment()
+        public FlexiDialogFragment()
         {
         }
 
         /// <inheritdoc />
-        protected DialogFragment(IntPtr javaReference, JniHandleOwnership transfer)
+        protected FlexiDialogFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
         }
@@ -278,7 +285,7 @@ namespace FlexiMvvm.Views
         /// </summary>
         protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<DialogFragment>(this);
+            return new ViewLifecycleDelegate<FlexiDialogFragment>(this);
         }
 
         /// <inheritdoc />
@@ -369,7 +376,7 @@ namespace FlexiMvvm.Views
     }
 
     /// <summary>
-    /// Represents a/an <see cref="Android.Support.V4.App.DialogFragment"/> that is adapted for use with the FlexiMvvm
+    /// Represents a/an <see cref="DialogFragment"/> that is adapted for use with the FlexiMvvm
     /// and has its own lifecycle-aware view model.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
@@ -377,18 +384,18 @@ namespace FlexiMvvm.Views
         "Compiler",
         "CS8618:Non-nullable field is uninitialized.",
         Justification = "The view lifecycle delegate sets a value to the ViewModel property so it is not null starting from OnCreate method.")]
-    public partial class DialogFragment<TViewModel> : DialogFragment, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
+    public partial class FlexiDialogFragment<TViewModel> : FlexiDialogFragment, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithoutParameters, IStateOwner
     {
         private RequestCode? _requestCode;
 
         /// <inheritdoc />
-        public DialogFragment()
+        public FlexiDialogFragment()
         {
         }
 
         /// <inheritdoc />
-        protected DialogFragment(IntPtr javaReference, JniHandleOwnership transfer)
+        protected FlexiDialogFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
         }
@@ -402,7 +409,7 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<DialogFragment<TViewModel>, TViewModel>(this);
+            return new ViewLifecycleDelegate<FlexiDialogFragment<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
@@ -431,7 +438,7 @@ namespace FlexiMvvm.Views
     }
 
     /// <summary>
-    /// Represents a/an <see cref="Android.Support.V4.App.DialogFragment"/> that is adapted for use with the FlexiMvvm,
+    /// Represents a/an <see cref="DialogFragment"/> that is adapted for use with the FlexiMvvm,
     /// has its own lifecycle-aware view model and takes lifecycle-aware view model parameters.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
@@ -440,19 +447,19 @@ namespace FlexiMvvm.Views
         "Compiler",
         "CS8618:Non-nullable field is uninitialized.",
         Justification = "The view lifecycle delegate sets a value to the ViewModel property so it is not null starting from OnCreate method.")]
-    public partial class DialogFragment<TViewModel, TParameters> : DialogFragment, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
+    public partial class FlexiDialogFragment<TViewModel, TParameters> : FlexiDialogFragment, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>, IStateOwner
         where TParameters : Parameters
     {
         private RequestCode? _requestCode;
 
         /// <inheritdoc />
-        public DialogFragment()
+        public FlexiDialogFragment()
         {
         }
 
         /// <inheritdoc />
-        protected DialogFragment(IntPtr javaReference, JniHandleOwnership transfer)
+        protected FlexiDialogFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
         }
@@ -466,7 +473,7 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<DialogFragment<TViewModel, TParameters>, TViewModel>(this);
+            return new ViewLifecycleDelegate<FlexiDialogFragment<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />
@@ -499,20 +506,20 @@ namespace FlexiMvvm.Views
 namespace FlexiMvvm.Views
 {
     /// <summary>
-    /// Represents a/an <see cref="Android.Support.V4.App.Fragment"/> that is adapted for use with the FlexiMvvm.
+    /// Represents a/an <see cref="Fragment"/> that is adapted for use with the FlexiMvvm.
     /// </summary>
-    [Register("fleximvvm.views.Fragment")]
-    public partial class Fragment : Android.Support.V4.App.Fragment, IAndroidView, IOptionsMenuSource
+    [Register("fleximvvm.views.FlexiFragment")]
+    public partial class FlexiFragment : Fragment, IAndroidView, IOptionsMenuSource
     {
         private IViewLifecycleDelegate? _lifecycleDelegate;
 
         /// <inheritdoc />
-        public Fragment()
+        public FlexiFragment()
         {
         }
 
         /// <inheritdoc />
-        protected Fragment(IntPtr javaReference, JniHandleOwnership transfer)
+        protected FlexiFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
         }
@@ -530,7 +537,7 @@ namespace FlexiMvvm.Views
         /// </summary>
         protected virtual IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<Fragment>(this);
+            return new ViewLifecycleDelegate<FlexiFragment>(this);
         }
 
         /// <inheritdoc />
@@ -621,7 +628,7 @@ namespace FlexiMvvm.Views
     }
 
     /// <summary>
-    /// Represents a/an <see cref="Android.Support.V4.App.Fragment"/> that is adapted for use with the FlexiMvvm
+    /// Represents a/an <see cref="Fragment"/> that is adapted for use with the FlexiMvvm
     /// and has its own lifecycle-aware view model.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
@@ -629,18 +636,18 @@ namespace FlexiMvvm.Views
         "Compiler",
         "CS8618:Non-nullable field is uninitialized.",
         Justification = "The view lifecycle delegate sets a value to the ViewModel property so it is not null starting from OnCreate method.")]
-    public partial class Fragment<TViewModel> : Fragment, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
+    public partial class FlexiFragment<TViewModel> : FlexiFragment, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithoutParameters, IStateOwner
     {
         private RequestCode? _requestCode;
 
         /// <inheritdoc />
-        public Fragment()
+        public FlexiFragment()
         {
         }
 
         /// <inheritdoc />
-        protected Fragment(IntPtr javaReference, JniHandleOwnership transfer)
+        protected FlexiFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
         }
@@ -654,7 +661,7 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<Fragment<TViewModel>, TViewModel>(this);
+            return new ViewLifecycleDelegate<FlexiFragment<TViewModel>, TViewModel>(this);
         }
 
         /// <inheritdoc />
@@ -683,7 +690,7 @@ namespace FlexiMvvm.Views
     }
 
     /// <summary>
-    /// Represents a/an <see cref="Android.Support.V4.App.Fragment"/> that is adapted for use with the FlexiMvvm,
+    /// Represents a/an <see cref="Fragment"/> that is adapted for use with the FlexiMvvm,
     /// has its own lifecycle-aware view model and takes lifecycle-aware view model parameters.
     /// </summary>
     /// <typeparam name="TViewModel">The type of the view model.</typeparam>
@@ -692,19 +699,19 @@ namespace FlexiMvvm.Views
         "Compiler",
         "CS8618:Non-nullable field is uninitialized.",
         Justification = "The view lifecycle delegate sets a value to the ViewModel property so it is not null starting from OnCreate method.")]
-    public partial class Fragment<TViewModel, TParameters> : Fragment, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
+    public partial class FlexiFragment<TViewModel, TParameters> : FlexiFragment, INavigationView<TViewModel>, ILifecycleViewModelOwner<TViewModel>
         where TViewModel : class, ILifecycleViewModelWithParameters<TParameters>, IStateOwner
         where TParameters : Parameters
     {
         private RequestCode? _requestCode;
 
         /// <inheritdoc />
-        public Fragment()
+        public FlexiFragment()
         {
         }
 
         /// <inheritdoc />
-        protected Fragment(IntPtr javaReference, JniHandleOwnership transfer)
+        protected FlexiFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
         }
@@ -718,7 +725,7 @@ namespace FlexiMvvm.Views
         /// <inheritdoc />
         protected override IViewLifecycleDelegate CreateLifecycleDelegate()
         {
-            return new ViewLifecycleDelegate<Fragment<TViewModel, TParameters>, TViewModel>(this);
+            return new ViewLifecycleDelegate<FlexiFragment<TViewModel, TParameters>, TViewModel>(this);
         }
 
         /// <inheritdoc />

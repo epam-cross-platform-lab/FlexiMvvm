@@ -15,13 +15,16 @@
 // =========================================================================
 
 using System;
+#if __ANDROID_29__
+using AndroidX.Fragment.App;
+#else
+using Android.Support.V4.App;
+#endif
 using FlexiMvvm.ViewModels;
 using FlexiMvvm.Views;
 
 namespace FlexiMvvm.Navigation
 {
-    using Android.Support.V4.App;
-
     /// <summary>
     /// Provides a set of static methods for the <see cref="INavigationView{TViewModel}"/>.
     /// </summary>

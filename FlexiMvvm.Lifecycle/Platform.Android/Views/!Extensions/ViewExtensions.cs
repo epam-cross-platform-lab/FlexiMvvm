@@ -15,6 +15,11 @@
 // =========================================================================
 
 using System;
+#if __ANDROID_29__
+using AndroidX.Fragment.App;
+#else
+using Android.Support.V4.App;
+#endif
 using FlexiMvvm.Formatters;
 using FlexiMvvm.ViewModels;
 
@@ -37,8 +42,8 @@ namespace FlexiMvvm.Views
         /// </exception>
         public static void As(
             this IView<ILifecycleViewModel> view,
-            Action<Android.Support.V4.App.FragmentActivity> activityHandler,
-            Action<Android.Support.V4.App.Fragment> fragmentHandler)
+            Action<FragmentActivity> activityHandler,
+            Action<Fragment> fragmentHandler)
         {
             if (view == null)
                 throw new ArgumentNullException(nameof(view));
@@ -47,19 +52,19 @@ namespace FlexiMvvm.Views
             if (fragmentHandler == null)
                 throw new ArgumentNullException(nameof(fragmentHandler));
 
-            if (view is Android.Support.V4.App.FragmentActivity activity)
+            if (view is FragmentActivity activity)
             {
                 activityHandler(activity);
             }
-            else if (view is Android.Support.V4.App.Fragment fragment)
+            else if (view is Fragment fragment)
             {
                 fragmentHandler(fragment);
             }
             else
             {
                 throw new ArgumentException(
-                    $"Only views derived from the '{TypeFormatter.FormatName<Android.Support.V4.App.FragmentActivity>()}' or " +
-                    $"'{TypeFormatter.FormatName<Android.Support.V4.App.Fragment>()}' are supported.", nameof(view));
+                    $"Only views derived from the '{TypeFormatter.FormatName<FragmentActivity>()}' or " +
+                    $"'{TypeFormatter.FormatName<Fragment>()}' are supported.", nameof(view));
             }
         }
 
@@ -77,8 +82,8 @@ namespace FlexiMvvm.Views
         /// </exception>
         public static T As<T>(
             this IView<ILifecycleViewModel> view,
-            Func<Android.Support.V4.App.FragmentActivity, T> activityHandler,
-            Func<Android.Support.V4.App.Fragment, T> fragmentHandler)
+            Func<FragmentActivity, T> activityHandler,
+            Func<Fragment, T> fragmentHandler)
         {
             if (view == null)
                 throw new ArgumentNullException(nameof(view));
@@ -89,19 +94,19 @@ namespace FlexiMvvm.Views
 
             T result;
 
-            if (view is Android.Support.V4.App.FragmentActivity activity)
+            if (view is FragmentActivity activity)
             {
                 result = activityHandler(activity);
             }
-            else if (view is Android.Support.V4.App.Fragment fragment)
+            else if (view is Fragment fragment)
             {
                 result = fragmentHandler(fragment);
             }
             else
             {
                 throw new ArgumentException(
-                    $"Only views derived from the '{TypeFormatter.FormatName<Android.Support.V4.App.FragmentActivity>()}' or " +
-                    $"'{TypeFormatter.FormatName<Android.Support.V4.App.Fragment>()}' are supported.", nameof(view));
+                    $"Only views derived from the '{TypeFormatter.FormatName<FragmentActivity>()}' or " +
+                    $"'{TypeFormatter.FormatName<Fragment>()}' are supported.", nameof(view));
             }
 
             return result;

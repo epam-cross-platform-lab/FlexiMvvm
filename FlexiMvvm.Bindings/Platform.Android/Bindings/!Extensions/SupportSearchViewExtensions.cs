@@ -15,7 +15,11 @@
 // =========================================================================
 
 using System;
+#if __ANDROID_29__
+using AndroidX.AppCompat.Widget;
+#else
 using Android.Support.V7.Widget;
+#endif
 using FlexiMvvm.Bindings.Custom;
 
 namespace FlexiMvvm.Bindings

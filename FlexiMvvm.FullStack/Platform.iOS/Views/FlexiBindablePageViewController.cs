@@ -24,57 +24,10 @@ namespace FlexiMvvm.Views
         "StyleCop.CSharp.DocumentationRules",
         "SA1648:InheritDocMustBeUsedWithInheritingClass",
         Justification = "This rule doesn't work properly with a partial class.")]
-    public partial class PageViewController
+    public partial class FlexiBindablePageViewController<TViewModel>
     {
         /// <inheritdoc />
-        public PageViewController(
-            UIPageViewControllerTransitionStyle style,
-            UIPageViewControllerNavigationOrientation navigationOrientation)
-            : base(style, navigationOrientation)
-        {
-            LifecycleDelegate.ForceInstanceCreation();
-        }
-
-        /// <inheritdoc />
-        public PageViewController(
-            UIPageViewControllerTransitionStyle style,
-            UIPageViewControllerNavigationOrientation navigationOrientation,
-            UIPageViewControllerSpineLocation spineLocation)
-            : base(style, navigationOrientation, spineLocation)
-        {
-            LifecycleDelegate.ForceInstanceCreation();
-        }
-
-        /// <inheritdoc />
-        public PageViewController(
-            UIPageViewControllerTransitionStyle style,
-            UIPageViewControllerNavigationOrientation navigationOrientation,
-            NSDictionary options)
-            : base(style, navigationOrientation, options)
-        {
-            LifecycleDelegate.ForceInstanceCreation();
-        }
-
-        /// <inheritdoc />
-        public PageViewController(
-            UIPageViewControllerTransitionStyle style,
-            UIPageViewControllerNavigationOrientation navigationOrientation,
-            UIPageViewControllerSpineLocation spineLocation,
-            float interPageSpacing)
-            : base(style, navigationOrientation, spineLocation, interPageSpacing)
-        {
-            LifecycleDelegate.ForceInstanceCreation();
-        }
-    }
-
-    [SuppressMessage(
-        "StyleCop.CSharp.DocumentationRules",
-        "SA1648:InheritDocMustBeUsedWithInheritingClass",
-        Justification = "This rule doesn't work properly with a partial class.")]
-    public partial class PageViewController<TViewModel>
-    {
-        /// <inheritdoc />
-        public PageViewController(
+        public FlexiBindablePageViewController(
             UIPageViewControllerTransitionStyle style,
             UIPageViewControllerNavigationOrientation navigationOrientation)
             : base(style, navigationOrientation)
@@ -82,7 +35,7 @@ namespace FlexiMvvm.Views
         }
 
         /// <inheritdoc />
-        public PageViewController(
+        public FlexiBindablePageViewController(
             UIPageViewControllerTransitionStyle style,
             UIPageViewControllerNavigationOrientation navigationOrientation,
             UIPageViewControllerSpineLocation spineLocation)
@@ -91,7 +44,7 @@ namespace FlexiMvvm.Views
         }
 
         /// <inheritdoc />
-        public PageViewController(
+        public FlexiBindablePageViewController(
             UIPageViewControllerTransitionStyle style,
             UIPageViewControllerNavigationOrientation navigationOrientation,
             NSDictionary options)
@@ -100,7 +53,7 @@ namespace FlexiMvvm.Views
         }
 
         /// <inheritdoc />
-        public PageViewController(
+        public FlexiBindablePageViewController(
             UIPageViewControllerTransitionStyle style,
             UIPageViewControllerNavigationOrientation navigationOrientation,
             UIPageViewControllerSpineLocation spineLocation,
@@ -114,10 +67,10 @@ namespace FlexiMvvm.Views
         "StyleCop.CSharp.DocumentationRules",
         "SA1648:InheritDocMustBeUsedWithInheritingClass",
         Justification = "This rule doesn't work properly with a partial class.")]
-    public partial class PageViewController<TViewModel, TParameters>
+    public partial class FlexiBindablePageViewController<TViewModel, TParameters>
     {
         /// <inheritdoc />
-        public PageViewController(
+        public FlexiBindablePageViewController(
             UIPageViewControllerTransitionStyle style,
             UIPageViewControllerNavigationOrientation navigationOrientation)
             : base(style, navigationOrientation)
@@ -125,7 +78,7 @@ namespace FlexiMvvm.Views
         }
 
         /// <inheritdoc />
-        public PageViewController(
+        public FlexiBindablePageViewController(
             UIPageViewControllerTransitionStyle style,
             UIPageViewControllerNavigationOrientation navigationOrientation,
             UIPageViewControllerSpineLocation spineLocation)
@@ -134,7 +87,7 @@ namespace FlexiMvvm.Views
         }
 
         /// <inheritdoc />
-        public PageViewController(
+        public FlexiBindablePageViewController(
             UIPageViewControllerTransitionStyle style,
             UIPageViewControllerNavigationOrientation navigationOrientation,
             NSDictionary options)
@@ -143,7 +96,7 @@ namespace FlexiMvvm.Views
         }
 
         /// <inheritdoc />
-        public PageViewController(
+        public FlexiBindablePageViewController(
             UIPageViewControllerTransitionStyle style,
             UIPageViewControllerNavigationOrientation navigationOrientation,
             UIPageViewControllerSpineLocation spineLocation,

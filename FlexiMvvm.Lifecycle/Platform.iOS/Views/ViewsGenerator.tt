@@ -5,13 +5,13 @@
 <#
     var viewsGenerator = new ViewsGenerator(
         "FlexiMvvm.Views",
-        new ViewGenerationOptions("CollectionViewController", "UIKit.UICollectionViewController"),
-        new ViewGenerationOptions("NavigationController", "UIKit.UINavigationController"),
-        new ViewGenerationOptions("PageViewController", "UIKit.UIPageViewController"),
-        new ViewGenerationOptions("SplitViewController", "UIKit.UISplitViewController"),
-        new ViewGenerationOptions("TabBarController", "UIKit.UITabBarController"),
-        new ViewGenerationOptions("TableViewController", "UIKit.UITableViewController"),
-        new ViewGenerationOptions("ViewController", "UIKit.UIViewController")
+        new ViewGenerationOptions("FlexiCollectionViewController", "UIKit.UICollectionViewController"),
+        new ViewGenerationOptions("FlexiNavigationController", "UIKit.UINavigationController"),
+        new ViewGenerationOptions("FlexiPageViewController", "UIKit.UIPageViewController"),
+        new ViewGenerationOptions("FlexiSplitViewController", "UIKit.UISplitViewController"),
+        new ViewGenerationOptions("FlexiTabBarController", "UIKit.UITabBarController"),
+        new ViewGenerationOptions("FlexiTableViewController", "UIKit.UITableViewController"),
+        new ViewGenerationOptions("FlexiViewController", "UIKit.UIViewController")
         {
             HandleKeyboard = true
         });
