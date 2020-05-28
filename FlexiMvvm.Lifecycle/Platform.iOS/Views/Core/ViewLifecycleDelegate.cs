@@ -133,7 +133,7 @@ namespace FlexiMvvm.Views.Core
             _isViewModelCreated = true;
 
             View.SetViewModel(viewModel);
-            ViewCache.Add(View);
+            ViewRegistry.Add(View);
         }
 
         /// <inheritdoc />

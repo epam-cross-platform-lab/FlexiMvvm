@@ -138,7 +138,7 @@ namespace FlexiMvvm.Views.Core
 
             View.SetViewModel(viewModel);
             View.RequestCode.ImportState(viewRequestCodeState);
-            ViewCache.Add(View);
+            ViewRegistry.Add(View);
         }
 
         /// <inheritdoc />
@@ -206,7 +206,7 @@ namespace FlexiMvvm.Views.Core
                     });
             }
 
-            ViewCache.Remove(View);
+            ViewRegistry.Remove(View);
         }
     }
 }

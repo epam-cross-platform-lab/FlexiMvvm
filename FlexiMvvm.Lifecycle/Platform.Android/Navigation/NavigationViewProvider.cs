@@ -15,14 +15,15 @@
 // =========================================================================
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 #if __ANDROID_29__
 using AndroidX.Fragment.App;
 #else
 using Android.Support.V4.App;
 #endif
+using FlexiMvvm.Formatters;
 using FlexiMvvm.ViewModels;
 using FlexiMvvm.Views;
-using FlexiMvvm.Views.Core;
 
 namespace FlexiMvvm.Navigation
 {
@@ -37,6 +38,7 @@ namespace FlexiMvvm.Navigation
         /// <returns>The navigation view instance.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> is <see langword="null"/>.</exception>
         /// <exception cref="InvalidOperationException">The view instance is missing for the provided <paramref name="viewModel"/>.</exception>
+        [Obsolete("GetActivity<TView, TViewModel>(TViewModel viewModel) will be removed soon. Use TryGetActivity<TViewModel, TView>(TViewModel viewModel, out TView view) method instead.")]
         public static TView GetActivity<TView, TViewModel>(TViewModel viewModel)
             where TView : FragmentActivity, INavigationView<TViewModel>
             where TViewModel : class, ILifecycleViewModel
@@ -44,7 +46,32 @@ namespace FlexiMvvm.Navigation
             if (viewModel == null)
                 throw new ArgumentNullException(nameof(viewModel));
 
-            return ViewCache.Get<TView, TViewModel>(viewModel);
+            if (!ViewRegistry.TryGetView<TViewModel, TView>(viewModel, out var view))
+            {
+                throw new InvalidOperationException(
+                    $"The view instance is missing for the provided '{TypeFormatter.FormatName(viewModel.GetType())}' view model.");
+            }
+
+            return view;
+        }
+
+        /// <summary>
+        /// Gets an existing navigation <typeparamref name="TView"/> derived from the <see cref="FragmentActivity"/> by <paramref name="viewModel"/>.
+        /// </summary>
+        /// <typeparam name="TViewModel">The type of the view model.</typeparam>
+        /// <typeparam name="TView">The type of the view.</typeparam>
+        /// <param name="viewModel">The view model that is used to get its view.</param>
+        /// <param name="view">The navigation view corresponding to the provided model.</param>
+        /// <returns><see langword="true"/> if the view still exists and has not yet been garbage collected or disposed; otherwise, <see langword="false"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> is <see langword="null"/>.</exception>
+        public static bool TryGetActivity<TViewModel, TView>(TViewModel viewModel, [MaybeNullWhen(returnValue: false)] out TView view)
+            where TViewModel : class, ILifecycleViewModel
+            where TView : FragmentActivity, INavigationView<TViewModel>
+        {
+            if (viewModel == null)
+                throw new ArgumentNullException(nameof(viewModel));
+
+            return ViewRegistry.TryGetView(viewModel, out view);
         }
 
         /// <summary>
@@ -56,6 +83,7 @@ namespace FlexiMvvm.Navigation
         /// <returns>The navigation view instance.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> is <see langword="null"/>.</exception>
         /// <exception cref="InvalidOperationException">The view instance is missing for the provided <paramref name="viewModel"/>.</exception>
+        [Obsolete("GetFragment<TView, TViewModel>(TViewModel viewModel) will be removed soon. Use TryGetFragment<TViewModel, TView>(TViewModel viewModel, out TView view) method instead.")]
         public static TView GetFragment<TView, TViewModel>(TViewModel viewModel)
             where TView : Fragment, INavigationView<TViewModel>
             where TViewModel : class, ILifecycleViewModel
@@ -63,7 +91,51 @@ namespace FlexiMvvm.Navigation
             if (viewModel == null)
                 throw new ArgumentNullException(nameof(viewModel));
 
-            return ViewCache.Get<TView, TViewModel>(viewModel);
+            if (!ViewRegistry.TryGetView<TViewModel, TView>(viewModel, out var view))
+            {
+                throw new InvalidOperationException(
+                    $"The view instance is missing for the provided '{TypeFormatter.FormatName(viewModel.GetType())}' view model.");
+            }
+
+            return view;
+        }
+
+        /// <summary>
+        /// Gets an existing navigation <typeparamref name="TView"/> derived from the <see cref="Fragment"/> by <paramref name="viewModel"/>.
+        /// </summary>
+        /// <typeparam name="TViewModel">The type of the view model.</typeparam>
+        /// <typeparam name="TView">The type of the view.</typeparam>
+        /// <param name="viewModel">The view model that is used to get its view.</param>
+        /// <param name="view">The navigation view corresponding to the provided model.</param>
+        /// <returns><see langword="true"/> if the view still exists and has not yet been garbage collected or disposed; otherwise, <see langword="false"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> is <see langword="null"/>.</exception>
+        public static bool TryGetFragment<TViewModel, TView>(TViewModel viewModel, [MaybeNullWhen(returnValue: false)] out TView view)
+            where TViewModel : class, ILifecycleViewModel
+            where TView : Fragment, INavigationView<TViewModel>
+        {
+            if (viewModel == null)
+                throw new ArgumentNullException(nameof(viewModel));
+
+            return ViewRegistry.TryGetView(viewModel, out view);
+        }
+
+        /// <summary>
+        /// Gets an existing navigation <typeparamref name="TView"/> derived from the <see cref="DialogFragment"/> by <paramref name="viewModel"/>.
+        /// </summary>
+        /// <typeparam name="TViewModel">The type of the view model.</typeparam>
+        /// <typeparam name="TView">The type of the view.</typeparam>
+        /// <param name="viewModel">The view model that is used to get its view.</param>
+        /// <param name="view">The navigation view corresponding to the provided model.</param>
+        /// <returns><see langword="true"/> if the view still exists and has not yet been garbage collected or disposed; otherwise, <see langword="false"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> is <see langword="null"/>.</exception>
+        public static bool TryGetDialogFragment<TViewModel, TView>(TViewModel viewModel, [MaybeNullWhen(returnValue: false)] out TView view)
+            where TViewModel : class, ILifecycleViewModel
+            where TView : DialogFragment, INavigationView<TViewModel>
+        {
+            if (viewModel == null)
+                throw new ArgumentNullException(nameof(viewModel));
+
+            return ViewRegistry.TryGetView(viewModel, out view);
         }
     }
 }

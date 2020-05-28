@@ -15,9 +15,10 @@
 // =========================================================================
 
 using System;
+using System.Diagnostics.CodeAnalysis;
+using FlexiMvvm.Formatters;
 using FlexiMvvm.ViewModels;
 using FlexiMvvm.Views;
-using FlexiMvvm.Views.Core;
 using UIKit;
 
 namespace FlexiMvvm.Navigation
@@ -33,6 +34,7 @@ namespace FlexiMvvm.Navigation
         /// <returns>The navigation view instance.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> is <see langword="null"/>.</exception>
         /// <exception cref="InvalidOperationException">The view instance is missing for the provided <paramref name="viewModel"/>.</exception>
+        [Obsolete("GetViewController<TView, TViewModel>(TViewModel viewModel) will be removed soon. Use TryGetViewController<TViewModel, TView>(TViewModel viewModel, out TView view) method instead.")]
         public static TView GetViewController<TView, TViewModel>(TViewModel viewModel)
             where TView : UIViewController, INavigationView<TViewModel>
             where TViewModel : class, ILifecycleViewModel
@@ -40,7 +42,51 @@ namespace FlexiMvvm.Navigation
             if (viewModel == null)
                 throw new ArgumentNullException(nameof(viewModel));
 
-            return ViewCache.Get<TView, TViewModel>(viewModel);
+            if (!ViewRegistry.TryGetView<TViewModel, TView>(viewModel, out var view))
+            {
+                throw new InvalidOperationException(
+                    $"The view instance is missing for the provided '{TypeFormatter.FormatName(viewModel.GetType())}' view model.");
+            }
+
+            return view;
+        }
+
+        /// <summary>
+        /// Gets an existing navigation <typeparamref name="TView"/> derived from the <see cref="UIViewController"/> by <paramref name="viewModel"/>.
+        /// </summary>
+        /// <typeparam name="TViewModel">The type of the view model.</typeparam>
+        /// <typeparam name="TView">The type of the view.</typeparam>
+        /// <param name="viewModel">The view model that is used to get its view.</param>
+        /// <param name="view">The navigation view corresponding to the provided model.</param>
+        /// <returns><see langword="true"/> if the view still exists and has not yet been garbage collected or disposed; otherwise, <see langword="false"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> is <see langword="null"/>.</exception>
+        public static bool TryGetViewController<TViewModel, TView>(TViewModel viewModel, [MaybeNullWhen(returnValue: false)] out TView view)
+            where TViewModel : class, ILifecycleViewModel
+            where TView : UIViewController, INavigationView<TViewModel>
+        {
+            if (viewModel == null)
+                throw new ArgumentNullException(nameof(viewModel));
+
+            return ViewRegistry.TryGetView(viewModel, out view);
+        }
+
+        /// <summary>
+        /// Gets an existing navigation <typeparamref name="TView"/> derived from the <see cref="UINavigationController"/> by <paramref name="viewModel"/>.
+        /// </summary>
+        /// <typeparam name="TViewModel">The type of the view model.</typeparam>
+        /// <typeparam name="TView">The type of the view.</typeparam>
+        /// <param name="viewModel">The view model that is used to get its view.</param>
+        /// <param name="view">The navigation view corresponding to the provided model.</param>
+        /// <returns><see langword="true"/> if the view still exists and has not yet been garbage collected or disposed; otherwise, <see langword="false"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="viewModel"/> is <see langword="null"/>.</exception>
+        public static bool TryGetNavigationController<TViewModel, TView>(TViewModel viewModel, [MaybeNullWhen(returnValue: false)] out TView view)
+            where TViewModel : class, ILifecycleViewModel
+            where TView : UINavigationController, INavigationView<TViewModel>
+        {
+            if (viewModel == null)
+                throw new ArgumentNullException(nameof(viewModel));
+
+            return ViewRegistry.TryGetView(viewModel, out view);
         }
     }
 }
