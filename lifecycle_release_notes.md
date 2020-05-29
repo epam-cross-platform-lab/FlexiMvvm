@@ -1,5 +1,11 @@
 # FlexiMvvm.Lifecycle Package Release Notes
 
+## v.0.13 (preview)
+
+### Existing functionality changes
+
+- NavigationViewProvider.GetXXX methods are deprecated. Don't use them anymore. They can cause the app crash when trying to get a view that was garbage collected. Instead, use the new set of NavigationViewProvider.TryGetXXX methods.
+
 ## v.0.12 (preview)
 
 ### New functionality

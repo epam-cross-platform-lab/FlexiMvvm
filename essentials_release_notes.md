@@ -1,5 +1,11 @@
 # FlexiMvvm.Essentials Package Release Notes
 
+## v.0.13 (preview)
+
+### New functionality
+
+- Added IsAlive extension method for Java Object and NSObject to determine if the object wasn't garbage collected.
+
 ## v.0.12 (preview)
 
 ### New functionality
