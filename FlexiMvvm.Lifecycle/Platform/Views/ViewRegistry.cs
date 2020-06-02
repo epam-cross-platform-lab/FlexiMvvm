@@ -15,37 +15,62 @@
 // =========================================================================
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Runtime.CompilerServices;
 using FlexiMvvm.ViewModels;
 
 namespace FlexiMvvm.Views
 {
     internal static partial class ViewRegistry
     {
-        private static ConditionalWeakTable<ILifecycleViewModel, WeakReference<IView<ILifecycleViewModel>>> Registry { get; } =
-            new ConditionalWeakTable<ILifecycleViewModel, WeakReference<IView<ILifecycleViewModel>>>();
+        private static List<WeakReference<IView<ILifecycleViewModel>>> ViewsWeakReferences { get; } = new List<WeakReference<IView<ILifecycleViewModel>>>();
 
         internal static bool TryGetView<TViewModel, TView>(TViewModel viewModel, [MaybeNullWhen(returnValue: false)] out TView view)
             where TViewModel : class, ILifecycleViewModel
-            where TView : IView<TViewModel>
+            where TView : class, IView<TViewModel>
         {
             view = default;
 
-            return Registry.TryGetValue(viewModel, out var registryViewWeakReference) &&
-                registryViewWeakReference.TryGetTarget(out var registryView) &&
-                (view = (TView)registryView) != null &&
-                IsAlive(view);
+            for (var i = ViewsWeakReferences.Count - 1; i > -1; i--)
+            {
+                var viewWeakReference = ViewsWeakReferences[i];
+
+                if (viewWeakReference.TryGetTarget(out var registryView) && IsAlive(registryView))
+                {
+                    if (ReferenceEquals(registryView.ViewModel, viewModel))
+                    {
+                        view = (TView)registryView;
+
+                        return true;
+                    }
+                }
+                else
+                {
+                    ViewsWeakReferences.Remove(viewWeakReference);
+                }
+            }
+
+            return false;
         }
 
         internal static void Add(IView<ILifecycleViewModel> view)
         {
-            Registry.AddOrUpdate(view.ViewModel, new WeakReference<IView<ILifecycleViewModel>>(view));
+            ViewsWeakReferences.Add(new WeakReference<IView<ILifecycleViewModel>>(view));
         }
 
         internal static void Remove(IView<ILifecycleViewModel> view)
         {
-            Registry.Remove(view.ViewModel);
+            for (var i = ViewsWeakReferences.Count - 1; i > -1; i--)
+            {
+                var viewWeakReference = ViewsWeakReferences[i];
+
+                if (viewWeakReference.TryGetTarget(out var registryView) && ReferenceEquals(registryView, view))
+                {
+                    ViewsWeakReferences.Remove(viewWeakReference);
+
+                    break;
+                }
+            }
         }
     }
 }
