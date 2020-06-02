@@ -5,9 +5,9 @@
         <PackageId>FlexiMvvm.Lifecycle.PreRelease</PackageId>
         <Title>FlexiMvvm.Lifecycle</Title>
         <Description>MVVM framework for Xamarin.Native.</Description>
-        <AssemblyVersion>0.13.0.0</AssemblyVersion>
-        <AssemblyFileVersion>0.13.0.0</AssemblyFileVersion>
-        <Version>0.13.0-prerelease</Version>
+        <AssemblyVersion>0.13.1.0</AssemblyVersion>
+        <AssemblyFileVersion>0.13.1.0</AssemblyFileVersion>
+        <Version>0.13.1-prerelease</Version>
     </PropertyGroup>
     <ItemGroup>
         <ProjectReference Include="..\FlexiMvvm.Common\FlexiMvvm.Common.csproj" />
