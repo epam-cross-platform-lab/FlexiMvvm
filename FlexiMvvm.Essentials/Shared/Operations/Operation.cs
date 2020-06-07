@@ -100,6 +100,8 @@ namespace FlexiMvvm.Operations
                         }
                         catch (OperationCanceledException)
                         {
+                            status = OperationStatus.Canceled;
+
                             throw;
                         }
                         catch (Exception ex)
@@ -130,6 +132,7 @@ namespace FlexiMvvm.Operations
                     catch (OperationCanceledException ex)
                     {
                         status = OperationStatus.Canceled;
+
                         await ExecuteOperationCancelHandlerAsync(context, status, ex.CancellationToken);
                         await ExecuteOperationFinishHandlerAsync(context, status, ex.CancellationToken);
                     }
