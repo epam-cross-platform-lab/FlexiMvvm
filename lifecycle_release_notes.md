@@ -1,5 +1,11 @@
 # FlexiMvvm.Lifecycle Package Release Notes
 
+## v.0.13.1 (preview)
+
+### Bug fixing
+
+- NavigationViewProvider.TryGetXXX methods can return false value even when view is alive.
+
 ## v.0.13 (preview)
 
 ### Existing functionality changes
