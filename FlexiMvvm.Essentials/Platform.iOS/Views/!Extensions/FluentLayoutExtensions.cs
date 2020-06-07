@@ -23,6 +23,7 @@ using UIKit;
 
 namespace FlexiMvvm.Views
 {
+    [Obsolete("FluentLayout plugin is not supported anymore. Use iOS layout anchors instead.")]
     public static class FluentLayoutExtensions
     {
         private const float DefaultMargin = 0;
