@@ -6,13 +6,14 @@
     var weakEventSubscriptionExtensionsGenerator = new WeakEventSubscriptionExtensionsGenerator(
         "FlexiMvvm.Views",
         new ExtensionsGenerationOptions(
-            "FlexiMvvm.Views.Keyboard.KeyboardHandler",
+            "FlexiMvvm.Views.Keyboard.IKeyboardHandler",
             new EventGenerationOptions("KeyboardDidHide", "FlexiMvvm.Views.Keyboard.KeyboardVisibilityChangedEventArgs"),
             new EventGenerationOptions("KeyboardDidShow", "FlexiMvvm.Views.Keyboard.KeyboardVisibilityChangedEventArgs"),
             new EventGenerationOptions("KeyboardWillHide", "FlexiMvvm.Views.Keyboard.KeyboardVisibilityChangedEventArgs"),
             new EventGenerationOptions("KeyboardWillShow", "FlexiMvvm.Views.Keyboard.KeyboardVisibilityChangedEventArgs"))
         {
-            TargetNamespace = "FlexiMvvm.Views.Keyboard"
+            TargetNamespace = "FlexiMvvm.Views.Keyboard",
+            ExtensionsClassCustomName = "KeyboardHandler"
         },
         new ExtensionsGenerationOptions(
             "UIKit.UIAccelerometer",
