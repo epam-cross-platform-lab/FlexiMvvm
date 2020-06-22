@@ -15,11 +15,10 @@
 // =========================================================================
 
 using CoreGraphics;
-using UIKit;
 
 namespace FlexiMvvm.Views
 {
-    public class LayoutView : UIView
+    public class LayoutView : LayoutViewBase
     {
         public LayoutView()
         {
@@ -32,28 +31,43 @@ namespace FlexiMvvm.Views
             Initialize();
         }
 
-        private void Initialize()
+        protected override void SetupLayout()
         {
-            SetupSubviews();
-            SetupSubviewsConstraints();
-            SetupLayout();
-            SetupLayoutConstraints();
+            SetupLayoutAsNonScrollable();
         }
 
-        protected virtual void SetupSubviews()
+        protected override void SetupLayoutConstraints()
         {
+            AllSubviewsDoNotTranslateAutoresizingMaskIntoConstraints(this);
+
+            SetupLayoutConstraintsAsNonScrollable();
+        }
+    }
+
+    public class LayoutView<TParameters> : LayoutViewBase<TParameters>
+    {
+        public LayoutView(TParameters parameters)
+            : base(parameters)
+        {
+            Initialize();
         }
 
-        protected virtual void SetupSubviewsConstraints()
+        public LayoutView(TParameters parameters, CGRect frame)
+            : base(parameters, frame)
         {
+            Initialize();
         }
 
-        protected virtual void SetupLayout()
+        protected override void SetupLayout()
         {
+            SetupLayoutAsNonScrollable();
         }
 
-        protected virtual void SetupLayoutConstraints()
+        protected override void SetupLayoutConstraints()
         {
+            AllSubviewsDoNotTranslateAutoresizingMaskIntoConstraints(this);
+
+            SetupLayoutConstraintsAsNonScrollable();
         }
     }
 }

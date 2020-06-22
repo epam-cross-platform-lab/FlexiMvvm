@@ -19,18 +19,24 @@ using UIKit;
 
 namespace FlexiMvvm.Views
 {
-    public class ScrollableLayoutView : LayoutViewBase
+    public class StylizedScrollableLayoutView<TTheme> : LayoutViewBase
     {
-        public ScrollableLayoutView()
+        public StylizedScrollableLayoutView(TTheme theme)
         {
+            Theme = theme;
+
             Initialize();
         }
 
-        public ScrollableLayoutView(CGRect frame)
+        public StylizedScrollableLayoutView(TTheme theme, CGRect frame)
             : base(frame)
         {
+            Theme = theme;
+
             Initialize();
         }
+
+        public TTheme Theme { get; }
 
         public virtual UIScrollView ScrollView { get; } = new UIScrollView();
 
@@ -47,19 +53,25 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public class ScrollableLayoutView<TParameters> : LayoutViewBase<TParameters>
+    public class StyledScrollableLayoutView<TTheme, TParameters> : LayoutViewBase<TParameters>
     {
-        public ScrollableLayoutView(TParameters parameters)
+        public StyledScrollableLayoutView(TTheme theme, TParameters parameters)
             : base(parameters)
         {
+            Theme = theme;
+
             Initialize();
         }
 
-        public ScrollableLayoutView(TParameters parameters, CGRect frame)
+        public StyledScrollableLayoutView(TTheme theme, TParameters parameters, CGRect frame)
             : base(parameters, frame)
         {
+            Theme = theme;
+
             Initialize();
         }
+
+        public TTheme Theme { get; }
 
         public virtual UIScrollView ScrollView { get; } = new UIScrollView();
 

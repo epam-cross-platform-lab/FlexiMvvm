@@ -15,64 +15,71 @@
 // =========================================================================
 
 using CoreGraphics;
-using UIKit;
 
 namespace FlexiMvvm.Views
 {
-    public class ScrollableLayoutView : LayoutViewBase
+    public class StylizedLayoutView<TTheme> : LayoutViewBase
     {
-        public ScrollableLayoutView()
+        public StylizedLayoutView(TTheme theme)
         {
+            Theme = theme;
+
             Initialize();
         }
 
-        public ScrollableLayoutView(CGRect frame)
+        public StylizedLayoutView(TTheme theme, CGRect frame)
             : base(frame)
         {
+            Theme = theme;
+
             Initialize();
         }
 
-        public virtual UIScrollView ScrollView { get; } = new UIScrollView();
+        public TTheme Theme { get; }
 
         protected override void SetupLayout()
         {
-            SetupLayoutAsScrollable(ScrollView);
+            SetupLayoutAsNonScrollable();
         }
 
         protected override void SetupLayoutConstraints()
         {
             AllSubviewsDoNotTranslateAutoresizingMaskIntoConstraints(this);
 
-            SetupLayoutConstraintsAsScrollable(ScrollView);
+            SetupLayoutConstraintsAsNonScrollable();
         }
     }
 
-    public class ScrollableLayoutView<TParameters> : LayoutViewBase<TParameters>
+    public class StyledLayoutView<TTheme, TParameters> : LayoutViewBase<TParameters>
     {
-        public ScrollableLayoutView(TParameters parameters)
+        public StyledLayoutView(TTheme theme, TParameters parameters)
             : base(parameters)
         {
+            Theme = theme;
+
             Initialize();
         }
 
-        public ScrollableLayoutView(TParameters parameters, CGRect frame)
+        public StyledLayoutView(TTheme theme, TParameters parameters, CGRect frame)
             : base(parameters, frame)
         {
+            Theme = theme;
+
             Initialize();
         }
 
-        public virtual UIScrollView ScrollView { get; } = new UIScrollView();
+        public TTheme Theme { get; }
 
         protected override void SetupLayout()
         {
-            SetupLayoutAsScrollable(ScrollView);
+            SetupLayoutAsNonScrollable();
         }
 
         protected override void SetupLayoutConstraints()
         {
             AllSubviewsDoNotTranslateAutoresizingMaskIntoConstraints(this);
 
-            SetupLayoutConstraintsAsScrollable(ScrollView);
+            SetupLayoutConstraintsAsNonScrollable();
         }
     }
 }
