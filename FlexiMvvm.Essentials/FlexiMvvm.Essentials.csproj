@@ -1,6 +1,6 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras/2.0.54">
     <PropertyGroup>
-        <TargetFrameworks>netstandard2.0;MonoAndroid80;MonoAndroid81;MonoAndroid90;MonoAndroid10.0;Xamarin.iOS10</TargetFrameworks>
+        <TargetFrameworks>netstandard2.1;MonoAndroid80;MonoAndroid81;MonoAndroid90;MonoAndroid10.0;Xamarin.iOS10</TargetFrameworks>
         <AssemblyName>FlexiMvvm.Essentials</AssemblyName>
         <PackageId>FlexiMvvm.Essentials.PreRelease</PackageId>
         <Title>FlexiMvvm.Essentials</Title>

@@ -1,6 +1,6 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras/2.0.54">
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <TargetFramework>netstandard2.1</TargetFramework>
         <AssemblyName>FlexiMvvm.Common</AssemblyName>
         <PackageId>FlexiMvvm.Common.PreRelease</PackageId>
         <Title>FlexiMvvm.Common</Title>
