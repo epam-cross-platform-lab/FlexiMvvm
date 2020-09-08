@@ -19,7 +19,8 @@ using FlexiMvvm.Collections;
 namespace FlexiMvvm.Bootstrappers
 {
     /// <summary>
-    /// Represents a bootstrapper configuration. Used for passing values that are consumed by a bootsrapper. Any item should be added using extension method.
+    /// Represents a bootstrapper configuration. Used for passing values that are consumed by a bootsrapper.
+    /// Any item should be added using an extension method.
     /// </summary>
     public sealed class BootstrapperConfig : ValueSet
     {

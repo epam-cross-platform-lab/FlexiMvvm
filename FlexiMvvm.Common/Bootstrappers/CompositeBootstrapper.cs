@@ -29,8 +29,12 @@ namespace FlexiMvvm.Bootstrappers
         /// Initializes a new instance of the <see cref="CompositeBootstrapper"/> class.
         /// </summary>
         /// <param name="bootstrappers">The collection of bootstrappers to be executed.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="bootstrappers"/> is <see langword="null"/>.</exception>
         public CompositeBootstrapper(params IBootstrapper[] bootstrappers)
         {
+            if (bootstrappers == null)
+                throw new ArgumentNullException(nameof(bootstrappers));
+
             _bootstrappers = bootstrappers;
         }
 
@@ -40,12 +44,9 @@ namespace FlexiMvvm.Bootstrappers
             if (config == null)
                 throw new ArgumentNullException(nameof(config));
 
-            if (_bootstrappers != null)
+            foreach (var bootstrapper in _bootstrappers)
             {
-                foreach (var bootstrapper in _bootstrappers)
-                {
-                    bootstrapper.Execute(config);
-                }
+                bootstrapper.Execute(config);
             }
         }
     }
