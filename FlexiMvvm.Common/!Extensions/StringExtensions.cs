@@ -15,34 +15,30 @@
 // =========================================================================
 
 using System;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm
 {
     public static class StringExtensions
     {
-        [ContractAnnotation("=> notnull")]
-        public static string SelfOrEmpty([CanBeNull] this string value)
+        public static string SelfOrEmpty(this string? value)
         {
             return value ?? string.Empty;
         }
 
-        [ContractAnnotation("=> notnull")]
-        public static string SelfOrDefaultIfNullOrEmpty([CanBeNull] this string value, [NotNull] string defaultValue)
+        public static string SelfOrDefault(this string? value, string defaultValue)
         {
             if (defaultValue == null)
                 throw new ArgumentNullException(nameof(defaultValue));
 
-            return string.IsNullOrEmpty(value) ? defaultValue : value;
+            return value ?? defaultValue;
         }
 
-        [ContractAnnotation("=> notnull")]
-        public static string SelfOrDefaultIfNullOrWhiteSpace([CanBeNull] this string value, [NotNull] string defaultValue)
+        public static string SelfOrDefault(this string? value, Func<string> defaultValue)
         {
             if (defaultValue == null)
                 throw new ArgumentNullException(nameof(defaultValue));
 
-            return string.IsNullOrWhiteSpace(value) ? defaultValue : value;
+            return value ?? defaultValue() ?? throw new ArgumentException("Function returned 'null' value.", nameof(defaultValue));
         }
     }
 }
