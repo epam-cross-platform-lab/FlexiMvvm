@@ -19,7 +19,6 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Collections
 {
@@ -32,35 +31,35 @@ namespace FlexiMvvm.Collections
         {
         }
 
-        public ObservableCollection([NotNull] IEnumerable<TItem> items)
+        public ObservableCollection(IEnumerable<TItem> items)
             : base(items)
         {
         }
 
-        public void AddRange([NotNull] IEnumerable<TItem> items)
+        public void AddRange(IEnumerable<TItem> items)
         {
             if (items == null)
                 throw new ArgumentNullException(nameof(items));
 
-            var startIndex = Items.NotNull().Count;
+            var startIndex = Items.Count;
 
             InsertRange(startIndex, items);
         }
 
-        public void InsertRange(int index, [NotNull] IEnumerable<TItem> items)
+        public void InsertRange(int index, IEnumerable<TItem> items)
         {
             if (items == null)
                 throw new ArgumentNullException(nameof(items));
 
             CheckReentrancy();
 
-            var newItems = items.ToList().NotNull();
+            var newItems = items.ToList();
 
             if (newItems.Any())
             {
                 var startIndex = index;
                 var currentIndex = startIndex;
-                var existingItems = Items.NotNull();
+                var existingItems = Items;
 
                 foreach (var newItem in newItems)
                 {
@@ -82,7 +81,7 @@ namespace FlexiMvvm.Collections
             var startIndex = index;
             var currentIndex = startIndex;
             var endIndex = startIndex + count;
-            var existingItems = Items.NotNull();
+            var existingItems = Items;
             var removedItems = new List<TItem>();
 
             while (currentIndex < endIndex)
@@ -98,39 +97,94 @@ namespace FlexiMvvm.Collections
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, removedItems, startIndex));
         }
 
-        public void ReplaceRange(int index, [NotNull] IEnumerable<TItem> items)
+        public void ReplaceRange(int index, IEnumerable<TItem> items)
         {
             if (items == null)
                 throw new ArgumentNullException(nameof(items));
 
             CheckReentrancy();
 
-            var newItems = items.ToList().NotNull();
+            var newItems = items.ToList();
 
             if (newItems.Any())
             {
                 var startIndex = index;
                 var currentIndex = startIndex;
-                var existingItems = Items.NotNull();
+                var existingItems = Items;
                 var replacedItems = new List<TItem>();
 
                 foreach (var newItem in newItems)
                 {
-                    replacedItems.Add(existingItems[currentIndex]);
-                    existingItems[currentIndex] = newItem;
+                    if (currentIndex < existingItems.Count)
+                    {
+                        replacedItems.Add(existingItems[currentIndex]);
+                        existingItems[currentIndex] = newItem;
+                    }
+                    else
+                    {
+                        existingItems.Insert(currentIndex, newItem);
+                    }
 
                     currentIndex++;
+                }
+
+                if (newItems.Count != replacedItems.Count)
+                {
+                    OnPropertyChanged(new PropertyChangedEventArgs(CountString));
                 }
 
                 OnPropertyChanged(new PropertyChangedEventArgs(IndexerName));
                 OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, newItems, replacedItems, startIndex));
             }
         }
+
+        public void ReplaceWith(IEnumerable<TItem> items)
+        {
+            if (items == null)
+                throw new ArgumentNullException(nameof(items));
+
+            CheckReentrancy();
+
+            var newItems = items.ToList();
+            var existingItems = Items;
+
+            if (newItems.Any() || existingItems.Any())
+            {
+                existingItems.Clear();
+
+                foreach (var newItem in newItems)
+                {
+                    existingItems.Add(newItem);
+                }
+
+                OnPropertyChanged(new PropertyChangedEventArgs(CountString));
+                OnPropertyChanged(new PropertyChangedEventArgs(IndexerName));
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            }
+        }
     }
 
+    public class ObservableCollection : ObservableCollection<object>
+    {
+        public ObservableCollection()
+        {
+        }
+
+        public ObservableCollection(IEnumerable<object> items)
+            : base(items)
+        {
+        }
+
+        public ObservableCollection(params object[] items)
+            : base(items)
+        {
+        }
+    }
+
+    [Obsolete("ObservableCollection<TGroup, TItem> will be removed soon. Use GroupingObservableCollection<TKey, TItem> instead.")]
     public class ObservableCollection<TGroup, TItem> : ObservableCollection<TItem>, IGrouping<TGroup, TItem>
     {
-        public ObservableCollection([NotNull] TGroup key)
+        public ObservableCollection(TGroup key)
         {
             if (key == null)
                 throw new ArgumentNullException(nameof(key));
@@ -138,7 +192,7 @@ namespace FlexiMvvm.Collections
             Key = key;
         }
 
-        public ObservableCollection([NotNull] TGroup key, [NotNull] IEnumerable<TItem> items)
+        public ObservableCollection(TGroup key, IEnumerable<TItem> items)
             : base(items)
         {
             if (key == null)
@@ -147,7 +201,6 @@ namespace FlexiMvvm.Collections
             Key = key;
         }
 
-        [NotNull]
         public TGroup Key { get; }
     }
 }

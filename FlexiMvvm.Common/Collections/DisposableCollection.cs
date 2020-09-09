@@ -17,7 +17,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Collections
 {
@@ -28,12 +27,12 @@ namespace FlexiMvvm.Collections
         {
         }
 
-        public DisposableCollection([NotNull] IList<TDisposable> disposables)
+        public DisposableCollection(IList<TDisposable> disposables)
             : base(disposables)
         {
         }
 
-        public DisposableCollection([NotNull] params TDisposable[] disposables)
+        public DisposableCollection(params TDisposable[] disposables)
             : base(disposables)
         {
         }
@@ -48,7 +47,7 @@ namespace FlexiMvvm.Collections
         {
             if (disposing)
             {
-                foreach (var item in Items.NotNull())
+                foreach (var item in Items)
                 {
                     item.Dispose();
                 }
@@ -64,12 +63,12 @@ namespace FlexiMvvm.Collections
         {
         }
 
-        public DisposableCollection([NotNull] IList<IDisposable> disposables)
+        public DisposableCollection(IList<IDisposable> disposables)
             : base(disposables)
         {
         }
 
-        public DisposableCollection([NotNull] params IDisposable[] disposables)
+        public DisposableCollection(params IDisposable[] disposables)
             : base(disposables)
         {
         }

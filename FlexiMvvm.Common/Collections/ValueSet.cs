@@ -24,9 +24,9 @@ namespace FlexiMvvm.Collections
     /// </summary>
     public abstract class ValueSet
     {
-        private Dictionary<string, object> _values;
+        private Dictionary<string, object?>? _values;
 
-        private Dictionary<string, object> Values => _values ?? (_values = new Dictionary<string, object>());
+        private Dictionary<string, object?> Values => _values ??= new Dictionary<string, object?>();
 
         /// <summary>
         /// Gets the value that is associated with the specified key.
@@ -42,7 +42,9 @@ namespace FlexiMvvm.Collections
             if (key == null)
                 throw new ArgumentNullException(nameof(key));
 
+#nullable disable
             return (T)_values.GetValueOrDefault(key, defaultValue);
+#nullable enable
         }
 
         /// <summary>

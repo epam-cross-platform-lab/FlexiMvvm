@@ -20,70 +20,66 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Collections
 {
     public class ObservableDictionary<TKey, TValue> : IDictionary<TKey, TValue>, INotifyCollectionChanged, INotifyPropertyChanged
+        where TKey : notnull
     {
         private const string CountString = "Count";
         private const string IndexerName = "Item[]";
         private const string KeysName = "Keys";
         private const string ValuesName = "Values";
 
-        [NotNull]
-        private IDictionary<TKey, TValue> _dictionary;
-
         public ObservableDictionary()
         {
-            _dictionary = new Dictionary<TKey, TValue>();
+            Dictionary = new Dictionary<TKey, TValue>();
         }
 
-        public ObservableDictionary([NotNull] IDictionary<TKey, TValue> dictionary)
+        public ObservableDictionary(IDictionary<TKey, TValue> dictionary)
         {
             if (dictionary == null)
                 throw new ArgumentNullException(nameof(dictionary));
 
-            _dictionary = new Dictionary<TKey, TValue>(dictionary);
+            Dictionary = new Dictionary<TKey, TValue>(dictionary);
         }
 
-        public ObservableDictionary([NotNull] IEqualityComparer<TKey> comparer)
+        public ObservableDictionary(IEqualityComparer<TKey> comparer)
         {
             if (comparer == null)
                 throw new ArgumentNullException(nameof(comparer));
 
-            _dictionary = new Dictionary<TKey, TValue>(comparer);
+            Dictionary = new Dictionary<TKey, TValue>(comparer);
         }
 
         public ObservableDictionary(int capacity)
         {
-            _dictionary = new Dictionary<TKey, TValue>(capacity);
+            Dictionary = new Dictionary<TKey, TValue>(capacity);
         }
 
-        public ObservableDictionary([NotNull] IDictionary<TKey, TValue> dictionary, [NotNull] IEqualityComparer<TKey> comparer)
+        public ObservableDictionary(IDictionary<TKey, TValue> dictionary, IEqualityComparer<TKey> comparer)
         {
             if (dictionary == null)
                 throw new ArgumentNullException(nameof(dictionary));
             if (comparer == null)
                 throw new ArgumentNullException(nameof(comparer));
 
-            _dictionary = new Dictionary<TKey, TValue>(dictionary, comparer);
+            Dictionary = new Dictionary<TKey, TValue>(dictionary, comparer);
         }
 
-        public ObservableDictionary(int capacity, [NotNull] IEqualityComparer<TKey> comparer)
+        public ObservableDictionary(int capacity, IEqualityComparer<TKey> comparer)
         {
             if (comparer == null)
                 throw new ArgumentNullException(nameof(comparer));
 
-            _dictionary = new Dictionary<TKey, TValue>(capacity, comparer);
+            Dictionary = new Dictionary<TKey, TValue>(capacity, comparer);
         }
 
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
+        public event NotifyCollectionChangedEventHandler CollectionChanged = (sender, e) => { };
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
 
-        [NotNull]
-        protected IDictionary<TKey, TValue> Dictionary => _dictionary;
+        protected IDictionary<TKey, TValue> Dictionary { get; }
 
         public ICollection<TKey> Keys => Dictionary.Keys;
 
@@ -95,8 +91,21 @@ namespace FlexiMvvm.Collections
 
         public TValue this[TKey key]
         {
-            get => Dictionary[key];
-            set => Insert(key, value, false);
+            get
+            {
+                if (key == null)
+                    throw new ArgumentNullException(nameof(key));
+
+                return Dictionary[key];
+            }
+
+            set
+            {
+                if (key == null)
+                    throw new ArgumentNullException(nameof(key));
+
+                AddOrReplace(key, value);
+            }
         }
 
         public bool TryGetValue(TKey key, out TValue value)
@@ -117,6 +126,9 @@ namespace FlexiMvvm.Collections
 
         public bool Contains(KeyValuePair<TKey, TValue> item)
         {
+            if (item.Key == null)
+                throw new ArgumentNullException(nameof(item.Key));
+
             return Dictionary.Contains(item);
         }
 
@@ -125,7 +137,9 @@ namespace FlexiMvvm.Collections
             if (key == null)
                 throw new ArgumentNullException(nameof(key));
 
-            Insert(key, value, true);
+            Dictionary.Add(key, value);
+
+            OnCollectionChanged(NotifyCollectionChangedAction.Add, new KeyValuePair<TKey, TValue>(key, value));
         }
 
         public void Add(KeyValuePair<TKey, TValue> item)
@@ -136,50 +150,37 @@ namespace FlexiMvvm.Collections
             Add(item.Key, item.Value);
         }
 
-        public void AddRange([NotNull] IDictionary<TKey, TValue> items)
+        public void AddRange(IDictionary<TKey, TValue> items)
         {
             if (items == null)
                 throw new ArgumentNullException(nameof(items));
 
             if (items.Any())
             {
-                if (Dictionary.Any())
+                foreach (var item in items)
                 {
-                    foreach (var item in items)
-                    {
-                        if (item.Key == null)
-                            throw new ArgumentNullException(nameof(item.Key));
-                        if (Dictionary.ContainsKey(item.Key))
-                            throw new ArgumentException("An item with the same key has already been added.", nameof(items));
-
-                        Dictionary.Add(item);
-                    }
-                }
-                else
-                {
-                    _dictionary = new Dictionary<TKey, TValue>(items);
+                    Dictionary.Add(item);
                 }
 
-                OnCollectionChanged(NotifyCollectionChangedAction.Add, items.ToArray().NotNull());
+                OnCollectionChanged(NotifyCollectionChangedAction.Add, items.ToList());
             }
         }
 
-        private void Insert([NotNull] TKey key, TValue value, bool add)
+        private void AddOrReplace(TKey key, TValue value)
         {
-            if (Dictionary.TryGetValue(key, out var item))
+            if (Dictionary.TryGetValue(key, out var existingValue))
             {
-                if (add)
-                    throw new ArgumentException("An item with the same key has already been added.", nameof(add));
-
-                if (!Equals(item, value))
+                if (!Equals(existingValue, value))
                 {
                     Dictionary[key] = value;
-                    OnCollectionChanged(NotifyCollectionChangedAction.Replace, new KeyValuePair<TKey, TValue>(key, value), new KeyValuePair<TKey, TValue>(key, item));
+
+                    OnCollectionChanged(NotifyCollectionChangedAction.Replace, new KeyValuePair<TKey, TValue>(key, value), new KeyValuePair<TKey, TValue>(key, existingValue));
                 }
             }
             else
             {
-                Dictionary[key] = value;
+                Dictionary.Add(key, value);
+
                 OnCollectionChanged(NotifyCollectionChangedAction.Add, new KeyValuePair<TKey, TValue>(key, value));
             }
         }
@@ -189,12 +190,12 @@ namespace FlexiMvvm.Collections
             if (key == null)
                 throw new ArgumentNullException(nameof(key));
 
-            Dictionary.TryGetValue(key, out _);
+            Dictionary.TryGetValue(key, out var value);
             var removed = Dictionary.Remove(key);
 
             if (removed)
             {
-                OnCollectionChanged();
+                OnCollectionChanged(NotifyCollectionChangedAction.Remove, new KeyValuePair<TKey, TValue>(key, value));
             }
 
             return removed;
@@ -213,6 +214,7 @@ namespace FlexiMvvm.Collections
             if (Dictionary.Count > 0)
             {
                 Dictionary.Clear();
+
                 OnCollectionChanged();
             }
         }
@@ -229,12 +231,12 @@ namespace FlexiMvvm.Collections
 
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
         {
-            return Dictionary.GetEnumerator().NotNull();
+            return Dictionary.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return ((IEnumerable)Dictionary).GetEnumerator().NotNull();
+            return ((IEnumerable)Dictionary).GetEnumerator();
         }
 
         private void OnPropertyChanged()
@@ -245,7 +247,7 @@ namespace FlexiMvvm.Collections
             OnPropertyChanged(ValuesName);
         }
 
-        protected virtual void OnPropertyChanged([NotNull] string propertyName)
+        protected virtual void OnPropertyChanged(string propertyName)
         {
             if (propertyName == null)
                 throw new ArgumentNullException(nameof(propertyName));
@@ -273,7 +275,7 @@ namespace FlexiMvvm.Collections
             CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(action, newItem, oldItem));
         }
 
-        private void OnCollectionChanged(NotifyCollectionChangedAction action, [NotNull] IList newItems)
+        private void OnCollectionChanged(NotifyCollectionChangedAction action, IList newItems)
         {
             OnPropertyChanged();
             CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(action, newItems));
