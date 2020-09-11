@@ -29,17 +29,20 @@ namespace FlexiMvvm.Commands
         /// <summary>
         /// Initializes a new instance of the <see cref="RelayCommand"/> class.
         /// </summary>
+        /// <param name="diagnosticName">The diagnostic command name.</param>
         /// <param name="execute">The <see cref="Action"/> to invoke when <see cref="Command.Execute"/> is called.</param>
         /// <param name="canExecute">
         /// The <see cref="Func{TResult}"/> to invoke when <see cref="Command.CanExecute"/> is called. Can be <see langword="null"/>.
-        /// <para><see cref="Command.CanExecute"/> will return <see langword="true"/> if <paramref name="canExecute"/> is <see langword="null"/>.</para>
+        /// <para><see cref="Command.CanExecute"/> returns <see langword="true"/> if <paramref name="canExecute"/> is <see langword="null"/>.</para>
         /// </param>
-        /// <param name="name">The diagnostic command name. Can be <see langword="null"/>.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="execute"/> is <see langword="null"/>.</exception>
-        public RelayCommand(Action execute, Func<bool>? canExecute = null, string? name = null)
-            : base(name)
+        /// <exception cref="ArgumentNullException"><paramref name="diagnosticName"/> or <paramref name="execute"/> is <see langword="null"/>.</exception>
+        public RelayCommand(string diagnosticName, Action execute, Func<bool>? canExecute = null)
+            : base(diagnosticName)
         {
-            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            if (execute == null)
+                throw new ArgumentNullException(nameof(execute));
+
+            _execute = execute;
             _canExecute = canExecute;
         }
 
@@ -76,17 +79,20 @@ namespace FlexiMvvm.Commands
         /// <summary>
         /// Initializes a new instance of the <see cref="RelayCommand{T}"/> class.
         /// </summary>
+        /// <param name="diagnosticName">The diagnostic command name.</param>
         /// <param name="execute">The <see cref="Action{T}"/> to invoke when <see cref="Command{T}.Execute(T)"/> is called.</param>
         /// <param name="canExecute">
         /// The <see cref="Func{T, TResult}"/> to invoke when <see cref="Command{T}.CanExecute(T)"/> is called. Can be <see langword="null"/>.
-        /// <para><see cref="Command{T}.CanExecute(T)"/> will return <see langword="true"/> if <paramref name="canExecute"/> is <see langword="null"/>.</para>
+        /// <para><see cref="Command{T}.CanExecute(T)"/> returns <see langword="true"/> if <paramref name="canExecute"/> is <see langword="null"/>.</para>
         /// </param>
-        /// <param name="name">The diagnostic command name. Can be <see langword="null"/>.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="execute"/> is <see langword="null"/>.</exception>
-        public RelayCommand(Action<T> execute, Func<T, bool>? canExecute = null, string? name = null)
-            : base(name)
+        /// <exception cref="ArgumentNullException"><paramref name="diagnosticName"/> or <paramref name="execute"/> is <see langword="null"/>.</exception>
+        public RelayCommand(string diagnosticName, Action<T> execute, Func<T, bool>? canExecute = null)
+            : base(diagnosticName)
         {
-            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            if (execute == null)
+                throw new ArgumentNullException(nameof(execute));
+
+            _execute = execute;
             _canExecute = canExecute;
         }
 

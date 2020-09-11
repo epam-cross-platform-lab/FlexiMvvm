@@ -44,7 +44,7 @@ namespace FlexiMvvm.Commands
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
 
-            return (Command)_commands.GetOrAdd(name, _ => new RelayCommand(execute, canExecute, name));
+            return (Command)_commands.GetOrAdd(name, _ => new RelayCommand(name, execute, canExecute));
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace FlexiMvvm.Commands
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
 
-            return (Command<T>)_commands.GetOrAdd(name, _ => new RelayCommand<T>(execute, canExecute, name));
+            return (Command<T>)_commands.GetOrAdd(name, _ => new RelayCommand<T>(name, execute, canExecute));
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace FlexiMvvm.Commands
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
 
-            return (Command)_commands.GetOrAdd(name, _ => new RelayCommand(async () => await execute(), canExecute, name));
+            return (Command)_commands.GetOrAdd(name, _ => new RelayCommand(name, async () => await execute(), canExecute));
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace FlexiMvvm.Commands
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
 
-            return (Command<T>)_commands.GetOrAdd(name, _ => new RelayCommand<T>(async parameter => await execute(parameter), canExecute, name));
+            return (Command<T>)_commands.GetOrAdd(name, _ => new RelayCommand<T>(name, async parameter => await execute(parameter), canExecute));
         }
     }
 }
