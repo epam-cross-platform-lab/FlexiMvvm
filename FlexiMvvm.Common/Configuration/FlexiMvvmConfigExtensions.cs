@@ -16,6 +16,8 @@
 
 using System;
 using System.ComponentModel;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace FlexiMvvm.Configuration
 {
@@ -25,13 +27,16 @@ namespace FlexiMvvm.Configuration
     public static class FlexiMvvmConfigExtensions
     {
         private const string ShouldRaisePropertyChangedKey = "ShouldRaisePropertyChanged";
+        private const string LoggerFactoryKey = "LoggerFactory";
 
         /// <summary>
-        /// Determines whether FlexiMvvm classes which implement <see cref="INotifyPropertyChanged"/> should raise <see cref="INotifyPropertyChanged.PropertyChanged"/> event.
+        /// Determines whether FlexiMvvm classes which implement <see cref="INotifyPropertyChanged"/>
+        /// should raise <see cref="INotifyPropertyChanged.PropertyChanged"/> event.
         /// </summary>
-        /// <param name="config">>The FlexiMvvm configuration.</param>
-        /// <returns><c>true</c> if FlexiMvvm classes raise <see cref="INotifyPropertyChanged.PropertyChanged"/> event; otherwise, <c>false</c>. Returns <c>true</c> by default.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="config"/> is <c>null</c>.</exception>
+        /// <param name="config">The FlexiMvvm configuration.</param>
+        /// <returns><see langword="true"/> if FlexiMvvm classes raise <see cref="INotifyPropertyChanged.PropertyChanged"/> event;
+        /// otherwise, <see langword="false"/>. Returns <see langword="true"/> by default.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="config"/> is <see langword="null"/>.</exception>
         public static bool ShouldRaisePropertyChanged(this FlexiMvvmConfig config)
         {
             if (config == null)
@@ -41,17 +46,51 @@ namespace FlexiMvvm.Configuration
         }
 
         /// <summary>
-        /// Determines whether FlexiMvvm classes which implement <see cref="INotifyPropertyChanged"/> should raise <see cref="INotifyPropertyChanged.PropertyChanged"/> event.
+        /// Allows to customize whether FlexiMvvm classes which implement <see cref="INotifyPropertyChanged"/>
+        /// should raise <see cref="INotifyPropertyChanged.PropertyChanged"/> event.
         /// </summary>
         /// <param name="config">The FlexiMvvm configuration.</param>
-        /// <param name="value"><c>true</c> if FlexiMvvm classes should raise <see cref="INotifyPropertyChanged.PropertyChanged"/> event; otherwise, <c>false</c>.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="config"/> is <c>null</c>.</exception>
+        /// <param name="value"><see langword="true"/> if FlexiMvvm classes should raise <see cref="INotifyPropertyChanged.PropertyChanged"/> event;
+        /// otherwise, <see langword="false"/>.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="config"/> is <see langword="null"/>.</exception>
         public static void ShouldRaisePropertyChanged(this FlexiMvvmConfig config, bool value)
         {
             if (config == null)
                 throw new ArgumentNullException(nameof(config));
 
             config.SetValue(ShouldRaisePropertyChangedKey, value);
+        }
+
+        /// <summary>
+        /// Returns a logger factory instance. This method is intended for internal use by FlexiMvvm.
+        /// </summary>
+        /// <param name="config">The FlexiMvvm configuration.</param>
+        /// <returns>The logger factory instance.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="config"/> is <see langword="null"/>.</exception>
+        public static ILoggerFactory GetLoggerFactory(this FlexiMvvmConfig config)
+        {
+            if (config == null)
+                throw new ArgumentNullException(nameof(config));
+
+            return config.GetValue<ILoggerFactory>(LoggerFactoryKey, NullLoggerFactory.Instance);
+        }
+
+        /// <summary>
+        /// Sets the logger factory instance. FlexiMvvm uses this logger factory to log its diagnostic events.
+        /// </summary>
+        /// <param name="config">The FlexiMvvm configuration.</param>
+        /// <param name="loggerFactory">The logger factory.</param>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="config"/> or <paramref name="loggerFactory"/> is <see langword="null"/>.
+        /// </exception>
+        public static void SetLoggerFactory(this FlexiMvvmConfig config, ILoggerFactory loggerFactory)
+        {
+            if (config == null)
+                throw new ArgumentNullException(nameof(config));
+            if (loggerFactory == null)
+                throw new ArgumentNullException(nameof(loggerFactory));
+
+            config.SetValue(LoggerFactoryKey, loggerFactory);
         }
     }
 }
