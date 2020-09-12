@@ -14,23 +14,20 @@
 // limitations under the License.
 // =========================================================================
 
+using System;
 using System.Collections.ObjectModel;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Diagnostics
 {
+    [Obsolete]
     public class DelegatingLogger : ILogger
     {
-        [CanBeNull]
-        private Collection<string> _messages;
-        [CanBeNull]
-        private ILogger _logger;
+        private Collection<string>? _messages;
+        private ILogger? _logger;
 
-        [NotNull]
         private Collection<string> Messages => _messages ?? (_messages = new Collection<string>());
 
-        [CanBeNull]
-        public ILogger Logger
+        public ILogger? Logger
         {
             get => _logger;
             set
@@ -49,7 +46,7 @@ namespace FlexiMvvm.Diagnostics
             }
         }
 
-        public void Log(string message)
+        public void Log(string? message)
         {
             if (Logger != null)
             {

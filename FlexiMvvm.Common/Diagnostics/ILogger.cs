@@ -14,12 +14,13 @@
 // limitations under the License.
 // =========================================================================
 
-using JetBrains.Annotations;
+using System;
 
 namespace FlexiMvvm.Diagnostics
 {
+    [Obsolete]
     public interface ILogger
     {
-        void Log([CanBeNull] string message);
+        void Log(string? message);
     }
 }

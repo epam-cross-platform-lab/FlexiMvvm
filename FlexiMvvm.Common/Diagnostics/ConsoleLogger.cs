@@ -15,24 +15,20 @@
 // =========================================================================
 
 using System;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Diagnostics
 {
+    [Obsolete]
     public class ConsoleLogger : ILogger
     {
-        [CanBeNull]
-        private readonly string _module;
-        [CanBeNull]
-        private readonly string _prefix;
+        private readonly string? _module;
+        private readonly string? _prefix;
 
         public ConsoleLogger()
         {
         }
 
-        public ConsoleLogger(
-            [NotNull] string module,
-            [NotNull] string prefix)
+        public ConsoleLogger(string module, string prefix)
         {
             if (module == null)
                 throw new ArgumentNullException(nameof(module));
@@ -47,7 +43,7 @@ namespace FlexiMvvm.Diagnostics
             _prefix = prefix;
         }
 
-        public void Log(string message)
+        public void Log(string? message)
         {
             if (!string.IsNullOrWhiteSpace(message))
             {
