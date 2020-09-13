@@ -14,27 +14,12 @@
 // limitations under the License.
 // =========================================================================
 
-using System;
-
-namespace FlexiMvvm.Ioc
+namespace FlexiMvvm.DependencyInjection
 {
-    internal class ItemProvider
+    public enum Reuse
     {
-        private readonly Func<object> _factory;
-        private readonly Reuse _reuse;
-        private Lazy<object>? _lazyItem;
+        Transient,
 
-        internal ItemProvider(Func<object> factory, Reuse reuse)
-        {
-            _factory = factory;
-            _reuse = reuse;
-        }
-
-        private Lazy<object> LazyItem => _lazyItem ??= new Lazy<object>(() => _factory());
-
-        internal object Get()
-        {
-            return _reuse == Reuse.Singleton ? LazyItem.Value : _factory();
-        }
+        Singleton
     }
 }

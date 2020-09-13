@@ -17,19 +17,18 @@
 using System;
 using System.Collections.Generic;
 using FlexiMvvm.Formatters;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Ioc
 {
+    [Obsolete("Use ServiceCollection class instead.")]
     public sealed class SimpleIoc : ISimpleIoc
     {
-        [CanBeNull]
-        private Dictionary<Type, ItemProvider> _itemsProviders;
+        private Dictionary<Type, ItemProvider>? _itemsProviders;
 
-        [NotNull]
-        private Dictionary<Type, ItemProvider> ItemsProviders => _itemsProviders ?? (_itemsProviders = new Dictionary<Type, ItemProvider>());
+        private Dictionary<Type, ItemProvider> ItemsProviders => _itemsProviders ??= new Dictionary<Type, ItemProvider>();
 
         public void Register<T>(Func<T> factory, Reuse reuse = Reuse.Transient)
+            where T : notnull
         {
             if (factory == null)
                 throw new ArgumentNullException(nameof(factory));
@@ -38,6 +37,7 @@ namespace FlexiMvvm.Ioc
         }
 
         public T Get<T>()
+            where T : notnull
         {
             return (T)GetService(typeof(T));
         }

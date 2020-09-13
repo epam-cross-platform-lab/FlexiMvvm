@@ -14,13 +14,14 @@
 // limitations under the License.
 // =========================================================================
 
-using JetBrains.Annotations;
+using System;
 
 namespace FlexiMvvm.Ioc
 {
+    [Obsolete("Use IServiceProvider interface instead.")]
     public interface IDependencyProvider
     {
-        [NotNull]
-        T Get<T>();
+        T Get<T>()
+            where T : notnull;
     }
 }

@@ -15,12 +15,13 @@
 // =========================================================================
 
 using System;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Ioc
 {
+    [Obsolete("Use IServiceCollection or IServiceProvider interface instead.")]
     public interface ISimpleIoc : IDependencyProvider, IServiceProvider
     {
-        void Register<T>([NotNull] Func<T> factory, Reuse reuse = Reuse.Transient);
+        void Register<T>(Func<T> factory, Reuse reuse = Reuse.Transient)
+            where T : notnull;
     }
 }

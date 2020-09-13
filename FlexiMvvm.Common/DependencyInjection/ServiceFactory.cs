@@ -16,15 +16,15 @@
 
 using System;
 
-namespace FlexiMvvm.Ioc
+namespace FlexiMvvm.DependencyInjection
 {
-    internal class ItemProvider
+    internal sealed class ServiceFactory
     {
         private readonly Func<object> _factory;
         private readonly Reuse _reuse;
         private Lazy<object>? _lazyItem;
 
-        internal ItemProvider(Func<object> factory, Reuse reuse)
+        internal ServiceFactory(Func<object> factory, Reuse reuse)
         {
             _factory = factory;
             _reuse = reuse;
