@@ -20,7 +20,7 @@ namespace FlexiMvvm.ValueConverters
     /// Represents a value conversion result.
     /// </summary>
     /// <typeparam name="TValue">The type of the value.</typeparam>
-    public class ConversionResult<TValue>
+    public sealed class ConversionResult<TValue>
     {
         private ConversionResult(object? value)
         {

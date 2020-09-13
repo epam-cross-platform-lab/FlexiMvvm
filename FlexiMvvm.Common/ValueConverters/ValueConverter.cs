@@ -44,7 +44,7 @@ namespace FlexiMvvm.ValueConverters
         /// </summary>
         /// <param name="value">The source value being passed to the target.</param>
         /// <param name="targetType">The type of the target property, as a type reference.</param>
-        /// <param name="parameter">The parameter to be used in the converter logic. Can be <c>null</c>.</param>
+        /// <param name="parameter">The parameter to be used in the converter logic. Can be <see langword="null"/>.</param>
         /// <param name="culture">The culture to be used in the converter.</param>
         /// <returns>The conversion result instance.</returns>
         protected virtual ConversionResult<TTargetValue> Convert(TSourceValue value, Type targetType, object? parameter, CultureInfo culture)
@@ -70,7 +70,7 @@ namespace FlexiMvvm.ValueConverters
         /// </summary>
         /// <param name="value">The target value being passed to the source.</param>
         /// <param name="targetType">The type of the target property, as a type reference.</param>
-        /// <param name="parameter">The parameter to be used in the converter logic. Can be <c>null</c>.</param>
+        /// <param name="parameter">The parameter to be used in the converter logic. Can be <see langword="null"/>.</param>
         /// <param name="culture">The culture to be used in the converter.</param>
         /// <returns>The conversion result instance.</returns>
         protected virtual ConversionResult<TSourceValue> ConvertBack(TTargetValue value, Type targetType, object? parameter, CultureInfo culture)

@@ -27,23 +27,23 @@ namespace FlexiMvvm.ValueConverters
         /// <summary>
         /// Modifies the source value before passing it to the target for display in the UI.
         /// </summary>
-        /// <param name="value">The source value being passed to the target. Can be <c>null</c>.</param>
+        /// <param name="value">The source value being passed to the target. Can be <see langword="null"/>.</param>
         /// <param name="targetType">The type of the target property, as a type reference.</param>
-        /// <param name="parameter">The parameter to be used in the converter logic. Can be <c>null</c>.</param>
+        /// <param name="parameter">The parameter to be used in the converter logic. Can be <see langword="null"/>.</param>
         /// <param name="culture">The culture to be used in the converter.</param>
-        /// <returns>A converted value. If the method returns <c>null</c>, the valid <c>null</c> value is used.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="targetType"/> or <paramref name="culture"/> is <c>null</c>.</exception>
+        /// <returns>A converted value. If the method returns <see langword="null"/>, the valid <see langword="null"/> value is used.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="targetType"/> or <paramref name="culture"/> is <see langword="null"/>.</exception>
         object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture);
 
         /// <summary>
         /// Modifies the target value before passing it to the source object.
         /// </summary>
-        /// <param name="value">The target value being passed to the source. Can be <c>null</c>.</param>
+        /// <param name="value">The target value being passed to the source. Can be <see langword="null"/>.</param>
         /// <param name="targetType">The type of the target property, as a type reference.</param>
-        /// <param name="parameter">The parameter to be used in the converter logic. Can be <c>null</c>.</param>
+        /// <param name="parameter">The parameter to be used in the converter logic. Can be <see langword="null"/>.</param>
         /// <param name="culture">The culture to be used in the converter.</param>
-        /// <returns>A converted value. If the method returns <c>null</c>, the valid <c>null</c> value is used.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="targetType"/> or <paramref name="culture"/> is <c>null</c>.</exception>
+        /// <returns>A converted value. If the method returns <see langword="null"/>, the valid <see langword="null"/> value is used.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="targetType"/> or <paramref name="culture"/> is <see langword="null"/>.</exception>
         object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture);
     }
 }
