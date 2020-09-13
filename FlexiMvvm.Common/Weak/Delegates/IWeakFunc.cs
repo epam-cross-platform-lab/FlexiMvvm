@@ -14,61 +14,49 @@
 // limitations under the License.
 // =========================================================================
 
-using JetBrains.Annotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FlexiMvvm.Weak.Delegates
 {
     public interface IWeakFunc<out TResult>
     {
-        [ContractAnnotation("=> true, target: notnull; => false, target: null")]
-        bool TryGetTarget(out object target);
+        bool TryGetTarget([MaybeNullWhen(returnValue: false)] out object target);
 
-        [CanBeNull]
-        TResult Invoke([NotNull] object target);
+        TResult Invoke(object target);
     }
 
     public interface IWeakFunc<in T, out TResult>
     {
-        [ContractAnnotation("=> true, target: notnull; => false, target: null")]
-        bool TryGetTarget(out object target);
+        bool TryGetTarget([MaybeNullWhen(returnValue: false)] out object target);
 
-        [CanBeNull]
-        TResult Invoke([NotNull] object target, [CanBeNull] T arg);
+        TResult Invoke(object target, T arg);
     }
 
     public interface IWeakFunc<in T1, in T2, out TResult>
     {
-        [ContractAnnotation("=> true, target: notnull; => false, target: null")]
-        bool TryGetTarget(out object target);
+        bool TryGetTarget([MaybeNullWhen(returnValue: false)] out object target);
 
-        [CanBeNull]
-        TResult Invoke([NotNull] object target, [CanBeNull] T1 arg1, [CanBeNull] T2 arg2);
+        TResult Invoke(object target, T1 arg1, T2 arg2);
     }
 
     public interface IWeakFunc<in T1, in T2, in T3, out TResult>
     {
-        [ContractAnnotation("=> true, target: notnull; => false, target: null")]
-        bool TryGetTarget(out object target);
+        bool TryGetTarget([MaybeNullWhen(returnValue: false)] out object target);
 
-        [CanBeNull]
-        TResult Invoke([NotNull] object target, [CanBeNull] T1 arg1, [CanBeNull] T2 arg2, [CanBeNull] T3 arg3);
+        TResult Invoke(object target, T1 arg1, T2 arg2, T3 arg3);
     }
 
     public interface IWeakFunc<in T1, in T2, in T3, in T4, out TResult>
     {
-        [ContractAnnotation("=> true, target: notnull; => false, target: null")]
-        bool TryGetTarget(out object target);
+        bool TryGetTarget([MaybeNullWhen(returnValue: false)] out object target);
 
-        [CanBeNull]
-        TResult Invoke([NotNull] object target, [CanBeNull] T1 arg1, [CanBeNull] T2 arg2, [CanBeNull] T3 arg3, [CanBeNull] T4 arg4);
+        TResult Invoke(object target, T1 arg1, T2 arg2, T3 arg3, T4 arg4);
     }
 
     public interface IWeakFunc<in T1, in T2, in T3, in T4, in T5, out TResult>
     {
-        [ContractAnnotation("=> true, target: notnull; => false, target: null")]
-        bool TryGetTarget(out object target);
+        bool TryGetTarget([MaybeNullWhen(returnValue: false)] out object target);
 
-        [CanBeNull]
-        TResult Invoke([NotNull] object target, [CanBeNull] T1 arg1, [CanBeNull] T2 arg2, [CanBeNull] T3 arg3, [CanBeNull] T4 arg4, [CanBeNull] T5 arg5);
+        TResult Invoke(object target, T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5);
     }
 }

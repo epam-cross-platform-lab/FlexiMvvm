@@ -15,19 +15,17 @@
 // =========================================================================
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Weak.Delegates
 {
     public abstract class WeakDelegate
     {
-        [NotNull]
         private readonly WeakReference<object> _targetWeakReference;
-        [NotNull]
         private readonly MethodInfo _targetMethodInfo;
 
-        protected WeakDelegate([NotNull] Delegate @delegate)
+        protected WeakDelegate(Delegate @delegate)
         {
             if (@delegate == null)
                 throw new ArgumentNullException(nameof(@delegate));
@@ -36,16 +34,17 @@ namespace FlexiMvvm.Weak.Delegates
             _targetMethodInfo = @delegate.Method;
         }
 
-        [ContractAnnotation("=> true, target: notnull; => false, target: null")]
-        public bool TryGetTarget(out object target)
+        public bool TryGetTarget([MaybeNullWhen(returnValue: false)] out object target)
         {
             return _targetWeakReference.TryGetTarget(out target);
         }
 
-        protected object Invoke([NotNull] object target, [CanBeNull] params object[] parameters)
+        protected object Invoke(object target, params object?[] parameters)
         {
             if (target == null)
                 throw new ArgumentNullException(nameof(target));
+            if (parameters == null)
+                throw new ArgumentNullException(nameof(parameters));
 
             return _targetMethodInfo.Invoke(target, parameters);
         }

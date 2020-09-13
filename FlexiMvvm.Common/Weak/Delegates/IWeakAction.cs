@@ -14,55 +14,61 @@
 // limitations under the License.
 // =========================================================================
 
-using JetBrains.Annotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FlexiMvvm.Weak.Delegates
 {
     public interface IWeakAction
     {
-        [ContractAnnotation("=> true, target: notnull; => false, target: null")]
-        bool TryGetTarget(out object target);
+        bool TryGetTarget([MaybeNullWhen(returnValue: false)] out object target);
 
-        void Invoke([NotNull] object target);
+        void Invoke(object target);
+
+        void InvokeIfAlive();
     }
 
     public interface IWeakAction<in T>
     {
-        [ContractAnnotation("=> true, target: notnull; => false, target: null")]
-        bool TryGetTarget(out object target);
+        bool TryGetTarget([MaybeNullWhen(returnValue: false)] out object target);
 
-        void Invoke([NotNull] object target, [CanBeNull] T arg);
+        void Invoke(object target, T arg);
+
+        void InvokeIfAlive(T arg);
     }
 
     public interface IWeakAction<in T1, in T2>
     {
-        [ContractAnnotation("=> true, target: notnull; => false, target: null")]
-        bool TryGetTarget(out object target);
+        bool TryGetTarget([MaybeNullWhen(returnValue: false)] out object target);
 
-        void Invoke([NotNull] object target, [CanBeNull] T1 arg1, [CanBeNull] T2 arg2);
+        void Invoke(object target, T1 arg1, T2 arg2);
+
+        void InvokeIfAlive(T1 arg1, T2 arg2);
     }
 
     public interface IWeakAction<in T1, in T2, in T3>
     {
-        [ContractAnnotation("=> true, target: notnull; => false, target: null")]
-        bool TryGetTarget(out object target);
+        bool TryGetTarget([MaybeNullWhen(returnValue: false)] out object target);
 
-        void Invoke([NotNull] object target, [CanBeNull] T1 arg1, [CanBeNull] T2 arg2, [CanBeNull] T3 arg3);
+        void Invoke(object target, T1 arg1, T2 arg2, T3 arg3);
+
+        void InvokeIfAlive(T1 arg1, T2 arg2, T3 arg3);
     }
 
     public interface IWeakAction<in T1, in T2, in T3, in T4>
     {
-        [ContractAnnotation("=> true, target: notnull; => false, target: null")]
-        bool TryGetTarget(out object target);
+        bool TryGetTarget([MaybeNullWhen(returnValue: false)] out object target);
 
-        void Invoke([NotNull] object target, [CanBeNull] T1 arg1, [CanBeNull] T2 arg2, [CanBeNull] T3 arg3, [CanBeNull] T4 arg4);
+        void Invoke(object target, T1 arg1, T2 arg2, T3 arg3, T4 arg4);
+
+        void InvokeIfAlive(T1 arg1, T2 arg2, T3 arg3, T4 arg4);
     }
 
     public interface IWeakAction<in T1, in T2, in T3, in T4, in T5>
     {
-        [ContractAnnotation("=> true, target: notnull; => false, target: null")]
-        bool TryGetTarget(out object target);
+        bool TryGetTarget([MaybeNullWhen(returnValue: false)] out object target);
 
-        void Invoke([NotNull] object target, [CanBeNull] T1 arg1, [CanBeNull] T2 arg2, [CanBeNull] T3 arg3, [CanBeNull] T4 arg4, [CanBeNull] T5 arg5);
+        void Invoke(object target, T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5);
+
+        void InvokeIfAlive(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5);
     }
 }
