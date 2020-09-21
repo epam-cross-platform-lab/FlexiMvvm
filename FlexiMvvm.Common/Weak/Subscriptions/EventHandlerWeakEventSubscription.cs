@@ -15,27 +15,29 @@
 // =========================================================================
 
 using System;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Weak.Subscriptions
 {
-    public sealed class EventHandlerWeakEventSubscription<TEventSource> : WeakEventSubscription<TEventSource>
+    public sealed class EventHandlerWeakEventSubscription<TEventSource, TEventArgs> : WeakEventSubscription<TEventSource, TEventArgs>
         where TEventSource : class
     {
-        [NotNull]
-        private readonly Action<TEventSource, EventHandler> _subscribeToEvent;
-        [NotNull]
-        private readonly Action<TEventSource, EventHandler> _unsubscribeFromEvent;
+        private readonly Action<TEventSource, EventHandler<TEventArgs>> _subscribeToEvent;
+        private readonly Action<TEventSource, EventHandler<TEventArgs>> _unsubscribeFromEvent;
 
         public EventHandlerWeakEventSubscription(
-            [NotNull] TEventSource eventSource,
-            [NotNull] Action<TEventSource, EventHandler> subscribeToEvent,
-            [NotNull] Action<TEventSource, EventHandler> unsubscribeFromEvent,
-            [NotNull] EventHandler eventHandler)
+            TEventSource eventSource,
+            Action<TEventSource, EventHandler<TEventArgs>> subscribeToEvent,
+            Action<TEventSource, EventHandler<TEventArgs>> unsubscribeFromEvent,
+            EventHandler<TEventArgs> eventHandler)
             : base(eventSource, eventHandler)
         {
-            _subscribeToEvent = subscribeToEvent ?? throw new ArgumentNullException(nameof(subscribeToEvent));
-            _unsubscribeFromEvent = unsubscribeFromEvent ?? throw new ArgumentNullException(nameof(unsubscribeFromEvent));
+            if (subscribeToEvent == null)
+                throw new ArgumentNullException(nameof(subscribeToEvent));
+            if (unsubscribeFromEvent == null)
+                throw new ArgumentNullException(nameof(unsubscribeFromEvent));
+
+            _subscribeToEvent = subscribeToEvent;
+            _unsubscribeFromEvent = unsubscribeFromEvent;
 
             SubscribeToEvent();
         }
@@ -57,23 +59,26 @@ namespace FlexiMvvm.Weak.Subscriptions
         }
     }
 
-    public sealed class EventHandlerWeakEventSubscription<TEventSource, TEventArgs> : WeakEventSubscription<TEventSource, TEventArgs>
+    public sealed class EventHandlerWeakEventSubscription<TEventSource> : WeakEventSubscription<TEventSource>
         where TEventSource : class
     {
-        [NotNull]
-        private readonly Action<TEventSource, EventHandler<TEventArgs>> _subscribeToEvent;
-        [NotNull]
-        private readonly Action<TEventSource, EventHandler<TEventArgs>> _unsubscribeFromEvent;
+        private readonly Action<TEventSource, EventHandler> _subscribeToEvent;
+        private readonly Action<TEventSource, EventHandler> _unsubscribeFromEvent;
 
         public EventHandlerWeakEventSubscription(
-            [NotNull] TEventSource eventSource,
-            [NotNull] Action<TEventSource, EventHandler<TEventArgs>> subscribeToEvent,
-            [NotNull] Action<TEventSource, EventHandler<TEventArgs>> unsubscribeFromEvent,
-            [NotNull] EventHandler<TEventArgs> eventHandler)
+            TEventSource eventSource,
+            Action<TEventSource, EventHandler> subscribeToEvent,
+            Action<TEventSource, EventHandler> unsubscribeFromEvent,
+            EventHandler eventHandler)
             : base(eventSource, eventHandler)
         {
-            _subscribeToEvent = subscribeToEvent ?? throw new ArgumentNullException(nameof(subscribeToEvent));
-            _unsubscribeFromEvent = unsubscribeFromEvent ?? throw new ArgumentNullException(nameof(unsubscribeFromEvent));
+            if (subscribeToEvent == null)
+                throw new ArgumentNullException(nameof(subscribeToEvent));
+            if (unsubscribeFromEvent == null)
+                throw new ArgumentNullException(nameof(unsubscribeFromEvent));
+
+            _subscribeToEvent = subscribeToEvent;
+            _unsubscribeFromEvent = unsubscribeFromEvent;
 
             SubscribeToEvent();
         }

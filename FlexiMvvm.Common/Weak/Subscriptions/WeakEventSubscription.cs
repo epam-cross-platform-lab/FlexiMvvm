@@ -16,32 +16,23 @@
 
 using System;
 using FlexiMvvm.Weak.Delegates;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Weak.Subscriptions
 {
     public abstract class WeakEventSubscription<TEventSource, TEventArgs> : IDisposable
         where TEventSource : class
     {
-        [NotNull]
         private readonly WeakReference<TEventSource> _eventSourceWeakReference;
-        [CanBeNull]
         private readonly WeakEventHandler<TEventArgs> _weakEventHandler;
 
-        private protected WeakEventSubscription([NotNull] TEventSource eventSource)
+        protected WeakEventSubscription(TEventSource eventSource, EventHandler<TEventArgs> eventHandler)
         {
             if (eventSource == null)
                 throw new ArgumentNullException(nameof(eventSource));
-
-            _eventSourceWeakReference = new WeakReference<TEventSource>(eventSource);
-        }
-
-        protected WeakEventSubscription([NotNull] TEventSource eventSource, [NotNull] EventHandler<TEventArgs> eventHandler)
-            : this(eventSource)
-        {
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
+            _eventSourceWeakReference = new WeakReference<TEventSource>(eventSource);
             _weakEventHandler = new WeakEventHandler<TEventArgs>(eventHandler);
         }
 
@@ -53,7 +44,7 @@ namespace FlexiMvvm.Weak.Subscriptions
             }
         }
 
-        protected abstract void SubscribeToEvent([NotNull] TEventSource eventSource);
+        protected abstract void SubscribeToEvent(TEventSource eventSource);
 
         protected void UnsubscribeFromEvent()
         {
@@ -63,18 +54,13 @@ namespace FlexiMvvm.Weak.Subscriptions
             }
         }
 
-        protected abstract void UnsubscribeFromEvent([NotNull] TEventSource eventSource);
+        protected abstract void UnsubscribeFromEvent(TEventSource eventSource);
 
-        private protected virtual bool TryInvokeEventHandler([NotNull] object sender, [NotNull] TEventArgs e)
+        private bool TryInvokeEventHandler(object sender, TEventArgs args)
         {
-            if (sender == null)
-                throw new ArgumentNullException(nameof(sender));
-            if (e == null)
-                throw new ArgumentNullException(nameof(e));
-
-            if (_weakEventHandler.NotNull().TryGetTarget(out var target))
+            if (_weakEventHandler.TryGetTarget(out var target))
             {
-                _weakEventHandler.Invoke(target, sender, e);
+                _weakEventHandler.Invoke(target, sender, args);
 
                 return true;
             }
@@ -82,14 +68,14 @@ namespace FlexiMvvm.Weak.Subscriptions
             return false;
         }
 
-        protected void OnSourceEvent([NotNull] object sender, [NotNull] TEventArgs e)
+        protected void OnSourceEvent(object sender, TEventArgs args)
         {
             if (sender == null)
                 throw new ArgumentNullException(nameof(sender));
-            if (e == null)
-                throw new ArgumentNullException(nameof(e));
+            if (args == null)
+                throw new ArgumentNullException(nameof(args));
 
-            if (!TryInvokeEventHandler(sender, e))
+            if (!TryInvokeEventHandler(sender, args))
             {
                 UnsubscribeFromEvent();
             }
@@ -110,36 +96,80 @@ namespace FlexiMvvm.Weak.Subscriptions
         }
     }
 
-    public abstract class WeakEventSubscription<TEventSource> : WeakEventSubscription<TEventSource, EventArgs>
+    public abstract class WeakEventSubscription<TEventSource> : IDisposable
         where TEventSource : class
     {
-        [NotNull]
+        private readonly WeakReference<TEventSource> _eventSourceWeakReference;
         private readonly WeakEventHandler _weakEventHandler;
 
-        protected WeakEventSubscription([NotNull] TEventSource eventSource, [NotNull] EventHandler eventHandler)
-            : base(eventSource)
+        protected WeakEventSubscription(TEventSource eventSource, EventHandler eventHandler)
         {
+            if (eventSource == null)
+                throw new ArgumentNullException(nameof(eventSource));
             if (eventHandler == null)
                 throw new ArgumentNullException(nameof(eventHandler));
 
+            _eventSourceWeakReference = new WeakReference<TEventSource>(eventSource);
             _weakEventHandler = new WeakEventHandler(eventHandler);
         }
 
-        private protected override bool TryInvokeEventHandler(object sender, EventArgs e)
+        protected void SubscribeToEvent()
         {
-            if (sender == null)
-                throw new ArgumentNullException(nameof(sender));
-            if (e == null)
-                throw new ArgumentNullException(nameof(e));
+            if (_eventSourceWeakReference.TryGetTarget(out var eventSource))
+            {
+                SubscribeToEvent(eventSource);
+            }
+        }
 
+        protected abstract void SubscribeToEvent(TEventSource eventSource);
+
+        protected void UnsubscribeFromEvent()
+        {
+            if (_eventSourceWeakReference.TryGetTarget(out var eventSource))
+            {
+                UnsubscribeFromEvent(eventSource);
+            }
+        }
+
+        protected abstract void UnsubscribeFromEvent(TEventSource eventSource);
+
+        private bool TryInvokeEventHandler(object sender, EventArgs args)
+        {
             if (_weakEventHandler.TryGetTarget(out var target))
             {
-                _weakEventHandler.Invoke(target, sender, e);
+                _weakEventHandler.Invoke(target, sender, args);
 
                 return true;
             }
 
             return false;
+        }
+
+        protected void OnSourceEvent(object sender, EventArgs args)
+        {
+            if (sender == null)
+                throw new ArgumentNullException(nameof(sender));
+            if (args == null)
+                throw new ArgumentNullException(nameof(args));
+
+            if (!TryInvokeEventHandler(sender, args))
+            {
+                UnsubscribeFromEvent();
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                UnsubscribeFromEvent();
+            }
         }
     }
 }
