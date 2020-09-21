@@ -26,20 +26,20 @@ namespace FlexiMvvm
     public abstract class ObservableObject : INotifyPropertyChanged
     {
         /// <inheritdoc />
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
         /// Sets the new <paramref name="value"/> if it was changed to the <paramref name="field"/> and
         /// raises <see cref="INotifyPropertyChanged.PropertyChanged"/> event with the <paramref name="propertyName"/> value.
-        /// <para><see cref="INotifyPropertyChanged.PropertyChanged"/> event won't be raised if it is suppressed by setting <c>false</c> for
-        /// <see cref="FlexiMvvmConfigExtensions.ShouldRaisePropertyChanged(FlexiMvvmConfig, bool)"/>.</para>
+        /// <para><see cref="INotifyPropertyChanged.PropertyChanged"/> event won't be raised if it is suppressed by setting <see langword="false"/>
+        /// for <see cref="FlexiMvvmConfigExtensions.ShouldRaisePropertyChanged(FlexiMvvmConfig, bool)"/>.</para>
         /// </summary>
         /// <typeparam name="T">The type of the value.</typeparam>
         /// <param name="field">The backing field for the value.</param>
         /// <param name="value">The new value.</param>
         /// <param name="propertyName">The property name to which set the value.</param>
-        /// <returns><c>true</c> if the new value was set; otherwise, <c>false</c>.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="propertyName"/> is <c>null</c>.</exception>
+        /// <returns><see langword="true"/> if the new value was set; otherwise, <see langword="false"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="propertyName"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException"><paramref name="propertyName"/> is a zero-length string or whitespace.</exception>
         protected bool SetValue<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
         {
@@ -48,7 +48,7 @@ namespace FlexiMvvm
             if (string.IsNullOrWhiteSpace(propertyName))
                 throw new ArgumentException("Value cannot be a zero-length string or whitespace.", nameof(propertyName));
 
-            if (!EqualityComparer<T>.Default.NotNull().Equals(field, value))
+            if (!EqualityComparer<T>.Default.Equals(field, value))
             {
                 field = value;
 
@@ -67,7 +67,7 @@ namespace FlexiMvvm
         /// Raises <see cref="INotifyPropertyChanged.PropertyChanged"/> event with <paramref name="propertyName"/> value.
         /// </summary>
         /// <param name="propertyName">The property name which value was changed.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="propertyName"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="propertyName"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException"><paramref name="propertyName"/> is a zero-length string or whitespace.</exception>
         protected void RaisePropertyChanged([CallerMemberName] string? propertyName = null)
         {
