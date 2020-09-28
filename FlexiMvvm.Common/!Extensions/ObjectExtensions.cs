@@ -14,15 +14,30 @@
 // limitations under the License.
 // =========================================================================
 
-using System;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlexiMvvm.Exceptions;
+using FlexiMvvm.Formatters;
 
 namespace FlexiMvvm
 {
-    public class AssertionException : Exception
+    public static class ObjectExtensions
     {
-        public AssertionException(string message)
-            : base(message)
+        [DebuggerStepThrough]
+        [return: NotNull]
+        public static T NotNull<T>(
+            [AllowNull] this T value,
+            [CallerMemberName] string? memberName = null,
+            [CallerFilePath] string? filePath = null,
+            [CallerLineNumber] int lineNumber = 0)
         {
+            if (value != null)
+            {
+                return value;
+            }
+
+            throw new AssertionException($"Value of type '{TypeFormatter.FormatName<T>()}' is null at {memberName}, {filePath}:{lineNumber}");
         }
     }
 }
