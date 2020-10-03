@@ -16,11 +16,17 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FlexiMvvm
 {
     public static class EnumerableExtensions
     {
+        public static IEnumerable<T> SelfOrEmpty<T>(this IEnumerable<T>? source)
+        {
+            return source ?? Enumerable.Empty<T>();
+        }
+
         public static IEnumerable<T> DistinctBy<T, TKey>(this IEnumerable<T> source, Func<T, TKey> keySelector)
         {
             if (source == null)
