@@ -53,9 +53,9 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public class StyledScrollableLayoutView<TTheme, TParameters> : LayoutViewBase<TParameters>
+    public class StylizedScrollableLayoutView<TTheme, TParameters> : LayoutViewBase<TParameters>
     {
-        public StyledScrollableLayoutView(TTheme theme, TParameters parameters)
+        public StylizedScrollableLayoutView(TTheme theme, TParameters parameters)
             : base(parameters)
         {
             Theme = theme;
@@ -63,7 +63,7 @@ namespace FlexiMvvm.Views
             Initialize();
         }
 
-        public StyledScrollableLayoutView(TTheme theme, TParameters parameters, CGRect frame)
+        public StylizedScrollableLayoutView(TTheme theme, TParameters parameters, CGRect frame)
             : base(parameters, frame)
         {
             Theme = theme;

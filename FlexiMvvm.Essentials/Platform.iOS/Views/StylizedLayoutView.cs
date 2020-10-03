@@ -50,9 +50,9 @@ namespace FlexiMvvm.Views
         }
     }
 
-    public class StyledLayoutView<TTheme, TParameters> : LayoutViewBase<TParameters>
+    public class StylizedLayoutView<TTheme, TParameters> : LayoutViewBase<TParameters>
     {
-        public StyledLayoutView(TTheme theme, TParameters parameters)
+        public StylizedLayoutView(TTheme theme, TParameters parameters)
             : base(parameters)
         {
             Theme = theme;
@@ -60,7 +60,7 @@ namespace FlexiMvvm.Views
             Initialize();
         }
 
-        public StyledLayoutView(TTheme theme, TParameters parameters, CGRect frame)
+        public StylizedLayoutView(TTheme theme, TParameters parameters, CGRect frame)
             : base(parameters, frame)
         {
             Theme = theme;
