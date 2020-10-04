@@ -20,31 +20,32 @@ using System.Collections.Specialized;
 using System.Linq;
 using FlexiMvvm.Collections.Core;
 using Foundation;
-using JetBrains.Annotations;
+using Microsoft.Extensions.Logging;
 using UIKit;
 
 namespace FlexiMvvm.Collections
 {
     public class CollectionViewObservableGroupedSource : CollectionViewObservableSource
     {
-        [CanBeNull]
-        private readonly Func<object, UICollectionElementKindSection, string> _sectionHeaderFooterCellReuseIdFactory;
-        [CanBeNull]
-        [ItemCanBeNull]
-        private IEnumerable<IGrouping<object, object>> _groupedItems;
+        private readonly Func<object?, UICollectionElementKindSection, string>? _sectionHeaderFooterCellReuseIdentifierFactory;
+        private IEnumerable<IGrouping<object?, object?>?>? _groupedItems;
 
-        public CollectionViewObservableGroupedSource(
-            [NotNull] UICollectionView collectionView,
-            [NotNull] Func<object, string> itemCellReuseIdFactory,
-            [CanBeNull] Func<object, UICollectionElementKindSection, string> sectionHeaderFooterCellReuseIdFactory = null)
-            : base(collectionView, itemCellReuseIdFactory)
+        public CollectionViewObservableGroupedSource(UICollectionView collectionView)
+            : base(collectionView)
         {
-            _sectionHeaderFooterCellReuseIdFactory = sectionHeaderFooterCellReuseIdFactory;
         }
 
-        [CanBeNull]
-        [ItemCanBeNull]
-        public IEnumerable<IGrouping<object, object>> GroupedItems
+        [Obsolete("CollectionViewObservableGroupedSource(UICollectionView collectionView, Func<object?, string> itemCellReuseIdentifierFactory, Func<object?, UICollectionElementKindSection, string> ? sectionHeaderFooterCellReuseIdentifierFactory = null) will be removed soon. Use CollectionViewObservableGroupedSource(UICollectionView collectionView) constructor instead.")]
+        public CollectionViewObservableGroupedSource(
+            UICollectionView collectionView,
+            Func<object?, string> itemCellReuseIdentifierFactory,
+            Func<object?, UICollectionElementKindSection, string>? sectionHeaderFooterCellReuseIdentifierFactory = null)
+            : base(collectionView, itemCellReuseIdentifierFactory)
+        {
+            _sectionHeaderFooterCellReuseIdentifierFactory = sectionHeaderFooterCellReuseIdentifierFactory;
+        }
+
+        public IEnumerable<IGrouping<object?, object?>?>? GroupedItems
         {
             get => _groupedItems;
             set
@@ -59,62 +60,92 @@ namespace FlexiMvvm.Collections
             }
         }
 
-        public override nint NumberOfSections([NotNull] UICollectionView collectionView)
+        public override nint NumberOfSections(UICollectionView collectionView)
         {
             return GroupedItems?.Count() ?? 0;
         }
 
-        public override nint GetItemsCount([NotNull] UICollectionView collectionView, nint section)
+        public override nint GetItemsCount(UICollectionView collectionView, nint section)
         {
             return GroupedItems != null ? GetItemsGroup(section)?.Count() ?? 0 : 0;
         }
 
-        [NotNull]
-        public override UICollectionReusableView GetViewForSupplementaryElement(
-            [NotNull] UICollectionView collectionView,
-            [NotNull] NSString elementKind,
-            [NotNull] NSIndexPath indexPath)
+        public sealed override UICollectionReusableView GetViewForSupplementaryElement(
+            UICollectionView collectionView,
+            NSString elementKind,
+            NSIndexPath indexPath)
         {
-            if (_sectionHeaderFooterCellReuseIdFactory == null)
-            {
-                throw new InvalidOperationException(
-                    "\"sectionHeaderFooterCellReuseIdFactory\" constructor parameter should be specified " +
-                    "in order to create a view for header or footer.");
-            }
+            var elementKindSection = GetElementKindSection(elementKind);
 
-            var itemsGroup = GetItemsGroup(indexPath.Section);
-            var group = itemsGroup?.Key;
-            var sectionHeaderFooterCellReuseId = _sectionHeaderFooterCellReuseIdFactory(group, GetElementKindSection(elementKind));
-            var sectionHeaderFooterCell = (CollectionViewObservableSectionHeaderFooterCell)collectionView.DequeueReusableSupplementaryView(
-                elementKind,
-                sectionHeaderFooterCellReuseId,
-                indexPath).NotNull();
-
-            sectionHeaderFooterCell.Bind(ItemsContext, group);
-
-            return sectionHeaderFooterCell;
+            return GetSectionHeaderFooterCell(collectionView, elementKindSection, indexPath);
         }
 
-        [CanBeNull]
-        protected virtual IGrouping<object, object> GetItemsGroup(nint section)
+        public virtual string GetSectionHeaderFooterCellReuseIdentifier(object? group, UICollectionElementKindSection elementKindSection)
+        {
+            var reuseIdentifier = (_sectionHeaderFooterCellReuseIdentifierFactory?.Invoke(group, elementKindSection)).SelfOrEmpty();
+
+            if (string.IsNullOrEmpty(reuseIdentifier))
+            {
+                Logger.LogDebug(
+                    $"Section header footer cell reuse identifier factory is 'null' or returned empty/null reuse identifier for " +
+                    $"'{elementKindSection}' element kind section. Use '{nameof(CollectionViewObservableSectionHeaderFooterCell)}' as fallback cell.");
+
+                reuseIdentifier = CollectionViewObservableSectionHeaderFooterCell.ReuseIdentifier;
+            }
+
+            return reuseIdentifier;
+        }
+
+        public virtual UICollectionReusableView GetSectionHeaderFooterCell(
+            UICollectionView collectionView,
+            UICollectionElementKindSection elementKindSection,
+            NSIndexPath indexPath)
+        {
+            var itemsGroup = GetItemsGroup(indexPath.Section);
+            var group = itemsGroup?.Key;
+            var cellReuseIdentifier = GetSectionHeaderFooterCellReuseIdentifier(group, elementKindSection);
+            var cell = (CollectionViewObservableSectionHeaderFooterCell)collectionView.DequeueReusableSupplementaryView(
+                elementKindSection,
+                cellReuseIdentifier,
+                indexPath);
+
+            cell.Initialize(CellsSharedData);
+            PrepareSectionHeaderFooterCell(collectionView, cell, elementKindSection, indexPath);
+            cell.Bind(ItemsContext, null);
+
+            return cell;
+        }
+
+        public virtual void PrepareSectionHeaderFooterCell(
+            UICollectionView collectionView,
+            CollectionViewObservableSectionHeaderFooterCell cell,
+            UICollectionElementKindSection elementKindSection,
+            NSIndexPath indexPath)
+        {
+        }
+
+        protected virtual IGrouping<object?, object?>? GetItemsGroup(nint section)
         {
             if (GroupedItems == null)
             {
                 throw new InvalidOperationException(
-                    $"Unable to get items group at \"{section}\" section due to \"{nameof(GroupedItems)}\" collection is null.");
+                    $"Unable to get items group at '{section}' section due to '{nameof(GroupedItems)}' collection is 'null'.");
             }
 
             return GroupedItems.ElementAt((int)section);
         }
 
-        protected override object GetItem(NSIndexPath indexPath)
+        protected override object? GetItem(NSIndexPath indexPath)
         {
+            if (indexPath == null)
+                throw new ArgumentNullException(nameof(indexPath));
+
             var itemsGroup = GetItemsGroup(indexPath.Section);
 
             if (itemsGroup == null)
             {
                 throw new InvalidOperationException(
-                    $"Unable to get item at \"{indexPath.Row}\" position due to items group at \"{indexPath.Section}\" section is null.");
+                    $"Unable to get item at '{indexPath.Row}' position due to items group at '{indexPath.Section}' section is 'null'.");
             }
 
             return itemsGroup.ElementAt(indexPath.Row);
@@ -128,7 +159,7 @@ namespace FlexiMvvm.Collections
             {
                 observableGroupedItems.CollectionChangedWeakSubscribe(GroupedItems_CollectionChanged).DisposeWith(ItemsSubscriptions);
 
-                foreach (var itemsGroup in GroupedItems.NotNull())
+                foreach (var itemsGroup in GroupedItems)
                 {
                     if (itemsGroup is INotifyCollectionChanged observableItemsGroup)
                     {
@@ -143,41 +174,38 @@ namespace FlexiMvvm.Collections
             if (args == null)
                 throw new ArgumentNullException(nameof(args));
 
-            if (CollectionViewWeakReference.TryGetTarget(out var collectionView))
+            switch (args.Action)
             {
-                switch (args.Action)
-                {
-                    case NotifyCollectionChangedAction.Add:
-                        collectionView.PerformBatchUpdates(() => collectionView.InsertSections(args.ToNewIndexSet()), null);
-                        break;
-                    case NotifyCollectionChangedAction.Move:
-                        collectionView.MoveSection(args.OldStartingIndex, args.NewStartingIndex);
-                        break;
-                    case NotifyCollectionChangedAction.Replace:
-                        collectionView.PerformBatchUpdates(() => collectionView.ReloadSections(args.ToNewIndexSet()), null);
-                        break;
-                    case NotifyCollectionChangedAction.Remove:
-                        collectionView.PerformBatchUpdates(() => collectionView.DeleteSections(args.ToOldIndexSet()), null);
-                        break;
-                    default:
-                        collectionView.ReloadData();
-                        break;
-                }
+                case NotifyCollectionChangedAction.Add:
+                    CollectionView.PerformBatchUpdates(() => CollectionView.InsertSections(args.ToNewIndexSet()), null);
+                    break;
+                case NotifyCollectionChangedAction.Move:
+                    CollectionView.MoveSection(args.OldStartingIndex, args.NewStartingIndex);
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    CollectionView.PerformBatchUpdates(() => CollectionView.ReloadSections(args.ToNewIndexSet()), null);
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    CollectionView.PerformBatchUpdates(() => CollectionView.DeleteSections(args.ToOldIndexSet()), null);
+                    break;
+                default:
+                    CollectionView.ReloadData();
+                    break;
             }
         }
 
-        private void GroupedItems_CollectionChanged([NotNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
+        private void GroupedItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             RefreshItemsSubscriptions();
             ReloadSections(e);
         }
 
-        private void ItemsGroup_CollectionChanged([NotNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
+        private void ItemsGroup_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             var changedItemsGroup = (IGrouping<object, object>)sender;
             var section = 0;
 
-            foreach (var itemsGroup in GroupedItems.NotNull())
+            foreach (var itemsGroup in GroupedItems)
             {
                 if (ReferenceEquals(itemsGroup, changedItemsGroup))
                 {

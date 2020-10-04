@@ -14,17 +14,10 @@
 // limitations under the License.
 // =========================================================================
 
-using System;
-
 namespace FlexiMvvm.Collections
 {
-    public class SelectionChangedEventArgs : EventArgs
+    public interface ICellsSharedReadOnlyData
     {
-        public SelectionChangedEventArgs(object? item)
-        {
-            Item = item;
-        }
-
-        public object? Item { get; }
+        T GetValue<T>(string key, T defaultValue = default);
     }
 }

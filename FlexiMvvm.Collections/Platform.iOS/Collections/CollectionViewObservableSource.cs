@@ -15,73 +15,110 @@
 // =========================================================================
 
 using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using FlexiMvvm.Collections.Core;
+using FlexiMvvm.Configuration;
 using Foundation;
-using JetBrains.Annotations;
+using Microsoft.Extensions.Logging;
 using UIKit;
 
 namespace FlexiMvvm.Collections
 {
     public abstract class CollectionViewObservableSource : UICollectionViewSource
     {
-        [NotNull]
-        private readonly Func<object, string> _itemCellReuseIdFactory;
-        [CanBeNull]
-        [ItemNotNull]
-        private DisposableCollection _itemsSubscriptions;
+        [Weak]
+        private readonly UICollectionView _collectionView;
+        private readonly Func<object?, string>? _itemCellReuseIdentifierFactory;
+        private ILogger? _logger;
+        private DisposableCollection? _itemsSubscriptions;
 
-        private protected CollectionViewObservableSource(
-            [NotNull] UICollectionView collectionView,
-            [NotNull] Func<object, string> itemCellReuseIdFactory)
+        private protected CollectionViewObservableSource(UICollectionView collectionView)
         {
             if (collectionView == null)
                 throw new ArgumentNullException(nameof(collectionView));
-            if (itemCellReuseIdFactory == null)
-                throw new ArgumentNullException(nameof(itemCellReuseIdFactory));
 
-            CollectionViewWeakReference = new WeakReference<UICollectionView>(collectionView);
-            _itemCellReuseIdFactory = itemCellReuseIdFactory;
+            _collectionView = collectionView;
+
+            _collectionView.RegisterClassForSupplementaryView(
+                typeof(CollectionViewObservableSectionHeaderFooterCell),
+                UICollectionElementKindSection.Header,
+                CollectionViewObservableSectionHeaderFooterCell.ReuseIdentifier);
+            _collectionView.RegisterClassForSupplementaryView(
+                typeof(CollectionViewObservableSectionHeaderFooterCell),
+                UICollectionElementKindSection.Footer,
+                CollectionViewObservableSectionHeaderFooterCell.ReuseIdentifier);
+            _collectionView.RegisterClassForCell(typeof(CollectionViewObservableItemCell), CollectionViewObservableItemCell.ReuseIdentifier);
         }
 
-        public event EventHandler<SelectionChangedEventArgs> ItemSelectedCalled;
+        [Obsolete]
+        private protected CollectionViewObservableSource(UICollectionView collectionView, Func<object?, string> itemCellReuseIdentifierFactory)
+            : this(collectionView)
+        {
+            if (itemCellReuseIdentifierFactory == null)
+                throw new ArgumentNullException(nameof(itemCellReuseIdentifierFactory));
 
-        public event EventHandler<SelectionChangedEventArgs> ItemDeselectedCalled;
+            _itemCellReuseIdentifierFactory = itemCellReuseIdentifierFactory;
+        }
 
-        [CanBeNull]
-        public object ItemsContext { get; set; }
+        public event EventHandler<SelectionChangedEventArgs>? ItemSelectedCalled;
 
-        [NotNull]
-        protected WeakReference<UICollectionView> CollectionViewWeakReference { get; }
+        public event EventHandler<SelectionChangedEventArgs>? ItemDeselectedCalled;
 
-        [NotNull]
-        [ItemNotNull]
-        private protected DisposableCollection ItemsSubscriptions => _itemsSubscriptions ?? (_itemsSubscriptions = new DisposableCollection());
+        private protected ILogger Logger => _logger ??= FlexiMvvmConfig.Instance.GetLoggerFactory().CreateLogger(GetType());
 
-        [NotNull]
-        public override UICollectionViewCell GetCell([NotNull] UICollectionView collectionView, [NotNull] NSIndexPath indexPath)
+        protected CellsSharedData CellsSharedData { get; } = new CellsSharedData();
+
+        public object? ItemsContext { get; set; }
+
+        protected UICollectionView CollectionView => _collectionView;
+
+        private protected DisposableCollection ItemsSubscriptions => _itemsSubscriptions ??= new DisposableCollection();
+
+        public virtual string GetCellReuseIdentifier(object? item)
+        {
+            var reuseIdentifier = (_itemCellReuseIdentifierFactory?.Invoke(item)).SelfOrEmpty();
+
+            if (string.IsNullOrEmpty(reuseIdentifier))
+            {
+                Logger.LogDebug(
+                    $"Item cell reuse identifier factory is 'null' or returned empty/null reuse identifier. " +
+                    $"Use '{nameof(CollectionViewObservableItemCell)}' as fallback cell.");
+
+                reuseIdentifier = CollectionViewObservableItemCell.ReuseIdentifier;
+            }
+
+            return reuseIdentifier;
+        }
+
+        public override UICollectionViewCell GetCell(UICollectionView collectionView, NSIndexPath indexPath)
         {
             var item = GetItem(indexPath);
-            var itemCellReuseId = _itemCellReuseIdFactory(item);
-            var itemCell = (CollectionViewObservableItemCell)collectionView.DequeueReusableCell(itemCellReuseId, indexPath).NotNull();
+            var cellReuseIdentifier = GetCellReuseIdentifier(item);
+            var cell = (CollectionViewObservableItemCell)collectionView.DequeueReusableCell(cellReuseIdentifier, indexPath);
 
-            itemCell.Bind(ItemsContext, item);
+            cell.Initialize(CellsSharedData);
+            PrepareCell(collectionView, cell, indexPath);
+            cell.Bind(ItemsContext, item);
 
-            return itemCell;
+            return cell;
         }
 
-        public override void ItemSelected([NotNull] UICollectionView collectionView, [NotNull] NSIndexPath indexPath)
+        public virtual void PrepareCell(UICollectionView collectionView, CollectionViewObservableItemCell cell, NSIndexPath indexPath)
+        {
+        }
+
+        public override void ItemSelected(UICollectionView collectionView, NSIndexPath indexPath)
         {
             ItemSelectedCalled?.Invoke(this, new SelectionChangedEventArgs(GetItem(indexPath)));
         }
 
-        public override void ItemDeselected([NotNull] UICollectionView collectionView, [NotNull] NSIndexPath indexPath)
+        public override void ItemDeselected(UICollectionView collectionView, NSIndexPath indexPath)
         {
             ItemDeselectedCalled?.Invoke(this, new SelectionChangedEventArgs(GetItem(indexPath)));
         }
 
-        [CanBeNull]
-        protected abstract object GetItem([NotNull] NSIndexPath indexPath);
+        protected abstract object? GetItem(NSIndexPath indexPath);
 
         private protected virtual void RefreshItemsSubscriptions()
         {
@@ -89,37 +126,34 @@ namespace FlexiMvvm.Collections
             _itemsSubscriptions = new DisposableCollection();
         }
 
-        protected abstract void ReloadSections([NotNull] NotifyCollectionChangedEventArgs args);
+        protected abstract void ReloadSections(NotifyCollectionChangedEventArgs args);
 
-        protected virtual void ReloadSection(nint section, [NotNull] NotifyCollectionChangedEventArgs args)
+        protected virtual void ReloadSection(nint section, NotifyCollectionChangedEventArgs args)
         {
             if (args == null)
                 throw new ArgumentNullException(nameof(args));
 
-            if (CollectionViewWeakReference.TryGetTarget(out var collectionView))
+            switch (args.Action)
             {
-                switch (args.Action)
-                {
-                    case NotifyCollectionChangedAction.Add:
-                        collectionView.PerformBatchUpdates(() => collectionView.InsertItems(args.ToNewIndexPaths(section)), null);
-                        break;
-                    case NotifyCollectionChangedAction.Move:
-                        collectionView.MoveItem(args.ToOldIndexPath(section), args.ToNewIndexPath(section));
-                        break;
-                    case NotifyCollectionChangedAction.Replace:
-                        collectionView.PerformBatchUpdates(() => collectionView.ReloadItems(args.ToNewIndexPaths(section)), null);
-                        break;
-                    case NotifyCollectionChangedAction.Remove:
-                        collectionView.PerformBatchUpdates(() => collectionView.DeleteItems(args.ToOldIndexPaths(section)), null);
-                        break;
-                    default:
-                        collectionView.ReloadSections(NSIndexSet.FromIndex(section));
-                        break;
-                }
+                case NotifyCollectionChangedAction.Add:
+                    CollectionView.PerformBatchUpdates(() => CollectionView.InsertItems(args.ToNewIndexPaths(section)), null);
+                    break;
+                case NotifyCollectionChangedAction.Move:
+                    CollectionView.MoveItem(args.ToOldIndexPath(section), args.ToNewIndexPath(section));
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    CollectionView.PerformBatchUpdates(() => CollectionView.ReloadItems(args.ToNewIndexPaths(section)), null);
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    CollectionView.PerformBatchUpdates(() => CollectionView.DeleteItems(args.ToOldIndexPaths(section)), null);
+                    break;
+                default:
+                    CollectionView.ReloadSections(NSIndexSet.FromIndex(section));
+                    break;
             }
         }
 
-        private protected UICollectionElementKindSection GetElementKindSection([NotNull] NSString elementKind)
+        private protected UICollectionElementKindSection GetElementKindSection(NSString elementKind)
         {
             if (elementKind == UICollectionElementKindSectionKey.Header)
             {
@@ -131,7 +165,7 @@ namespace FlexiMvvm.Collections
                 return UICollectionElementKindSection.Footer;
             }
 
-            throw new ArgumentException($"\"{elementKind}\" element kind section is unknown.");
+            throw new ArgumentException($"'{elementKind}' element kind section is unknown.");
         }
     }
 }

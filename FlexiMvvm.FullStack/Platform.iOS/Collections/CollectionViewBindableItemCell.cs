@@ -18,7 +18,6 @@ using System;
 using CoreGraphics;
 using FlexiMvvm.Bindings;
 using Foundation;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Collections
 {
@@ -26,10 +25,8 @@ namespace FlexiMvvm.Collections
         where TItemsContext : class
         where TItem : class
     {
-        [CanBeNull]
-        private BindingSet<TItemsContext> _itemsContextBindingSet;
-        [CanBeNull]
-        private BindingSet<TItem> _itemBindingSet;
+        private BindingSet<TItemsContext?>? _itemsContextBindingSet;
+        private BindingSet<TItem?>? _itemBindingSet;
 
         public CollectionViewBindableItemCell()
         {
@@ -55,29 +52,29 @@ namespace FlexiMvvm.Collections
         {
         }
 
-        public override void Bind(TItemsContext itemsContext)
+        public override void Bind(TItemsContext? itemsContext)
         {
             base.Bind(itemsContext);
 
             if (_itemsContextBindingSet == null)
             {
-                _itemsContextBindingSet = new BindingSet<TItemsContext>(itemsContext);
+                _itemsContextBindingSet = new BindingSet<TItemsContext?>(itemsContext);
                 Bind(_itemsContextBindingSet);
                 _itemsContextBindingSet.Apply();
             }
         }
 
-        public virtual void Bind([NotNull] BindingSet<TItemsContext> bindingSet)
+        public virtual void Bind(BindingSet<TItemsContext?> bindingSet)
         {
         }
 
-        public override void Bind(TItem item)
+        public override void Bind(TItem? item)
         {
             base.Bind(item);
 
             if (_itemBindingSet == null)
             {
-                _itemBindingSet = new BindingSet<TItem>(item);
+                _itemBindingSet = new BindingSet<TItem?>(item);
                 Bind(_itemBindingSet);
                 _itemBindingSet.Apply();
             }
@@ -87,7 +84,7 @@ namespace FlexiMvvm.Collections
             }
         }
 
-        public virtual void Bind([NotNull] BindingSet<TItem> bindingSet)
+        public virtual void Bind(BindingSet<TItem?> bindingSet)
         {
         }
     }

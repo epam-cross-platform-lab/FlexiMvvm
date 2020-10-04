@@ -19,34 +19,35 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using Foundation;
-using JetBrains.Annotations;
+using Microsoft.Extensions.Logging;
 using UIKit;
 
 namespace FlexiMvvm.Collections
 {
-    public class CollectionViewObservablePlainSource : CollectionViewObservableSource, IItemsSource<object>
+    public class CollectionViewObservablePlainSource : CollectionViewObservableSource, IItemsSource<object?>
     {
         protected const int DefaultSection = 0;
         protected const int DefaultSectionCount = 1;
 
-        [CanBeNull]
-        private readonly Func<UICollectionElementKindSection, string> _sectionHeaderFooterCellReuseIdFactory;
-        [CanBeNull]
-        [ItemCanBeNull]
-        private IEnumerable<object>? _items;
+        private readonly Func<UICollectionElementKindSection, string>? _sectionHeaderFooterCellReuseIdentifierFactory;
+        private IEnumerable<object?>? _items;
 
-        public CollectionViewObservablePlainSource(
-            [NotNull] UICollectionView collectionView,
-            [NotNull] Func<object, string> itemCellReuseIdFactory,
-            [CanBeNull] Func<UICollectionElementKindSection, string> sectionHeaderFooterCellReuseIdFactory = null)
-            : base(collectionView, itemCellReuseIdFactory)
+        public CollectionViewObservablePlainSource(UICollectionView collectionView)
+            : base(collectionView)
         {
-            _sectionHeaderFooterCellReuseIdFactory = sectionHeaderFooterCellReuseIdFactory;
         }
 
-        [CanBeNull]
-        [ItemCanBeNull]
-        public IEnumerable<object>? Items
+        [Obsolete("CollectionViewObservablePlainSource(UICollectionView collectionView, Func<object?, string> itemCellReuseIdentifierFactory, Func<UICollectionElementKindSection, string>? sectionHeaderFooterCellReuseIdentifierFactory = null) will be removed soon. Use CollectionViewObservablePlainSource(UICollectionView collectionView) constructor instead.")]
+        public CollectionViewObservablePlainSource(
+            UICollectionView collectionView,
+            Func<object?, string> itemCellReuseIdentifierFactory,
+            Func<UICollectionElementKindSection, string>? sectionHeaderFooterCellReuseIdentifierFactory = null)
+            : base(collectionView, itemCellReuseIdentifierFactory)
+        {
+            _sectionHeaderFooterCellReuseIdentifierFactory = sectionHeaderFooterCellReuseIdentifierFactory;
+        }
+
+        public IEnumerable<object?>? Items
         {
             get => _items;
             set
@@ -61,52 +62,83 @@ namespace FlexiMvvm.Collections
             }
         }
 
-        public override nint NumberOfSections([NotNull] UICollectionView collectionView)
+        public override nint NumberOfSections(UICollectionView collectionView)
         {
             return DefaultSectionCount;
         }
 
-        public override nint GetItemsCount([NotNull] UICollectionView collectionView, nint section)
+        public override nint GetItemsCount(UICollectionView collectionView, nint section)
         {
             return section == DefaultSection && Items != null ? Items.Count() : 0;
         }
 
-        [NotNull]
-        public override UICollectionReusableView GetViewForSupplementaryElement(
-            [NotNull] UICollectionView collectionView,
-            [NotNull] NSString elementKind,
-            [NotNull] NSIndexPath indexPath)
+        public sealed override UICollectionReusableView GetViewForSupplementaryElement(
+            UICollectionView collectionView,
+            NSString elementKind,
+            NSIndexPath indexPath)
         {
-            if (_sectionHeaderFooterCellReuseIdFactory == null)
-            {
-                throw new InvalidOperationException(
-                    "\"sectionHeaderFooterCellReuseIdFactory\" constructor parameter should be specified " +
-                    "in order to create a view for section header or footer.");
-            }
+            var elementKindSection = GetElementKindSection(elementKind);
 
-            var sectionHeaderFooterCellReuseId = _sectionHeaderFooterCellReuseIdFactory(GetElementKindSection(elementKind));
-            var sectionHeaderFooterCell = (CollectionViewObservableSectionHeaderFooterCell)collectionView.DequeueReusableSupplementaryView(
-                elementKind,
-                sectionHeaderFooterCellReuseId,
-                indexPath).NotNull();
-
-            sectionHeaderFooterCell.Bind(ItemsContext, null);
-
-            return sectionHeaderFooterCell;
+            return GetSectionHeaderFooterCell(collectionView, elementKindSection, indexPath);
         }
 
-        protected override object GetItem(NSIndexPath indexPath)
+        public virtual string GetSectionHeaderFooterCellReuseIdentifier(UICollectionElementKindSection elementKindSection)
         {
+            var reuseIdentifier = (_sectionHeaderFooterCellReuseIdentifierFactory?.Invoke(elementKindSection)).SelfOrEmpty();
+
+            if (string.IsNullOrEmpty(reuseIdentifier))
+            {
+                Logger.LogDebug(
+                    $"Section header footer cell reuse identifier factory is 'null' or returned empty/null reuse identifier for " +
+                    $"'{elementKindSection}' element kind section. Use '{nameof(CollectionViewObservableSectionHeaderFooterCell)}' as fallback cell.");
+
+                reuseIdentifier = CollectionViewObservableSectionHeaderFooterCell.ReuseIdentifier;
+            }
+
+            return reuseIdentifier;
+        }
+
+        public virtual UICollectionReusableView GetSectionHeaderFooterCell(
+            UICollectionView collectionView,
+            UICollectionElementKindSection elementKindSection,
+            NSIndexPath indexPath)
+        {
+            var cellReuseIdentifier = GetSectionHeaderFooterCellReuseIdentifier(elementKindSection);
+            var cell = (CollectionViewObservableSectionHeaderFooterCell)collectionView.DequeueReusableSupplementaryView(
+                elementKindSection,
+                cellReuseIdentifier,
+                indexPath);
+
+            cell.Initialize(CellsSharedData);
+            PrepareSectionHeaderFooterCell(collectionView, cell, elementKindSection, indexPath);
+            cell.Bind(ItemsContext, null);
+
+            return cell;
+        }
+
+        public virtual void PrepareSectionHeaderFooterCell(
+            UICollectionView collectionView,
+            CollectionViewObservableSectionHeaderFooterCell cell,
+            UICollectionElementKindSection elementKindSection,
+            NSIndexPath indexPath)
+        {
+        }
+
+        protected override object? GetItem(NSIndexPath indexPath)
+        {
+            if (indexPath == null)
+                throw new ArgumentNullException(nameof(indexPath));
+
             if (indexPath.Section != DefaultSection)
             {
                 throw new InvalidOperationException(
-                    $"Unable to get item for \"{indexPath.Section}\" section. Only \"{DefaultSection}\" section is supported.");
+                    $"Unable to get item for '{indexPath.Section}' section. Only '{DefaultSection}' section is supported.");
             }
 
             if (Items == null)
             {
                 throw new InvalidOperationException(
-                    $"Unable to get item at \"{indexPath.Row}\" position due to \"{nameof(Items)}\" collection is null.");
+                    $"Unable to get item at '{indexPath.Row}' position due to '{nameof(Items)}' collection is null.");
             }
 
             return Items.ElementAt(indexPath.Row);
@@ -127,13 +159,10 @@ namespace FlexiMvvm.Collections
             if (args == null)
                 throw new ArgumentNullException(nameof(args));
 
-            if (CollectionViewWeakReference.TryGetTarget(out var collectionView))
-            {
-                collectionView.ReloadData();
-            }
+            CollectionView.ReloadData();
         }
 
-        private void Items_CollectionChanged([NotNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
+        private void Items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             ReloadSection(DefaultSection, e);
         }

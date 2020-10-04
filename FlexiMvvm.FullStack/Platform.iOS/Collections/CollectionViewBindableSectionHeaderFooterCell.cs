@@ -18,15 +18,13 @@ using System;
 using CoreGraphics;
 using FlexiMvvm.Bindings;
 using Foundation;
-using JetBrains.Annotations;
 
 namespace FlexiMvvm.Collections
 {
     public class CollectionViewBindableSectionHeaderFooterCell<TItemsContext> : CollectionViewObservableSectionHeaderFooterCell<TItemsContext>
         where TItemsContext : class
     {
-        [CanBeNull]
-        private BindingSet<TItemsContext> _itemsContextBindingSet;
+        private BindingSet<TItemsContext?>? _itemsContextBindingSet;
 
         public CollectionViewBindableSectionHeaderFooterCell()
         {
@@ -52,19 +50,19 @@ namespace FlexiMvvm.Collections
         {
         }
 
-        public override void Bind(TItemsContext itemsContext)
+        public override void Bind(TItemsContext? itemsContext)
         {
             base.Bind(itemsContext);
 
             if (_itemsContextBindingSet == null)
             {
-                _itemsContextBindingSet = new BindingSet<TItemsContext>(itemsContext);
+                _itemsContextBindingSet = new BindingSet<TItemsContext?>(itemsContext);
                 Bind(_itemsContextBindingSet);
                 _itemsContextBindingSet.Apply();
             }
         }
 
-        public virtual void Bind([NotNull] BindingSet<TItemsContext> bindingSet)
+        public virtual void Bind(BindingSet<TItemsContext?> bindingSet)
         {
         }
     }
@@ -73,10 +71,8 @@ namespace FlexiMvvm.Collections
         where TItemsContext : class
         where TGroup : class
     {
-        [CanBeNull]
-        private BindingSet<TItemsContext> _itemsContextBindingSet;
-        [CanBeNull]
-        private BindingSet<TGroup> _groupBindingSet;
+        private BindingSet<TItemsContext?>? _itemsContextBindingSet;
+        private BindingSet<TGroup?>? _groupBindingSet;
 
         public CollectionViewBindableSectionHeaderFooterCell()
         {
@@ -102,29 +98,29 @@ namespace FlexiMvvm.Collections
         {
         }
 
-        public override void Bind(TItemsContext itemsContext)
+        public override void Bind(TItemsContext? itemsContext)
         {
             base.Bind(itemsContext);
 
             if (_itemsContextBindingSet == null)
             {
-                _itemsContextBindingSet = new BindingSet<TItemsContext>(itemsContext);
+                _itemsContextBindingSet = new BindingSet<TItemsContext?>(itemsContext);
                 Bind(_itemsContextBindingSet);
                 _itemsContextBindingSet.Apply();
             }
         }
 
-        public virtual void Bind([NotNull] BindingSet<TItemsContext> bindingSet)
+        public virtual void Bind(BindingSet<TItemsContext?> bindingSet)
         {
         }
 
-        public override void Bind(TGroup group)
+        public override void Bind(TGroup? group)
         {
             base.Bind(group);
 
             if (_groupBindingSet == null)
             {
-                _groupBindingSet = new BindingSet<TGroup>(group);
+                _groupBindingSet = new BindingSet<TGroup?>(group);
                 Bind(_groupBindingSet);
                 _groupBindingSet.Apply();
             }
@@ -134,7 +130,7 @@ namespace FlexiMvvm.Collections
             }
         }
 
-        public virtual void Bind([NotNull] BindingSet<TGroup> bindingSet)
+        public virtual void Bind(BindingSet<TGroup?> bindingSet)
         {
         }
     }

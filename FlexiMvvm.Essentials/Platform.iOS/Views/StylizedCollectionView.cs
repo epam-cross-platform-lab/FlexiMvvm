@@ -15,16 +15,24 @@
 // =========================================================================
 
 using System;
+using CoreGraphics;
+using UIKit;
 
-namespace FlexiMvvm.Collections
+namespace FlexiMvvm.Views
 {
-    public class SelectionChangedEventArgs : EventArgs
+    public class StylizedCollectionView<TTheme> : UICollectionView
     {
-        public SelectionChangedEventArgs(object? item)
+        public StylizedCollectionView(TTheme theme, CGRect frame, UICollectionViewLayout layout)
+            : base(frame, layout)
         {
-            Item = item;
+            Theme = theme;
         }
 
-        public object? Item { get; }
+        protected internal StylizedCollectionView(IntPtr handle)
+            : base(handle)
+        {
+        }
+
+        public TTheme Theme { get; }
     }
 }

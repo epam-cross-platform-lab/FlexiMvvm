@@ -15,9 +15,12 @@
 // =========================================================================
 
 using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using CoreGraphics;
+using FlexiMvvm.Formatters;
+using FlexiMvvm.Views;
 using Foundation;
-using JetBrains.Annotations;
 using UIKit;
 
 namespace FlexiMvvm.Collections
@@ -26,48 +29,65 @@ namespace FlexiMvvm.Collections
     {
         public CollectionViewObservableSectionHeaderFooterCell()
         {
-            Initialize();
         }
 
         public CollectionViewObservableSectionHeaderFooterCell(NSCoder coder)
             : base(coder)
         {
-            Initialize();
         }
 
         public CollectionViewObservableSectionHeaderFooterCell(CGRect frame)
             : base(frame)
         {
-            Initialize();
         }
 
         protected CollectionViewObservableSectionHeaderFooterCell(NSObjectFlag t)
             : base(t)
         {
-            Initialize();
         }
 
         protected internal CollectionViewObservableSectionHeaderFooterCell(IntPtr handle)
             : base(handle)
         {
-            Initialize();
         }
 
-        private void Initialize()
+        internal static string ReuseIdentifier { get; } = nameof(CollectionViewObservableSectionHeaderFooterCell);
+
+        protected ICellsSharedReadOnlyData? CellsSharedData { get; private set; }
+
+        public virtual UIView View { get; set; }
+
+        internal void Initialize(ICellsSharedReadOnlyData cellsSharedData)
         {
+            CellsSharedData = cellsSharedData;
+
             LoadView();
+
+            if (View != null && View.Superview == null)
+            {
+                AddSubview(View);
+
+                View.TranslatesAutoresizingMaskIntoConstraints = false;
+
+                View.LeadingAnchor.ConstraintEqualTo(LeadingAnchor).SetActive(true);
+                View.TopAnchor.ConstraintEqualTo(TopAnchor).SetActive(true);
+                View.TrailingAnchor.ConstraintEqualTo(TrailingAnchor).SetActive(true);
+                View.BottomAnchor.ConstraintEqualTo(BottomAnchor).SetActive(true);
+            }
+
             ViewDidLoad();
         }
 
         public virtual void LoadView()
         {
+            View = new UIView();
         }
 
         public virtual void ViewDidLoad()
         {
         }
 
-        internal virtual void Bind([CanBeNull] object itemsContext, [CanBeNull] object group)
+        internal virtual void Bind(object? itemsContext, object? group)
         {
         }
     }
@@ -98,19 +118,41 @@ namespace FlexiMvvm.Collections
         {
         }
 
-        [CanBeNull]
+        [AllowNull]
         public TItemsContext ItemsContext { get; private set; }
 
-        internal override void Bind(object itemsContext, object group)
+        internal override void Bind(object? itemsContext, object? group)
         {
             base.Bind(itemsContext, group);
 
-            ItemsContext = (TItemsContext)itemsContext;
+            try
+            {
+                ItemsContext = (TItemsContext)itemsContext;
+            }
+            catch (NullReferenceException ex)
+            {
+                throw new NullReferenceException(
+                    $"Unable to cast the items context to the target type '{TypeFormatter.FormatName<TItemsContext>()}' " +
+                    $"due to the items context is 'null' but the target type is not nullable.",
+                    ex);
+            }
+            catch (InvalidCastException ex)
+            {
+                if (itemsContext != null)
+                {
+                    throw new InvalidCastException(
+                        $"Unable to cast the items context of type '{TypeFormatter.FormatName(itemsContext.GetType())}' " +
+                        $"to the target type '{TypeFormatter.FormatName<TItemsContext>()}'.",
+                        ex);
+                }
+
+                throw;
+            }
 
             Bind(ItemsContext);
         }
 
-        public virtual void Bind([CanBeNull] TItemsContext itemsContext)
+        public virtual void Bind([AllowNull] TItemsContext itemsContext)
         {
         }
     }
@@ -141,19 +183,41 @@ namespace FlexiMvvm.Collections
         {
         }
 
-        [CanBeNull]
+        [AllowNull]
         public TGroup Group { get; private set; }
 
-        internal override void Bind(object itemsContext, object group)
+        internal override void Bind(object? itemsContext, object? group)
         {
             base.Bind(itemsContext, group);
 
-            Group = (TGroup)group;
+            try
+            {
+                Group = (TGroup)group;
+            }
+            catch (NullReferenceException ex)
+            {
+                throw new NullReferenceException(
+                    $"Unable to cast the group to the target type '{TypeFormatter.FormatName<TGroup>()}' " +
+                    $"due to the group is 'null' but the target type is not nullable.",
+                    ex);
+            }
+            catch (InvalidCastException ex)
+            {
+                if (group != null)
+                {
+                    throw new InvalidCastException(
+                        $"Unable to cast the group of type '{TypeFormatter.FormatName(group.GetType())}' " +
+                        $"to the target type '{TypeFormatter.FormatName<TGroup>()}'.",
+                        ex);
+                }
+
+                throw;
+            }
 
             Bind(Group);
         }
 
-        public virtual void Bind([CanBeNull] TGroup group)
+        public virtual void Bind([AllowNull] TGroup group)
         {
         }
     }
