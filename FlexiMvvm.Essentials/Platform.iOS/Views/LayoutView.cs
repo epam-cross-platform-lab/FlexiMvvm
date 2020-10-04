@@ -38,8 +38,6 @@ namespace FlexiMvvm.Views
 
         protected override void SetupLayoutConstraints()
         {
-            AllSubviewsDoNotTranslateAutoresizingMaskIntoConstraints(this);
-
             SetupLayoutConstraintsAsNonScrollable();
         }
     }
@@ -65,8 +63,6 @@ namespace FlexiMvvm.Views
 
         protected override void SetupLayoutConstraints()
         {
-            AllSubviewsDoNotTranslateAutoresizingMaskIntoConstraints(this);
-
             SetupLayoutConstraintsAsNonScrollable();
         }
     }

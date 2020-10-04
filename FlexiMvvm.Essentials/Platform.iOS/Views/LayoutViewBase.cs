@@ -14,7 +14,6 @@
 // limitations under the License.
 // =========================================================================
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using CoreGraphics;
@@ -87,6 +86,8 @@ namespace FlexiMvvm.Views
 
         private protected void SetupLayoutConstraintsAsNonScrollable()
         {
+            this.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
+
             ContentView.LeadingAnchor.ConstraintEqualTo(LeadingAnchor).WithIdentifier(LayoutViewConstraintIdentifier.ContentViewLeadingConstraint).SetActive(true);
             ContentView.TopAnchor.ConstraintEqualTo(TopAnchor).WithIdentifier(LayoutViewConstraintIdentifier.ContentViewTopConstraint).SetActive(true);
             ContentView.TrailingAnchor.ConstraintEqualTo(TrailingAnchor).WithIdentifier(LayoutViewConstraintIdentifier.ContentViewTrailingConstraint).SetActive(true);
@@ -100,6 +101,9 @@ namespace FlexiMvvm.Views
 
         private protected void SetupLayoutConstraintsAsScrollable(UIScrollView scrollView)
         {
+            this.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
+            scrollView.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
+
             scrollView.LeadingAnchor.ConstraintEqualTo(LeadingAnchor).WithIdentifier(LayoutViewConstraintIdentifier.ScrollViewLeadingConstraint).SetActive(true);
             scrollView.TopAnchor.ConstraintEqualTo(TopAnchor).WithIdentifier(LayoutViewConstraintIdentifier.ScrollViewTopConstraint).SetActive(true);
             scrollView.TrailingAnchor.ConstraintEqualTo(TrailingAnchor).WithIdentifier(LayoutViewConstraintIdentifier.ScrollViewTrailingConstraint).SetActive(true);
@@ -168,25 +172,6 @@ namespace FlexiMvvm.Views
                 if (_compatHeightConstraints != null)
                 {
                     NSLayoutConstraint.ActivateConstraints(_compatHeightConstraints.ToArray());
-                }
-            }
-        }
-
-        protected virtual void AllSubviewsDoNotTranslateAutoresizingMaskIntoConstraints(UIView view)
-        {
-            if (view == null)
-                throw new ArgumentNullException(nameof(view));
-
-            foreach (var subview in view.Subviews)
-            {
-                if (subview.AutoresizingMask == UIViewAutoresizing.None)
-                {
-                    subview.TranslatesAutoresizingMaskIntoConstraints = false;
-                }
-
-                if (!(subview is LayoutViewBase))
-                {
-                    AllSubviewsDoNotTranslateAutoresizingMaskIntoConstraints(subview);
                 }
             }
         }

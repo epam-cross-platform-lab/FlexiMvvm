@@ -91,5 +91,16 @@ namespace FlexiMvvm.Views
 
             return null;
         }
+
+        public static void SubviewsDoNotTranslateAutoresizingMaskIntoConstraints(this UIView view)
+        {
+            if (view == null)
+                throw new ArgumentNullException(nameof(view));
+
+            foreach (var subview in view.Subviews)
+            {
+                subview.TranslatesAutoresizingMaskIntoConstraints = false;
+            }
+        }
     }
 }
