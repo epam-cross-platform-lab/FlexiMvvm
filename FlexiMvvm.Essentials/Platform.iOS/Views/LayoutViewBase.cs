@@ -86,7 +86,7 @@ namespace FlexiMvvm.Views
 
         private protected void SetupLayoutConstraintsAsNonScrollable()
         {
-            this.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
+            this.SubviewsTranslateAutoresizingMaskIntoConstraints(false);
 
             ContentView.LeadingAnchor.ConstraintEqualTo(LeadingAnchor).WithIdentifier(LayoutViewConstraintIdentifier.ContentViewLeadingConstraint).SetActive(true);
             ContentView.TopAnchor.ConstraintEqualTo(TopAnchor).WithIdentifier(LayoutViewConstraintIdentifier.ContentViewTopConstraint).SetActive(true);
@@ -101,8 +101,8 @@ namespace FlexiMvvm.Views
 
         private protected void SetupLayoutConstraintsAsScrollable(UIScrollView scrollView)
         {
-            this.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
-            scrollView.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
+            this.SubviewsTranslateAutoresizingMaskIntoConstraints(false);
+            scrollView.SubviewsTranslateAutoresizingMaskIntoConstraints(false);
 
             scrollView.LeadingAnchor.ConstraintEqualTo(LeadingAnchor).WithIdentifier(LayoutViewConstraintIdentifier.ScrollViewLeadingConstraint).SetActive(true);
             scrollView.TopAnchor.ConstraintEqualTo(TopAnchor).WithIdentifier(LayoutViewConstraintIdentifier.ScrollViewTopConstraint).SetActive(true);
