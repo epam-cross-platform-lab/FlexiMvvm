@@ -47,6 +47,9 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
         /// <inheritdoc />
         public <#= viewGenerationOptions.ClassName #>()
         {
+<#      if (viewGenerationOptions.Kind == ViewKind.Fragment || viewGenerationOptions.Kind == ViewKind.DialogFragment) { #>
+            SetTargetFragment(null, RequestCode.InvalidRequestCode);
+<#      } #>
         }
 
         /// <inheritdoc />
@@ -94,6 +97,16 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
 
             LifecycleDelegate.OnResume();
         }
+<#      if (viewGenerationOptions.Kind == ViewKind.DialogFragment) { #>
+
+        /// <inheritdoc />
+        public override void OnDismiss(IDialogInterface dialog)
+        {
+            base.OnDismiss(dialog);
+
+            LifecycleDelegate.OnDismiss();
+        }
+<#      } #>
 
         /// <inheritdoc />
         <#= viewGenerationOptions.LifecycleMethodAccessModifier #> override void OnPause()
@@ -140,7 +153,7 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
 
             base.OnSaveInstanceState(outState);
         }
-<#      if (viewGenerationOptions.Kind == ViewKind.Fragment) { #>
+<#      if (viewGenerationOptions.Kind == ViewKind.Fragment || viewGenerationOptions.Kind == ViewKind.DialogFragment) { #>
 
         /// <inheritdoc />
         public override void OnDestroyView()
@@ -196,22 +209,20 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
         {
             return new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel>, TViewModel>(this);
         }
-<#      if (viewGenerationOptions.Kind == ViewKind.Fragment) { #>
+<#      if (viewGenerationOptions.Kind == ViewKind.Fragment || viewGenerationOptions.Kind == ViewKind.DialogFragment) { #>
 
         /// <inheritdoc />
-        /// <exception cref="NotSupportedException">The fragment cannot set a result. Use the appropriate method of fragment's activity instead.</exception>
         public void SetResult(Android.App.Result resultCode, Intent? data)
         {
-            throw new NotSupportedException("The fragment cannot set a result. Use the appropriate method of fragment's activity instead.");
-        }
-
-        /// <inheritdoc />
-        /// <exception cref="NotSupportedException">The fragment cannot finish an activity. Use the appropriate method of fragment's activity instead.</exception>
-        public void Finish()
-        {
-            throw new NotSupportedException("The fragment cannot finish an activity. Use the appropriate method of fragment's activity instead.");
+            LifecycleDelegate.SetResult(resultCode, data);
         }
 <#      } #>
+
+        /// <inheritdoc />
+        void INavigationView<TViewModel>.OnActivityResult(int requestCode, Android.App.Result resultCode, Intent? data)
+        {
+            OnActivityResult(requestCode, (<#= viewGenerationOptions.ResultCodeTypeName #>)resultCode, data);
+        }
 
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {
@@ -262,22 +273,20 @@ namespace <#= GetNamespace(viewGenerationOptions) #>
         {
             return new ViewLifecycleDelegate<<#= viewGenerationOptions.ClassName #><TViewModel, TParameters>, TViewModel>(this);
         }
-<#      if (viewGenerationOptions.Kind == ViewKind.Fragment) { #>
+<#      if (viewGenerationOptions.Kind == ViewKind.Fragment || viewGenerationOptions.Kind == ViewKind.DialogFragment) { #>
 
         /// <inheritdoc />
-        /// <exception cref="NotSupportedException">The fragment cannot set a result. Use the appropriate method of fragment's activity instead.</exception>
         public void SetResult(Android.App.Result resultCode, Intent? data)
         {
-            throw new NotSupportedException("The fragment cannot set a result. Use the appropriate method of fragment's activity instead.");
-        }
-
-        /// <inheritdoc />
-        /// <exception cref="NotSupportedException">The fragment cannot finish an activity. Use the appropriate method of fragment's activity instead.</exception>
-        public void Finish()
-        {
-            throw new NotSupportedException("The fragment cannot finish an activity. Use the appropriate method of fragment's activity instead.");
+            LifecycleDelegate.SetResult(resultCode, data);
         }
 <#      } #>
+
+        /// <inheritdoc />
+        void INavigationView<TViewModel>.OnActivityResult(int requestCode, Android.App.Result resultCode, Intent? data)
+        {
+            OnActivityResult(requestCode, (<#= viewGenerationOptions.ResultCodeTypeName #>)resultCode, data);
+        }
 
         void ILifecycleViewModelOwner<TViewModel>.SetViewModel(TViewModel viewModel)
         {

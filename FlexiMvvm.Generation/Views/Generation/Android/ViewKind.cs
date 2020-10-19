@@ -20,6 +20,8 @@ namespace FlexiMvvm.Views.Generation.Android
     {
         Activity,
 
-        Fragment
+        Fragment,
+
+        DialogFragment
     }
 }
