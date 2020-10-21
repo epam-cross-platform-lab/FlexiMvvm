@@ -1,6 +1,6 @@
 ﻿<#@ template language="C#" #>
 <#@ assembly Name="netstandard" #>
-<#@ assembly name="$(SolutionDir)FlexiMvvm.Generation\bin\$(Configuration)\netstandard2.1\FlexiMvvm.Generation.dll" #>
+<#@ assembly name="$(SolutionDir)FlexiMvvm.Generation\bin\$(Configuration)\netstandard2.0\FlexiMvvm.Generation.dll" #>
 <#@ import namespace="FlexiMvvm.Views.Generation.Android" #>
 <#
     var bindableViewsGenerator = new BindableViewsGenerator(
